@@ -23,7 +23,7 @@ OUTPUT="$(realpath -m "$3")"
 cd /work
 mips-linux-gnu-cpp -Iinclude -undef -lang-c -nostdinc -D__GNUC__=2 -Dmips -D__mips__ \\
     -Dpsx -D_MIPSEL -DLANGUAGE_C -DPERMUTER "$INPUT" \\
-  | /opt/gcc-2.7.2-psx/cc1 -O2 -G8 -quiet -mcpu=3000 -fgnu-linker -mgas -msoft-float \\
+  | /opt/gcc-{gcc}/cc1 -O2 -G8 -quiet -mcpu=3000 -fgnu-linker -mgas -msoft-float \\
   | python3 /opt/maspsx/maspsx.py --aspsx-version=2.79 --expand-div --use-comm-section \\
       --dont-force-G0 --run-assembler --gnu-as-path mips-linux-gnu-as -EL -Iinclude \\
       -march=r3000 -mtune=r3000 -no-pad-sections -O1 -G8 -o "$OUTPUT"
@@ -37,6 +37,7 @@ def main():
     ap.add_argument("src")
     ap.add_argument("--seconds", type=int, default=600)
     ap.add_argument("--jobs", type=int, default=8)
+    ap.add_argument("--gcc", default="2.7.2-psx")
     a = ap.parse_args()
     asm = next((ROOT / "asm" / a.target / "nonmatchings").rglob(f"{a.func}.s"))
     d = ROOT / ".cache" / "permuter" / a.func
@@ -52,7 +53,7 @@ def main():
     pre = subprocess.run(f"mips-linux-gnu-cpp -Iinclude -undef -lang-c -nostdinc -P -DPERMUTER {a.src}",
                          shell=True, cwd=ROOT, capture_output=True, text=True, check=True).stdout
     (d / "base.c").write_text(pre, encoding="utf-8")
-    (d / "compile.sh").write_text(COMPILE_SH, encoding="utf-8")
+    (d / "compile.sh").write_text(COMPILE_SH.replace("{gcc}", a.gcc), encoding="utf-8")
     (d / "compile.sh").chmod(0o755)
     (d / "settings.toml").write_text(f'func_name = "{a.func}"\ncompiler_type = "gcc"\n', encoding="utf-8")
     cmd = ["timeout", str(a.seconds), "python3", "/opt/decomp-permuter/permuter.py", str(d),

@@ -268,6 +268,7 @@ def evaluate(target, func, heur=DEFAULT_HEURISTICS):
                     break  # não compila: inútil tentar outro compilador
                 reason = "não casou"
                 if best is None or rec["n"] < best["n"]:
+                    rec["c"] = c  # C da melhor tentativa (ponto de partida para permuter/wip)
                     best = rec
     rec = dict(best or {})
     rec["reason"] = reason
