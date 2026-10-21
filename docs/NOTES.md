@@ -100,3 +100,13 @@ GTE/COP0: libgte e rotinas de sistema; `crt0`), `slpm` 3, `chess` 13, `raise` 6.
 entre binários (SDK duplicado em `yuugi`/`slpm`/overlays). Hoje não há grupo
 misto porque o pipeline m2c é determinístico; a ferramenta passa a render a
 cada função escrita/corrigida à mão.
+
+## Funções quase casadas (C em `docs/wip/`)
+
+| Função | Cópias (gêmeas) | Estado | Pista principal |
+|---|---|---|---|
+| `raise:func_800BBA38` (cria objeto/sprite, 13 parâmetros) | 4 (`raise`) | mesmo tamanho; 60 instruções diferem (registradores/ordem) | o original calcula `&D_8008ED68` uma vez e lê `+0x108/+0x10C` a partir do registrador; ponteiro local e `register` não reproduzem isso no GCC 2.7.2; campos de bits em `+0x30/+0x38` confirmados |
+| `yuugi:SetDrawEnv` (pacote de ambiente de desenho da GPU) | 2 (`yuugi`, `slpm`) | mesmo tamanho; 68 instruções diferem | função `void`; soma `w + x` / `y + h`; o *clamp* relê `r.h` da pilha com `lh` e `lhu` (macro de *clamp* sobre o retângulo em memória); quadro de pilha original 0x28 (o nosso gera 0x40) |
+
+O permuter chegou a 42 diferenças em `SetDrawEnv` apenas com um temporário
+`volatile`, artifício descartado por não refletir o código original.
