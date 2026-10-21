@@ -211,20 +211,29 @@ def apply(target):
     arquivos-fonte.
     """
     store = CACHE / target
-    n = skipped = 0
+    n = skipped = rod = 0
+    ro_lo, ro_hi = rodata_range(target)
     for c in sorted((ROOT / "src" / target).rglob("*.c")):
         file_gcc = file_compiler(c)
         s = c.read_text(encoding="utf-8")
         modes = gp_modes(s)
 
         def repl(m):
-            nonlocal n, skipped
+            nonlocal n, skipped, rod
             f = store / f"{m.group(2)}.c"
             g = store / f"{m.group(2)}.gcc"
             gcc = g.read_text().strip() if g.exists() else "2.7.2-psx"
             if not f.exists() or gcc != file_gcc:
                 return m.group(0)
             code = f.read_text(encoding="utf-8").rstrip()
+            # funções que usam .rodata (jump tables, strings, constantes) ficam para
+            # a etapa de migração do .rodata por unidade de tradução
+            asm = asm_path(target, m.group(2))
+            refs = [int(x, 16) for x in re.findall(r"\b(?:D|jtbl)_([0-9A-F]{8})\b",
+                                                   asm.read_text(encoding="utf-8"))]
+            if '"' in code or any(ro_lo <= r < ro_hi for r in refs):
+                rod += 1
+                return m.group(0)
             mine = gp_modes(code)
             if any(modes.get(k, v) != v for k, v in mine.items()):
                 skipped += 1
@@ -235,7 +244,18 @@ def apply(target):
         t = INCLUDE.sub(repl, s)
         if t != s:
             c.write_text(t, encoding="utf-8", newline="\n")
-    print(f"{n} funções aplicadas em src/{target} ({skipped} adiadas por conflito de $gp entre arquivos)")
+    print(f"{n} funções aplicadas em src/{target} ({skipped} adiadas por conflito de $gp, "
+          f"{rod} adiadas por usar .rodata)")
+
+
+def rodata_range(target):
+    """Faixa de VRAM do .rodata do alvo, a partir do YAML do splat."""
+    y = (ROOT / "config" / f"{target}.yaml").read_text(encoding="utf-8")
+    seg = re.search(r"type: code\s+start: (0x[0-9A-Fa-f]+)\s+vram: (0x[0-9A-Fa-f]+)", y)
+    start, vram = int(seg.group(1), 16), int(seg.group(2), 16)
+    ro = re.search(r"- \[(0x[0-9A-Fa-f]+), rodata\]", y)
+    tx = re.search(r"- \[(0x[0-9A-Fa-f]+), c, ", y)
+    return vram + int(ro.group(1), 16) - start, vram + int(tx.group(1), 16) - start
 
 
 def main():

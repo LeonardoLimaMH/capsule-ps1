@@ -58,12 +58,12 @@ converter o assembly em C.
 | 1 | **Toolchain reprodutível** | imagem Docker com GCC 2.7.2 (PsyQ), maspsx, binutils MIPS, splat, spimdisasm, m2c, Unicorn | ✅ |
 | 2 | **Split + rebuild byte-idêntico** | `config/*.yaml`, Makefile, 5 binários reconstruídos com SHA-1 idêntico | ✅ |
 | 3 | **Identificação do SDK** | ~520 funções PsyQ nomeadas por assinatura (`config/symbols.*.psyq.txt`) | ✅ |
-| 4 | **Identificação do compilador** | GCC 2.7.2 + `-O2 -G8` + ASPSX 2.79 confirmados por byte-matching | ✅ |
+| 4 | **Identificação do compilador** | GCC 2.7.2 (maioria) e GCC 2.8.1 (parte do código e bibliotecas), `-O2 -G8`, ASPSX 2.79 — confirmados por byte-matching (ver `docs/NOTES.md`) | ✅ |
 | 5 | **Ferramentas de matching e testes diferenciais** | `tools/match.py`, `tools/difftest.py`, suíte `pytest` | ✅ |
 | 6 | **Decompilação do executável principal** (`YUUGI.EXE`) | motor, gráficos, CD, som, memória, menus | 🚧 |
 | 7 | **Decompilação do loader** (`SLPM_860.96`) | boot, vídeos de abertura | ⏳ |
 | 8 | **Decompilação dos overlays** (`CHESS`, `RAISE`, `ETC`) | batalha no tabuleiro, criação de monstros, telas diversas | ⏳ |
-| 9 | **Separação em unidades de tradução** | dividir `main.c` nos arquivos-fonte originais (fronteiras de `.rodata`/ordem de link) | ⏳ |
+| 9 | **Separação em unidades de tradução** | fronteiras deduzidas de conflitos de `$gp`, ilhas de compilador e objetos do SDK; compilador por arquivo (`config/compilers.txt`) | 🚧 |
 | 10 | **Dados e nomes** | tipos, structs, nomes de variáveis/funções, `.data`/`.rodata` migrados para C | ⏳ |
 | 11 | **Formatos de arquivo** | documentação/ferramentas para `.CVT`, `SOUND.DAT`, `*.STR`, `*.XA` | ⏳ |
 
@@ -92,8 +92,10 @@ logo após o BSS do executável principal) e se alternam conforme o modo de jogo
 Endereços confirmados pelo código de inicialização (`crt0`) e pela análise dos
 alvos de `jal` dentro de cada overlay.
 
-**Compilador:** PsyQ `ccpsx` → GCC **2.7.2** (`cc1psx`) com `-O2 -G8`, montado
-pelo ASPSX 2.79 (emulado pelo [maspsx](https://github.com/mkst/maspsx)).
+**Compiladores:** PsyQ `ccpsx` → GCC **2.7.2** na maior parte do código do jogo e
+GCC **2.8.1** em parte dele e nas bibliotecas, ambos com `-O2 -G8`, montados pelo
+ASPSX 2.79 (emulado pelo [maspsx](https://github.com/mkst/maspsx) com
+`--dont-force-G0 -G8`, que reproduz a escolha de `$gp` por arquivo).
 **SDK:** bibliotecas PsyQ ~4.0–4.3 (libgpu/libgte/libgs/libcd/libspu/libsnd/
 libpress/libapi/libc/libetc).
 
@@ -130,6 +132,11 @@ disco), `asm/` (assembly desmontado), `build/`.
 | `match.py` | compila um trecho C e compara instrução a instrução com o original (diff lado a lado) |
 | `difftest.py` | teste diferencial em emulação MIPS (Unicorn): original × C, com log de chamadas ao SDK |
 | `progress.py` | calcula o progresso e atualiza este README (`--readme`) |
+| `autodecomp.py` | decompilação automática: rascunho m2c → C compilável → byte-matching com GCC 2.7.2 e 2.8.1; `--apply` insere em `src/` evitando conflitos |
+| `compiler_map.py` | classifica funções por estilo de compilador (epílogo 2.7.2 × 2.8.x) |
+| `tu_boundaries.py` / `plan_tus.py` | deduzem e aplicam a separação em unidades de tradução |
+| `split_tu.py` | separa um `.c` numa fronteira de função (atualiza YAML, caminhos e compilador) |
+| `permute.py` | prepara e roda o decomp-permuter em funções quase casadas |
 | `check.py` | compara os binários gerados com os originais (SHA-1 + primeiras diferenças) |
 | `find_drift.py` | encontra o primeiro símbolo cujo endereço linkado divergiu (depuração de layout) |
 | `find_islands.py`, `sections.py`, `disasm.py` | análise de fronteiras de seção, ilhas de dados e desmontagem rápida |

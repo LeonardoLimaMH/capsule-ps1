@@ -100,6 +100,11 @@ def union(write):
                     nm = f"{t}_{nm}"
                 lines.append(f"{nm} = 0x{vram + off + l['offset']:08X}; // type:func  [{lib}/{obj} PsyQ-{v}]")
         (ROOT / "config" / f"symbols.{t}.psyq.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
+        # extensão de cada objeto do SDK (cada .OBJ era uma unidade de tradução)
+        objs = ["# início      fim(excl.)  biblioteca/objeto  versão"]
+        objs += [f"0x{vram + off:08X}  0x{vram + off + n:08X}  {lib}/{obj}  {v}"
+                 for off, n, v, lib, obj, labels in chosen]
+        (ROOT / "config" / f"psyq_objs.{t}.txt").write_text("\n".join(objs) + "\n", encoding="utf-8")
         if t == "yuugi":
             main_names = set(seen)
 

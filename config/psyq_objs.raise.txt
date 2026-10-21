@@ -1,0 +1,3 @@
+# início      fim(excl.)  biblioteca/objeto  versão
+0x800B9EE8  0x800B9F08  LIBSPU/S_I.OBJ  400
+0x800BA170  0x800BA190  LIBSPU/S_IH.OBJ  400

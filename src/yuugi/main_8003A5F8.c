@@ -1,0 +1,136 @@
+#include "common.h"
+#include "yuugi.h"
+
+s32 func_8003A5F8(void) {
+    extern s32 D_80078C84;
+    extern s32 D_80078C88;
+    extern s32 D_80078C90;
+    extern s32 D_80078CC0[];
+    if (((*D_80078CC0) == 0) || (D_80078C84 != 0)) {
+        return 1;
+    }
+    if (D_80078C88 == 0) {
+        D_80078C88 = 1;
+        func_8003C390();
+        if (D_80078C90 >= 0xB) {
+            func_800383C8();
+            func_8003CAD8();
+            D_80078C90 = 0;
+        }
+        D_80078C88 = 0;
+        D_80078C90 += 1;
+    }
+    return 0;
+}
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A690);
+
+void func_8003A71C(void) {
+    extern s32 D_80078C84;
+    extern s32 D_80078C94;
+    extern s32 D_80078D5C;
+    D_80078C94 = 1;
+    func_8004FEDC();
+    StopRCnt(0xF2000002);
+    func_8004FE8C(D_80078D5C);
+    func_8004FE4C(D_80078D5C);
+    func_8004FEEC();
+    D_80078C84 = 0;
+}
+
+void func_8003A774(void) {
+    extern s32 D_80078C84;
+    extern s32 D_80078C94;
+    D_80078C94 = 1;
+    func_8004FEDC();
+    StopRCnt(0xF2000002);
+    func_8004FEEC();
+    D_80078C84 = 0;
+}
+
+void func_8003A7B4(void) {
+    extern s32 D_80078C88;
+    extern s32 D_80078C8C;
+    if (D_80078C88 == 0) {
+        D_80078C88 = 1;
+        if (D_80078C8C != 0) {
+            func_8003C390();
+            func_8003C390();
+            func_8003C390();
+            func_8003C390();
+            func_8003C390();
+            func_8003C390();
+            func_8003C390();
+            func_8003C390();
+            func_8003C390();
+            func_8003C390();
+        }
+        func_800383C8();
+        func_8003CAD8();
+        D_80078C88 = 0;
+    }
+}
+
+void func_8003A84C(void) {
+
+}
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A854);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A8A4);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A940);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A9DC);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AA78);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AAF0);
+
+s32 func_8003AC20(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    return ((((((arg0 & 0xFF) << 8) + (arg1 & 0xFF)) << 8) + (arg2 & 0xFF)) << 8) | (arg3 & 0xFF);
+}
+
+s32 func_8003AC4C(s32 arg0, s32 arg1) {
+    return ((arg0 & 0xFF) << 8) | (arg1 & 0xFF);
+}
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AC60);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AE48);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AF34);
+
+void func_8003B15C(s32 *arg0, s32 arg1) {
+    *arg0 += arg1;
+}
+
+void func_8003B170(void) {
+
+}
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003B178);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003B6F4);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003B7B4);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003BC94);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003BFCC);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C0C8);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C29C);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C390);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C530);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C5BC);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C654);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C73C);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C7C8);

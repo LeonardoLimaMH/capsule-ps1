@@ -1,0 +1,3 @@
+# início      fim(excl.)  biblioteca/objeto  versão
+0x800C7F54  0x800C7F74  LIBSN/_UDIVDI3.OBJ  400
+0x800CF2A8  0x800CF2C8  LIBSND/SSQUIT.OBJ  400
