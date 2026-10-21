@@ -1,0 +1,4 @@
+// Funções do SDK PsyQ identificadas por assinatura (tools/psyq_match.py --union)
+// formato: nome = endereço; // type:func  [BIBLIOTECA/OBJETO PsyQ-versão]
+raise_SpuInit = 0x800B9EE8; // type:func  [LIBSPU/S_I.OBJ PsyQ-400]
+SpuInitHot = 0x800BA170; // type:func  [LIBSPU/S_IH.OBJ PsyQ-400]

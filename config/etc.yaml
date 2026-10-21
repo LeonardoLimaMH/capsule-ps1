@@ -6,7 +6,7 @@ options:
   asm_path: asm/etc
   src_path: src/etc
   ld_script_path: build/etc.ld
-  symbol_addrs_path: [config/symbols.etc.txt, config/symbols.yuugi.txt]
+  symbol_addrs_path: [config/symbols.etc.txt, config/symbols.etc.psyq.txt, config/symbols.yuugi.txt, config/symbols.yuugi.psyq.txt]
   undefined_funcs_auto_path: config/undefined_funcs_auto.etc.txt
   undefined_syms_auto_path: config/undefined_syms_auto.etc.txt
   gp_value: 0x80078B6C

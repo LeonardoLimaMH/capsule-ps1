@@ -6,7 +6,7 @@ options:
   asm_path: asm/chess
   src_path: src/chess
   ld_script_path: build/chess.ld
-  symbol_addrs_path: [config/symbols.chess.txt, config/symbols.yuugi.txt]
+  symbol_addrs_path: [config/symbols.chess.txt, config/symbols.chess.psyq.txt, config/symbols.yuugi.txt, config/symbols.yuugi.psyq.txt]
   undefined_funcs_auto_path: config/undefined_funcs_auto.chess.txt
   undefined_syms_auto_path: config/undefined_syms_auto.chess.txt
   gp_value: 0x80078B6C

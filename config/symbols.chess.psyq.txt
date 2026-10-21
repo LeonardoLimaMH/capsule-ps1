@@ -1,0 +1,4 @@
+// Funções do SDK PsyQ identificadas por assinatura (tools/psyq_match.py --union)
+// formato: nome = endereço; // type:func  [BIBLIOTECA/OBJETO PsyQ-versão]
+__udivdi3 = 0x800C7F54; // type:func  [LIBSN/_UDIVDI3.OBJ PsyQ-400]
+SsQuit = 0x800CF2A8; // type:func  [LIBSND/SSQUIT.OBJ PsyQ-400]

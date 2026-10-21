@@ -6,7 +6,7 @@ options:
   asm_path: asm/raise
   src_path: src/raise
   ld_script_path: build/raise.ld
-  symbol_addrs_path: [config/symbols.raise.txt, config/symbols.yuugi.txt]
+  symbol_addrs_path: [config/symbols.raise.txt, config/symbols.raise.psyq.txt, config/symbols.yuugi.txt, config/symbols.yuugi.psyq.txt]
   undefined_funcs_auto_path: config/undefined_funcs_auto.raise.txt
   undefined_syms_auto_path: config/undefined_syms_auto.raise.txt
   gp_value: 0x80078B6C

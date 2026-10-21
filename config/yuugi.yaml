@@ -10,7 +10,7 @@ options:
   src_path: src/yuugi
   build_path: build
   ld_script_path: build/yuugi.ld
-  symbol_addrs_path: [config/symbols.yuugi.txt]
+  symbol_addrs_path: [config/symbols.yuugi.txt, config/symbols.yuugi.psyq.txt]
   undefined_funcs_auto_path: config/undefined_funcs_auto.yuugi.txt
   undefined_syms_auto_path: config/undefined_syms_auto.yuugi.txt
   find_file_boundaries: yes

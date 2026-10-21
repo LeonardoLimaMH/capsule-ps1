@@ -1,0 +1,2 @@
+// Funções do SDK PsyQ identificadas por assinatura (tools/psyq_match.py --union)
+// formato: nome = endereço; // type:func  [BIBLIOTECA/OBJETO PsyQ-versão]

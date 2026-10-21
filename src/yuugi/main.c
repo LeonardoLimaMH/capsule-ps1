@@ -122,7 +122,7 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80013180);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800131C0);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8001332C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", GsClearVcount);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80013350);
 
@@ -1114,7 +1114,7 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003C894);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003C8C8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003C920);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SsInitHot);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003C950);
 
@@ -1146,207 +1146,207 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003CFBC);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003D518);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003D5D8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __adddf3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003D958);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _add_mant_d);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003DA08);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __addsf3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003DBB8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _dbl_shift);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003DC78);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __divdf3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003DF58);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _comp_mant);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003DFA8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _dbl_shift_us);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003E068);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __divsf3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003E1B8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __fixdfsi);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003E2B8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __fixunsdfsi);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003E3C8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __floatsidf);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003E4C8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __floatsisf);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003E588);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __ltsf2);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003E638);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _mainasu);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003E6A8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __muldf3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003E9BC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _mul_mant_d);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003EAA8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __mulsf3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003EBE8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __nedf2);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003EC38);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __subdf3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003ECB8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __negdf2);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003ECF8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", sqrt);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003EE38);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __gtdf2);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003EF18);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __ltdf2);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003EFF8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _err_math);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003F068);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuInit);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003F088);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _SpuInit);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003F170);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuStart);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003F1E8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _spu_init);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003F468);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003F628);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _spu_FiDMA);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003F6E4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _spu_Fr_);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003F78C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _spu_t);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003FA0C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _spu_Fw);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003FA90);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _spu_Fr);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003FAF4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _spu_FsetRXX);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003FB38);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _spu_FsetRXXa);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003FBDC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _spu_FgetRXXa);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003FC18);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _spu_FsetPCR);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003FC70);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003FC98);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003FCC0);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _spu_Fw1ts);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003FD28);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _SpuDataCallback);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003FD58);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuQuit);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003FDD8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuInitMalloc);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003FE38);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuSetReverb);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003FF08);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _SpuIsInAllocateArea);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8003FF88);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _SpuIsInAllocateArea_);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80040018);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuGetReverb);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80040038);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuSetReverbModeParam);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80040518);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _spu_setReverbAttr);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800409E8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuReserveReverbWorkArea);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80040A38);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuSetReverbVoice);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80040A68);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _SpuSetAnyVoice);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80040D28);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuGetReverbVoice);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80040D58);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _SpuGetAnyVoice);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80040D88);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuClearReverbWorkArea);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80040F28);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuReadDecodedData);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80040F98);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuSetKey);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80041158);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuGetKeyStatus);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800411E8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuSetKeyOnWithAttr);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80041218);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuWrite);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80041278);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuWrite0);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800413D8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuSetTransferStartAddr);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80041438);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuSetTransferMode);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80041468);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuWritePartly);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800414F8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuIsTransferCompleted);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800415A8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuSetTransferCallback);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800415D8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuSetCommonAttr);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80041958);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuRGetAllKeysStatus);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80041A2C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuGetAllKeysStatus);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80041AB8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuSetVoiceAttr);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800420B8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _spu_2pitch);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80042144);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _spu_note2pitch);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004227C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _spu_pitch2note);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800423A8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SpuGetVoiceEnvelope);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800423C8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", PCopen);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800423E8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800423F8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", PClseek);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004241C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", PCcreat);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", __SN_ENTRY_POINT);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800424E4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __main);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80042554);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", __do_global_dtors);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800425BC);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004267C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _SN_read);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80042694);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80042754);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _SN_write);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004276C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", PadInit);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800427B8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", PadRead);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800427E0);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", PadStop);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004280C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", VSync);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80042984);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80042A1C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", ResetCallback);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80042A4C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", InterruptCallback);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80042A7C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DMACallback);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80042AAC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", VSyncCallback);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80042AE0);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", VSyncCallbacks);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80042B10);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", StopCallback);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80042B40);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", RestartCallback);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80042B70);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", CheckCallback);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80042B80);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", GetIntrMask);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80042B98);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetIntrMask);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80042BB0);
 
@@ -1360,7 +1360,7 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80043040);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800430B8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800430DC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", startIntrVSync);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80043134);
 
@@ -1368,7 +1368,7 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800431A0);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800431CC);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800431FC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", startIntrDMA);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80043248);
 
@@ -1390,31 +1390,31 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004386C);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80043A90);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80043B1C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsInit);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80043C60);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsReset);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80043D6C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsClose);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80043D8C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsCommand);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80043FD0);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsPacket);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80044320);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsSync);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80044510);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsReady);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800445A4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsFlush);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80044634);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsSystemStatus);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80044680);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsQueueLen);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80044690);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsStatus);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800446B0);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsShellOpen);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800446D0);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsLastCom);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800446F0);
 
@@ -1492,53 +1492,53 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800458E8);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800459CC);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80045F28);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", CD_sync);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800461A8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", CD_ready);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80046470);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", CD_cw);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004687C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", CD_vol);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80046904);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", CD_flush);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800469D8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", CD_initvol);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80046AC8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", CD_initintr);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80046B14);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", CD_init);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80046CF4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", CD_datasync);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80046E5C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", CD_getsector);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80046F5C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", CD_getsector2);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80047048);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", CD_set_test_parmnum);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80047054);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004712C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsMix);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004714C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsGetSector);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004716C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsGetSector2);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004718C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsDataSync);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800471AC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsIntToPos);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800472B0);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsPosToInt);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80047330);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsSetDebug);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80047344);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsLastPos);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004739C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsControlF);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800473C4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsControl);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004742C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsControlB);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004749C);
 
@@ -1556,11 +1556,11 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800478D0);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004795C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004797C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsStartReadySystem);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80047A00);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsEndReadySystem);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80047A64);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsReadySystemMode);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80047A78);
 
@@ -1570,199 +1570,201 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80047E0C);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80047E84);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80047EB4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", ER_active);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80047EC4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", ER_clear);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80047F1C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsSyncCallback);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80047F30);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsReadyCallback);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80047F44);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsStartCallback);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80047F58);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DsDataCallback);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80047F7C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", rsin);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80047FB8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", sin_1);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004804C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", rcos);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800480EC);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800480F4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", InitGeom);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004817C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SquareRoot0);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004820C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SquareRoot12);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800482AC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", MulMatrix0);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800483BC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", CompMatrix);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004851C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", PushMatrix);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800485C0);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", PopMatrix);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004866C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", ReadRotMatrix);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800486BC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", MulMatrix);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800487CC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", TransMatrix);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800487FC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", ScaleMatrix);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004893C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetRotMatrix);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004896C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetLightMatrix);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004899C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetColorMatrix);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800489CC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetTransMatrix);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800489EC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetBackColor);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048A0C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetGeomOffset);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048A2C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048A3C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", LocalLight);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048A60);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DpqColor);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048A7C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", NormalColor);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048A98);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", NormalColor3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048AD4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", NormalColorDpq);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048AF8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", NormalColorDpq3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048B40);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", NormalColorCol);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048B60);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", NormalColorCol3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048BA4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", ColorDpq);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048BCC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", ColorCol);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048BF0);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", AverageSZ3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048C00);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", AverageSZ4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048C1C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", LightColor);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048C44);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DpqColorLight);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048C6C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DpqColor3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048CA8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", Intpl);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048CCC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", Square12);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048CF4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", Square0);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048D1C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", AverageZ3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048D3C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", AverageZ4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048D60);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", OuterProduct12);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048DB8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", OuterProduct0);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048E10);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", Lzc);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048E2C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", RotTransPers);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048E5C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", RotTrans);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048E8C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", NormalClip);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048EBC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", RotTransPers4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048F3C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", RotAverage3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80048F9C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", RotAverage4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004901C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", RotMatrix);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800492AC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", ratan2);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004942C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _patch_gte);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800494D8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800495F4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", LoadTPage);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80049658);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", LoadClut);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800496BC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", LoadClut2);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80049770);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetDefDrawEnv);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800497AC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetDefDispEnv);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800497C0);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetVideoMode);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800497DC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", GetVideoMode);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80049950);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", ResetGraph);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800499AC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetGraphDebug);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80049A50);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetGraphQueue);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80049A60);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", GetGraphDebug);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80049AC0);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DrawSyncCallback);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80049B58);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetDispMask);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DrawSync);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80049BC0);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80049CDC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", ClearImage);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80049D6C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", ClearImage2);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80049E04);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", LoadImage);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80049E64);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", StoreImage);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80049EC4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", MoveImage);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80049F7C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", ClearOTag);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004A044);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", ClearOTagR);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004A0F0);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DrawPrim);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004A14C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DrawOTag);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004A1BC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", PutDrawEnv);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004A27C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DrawOTagEnv);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004A354);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", GetDrawEnv);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004A388);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", PutDispEnv);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004A880);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", GetDispEnv);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004A8B4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", GetODE);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004A8E4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetTexWindow);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004A91C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetDrawArea);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004A99C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetDrawOffset);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004A9DC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetPriority);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004AA04);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetDrawStp);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004AA2C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetDrawMode);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004AA80);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetDrawEnv);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004AC78);
 
@@ -1812,25 +1814,25 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004C19C);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004C2E0);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004C380);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", LoadImage2);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004C46C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", StoreImage2);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004C558);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", MoveImage2);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004C69C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DrawOTag2);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004C798);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004C7C0);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004C7EC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", OpenTIM);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004C7FC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", ReadTIM);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004C860);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", OpenTMD);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004C8A0);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", ReadTMD);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004CB48);
 
@@ -1838,35 +1840,35 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004CC60);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004CDD4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E06C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", GetTPage);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E0AC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", GetClut);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E0CC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", AddPrim);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E10C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetSemiTrans);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E13C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetShadeTex);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E16C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetPolyF3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E18C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetPolyFT3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E1AC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetPolyG3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E1CC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetPolyGT3);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E1EC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetPolyF4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E20C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetPolyFT4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E22C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetPolyG4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E24C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetPolyGT4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E26C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetSprt);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E28C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetLineF2);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E2AC);
 
@@ -1874,17 +1876,17 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E2BC);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E2CC);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E2DC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _card_clear);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E31C);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E32C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E33C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", InitCARD);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E3A8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", StartCARD);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E3E0);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", StopCARD);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E40C);
 
@@ -1896,59 +1898,59 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E468);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E4AC);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E4D4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _patch_card);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E568);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _patch_card2);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E5D8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _copy_memcard_patch);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E60C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _ExitCard);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E68C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", atoi);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E7B8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", atol);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E7DC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", bcopy);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E81C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", toupper);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E850);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", tolower);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E88C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", memcpy);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E8CC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", memset);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E8FC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", rand);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E92C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", srand);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E93C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", strcpy);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E98C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", strlen);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004E9CC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", todigit);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004EA3C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", printf);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004EA7C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", prnt);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004F11C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", memchr);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004F16C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _putchar);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004F268);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _putchar_flash);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004F2A4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", putchar);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004F3CC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", sprintf);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004FC4C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", memmove);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004FCBC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", puts);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004FD1C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", setjmp);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004FD58);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", longjmp);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004FD9C);
 
@@ -1962,7 +1964,7 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004FDDC);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004FDEC);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004FE04);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _96_remove);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004FE1C);
 
@@ -2010,33 +2012,35 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004FF7C);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004FF8C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8004FF9C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetRCnt);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80050038);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", GetRCnt);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80050070);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", StartRCnt);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800500A0);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", StopRCnt);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800500D4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", ResetRCnt);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8005010C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", firstfile);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800502A8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800503AC);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", strcmp);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8005041C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80050438);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", SetInitPadFlag);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80050448);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", ReadInitPadFlag);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800504D8);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", PAD_init);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80050568);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", InitPAD);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80050598);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", StartPAD);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", StopPAD);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800505D0);
 
@@ -2058,10 +2062,10 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8005076C);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8005077C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8005078C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", EnablePAD);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800507A0);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", DisablePAD);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800507B4);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _patch_pad);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_8005082C);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", _remove_ChgclrPAD);

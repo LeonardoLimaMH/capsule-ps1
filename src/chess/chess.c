@@ -898,7 +898,7 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800C7D84);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800C7DD8);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800C7F54);
+INCLUDE_ASM("asm/chess/nonmatchings/chess", __udivdi3);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800C7F74);
 
@@ -1100,7 +1100,7 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800CEFA0);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800CF220);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800CF2A8);
+INCLUDE_ASM("asm/chess/nonmatchings/chess", SsQuit);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800CF2C8);
 

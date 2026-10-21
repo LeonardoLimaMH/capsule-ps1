@@ -6,7 +6,7 @@ options:
   asm_path: asm/slpm
   src_path: src/slpm
   ld_script_path: build/slpm.ld
-  symbol_addrs_path: [config/symbols.slpm.txt]
+  symbol_addrs_path: [config/symbols.slpm.txt, config/symbols.slpm.psyq.txt]
   undefined_funcs_auto_path: config/undefined_funcs_auto.slpm.txt
   undefined_syms_auto_path: config/undefined_syms_auto.slpm.txt
   gp_value: 0x80133474

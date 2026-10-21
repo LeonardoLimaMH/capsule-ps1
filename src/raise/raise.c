@@ -762,7 +762,7 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise", func_800B9CEC);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise", func_800B9E34);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise", func_800B9EE8);
+INCLUDE_ASM("asm/raise/nonmatchings/raise", raise_SpuInit);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise", func_800B9F08);
 
@@ -770,7 +770,7 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise", func_800B9F2C);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise", func_800B9F50);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise", func_800BA170);
+INCLUDE_ASM("asm/raise/nonmatchings/raise", SpuInitHot);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise", func_800BA190);
 
