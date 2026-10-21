@@ -134,6 +134,9 @@ def to_c(draft, func, asm_text, variant):
 
 
 HEADER = '#include "common.h"\n\n'
+# compiladores tentados, em ordem: o código do jogo é majoritariamente GCC 2.7.2;
+# parte (sobretudo bibliotecas) foi compilada com GCC 2.8.1
+COMPILERS = ["2.7.2-psx", "2.8.1-psx"]
 
 
 def try_function(target, func):
@@ -159,10 +162,14 @@ def try_function(target, func):
                 continue
             tmp = pathlib.Path(tempfile.mkdtemp()) / f"{func}.c"
             tmp.write_text(HEADER + c + "\n", encoding="utf-8")
-            r = subprocess.run(["python3", "tools/match.py", target, func, str(tmp), "-q"],
-                               cwd=ROOT, capture_output=True, text=True, timeout=120)
-            if r.returncode == 0:
-                return func, c, "MATCH"
+            for gcc in COMPILERS:
+                r = subprocess.run(["python3", "tools/match.py", target, func, str(tmp), "-q",
+                                    "--gcc", gcc], cwd=ROOT, capture_output=True, text=True,
+                                   timeout=120)
+                if r.returncode == 0:
+                    return func, (c, gcc), "MATCH " + gcc
+                if "DIFERENTE" not in r.stdout:
+                    break  # não compila: inútil tentar outro compilador
             last = "não casou" if "DIFERENTE" in r.stdout else "não compila"
     return func, None, last
 
@@ -175,22 +182,60 @@ def pending_functions(target):
     return out
 
 
+def file_compiler(path):
+    """Compilador de um .c, conforme config/compilers.txt (padrão: GCC 2.7.2)."""
+    cfg = ROOT / "config" / "compilers.txt"
+    if cfg.exists():
+        for l in cfg.read_text(encoding="utf-8").splitlines():
+            p = l.split("#")[0].split()
+            if len(p) == 2 and (ROOT / p[0]).resolve() == path.resolve():
+                return p[1]
+    return "2.7.2-psx"
+
+
+EXTERN_DECL = re.compile(r"extern\s+[^;()]*?\b(\w+)\s*(\[[^\]]*\])?\s*;")
+
+
+def gp_modes(code):
+    """Modo de acesso de cada global declarado: 'gp' (tamanho conhecido) ou 'abs' ([])."""
+    return {m.group(1): ("abs" if m.group(2) == "[]" else "gp") for m in EXTERN_DECL.finditer(code)}
+
+
 def apply(target):
+    """Substitui INCLUDE_ASM pelos C casados, evitando conflitos dentro do arquivo.
+
+    O assembler decide entre $gp e %hi/%lo por arquivo: se uma função declara um
+    global com tamanho (acesso via $gp) e outra o declara incompleto (acesso
+    absoluto), as duas vinham de unidades de tradução diferentes e não podem
+    coexistir no mesmo .c. A segunda fica em INCLUDE_ASM até a separação dos
+    arquivos-fonte.
+    """
     store = CACHE / target
-    n = 0
+    n = skipped = 0
     for c in sorted((ROOT / "src" / target).rglob("*.c")):
+        file_gcc = file_compiler(c)
         s = c.read_text(encoding="utf-8")
+        modes = gp_modes(s)
+
         def repl(m):
-            nonlocal n
+            nonlocal n, skipped
             f = store / f"{m.group(2)}.c"
-            if f.exists():
-                n += 1
-                return f.read_text(encoding="utf-8").rstrip()
-            return m.group(0)
+            g = store / f"{m.group(2)}.gcc"
+            gcc = g.read_text().strip() if g.exists() else "2.7.2-psx"
+            if not f.exists() or gcc != file_gcc:
+                return m.group(0)
+            code = f.read_text(encoding="utf-8").rstrip()
+            mine = gp_modes(code)
+            if any(modes.get(k, v) != v for k, v in mine.items()):
+                skipped += 1
+                return m.group(0)
+            modes.update(mine)
+            n += 1
+            return code
         t = INCLUDE.sub(repl, s)
         if t != s:
             c.write_text(t, encoding="utf-8", newline="\n")
-    print(f"{n} funções aplicadas em src/{target}")
+    print(f"{n} funções aplicadas em src/{target} ({skipped} adiadas por conflito de $gp entre arquivos)")
 
 
 def main():
@@ -223,8 +268,10 @@ def main():
         for func, c, why in ex.map(lambda x: try_function(a.target, x[1]), funcs):
             stats[why] = stats.get(why, 0) + 1
             if c:
-                (store / f"{func}.c").write_text(c + "\n", encoding="utf-8")
-                print(f"  MATCH {func}", flush=True)
+                code, gcc = c
+                (store / f"{func}.c").write_text(code + "\n", encoding="utf-8")
+                (store / f"{func}.gcc").write_text(gcc + "\n", encoding="utf-8")
+                print(f"  MATCH {func} ({gcc})", flush=True)
     print("resumo:", stats)
 
 

@@ -26,7 +26,9 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_80111584);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_801119E4);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_80111A40);
+void func_80111A40(void) {
+
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", __SN_ENTRY_POINT_loader);
 
@@ -52,15 +54,29 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_ResetRCnt);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_SetInitPadFlag);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_ReadInitPadFlag);
+s32 slpm_ReadInitPadFlag(void) {
+    extern s32 D_801208B4[];
+    return (*D_801208B4);
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_PAD_init);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_InitPAD);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_StartPAD);
+s32 slpm_StartPAD(void) {
+    func_80111FE4();
+    func_80111B54(0);
+    slpm_EnablePAD();
+    return 1;
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_StopPAD);
+void slpm_StopPAD(void) {
+    extern s32 D_801208B4[];
+    slpm_DisablePAD();
+    func_80111FF4();
+    func_80111EF0();
+    (*D_801208B4) = 0;
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_80111E78);
 
@@ -122,19 +138,27 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", DecDCTGetEnv);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", DecDCTPutEnv);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", DecDCTBufSize);
+u16 DecDCTBufSize(u16 *arg0) {
+    return *arg0;
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", DecDCTin);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", DecDCTout);
+void DecDCTout(void) {
+    func_80113004();
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", DecDCTinSync);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", DecDCToutSync);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", DecDCTinCallback);
+void DecDCTinCallback(s32 arg0) {
+    slpm_DMACallback(0, arg0);
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", DecDCToutCallback);
+void DecDCToutCallback(s32 arg0) {
+    slpm_DMACallback(1, arg0);
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_80112E84);
 
@@ -146,7 +170,10 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_80113090);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_80113124);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_801131B8);
+s32 func_801131B8(void) {
+    extern s32 * D_80120AA8[];
+    return *(*D_80120AA8);
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_801131D0);
 
@@ -170,7 +197,10 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_SetGraphDebug);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_SetGraphQueue);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_GetGraphDebug);
+u8 slpm_GetGraphDebug(void) {
+    extern u8 D_80131B36[];
+    return (*D_80131B36);
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_DrawSyncCallback);
 
@@ -236,7 +266,10 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_801150F0);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_8011510C);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_8011518C);
+s32 func_8011518C(void) {
+    extern s32 * D_80131C3C[];
+    return *(*D_80131C3C);
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_801151A4);
 
@@ -252,9 +285,23 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_80115994);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_801159A8);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_801159E8);
+void func_801159E8(s32 arg0) {
+    extern s32 * D_80131C3C[];
+    extern s32 * D_80131C40[];
+    extern s32 * D_80131C44[];
+    extern s32 * D_80131C48[];
+    *(*D_80131C3C) = 0x04000002;
+    *(*D_80131C40) = arg0;
+    *(*D_80131C44) = 0;
+    *(*D_80131C48) = 0x01000401;
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_80115A30);
+s32 func_80115A30(s32 arg0) {
+    extern s32 * D_80131C38[];
+    extern s32 * D_80131C3C[];
+    *(*D_80131C3C) = arg0 | 0x10000000;
+    return *(*D_80131C38) & 0xFFFFFF;
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_80115A60);
 
@@ -266,7 +313,12 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_80115F94);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_801160E4);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_80116220);
+void func_80116220(void) {
+    extern s32 D_80131C70[];
+    extern s32 D_80131C74[];
+    (*D_80131C70) = slpm_VSync(-1) + 0xF0;
+    (*D_80131C74) = 0;
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_80116254);
 
@@ -296,25 +348,40 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", StSetRing);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdInit);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_80116A08);
+void func_80116A08(void) {
+    func_80116A84(0xF0000003, 0x20);
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_80116A30);
+void func_80116A30(void) {
+    func_80116A84(0xF0000003, 0x40);
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_80116A58);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_80116A84);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdStatus);
+u8 CdStatus(void) {
+    extern u8 D_80131D2C[];
+    return (*D_80131D2C);
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdMode);
+u8 CdMode(void) {
+    extern u8 D_80131D3C[];
+    return (*D_80131D3C);
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdLastCom);
+u8 CdLastCom(void) {
+    extern u8 D_80131D3D[];
+    return (*D_80131D3D);
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdLastPos);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdReset);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdFlush);
+void CdFlush(void) {
+    slpm_CD_flush();
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdSetDebug);
 
@@ -322,9 +389,13 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdComstr);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdIntstr);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdSync);
+void CdSync(void) {
+    slpm_CD_sync();
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdReady);
+void CdReady(void) {
+    slpm_CD_ready();
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdSyncCallback);
 
@@ -336,15 +407,26 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdControlF);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdControlB);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdMix);
+s32 CdMix(void) {
+    slpm_CD_vol();
+    return 1;
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdGetSector);
+s32 CdGetSector(void) {
+    return slpm_CD_getsector() == 0;
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdGetSector2);
+s32 CdGetSector2(void) {
+    return slpm_CD_getsector2() == 0;
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdDataCallback);
+void CdDataCallback(s32 arg0) {
+    slpm_DMACallback(3, arg0);
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdDataSync);
+void CdDataSync(void) {
+    slpm_CD_datasync();
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdIntToPos);
 
@@ -416,7 +498,24 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", CdRead2);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_80119C78);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", StClearRing);
+void StClearRing(void) {
+    extern s32 D_80134E90[];
+    extern s16 D_80134E94[];
+    extern s32 D_80134E9C[];
+    extern s32 D_80134EAC[];
+    extern s32 D_80134EB4[];
+    extern s32 D_80134EB8[];
+    extern s32 D_80134EBC[];
+    extern s32 D_80134ED4[];
+    (*D_80134EBC) = 0;
+    (*D_80134EB8) = 0;
+    (*D_80134EB4) = 0;
+    (*D_80134EAC) = 0;
+    init_ring_status(0, (*D_80134ED4));
+    (*D_80134E9C) = 0;
+    (*D_80134E94) = 0;
+    (*D_80134E90) = 0;
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", StUnSetRing);
 
@@ -442,7 +541,11 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_8011AA1C);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_PadInit);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_PadRead);
+s32 slpm_PadRead(void) {
+    extern s32 D_80137338[];
+    func_8011AC64();
+    return ~(*D_80137338);
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_PadStop);
 
@@ -468,11 +571,24 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_StopCallback);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_RestartCallback);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_CheckCallback);
+u16 slpm_CheckCallback(void) {
+    extern u16 D_801321DE[];
+    return (*D_801321DE);
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_GetIntrMask);
+u16 slpm_GetIntrMask(void) {
+    extern u16 * D_8013326C[];
+    return *(*D_8013326C);
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_SetIntrMask);
+u16 slpm_SetIntrMask(u16 arg0) {
+    extern u16 * D_8013326C[];
+    u16 temp_v0;
+
+    temp_v0 = *(*D_8013326C);
+    *(*D_8013326C) = arg0;
+    return temp_v0;
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_8011B028);
 
@@ -518,19 +634,29 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_GetVideoMode);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", SsEnd);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_SsInitHot);
+void slpm_SsInitHot(void) {
+    slpm_ResetCallback();
+    func_8011E864();
+    _SsInit();
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", _SsInit);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_8011BBC4);
+void func_8011BBC4(void) {
+    slpm_SpuQuit();
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", SsSetSerialAttr);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_8011BCA4);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", SsStart);
+void SsStart(void) {
+    func_8011BCA4(1);
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", SsStart2);
+void SsStart2(void) {
+    func_8011BCA4(0);
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_8011BF14);
 
@@ -560,7 +686,9 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", _SsSndReplay);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", _SsSndStop);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", SsSeqStop);
+void SsSeqStop(s16 arg0) {
+    _SsSndStop(arg0, 0);
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", SsSepStop);
 
@@ -588,7 +716,9 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", _SsVmSeqKeyOff);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", _SsVmVSetUp);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_8011E864);
+void func_8011E864(void) {
+    slpm__SpuInit(0);
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm__SpuInit);
 
@@ -620,9 +750,15 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm__spu_FgetRXXa);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm__spu_FsetPCR);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_8011F48C);
+void func_8011F48C(void) {
+    extern s32 * D_801333E8[];
+    *(*D_801333E8) = (*(*D_801333E8) & 0xF0FFFFFF) | 0x20000000;
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", func_8011F4B4);
+void func_8011F4B4(void) {
+    extern s32 * D_801333E8[];
+    *(*D_801333E8) = (*(*D_801333E8) & 0xF0FFFFFF) | 0x22000000;
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm__spu_Fw1ts);
 
@@ -646,7 +782,10 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_SpuSetKey);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", _spu_setInTransfer);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", _spu_getInTransfer);
+s32 _spu_getInTransfer(void) {
+    extern s32 D_80133408[];
+    return (*D_80133408) != 1;
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_SpuSetCommonAttr);
 
@@ -660,10 +799,33 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm__spu_pitch2note);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_SpuGetVoiceEnvelope);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_DsSyncCallback);
+s32 slpm_DsSyncCallback(s32 arg0) {
+    extern s32 D_80138670[];
+    s32 temp_v0;
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_DsReadyCallback);
+    temp_v0 = (*D_80138670);
+    (*D_80138670) = arg0;
+    return temp_v0;
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_DsStartCallback);
+s32 slpm_DsReadyCallback(s32 arg0) {
+    extern s32 D_80138674[];
+    s32 temp_v0;
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader", slpm_DsDataCallback);
+    temp_v0 = (*D_80138674);
+    (*D_80138674) = arg0;
+    return temp_v0;
+}
+
+s32 slpm_DsStartCallback(s32 arg0) {
+    extern s32 D_80138678[];
+    s32 temp_v0;
+
+    temp_v0 = (*D_80138678);
+    (*D_80138678) = arg0;
+    return temp_v0;
+}
+
+void slpm_DsDataCallback(s32 arg0) {
+    slpm_DMACallback(3, arg0);
+}

@@ -32,7 +32,12 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099474);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099570);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800997D4);
+void func_800997D4(void) {
+    extern s32 D_8008F7D0[];
+    if ((*D_8008F7D0) == 0) {
+        func_80012508();
+    }
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099800);
 
@@ -246,7 +251,10 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800A4A28);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800A4A8C);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800A4AC8);
+void func_800A4AC8(void) {
+    func_8001A49C(0x80110000);
+    func_80012508();
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800A4AF0);
 

@@ -13,6 +13,8 @@ SPLAT       := splat split
 # Compilador original: GCC 2.7.2 (cc1 do PsyQ) + maspsx (emula o ASPSX)
 GCC_VERSION ?= 2.7.2-psx
 CC1         := /opt/gcc-$(GCC_VERSION)/cc1
+# compilador por arquivo (config/compilers.txt: "src/x/y.c 2.8.1-psx"); padrão: GCC_VERSION
+cc1_for      = /opt/gcc-$(or $(shell awk '$$1=="$(1)"{print $$2}' config/compilers.txt 2>/dev/null),$(GCC_VERSION))/cc1
 MASPSX      := $(PYTHON) /opt/maspsx/maspsx.py
 MASPSX_FLAGS:= --aspsx-version=2.79 --expand-div --use-comm-section --dont-force-G0 --run-assembler --gnu-as-path $(AS) \
                -EL -Iinclude -march=r3000 -mtune=r3000 -no-pad-sections -O1 -G8
@@ -63,9 +65,9 @@ $(BUILD_DIR)/%.ld: config/%.yaml
 # (src/<alvo>/<arq>.c -> asm/<alvo>/nonmatchings/<arq>/*.s)
 C_ASM_DEPS = $$(wildcard asm/$$(dir $$*)nonmatchings/$$(notdir $$*)/*.s)
 
-$(BUILD_DIR)/src/%.c.o: src/%.c $(C_ASM_DEPS) include/macro.inc $$(wildcard include/*.h)
+$(BUILD_DIR)/src/%.c.o: src/%.c $(C_ASM_DEPS) include/macro.inc $$(wildcard include/*.h) $$(wildcard config/compilers.txt)
 	@mkdir -p $(dir $@)
-	$(CPP) $(CPP_FLAGS) $< | $(CC1) $(CC_FLAGS) | $(MASPSX) $(MASPSX_FLAGS) -o $@
+	$(CPP) $(CPP_FLAGS) $< | $(call cc1_for,$<) $(CC_FLAGS) | $(MASPSX) $(MASPSX_FLAGS) -o $@
 
 $(BUILD_DIR)/%.s.o: %.s include/macro.inc
 	@mkdir -p $(dir $@)
