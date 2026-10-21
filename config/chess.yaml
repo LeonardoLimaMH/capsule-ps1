@@ -42,6 +42,8 @@ segments:
     subsegments:
       - [0x0, rodata]
       - [0x2340, c, chess]
+      - [0x17550, c, chess__800AED50]
+      - [0x181D4, c, chess__800AF9D4]
       - [0x240BC, c, chess_800BB8BC]
       - [0x24110, c, chess_800BB910]
       - [0x2AAA0, c, chess_800C22A0]

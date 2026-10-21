@@ -12,7 +12,9 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009A0B8);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009A30C);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009A48C);
+void func_8009A48C(void *arg0) {
+    M2C_FIELD(arg0, s8 *, 0xF) = 3;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009A498);
 
@@ -135,11 +137,15 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009F98C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009FD2C);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009FD78);
+void func_8009FD78(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x14) = func_8001F8B0(0x19, arg1 - 3);
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009FDAC);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009FE5C);
+void func_8009FE5C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x14) = func_8001F8B0(0x19, 8);
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009FE90);
 
@@ -331,7 +337,9 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A81D8);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A82A0);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A835C);
+s32 func_800A835C(s32 arg0, s32 arg1) {
+    return (M2C_FIELD((arg0 + arg1), u8 *, 0x5DE) != 2) * 4;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8378);
 
@@ -474,227 +482,3 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AECC4);
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AECE0);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AED34);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AED50);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AED5C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AEDB8);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AF1C0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AF340);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AF81C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AF9D4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AF9DC);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AFACC);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AFBDC);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AFCE0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AFDB0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AFEA4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AFFA4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B03B8);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B0478);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B0530);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B06A0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B077C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B0844);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B09B0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B0BB0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B0D70);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B0F1C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B0F48);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B2ABC);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B2F48);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B30F8);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B3218);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B3338);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B3488);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B3558);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B360C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B3714);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B3878);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B38B0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B3AE4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B3C4C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B3D24);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B3EC4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B40F0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B4284);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B4304);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B4384);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B4400);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B4518);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B48F0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B4CA4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B5020);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B5184);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B52FC);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B5438);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B5780);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B58EC);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B5BE0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B5C4C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B5DA0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B5F8C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B61C4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B63CC);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B65CC);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B678C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B698C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B6B70);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B6D2C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B6E24);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B711C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B7200);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B74BC);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B75C4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B7630);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B7734);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B7790);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B780C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B7988);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B7D64);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B7F34);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B80E4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B81E0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B8310);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B8478);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B862C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B8740);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B881C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B8A0C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B8DA0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B8EC0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B8F38);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B9020);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B90FC);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B91F0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B9248);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B9298);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B9684);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B97B4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B98E8);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B9990);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B9B88);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B9E8C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800B9F9C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800BA108);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800BA274);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800BA3C4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800BA4E0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800BA684);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800BA744);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800BA820);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800BAD3C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800BAF44);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800BB344);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800BB670);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800BB880);

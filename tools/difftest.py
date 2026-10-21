@@ -74,11 +74,23 @@ def sh(cmd):
     return r.stdout
 
 
+def file_compiler(src):
+    """Compilador do arquivo, como no build (config/compilers.txt; padrão GCC 2.7.2)."""
+    key = pathlib.Path(src).as_posix()
+    cfg = ROOT / "config" / "compilers.txt"
+    if cfg.exists():
+        for l in cfg.read_text(encoding="utf-8").splitlines():
+            p = l.split("#")[0].split()
+            if len(p) == 2 and p[0] == key:
+                return p[1]
+    return "2.7.2-psx"
+
+
 def build_candidate(target, src, func):
     """Compila o .c (sem os INCLUDE_ASM) e liga em CAND_BASE contra os símbolos originais."""
     tmp = pathlib.Path(tempfile.mkdtemp())
     obj, elf, binf, lds = tmp / "c.o", tmp / "c.elf", tmp / "c.bin", tmp / "c.ld"
-    sh(f"mips-linux-gnu-cpp {CPP_FLAGS} {src} | /opt/gcc-2.7.2-psx/cc1 -O2 -G8 -quiet -mcpu=3000 "
+    sh(f"mips-linux-gnu-cpp {CPP_FLAGS} {src} | /opt/gcc-{file_compiler(src)}/cc1 -O2 -G8 -quiet -mcpu=3000 "
        f"-fgnu-linker -mgas -msoft-float -gcoff | {MASPSX} -o {obj}")
     # renomeia as funções definidas no objeto (X -> X__cand) para não colidirem com
     # os símbolos do binário original; referências internas acompanham o rename

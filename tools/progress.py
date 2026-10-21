@@ -41,17 +41,63 @@ def psyq_names(t):
             if "=" in l and not l.startswith("//")}
 
 
-def collect(t):
+MAP_SECTION = re.compile(r"^ \.text\s+0x([0-9a-f]+)\s+0x([0-9a-f]+)\s+\S+")
+MAP_SYMBOL = re.compile(r"^\s+0x([0-9a-f]{8})\s+([A-Za-z_]\w*)\s*$")
+
+
+def function_sizes(t):
+    """Tamanho de cada função a partir do mapa do linker (build/<alvo>.map).
+
+    Funciona tanto para funções em C quanto em INCLUDE_ASM: o tamanho é a
+    distância até o próximo símbolo de função na mesma seção .text de entrada.
+    """
     sizes = {}
-    for s in (ROOT / "asm" / t / "nonmatchings").rglob("*.s"):
-        m = NONMATCH.search(s.read_text(encoding="utf-8", errors="replace"))
+    mp = ROOT / "build" / f"{t}.map"
+    if not mp.exists():
+        sys.exit(f"{mp} não existe: rode `./run.sh make` antes")
+    sec_end, syms = None, []
+
+    def flush():
+        syms.sort()
+        for i, (a, n) in enumerate(syms):
+            end = syms[i + 1][0] if i + 1 < len(syms) else sec_end
+            sizes[n] = end - a
+        syms.clear()
+
+    for l in mp.read_text(encoding="utf-8").splitlines():
+        m = MAP_SECTION.match(l)
         if m:
-            sizes[m.group(1)] = int(m.group(2), 16)
+            flush()
+            sec_end = int(m.group(1), 16) + int(m.group(2), 16)
+            continue
+        if re.match(r"^ ?\.\w", l) or (l.strip() and not l.startswith(" ")):
+            flush()  # outra seção de entrada (.rodata, .data...) ou de saída
+            sec_end = None
+            continue
+        if sec_end is None:
+            continue
+        m = MAP_SYMBOL.match(l)
+        if m:
+            name = m.group(2)
+            if re.fullmatch(r"(L|D_|jtbl_)[0-9A-F]{8}", name) or name.startswith("__maspsx"):
+                continue
+            syms.append((int(m.group(1), 16), name))
+        elif l.strip() and not l.startswith(" "):
+            flush()
+            sec_end = None
+    flush()
+    return sizes
+
+
+def collect(t):
+    sizes = function_sizes(t)
     pending = set()
     for c in (ROOT / "src" / t).rglob("*.c"):
         pending |= set(INCLUDE.findall(c.read_text(encoding="utf-8", errors="replace")))
     lib = psyq_names(t)
-    r = {k: {"funcs": 0, "done_funcs": 0, "bytes": 0, "done_bytes": 0} for k in ("game", "lib")}
+    hand = handwritten(t)
+    r = {k: {"funcs": 0, "done_funcs": 0, "bytes": 0, "done_bytes": 0, "asm_bytes": 0}
+         for k in ("game", "lib")}
     for name, size in sizes.items():
         k = "lib" if name in lib else "game"
         r[k]["funcs"] += 1
@@ -59,7 +105,16 @@ def collect(t):
         if name not in pending:
             r[k]["done_funcs"] += 1
             r[k]["done_bytes"] += size
+        elif name in hand:
+            r[k]["asm_bytes"] += size  # escrita em assembly no original: fica como .s
     return r
+
+
+def handwritten(t):
+    p = ROOT / "config" / f"handwritten.{t}.txt"
+    if not p.exists():
+        return set()
+    return {l.split()[0] for l in p.read_text(encoding="utf-8").splitlines() if l and not l.startswith("#")}
 
 
 def pct(a, b):
@@ -74,7 +129,8 @@ def bar(p, width=20):
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
     data = {t: collect(t) for t, _, _ in TARGETS}
-    tot = {k: {"funcs": 0, "done_funcs": 0, "bytes": 0, "done_bytes": 0} for k in ("game", "lib")}
+    tot = {k: {"funcs": 0, "done_funcs": 0, "bytes": 0, "done_bytes": 0, "asm_bytes": 0}
+           for k in ("game", "lib")}
     for t in data:
         for k in tot:
             for f in tot[k]:
@@ -102,9 +158,11 @@ def main():
                 f"**{pct(all_d, all_b):.2f}%** |")
     pg = pct(g["done_bytes"], g["bytes"])
     pa = pct(all_d, all_b)
+    cov = pct(all_d + tot["game"]["asm_bytes"] + tot["lib"]["asm_bytes"], all_b)
     summary = [
         f"**Código do jogo decompilado em C (byte-matching):** `{bar(pg)}` **{pg:.2f}%**  ",
         f"**Total incluindo SDK PsyQ:** `{bar(pa)}` **{pa:.2f}%**  ",
+        f"**Cobertura (C + funções que já eram assembly no original):** `{bar(cov)}` **{cov:.2f}%**  ",
         f"**Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)",
         "",
     ]

@@ -1,0 +1,56 @@
+#include "common.h"
+#include "yuugi.h"
+
+void func_80012324(void) {
+
+}
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_8001232C);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012394);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800123D4);
+
+void func_80012430(void) {
+
+}
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012438);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800124A0);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012508);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012544);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012578);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800125AC);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800125D8);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012604);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012628);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_8001264C);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012668);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012684);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012698);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800126F8);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012764);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012778);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800127AC);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800127F4);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012868);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800129DC);

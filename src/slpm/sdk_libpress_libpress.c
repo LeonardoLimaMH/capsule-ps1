@@ -1,11 +1,12 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libpress_libpress", DecDCTReset);
+void DecDCTReset(s32 arg0) {
+    if (arg0 == 0) {
+        slpm_ResetCallback();
+    }
+    func_80112E84(arg0);
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libpress_libpress", DecDCTGetEnv);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libpress_libpress", DecDCTPutEnv);
-
-u16 DecDCTBufSize(u16 *arg0) {
-    return *arg0;
-}

@@ -73,3 +73,30 @@ Consequências para o projeto:
 - A etapa 9 (separar `main.c` nos arquivos originais) passa a ser necessária
   para aproveitar tudo: cada arquivo terá o seu compilador
   (`config/compilers.txt`) e as suas declarações.
+
+## Separação em unidades de tradução (etapa 9)
+
+- `plan_tus.py`: 410 TUs iniciais a partir de conflitos de `$gp` (124 pares → 6
+  fronteiras mínimas no código do jogo do `yuugi`), ilhas de estilo de
+  compilador e objetos do SDK identificados.
+- `assign_compilers.py --split`: a evidência de byte-matching prevalece sobre a
+  heurística de estilo; 40 fronteiras extras criadas onde funções casadas com
+  compiladores diferentes caíam no mesmo arquivo. Total: ~450 arquivos-fonte.
+- Correção de segmentação: o texto do `ETC.BIN` começa em `0x800979BC`
+  (offset `0x1BC`), não em `0x1F4`; o falso "assembly à mão" em
+  `func_800979F4` era o fim dessa função.
+
+## Assembly escrito à mão no original
+
+`tools/handwritten.py` (sinais certos: COP0/GTE, código que continua na
+próxima função, leitura de temporário antes da escrita). Primeira versão
+superestimava por causa de `nop`s de alinhamento entre objetos do SDK; com
+esses `nop`s descartados, os resultados conferem: `yuugi` 81 funções (71 de
+GTE/COP0: libgte e rotinas de sistema; `crt0`), `slpm` 3, `chess` 13, `raise` 6.
+
+## Gêmeos
+
+`tools/twins.py`: 258 grupos de funções idênticas (721 funções), inclusive
+entre binários (SDK duplicado em `yuugi`/`slpm`/overlays). Hoje não há grupo
+misto porque o pipeline m2c é determinístico; a ferramenta passa a render a
+cada função escrita/corrigida à mão.

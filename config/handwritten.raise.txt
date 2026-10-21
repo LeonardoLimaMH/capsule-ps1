@@ -1,0 +1,8 @@
+# Funções escritas em assembly no original (tools/handwritten.py)
+# função  tamanho  motivo
+func_800E3A04 0x110 coprocessador (lwc2)
+func_800E3B14 0x110 coprocessador (lwc2)
+func_800E3C24 0xec coprocessador (lwc2)
+func_800E3D18 0x220 coprocessador (lwc2)
+func_800E3F38 0x220 coprocessador (lwc2)
+func_800E4AD0 0x8fc coprocessador (lwc2)

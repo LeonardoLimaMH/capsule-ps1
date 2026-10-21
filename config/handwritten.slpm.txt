@@ -1,0 +1,5 @@
+# Funções escritas em assembly no original (tools/handwritten.py)
+# função  tamanho  motivo
+__SN_ENTRY_POINT_loader 0xbc não termina em salto (continua na próxima função)
+func_80111B24 0x18 não termina em salto (continua na próxima função)
+DecDCTvlc 0x370 coprocessador (mfc0)

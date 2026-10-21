@@ -1,14 +1,28 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003C808);
+void func_8003C808(void) {
+    extern s32 D_80078CC0;
+    extern s32 D_80078D64;
+    if (D_80078D64 > 0) {
+        if (D_80078D64 < 4) {
+            func_8003A690();
+        }
+    }
+    D_80078CC0 = 1;
+}
 
 void func_8003C844(s32 arg0) {
     extern s32 D_80078D64;
     D_80078D64 = arg0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003C850);
+void func_8003C850(void) {
+    extern s32 D_80078CC0;
+    if (D_80078CC0 != 0) {
+        func_8003A7B4();
+    }
+}
 
 void func_8003C878(void) {
     extern s32 D_80078CC8;

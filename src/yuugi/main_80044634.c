@@ -1,13 +1,17 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80044634", DsSystemStatus);
+s32 DsSystemStatus(void) {
+    s32 temp_v0;
+    s32 var_v0;
 
-s32 DsQueueLen(void) {
-    extern s32 D_80094B70[];
-    return (*D_80094B70);
-}
-
-s32 DsStatus(void) {
-    return func_80044B5C() & 0xFF;
+    temp_v0 = func_80044AF8(0);
+    var_v0 = temp_v0;
+    if (temp_v0 == 1) {
+        var_v0 = temp_v0;
+        if (DsQueueLen() > 0) {
+            var_v0 = 2;
+        }
+    }
+    return var_v0;
 }

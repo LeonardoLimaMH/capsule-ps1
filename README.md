@@ -16,19 +16,24 @@ emulação contra a função original.
 ## Progresso
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **0.52%**  
-**Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **0.65%**  
+**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **0.80%**  
+**Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **1.10%**  
+**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.49%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | executável principal | 1.11% (2,296 / 206,184 B) | 72 / 732 | 1.63% (28 / 303 fn) | **1.22%** |
-| `SLPM_860.96` | loader / boot | 2.19% (452 / 20,632 B) | 12 / 119 | 2.38% (33 / 215 fn) | **2.32%** |
-| `CHESS.BIN` | overlay de batalha (tabuleiro) | 0.09% (368 / 421,956 B) | 14 / 867 | 50.00% (1 / 2 fn) | **0.09%** |
-| `RAISE.BIN` | overlay de criação de monstros | 0.73% (2,372 / 326,576 B) | 125 / 940 | 100.00% (2 / 2 fn) | **0.75%** |
-| `ETC.BIN` | overlay de menus/diversos | 0.09% (84 / 88,936 B) | 2 / 189 | 0.00% (0 / 0 fn) | **0.09%** |
-| **Total** | | **0.52%** (5,572 / 1,064,284 B) | 225 / 2847 | 2.08% (64 / 522 fn) | **0.65%** |
+| `YUUGI.EXE` | executável principal | 1.47% (3,044 / 206,408 B) | 93 / 732 | 5.22% (37 / 303 fn) | **2.23%** |
+| `SLPM_860.96` | loader / boot | 2.17% (452 / 20,808 B) | 12 / 119 | 3.41% (39 / 215 fn) | **3.01%** |
+| `CHESS.BIN` | overlay de batalha (tabuleiro) | 0.41% (1,736 / 421,956 B) | 38 / 867 | 50.00% (1 / 2 fn) | **0.42%** |
+| `RAISE.BIN` | overlay de criação de monstros | 0.97% (3,160 / 326,576 B) | 148 / 940 | 100.00% (2 / 2 fn) | **0.99%** |
+| `ETC.BIN` | overlay de menus/diversos | 0.09% (84 / 88,992 B) | 2 / 189 | 0.00% (0 / 0 fn) | **0.09%** |
+| **Total** | | **0.80%** (8,476 / 1,064,740 B) | 293 / 2847 | 4.49% (79 / 522 fn) | **1.10%** |
 <!-- PROGRESS:END -->
+
+A **cobertura** soma ao C as funções que já eram escritas em assembly no
+original (detectadas por `tools/handwritten.py`): nesses casos o `.s` é a forma
+correta do código-fonte, como num projeto de decompilação tradicional.
 
 O percentual é medido em **bytes de código**: uma função conta como decompilada
 quando o seu `INCLUDE_ASM` foi substituído por C e o build completo continua
@@ -137,6 +142,10 @@ disco), `asm/` (assembly desmontado), `build/`.
 | `tu_boundaries.py` / `plan_tus.py` | deduzem e aplicam a separação em unidades de tradução |
 | `split_tu.py` | separa um `.c` numa fronteira de função (atualiza YAML, caminhos e compilador) |
 | `permute.py` | prepara e roda o decomp-permuter em funções quase casadas |
+| `assign_compilers.py` | define o compilador de cada arquivo pela evidência de byte-matching e cria fronteiras de TU onde o compilador troca (`--split`) |
+| `full_asm.py` | gera o assembly de todas as funções (inclusive as já em C) em `.cache/fullasm`, para análise |
+| `handwritten.py` | detecta funções que eram assembly no original (COP0/GTE, código que continua na próxima função, leitura de temporário antes da escrita) → `config/handwritten.<alvo>.txt` |
+| `twins.py` | casamentos "de graça": funções gêmeas (mesmo código com relocações mascaradas, em qualquer binário) recebem o C de uma irmã já casada, com os nomes trocados |
 | `check.py` | compara os binários gerados com os originais (SHA-1 + primeiras diferenças) |
 | `find_drift.py` | encontra o primeiro símbolo cujo endereço linkado divergiu (depuração de layout) |
 | `find_islands.py`, `sections.py`, `disasm.py` | análise de fronteiras de seção, ilhas de dados e desmontagem rápida |
@@ -249,3 +258,7 @@ vínculo com Konami, Kazuki Takahashi ou Sony Interactive Entertainment.
 [m2c](https://github.com/matt-kempster/m2c) · [asm-differ](https://github.com/simonlindholm/asm-differ) ·
 [decomp-permuter](https://github.com/simonlindholm/decomp-permuter) ·
 [psx_psyq_signatures](https://github.com/lab313ru/psx_psyq_signatures) · [Unicorn](https://www.unicorn-engine.org/)
+
+As técnicas de gêmeos e de detecção de assembly escrito à mão foram inspiradas
+no [decomp.wtf](https://github.com/i12bp8/decomp.wtf) e reimplementadas do zero
+sobre as ferramentas deste projeto.

@@ -4,5 +4,3 @@ s32 func_800DC5F8(void) {
     extern s32 D_8008ED80[];
     return (func_800202A4(0x64) + (*D_8008ED80)) & 1;
 }
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DC5F8", func_800DC628);

@@ -32,7 +32,3 @@ s32 func_800D0CFC(s32 arg0) {
 }
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CF2E4", func_800D0D14);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CF2E4", func_800D0D40);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CF2E4", func_800D0D4C);

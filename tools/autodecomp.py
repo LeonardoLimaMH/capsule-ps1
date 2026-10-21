@@ -27,6 +27,7 @@ import tempfile
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import match  # noqa: E402
+from handwritten import load as load_handwritten  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CACHE = ROOT / ".cache" / "auto"
@@ -133,6 +134,7 @@ def to_c(draft, func, asm_text, variant):
     return c_func
 
 
+HANDWRITTEN = {}  # alvo -> funções escritas em assembly no original (tools/handwritten.py)
 HEADER = '#include "common.h"\n\n'
 # compiladores tentados, em ordem: o código do jogo é majoritariamente GCC 2.7.2;
 # parte (sobretudo bibliotecas) foi compilada com GCC 2.8.1
@@ -146,8 +148,8 @@ def try_function(target, func):
     asm_text = asm.read_text(encoding="utf-8")
     if re.search(r"\b(rtps|rtpt|nclip|mvmva|avsz3|avsz4|ncds|nccs|mfc2|mtc2|cfc2|ctc2|lwc2|swc2)\b", asm_text):
         return func, None, "usa GTE"
-    if "/* handwritten" in asm_text.lower():
-        return func, None, "escrita à mão"
+    if "/* handwritten" in asm_text.lower() or func in HANDWRITTEN.get(target, {}):
+        return func, None, "assembly original"
     variants = [{}, {"unproto": True}, {"unsigned": True}]
     flags_sets = [(), ("--no-andor",)]
     last = "m2c falhou"
@@ -271,6 +273,7 @@ def main():
         return apply(a.target)
     store = CACHE / a.target
     store.mkdir(parents=True, exist_ok=True)
+    HANDWRITTEN[a.target] = load_handwritten(a.target)
     funcs = []
     for c, f in pending_functions(a.target):
         p = asm_path(a.target, f)

@@ -24,9 +24,16 @@ FUNC_START = re.compile(r"^(INCLUDE_ASM\(\"[^\"]+\",\s*(\w+)\);|[A-Za-z_][\w \*]
 
 def func_offset(target, func):
     """Offset no arquivo da função (procura o asm em qualquer pasta de nonmatchings)."""
-    asm = next((ROOT / "asm" / target / "nonmatchings").rglob(f"{func}.s"))
-    m = re.search(r"/\* ([0-9A-F]+) [0-9A-F]{8} [0-9A-F]{8} \*/", asm.read_text(encoding="utf-8"))
-    return int(m.group(1), 16)
+    asm = next((ROOT / "asm" / target / "nonmatchings").rglob(f"{func}.s"), None)
+    if asm is not None:
+        m = re.search(r"/\* ([0-9A-F]+) [0-9A-F]{8} [0-9A-F]{8} \*/", asm.read_text(encoding="utf-8"))
+        return int(m.group(1), 16)
+    # função já em C (o splat não gera .s para ela): endereço no mapa do linker
+    mp = (ROOT / "build" / f"{target}.map").read_text(encoding="utf-8")
+    addr = int(re.search(rf"^\s+0x([0-9a-f]{{8}})\s+{func}\s*$", mp, re.M).group(1), 16)
+    y = (ROOT / "config" / f"{target}.yaml").read_text(encoding="utf-8")
+    seg = re.search(r"type: code\s+start: (0x[0-9A-Fa-f]+)\s+vram: (0x[0-9A-Fa-f]+)", y)
+    return addr - int(seg.group(2), 16) + int(seg.group(1), 16)
 
 
 def set_compiler(target, name, gcc):

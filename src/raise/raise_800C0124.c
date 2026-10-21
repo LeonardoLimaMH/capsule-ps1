@@ -6,13 +6,12 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0124", func_800C0560);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0124", func_800C0590);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0124", func_800C062C);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0124", func_800C063C);
-
-s16 func_800C0648(void) {
+void func_800C062C(void) {
     extern s16 D_800F0710[];
-    return (*D_800F0710);
+    (*D_800F0710) = 1;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0124", func_800C0658);
+void func_800C063C(void) {
+    extern s16 D_800F0710[];
+    (*D_800F0710) = 0;
+}

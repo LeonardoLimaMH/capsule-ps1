@@ -1,4 +1,7 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800411E8", SpuSetKeyOnWithAttr);
+void SpuSetKeyOnWithAttr(s32 *arg0) {
+    SpuSetVoiceAttr();
+    SpuSetKey(1, *arg0);
+}

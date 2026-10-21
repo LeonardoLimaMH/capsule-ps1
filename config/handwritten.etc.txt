@@ -1,0 +1,2 @@
+# Funções escritas em assembly no original (tools/handwritten.py)
+# função  tamanho  motivo
