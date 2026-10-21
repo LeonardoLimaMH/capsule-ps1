@@ -31,7 +31,7 @@ MASPSX = (f"python3 /opt/maspsx/maspsx.py --aspsx-version={__import__('os').envi
 
 
 def original(target, func):
-    hits = list((ROOT / "asm" / target / "nonmatchings").rglob(f"{func}.s"))
+    hits = list((ROOT / "asm" / target / "nonmatchings").rglob(f"{func}.s")) or         list((ROOT / ".cache" / "fullasm" / target / "nonmatchings").rglob(f"{func}.s"))
     if not hits:
         sys.exit(f"asm de {func} não encontrado em asm/{target}/nonmatchings")
     words, vram = [], None
@@ -110,6 +110,13 @@ def main():
     while len(cw) > len(ow) and cw[-1] == 0:
         cw.pop()
         masks.pop()
+    # Zeros finais só no original: preenchimento da seção .text do objeto até
+    # múltiplo de 16 bytes (feito na montagem/ligação, não pelo compilador). O
+    # build o reproduz por arquivo-fonte (tools/ldpad.py); aqui não é diferença.
+    pad = 0
+    while len(ow) > len(cw) and ow[-1] == 0:
+        ow.pop()
+        pad += 1
     n = max(len(ow), len(cw))
     diffs = 0
     out = []
@@ -126,6 +133,8 @@ def main():
         print(f"{'ORIGINAL':<52}| COMPILADO ({a.gcc} {a.cflags})")
         print("\n".join(out))
     status = "MATCH" if diffs == 0 else f"DIFERENTE ({diffs} instruções, {len(ow)} vs {len(cw)})"
+    if pad:
+        status += f" (+{pad} nop(s) de preenchimento de seção no original)"
     print(f"[{status}] {a.target}:{a.func}")
     sys.exit(0 if diffs == 0 else 1)
 

@@ -33,7 +33,7 @@ chess_ORIG  := disc/MASTER/PSF/CHESS.BIN
 raise_ORIG  := disc/MASTER/PSF/RAISE.BIN
 etc_ORIG    := disc/MASTER/PSF/ETC.BIN
 
-.PHONY: all clean split check progress test
+.PHONY: all clean split check progress test bench wip catalog
 .SECONDEXPANSION:
 
 all: check
@@ -60,6 +60,7 @@ $(foreach t,$(TARGETS),$(eval $(call TARGET_RULES,$(t))))
 $(BUILD_DIR)/%.ld: config/%.yaml
 	$(SPLAT) $<
 	$(PYTHON) tools/postsplit.py asm
+	$(PYTHON) tools/ldpad.py $*
 
 # Um .c depende de todos os .s que ele inclui via INCLUDE_ASM
 # (src/<alvo>/<arq>.c -> asm/<alvo>/nonmatchings/<arq>/*.s)
@@ -79,12 +80,26 @@ check: $(foreach t,$(TARGETS),$(BUILD_DIR)/$(t).exe)
 split:
 	$(foreach t,$(TARGETS),$(SPLAT) config/$(t).yaml;)
 	$(PYTHON) tools/postsplit.py asm
+	$(PYTHON) tools/ldpad.py $(TARGETS)
 
 progress:
 	@$(PYTHON) tools/progress.py
 
 test:
 	@$(PYTHON) -m pytest -q tests
+
+# bancada fixa do pipeline automático (docs/PROCESS.md); ex.: make bench LABEL=teste
+bench:
+	$(PYTHON) tools/full_asm.py
+	$(PYTHON) tools/bench.py --run $(or $(LABEL),manual)
+
+# recompila as hipóteses do trabalho manual e atualiza docs/wip/STATUS.md
+wip:
+	$(PYTHON) tools/wip.py check
+
+# confere o disco extraído contra config/disc_files.txt
+catalog:
+	$(PYTHON) tools/disc_catalog.py --check
 
 clean:
 	rm -rf $(BUILD_DIR)

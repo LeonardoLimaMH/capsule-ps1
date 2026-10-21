@@ -28,6 +28,7 @@ import tempfile
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import match  # noqa: E402
 from handwritten import load as load_handwritten  # noqa: E402
+import typeinfer  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CACHE = ROOT / ".cache" / "auto"
@@ -36,9 +37,23 @@ INCLUDE = re.compile(r'INCLUDE_ASM\(\s*"([^"]+)"\s*,\s*(\w+)\s*\);')
 SYM_RE = re.compile(r"\b(D_[0-9A-F]{8}|jtbl_[0-9A-F]{8}|__bss_start|__bss_end|g_\w+)\b")
 
 
+_ASM_INDEX = {}
+
+
+def _index(base):
+    """Índice nome -> caminho dos .s de um diretório (uma varredura por diretório)."""
+    if base not in _ASM_INDEX:
+        _ASM_INDEX[base] = {p.stem: p for p in base.rglob("*.s")} if base.exists() else {}
+    return _ASM_INDEX[base]
+
+
 def asm_path(target, func):
-    hits = list((ROOT / "asm" / target / "nonmatchings").rglob(f"{func}.s"))
-    return hits[0] if hits else None
+    """Assembly da função: asm/ (pendentes) ou .cache/fullasm (todas, ver full_asm.py)."""
+    for base in (ROOT / "asm" / target / "nonmatchings", ROOT / ".cache" / "fullasm" / target / "nonmatchings"):
+        hit = _index(base).get(func)
+        if hit:
+            return hit
+    return None
 
 
 def func_size(path):
@@ -121,6 +136,12 @@ def to_c(draft, func, asm_text, variant):
             continue
         if "(" in d:
             d = d.replace("?", "s32")
+            fm = re.search(r"\b(\w+)\s*\(", d)
+            if fm and fm.group(1) == func:
+                continue  # a própria função
+            if fm and fm.group(1) in PROTOS and variant.get("protos") and not variant.get("unproto"):
+                out_decls.append(PROTOS[fm.group(1)])  # assinatura exata (função já casada)
+                continue
             if variant.get("unproto"):
                 d = re.sub(r"\((.*)\);$", "();", d)
             out_decls.append(d if d.startswith("extern") else d)
@@ -134,6 +155,7 @@ def to_c(draft, func, asm_text, variant):
     return c_func
 
 
+PROTOS = {}  # nome -> protótipo exato das funções já em C (typeinfer.known_prototypes)
 HANDWRITTEN = {}  # alvo -> funções escritas em assembly no original (tools/handwritten.py)
 HEADER = '#include "common.h"\n\n'
 # compiladores tentados, em ordem: o código do jogo é majoritariamente GCC 2.7.2;
@@ -141,39 +163,115 @@ HEADER = '#include "common.h"\n\n'
 COMPILERS = ["2.7.2-psx", "2.8.1-psx"]
 
 
-def try_function(target, func):
+# Heurísticas do pipeline, cada uma ligável/desligável para medição na bancada
+# fixa (tools/bench.py). Só entram em DEFAULT_HEURISTICS depois de mostrarem
+# ganho sem regressões (ver docs/PROCESS.md).
+ALL_HEURISTICS = {
+    "protos": "protótipos exatos das funções já casadas para as funções chamadas",
+    "ptypes": "tipos de parâmetros inferidos da normalização na entrada (sll/sra, andi)",
+    "unproto": "variante com declarações sem protótipo",
+    "unsigned": "variante com temporários sem sinal",
+    "noandor": "variante do m2c sem fusão de && / ||",
+    "gcc281": "tentar também o GCC 2.8.1",
+}
+DEFAULT_HEURISTICS = frozenset(ALL_HEURISTICS)
+ROW = re.compile(r"^(>>|  ) [0-9A-F]{8}  (.{40}) \| (.*)$")
+LOADS = {"lh", "lhu", "lb", "lbu", "lw"}
+
+
+def classify(o, c):
+    """Categoria de uma linha divergente (original x compilado)."""
+    oo, cc = o.split(), c.split()
+    if not oo or not cc or oo[0] == "-" or cc[0] == "-":
+        return "tamanho"
+    if oo[0] != cc[0]:
+        pair = {oo[0], cc[0]}
+        if len(pair & LOADS) == 2:
+            return "tipo de load (sinal/largura)"
+        if pair & {"sll", "sra", "srl", "andi"}:
+            return "extensão/truncamento"
+        if pair & {"slt", "sltu", "sltiu", "slti"}:
+            return "comparação com/sem sinal"
+        return "ordem/instrução diferente"
+    if oo[1:] != cc[1:]:
+        return "registradores"
+    return "outro"
+
+
+def _attempt(target, func, c, gcc):
+    """Compila e compara uma tentativa; devolve registro com métricas."""
+    tmp = pathlib.Path(tempfile.mkdtemp()) / f"{func}.c"
+    tmp.write_text(HEADER + c + "\n", encoding="utf-8")
+    r = subprocess.run(["python3", "tools/match.py", target, func, str(tmp), "-q", "--gcc", gcc],
+                       cwd=ROOT, capture_output=True, text=True, timeout=120)
+    if r.returncode == 0:
+        return {"compiles": True, "match": True, "n": 0, "same_len": True, "gcc": gcc}
+    m = re.search(r"\((\d+) instruções, (\d+) vs (\d+)\)", r.stdout)
+    if not m:
+        return {"compiles": False, "match": False, "gcc": gcc}
+    first = next((ROW.match(l) for l in r.stdout.splitlines() if l.startswith(">>")), None)
+    return {"compiles": True, "match": False, "n": int(m.group(1)), "gcc": gcc,
+            "same_len": m.group(2) == m.group(3),
+            "cat": classify(first.group(2).strip(), first.group(3).strip()) if first else "?",
+            "first": (first.group(2).strip() + " | " + first.group(3).strip()) if first else ""}
+
+
+def evaluate(target, func, heur=DEFAULT_HEURISTICS):
+    """Roda o pipeline numa função. Devolve (c_casado|None, gcc|None, registro).
+
+    O registro descreve a melhor tentativa (menos instruções diferentes) e o
+    motivo final: MATCH, não casou, não compila, m2c falhou, usa GTE...
+    """
     asm = asm_path(target, func)
     if asm is None:
-        return func, None, "sem asm"
+        return None, None, {"reason": "sem asm"}
     asm_text = asm.read_text(encoding="utf-8")
     if re.search(r"\b(rtps|rtpt|nclip|mvmva|avsz3|avsz4|ncds|nccs|mfc2|mtc2|cfc2|ctc2|lwc2|swc2)\b", asm_text):
-        return func, None, "usa GTE"
+        return None, None, {"reason": "usa GTE"}
     if "/* handwritten" in asm_text.lower() or func in HANDWRITTEN.get(target, {}):
-        return func, None, "assembly original"
-    variants = [{}, {"unproto": True}, {"unsigned": True}]
-    flags_sets = [(), ("--no-andor",)]
-    last = "m2c falhou"
+        return None, None, {"reason": "assembly original"}
+    ptypes = typeinfer.infer_params(asm_text) if "ptypes" in heur else [None] * 4
+    variants = ([{"ptypes": ptypes}] if any(ptypes) else []) + [{}]
+    if "unproto" in heur:
+        variants.append({"unproto": True})
+    if "unsigned" in heur:
+        variants.append({"unsigned": True})
+    for v in variants:
+        v["protos"] = "protos" in heur
+    flags_sets = [()] + ([("--no-andor",)] if "noandor" in heur else [])
+    compilers = COMPILERS if "gcc281" in heur else COMPILERS[:1]
+    best, reason = None, "m2c falhou"
     for flags in flags_sets:
         draft = run_m2c(target, func, asm, flags)
         if draft is None:
             continue
         for v in variants:
             c = to_c(draft, func, asm_text, v)
+            if c is not None and v.get("ptypes"):
+                c = typeinfer.apply_param_types(c, func, v["ptypes"])
             if c is None:
-                last = "tipo composto"
+                reason = "tipo composto"
                 continue
-            tmp = pathlib.Path(tempfile.mkdtemp()) / f"{func}.c"
-            tmp.write_text(HEADER + c + "\n", encoding="utf-8")
-            for gcc in COMPILERS:
-                r = subprocess.run(["python3", "tools/match.py", target, func, str(tmp), "-q",
-                                    "--gcc", gcc], cwd=ROOT, capture_output=True, text=True,
-                                   timeout=120)
-                if r.returncode == 0:
-                    return func, (c, gcc), "MATCH " + gcc
-                if "DIFERENTE" not in r.stdout:
+            for gcc in compilers:
+                rec = _attempt(target, func, c, gcc)
+                rec["variant"] = ",".join(k for k, x in v.items() if x and k != "protos") or "base"
+                if rec["match"]:
+                    rec["reason"] = "MATCH"
+                    return c, gcc, rec
+                if not rec["compiles"]:
+                    reason = "não compila" if reason != "não casou" else reason
                     break  # não compila: inútil tentar outro compilador
-            last = "não casou" if "DIFERENTE" in r.stdout else "não compila"
-    return func, None, last
+                reason = "não casou"
+                if best is None or rec["n"] < best["n"]:
+                    best = rec
+    rec = dict(best or {})
+    rec["reason"] = reason
+    return None, None, rec
+
+
+def try_function(target, func):
+    c, gcc, rec = evaluate(target, func)
+    return func, ((c, gcc) if c else None), ("MATCH " + gcc if c else rec["reason"])
 
 
 def pending_functions(target):
@@ -274,6 +372,7 @@ def main():
     store = CACHE / a.target
     store.mkdir(parents=True, exist_ok=True)
     HANDWRITTEN[a.target] = load_handwritten(a.target)
+    PROTOS.update(typeinfer.known_prototypes([a.target] + (["yuugi"] if a.target in ("chess", "raise", "etc") else [])))
     funcs = []
     for c, f in pending_functions(a.target):
         p = asm_path(a.target, f)
