@@ -174,7 +174,12 @@ ALL_HEURISTICS = {
     "noandor": "variante do m2c sem fusão de && / ||",
     "gcc281": "tentar também o GCC 2.8.1",
 }
-DEFAULT_HEURISTICS = frozenset(ALL_HEURISTICS)
+# Decisão pela ablação de 2026-10-21 (docs/BENCH.md): só "gcc281" afeta casamentos
+# (sem ela, 5 controles deixam de casar). "noandor" e "unsigned" não casaram nada mas
+# deixam alguns rascunhos mais próximos: ficam no conjunto de rascunho (wip/permuter).
+# "protos", "ptypes" e "unproto": nenhum efeito medido; disponíveis, desligadas.
+DEFAULT_HEURISTICS = frozenset({"gcc281"})
+DRAFT_HEURISTICS = frozenset({"gcc281", "noandor", "unsigned"})
 ROW = re.compile(r"^(>>|  ) [0-9A-F]{8}  (.{40}) \| (.*)$")
 LOADS = {"lh", "lhu", "lb", "lbu", "lw"}
 

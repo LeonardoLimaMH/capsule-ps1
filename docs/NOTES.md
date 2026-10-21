@@ -110,3 +110,24 @@ cada função escrita/corrigida à mão.
 
 O permuter chegou a 42 diferenças em `SetDrawEnv` apenas com um temporário
 `volatile`, artifício descartado por não refletir o código original.
+
+## Tabela de carga e cadeia de leitura do CD (confirmada com o Ghidra)
+
+- Registros de arquivo de 16 bytes {destino, tamanho, LBA, modo} em dois blocos:
+  `0x8006E994` (373) e `0x800701C4` (27); tabelas-índice de 8 bytes `D_8006DDE4`
+  (tipos 0x00-0x10) e `D_800700E4` (tipos 0x11/0x12: OVDT0, CHESS/RAISE/ETC, CHSRF*).
+  Catálogo: `config/disc_files.txt`; testes: `tests/test_overlays.py`.
+- `func_80019F30(id = (tipo << 16) | índice, ...)`: resolve o registro e despacha por tipo.
+- `func_8001A1DC(a0, a1, registro)`: modo 1 → `func_80019D48(tamanho, destino, LBA)`;
+  outro modo → fila (`func_800190F4(0xFE, ...)`).
+- `func_80019D48` → `func_80019DB4(tamanho, setores = (tamanho + 0x7FF) >> 11, destino, LBA)`
+  → `func_800190F4(6, LBA, &{destino, setores}, tamanho)`: comando 6 na fila do CD.
+- **Em aberto:** os registros dos overlays dizem destino `0x80098000`, mas o código foi
+  ligado em `0x80097800` (50–67% das chamadas internas caem em prólogos nessa base, 0–1%
+  na outra). Próximo passo: seguir o comando 6 da fila até o callback de leitura.
+
+## Ghidra (plugin GhidraMCP via HTTP, `tools/ghidra.py`)
+
+Usado para análise (pseudo-C de leitura, referências cruzadas, structs), nunca como
+fonte de verdade. Importar o ELF do build **sem** fixar `language`; com ele o plugin
+usa o carregador de binário cru e os endereços ficam errados (aconteceu na 1ª tentativa).
