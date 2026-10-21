@@ -1,0 +1,49 @@
+name: slpm
+sha1: a4d3c7f4750acc79a29f2f941449f73950497e5e
+options:
+  basename: slpm
+  target_path: disc/SLPM_860.96
+  asm_path: asm/slpm
+  src_path: src/slpm
+  ld_script_path: build/slpm.ld
+  symbol_addrs_path: [config/symbols.slpm.txt]
+  undefined_funcs_auto_path: config/undefined_funcs_auto.slpm.txt
+  undefined_syms_auto_path: config/undefined_syms_auto.slpm.txt
+  gp_value: 0x80133474
+  base_path: ..
+  platform: psx
+  compiler: PSYQ
+  build_path: build
+  find_file_boundaries: yes
+  use_legacy_include_asm: no
+  section_order: [".rodata", ".text", ".data", ".bss"]
+  ld_bss_is_noload: true
+  ld_align_section_vram_end: false
+  ld_align_segment_vram_end: false
+  ld_align_segment_start: false
+  subalign: 4
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  migrate_rodata_to_functions: no
+  string_encoding: SHIFT-JIS
+  data_string_encoding: SHIFT-JIS
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  disasm_unknown: true
+  auto_decompile_empty_functions: false
+  global_vram_start: 0x80010000
+  global_vram_end: 0x80200000
+segments:
+  - name: header
+    type: header
+    start: 0x0
+  - name: loader
+    type: code
+    start: 0x800
+    vram: 0x80110000
+    bss_size: 0x4E80
+    subsegments:
+      - [0x800, rodata]
+      - [0x1448, c, loader]
+      - [0x11084, data]
+  - [0x24000]

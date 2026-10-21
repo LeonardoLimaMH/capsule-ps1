@@ -1,0 +1,45 @@
+name: chess
+sha1: a6a63cc46a633968573c23b5681bb178070dba25
+options:
+  basename: chess
+  target_path: disc/MASTER/PSF/CHESS.BIN
+  asm_path: asm/chess
+  src_path: src/chess
+  ld_script_path: build/chess.ld
+  symbol_addrs_path: [config/symbols.chess.txt, config/symbols.yuugi.txt]
+  undefined_funcs_auto_path: config/undefined_funcs_auto.chess.txt
+  undefined_syms_auto_path: config/undefined_syms_auto.chess.txt
+  gp_value: 0x80078B6C
+  base_path: ..
+  platform: psx
+  compiler: PSYQ
+  build_path: build
+  find_file_boundaries: yes
+  use_legacy_include_asm: no
+  section_order: [".rodata", ".text", ".data", ".bss"]
+  ld_bss_is_noload: true
+  ld_align_section_vram_end: false
+  ld_align_segment_vram_end: false
+  ld_align_segment_start: false
+  subalign: 4
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  migrate_rodata_to_functions: no
+  string_encoding: SHIFT-JIS
+  data_string_encoding: SHIFT-JIS
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  disasm_unknown: true
+  auto_decompile_empty_functions: false
+  global_vram_start: 0x80010000
+  global_vram_end: 0x80200000
+segments:
+  - name: chess
+    type: code
+    start: 0x0
+    vram: 0x80097800
+    subsegments:
+      - [0x0, rodata]
+      - [0x2340, c, chess]
+      - [0x693C4, data]
+  - [0x81F80]

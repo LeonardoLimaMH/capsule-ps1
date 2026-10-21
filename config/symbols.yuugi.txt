@@ -1,0 +1,7 @@
+// Símbolos do executável principal YUUGI.EXE (formato splat)
+__SN_ENTRY_POINT = 0x8004243C; // type:func
+main = 0x80011820; // type:func
+D_80010490 = 0x80010490; // size:0x8
+__bss_start = 0x80078CD8;
+__bss_end = 0x80096690;
+g_OverlayBase = 0x80097800;

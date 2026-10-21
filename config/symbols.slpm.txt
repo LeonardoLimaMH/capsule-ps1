@@ -1,0 +1,2 @@
+// Símbolos do loader SLPM_860.96
+__SN_ENTRY_POINT_loader = 0x80111A48; // type:func

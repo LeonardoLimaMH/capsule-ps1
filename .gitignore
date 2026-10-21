@@ -1,0 +1,19 @@
+# Conteúdo protegido / derivado da mídia original: NUNCA versionar
+disc/
+disc_manifest.json
+*.bin
+*.BIN
+*.EXE
+*.cue
+asm/
+assets/
+
+# Saídas de build
+build/
+__pycache__/
+*.pyc
+.pytest_cache/
+nonmatchings/
+*.o
+.splache
+.splat/

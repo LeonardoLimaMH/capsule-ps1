@@ -1,0 +1,49 @@
+name: YUUGI.EXE
+sha1: ded3d5e61d5906077d0171396fea4ca3959ecf23
+options:
+  basename: yuugi
+  target_path: disc/YUUGI.EXE
+  base_path: ..
+  platform: psx
+  compiler: PSYQ
+  asm_path: asm/yuugi
+  src_path: src/yuugi
+  build_path: build
+  ld_script_path: build/yuugi.ld
+  symbol_addrs_path: [config/symbols.yuugi.txt]
+  undefined_funcs_auto_path: config/undefined_funcs_auto.yuugi.txt
+  undefined_syms_auto_path: config/undefined_syms_auto.yuugi.txt
+  find_file_boundaries: yes
+  use_legacy_include_asm: no
+  section_order: [".rodata", ".text", ".data", ".bss"]
+  gp_value: 0x80078B6C
+  ld_bss_is_noload: true
+  ld_align_section_vram_end: false
+  ld_align_segment_vram_end: false
+  ld_align_segment_start: false
+  subalign: 4
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  migrate_rodata_to_functions: no
+  string_encoding: SHIFT-JIS
+  data_string_encoding: SHIFT-JIS
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  disasm_unknown: true
+  auto_decompile_empty_functions: false
+  global_vram_start: 0x80010000
+  global_vram_end: 0x80200000
+segments:
+  - name: header
+    type: header
+    start: 0x0
+  - name: main
+    type: code
+    start: 0x800
+    vram: 0x80010000
+    bss_size: 0x1D690
+    subsegments:
+      - [0x800, rodata]
+      - [0x2020, c, main]
+      - [0x41094, data]
+  - [0x69800]
