@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN python3 -m venv /opt/venv
 ENV PATH=/opt/venv/bin:$PATH
 RUN pip install --no-cache-dir "splat64[mips]==0.50.1" "spimdisasm==1.42.4" pyyaml pycparser colorama \
-      cxxfilt python-Levenshtein capstone unicorn
+      cxxfilt python-Levenshtein capstone unicorn pytest pytest-xdist
 # Compiladores GCC antigos (builds PSX do PsyQ recompilados pelo projeto decompals/old-gcc)
 RUN for v in 2.7.2-psx 2.8.0-psx 2.8.1-psx 2.6.3-psx 2.91.66-psx; do \
       mkdir -p /opt/gcc-$v && wget -q https://github.com/decompals/old-gcc/releases/download/0.17/gcc-$v.tar.gz -O /tmp/g.tgz \

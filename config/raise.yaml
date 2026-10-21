@@ -30,6 +30,7 @@ options:
   rodata_string_guesser_level: 2
   data_string_guesser_level: 2
   disasm_unknown: true
+  generate_asm_macros_files: false
   auto_decompile_empty_functions: false
   global_vram_start: 0x80010000
   global_vram_end: 0x80200000

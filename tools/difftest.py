@@ -1,0 +1,284 @@
+#!/usr/bin/env python3
+"""Teste diferencial: função original x função compilada do nosso C.
+
+Executa a mesma função em dois emuladores MIPS R3000 (Unicorn) a partir de
+estados iniciais idênticos e aleatórios:
+  A) binário original;
+  B) binário original + nosso C compilado em área livre (0x80180000), com a
+     entrada da função original desviada (j) para a versão em C.
+Todos os demais endereços ficam iguais, então registradores e a RAM inteira
+podem ser comparados após o retorno.
+
+Funções do jogo chamadas pela função testada executam de verdade. Funções do
+SDK PsyQ (dependentes de hardware: GPU, CD, SPU...) e vetores da BIOS viram
+stubs instrumentados: cada chamada é registrada (nome + a0..a3) e retorna um
+valor determinístico. O log de chamadas de A e B também é comparado.
+
+Resultado por tentativa: idêntica, divergente, ou inconclusiva (ambos os lados
+travaram/estouraram do mesmo modo). Inconclusivas nunca contam como aprovação.
+Instruções GTE (COP2) não são emuladas: o caso é "não suportado".
+
+Uso (dentro do container):
+  difftest.py <alvo> <função> [--src arquivo.c] [--trials 200] [--seed 1]
+Saída: 0 = equivalente; 1 = divergência; 2 = inconclusivo/não suportado.
+"""
+import argparse
+import pathlib
+import random
+import re
+import subprocess
+import sys
+import tempfile
+
+from unicorn import (Uc, UcError, UC_ARCH_MIPS, UC_MODE_MIPS32, UC_MODE_LITTLE_ENDIAN,
+                     UC_HOOK_INTR, UC_HOOK_CODE)
+from unicorn.mips_const import *
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+RAM_SIZE = 0x200000
+CAND_BASE = 0x80180000          # área livre usada para o código candidato
+STACK_TOP = 0x801FFF00
+SENTINEL = 0x80000400           # endereço de retorno falso
+MAX_INSNS = 2_000_000
+MIN_CONCLUSIVE = 0.25           # fração mínima de tentativas conclusivas
+
+TARGETS = {
+    "yuugi": ("disc/YUUGI.EXE", 0x800, 0x80010000, "build/yuugi.elf"),
+    "slpm": ("disc/SLPM_860.96", 0x800, 0x80110000, "build/slpm.elf"),
+    "chess": ("disc/MASTER/PSF/CHESS.BIN", 0, 0x80097800, "build/chess.elf"),
+    "raise": ("disc/MASTER/PSF/RAISE.BIN", 0, 0x80097800, "build/raise.elf"),
+    "etc": ("disc/MASTER/PSF/ETC.BIN", 0, 0x80097800, "build/etc.elf"),
+}
+GP = {"slpm": 0x80133474}
+CPP_FLAGS = ("-Iinclude -undef -Wall -lang-c -nostdinc -D__GNUC__=2 -D__OPTIMIZE__ -Dmips "
+             "-D__mips__ -D__mips -Dpsx -D__psx__ -D__psx -D_PSYQ -D_MIPSEL -D_LANGUAGE_C "
+             "-DLANGUAGE_C -DPERMUTER -DDIFFTEST")
+MASPSX = ("python3 /opt/maspsx/maspsx.py --aspsx-version=2.79 --expand-div --use-comm-section "
+          "--run-assembler --gnu-as-path mips-linux-gnu-as -EL -Iinclude -march=r3000 "
+          "-mtune=r3000 -no-pad-sections -O1")
+REGS = [UC_MIPS_REG_V0, UC_MIPS_REG_V1, UC_MIPS_REG_S0, UC_MIPS_REG_S1, UC_MIPS_REG_S2,
+        UC_MIPS_REG_S3, UC_MIPS_REG_S4, UC_MIPS_REG_S5, UC_MIPS_REG_S6, UC_MIPS_REG_S7,
+        UC_MIPS_REG_FP, UC_MIPS_REG_SP, UC_MIPS_REG_GP]
+REG_NAMES = ["v0", "v1", "s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "fp", "sp", "gp"]
+JR_RA_NOP = (0x03E00008).to_bytes(4, "little") + bytes(4)
+
+
+class Unsupported(Exception):
+    pass
+
+
+def sh(cmd):
+    r = subprocess.run(cmd, shell=True, cwd=ROOT, capture_output=True, text=True)
+    if r.returncode:
+        sys.exit(f"falhou: {cmd}\n{r.stderr}")
+    return r.stdout
+
+
+def build_candidate(target, src, func):
+    """Compila o .c (sem os INCLUDE_ASM) e liga em CAND_BASE contra os símbolos originais."""
+    tmp = pathlib.Path(tempfile.mkdtemp())
+    obj, elf, binf, lds = tmp / "c.o", tmp / "c.elf", tmp / "c.bin", tmp / "c.ld"
+    sh(f"mips-linux-gnu-cpp {CPP_FLAGS} {src} | /opt/gcc-2.7.2-psx/cc1 -O2 -G8 -quiet -mcpu=3000 "
+       f"-fgnu-linker -mgas -msoft-float -gcoff | {MASPSX} -o {obj}")
+    # renomeia as funções definidas no objeto (X -> X__cand) para não colidirem com
+    # os símbolos do binário original; referências internas acompanham o rename
+    defined = [l.split()[2] for l in sh(f"mips-linux-gnu-nm {obj}").splitlines()
+               if len(l.split()) == 3 and l.split()[1] in "Tt" and not l.split()[2].startswith("L")]
+    if func not in defined:
+        sys.exit(f"{func} não está em C em {src}")
+    ren = " ".join(f"--redefine-sym {s}={s}__cand" for s in defined)
+    sh(f"mips-linux-gnu-objcopy {ren} {obj}")
+    # endereços com extensão de sinal: o ld (host 64-bit) estende os símbolos ELF32-MIPS
+    lds.write_text(f"""SECTIONS {{
+    . = 0xFFFFFFFF{CAND_BASE:08X};
+    .text : {{ *(.text) }}
+    .rodata : {{ *(.rodata*) }}
+    .data : {{ *(.data) *(.sdata) }}
+    .bss : {{ *(.sbss) *(.bss) *(COMMON) }}
+    /DISCARD/ : {{ *(*) }}
+}}
+""")
+    sh(f"mips-linux-gnu-ld -EL -nostdlib --allow-multiple-definition "
+       f"--just-symbols={TARGETS[target][3]} -T {lds} -e {func}__cand -o {elf} {obj}")
+    sh(f"mips-linux-gnu-objcopy -O binary {elf} {binf}")
+    addr = int(sh(f"mips-linux-gnu-nm {elf} | grep ' {func}__cand$'").split()[0], 16) & 0xFFFFFFFF
+    return binf.read_bytes(), addr
+
+
+def elf_symbols(target):
+    out = {}
+    for l in sh(f"mips-linux-gnu-nm {TARGETS[target][3]}").splitlines():
+        p = l.split()
+        if len(p) == 3:
+            out[p[2]] = int(p[0], 16)
+    return out
+
+
+def stub_addrs(target):
+    """Funções do SDK a substituir por stubs: as do alvo e, em overlays, as do principal."""
+    files = [f"config/symbols.{target}.psyq.txt"]
+    if target in ("chess", "raise", "etc"):
+        files.append("config/symbols.yuugi.psyq.txt")
+    stubs = {}
+    for f in files:
+        for l in (ROOT / f).read_text(encoding="utf-8").splitlines():
+            m = re.match(r"(\w+) = (0x[0-9A-Fa-f]+);", l)
+            if m:
+                stubs[int(m.group(2), 16)] = m.group(1)
+    return stubs
+
+
+def run(entry, regs, ram, stubs, extra):
+    mu = Uc(UC_ARCH_MIPS, UC_MODE_MIPS32 | UC_MODE_LITTLE_ENDIAN)
+    mu.mem_map(0x00000000, RAM_SIZE)           # kseg0 0x80000000 -> físico 0
+    mu.mem_map(0x1F800000, 0x2000)             # scratchpad + registradores de I/O
+    mu.mem_write(0, ram)
+    for addr, data in extra:
+        mu.mem_write(addr & 0x1FFFFFFF, data)
+    for r, v in regs.items():
+        mu.reg_write(r, v)
+    mu.reg_write(UC_MIPS_REG_RA, SENTINEL)
+    calls = []
+    state = {"err": None}
+
+    def on_stub(uc, addr, size, user):
+        name = stubs.get(addr) or {0xA0: "BIOS_A0", 0xB0: "BIOS_B0", 0xC0: "BIOS_C0"}.get(addr & 0x1FFFFFFF)
+        if name is None:
+            return
+        args = tuple(uc.reg_read(r) for r in (UC_MIPS_REG_A0, UC_MIPS_REG_A1, UC_MIPS_REG_A2,
+                                               UC_MIPS_REG_A3))
+        if name.startswith("BIOS"):
+            args = (uc.reg_read(UC_MIPS_REG_T1),) + args
+        calls.append((name,) + args)
+        uc.reg_write(UC_MIPS_REG_V0, (len(calls) * 0x9E3779B1) & 0xFFFF)  # retorno determinístico
+
+    def on_intr(uc, intno, user):
+        pc = uc.reg_read(UC_MIPS_REG_PC)
+        if intno == 17:  # syscall (Enter/ExitCriticalSection...): registra e segue
+            calls.append(("syscall", uc.reg_read(UC_MIPS_REG_A0)))
+            uc.reg_write(UC_MIPS_REG_PC, pc + 4)
+            return
+        state["err"] = state["err"] or f"exceção {intno} em {pc:#x}"
+        uc.emu_stop()
+
+    for addr in list(stubs) + [0x800000A0, 0x800000B0, 0x800000C0]:
+        mu.mem_write(addr & 0x1FFFFFFF, JR_RA_NOP)
+        mu.hook_add(UC_HOOK_CODE, on_stub, begin=addr, end=addr)
+    mu.hook_add(UC_HOOK_INTR, on_intr)
+    try:
+        mu.emu_start(entry, SENTINEL, count=MAX_INSNS)
+    except UcError as e:
+        pc = mu.reg_read(UC_MIPS_REG_PC)
+        p = pc & 0x1FFFFFFF
+        word = int.from_bytes(mu.mem_read(p, 4), "little") if p < RAM_SIZE else 0
+        if (word >> 26) == 0x12:
+            raise Unsupported(f"instrução GTE em {pc:#x}")
+        return None, f"{e} em {pc:#x}"
+    if state["err"]:
+        return None, state["err"]
+    if mu.reg_read(UC_MIPS_REG_PC) != SENTINEL:
+        return None, f"limite de {MAX_INSNS} instruções"
+    return ([mu.reg_read(r) for r in REGS], bytes(mu.mem_read(0, RAM_SIZE)), calls), None
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("target")
+    ap.add_argument("func")
+    ap.add_argument("--src")
+    ap.add_argument("--trials", type=int, default=200)
+    ap.add_argument("--seed", type=int, default=1)
+    a = ap.parse_args()
+    path, hdr, base, _ = TARGETS[a.target]
+    if a.src:
+        src = a.src
+    else:
+        src = next(str(p.relative_to(ROOT)) for p in sorted((ROOT / "src" / a.target).rglob("*.c"))
+                   if re.search(rf"^\S.*\b{a.func}\s*\([^;]*$", p.read_text(encoding="utf-8"), re.M))
+    image = (ROOT / path).read_bytes()[hdr:]
+    cand, cand_entry = build_candidate(a.target, src, a.func)
+    entry = elf_symbols(a.target)[a.func] & 0xFFFFFFFF
+    stubs = stub_addrs(a.target)
+    if entry in stubs:
+        del stubs[entry]  # testando uma função do próprio SDK
+    jump = ((0x02 << 26) | ((cand_entry >> 2) & 0x3FFFFFF)).to_bytes(4, "little") + bytes(4)
+    rng = random.Random(a.seed)
+    same = inconclusive = unsupported = 0
+    reasons = {}
+
+    def norm(m):
+        # ignora a área do candidato, o desvio e a pilha abaixo de sp (morta após o retorno)
+        m = bytearray(m)
+        c = CAND_BASE & 0x1FFFFFFF
+        m[c:c + len(cand)] = bytes(len(cand))
+        e = entry & 0x1FFFFFFF
+        m[e:e + 8] = bytes(8)
+        s = STACK_TOP & 0x1FFFFFFF
+        m[s - 0x10000:s] = bytes(0x10000)
+        return bytes(m)
+
+    for t in range(a.trials):
+        if t % 2:
+            ram = bytearray(RAM_SIZE)   # metade das tentativas com RAM zerada
+        else:
+            ram = bytearray(rng.getrandbits(8) for _ in range(0x1000)) * (RAM_SIZE // 0x1000)
+        off = base & 0x1FFFFFFF
+        ram[off:off + len(image)] = image
+        s = SENTINEL & 0x1FFFFFFF
+        ram[s:s + 8] = (0x1000FFFF).to_bytes(4, "little") + bytes(4)
+
+        def arg():
+            k = rng.random()
+            if k < 0.3:
+                return rng.randrange(0, 16)
+            if k < 0.7:  # ponteiro para dentro da RAM (área de dados/heap)
+                return 0x80000000 | (rng.randrange(0x100000, 0x170000) & ~3)
+            return rng.getrandbits(32)
+        regs = {r: arg() for r in (UC_MIPS_REG_A0, UC_MIPS_REG_A1, UC_MIPS_REG_A2, UC_MIPS_REG_A3)}
+        for r in REGS[2:11]:
+            regs[r] = rng.getrandbits(32)
+        regs[UC_MIPS_REG_SP] = STACK_TOP
+        regs[UC_MIPS_REG_GP] = GP.get(a.target, 0x80078B6C)
+        try:
+            ra, ea = run(entry, regs, bytes(ram), stubs, [])
+            rb, eb = run(entry, regs, bytes(ram), stubs, [(CAND_BASE, cand), (entry, jump)])
+        except Unsupported:
+            unsupported += 1
+            continue
+        if ea and eb:
+            inconclusive += 1
+            reasons[ea] = reasons.get(ea, 0) + 1
+            continue
+        if ea or eb:
+            print(f"[DIVERGENTE] tentativa {t}: original={ea or 'ok'} | C={eb or 'ok'}")
+            sys.exit(1)
+        (rega, mema, calla), (regb, memb, callb) = ra, rb
+        bad = [n for n, x, y in zip(REG_NAMES, rega, regb) if x != y]
+        if calla != callb:
+            k = next((i for i, (x, y) in enumerate(zip(calla, callb)) if x != y), min(len(calla), len(callb)))
+            fmt = lambda c: f"{c[0]}({', '.join(hex(v) for v in c[1:])})" if c else "-"
+            print(f"[DIVERGENTE] tentativa {t}: chamada #{k}: original={fmt(calla[k] if k < len(calla) else None)}"
+                  f" | C={fmt(callb[k] if k < len(callb) else None)}")
+            sys.exit(1)
+        ma, mb = norm(mema), norm(memb)
+        if bad or ma != mb:
+            diff = [i for i in range(RAM_SIZE) if ma[i] != mb[i]][:8]
+            print(f"[DIVERGENTE] tentativa {t}: registradores {bad}; RAM difere em "
+                  f"{[hex(0x80000000 | i) for i in diff]}")
+            sys.exit(1)
+        same += 1
+    conclusive = a.trials - unsupported
+    if unsupported == a.trials:
+        print(f"[NÃO SUPORTADO] {a.target}:{a.func} (usa GTE)")
+        sys.exit(2)
+    if same < MIN_CONCLUSIVE * conclusive or same == 0:
+        print(f"[INCONCLUSIVO] {a.target}:{a.func} — {same} idênticas, {inconclusive} inconclusivas: "
+              f"{sorted(reasons.items(), key=lambda x: -x[1])[:3]}")
+        sys.exit(2)
+    print(f"[EQUIVALENTE] {a.target}:{a.func} — {same} tentativas idênticas"
+          + (f", {inconclusive} inconclusivas" if inconclusive else "")
+          + (f", {unsupported} não suportadas" if unsupported else ""))
+
+
+if __name__ == "__main__":
+    main()

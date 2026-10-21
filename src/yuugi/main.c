@@ -1,8 +1,14 @@
 #include "common.h"
+#include "yuugi.h"
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", main);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800118BC);
+void func_800118BC(void) {
+    ResetGraph(0);
+    srand(1);
+    func_8001A998(__bss_start, 4);
+    func_8001C9D8();
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800118FC);
 
