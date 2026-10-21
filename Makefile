@@ -14,8 +14,8 @@ SPLAT       := splat split
 GCC_VERSION ?= 2.7.2-psx
 CC1         := /opt/gcc-$(GCC_VERSION)/cc1
 MASPSX      := $(PYTHON) /opt/maspsx/maspsx.py
-MASPSX_FLAGS:= --aspsx-version=2.79 --expand-div --use-comm-section --run-assembler --gnu-as-path $(AS) \
-               -EL -Iinclude -march=r3000 -mtune=r3000 -no-pad-sections -O1
+MASPSX_FLAGS:= --aspsx-version=2.79 --expand-div --use-comm-section --dont-force-G0 --run-assembler --gnu-as-path $(AS) \
+               -EL -Iinclude -march=r3000 -mtune=r3000 -no-pad-sections -O1 -G8
 
 CPP_FLAGS   := -Iinclude -Iinclude/psyq -undef -Wall -lang-c -nostdinc \
                -D__GNUC__=2 -D__OPTIMIZE__ -Dmips -D__mips__ -D__mips -Dpsx -D__psx__ -D__psx \

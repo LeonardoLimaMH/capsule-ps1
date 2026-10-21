@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 RUN python3 -m venv /opt/venv
 ENV PATH=/opt/venv/bin:$PATH
-RUN pip install --no-cache-dir "splat64[mips]==0.50.1" "spimdisasm==1.42.4" pyyaml pycparser colorama \
+RUN pip install --no-cache-dir "splat64[mips]==0.50.1" "spimdisasm==1.42.4" pyyaml "pycparser<3" colorama \
       cxxfilt python-Levenshtein capstone unicorn pytest pytest-xdist
 # Compiladores GCC antigos (builds PSX do PsyQ recompilados pelo projeto decompals/old-gcc)
 RUN for v in 2.7.2-psx 2.8.0-psx 2.8.1-psx 2.6.3-psx 2.91.66-psx; do \
@@ -17,5 +17,5 @@ RUN git clone --depth 1 https://github.com/mkst/maspsx /opt/maspsx \
  && git clone --depth 1 https://github.com/simonlindholm/asm-differ /opt/asm-differ \
  && git clone --depth 1 https://github.com/simonlindholm/decomp-permuter /opt/decomp-permuter \
  && git clone --depth 1 https://github.com/ethteck/m2c /opt/m2c \
- && pip install --no-cache-dir -r /opt/m2c/requirements.txt || true
+ && pip install --no-cache-dir "pycparser<3" graphviz || true
 WORKDIR /work

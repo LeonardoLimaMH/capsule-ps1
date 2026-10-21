@@ -53,9 +53,9 @@ GP = {"slpm": 0x80133474}
 CPP_FLAGS = ("-Iinclude -undef -Wall -lang-c -nostdinc -D__GNUC__=2 -D__OPTIMIZE__ -Dmips "
              "-D__mips__ -D__mips -Dpsx -D__psx__ -D__psx -D_PSYQ -D_MIPSEL -D_LANGUAGE_C "
              "-DLANGUAGE_C -DPERMUTER -DDIFFTEST")
-MASPSX = ("python3 /opt/maspsx/maspsx.py --aspsx-version=2.79 --expand-div --use-comm-section "
+MASPSX = ("python3 /opt/maspsx/maspsx.py --aspsx-version=2.79 --expand-div --use-comm-section --dont-force-G0 "
           "--run-assembler --gnu-as-path mips-linux-gnu-as -EL -Iinclude -march=r3000 "
-          "-mtune=r3000 -no-pad-sections -O1")
+          "-mtune=r3000 -no-pad-sections -O1 -G8")
 REGS = [UC_MIPS_REG_V0, UC_MIPS_REG_V1, UC_MIPS_REG_S0, UC_MIPS_REG_S1, UC_MIPS_REG_S2,
         UC_MIPS_REG_S3, UC_MIPS_REG_S4, UC_MIPS_REG_S5, UC_MIPS_REG_S6, UC_MIPS_REG_S7,
         UC_MIPS_REG_FP, UC_MIPS_REG_SP, UC_MIPS_REG_GP]
