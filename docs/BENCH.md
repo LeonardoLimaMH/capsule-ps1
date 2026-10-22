@@ -37,3 +37,8 @@ Cada linha é uma rodada no mesmo conjunto `config/bench.txt`. *Casadas* = bytes
   33 → 47. Casadas novas: yuugi func_8001E208, func_800342CC; slpm DecDCTinSync, func_8011B530,
   slpm_RestartCallback; chess func_8009C178. Entra em `DEFAULT_HEURISTICS`. Rascunhos com registradores sem
   origem no C (`in_*`, `unaff_*`, `extraout_*`) são descartados.
+- 2026-10-22 — **hipótese rejeitada: outro compilador/nível de otimização.** Os 113 rascunhos da bancada
+  (`ghidra-v1`, ≤ 60 instruções diferentes) foram recompilados com GCC 2.6.3, 2.7.2, 2.8.0, 2.8.1 e 2.91.66 ×
+  `-O1/-O2/-O3 -G8` e `-O2 -G0`: **0 casamentos**; no máximo 7 rascunhos ficam um pouco mais próximos (sempre
+  com `-O1`, por poucas instruções). O par GCC 2.7.2/2.8.1 com `-O2 -G8` continua sendo o do original; as
+  diferenças restantes estão no C (alocação de registradores e ordem), não na escolha do compilador.
