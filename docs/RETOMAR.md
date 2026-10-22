@@ -35,13 +35,21 @@ python tools/progress.py --readme && git add -A && git commit
 
 ## 3. Próximos passos planejados
 
-1. ~~Permuter em lote~~: feito em 2026-10-22 (6 casamentos; ver `docs/BENCH.md`).
-   Próxima rodada: tempo maior (600 s) só nas funções com 1–2 instruções diferentes.
-2. Testar o pseudo-C do Ghidra como fonte alternativa de rascunho, medido na bancada
-   (`tools/ghidra.py`; abrir o Ghidra com o plugin e o projeto `RECOMP/Ghidra`).
-3. ~~Destino dos overlays~~: resolvido (`func_8001A480` troca o destino para `0x80097800`;
-   ver `docs/NOTES.md`).
-4. Trabalho manual: `docs/wip/STATUS.md` (`./run.sh python3 tools/wip.py check`).
+Estado em 2026-10-22: 5 binários idênticos; heurística `ghidra` no padrão; rodada
+automática completa nos 5 alvos (+99 funções); progresso total 1,58%.
+
+1. **Permuter**: as duas últimas rodadas foram interrompidas pelo Claude Code por
+   falta de memória (o WSL pode usar até 10 GB de 15,6 GB). Antes de rodar de novo:
+   baixar `memory=` em `C:SERSeONARDO.QUEIROZ.WSLCONFIG` para 8GB (e
+   `wsl --shutdown`) ou usar `--jobs 4`. Comando:
+   `./run.sh python3 tools/permute_batch.py --bench --seconds 300 --max-diff 20 --jobs 4`
+2. ~~Ghidra como fonte de rascunho~~: aceito (+6 na bancada). Para funções novas:
+   abrir o Ghidra (ver `docs/NOTES.md`, seção Ghidra), `python tools/ghidra.py all`.
+3. ~~Destino dos overlays~~: resolvido (`func_8001A480` troca o destino para `0x80097800`).
+4. Funções acima de 0x800 bytes ainda não passaram pelo autodecomp (`--max-size`).
+5. `.rodata` por unidade de tradução: casamentos adiados por usar `.rodata`
+   (strings, tabelas de salto) esperam a migração.
+6. Trabalho manual: `docs/wip/STATUS.md` (`./run.sh python3 tools/wip.py check`).
 
 ## Referências
 
