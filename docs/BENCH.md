@@ -42,3 +42,7 @@ Cada linha é uma rodada no mesmo conjunto `config/bench.txt`. *Casadas* = bytes
   `-O1/-O2/-O3 -G8` e `-O2 -G0`: **0 casamentos**; no máximo 7 rascunhos ficam um pouco mais próximos (sempre
   com `-O1`, por poucas instruções). O par GCC 2.7.2/2.8.1 com `-O2 -G8` continua sendo o do original; as
   diferenças restantes estão no C (alocação de registradores e ordem), não na escolha do compilador.
+- 2026-10-22 — **hipótese rejeitada: junção artificial automática para constante repetida** (ver
+  `docs/NOTES.md`). Aplicada à primeira chamada com literal repetido em todas as 227 pendentes cujo
+  assembly copia um registrador de argumento (`addu $aN, $aM, $zero`): **0 casamentos**, 26 mais
+  próximas, 92 mais distantes, 109 iguais. O truque só serve caso a caso (casou `raise:func_800DC79C`).
