@@ -88,8 +88,10 @@ def main():
         if code:
             store = ad.CACHE / t
             store.mkdir(parents=True, exist_ok=True)
-            # o permuter trabalha sobre C pré-processado: guarda só a função
-            (store / f"{f}.c").write_text(code.strip() + "\n", encoding="utf-8")
+            # o permuter trabalha sobre C pré-processado: guarda só a função (mais o
+            # include dos tipos do Ghidra, se o rascunho veio dele)
+            types = ad.ghidra2c.TYPES if ad.ghidra2c.TYPES in c else ""
+            (store / f"{f}.c").write_text(types + code.strip() + "\n", encoding="utf-8")
             (store / f"{f}.gcc").write_text(gcc + "\n", encoding="utf-8")
             won += 1
         print(f"  {t}:{f} (n={n}): {'MATCH' if code else 'sem casamento'}", flush=True)
