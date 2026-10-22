@@ -71,7 +71,7 @@ src/slpm/loader_80116AD0.c 2.8.1-psx
 src/slpm/sdk_libcd_bios.c 2.8.1-psx
 src/slpm/loader_8011854C.c 2.8.1-psx
 src/slpm/sdk_libc2_puts.c 2.8.1-psx
-src/slpm/sdk_libcd_cdread.c 2.8.1-psx
+src/slpm/sdk_libcd_cdread.c 2.7.2-psx
 src/slpm/sdk_libcd_cdread2.c 2.8.1-psx
 src/slpm/loader_80119E10.c 2.8.1-psx
 src/slpm/sdk_libcd_c_005.c 2.8.1-psx

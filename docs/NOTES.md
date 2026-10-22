@@ -205,5 +205,6 @@ Conclusões: (1) as bibliotecas PsyQ foram compiladas com `-G0` (acesso absoluto
 Medição parcial (`-G0` ± filtro, rascunho do m2c com globais escalares) nas pendentes do
 slpm, interrompida por falta de memória: 0 casamentos novos até agora; algumas ficam bem
 mais próximas (`func_80113004` 17 → 2, `func_801131D0` 23 → 15, `slpm__putchar_flash`
-14 → 10). Falta: integrar no build como opção por arquivo (coluna extra em
-`config/compilers.txt`, p. ex. `2.7.2-psx g0fill`) e medir em todas as funções do SDK.
+14 → 10). Integrado ao build: os arquivos listados em `config/g0fill.txt` são compilados com esse
+perfil pelo Makefile, por `tools/difftest.py` e por `tools/match.py --g0fill`
+(implementação comum em `tools/g0fill.py`). Primeiro arquivo: `sdk_libcd_cdread.c`.

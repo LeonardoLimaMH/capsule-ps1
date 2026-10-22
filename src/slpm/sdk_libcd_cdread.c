@@ -12,6 +12,13 @@ INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libcd_cdread", CdRead);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libcd_cdread", CdReadSync);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libcd_cdread", CdReadCallback);
+extern s32 D_80132054;
+
+s32 CdReadCallback(s32 func) {
+    s32 old = D_80132054;
+
+    D_80132054 = func;
+    return old;
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libcd_cdread", CdReadMode);

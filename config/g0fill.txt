@@ -1,0 +1,3 @@
+# Arquivos compilados como as bibliotecas PsyQ: cc1 -G0 + tools/aspsx_fill.py
+# (delay slot do retorno preenchido pelo ASPSX antigo). Ver docs/NOTES.md.
+src/slpm/sdk_libcd_cdread.c

@@ -8,7 +8,7 @@ mascarados aqui; os endereços reais são verificados depois pelo SHA-1 do build
 completo.
 
 Uso:
-  match.py <alvo> <função> <arquivo.c> [--gcc 2.7.2-psx] [--cflags "-O2 -G8"] [-q]
+  match.py <alvo> <função> <arquivo.c> [--gcc 2.7.2-psx] [--cflags "-O2 -G8"] [--g0fill] [-q]
 Código de saída 0 = bytes idênticos.
 """
 import argparse
@@ -19,6 +19,9 @@ import sys
 import tempfile
 
 import rabbitizer
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import g0fill as g0fill_profile  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 LINE = re.compile(r"/\* [0-9A-F]+ ([0-9A-F]{8}) ([0-9A-F]{8}) \*/")
@@ -44,11 +47,14 @@ def original(target, func):
     return words, vram
 
 
-def compile_c(src, gcc, cflags):
+def compile_c(src, gcc, cflags, g0fill=False):
     tmp = pathlib.Path(tempfile.mkdtemp())
     obj = tmp / "f.o"
+    back = g0fill_profile.backend(obj) if g0fill else f"{MASPSX} -o {obj}"
+    if g0fill:
+        cflags = cflags.replace("-G8", "-G0")
     cmd = (f"mips-linux-gnu-cpp {CPP_FLAGS} {src} | /opt/gcc-{gcc}/cc1 {cflags} -quiet "
-           f"-mcpu=3000 -fgnu-linker -mgas -msoft-float -gcoff | {MASPSX} -o {obj}")
+           f"-mcpu=3000 -fgnu-linker -mgas -msoft-float -gcoff | {back}")
     r = subprocess.run(cmd, shell=True, cwd=ROOT, capture_output=True, text=True)
     if r.returncode != 0:
         sys.exit("falha de compilação:\n" + r.stderr)
@@ -104,9 +110,11 @@ def main():
     ap.add_argument("--gcc", default="2.7.2-psx")
     ap.add_argument("--cflags", default="-O2 -G8")
     ap.add_argument("-q", action="store_true")
+    ap.add_argument("--g0fill", action="store_true",
+                    help="perfil das bibliotecas PsyQ: -G0 + tools/aspsx_fill.py")
     a = ap.parse_args()
     ow, vram = original(a.target, a.func)
-    cw, masks = compiled(compile_c(a.src, a.gcc, a.cflags), a.func)
+    cw, masks = compiled(compile_c(a.src, a.gcc, a.cflags, a.g0fill), a.func)
     while len(cw) > len(ow) and cw[-1] == 0:
         cw.pop()
         masks.pop()

@@ -34,6 +34,9 @@ from unicorn import (Uc, UcError, UC_ARCH_MIPS, UC_MODE_MIPS32, UC_MODE_LITTLE_E
                      UC_HOOK_INTR, UC_HOOK_CODE)
 from unicorn.mips_const import *
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import g0fill  # noqa: E402
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 RAM_SIZE = 0x200000
 CAND_BASE = 0x80180000          # área livre usada para o código candidato
@@ -90,8 +93,10 @@ def build_candidate(target, src, func):
     """Compila o .c (sem os INCLUDE_ASM) e liga em CAND_BASE contra os símbolos originais."""
     tmp = pathlib.Path(tempfile.mkdtemp())
     obj, elf, binf, lds = tmp / "c.o", tmp / "c.elf", tmp / "c.bin", tmp / "c.ld"
-    sh(f"mips-linux-gnu-cpp {CPP_FLAGS} {src} | /opt/gcc-{file_compiler(src)}/cc1 -O2 -G8 -quiet -mcpu=3000 "
-       f"-fgnu-linker -mgas -msoft-float -gcoff | {MASPSX} -o {obj}")
+    g0 = g0fill.enabled(src)
+    back = g0fill.backend(obj) if g0 else f"{MASPSX} -o {obj}"
+    sh(f"mips-linux-gnu-cpp {CPP_FLAGS} {src} | /opt/gcc-{file_compiler(src)}/cc1 -O2 "
+       f"{'-G0' if g0 else '-G8'} -quiet -mcpu=3000 -fgnu-linker -mgas -msoft-float -gcoff | {back}")
     # renomeia as funções definidas no objeto (X -> X__cand) para não colidirem com
     # os símbolos do binário original; referências internas acompanham o rename
     defined = [l.split()[2] for l in sh(f"mips-linux-gnu-nm {obj}").splitlines()
