@@ -117,7 +117,25 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009EB3C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009EC40);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009ECF8);
+void func_8009ECF8(void *arg0)
+{
+  s32 var_a1;
+  void *var_v1;
+  s8 *new_var;
+  *((s8 *) (((s8 *) arg0) + 0x624)) = 7;
+  var_a1 = 0;
+  var_v1 = arg0;
+  do
+  {
+    new_var = var_v1;
+    var_a1 += 1;
+    *((s32 *) (((s8 *) var_v1) + 0x77C)) = (s32) (*((s32 *) (((s8 *) new_var) + 0x798)));
+    var_v1 += 4;
+  }
+  while (var_a1 < 3);
+  new_var = ((s8 *) arg0) + ((short) 0x62A);
+  *((s8 *) new_var) = 1;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009ED2C);
 
@@ -250,7 +268,40 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A39AC);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A3AE8);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A3C24);
+void func_800A3C24(void *arg0)
+{
+  s8 *new_var4;
+  u8 new_var5;
+  s8 *new_var3;
+  int new_var;
+  int new_var2;
+  extern u8 D_80086012[];
+  s32 var_v0;
+  new_var3 = ((s8 *) arg0) + 0x50;
+  new_var5 = (u8) (*D_80086012);
+  if (new_var5 >= 5U)
+  {
+    if (new_var)
+    {
+      new_var2 = ~1;
+      new_var = (*((s32 *) new_var3)) & new_var2;
+      var_v0 = new_var;
+    }
+    else
+    {
+      new_var2 = ~1;
+      new_var = (*((s32 *) new_var3)) & new_var2;
+      var_v0 = new_var;
+    }
+  }
+  else
+  {
+    new_var4 = ((s8 *) arg0) + 0x50;
+    var_v0 = *((s32 *) new_var4);
+    var_v0 = var_v0 | 1;
+  }
+  *((s32 *) (((s8 *) arg0) + 0x50)) = var_v0;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A3C5C);
 
@@ -350,7 +401,35 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8378);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A83E0);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8444);
+#include "ghidra.h"
+int func_800A8444(undefined4 param_1, int param_2, int param_3, int param_4)
+{
+  int iVar1;
+  param_3 = param_3 - ((uint) (*((byte *) (param_2 + 0x15))));
+  param_4 = param_4 - ((uint) (*((byte *) (param_2 + 0x16))));
+  if (!(param_3 < 1))
+  {
+    iVar1 = 5;
+    if ((param_4 < 1) && ((iVar1 = 6, param_4 < 0)))
+    {
+      iVar1 = 7;
+    }
+  }
+  else
+    if (param_3 < 0)
+  {
+    iVar1 = 3;
+    if ((param_4 < 1) && ((iVar1 = 2, param_4 < 0)))
+    {
+      iVar1 = 1;
+    }
+  }
+  else
+  {
+    iVar1 = ((uint) (0 < param_4)) << 2;
+  }
+  return iVar1;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A84A0);
 
@@ -370,7 +449,12 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A88E8);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8954);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8994);
+s32 func_800A8994(s32 arg0, s32 arg1, s32 arg2)
+{
+  u8 *new_var;
+  new_var = (u8 *) (((s8 *) (arg0 + ((arg2 * 0x7C) + (arg1 * 0x2E8)))) + 0x5E8);
+  return (*new_var) + 0x10D;
+}
 
 s32 func_800A89C8(s32 arg0, s32 arg1, s32 arg2)
 {
@@ -441,9 +525,19 @@ s32 func_800A8D08(s32 arg0, s32 arg1, s32 arg2)
   return (((u32) (*((u32 *) (((s8 *) new_var) + 0x30)))) >> 0x19) & 3;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8D44);
+s32 func_800A8D44(s32 arg0, s32 arg1, s32 arg2)
+{
+  s32 *new_var;
+  new_var = (s32 *) (((s8 *) (arg0 + ((arg2 * 0x7C) + (arg1 * 0x2E8)))) + 0x30);
+  return (*new_var) & 0x08000000;
+}
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8D7C);
+s32 func_800A8D7C(s32 arg0, s32 arg1, s32 arg2)
+{
+  s8 *new_var;
+  new_var = ((s8 *) (arg0 + ((arg2 * 0x7C) + ((long) (arg1 * 0x2E8))))) + 0x30;
+  return (*((s32 *) new_var)) & 0x10000000;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8DB4);
 
@@ -459,7 +553,14 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8F3C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8FA0);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8FFC);
+void *func_800A8FFC(void *arg0)
+{
+  u8 temp_v0;
+  s8 *new_var;
+  temp_v0 = *((u8 *) (((s8 *) arg0) + 0x5FA));
+  new_var = (s8 *) (arg0 + temp_v0);
+  return (arg0 + ((temp_v0 * 0x2E8) + 0x18)) + ((*((u8 *) (new_var + 0x5FB))) * 0x7C);
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A903C);
 

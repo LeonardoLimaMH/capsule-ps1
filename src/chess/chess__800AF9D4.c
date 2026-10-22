@@ -63,7 +63,15 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800AF9D4", func_800B0BB0);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800AF9D4", func_800B0D70);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800AF9D4", func_800B0F1C);
+void func_800B0F1C(void *arg0)
+{
+  int new_var;
+  s8 *new_var2;
+  new_var2 = (s8 *) (((s8 *) (arg0 + ((*((u8 *) (((s8 *) arg0) + 0x5FA))) * 2))) + 0x601);
+  *new_var2 = 6;
+  new_var = (*((u8 *) (((s8 *) arg0) + 0x5FA))) * 2;
+  *((s8 *) (((s8 *) (arg0 + new_var)) + 0x602)) = 6;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800AF9D4", func_800B0F48);
 
