@@ -186,3 +186,24 @@ pelo permuter) `yuugi:func_8001AD48`. Sem parâmetro útil para a condição, du
 opacas funcionam (`if (v || w)`; só `w` não basta): `raise:func_800A0A30`, `func_800A5378`. Dentro de
 laço (`chess:func_8009CC34`) a variável extra fica viva e aloca outro `$s`: em aberto. A
 forma original provavelmente é uma macro ou função `inline` que ainda não identificamos.
+
+## Bibliotecas PsyQ: `-G0` e delay slot preenchido pelo ASPSX antigo
+
+`slpm:CdReadCallback` (libcd) **casa** com GCC 2.7.2, `-O2 -G0`, global escalar
+(`extern s32 D_80132054;`) e o filtro `tools/aspsx_fill.py` entre o maspsx e o `as`:
+
+```
+lui $v0,%hi(D) / lw $v0,%lo(D)($v0) / lui $at,%hi(D) / jr $ra / sw $a0,%lo(D)($at)
+```
+
+O maspsx gera `lui; sw; j; nop`; o ASPSX das bibliotecas colocava a segunda metade da
+macro de store no delay slot do retorno. O padrão (`lui $at` … `jr $ra` / `sw …($at)`)
+aparece em 22 funções pendentes, todas do SDK (yuugi 12, slpm 10; nenhuma nos overlays).
+Conclusões: (1) as bibliotecas PsyQ foram compiladas com `-G0` (acesso absoluto, sem
+`$gp`); (2) foram montadas com um ASPSX diferente do usado no código do jogo.
+
+Medição parcial (`-G0` ± filtro, rascunho do m2c com globais escalares) nas pendentes do
+slpm, interrompida por falta de memória: 0 casamentos novos até agora; algumas ficam bem
+mais próximas (`func_80113004` 17 → 2, `func_801131D0` 23 → 15, `slpm__putchar_flash`
+14 → 10). Falta: integrar no build como opção por arquivo (coluna extra em
+`config/compilers.txt`, p. ex. `2.7.2-psx g0fill`) e medir em todas as funções do SDK.

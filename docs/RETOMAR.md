@@ -56,7 +56,10 @@ automática completa nos 5 alvos (+99 funções); progresso total 1,58%.
 4. Funções acima de 0x800 bytes ainda não passaram pelo autodecomp (`--max-size`).
 5. `.rodata` por unidade de tradução: casamentos adiados por usar `.rodata`
    (strings, tabelas de salto) esperam a migração.
-6. Trabalho manual: `docs/wip/STATUS.md` (`./run.sh python3 tools/wip.py check`).
+6. **SDK com `-G0` + `tools/aspsx_fill.py`** (ver `docs/NOTES.md`): `CdReadCallback` casa
+   assim. Próximo passo: opção por arquivo no Makefile/match.py e medir nas pendentes do
+   SDK (o experimento `.cache/tmp/g0exp.py` foi interrompido por falta de memória).
+7. Trabalho manual: `docs/wip/STATUS.md` (`./run.sh python3 tools/wip.py check`).
 
 ## Referências
 
