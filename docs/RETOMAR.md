@@ -43,6 +43,13 @@ automática completa nos 5 alvos (+99 funções); progresso total 1,58%.
    baixar `memory=` em `%USERPROFILE%\.wslconfig` para 8GB (e
    `wsl --shutdown`) ou usar `--jobs 4`. Comando:
    `./run.sh python3 tools/permute_batch.py --bench --seconds 300 --max-diff 20 --jobs 4`
+   - 2026-10-22: terceira tentativa (`--target <alvo> --seconds 180 --max-diff 20 --jobs 3`,
+     todas as pendentes) também foi interrompida por falta de memória (só ~3,5 GB livres
+     no Windows), ainda na seleção de candidatos do yuugi; nenhum resultado perdido. O
+     container órfão foi parado (`docker ps` para conferir). **Antes de repetir**: fechar
+     outros programas ou baixar `memory=` no `.wslconfig` para 6–8 GB + `wsl --shutdown`;
+     se possível, iniciar o Claude Code com `CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1`.
+   - Varredura de compiladores/níveis de otimização: rejeitada (ver `docs/BENCH.md`).
 2. ~~Ghidra como fonte de rascunho~~: aceito (+6 na bancada). Para funções novas:
    abrir o Ghidra (ver `docs/NOTES.md`, seção Ghidra), `python tools/ghidra.py all`.
 3. ~~Destino dos overlays~~: resolvido (`func_8001A480` troca o destino para `0x80097800`).
