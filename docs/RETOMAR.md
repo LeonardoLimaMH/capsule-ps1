@@ -40,7 +40,7 @@ automática completa nos 5 alvos (+99 funções); progresso total 1,58%.
 
 1. **Permuter**: as duas últimas rodadas foram interrompidas pelo Claude Code por
    falta de memória (o WSL pode usar até 10 GB de 15,6 GB). Antes de rodar de novo:
-   baixar `memory=` em `C:SERSeONARDO.QUEIROZ.WSLCONFIG` para 8GB (e
+   baixar `memory=` em `%USERPROFILE%\.wslconfig` para 8GB (e
    `wsl --shutdown`) ou usar `--jobs 4`. Comando:
    `./run.sh python3 tools/permute_batch.py --bench --seconds 300 --max-diff 20 --jobs 4`
 2. ~~Ghidra como fonte de rascunho~~: aceito (+6 na bancada). Para funções novas:
