@@ -11,4 +11,9 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_80047600", func_800478BC);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80047600", func_800478D0);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80047600", func_8004795C);
+void func_8004795C(u32 arg0) {
+    extern u32 D_800733A8[];
+    if (arg0 < 2U) {
+        (*D_800733A8) = arg0;
+    }
+}

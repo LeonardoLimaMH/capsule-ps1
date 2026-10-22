@@ -197,9 +197,40 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800AF9D4", func_800B9020);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800AF9D4", func_800B90FC);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800AF9D4", func_800B91F0);
+#include "ghidra.h"
+void func_800B91F0(undefined4 param_1,char *param_2)
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800AF9D4", func_800B9248);
+{
+  undefined4 uVar1;
+  
+  if (*param_2 == 'P') {
+    uVar1 = 0x76;
+  }
+  else {
+    uVar1 = 0x3a;
+    if (*param_2 != '^') {
+      return;
+    }
+    param_2[0x17] = -0x78;
+    param_2[0x23] = '\x01';
+    *(undefined4 *)(*(int *)(param_2 + 0x70) + 0x88) = 0;
+  }
+  func_80034AB0(uVar1);
+  return;
+}
+
+#include "ghidra.h"
+void func_800B9248(undefined4 param_1,char *param_2)
+
+{
+  func_80034AB0(0x41);
+  if (*param_2 == 'E') {
+    param_2[0x17] = -0x78;
+    param_2[0x23] = '\x01';
+    *(undefined4 *)(*(int *)(param_2 + 0x70) + 0x88) = 0;
+  }
+  return;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800AF9D4", func_800B9298);
 

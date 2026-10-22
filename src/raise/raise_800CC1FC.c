@@ -46,4 +46,21 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CD9F4);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CDFDC);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CE128);
+#include "ghidra.h"
+int func_800CE128(int param_1)
+
+{
+    extern s16 D_80069BBE[];
+  int iVar1;
+  
+  iVar1 = (int)(*D_80069BBE);
+  if (iVar1 < 0) {
+    iVar1 = iVar1 + 0x1ff;
+  }
+  param_1 = param_1 + (iVar1 >> 9);
+  iVar1 = param_1;
+  if (param_1 < 0) {
+    iVar1 = param_1 + 7;
+  }
+  return param_1 + (iVar1 >> 3) * -8;
+}

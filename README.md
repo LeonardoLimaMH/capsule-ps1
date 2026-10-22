@@ -16,19 +16,19 @@ emulação contra a função original.
 ## Progresso
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.00%**  
-**Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **1.46%**  
-**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.85%**  
+**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.12%**  
+**Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **1.58%**  
+**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.97%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | executável principal | 2.06% (4,252 / 206,400 B) | 109 / 732 | 7.50% (70 / 303 fn) | **3.15%** |
-| `SLPM_860.96` | loader / boot | 3.29% (684 / 20,780 B) | 18 / 119 | 5.30% (58 / 215 fn) | **4.66%** |
-| `CHESS.BIN` | overlay de batalha (tabuleiro) | 0.48% (2,036 / 421,956 B) | 41 / 867 | 50.00% (1 / 2 fn) | **0.49%** |
-| `RAISE.BIN` | overlay de criação de monstros | 0.97% (3,160 / 326,576 B) | 148 / 940 | 100.00% (2 / 2 fn) | **0.99%** |
+| `YUUGI.EXE` | executável principal | 2.13% (4,388 / 206,380 B) | 113 / 732 | 7.60% (71 / 303 fn) | **3.22%** |
+| `SLPM_860.96` | loader / boot | 3.97% (824 / 20,764 B) | 22 / 119 | 5.43% (59 / 215 fn) | **4.96%** |
+| `CHESS.BIN` | overlay de batalha (tabuleiro) | 0.62% (2,628 / 421,956 B) | 49 / 867 | 50.00% (1 / 2 fn) | **0.63%** |
+| `RAISE.BIN` | overlay de criação de monstros | 1.09% (3,560 / 326,576 B) | 154 / 940 | 100.00% (2 / 2 fn) | **1.11%** |
 | `ETC.BIN` | overlay de menus/diversos | 0.57% (508 / 88,992 B) | 5 / 189 | 0.00% (0 / 0 fn) | **0.57%** |
-| **Total** | | **1.00%** (10,640 / 1,064,704 B) | 321 / 2847 | 6.58% (131 / 522 fn) | **1.46%** |
+| **Total** | | **1.12%** (11,908 / 1,064,668 B) | 343 / 2847 | 6.70% (133 / 522 fn) | **1.58%** |
 <!-- PROGRESS:END -->
 
 A **cobertura** soma ao C as funções que já eram escritas em assembly no

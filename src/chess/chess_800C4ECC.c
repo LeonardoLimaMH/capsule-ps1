@@ -171,7 +171,15 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800C9F98);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800CA00C);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800CA268);
+#include "ghidra.h"
+void func_800CA268(short param_1,short param_2,short param_3,short param_4,short param_5,
+                  undefined4 param_6)
+
+{
+  func_800CA00C
+            (0,(int)param_1,(int)param_2,(int)param_3,(int)param_4,(int)param_5,param_6,0);
+  return;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800CA2C8);
 
@@ -247,7 +255,21 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800CA7B0);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800CA87C);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800CAA44);
+#include "ghidra.h"
+void func_800CAA44(undefined4 param_1,int param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  
+  iVar2 = 0;
+  do {
+    iVar1 = param_2 + iVar2;
+    iVar2 = iVar2 + 1;
+    *(undefined1 *)(iVar1 + 0x6b) = *(undefined1 *)(iVar1 + 0xe);
+  } while (iVar2 < 5);
+  return;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800CAA6C);
 
@@ -451,7 +473,20 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800D24B4);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800D28C0);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800D2C9C);
+#include "ghidra.h"
+undefined1 func_800D2C9C(int param_1,uint param_2,uint param_3)
+
+{
+  undefined1 uVar1;
+  
+  if (((param_2 & 0xff) < 0xd) && ((param_3 & 0xff) < 0xd)) {
+    uVar1 = *(undefined1 *)((param_2 & 0xff) * 0xd + param_1 + (param_3 & 0xff));
+  }
+  else {
+    uVar1 = 0;
+  }
+  return uVar1;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800D2CE4);
 

@@ -396,7 +396,15 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C", func_800FE428);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C", func_800FE5B0);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C", func_800FE74C);
+#include "ghidra.h"
+void func_800FE74C(short *param_1,short *param_2)
+
+{
+  SquareRoot0(((int)*param_1 - (int)*param_2) * ((int)*param_1 - (int)*param_2) +
+                  ((int)param_1[1] - (int)param_2[1]) * ((int)param_1[1] - (int)param_2[1]) +
+                  ((int)param_1[2] - (int)param_2[2]) * ((int)param_1[2] - (int)param_2[2]));
+  return;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C", func_800FE7B8);
 
@@ -414,7 +422,16 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C", func_800FED90);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C", func_800FEE40);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C", func_800FEF04);
+#include "ghidra.h"
+void func_800FEF04(undefined4 param_1,undefined4 param_2)
+
+{
+  undefined1 auStack_10 [8];
+  
+  func_800FF460(param_1,param_2,2,1,auStack_10);
+  func_800FEC2C(auStack_10);
+  return;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C", func_800FEF40);
 

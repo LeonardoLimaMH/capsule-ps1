@@ -17,7 +17,14 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800DEC04);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800DECA8);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800DED74);
+#include "ghidra.h"
+undefined4 func_800DED74(undefined4 param_1,undefined2 param_2,short param_3,short param_4)
+
+{
+  func_800DECA8(param_1,param_2);
+  func_800DF838(param_1,param_2,(int)param_3,(int)param_4);
+  return 0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800DEDE4);
 
@@ -57,7 +64,14 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E071C);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E0794);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E080C);
+#include "ghidra.h"
+void func_800E080C(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  func_800B1260();
+  func_800CECEC(param_1,param_2,param_3);
+  return;
+}
 
 void func_800E085C(s32 arg0) {
     func_800CEF08();
@@ -105,7 +119,22 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E1140);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E11A0);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E134C);
+#include "ghidra.h"
+void func_800E134C(int param_1)
+
+{
+    extern s32 D_800EEBAC[];
+  undefined4 uVar1;
+  
+  if ((*D_800EEBAC) == 0) {
+    uVar1 = 3;
+    if (param_1 == 0) {
+      uVar1 = 2;
+    }
+    func_800AC34C(uVar1);
+  }
+  return;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E1388);
 

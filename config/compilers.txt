@@ -30,9 +30,6 @@ src/yuugi/sdk_libspu_s_itc.c 2.8.1-psx
 src/yuugi/sdk_libspu_s_sva.c 2.8.1-psx
 src/yuugi/sdk_libspu_s_n2p.c 2.8.1-psx
 src/yuugi/sdk_libetc_vsync.c 2.8.1-psx
-src/yuugi/main_80042BB0.c 2.8.1-psx
-src/yuugi/main_80043134.c 2.8.1-psx
-src/yuugi/main_80043248.c 2.8.1-psx
 src/yuugi/main_8004386C.c 2.8.1-psx
 src/yuugi/main_80043D8C.c 2.8.1-psx
 src/yuugi/main_80044934.c 2.8.1-psx
@@ -44,7 +41,6 @@ src/yuugi/main_80046CF4.c 2.8.1-psx
 src/yuugi/main_80047344.c 2.8.1-psx
 src/yuugi/main_800473C4.c 2.8.1-psx
 src/yuugi/main_8004749C.c 2.8.1-psx
-src/yuugi/main_80047600.c 2.8.1-psx
 src/yuugi/main_80047EC4.c 2.8.1-psx
 src/yuugi/sdk_libgpu_ext.c 2.8.1-psx
 src/yuugi/main_8004B9CC.c 2.8.1-psx
@@ -75,16 +71,12 @@ src/slpm/loader_80116AD0.c 2.8.1-psx
 src/slpm/sdk_libcd_bios.c 2.8.1-psx
 src/slpm/loader_8011854C.c 2.8.1-psx
 src/slpm/sdk_libc2_puts.c 2.8.1-psx
-src/slpm/sdk_libcd_iso9660.c 2.8.1-psx
 src/slpm/sdk_libcd_cdread.c 2.8.1-psx
 src/slpm/sdk_libcd_cdread2.c 2.8.1-psx
 src/slpm/loader_80119E10.c 2.8.1-psx
 src/slpm/sdk_libcd_c_005.c 2.8.1-psx
 src/slpm/loader_8011AA1C.c 2.8.1-psx
 src/slpm/sdk_libetc_vsync.c 2.8.1-psx
-src/slpm/loader_8011B028.c 2.8.1-psx
-src/slpm/loader_8011B65C.c 2.8.1-psx
-src/slpm/loader_8011B770.c 2.8.1-psx
 src/slpm/sdk_libsnd_ssend.c 2.8.1-psx
 src/slpm/sdk_libsnd_ssstart.c 2.8.1-psx
 src/slpm/loader_8011BF14.c 2.8.1-psx
@@ -165,3 +157,5 @@ src/yuugi/main_80044634.c 2.8.1-psx
 src/yuugi/sdk_libgpu_sys__DrawArea.c 2.8.1-psx
 src/etc/etc__8009BD30.c 2.8.1-psx
 src/etc/etc__800A822C.c 2.8.1-psx
+src/slpm/sdk_libgpu_sys__exWindow.c 2.8.1-psx
+src/yuugi/sdk_libgpu_sys__exWindow.c 2.8.1-psx

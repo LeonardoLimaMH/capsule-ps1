@@ -10,9 +10,21 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800C75C0", func_800C7FC0);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C75C0", func_800C8210);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C75C0", func_800C8320);
+#include "ghidra.h"
+void func_800C8320(undefined4 param_1,undefined4 param_2,short param_3)
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C75C0", func_800C834C);
+{
+  func_800C0EE8(param_2,6,(int)param_3);
+  return;
+}
+
+#include "ghidra.h"
+void func_800C834C(undefined4 param_1,undefined4 param_2,short param_3)
+
+{
+  func_800C0E1C(param_2,5,(int)param_3);
+  return;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C75C0", func_800C8378);
 

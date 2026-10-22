@@ -68,7 +68,18 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800C0440);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800C0658);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800C087C);
+#include "ghidra.h"
+void func_800C087C(undefined4 param_1)
+
+{
+  int iVar1;
+  
+  iVar1 = func_800B3338(param_1,1);
+  if (iVar1 != 0) {
+    func_800125D8();
+  }
+  return;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800C08AC);
 

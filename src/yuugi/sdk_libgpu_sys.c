@@ -52,5 +52,3 @@ u32 GetODE(void) {
     extern void * D_80078914[];
     return M2C_FIELD((*D_80078914), u32 (**)(), 0x38)() >> 0x1F;
 }
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys", SetTexWindow);

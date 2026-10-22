@@ -74,6 +74,7 @@ segments:
       - [0x3A54, c, sdk_libpress_vlc]
       - [0x3DF4, c, sdk_libgpu_ext]
       - [0x4094, c, sdk_libgpu_sys]
+      - [0x519C, c, sdk_libgpu_sys__exWindow]
       - [0x51D4, c, sdk_libgpu_sys__DrawArea]
       - [0x5294, c, sdk_libgpu_sys__Priority]
       - [0x6260, c, loader_80115A60]
