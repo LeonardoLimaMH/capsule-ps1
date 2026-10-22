@@ -8,8 +8,8 @@ void SetInitPadFlag(s32 arg0) {
 }
 
 s32 ReadInitPadFlag(void) {
-    extern s32 D_80078B5C[];
-    return (*D_80078B5C);
+    extern s32 D_80078B5C;
+    return D_80078B5C;
 }
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libapi_pad", PAD_init);

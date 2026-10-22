@@ -48,3 +48,9 @@ Cada linha é uma rodada no mesmo conjunto `config/bench.txt`. *Casadas* = bytes
   próximas, 92 mais distantes, 109 iguais. O truque só serve caso a caso (casou `raise:func_800DC79C`).
 - 2026-10-22 — variante `if (v || w)` (duas variáveis opacas) da junção automática: 2 casamentos (já obtidos à
   mão), 32 mais próximas, **144 mais distantes**: rejeitada como heurística; segue como receita manual.
+| 2026-10-22 | g0fill-v1 | g0fill, gcc281, ghidra | 12/180 | 42/42 | 174 | 48 | 34.5 | registradores (86); ordem/instrução diferente (61); extensão/truncamento (9); m2c falhou (5) |
+| 2026-10-22 | g0fill-v1 | gcc281, ghidra, g0fill | 12/180 | 42/42 | 174 | 48 | 34.5 | registradores (86); ordem/instrução diferente (61); extensão/truncamento (9); m2c falhou (5) |
+- 2026-10-22 — **heurística `g0fill` aceita**: nas funções do yuugi/slpm sem `$gp`, tenta também o perfil das
+  bibliotecas PsyQ (`cc1 -G0` + `tools/aspsx_fill.py`) com os globais do rascunho como escalares. **+3 pendentes
+  casadas** (yuugi CD_vol; slpm CdReadCallback, func_8011A0B4), 0 perdidas, 2 mais próximas. O perfil é gravado
+  como compilador `2.7.2-psx+g0fill`; `assign_compilers.py` move o arquivo para `config/g0fill.txt`.

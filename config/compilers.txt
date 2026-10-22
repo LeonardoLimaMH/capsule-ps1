@@ -36,7 +36,6 @@ src/yuugi/main_80044934.c 2.8.1-psx
 src/yuugi/main_80044C04.c 2.8.1-psx
 src/yuugi/main_8004530C.c 2.8.1-psx
 src/yuugi/main_80045680.c 2.8.1-psx
-src/yuugi/sdk_libcd_bios.c 2.8.1-psx
 src/yuugi/main_80046CF4.c 2.7.2-psx
 src/yuugi/main_80047344.c 2.8.1-psx
 src/yuugi/main_800473C4.c 2.8.1-psx
@@ -68,7 +67,6 @@ src/slpm/loader_80115A84.c 2.8.1-psx
 src/slpm/loader_80116438.c 2.8.1-psx
 src/slpm/sdk_libcd_event.c 2.8.1-psx
 src/slpm/loader_80116AD0.c 2.8.1-psx
-src/slpm/sdk_libcd_bios.c 2.8.1-psx
 src/slpm/loader_8011854C.c 2.7.2-psx
 src/slpm/sdk_libc2_puts.c 2.8.1-psx
 src/slpm/sdk_libcd_cdread.c 2.7.2-psx

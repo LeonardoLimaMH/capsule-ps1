@@ -184,8 +184,9 @@ ALL_HEURISTICS = {
 # deixam alguns rascunhos mais próximos: ficam no conjunto de rascunho (wip/permuter).
 # "protos", "ptypes" e "unproto": nenhum efeito medido; disponíveis, desligadas.
 # 2026-10-22: "ghidra" +6 pendentes casadas (3 -> 9/180), 0 controles perdidos, 65 mais próximas.
-DEFAULT_HEURISTICS = frozenset({"gcc281", "ghidra"})
-DRAFT_HEURISTICS = frozenset({"gcc281", "ghidra", "noandor", "unsigned"})
+# 2026-10-22: "g0fill" +3 (9 -> 12/180), 0 perdidas (perfil das bibliotecas PsyQ).
+DEFAULT_HEURISTICS = frozenset({"gcc281", "ghidra", "g0fill"})
+DRAFT_HEURISTICS = frozenset({"gcc281", "ghidra", "g0fill", "noandor", "unsigned"})
 ROW = re.compile(r"^(>>|  ) [0-9A-F]{8}  (.{40}) \| (.*)$")
 LOADS = {"lh", "lhu", "lb", "lbu", "lw"}
 
@@ -284,17 +285,18 @@ def evaluate(target, func, heur=DEFAULT_HEURISTICS):
                 reason = "tipo composto"
                 continue
             for gcc in compilers:
-                rec = _attempt(target, func, scalarize(c) if gcc.endswith("+g0fill") else c, gcc)
+                cc = scalarize(c) if gcc.endswith("+g0fill") else c
+                rec = _attempt(target, func, cc, gcc)
                 rec["variant"] = ",".join(k for k, x in v.items() if x and k != "protos") or "base"
                 if rec["match"]:
                     rec["reason"] = "MATCH"
-                    return c, gcc, rec
+                    return cc, gcc, rec
                 if not rec["compiles"]:
                     reason = "não compila" if reason != "não casou" else reason
                     break  # não compila: inútil tentar outro compilador
                 reason = "não casou"
                 if best is None or rec["n"] < best["n"]:
-                    rec["c"] = c  # C da melhor tentativa (ponto de partida para permuter/wip)
+                    rec["c"] = cc  # C da melhor tentativa (ponto de partida para permuter/wip)
                     best = rec
     rec = dict(best or {})
     rec["reason"] = reason

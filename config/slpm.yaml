@@ -77,6 +77,8 @@ segments:
       - [0x519C, c, sdk_libgpu_sys__exWindow]
       - [0x51D4, c, sdk_libgpu_sys__DrawArea]
       - [0x5294, c, sdk_libgpu_sys__Priority]
+      - [0x61A8, c, sdk_libgpu_sys__801159A8]
+      - [0x61E8, c, sdk_libgpu_sys__801159E8]
       - [0x6260, c, loader_80115A60]
       - [0x6284, c, loader_80115A84]
       - [0x6A20, c, loader_80116220]

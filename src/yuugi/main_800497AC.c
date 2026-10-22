@@ -11,6 +11,6 @@ s32 SetVideoMode(s32 arg0) {
 }
 
 s32 GetVideoMode(void) {
-    extern s32 D_800788BC[];
-    return (*D_800788BC);
+    extern s32 D_800788BC;
+    return D_800788BC;
 }

@@ -7,13 +7,13 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_80047600", func_80047778);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80047600", func_8004784C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80047600", func_800478BC);
+s32 func_800478BC(s32 arg0) {
+    extern s32 D_800733C0;
+    s32 temp_v0;
+
+    temp_v0 = D_800733C0;
+    D_800733C0 = arg0;
+    return temp_v0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80047600", func_800478D0);
-
-void func_8004795C(u32 arg0) {
-    extern u32 D_800733A8[];
-    if (arg0 < 2U) {
-        (*D_800733A8) = arg0;
-    }
-}

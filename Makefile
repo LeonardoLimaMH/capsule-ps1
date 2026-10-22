@@ -1,6 +1,10 @@
 # Yu-Gi-Oh! Monster Capsule Breed & Battle (SLPM-86096) - decompilação
 # Executar dentro do container do toolchain:  ./run.sh make [alvo]
 
+
+# erro em qualquer etapa do pipe (cpp | cc1 | maspsx) falha o build
+SHELL       := /bin/bash
+.SHELLFLAGS := -o pipefail -c
 BUILD_DIR   := build
 CROSS       := mips-linux-gnu-
 AS          := $(CROSS)as
