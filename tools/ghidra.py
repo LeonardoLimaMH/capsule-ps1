@@ -12,9 +12,11 @@ Uso:
   ghidra.py decompile <alvo> <função>  pseudo-C do Ghidra (leitura)
   ghidra.py xrefs <alvo> <0xendereço>  referências para um endereço
   ghidra.py bench                      pseudo-C das funções de config/bench.txt -> .cache/ghidra/c/<alvo>/<f>.c
+  ghidra.py all                        idem para todas as funções ainda em INCLUDE_ASM
   ghidra.py call <rota> [k=v ...]      chamada genérica (GET); rota sem "/" inicial
 """
 import json
+import re
 import pathlib
 import shutil
 import sys
@@ -59,6 +61,31 @@ def symbol_addr(target, func):
     return f"0x{m.group(1)}" if m else func
 
 
+def dump(pairs):
+    """Grava o pseudo-C de cada (alvo, função) em .cache/ghidra/c/<alvo>/<f>.c (pula as já feitas)."""
+    maps = {}
+    n = 0
+    for t, f in pairs:
+        out = ROOT / ".cache" / "ghidra" / "c" / t / f"{f}.c"
+        if out.exists() or t not in PROG:
+            continue
+        if t not in maps:
+            maps[t] = (ROOT / "build" / f"{t}.map").read_text(encoding="utf-8")
+        m = re.search(rf"^\s+0x([0-9a-f]{{8}})\s+{re.escape(f)}\s*$", maps[t], re.M)
+        try:
+            r = json.loads(get("/force_decompile", function=f"0x{m.group(1)}" if m else f, program=PROG[t]))
+        except Exception as e:  # registra e segue
+            print(f"{t}:{f}: {e}")
+            continue
+        if r.get("status") != "success":
+            print(f"{t}:{f}: {r.get('error', r.get('status'))}")
+            continue
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(r["decompiled"].replace(chr(13), ""), encoding="utf-8")
+        n += 1
+    return n
+
+
 def main():
     a = sys.argv[1:]
     if not a:
@@ -74,27 +101,14 @@ def main():
         print(get("/force_decompile", function=symbol_addr(a[1], a[2]), program=PROG.get(a[1], f"{a[1]}.elf")))
     elif a[0] == "xrefs":
         print(get("/get_xrefs_to", address=a[2], program=PROG.get(a[1], f"{a[1]}.elf")))
-    elif a[0] == "bench":
-        n = 0
-        for l in (ROOT / "config" / "bench.txt").read_text(encoding="utf-8").splitlines():
-            if not l or l.startswith("#"):
-                continue
-            t, f = l.split()[:2]
-            out = ROOT / ".cache" / "ghidra" / "c" / t / f"{f}.c"
-            if out.exists():
-                continue
-            try:
-                r = json.loads(get("/force_decompile", function=symbol_addr(t, f), program=PROG[t]))
-            except Exception as e:  # registra e segue
-                print(f"{t}:{f}: {e}")
-                continue
-            if r.get("status") != "success":
-                print(f"{t}:{f}: {r.get('error', r.get('status'))}")
-                continue
-            out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_text(r["decompiled"].replace(chr(13), ""), encoding="utf-8")
-            n += 1
-        print(f"{n} funções decompiladas pelo Ghidra")
+    elif a[0] in ("bench", "all"):
+        if a[0] == "bench":
+            pairs = [l.split()[:2] for l in (ROOT / "config" / "bench.txt").read_text(encoding="utf-8").splitlines()
+                     if l and not l.startswith("#")]
+        else:  # todas as funções ainda em INCLUDE_ASM
+            pairs = [(c.parent.name, f) for c in sorted((ROOT / "src").glob("*/*.c"))
+                     for f in re.findall(r'INCLUDE_ASM\("[^"]+",\s*(\w+)\)', c.read_text(encoding="utf-8"))]
+        print(f"{dump(pairs)} funções decompiladas pelo Ghidra")
     elif a[0] == "call":
         print(get(a[1], **dict(kv.split("=", 1) for kv in a[2:])))
     else:
