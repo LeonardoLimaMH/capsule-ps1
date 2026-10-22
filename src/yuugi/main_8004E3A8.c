@@ -8,4 +8,7 @@ void StartCARD(void) {
     func_8004FEEC();
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8004E3A8", StopCARD);
+void StopCARD(void) {
+    func_8004E42C();
+    _ExitCard();
+}

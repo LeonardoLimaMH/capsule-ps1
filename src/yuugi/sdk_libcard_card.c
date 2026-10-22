@@ -1,4 +1,7 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libcard_card", _card_clear);
+void _card_clear(s32 arg0) {
+    func_8004E32C();
+    func_8004E31C(arg0, 0x3F, 0);
+}

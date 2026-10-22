@@ -1,18 +1,67 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libetc_intr", slpm_ResetCallback);
+#include "ghidra.h"
+void slpm_ResetCallback(void)
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libetc_intr", slpm_InterruptCallback);
+{
+    extern void * D_80133264[];
+  (**(code **)((*D_80133264) + 0xc))();
+  return;
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libetc_intr", slpm_DMACallback);
+#include "ghidra.h"
+void slpm_InterruptCallback(void)
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libetc_intr", slpm_VSyncCallback);
+{
+    extern void * D_80133264[];
+  (**(code **)((*D_80133264) + 8))();
+  return;
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libetc_intr", slpm_VSyncCallbacks);
+#include "ghidra.h"
+void slpm_DMACallback(void)
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libetc_intr", slpm_StopCallback);
+{
+    extern void * D_80133264[];
+  (**(code **)((*D_80133264) + 4))();
+  return;
+}
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libetc_intr", slpm_RestartCallback);
+#include "ghidra.h"
+void slpm_VSyncCallback(undefined4 param_1)
+
+{
+    extern void * D_80133264[];
+  (**(code **)((*D_80133264) + 0x14))(4,param_1);
+  return;
+}
+
+#include "ghidra.h"
+void slpm_VSyncCallbacks(void)
+
+{
+    extern void * D_80133264[];
+  (**(code **)((*D_80133264) + 0x14))();
+  return;
+}
+
+#include "ghidra.h"
+void slpm_StopCallback(void)
+
+{
+    extern void * D_80133264[];
+  (**(code **)((*D_80133264) + 0x10))();
+  return;
+}
+
+#include "ghidra.h"
+void slpm_RestartCallback(void)
+
+{
+    extern void * D_80133264[];
+  (**(code **)((*D_80133264) + 0x18))();
+  return;
+}
 
 u16 slpm_CheckCallback(void) {
     extern u16 D_801321DE[];

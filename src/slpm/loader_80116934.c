@@ -1,5 +1,5 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80116934", slpm_GetClut);
-
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80116934", StSetRing);
+s32 slpm_GetClut(s32 arg0, s32 arg1) {
+    return ((arg1 << 6) | ((arg0 >> 4) & 0x3F)) & 0xFFFF;
+}

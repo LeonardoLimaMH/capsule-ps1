@@ -31,7 +31,19 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013A68);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013B84);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013C14);
+#include "ghidra.h"
+void func_80013C14(undefined4 *param_1,int param_2)
+
+{
+  if (param_2 < 0) {
+    param_2 = param_2 + 3;
+  }
+  for (param_2 = param_2 >> 2; 0 < param_2; param_2 = param_2 + -1) {
+    *param_1 = 0;
+    param_1 = param_1 + 1;
+  }
+  return;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013C44);
 
@@ -67,7 +79,18 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80015A0C);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80015A74);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80015B00);
+#include "ghidra.h"
+void func_80015B00(int param_1)
+
+{
+  *(undefined1 *)(param_1 + 0x5a) = 0x80;
+  *(undefined1 *)(param_1 + 0x59) = 0x80;
+  *(undefined1 *)(param_1 + 0x58) = 0x80;
+  if (*(short *)(param_1 + 0x46) < -0xe0) {
+    func_800185F8();
+  }
+  return;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80015B3C);
 
@@ -77,7 +100,23 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80015BE8);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80015C2C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80015CD0);
+#include "ghidra.h"
+void func_80015CD0(int param_1,int param_2,uint param_3)
+
+{
+  undefined2 uVar1;
+  undefined4 *puVar2;
+  
+  *(int *)(param_1 + 8) = param_2;
+  *(uint *)(param_1 + 0x1c) = *(uint *)(param_1 + 0x1c) & 0xfffffff8 | param_3 & 7;
+  puVar2 = *(undefined4 **)(param_2 + 4);
+  *(undefined4 *)(param_1 + 4) = *puVar2;
+  uVar1 = *(undefined2 *)(puVar2 + 1);
+  *(undefined4 *)(param_1 + 0xc) = 0;
+  *(undefined2 *)(param_1 + 0x12) = 0;
+  *(undefined2 *)(param_1 + 0x10) = uVar1;
+  return;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80015D14);
 
@@ -160,9 +199,21 @@ void func_80019D38(s32 arg0, s32 arg1, void *arg2) {
     M2C_FIELD(arg2, s32 *, 4) = (s32) (arg0 & 0xFFFF);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80019D48);
+#include "ghidra.h"
+void func_80019D48(int param_1,undefined4 param_2,undefined4 param_3)
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80019D7C);
+{
+  func_80019DB4(param_1,param_1 + 0x7ffU >> 0xb & 0xffff,param_2,param_3);
+  return;
+}
+
+#include "ghidra.h"
+void func_80019D7C(int param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  func_80019DB4(0,param_1 + 0x7ffU >> 0xb & 0xffff,param_2,param_3);
+  return;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80019DB4);
 

@@ -94,9 +94,33 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002C000);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002C214);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002C438);
+#include "ghidra.h"
+uint func_8002C438(undefined2 *param_1,int param_2,undefined4 param_3,uint param_4)
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002C490);
+{
+  undefined2 *puVar1;
+  
+  puVar1 = (undefined2 *)((param_4 & 0xffff) * 8 + param_2);
+  *param_1 = *puVar1;
+  param_1[1] = puVar1[1];
+  param_1[2] = puVar1[2];
+  func_8002C4E8(param_1,param_3);
+  return param_4 & 0xffff;
+}
+
+#include "ghidra.h"
+uint func_8002C490(undefined2 *param_1,int param_2,undefined4 param_3,uint param_4)
+
+{
+  undefined2 *puVar1;
+  
+  puVar1 = (undefined2 *)((param_4 & 0xffff) * 8 + param_2);
+  *param_1 = *puVar1;
+  param_1[1] = puVar1[1];
+  param_1[2] = puVar1[2];
+  func_8002C4E8(param_1,param_3);
+  return param_4 & 0xffff;
+}
 
 void func_8002C4E8(void *arg0, void *arg1) {
     if (arg1 != NULL) {

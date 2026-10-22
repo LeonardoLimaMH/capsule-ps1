@@ -48,7 +48,13 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C", func_8001E180);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C", func_8001E1E4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C", func_8001E208);
+#include "ghidra.h"
+void func_8001E208(undefined4 param_1)
+
+{
+  func_8001A998(param_1,0x18);
+  return;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C", func_8001E228);
 

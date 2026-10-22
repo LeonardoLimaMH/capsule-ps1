@@ -1,12 +1,7 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800423A8", SpuGetVoiceEnvelope);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800423A8", PCopen);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800423A8", func_800423E8);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800423A8", PClseek);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800423A8", PCcreat);
+void SpuGetVoiceEnvelope(s32 arg0, u16 *arg1) {
+    extern s32 D_80071598[];
+    *arg1 = M2C_FIELD(((arg0 * 0x10) + (*D_80071598)), u16 *, 0xC);
+}

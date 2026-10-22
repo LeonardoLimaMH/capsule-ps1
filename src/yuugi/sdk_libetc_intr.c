@@ -1,19 +1,68 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libetc_intr", ResetCallback);
+#include "ghidra.h"
+void ResetCallback(void)
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libetc_intr", InterruptCallback);
+{
+    extern void * D_80072E0C[];
+  (**(code **)((*D_80072E0C) + 0xc))();
+  return;
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libetc_intr", DMACallback);
+#include "ghidra.h"
+void InterruptCallback(void)
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libetc_intr", VSyncCallback);
+{
+    extern void * D_80072E0C[];
+  (**(code **)((*D_80072E0C) + 8))();
+  return;
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libetc_intr", VSyncCallbacks);
+#include "ghidra.h"
+void DMACallback(void)
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libetc_intr", StopCallback);
+{
+    extern void * D_80072E0C[];
+  (**(code **)((*D_80072E0C) + 4))();
+  return;
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libetc_intr", RestartCallback);
+#include "ghidra.h"
+void VSyncCallback(undefined4 param_1)
+
+{
+    extern void * D_80072E0C[];
+  (**(code **)((*D_80072E0C) + 0x14))(4,param_1);
+  return;
+}
+
+#include "ghidra.h"
+void VSyncCallbacks(void)
+
+{
+    extern void * D_80072E0C[];
+  (**(code **)((*D_80072E0C) + 0x14))();
+  return;
+}
+
+#include "ghidra.h"
+void StopCallback(void)
+
+{
+    extern void * D_80072E0C[];
+  (**(code **)((*D_80072E0C) + 0x10))();
+  return;
+}
+
+#include "ghidra.h"
+void RestartCallback(void)
+
+{
+    extern void * D_80072E0C[];
+  (**(code **)((*D_80072E0C) + 0x18))();
+  return;
+}
 
 u16 CheckCallback(void) {
     extern u16 D_80071D86[];

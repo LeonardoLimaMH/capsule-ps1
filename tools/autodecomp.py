@@ -252,7 +252,7 @@ def evaluate(target, func, heur=DEFAULT_HEURISTICS):
     best, reason = None, "m2c falhou"
     gdraft = None
     if "ghidra" in heur:
-        gdraft = ghidra2c.draft(target, func, run_m2c(target, func, asm))
+        gdraft = ghidra2c.draft(target, func, run_m2c(target, func, asm), asm_text)
     for flags in flags_sets + ([("ghidra",)] if gdraft else []):
         draft = gdraft if flags == ("ghidra",) else run_m2c(target, func, asm, flags)
         if draft is None:
@@ -346,7 +346,8 @@ def apply(target):
             asm = asm_path(target, m.group(2))
             refs = [int(x, 16) for x in re.findall(r"\b(?:D|jtbl)_([0-9A-F]{8})\b",
                                                    asm.read_text(encoding="utf-8"))]
-            if '"' in code or any(ro_lo <= r < ro_hi for r in refs):
+            strings = '"' in re.sub(r'^#include\s+"[^"]+"$', "", code, flags=re.M)
+            if strings or any(ro_lo <= r < ro_hi for r in refs):
                 rod += 1
                 return m.group(0)
             mine = gp_modes(code)

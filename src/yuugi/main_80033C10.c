@@ -13,7 +13,16 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_80034148);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_8003422C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_800342CC);
+#include "ghidra.h"
+void func_800342CC(void)
+
+{
+  undefined1 auStack_18 [16];
+  
+  auStack_18[0] = 0x50;
+  func_80036DB0(auStack_18);
+  return;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_800342F4);
 

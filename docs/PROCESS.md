@@ -80,5 +80,6 @@ e na validação de dependências.
 
 ```
 bench (medir) → hipótese/heurística → bench (comparar, sem regressão)
-   → autodecomp --apply → make (SHA-1) → make test → progress --readme → commit
+   → autodecomp --apply → assign_compilers --split / pad_split → make (SHA-1)
+   → make test → progress --readme → commit
 ```

@@ -1,4 +1,10 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80040A38", SpuSetReverbVoice);
+#include "ghidra.h"
+void SpuSetReverbVoice(undefined4 param_1,undefined4 param_2)
+
+{
+  _SpuSetAnyVoice(param_1,param_2,0xcc,0xcd);
+  return;
+}

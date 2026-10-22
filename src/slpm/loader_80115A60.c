@@ -1,3 +1,9 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80115A60", func_80115A60);
+#include "ghidra.h"
+void func_80115A60(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  func_80115A84(param_1,param_2,0,param_3);
+  return;
+}

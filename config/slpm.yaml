@@ -85,6 +85,7 @@ segments:
       - [0x70B4, c, sdk_libc2_memcpy]
       - [0x70F4, c, sdk_libgpu_p00]
       - [0x7134, c, loader_80116934]
+      - [0x7154, c, loader_80116934__StSetRing]
       - [0x7184, c, sdk_libcd_event]
       - [0x7208, c, loader_80116A08]
       - [0x7284, c, loader_80116A84]

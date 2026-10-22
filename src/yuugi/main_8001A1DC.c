@@ -3,9 +3,31 @@
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC", func_8001A1DC);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC", func_8001A25C);
+#include "ghidra.h"
+undefined4 func_8001A25C(undefined4 param_1,undefined4 param_2,undefined4 *param_3)
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC", func_8001A270);
+{
+  undefined4 uVar1;
+  
+  uVar1 = 0;
+  if (param_3 != (undefined4 *)0x0) {
+    uVar1 = *param_3;
+  }
+  return uVar1;
+}
+
+#include "ghidra.h"
+undefined4 func_8001A270(undefined4 param_1,undefined4 param_2,int param_3)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = 0;
+  if (param_3 != 0) {
+    uVar1 = *(undefined4 *)(param_3 + 4);
+  }
+  return uVar1;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC", func_8001A284);
 
@@ -45,7 +67,39 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC", func_8001A464);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC", func_8001A480);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC", func_8001A49C);
+#include "ghidra.h"
+void func_8001A49C(int param_1)
+
+{
+  func_8001A684(param_1,param_1 + 0x50,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0x54,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0x58,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0x5c,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0x60,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 100,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0x68,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0x6c,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0x70,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0x74,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0x78,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0x7c,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0x80,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0x84,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0x8c,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0x94,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0x9c,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0xa4,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0xac,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0xb4,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0xbc,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0xc4,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A684(param_1,param_1 + 0xcc,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A704(param_1,param_1 + 0x5c,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A784(param_1,param_1 + 0x60,*(undefined4 *)(param_1 + 0x4c));
+  func_8001A818(param_1,param_1 + 100,*(undefined4 *)(param_1 + 0x4c));
+  *(int *)(param_1 + 0x4c) = param_1;
+  return;
+}
 
 void func_8001A684(s32 arg0, s32 *arg1, s32 arg2) {
     s32 temp_v1;
@@ -90,7 +144,12 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC", func_8001AB74);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC", func_8001ABD4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC", func_8001AD48);
+void func_8001AD48(s32 arg0)
+{
+  int new_var2;
+  int new_var;
+ if (arg0 || new_var2) { new_var = 1; new_var2 = 2; } else { new_var = 1; new_var2 = 2; } do { func_8001ADF8(new_var, arg0, new_var2, new_var); } while (0);
+}
 
 void func_8001AD74(s32 arg0) {
     func_8001ADF8(0, arg0, 2, 1);

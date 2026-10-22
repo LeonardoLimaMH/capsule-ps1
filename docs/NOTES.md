@@ -136,3 +136,31 @@ O permuter chegou a 42 diferenças em `SetDrawEnv` apenas com um temporário
 Usado para análise (pseudo-C de leitura, referências cruzadas, structs), nunca como
 fonte de verdade. Importar o ELF do build **sem** fixar `language`; com ele o plugin
 usa o carregador de binário cru e os endereços ficam errados (aconteceu na 1ª tentativa).
+
+Desde 2026-10-22 também é fonte de rascunho (heurística `ghidra`, aceita pela bancada):
+`tools/ghidra.py all` grava o pseudo-C das funções pendentes em `.cache/ghidra/c/` e
+`tools/ghidra2c.py` o torna compilável (`include/ghidra.h` com os tipos do Ghidra).
+Armadilhas encontradas:
+- O Ghidra às vezes escolhe outro rótulo do mesmo endereço para a função chamada
+  (`gcc2_compiled_` no lugar de `_SpuSetAnyVoice`). O `match.py` mascara relocações e
+  não percebe; o link falha. Os nomes das chamadas diretas são trocados pelos alvos
+  dos `jal`, na ordem.
+- Iniciar o Ghidra fora do terminal do usuário exige `JAVA_HOME`
+  (`C:\Program Files\Eclipse Adoptium\jdk-25.0.4.101-hotspot`); a ponte MCP não é
+  necessária (o plugin escuta em 127.0.0.1:8089). Heap limitado com
+  `GHIDRA_GUI_MAXMEM=3G` para conviver com o Docker.
+
+## Preenchimento no fim dos objetos
+
+O .text de cada objeto original termina com nops de preenchimento. Quando a última
+função de um objeto vira C, os nops somem e tudo depois se desloca. Duas ferramentas:
+- `tools/ldpad.py` fixa no linker script a extensão original de cada arquivo-fonte
+  (`. = início + tamanho`): neutro num build que bate, repõe os nops quando faltam e
+  faz o `ld` falhar se o código crescer. A regra anterior ("completar até múltiplo de
+  16 a partir do início do arquivo") falhava quando o objeto original começava antes
+  do arquivo (`loader_80116850`, `main_800427E0`).
+- `tools/pad_split.py` separa o arquivo quando o fim de objeto cai no meio dele (o
+  splat juntou vários objetos do SDK num `main_*`); ex.: os setters de primitivas da
+  LIBGPU (`SetPolyF3`, `SetPolyG3`...) são cada um um objeto com 0x14 bytes + nops.
+O `.cache/fullasm` precisa refletir as separações atuais: o Makefile o regenera junto
+com o linker script.

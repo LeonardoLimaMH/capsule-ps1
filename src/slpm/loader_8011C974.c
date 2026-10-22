@@ -1,3 +1,5 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011C974", func_8011C974);
+void func_8011C974(s16 arg0, s16 arg1) {
+    _SsSeqPlay(arg0, arg1);
+}

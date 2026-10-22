@@ -3,4 +3,7 @@
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800497AC", SetVideoMode);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800497AC", GetVideoMode);
+s32 GetVideoMode(void) {
+    extern s32 D_800788BC[];
+    return (*D_800788BC);
+}

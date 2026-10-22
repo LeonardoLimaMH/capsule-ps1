@@ -1,4 +1,6 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003FD28", _SpuDataCallback);
+void _SpuDataCallback(s32 arg0) {
+    DMACallback(4, arg0);
+}

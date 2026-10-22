@@ -1,4 +1,10 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libds_dssys_4", DsControlF);
+#include "ghidra.h"
+void DsControlF(undefined1 param_1,undefined4 param_2)
+
+{
+  DsCommand(param_1,param_2,0,0);
+  return;
+}

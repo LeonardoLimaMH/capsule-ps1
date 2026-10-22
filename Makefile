@@ -60,6 +60,7 @@ $(foreach t,$(TARGETS),$(eval $(call TARGET_RULES,$(t))))
 $(BUILD_DIR)/%.ld: config/%.yaml
 	$(SPLAT) $<
 	$(PYTHON) tools/postsplit.py asm
+	$(PYTHON) tools/full_asm.py $*
 	$(PYTHON) tools/ldpad.py $*
 
 # Um .c depende de todos os .s que ele inclui via INCLUDE_ASM
@@ -80,6 +81,7 @@ check: $(foreach t,$(TARGETS),$(BUILD_DIR)/$(t).exe)
 split:
 	$(foreach t,$(TARGETS),$(SPLAT) config/$(t).yaml;)
 	$(PYTHON) tools/postsplit.py asm
+	$(PYTHON) tools/full_asm.py $(TARGETS)
 	$(PYTHON) tools/ldpad.py $(TARGETS)
 
 progress:

@@ -1,3 +1,5 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011F544", slpm__SpuDataCallback);
+void slpm__SpuDataCallback(s32 arg0) {
+    slpm_DMACallback(4, arg0);
+}
