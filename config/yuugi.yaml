@@ -69,6 +69,7 @@ segments:
       - [0x24410, c, main_80033C10]
       - [0x27C04, c, main_80037404]
       - [0x27C2C, c, main_8003742C]
+      - [0x2ADC8, c, main_8003742C__8003A5C8]
       - [0x2ADF8, c, main_8003A5F8]
       - [0x2D008, c, main_8003C808]
       - [0x2DDD8, c, sdk_libmath_adddf3]

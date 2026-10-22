@@ -159,3 +159,4 @@ src/slpm/sdk_libgpu_sys__exWindow.c 2.8.1-psx
 src/yuugi/sdk_libgpu_sys__exWindow.c 2.8.1-psx
 src/etc/etc__800A822C.c 2.8.1-psx
 src/raise/raise_8009D2A8__800A3434.c 2.8.1-psx
+src/yuugi/main_8003742C__8003A5C8.c 2.8.1-psx

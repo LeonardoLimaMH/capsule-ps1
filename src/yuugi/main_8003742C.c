@@ -72,5 +72,3 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_8003A594);
 void func_8003A5C0(void) {
 
 }
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_8003A5C8);
