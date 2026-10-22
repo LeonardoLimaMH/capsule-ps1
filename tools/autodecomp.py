@@ -19,6 +19,7 @@ Uso:
 """
 import argparse
 import concurrent.futures as cf
+import json
 import pathlib
 import re
 import subprocess
@@ -303,8 +304,25 @@ def evaluate(target, func, heur=DEFAULT_HEURISTICS):
     return None, None, rec
 
 
+BEST = ROOT / ".cache" / "best"  # melhor tentativa por função (reusada por permute_batch.py)
+
+
+def save_best(target, func, rec):
+    d = BEST / target
+    d.mkdir(parents=True, exist_ok=True)
+    keep = {k: rec.get(k) for k in ("n", "same_len", "gcc", "c", "reason", "variant")}
+    (d / f"{func}.json").write_text(json.dumps(keep, ensure_ascii=False), encoding="utf-8")
+
+
+def load_best(target, func):
+    p = BEST / target / f"{func}.json"
+    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else None
+
+
 def try_function(target, func):
     c, gcc, rec = evaluate(target, func)
+    if not c:
+        save_best(target, func, rec)
     return func, ((c, gcc) if c else None), ("MATCH " + gcc if c else rec["reason"])
 
 
