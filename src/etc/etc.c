@@ -4,7 +4,12 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800979BC);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800979FC);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80097AF0);
+s32 func_80097AF0(s32 arg0, s32 arg1, s32 arg2)
+{
+  s8 *new_var;
+  new_var = (s8 *) (arg0 + ((arg2 * 0x7C) + (arg1 * 0x2E8)));
+  return (*((u8 *) (new_var + 0x5E8))) + 0x10D;
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80097B24);
 
@@ -153,7 +158,22 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009B624);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009B6D0);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009B738);
+void func_8009B738(void *arg0)
+{
+  extern u16 D_8008EE44[];
+  s32 var_v0;
+  int new_var;
+  new_var = ~1;
+  if (((u32) ((*D_8008EE44) - 8)) < 3U)
+  {
+    var_v0 = (*((s32 *) (((s8 *) arg0) + 0x38))) & new_var;
+  }
+  else
+  {
+    var_v0 = (*((s32 *) (((s8 *) arg0) + 0x38))) | 1;
+  }
+  *((s32 *) (((s8 *) arg0) + 0x38)) = var_v0;
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009B774);
 

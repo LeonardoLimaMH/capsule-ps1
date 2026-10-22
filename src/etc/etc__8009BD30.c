@@ -103,9 +103,48 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30", func_800A2BB0);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30", func_800A2CC8);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30", func_800A2D84);
+void func_800A2D84(void *arg0)
+{
+  extern u16 D_8008EE44[];
+  s32 new_var;
+  s32 var_v0;
+  if ((*D_8008EE44) == (*((s32 *) (((s8 *) arg0) + 0x84))))
+  {
+    new_var = ~1;
+    var_v0 = (*((s32 *) (((s8 *) arg0) + 0x38))) & new_var;
+  }
+  else
+  {
+    var_v0 = (*((s32 *) (((s8 *) arg0) + 0x38))) | 1;
+  }
+  new_var = var_v0;
+  *((s32 *) (((s8 *) arg0) + 0x38)) = new_var;
+}
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30", func_800A2DBC);
+void func_800A2DBC(void *arg0)
+{
+  extern u16 D_8008EE44[];
+  extern s16 D_800B3B38[];
+  int new_var;
+  s32 var_v0;
+  if (((*D_8008EE44) == 6) && ((*D_800B3B38) != 0))
+  {
+    new_var = ~1;
+    if (arg0)
+    {
+      var_v0 = (*((s32 *) (((s8 *) arg0) + 0x38))) & new_var;
+    }
+    else
+    {
+      var_v0 = (*((s32 *) (((s8 *) arg0) + 0x38))) & new_var;
+    }
+  }
+  else
+  {
+    var_v0 = (*((s32 *) (((s8 *) arg0) + 0x38))) | 1;
+  }
+  *((s32 *) (((s8 *) arg0) + 0x38)) = var_v0;
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30", func_800A2E00);
 
