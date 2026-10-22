@@ -46,3 +46,5 @@ Cada linha é uma rodada no mesmo conjunto `config/bench.txt`. *Casadas* = bytes
   `docs/NOTES.md`). Aplicada à primeira chamada com literal repetido em todas as 227 pendentes cujo
   assembly copia um registrador de argumento (`addu $aN, $aM, $zero`): **0 casamentos**, 26 mais
   próximas, 92 mais distantes, 109 iguais. O truque só serve caso a caso (casou `raise:func_800DC79C`).
+- 2026-10-22 — variante `if (v || w)` (duas variáveis opacas) da junção automática: 2 casamentos (já obtidos à
+  mão), 32 mais próximas, **144 mais distantes**: rejeitada como heurística; segue como receita manual.

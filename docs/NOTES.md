@@ -181,6 +181,8 @@ if (arg0 || w) { z = 0; } else { z = 0; }
 f(arg0, arg1, z, z);
 ```
 
-Casou `raise:func_800DC79C` e (achado pelo permuter) `yuugi:func_8001AD48`. Dentro de
+Casou `raise:func_800DC79C` e suas 8 gêmeas (`func_800DC6EC` … `func_800DC84C`) e (achado
+pelo permuter) `yuugi:func_8001AD48`. Sem parâmetro útil para a condição, duas variáveis
+opacas funcionam (`if (v || w)`; só `w` não basta): `raise:func_800A0A30`, `func_800A5378`. Dentro de
 laço (`chess:func_8009CC34`) a variável extra fica viva e aloca outro `$s`: em aberto. A
 forma original provavelmente é uma macro ou função `inline` que ainda não identificamos.

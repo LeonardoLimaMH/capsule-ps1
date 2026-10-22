@@ -130,7 +130,6 @@ src/chess/chess__800AED50.c 2.8.1-psx
 src/raise/raise_8009B150__8009CFB4.c 2.8.1-psx
 src/raise/raise_8009D2A8.c 2.8.1-psx
 src/raise/raise_8009D2A8__8009DFF8.c 2.8.1-psx
-src/raise/raise_8009D2A8__800A3434.c 2.8.1-psx
 src/raise/raise_8009D2A8__800A9738.c 2.8.1-psx
 src/raise/raise_800AC34C__800B1150.c 2.8.1-psx
 src/raise/raise_800B9B2C.c 2.8.1-psx
@@ -159,3 +158,4 @@ src/etc/etc__8009BD30.c 2.8.1-psx
 src/slpm/sdk_libgpu_sys__exWindow.c 2.8.1-psx
 src/yuugi/sdk_libgpu_sys__exWindow.c 2.8.1-psx
 src/etc/etc__800A822C.c 2.8.1-psx
+src/raise/raise_8009D2A8__800A3434.c 2.8.1-psx

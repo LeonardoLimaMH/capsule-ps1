@@ -76,7 +76,17 @@ void func_800A0A10(void) {
     func_800A0E20();
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_800A0A30);
+void func_800A0A30(void) {
+    s32 z, w, v;
+
+    if (v || w) {
+        z = 0;
+    } else {
+        z = 0;
+    }
+    func_800A0D88(z, z);
+    func_800A0BB4();
+}
 
 void func_800A0A5C(void) {
     func_800A0E20();
