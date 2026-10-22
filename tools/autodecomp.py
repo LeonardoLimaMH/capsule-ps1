@@ -29,6 +29,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import match  # noqa: E402
 from handwritten import load as load_handwritten  # noqa: E402
 import typeinfer  # noqa: E402
+import ghidra2c  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CACHE = ROOT / ".cache" / "auto"
@@ -145,7 +146,8 @@ def to_c(draft, func, asm_text, variant):
             if variant.get("unproto"):
                 d = re.sub(r"\((.*)\);$", "();", d)
             out_decls.append(d if d.startswith("extern") else d)
-    body_text = body_text.replace("?", "s32")
+    if not variant.get("ghidra"):  # no Ghidra, "?" é operador ternário, não tipo desconhecido
+        body_text = body_text.replace("?", "s32")
     if variant.get("unsigned"):
         body_text = body_text.replace("s32 temp", "u32 temp")
     # injeta as declarações no início do corpo da função
@@ -173,13 +175,15 @@ ALL_HEURISTICS = {
     "unsigned": "variante com temporários sem sinal",
     "noandor": "variante do m2c sem fusão de && / ||",
     "gcc281": "tentar também o GCC 2.8.1",
+    "ghidra": "variante com o pseudo-C do Ghidra (.cache/ghidra/c, gerado por tools/ghidra.py bench)",
 }
 # Decisão pela ablação de 2026-10-21 (docs/BENCH.md): só "gcc281" afeta casamentos
 # (sem ela, 5 controles deixam de casar). "noandor" e "unsigned" não casaram nada mas
 # deixam alguns rascunhos mais próximos: ficam no conjunto de rascunho (wip/permuter).
 # "protos", "ptypes" e "unproto": nenhum efeito medido; disponíveis, desligadas.
-DEFAULT_HEURISTICS = frozenset({"gcc281"})
-DRAFT_HEURISTICS = frozenset({"gcc281", "noandor", "unsigned"})
+# 2026-10-22: "ghidra" +6 pendentes casadas (3 -> 9/180), 0 controles perdidos, 65 mais próximas.
+DEFAULT_HEURISTICS = frozenset({"gcc281", "ghidra"})
+DRAFT_HEURISTICS = frozenset({"gcc281", "ghidra", "noandor", "unsigned"})
 ROW = re.compile(r"^(>>|  ) [0-9A-F]{8}  (.{40}) \| (.*)$")
 LOADS = {"lh", "lhu", "lb", "lbu", "lw"}
 
@@ -246,12 +250,17 @@ def evaluate(target, func, heur=DEFAULT_HEURISTICS):
     flags_sets = [()] + ([("--no-andor",)] if "noandor" in heur else [])
     compilers = COMPILERS if "gcc281" in heur else COMPILERS[:1]
     best, reason = None, "m2c falhou"
-    for flags in flags_sets:
-        draft = run_m2c(target, func, asm, flags)
+    gdraft = None
+    if "ghidra" in heur:
+        gdraft = ghidra2c.draft(target, func, run_m2c(target, func, asm))
+    for flags in flags_sets + ([("ghidra",)] if gdraft else []):
+        draft = gdraft if flags == ("ghidra",) else run_m2c(target, func, asm, flags)
         if draft is None:
             continue
-        for v in variants:
+        for v in ([{"ghidra": True}] if flags == ("ghidra",) else variants):
             c = to_c(draft, func, asm_text, v)
+            if c is not None and v.get("ghidra"):
+                c = ghidra2c.TYPES + c
             if c is not None and v.get("ptypes"):
                 c = typeinfer.apply_param_types(c, func, v["ptypes"])
             if c is None:

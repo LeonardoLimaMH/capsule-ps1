@@ -46,6 +46,9 @@ produzirem casamentos.
   idêntico com relocações mascaradas), com os nomes trocados.
 - `tools/assign_compilers.py`: o compilador de cada arquivo-fonte segue a
   evidência das funções casadas nele.
+- `tools/ghidra.py` + `tools/ghidra2c.py`: o pseudo-C do Ghidra (gerado no host com
+  o Ghidra aberto, guardado em `.cache/ghidra/c/`) é uma segunda fonte de rascunho,
+  ao lado do m2c; aceita pela bancada em 2026-10-22 (`docs/BENCH.md`).
 
 ## 4. Trabalho manual
 

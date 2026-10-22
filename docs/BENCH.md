@@ -29,3 +29,11 @@ Cada linha é uma rodada no mesmo conjunto `config/bench.txt`. *Casadas* = bytes
   bytes e aplicados ao `src/`. Todos os 6 casaram em n ≥ 3; nenhum com 1–2 instruções diferentes (estes são, em
   geral, alocação de registradores que o permuter não alcança em 2 min). Duas funções do etc exigiram GCC 2.8.1 →
   `assign_compilers.py --split` criou novas fronteiras de TU; SHA-1 dos 5 binários inalterados.
+| 2026-10-22 | ghidra-v1 | gcc281, ghidra | 9/180 | 42/42 | 174 | 47 | 34 | registradores (87); ordem/instrução diferente (63); extensão/truncamento (9); m2c falhou (5) |
+- 2026-10-22 — **heurística `ghidra` aceita** (`ghidra-v1`): o pseudo-C do Ghidra 12.1.4 (ELF do build
+  importado com os símbolos do projeto) vira variante de rascunho: `tools/ghidra2c.py` traduz tipos/intrínsecos
+  do Ghidra, as declarações de globais vêm do m2c e o `to_c` aplica as regras de $gp e %hi/%lo. Resultado:
+  **+6 pendentes casadas (3 → 9/180)**, 0 controles perdidos, 65 mais próximas, 0 mais distantes; "tamanho igual"
+  33 → 47. Casadas novas: yuugi func_8001E208, func_800342CC; slpm DecDCTinSync, func_8011B530,
+  slpm_RestartCallback; chess func_8009C178. Entra em `DEFAULT_HEURISTICS`. Rascunhos com registradores sem
+  origem no C (`in_*`, `unaff_*`, `extraout_*`) são descartados.
