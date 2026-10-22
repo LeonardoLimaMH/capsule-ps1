@@ -16,9 +16,9 @@ emulação contra a função original.
 ## Progresso
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.12%**  
+**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.13%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **1.58%**  
-**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.97%**  
+**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.98%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -27,8 +27,8 @@ emulação contra a função original.
 | `SLPM_860.96` | loader / boot | 3.97% (824 / 20,764 B) | 22 / 119 | 5.43% (59 / 215 fn) | **4.96%** |
 | `CHESS.BIN` | overlay de batalha (tabuleiro) | 0.62% (2,628 / 421,956 B) | 49 / 867 | 50.00% (1 / 2 fn) | **0.63%** |
 | `RAISE.BIN` | overlay de criação de monstros | 1.09% (3,560 / 326,576 B) | 154 / 940 | 100.00% (2 / 2 fn) | **1.11%** |
-| `ETC.BIN` | overlay de menus/diversos | 0.57% (508 / 88,992 B) | 5 / 189 | 0.00% (0 / 0 fn) | **0.57%** |
-| **Total** | | **1.12%** (11,908 / 1,064,668 B) | 343 / 2847 | 6.70% (133 / 522 fn) | **1.58%** |
+| `ETC.BIN` | overlay de menus/diversos | 0.65% (580 / 88,992 B) | 6 / 189 | 0.00% (0 / 0 fn) | **0.65%** |
+| **Total** | | **1.13%** (11,980 / 1,064,668 B) | 344 / 2847 | 6.70% (133 / 522 fn) | **1.58%** |
 <!-- PROGRESS:END -->
 
 A **cobertura** soma ao C as funções que já eram escritas em assembly no
