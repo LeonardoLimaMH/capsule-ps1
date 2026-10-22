@@ -20,29 +20,35 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from split_tu import set_compiler, split  # noqa: E402
+import g0fill  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 FUNC = re.compile(r"^(?:INCLUDE_ASM\(\"[^\"]+\",\s*(\w+)\);|(?!static inline)[A-Za-z_][\w \*]*?\b(\w+)\s*\([^;{]*\)\s*\{)", re.M)
 
 
 def current(key):
+    """Compilador atual do arquivo, com o sufixo "+g0fill" se estiver em config/g0fill.txt."""
+    suffix = "+g0fill" if g0fill.enabled(ROOT / key) else ""
     cfg = ROOT / "config" / "compilers.txt"
     for l in cfg.read_text(encoding="utf-8").splitlines():
         p = l.split("#")[0].split()
         if len(p) == 2 and p[0] == key:
-            return p[1]
-    return "2.7.2-psx"
+            return p[1] + suffix
+    return "2.7.2-psx" + suffix
 
 
 def evidence(c, target):
     out = []
+    # função já em C: o build (SHA-1) garante que ela casa com o compilador atual do
+    # arquivo; o registro .gcc só decide para casamentos ainda não aplicados
+    here = current(c.relative_to(ROOT).as_posix())
     for m in FUNC.finditer(c.read_text(encoding="utf-8")):
         f = m.group(1) or m.group(2)
         if f.startswith("__maspsx"):
             continue
         g = ROOT / ".cache" / "auto" / target / f"{f}.gcc"
         if m.group(2):  # já em C
-            out.append((f, g.read_text().strip() if g.exists() else "2.7.2-psx"))
+            out.append((f, here))
         elif g.exists():
             out.append((f, g.read_text().strip()))
     return out

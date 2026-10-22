@@ -37,8 +37,17 @@ def func_offset(target, func):
 
 
 def set_compiler(target, name, gcc):
-    cfg = ROOT / "config" / "compilers.txt"
+    """Grava o compilador do arquivo; o sufixo "+g0fill" (perfil das bibliotecas
+    PsyQ) vai para config/g0fill.txt e o compilador-base para config/compilers.txt."""
     key = f"src/{target}/{name}.c"
+    lst = ROOT / "config" / "g0fill.txt"
+    listed = lst.read_text(encoding="utf-8").splitlines() if lst.exists() else []
+    want = bool(gcc) and gcc.endswith("+g0fill")
+    if want != (key in listed):
+        listed = [l for l in listed if l != key] + ([key] if want else [])
+        lst.write_text("\n".join(listed) + "\n", encoding="utf-8", newline="\n")
+    gcc = gcc.split("+")[0] if gcc else gcc
+    cfg = ROOT / "config" / "compilers.txt"
     lines = [l for l in cfg.read_text(encoding="utf-8").splitlines() if not l.startswith(key + " ")] \
         if cfg.exists() else ["# arquivo-fonte  compilador   (padrão: 2.7.2-psx)"]
     if gcc and gcc != "2.7.2-psx":

@@ -30,6 +30,7 @@ import match  # noqa: E402
 from handwritten import load as load_handwritten  # noqa: E402
 import typeinfer  # noqa: E402
 import ghidra2c  # noqa: E402
+import g0fill  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CACHE = ROOT / ".cache" / "auto"
@@ -176,6 +177,7 @@ ALL_HEURISTICS = {
     "noandor": "variante do m2c sem fusão de && / ||",
     "gcc281": "tentar também o GCC 2.8.1",
     "ghidra": "variante com o pseudo-C do Ghidra (.cache/ghidra/c, gerado por tools/ghidra.py bench)",
+    "g0fill": "perfil das bibliotecas PsyQ (-G0 + aspsx_fill) com globais escalares, em funções sem $gp",
 }
 # Decisão pela ablação de 2026-10-21 (docs/BENCH.md): só "gcc281" afeta casamentos
 # (sem ela, 5 controles deixam de casar). "noandor" e "unsigned" não casaram nada mas
@@ -207,11 +209,24 @@ def classify(o, c):
     return "outro"
 
 
+def scalarize(c):
+    """Globais declarados como vetor incompleto (`extern T D_x[];`, usados como `*D_x`)
+    viram escalares: com -G0 o acesso fica `lui/lw %lo` como nas bibliotecas PsyQ."""
+    names = re.findall(r"extern\s+[\w\s\*]+?\b(D_\w+)\[\];", c)
+    c = re.sub(r"(extern\s+[\w\s\*]+?\b)(D_\w+)\[\];", r"\1\2;", c)
+    for n in names:
+        c = c.replace(f"(*{n})", n)
+        c = re.sub(rf"\b{n}\[0\]", n, c)
+    return c
+
+
 def _attempt(target, func, c, gcc):
     """Compila e compara uma tentativa; devolve registro com métricas."""
     tmp = pathlib.Path(tempfile.mkdtemp()) / f"{func}.c"
     tmp.write_text(HEADER + c + "\n", encoding="utf-8")
-    r = subprocess.run(["python3", "tools/match.py", target, func, str(tmp), "-q", "--gcc", gcc],
+    base, _, prof = gcc.partition("+")
+    r = subprocess.run(["python3", "tools/match.py", target, func, str(tmp), "-q", "--gcc", base]
+                       + (["--g0fill"] if prof == "g0fill" else []),
                        cwd=ROOT, capture_output=True, text=True, timeout=120)
     if r.returncode == 0:
         return {"compiles": True, "match": True, "n": 0, "same_len": True, "gcc": gcc}
@@ -249,6 +264,8 @@ def evaluate(target, func, heur=DEFAULT_HEURISTICS):
         v["protos"] = "protos" in heur
     flags_sets = [()] + ([("--no-andor",)] if "noandor" in heur else [])
     compilers = COMPILERS if "gcc281" in heur else COMPILERS[:1]
+    if "g0fill" in heur and target in ("yuugi", "slpm") and "$gp" not in asm_text:
+        compilers = compilers + [g + "+g0fill" for g in compilers]
     best, reason = None, "m2c falhou"
     gdraft = None
     if "ghidra" in heur:
@@ -267,7 +284,7 @@ def evaluate(target, func, heur=DEFAULT_HEURISTICS):
                 reason = "tipo composto"
                 continue
             for gcc in compilers:
-                rec = _attempt(target, func, c, gcc)
+                rec = _attempt(target, func, scalarize(c) if gcc.endswith("+g0fill") else c, gcc)
                 rec["variant"] = ",".join(k for k, x in v.items() if x and k != "protos") or "base"
                 if rec["match"]:
                     rec["reason"] = "MATCH"
@@ -329,7 +346,7 @@ def apply(target):
     n = skipped = rod = 0
     ro_lo, ro_hi = rodata_range(target)
     for c in sorted((ROOT / "src" / target).rglob("*.c")):
-        file_gcc = file_compiler(c)
+        file_gcc = file_compiler(c) + ("+g0fill" if g0fill.enabled(c) else "")
         s = c.read_text(encoding="utf-8")
         modes = gp_modes(s)
 
