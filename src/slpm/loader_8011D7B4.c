@@ -1,3 +1,7 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011D7B4", func_8011D7B4);
+extern s16 D_80138420;
+
+void func_8011D7B4(void) {
+    D_80138420 = 0;
+}

@@ -3,4 +3,8 @@
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libc2_rand", rand);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libc2_rand", srand);
+extern s32 D_80096600;
+
+void srand(s32 arg0) {
+    D_80096600 = arg0;
+}

@@ -18,4 +18,11 @@ s32 DsPosToInt(void *arg0) {
     return (((((((temp_v1 >> 4) * 0xA) + (temp_v1 & 0xF)) * 0x3C) + (((temp_a2 >> 4) * 0xA) + (temp_a2 & 0xF))) * 0x4B) + (((temp_a1 >> 4) * 0xA) + (temp_a1 & 0xF))) - 0x96;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8004718C", DsSetDebug);
+extern s32 D_80073090;
+
+s32 DsSetDebug(s32 arg0) {
+    s32 old = D_80073090;
+
+    D_80073090 = arg0;
+    return old;
+}

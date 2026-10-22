@@ -1,3 +1,17 @@
 # Arquivos compilados como as bibliotecas PsyQ: cc1 -G0 + tools/aspsx_fill.py
 # (delay slot do retorno preenchido pelo ASPSX antigo). Ver docs/NOTES.md.
 src/slpm/sdk_libcd_cdread.c
+src/slpm/loader_80116B3C.c
+src/slpm/loader_8011A0B4.c
+src/slpm/loader_8011B9C4.c
+src/slpm/sdk_libapi_pad.c
+src/slpm/loader_8011D7B4.c
+src/slpm/loader_8011854C.c
+src/yuugi/main_80046CF4.c
+src/yuugi/main_8004718C.c
+src/yuugi/sdk_libapi_pad.c
+src/yuugi/main_800497AC.c
+src/yuugi/main_80041438.c
+src/yuugi/main_80044A0C.c
+src/yuugi/main_800457C4.c
+src/yuugi/sdk_libc2_rand.c

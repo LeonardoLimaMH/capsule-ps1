@@ -1,7 +1,11 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libapi_pad", SetInitPadFlag);
+extern s32 D_80078B5C;
+
+void SetInitPadFlag(s32 arg0) {
+    D_80078B5C = arg0;
+}
 
 s32 ReadInitPadFlag(void) {
     extern s32 D_80078B5C[];

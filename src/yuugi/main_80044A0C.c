@@ -5,13 +5,29 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_80044A0C", func_80044A0C);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80044A0C", func_80044A4C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80044A0C", func_80044AC8);
+extern s32 D_80094C08;
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80044A0C", func_80044AD4);
+void func_80044AC8(s32 arg0) {
+    D_80094C08 = arg0;
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80044A0C", func_80044AE0);
+extern s32 D_80094C0C;
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80044A0C", func_80044AEC);
+void func_80044AD4(s32 arg0) {
+    D_80094C0C = arg0;
+}
+
+extern s32 D_80094C10;
+
+void func_80044AE0(s32 arg0) {
+    D_80094C10 = arg0;
+}
+
+extern s32 D_80094C14;
+
+void func_80044AEC(s32 arg0) {
+    D_80094C14 = arg0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80044A0C", func_80044AF8);
 

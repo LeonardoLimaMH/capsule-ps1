@@ -1,7 +1,14 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800497AC", SetVideoMode);
+extern s32 D_800788BC;
+
+s32 SetVideoMode(s32 arg0) {
+    s32 old = D_800788BC;
+
+    D_800788BC = arg0;
+    return old;
+}
 
 s32 GetVideoMode(void) {
     extern s32 D_800788BC[];
