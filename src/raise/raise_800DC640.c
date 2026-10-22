@@ -10,7 +10,19 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DC640", func_800DC744);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DC640", func_800DC770);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DC640", func_800DC79C);
+void func_800DC79C(s32 arg0, s32 arg1) {
+    s32 z, w;
+
+    arg0 &= 0xFFFF;
+    arg1 &= 0xFFFF;
+    // junção artificial: faz o 2.7.2 copiar $a2 para $a3 em vez de recarregar o 0
+    if (arg0 || w) {
+        z = 0;
+    } else {
+        z = 0;
+    }
+    func_800D1CC4(arg0, arg1, z, z);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DC640", func_800DC7C8);
 

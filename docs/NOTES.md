@@ -164,3 +164,23 @@ função de um objeto vira C, os nops somem e tudo depois se desloca. Duas ferra
   LIBGPU (`SetPolyF3`, `SetPolyG3`...) são cada um um objeto com 0x14 bytes + nops.
 O `.cache/fullasm` precisa refletir as separações atuais: o Makefile o regenera junto
 com o linker script.
+
+## Constante repetida copiada de registrador (`addu $a3, $a2, $zero`)
+
+Padrão frequente nos overlays (35 funções pendentes só no chess): numa chamada com o mesmo
+valor constante em dois argumentos, o original carrega a constante uma vez e copia o
+registrador (`addu $a2, $zero, $zero` … `addu $a3, $a2, $zero`), enquanto o GCC 2.7.2
+com `f(x, y, 0, 0)` carrega as duas. Não reproduzem: variável local, atribuição dentro da
+chamada, `register`, `inline`, protótipos com `s16`/`float`/ponteiro, outro compilador ou
+nível de otimização. **Reproduz (fora de laço)** uma junção artificial em que a variável
+recebe a constante nos dois ramos de um `if` com condição opaca:
+
+```c
+s32 z, w;
+if (arg0 || w) { z = 0; } else { z = 0; }
+f(arg0, arg1, z, z);
+```
+
+Casou `raise:func_800DC79C` e (achado pelo permuter) `yuugi:func_8001AD48`. Dentro de
+laço (`chess:func_8009CC34`) a variável extra fica viva e aloca outro `$s`: em aberto. A
+forma original provavelmente é uma macro ou função `inline` que ainda não identificamos.
