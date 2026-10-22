@@ -35,11 +35,12 @@ python tools/progress.py --readme && git add -A && git commit
 
 ## 3. Próximos passos planejados
 
-1. Decidir pelo resultado do permuter em lote (regra em `docs/PROCESS.md`).
+1. ~~Permuter em lote~~: feito em 2026-10-22 (6 casamentos; ver `docs/BENCH.md`).
+   Próxima rodada: tempo maior (600 s) só nas funções com 1–2 instruções diferentes.
 2. Testar o pseudo-C do Ghidra como fonte alternativa de rascunho, medido na bancada
    (`tools/ghidra.py`; abrir o Ghidra com o plugin e o projeto `RECOMP/Ghidra`).
-3. Questão em aberto dos overlays (`0x80098000` x `0x80097800`): seguir o comando 6 da
-   fila do CD (`func_800190F4`) até o callback de leitura — ver `docs/NOTES.md`.
+3. ~~Destino dos overlays~~: resolvido (`func_8001A480` troca o destino para `0x80097800`;
+   ver `docs/NOTES.md`).
 4. Trabalho manual: `docs/wip/STATUS.md` (`./run.sh python3 tools/wip.py check`).
 
 ## Referências

@@ -5,7 +5,9 @@ Além do rebuild byte a byte (test_rebuild.py), confere:
   - a tabela de carga do jogo: cada uma das 400 entradas aponta para um arquivo
     real do disco (LBA e tamanho), incluindo os três overlays;
   - o endereço em que o código dos overlays foi ligado (0x80097800), pela
-    estatística de chamadas internas que caem em prólogos de função;
+    estatística de chamadas internas que caem em prólogos de função, e o código
+    do executável que troca o destino da tabela (0x80098000) por essa base
+    antes de cada carga (func_8001A480);
   - as dependências: toda chamada (jal) de um overlay tem como alvo uma função
     conhecida do próprio overlay ou do executável principal.
 """
@@ -68,7 +70,7 @@ def test_overlay_in_load_table(target):
     need("disc/YUUGI.EXE")
     e = disc_catalog.parse_catalog()[OVERLAYS[target]]
     assert e["role"] == "overlay"
-    # destino registrado pelo jogo; ver docs/NOTES.md (diferença de 1 setor para a base de ligação)
+    # destino inicial da tabela; o jogo o sobrescreve antes de carregar (test_overlay_dest_override)
     assert [d for _, d in e["table"]] == [0x80098000]
 
 
@@ -87,6 +89,40 @@ def test_overlay_link_base(target):
     data = (ROOT / "disc" / OVERLAYS[target]).read_bytes()
     assert _jal_prologue_ratio(data, LINK_BASE) >= 0.40
     assert _jal_prologue_ratio(data, LINK_BASE + 0x800) <= 0.05
+
+
+OVERLAY_INDEX = {"chess": 2, "raise": 3, "etc": 4}  # posição em D_800700E4 (tipo 0x11)
+SET_DEST = 0x8001A480  # func_8001A480(i, destino): D_800700E4[i].registro->destino = destino
+
+
+def _set_dest_calls():
+    """(índice, destino) de cada `func_8001A480(imediato, imediato)` em YUUGI.EXE."""
+    y = (ROOT / "disc" / "YUUGI.EXE").read_bytes()
+    w = struct.unpack_from(f"<{len(y) // 4}I", y)
+    jal = 0x0C000000 | ((SET_DEST >> 2) & 0x3FFFFFF)
+    out = []
+    for i, x in enumerate(w):
+        if x != jal:
+            continue
+        seg = w[i - 3:i + 2]  # argumentos montados antes do jal e no delay slot
+        a0 = [s & 0xFFFF for s in seg if s >> 16 == 0x2404]   # addiu $a0, $zero, imm
+        hi = [s & 0xFFFF for s in seg if s >> 16 == 0x3C05]   # lui $a1, imm
+        lo = [s & 0xFFFF for s in seg if s >> 16 == 0x34A5]   # ori $a1, $a1, imm
+        out.append((a0[-1] if a0 else None, (hi[0] << 16 | lo[0]) if hi and lo else None))
+    return out
+
+
+@pytest.mark.parametrize("target", list(OVERLAYS))
+def test_overlay_dest_override(target):
+    """O jogo carrega cada overlay na base de ligação, não no destino da tabela."""
+    need("disc/YUUGI.EXE")
+    calls = _set_dest_calls()
+    assert calls and all(d == LINK_BASE for _, d in calls)
+    assert OVERLAY_INDEX[target] in {i for i, _ in calls}
+    rec = disc_catalog.load_index_11()[OVERLAY_INDEX[target]][0]
+    start, _ = disc_catalog.TABLE_BLOCKS[1]
+    e = disc_catalog.parse_catalog()[OVERLAYS[target]]
+    assert [start + 16 * (i - disc_catalog.TABLE_BLOCKS[0][1]) for i, _ in e["table"]] == [rec]
 
 
 def _functions(mapfile):

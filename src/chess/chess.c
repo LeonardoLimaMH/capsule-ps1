@@ -50,7 +50,12 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009BFD4);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009C0E4);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009C178);
+void func_8009C178(char arg1)
+{
+  s32 new_var;
+  func_80012A20(func_80019F30(0x20013, new_var + 0x10), 3, 0x380, 0x100);
+  new_var = arg1;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009C1B4);
 
@@ -367,13 +372,74 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8954);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8994);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A89C8);
+s32 func_800A89C8(s32 arg0, s32 arg1, s32 arg2)
+{
+  s32 var_a1;
+  s32 var_a2;
+  s32 var_a3;
+  u8 temp_t0;
+  unsigned int new_var;
+  void *temp_v1;
+  var_a1 = arg1;
+  var_a2 = arg2;
+  new_var = arg0 + ((var_a2 * 0x7C) + (var_a1 * 0x2E8));
+  temp_t0 = *((u8 *) (((s8 *) new_var) + 0x5E8));
+  var_a3 = 0;
+  if (var_a1 != 0)
+  {
+    goto loop_2;
+  }
+  if (var_a2 == 0)
+  {
+    goto block_9;
+  }
+  loop_2:
+  if (var_a2 == 0)
+  {
+    goto block_4;
+  }
+
+  block_3:
+  var_a2 -= 1;
+
+  goto block_5;
+  block_4:
+  var_a1 -= 1;
+
+  var_a2 = 4;
+  block_5:
+  temp_v1 = arg0 + ((var_a2 * 0x7C) + (var_a1 * 0x2E8));
+
+  if (temp_t0 != (*((u8 *) (((s8 *) temp_v1) + 0x5E8))))
+  {
+    goto block_7;
+  }
+  var_a3 = (*((u8 *) (((s8 *) temp_v1) + 0x612))) + 1;
+  block_7:
+  if (var_a1 != 0)
+  {
+    goto loop_2;
+  }
+
+  if (var_a2 != 0)
+  {
+    goto block_3;
+  }
+  block_9:
+  return var_a3;
+
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8A7C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8B14);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8D08);
+s32 func_800A8D08(s32 arg0, s32 arg1, s32 arg2)
+{
+  int new_var;
+  new_var = arg0 + ((arg2 * 0x7C) + (arg1 * 0x2E8));
+  return (((u32) (*((u32 *) (((s8 *) new_var) + 0x30)))) >> 0x19) & 3;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8D44);
 

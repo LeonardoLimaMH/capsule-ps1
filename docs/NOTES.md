@@ -122,9 +122,14 @@ O permuter chegou a 42 diferenças em `SetDrawEnv` apenas com um temporário
   outro modo → fila (`func_800190F4(0xFE, ...)`).
 - `func_80019D48` → `func_80019DB4(tamanho, setores = (tamanho + 0x7FF) >> 11, destino, LBA)`
   → `func_800190F4(6, LBA, &{destino, setores}, tamanho)`: comando 6 na fila do CD.
-- **Em aberto:** os registros dos overlays dizem destino `0x80098000`, mas o código foi
-  ligado em `0x80097800` (50–67% das chamadas internas caem em prólogos nessa base, 0–1%
-  na outra). Próximo passo: seguir o comando 6 da fila até o callback de leitura.
+- O comando 6 é consumido por `func_800196A0`, que chama `func_8004749C(pos, setores,
+  destino, 0x80)` (forma de `DsRead` da LIBDS) com o destino do registro, sem deslocamento.
+- **Resolvido — destino dos overlays:** a tabela diz `0x80098000`, mas antes de cada carga
+  o jogo chama `func_8001A480(i, 0x80097800)`, que faz `D_800700E4[i].registro->destino =
+  0x80097800` (7 chamadas: índice 2 = CHESS, 3 = RAISE, 4 = ETC). O valor da tabela é só o
+  inicial. Confirmações independentes: 50–67% das chamadas internas caem em prólogos na base
+  `0x80097800` (0–1% em `0x80098000`), e o ETC chama 3 funções do primeiro setor do arquivo
+  (`0x80097B24`, `0x80097C6C`, `0x80097E40`). Teste: `test_overlay_dest_override`.
 
 ## Ghidra (plugin GhidraMCP via HTTP, `tools/ghidra.py`)
 
