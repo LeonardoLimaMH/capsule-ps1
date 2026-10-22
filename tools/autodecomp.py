@@ -378,6 +378,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("target")
     ap.add_argument("--max-size", type=lambda x: int(x, 0), default=0x200)
+    ap.add_argument("--min-size", type=lambda x: int(x, 0), default=0)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--jobs", type=int, default=8)
     ap.add_argument("--apply", action="store_true")
@@ -395,7 +396,7 @@ def main():
         if p is None or (store / f"{f}.c").exists() or (a.only and f != a.only):
             continue
         sz = func_size(p)
-        if sz <= a.max_size:
+        if a.min_size < sz <= a.max_size:
             funcs.append((sz, f))
     funcs.sort()
     if a.limit:
