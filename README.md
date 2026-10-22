@@ -16,9 +16,9 @@ emulação contra a função original.
 ## Progresso
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.20%**  
-**Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **1.70%**  
-**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **4.09%**  
+**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.24%**  
+**Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **1.73%**  
+**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **4.13%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -26,9 +26,9 @@ emulação contra a função original.
 | `YUUGI.EXE` | executável principal | 2.22% (4,584 / 206,380 B) | 121 / 732 | 8.20% (79 / 303 fn) | **3.42%** |
 | `SLPM_860.96` | loader / boot | 4.47% (928 / 20,756 B) | 25 / 119 | 6.03% (67 / 215 fn) | **5.53%** |
 | `CHESS.BIN` | overlay de batalha (tabuleiro) | 0.62% (2,628 / 421,956 B) | 49 / 867 | 50.00% (1 / 2 fn) | **0.63%** |
-| `RAISE.BIN` | overlay de criação de monstros | 1.24% (4,044 / 326,576 B) | 165 / 940 | 100.00% (2 / 2 fn) | **1.26%** |
+| `RAISE.BIN` | overlay de criação de monstros | 1.36% (4,436 / 326,576 B) | 172 / 940 | 100.00% (2 / 2 fn) | **1.38%** |
 | `ETC.BIN` | overlay de menus/diversos | 0.65% (580 / 88,992 B) | 6 / 189 | 0.00% (0 / 0 fn) | **0.65%** |
-| **Total** | | **1.20%** (12,764 / 1,064,660 B) | 366 / 2847 | 7.30% (149 / 522 fn) | **1.70%** |
+| **Total** | | **1.24%** (13,156 / 1,064,660 B) | 373 / 2847 | 7.30% (149 / 522 fn) | **1.73%** |
 <!-- PROGRESS:END -->
 
 A **cobertura** soma ao C as funções que já eram escritas em assembly no
