@@ -44,6 +44,8 @@ STACK_TOP = 0x801FFF00
 SENTINEL = 0x80000400           # endereço de retorno falso
 MAX_INSNS = 2_000_000
 MIN_CONCLUSIVE = 0.25           # fração mínima de tentativas conclusivas
+ABI_MAX_TRIALS = 1000           # --abi: sorteios no máximo
+ABI_MIN_SAME = 50               # --abi: execuções completas idênticas exigidas (e nenhuma divergente)
 
 TARGETS = {
     "yuugi": ("disc/YUUGI.EXE", 0x800, 0x80010000, "build/yuugi.elf"),
@@ -90,11 +92,15 @@ def file_compiler(src):
     return "2.7.2-psx"
 
 
-def build_candidate(target, src, func):
-    """Compila o .c (sem os INCLUDE_ASM) e liga em CAND_BASE contra os símbolos originais."""
+def build_candidate(target, src, func, force_g0=False):
+    """Compila o .c (sem os INCLUDE_ASM) e liga em CAND_BASE contra os símbolos originais.
+
+    force_g0 (modo --abi): globais sempre por endereço absoluto. O comportamento é o
+    mesmo; evita que um global declarado com tamanho vire acesso $gp fora do alcance.
+    """
     tmp = pathlib.Path(tempfile.mkdtemp())
     obj, elf, binf, lds = tmp / "c.o", tmp / "c.elf", tmp / "c.bin", tmp / "c.ld"
-    g0 = g0fill.enabled(src)
+    g0 = force_g0 or g0fill.enabled(src)
     back = g0fill.backend(obj) if g0 else f"{MASPSX} -o {obj}"
     sh(f"mips-linux-gnu-cpp {CPP_FLAGS} {src} | /opt/gcc-{file_compiler(src)}/cc1 -O2 "
        f"{'-G0' if g0 else '-G8'} -quiet -mcpu=3000 -fgnu-linker -mgas -msoft-float -gcoff | {back}")
@@ -146,6 +152,36 @@ def stub_addrs(target):
     return stubs
 
 
+def read_cstr(uc, v):
+    """Bytes da string C apontada por v (texto imprimível terminado em NUL), ou None."""
+    if not 0x80000000 <= v < 0x80000000 + RAM_SIZE:
+        return None
+    data = bytes(uc.mem_read(v & 0x1FFFFFFF, min(256, 0x80000000 + RAM_SIZE - v)))
+    end = data.find(0)
+    if end <= 0 or any(not (0x20 <= c < 0x7F or c in (9, 10, 13)) for c in data[:end]):
+        return None
+    return data[:end]
+
+
+def same_calls(a, b, cand_lo, cand_hi, relaxed):
+    """Chamadas iguais. relaxed (--abi): um ponteiro diferente também vale se o do C aponta
+    para a área do próprio candidato (string literal copiada) e as duas strings são iguais."""
+    (ca, sa), (cb, sb) = a, b
+    if ca == cb:
+        return True, None
+    for k, (x, y) in enumerate(zip(ca, cb)):
+        if x == y:
+            continue
+        if not relaxed or x[0] != y[0] or len(x) != len(y):
+            return False, k
+        for i, (u, w) in enumerate(zip(x[1:], y[1:])):
+            if u != w and not (cand_lo <= w < cand_hi and sa[k][i] is not None and sa[k][i] == sb[k][i]):
+                return False, k
+    if len(ca) != len(cb):
+        return False, min(len(ca), len(cb))
+    return True, None
+
+
 def run(entry, regs, ram, stubs, extra):
     mu = Uc(UC_ARCH_MIPS, UC_MODE_MIPS32 | UC_MODE_LITTLE_ENDIAN)
     mu.mem_map(0x00000000, RAM_SIZE)           # kseg0 0x80000000 -> físico 0
@@ -157,6 +193,7 @@ def run(entry, regs, ram, stubs, extra):
         mu.reg_write(r, v)
     mu.reg_write(UC_MIPS_REG_RA, SENTINEL)
     calls = []
+    strings = []  # conteúdo de cada argumento que aponte para uma string (ver same_calls)
     state = {"err": None}
 
     def on_stub(uc, addr, size, user):
@@ -168,6 +205,7 @@ def run(entry, regs, ram, stubs, extra):
         if name.startswith("BIOS"):
             args = (uc.reg_read(UC_MIPS_REG_T1),) + args
         calls.append((name,) + args)
+        strings.append(tuple(read_cstr(uc, v) for v in args))
         uc.reg_write(UC_MIPS_REG_V0, (len(calls) * 0x9E3779B1) & 0xFFFF)  # retorno determinístico
 
     def on_intr(uc, intno, user):
@@ -196,7 +234,7 @@ def run(entry, regs, ram, stubs, extra):
         return None, state["err"]
     if mu.reg_read(UC_MIPS_REG_PC) != SENTINEL:
         return None, f"limite de {MAX_INSNS} instruções"
-    return ([mu.reg_read(r) for r in REGS], bytes(mu.mem_read(0, RAM_SIZE)), calls), None
+    return ([mu.reg_read(r) for r in REGS], bytes(mu.mem_read(0, RAM_SIZE)), (calls, strings)), None
 
 
 def main():
@@ -218,7 +256,7 @@ def main():
         src = next(str(p.relative_to(ROOT)) for p in sorted((ROOT / "src" / a.target).rglob("*.c"))
                    if re.search(rf"^\S.*\b{a.func}\s*\([^;]*$", p.read_text(encoding="utf-8"), re.M))
     image = (ROOT / path).read_bytes()[hdr:]
-    cand, cand_entry = build_candidate(a.target, src, a.func)
+    cand, cand_entry = build_candidate(a.target, src, a.func, force_g0=a.abi)
     entry = elf_symbols(a.target)[a.func] & 0xFFFFFFFF
     stubs = stub_addrs(a.target)
     if entry in stubs:
@@ -239,7 +277,14 @@ def main():
         m[s - 0x10000:s] = bytes(0x10000)
         return bytes(m)
 
-    for t in range(a.trials):
+    # --abi: estados em que os dois lados travam não contam; continua sorteando (até
+    # ABI_MAX_TRIALS) até juntar a.trials execuções completas idênticas
+    limit = ABI_MAX_TRIALS if a.abi else a.trials
+    done = 0
+    for t in range(limit):
+        if a.abi and same >= a.trials:
+            break
+        done += 1
         if t % 2:
             ram = bytearray(RAM_SIZE)   # metade das tentativas com RAM zerada
         else:
@@ -277,8 +322,9 @@ def main():
         (rega, mema, calla), (regb, memb, callb) = ra, rb
         bad = [n for n, x, y in zip(REG_NAMES, rega, regb)
                if x != y and not (a.abi and n == "v1") and not (a.ignore_v0 and n == "v0")]
-        if calla != callb:
-            k = next((i for i, (x, y) in enumerate(zip(calla, callb)) if x != y), min(len(calla), len(callb)))
+        ok, k = same_calls(calla, callb, CAND_BASE, CAND_BASE + len(cand), a.abi)
+        if not ok:
+            calla, callb = calla[0], callb[0]
             fmt = lambda c: f"{c[0]}({', '.join(hex(v) for v in c[1:])})" if c else "-"
             print(f"[DIVERGENTE] tentativa {t}: chamada #{k}: original={fmt(calla[k] if k < len(calla) else None)}"
                   f" | C={fmt(callb[k] if k < len(callb) else None)}")
@@ -290,11 +336,11 @@ def main():
                   f"{[hex(0x80000000 | i) for i in diff]}")
             sys.exit(1)
         same += 1
-    conclusive = a.trials - unsupported
-    if unsupported == a.trials:
+    conclusive = done - unsupported
+    if unsupported == done:
         print(f"[NÃO SUPORTADO] {a.target}:{a.func} (usa GTE)")
         sys.exit(2)
-    if same < MIN_CONCLUSIVE * conclusive or same == 0:
+    if (same < ABI_MIN_SAME) if a.abi else (same < MIN_CONCLUSIVE * conclusive or same == 0):
         print(f"[INCONCLUSIVO] {a.target}:{a.func} — {same} idênticas, {inconclusive} inconclusivas: "
               f"{sorted(reasons.items(), key=lambda x: -x[1])[:3]}")
         sys.exit(2)
