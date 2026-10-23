@@ -61,6 +61,19 @@ automática completa nos 5 alvos (+99 funções); progresso total 1,58%.
    SDK (o experimento `.cache/tmp/g0exp.py` foi interrompido por falta de memória).
 7. Trabalho manual: `docs/wip/STATUS.md` (`./run.sh python3 tools/wip.py check`).
 
+## Ciclo automático (desde 2026-10-22)
+
+`tools/auto_loop.sh` roda sozinho no host: para cada alvo, autodecomp e permuter
+(etapas com mais tempo/distância), aplica os casamentos, ajusta as TUs, confere os
+SHA-1 dos 5 binários e os testes do alvo e faz o commit; se algo falhar, desfaz
+aquele alvo e segue. Log em `.cache/logs/auto_loop.log`.
+
+```bash
+nohup tools/auto_loop.sh --wait-log .cache/logs/permute_all.log > .cache/logs/auto_loop.log 2>&1 &
+touch .cache/auto_loop.stop     # parar ao fim da etapa atual
+git log --oneline | head        # o que foi aplicado
+```
+
 ## Referências
 
 - Processo e regras de aceitação: `docs/PROCESS.md`
