@@ -66,3 +66,10 @@ Cada linha é uma rodada no mesmo conjunto `config/bench.txt`. *Casadas* = bytes
   ganhou os tipos `M2C_UNK*` e macros com semântica real (`MULT_HI`, `M2C_BITWISE`); funções usadas como
   valor ganham `extern int f();`; globais que só o Ghidra usa são declarados; acesso parcial do Ghidra
   (`x._0_2_`) descarta o rascunho. **Compila 58 → 143**, tamanho igual 36 → 78, 0 perdidas.
+| 2026-10-23 | valfunc-v3 | g0fill, gcc281, ghidra | 14/180 | 42/42 | 155 | 87 | 24 | registradores (80); ordem/instrução diferente (44); não compila (19); extensão/truncamento (13) |
+| 2026-10-23 | valfunc-v3 | gcc281, ghidra, g0fill | 14/180 | 42/42 | 155 | 87 | 24 | registradores (80); ordem/instrução diferente (44); não compila (19); extensão/truncamento (13) |
+- 2026-10-23 — **correção do `to_c`: endereço de global virava conteúdo.** Para globais fora da área `$gp`, o
+  `to_c` fazia `&D` → `D` e depois `D` → `(*D)` em duas passadas; a segunda reescrevia o resultado da primeira e
+  `M2C_FIELD(&D, …)` / `f(&D)` passavam a usar o valor guardado em D. Uma passada só: **+2 casadas** (yuugi
+  OpenTMD, slpm slpm_GetDrawEnv), 0 perdidas, compila 143 → 155, tamanho igual 78 → 87. Na frente funcional
+  a mesma causa explicava boa parte das divergências "C lê o endereço 0".

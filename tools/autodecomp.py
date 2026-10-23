@@ -134,8 +134,11 @@ def to_c(draft, func, asm_text, variant):
             else:
                 # fora da área $gp: tipo incompleto força acesso %hi/%lo
                 out_decls.append(f"extern {typ} {name}[];")
-                body_text = re.sub(rf"&{name}\b(?!\s*\[)", name, body_text)
-                body_text = re.sub(rf"(?<![\w&]){name}\b(?!\s*\[)", f"(*{name})", body_text)
+                # numa passada só: &D (endereço) -> D (o vetor já é o endereço); D (valor)
+                # -> (*D). Em duas passadas a segunda reescrevia o resultado da primeira e
+                # o endereço virava o conteúdo (M2C_FIELD(&D, ...), f(&D) etc.)
+                body_text = re.sub(rf"(&?)(?<![\w]){name}\b(?!\s*\[)",
+                                   lambda m: name if m.group(1) else f"(*{name})", body_text)
             continue
         if "(" in d:
             d = d.replace("?", "s32")
