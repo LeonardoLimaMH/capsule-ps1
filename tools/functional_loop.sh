@@ -32,7 +32,7 @@ for pass in first retry; do
         extra=""; [ "$pass" = retry ] && extra="--retry"
         ./run.sh python3 tools/functional.py "$t" --jobs 2 $extra 2>&1 | grep -E 'a tentar|removido|resumo' || true
         if [ -n "$(git status --porcelain -- equiv)" ]; then
-            n=$(git status --porcelain -- equiv | grep -c '^??')
+            n=$(git status --porcelain -uall -- equiv | grep -c '^??')
             commit "equiv/$t: +$n funções equivalentes (difftest --abi, ciclo automático)
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
