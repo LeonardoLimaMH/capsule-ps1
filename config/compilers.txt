@@ -164,3 +164,5 @@ src/chess/chess_800C4ECC__800CAE14.c 2.8.1-psx
 src/yuugi/main_8001A1DC__8001A818.c 2.8.1-psx
 src/yuugi/main_8001A1DC__8001CB88.c 2.8.1-psx
 src/yuugi/sdk_libgpu_sys__DrawMode.c 2.8.1-psx
+src/slpm/sdk_libgpu_sys__DrawSync.c 2.8.1-psx
+src/slpm/sdk_libgpu_sys__DrawMode.c 2.8.1-psx

@@ -21,3 +21,4 @@ src/yuugi/main_80047600.c
 src/yuugi/sdk_libcd_bios.c
 src/yuugi/sdk_libgpu_sys__8004B8F0.c
 src/yuugi/main_80044868.c
+src/slpm/sdk_libgpu_sys__DrawSync.c
