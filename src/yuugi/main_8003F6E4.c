@@ -9,7 +9,21 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_Fw);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_Fr);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_FsetRXX);
+#include "ghidra.h"
+void _spu_FsetRXX(int param_1, uint param_2, int param_3)
+{
+  extern s32 D_80071598[];
+  extern s32 D_800715C0[];
+  if (param_3 == 0)
+  {
+    *((short *) ((param_1 * 2) + (*D_80071598))) = (short) param_2;
+  }
+  else
+  {
+    *((short *) ((param_1 * 2) + (*D_80071598))) = (short) (param_2 >> (*D_800715C0));
+  }
+  return;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_FsetRXXa);
 

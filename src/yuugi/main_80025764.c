@@ -25,7 +25,26 @@ void func_800260C8(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800260F4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800264BC);
+void func_800264BC(void *arg0)
+{
+  int new_var;
+  extern s32 D_80078D14;
+  s32 temp_v1;
+  s32 var_a1;
+  var_a1 = 0;
+  D_80078D14 = arg0 + 0x323;
+  new_var = 0xFF;
+  *((s8 *) (((s8 *) arg0) + 0x323)) = 0;
+  do
+  {
+    *((s8 *) (((s8 *) (D_80078D14 + var_a1)) + 1)) = new_var;
+    temp_v1 = var_a1 * 2;
+    *((s8 *) (((s8 *) (D_80078D14 + temp_v1)) + 4)) = new_var;
+    var_a1 += 1;
+    *((s8 *) (((s8 *) (D_80078D14 + temp_v1)) + 5)) = new_var;
+  }
+  while (var_a1 < 3);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80026514);
 
