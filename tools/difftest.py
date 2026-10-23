@@ -208,6 +208,8 @@ def main():
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--abi", action="store_true",
                     help="equivalência funcional: ignora v1 (temporário, só usado em retorno de 64 bits)")
+    ap.add_argument("--ignore-v0", action="store_true",
+                    help="nenhum chamador lê o retorno (tools/retuse.py): v0 não é comparado")
     a = ap.parse_args()
     path, hdr, base, _ = TARGETS[a.target]
     if a.src:
@@ -273,7 +275,8 @@ def main():
             print(f"[DIVERGENTE] tentativa {t}: original={ea or 'ok'} | C={eb or 'ok'}")
             sys.exit(1)
         (rega, mema, calla), (regb, memb, callb) = ra, rb
-        bad = [n for n, x, y in zip(REG_NAMES, rega, regb) if x != y and not (a.abi and n == "v1")]
+        bad = [n for n, x, y in zip(REG_NAMES, rega, regb)
+               if x != y and not (a.abi and n == "v1") and not (a.ignore_v0 and n == "v0")]
         if calla != callb:
             k = next((i for i, (x, y) in enumerate(zip(calla, callb)) if x != y), min(len(calla), len(callb)))
             fmt = lambda c: f"{c[0]}({', '.join(hex(v) for v in c[1:])})" if c else "-"

@@ -23,6 +23,7 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import autodecomp as ad  # noqa: E402
 from handwritten import load as load_handwritten  # noqa: E402
+import retuse  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 EQUIV = ROOT / "equiv"
@@ -30,7 +31,8 @@ TRIED = ROOT / ".cache" / "functional"  # resultado da última tentativa por fun
 
 
 def difftest(target, func, src):
-    r = subprocess.run(["python3", "tools/difftest.py", target, func, "--src", str(src), "--abi"],
+    extra = [] if retuse.used(func) else ["--ignore-v0"]  # retorno que nenhum chamador lê
+    r = subprocess.run(["python3", "tools/difftest.py", target, func, "--src", str(src), "--abi"] + extra,
                        cwd=ROOT, capture_output=True, text=True, timeout=900)
     out = (r.stdout.strip().splitlines() or [r.stderr.strip()[-200:]])[-1]
     return r.returncode, out
