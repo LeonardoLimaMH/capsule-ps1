@@ -54,6 +54,20 @@ Como o build é sempre byte-idêntico, o jogo gerado a partir deste repositório
 funcionalmente 100% igual ao original em qualquer estágio; o trabalho restante é
 converter o assembly em C.
 
+### Duas frentes
+
+| Frente | Critério de aceitação | Onde fica | Objetivo |
+|---|---|---|---|
+| **Byte-matching** | os bytes compilados são idênticos aos do original (SHA-1 do build) | `src/` | reconstrução exata, verificável bit a bit |
+| **Funcional** | o C executa igual ao original no teste diferencial (`difftest --abi`: registradores visíveis ao chamador, RAM inteira e chamadas ao SDK, 200 estados aleatórios) | `equiv/` | o jogo inteiro em C legível e funcionando, base para um port nativo |
+
+As duas avançam em paralelo, cada uma com seu ciclo automático (`tools/auto_loop.sh`
+e `tools/functional_loop.sh`). Uma função sai de `equiv/` quando passa a casar byte a
+byte. O percentual **Funcional** acima soma as duas. A frente funcional segue a mesma
+ideia de projetos como Road Rash: Jailbreak (xport) e CTR Native: primeiro todo o
+jogo em C com comportamento verificado; o byte-matching continua como progresso
+próprio.
+
 ---
 
 ## Planejamento por etapas

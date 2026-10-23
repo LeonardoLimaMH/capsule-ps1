@@ -79,3 +79,20 @@ git log --oneline | head        # o que foi aplicado
 - Processo e regras de aceitação: `docs/PROCESS.md`
 - Histórico da bancada: `docs/BENCH.md`
 - Descobertas técnicas: `docs/NOTES.md`
+
+## Frente funcional (desde 2026-10-22)
+
+`tools/functional_loop.sh` gera e valida C equivalente (`equiv/`), commitando só
+`equiv/` e o README; roda junto com o `auto_loop.sh`.
+
+```bash
+nohup tools/functional_loop.sh > .cache/logs/functional_loop.log 2>&1 &
+touch .cache/functional_loop.stop
+./run.sh python3 -m pytest -q tests/test_equiv.py     # revalida equiv/
+```
+
+Próximos passos da frente: (1) corrigir os símbolos que o link do difftest resolve
+como 0 (ponteiros de função/dados passados como argumento); (2) traduzir à mão/em lote
+os rascunhos que divergem ou que o m2c não gera; (3) build `NON_MATCHING` com todo o C
+(`src/` + `equiv/`) rodando no emulador; (4) validar com entradas reais capturadas do
+jogo em execução, como o lockstep do Road Rash: Jailbreak.
