@@ -26,7 +26,11 @@ INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__Priority", func_80114FC0);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__Priority", func_80115058);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__Priority", func_801150F0);
+s32 func_801150F0(s32 arg0, s32 arg1)
+{
+  int new_var;
+  return ((arg1 & 0x7FF) << 0xB) | ((arg0 & 0x7FF) | (new_var = 0xE5000000));
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__Priority", func_8011510C);
 
