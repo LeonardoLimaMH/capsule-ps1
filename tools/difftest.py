@@ -71,7 +71,8 @@ class Unsupported(Exception):
 
 
 def sh(cmd):
-    r = subprocess.run(cmd, shell=True, cwd=ROOT, capture_output=True, text=True)
+    r = subprocess.run("set -o pipefail; " + cmd, shell=True, executable="/bin/bash", cwd=ROOT,
+                       capture_output=True, text=True)  # erro do cc1 não fica mascarado pelo pipe
     if r.returncode:
         sys.exit(f"falhou: {cmd}\n{r.stderr}")
     return r.stdout

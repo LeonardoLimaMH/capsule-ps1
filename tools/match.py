@@ -55,7 +55,8 @@ def compile_c(src, gcc, cflags, g0fill=False):
         cflags = cflags.replace("-G8", "-G0")
     cmd = (f"mips-linux-gnu-cpp {CPP_FLAGS} {src} | /opt/gcc-{gcc}/cc1 {cflags} -quiet "
            f"-mcpu=3000 -fgnu-linker -mgas -msoft-float -gcoff | {back}")
-    r = subprocess.run(cmd, shell=True, cwd=ROOT, capture_output=True, text=True)
+    r = subprocess.run("set -o pipefail; " + cmd, shell=True, executable="/bin/bash", cwd=ROOT,
+                       capture_output=True, text=True)  # erro do cc1 não fica mascarado pelo pipe
     if r.returncode != 0:
         sys.exit("falha de compilação:\n" + r.stderr)
     return obj

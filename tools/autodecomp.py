@@ -148,6 +148,13 @@ def to_c(draft, func, asm_text, variant):
             if variant.get("unproto"):
                 d = re.sub(r"\((.*)\);$", "();", d)
             out_decls.append(d if d.startswith("extern") else d)
+    # funções usadas como valor (ponteiro de função passado/guardado) antes de qualquer
+    # chamada: sem declaração o cc1 dá erro ("undeclared"); a declaração implícita de
+    # C89 (int f()) é a mesma que o compilador assumiria numa chamada
+    declared = " ".join(out_decls)
+    for name in sorted(set(re.findall(r"(?<![\w.])&?(func_[0-9A-F]{8})\b(?!\s*\()", body_text))):
+        if name != func and not re.search(rf"\b{name}\s*\(", declared):
+            out_decls.append(f"extern int {name}();")
     if not variant.get("ghidra"):  # no Ghidra, "?" é operador ternário, não tipo desconhecido
         body_text = body_text.replace("?", "s32")
     if variant.get("unsigned"):

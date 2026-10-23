@@ -54,3 +54,15 @@ Cada linha é uma rodada no mesmo conjunto `config/bench.txt`. *Casadas* = bytes
   bibliotecas PsyQ (`cc1 -G0` + `tools/aspsx_fill.py`) com os globais do rascunho como escalares. **+3 pendentes
   casadas** (yuugi CD_vol; slpm CdReadCallback, func_8011A0B4), 0 perdidas, 2 mais próximas. O perfil é gravado
   como compilador `2.7.2-psx+g0fill`; `assign_compilers.py` move o arquivo para `config/g0fill.txt`.
+| 2026-10-23 | valfunc-v1 | g0fill, gcc281, ghidra | 12/180 | 42/42 | 58 | 36 | 14.0 | não compila (113); registradores (32); ordem/instrução diferente (14); m2c falhou (5) |
+| 2026-10-23 | valfunc-v2 | g0fill, gcc281, ghidra | 12/180 | 42/42 | 143 | 78 | 27 | registradores (66); ordem/instrução diferente (46); não compila (31); extensão/truncamento (14) |
+| 2026-10-22 | valfunc-v1 | gcc281, ghidra, g0fill | 12/180 | 42/42 | 58 | 36 | 14.0 | não compila (113); registradores (32); ordem/instrução diferente (14); m2c falhou (5) |
+| 2026-10-22 | valfunc-v2 | gcc281, ghidra, g0fill | 12/180 | 42/42 | 143 | 78 | 27 | registradores (66); ordem/instrução diferente (46); não compila (31); extensão/truncamento (14) |
+- 2026-10-22 — **correção de medição: erros do cc1 eram mascarados pelo pipe.** `match.py` e `difftest.py`
+  rodavam `cpp | cc1 | maspsx` sem `pipefail`; com erro de compilação o cc1 saía no meio e o resto do pipe
+  montava o que tinha sido gerado até ali. As colunas *compila*/*tamanho igual* das linhas anteriores estão
+  infladas (`valfunc-v1`: só 58 de 174 compilavam de verdade). Casamentos e o build nunca foram afetados (o
+  Makefile já tinha `pipefail` e o SHA-1 confere tudo). Correções medidas em `valfunc-v2`: `include/m2c.h`
+  ganhou os tipos `M2C_UNK*` e macros com semântica real (`MULT_HI`, `M2C_BITWISE`); funções usadas como
+  valor ganham `extern int f();`; globais que só o Ghidra usa são declarados; acesso parcial do Ghidra
+  (`x._0_2_`) descarta o rascunho. **Compila 58 → 143**, tamanho igual 36 → 78, 0 perdidas.

@@ -18,7 +18,8 @@ CACHE = ROOT / ".cache" / "ghidra" / "c"
 # tipos e intrínsecos do Ghidra: include/ghidra.h
 TYPES = '#include "ghidra.h"\n'  # incluído uma vez por função; o header tem guarda
 # registradores sem origem no C: o rascunho não tem como ser correto
-UNRESOLVED = re.compile(r"\b(in_\w+|unaff_\w+|extraout_\w+|halt_baddata|UNK_[0-9a-fA-F]+)\b")
+UNRESOLVED = re.compile(r"\b(in_\w+|unaff_\w+|extraout_\w+|halt_baddata|UNK_[0-9a-fA-F]+)\b"
+                        r"|\._\d+_\d+_")  # acesso parcial do Ghidra (x._0_2_): não é C
 
 
 def load(target, func):
@@ -85,4 +86,9 @@ def draft(target, func, m2c_draft, asm_text=""):
         decls.append(l)
     # protótipos de funções chamadas não vêm do m2c: o Ghidra decide os argumentos
     decls = [d for d in decls if "(" not in d]
+    # globais que o Ghidra usa e o m2c não declarou: vetor externo (o nome sozinho é o
+    # endereço, como o lui/addiu do original; o teste diferencial confere o uso)
+    known = set(re.findall(r"\b(D_[0-9A-F]{8})\b", "\n".join(decls)))
+    for name in sorted(set(re.findall(r"\b(D_[0-9A-F]{8})\b", body)) - known):
+        decls.append(f"extern s32 {name}[];")
     return "\n".join(decls) + "\n" + body
