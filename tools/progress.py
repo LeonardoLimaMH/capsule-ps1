@@ -96,7 +96,8 @@ def collect(t):
         pending |= set(INCLUDE.findall(c.read_text(encoding="utf-8", errors="replace")))
     lib = psyq_names(t)
     hand = handwritten(t)
-    r = {k: {"funcs": 0, "done_funcs": 0, "bytes": 0, "done_bytes": 0, "asm_bytes": 0}
+    equiv = {p.stem for p in (ROOT / "equiv" / t).glob("*.c")}  # trilha funcional
+    r = {k: {"funcs": 0, "done_funcs": 0, "bytes": 0, "done_bytes": 0, "asm_bytes": 0, "equiv_bytes": 0}
          for k in ("game", "lib")}
     for name, size in sizes.items():
         k = "lib" if name in lib else "game"
@@ -107,6 +108,8 @@ def collect(t):
             r[k]["done_bytes"] += size
         elif name in hand:
             r[k]["asm_bytes"] += size  # escrita em assembly no original: fica como .s
+        elif name in equiv:
+            r[k]["equiv_bytes"] += size  # C equivalente (difftest), ainda não byte-idêntico
     return r
 
 
@@ -129,7 +132,7 @@ def bar(p, width=20):
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
     data = {t: collect(t) for t, _, _ in TARGETS}
-    tot = {k: {"funcs": 0, "done_funcs": 0, "bytes": 0, "done_bytes": 0, "asm_bytes": 0}
+    tot = {k: {"funcs": 0, "done_funcs": 0, "bytes": 0, "done_bytes": 0, "asm_bytes": 0, "equiv_bytes": 0}
            for k in ("game", "lib")}
     for t in data:
         for k in tot:
@@ -159,10 +162,13 @@ def main():
     pg = pct(g["done_bytes"], g["bytes"])
     pa = pct(all_d, all_b)
     cov = pct(all_d + tot["game"]["asm_bytes"] + tot["lib"]["asm_bytes"], all_b)
+    fun = pct(all_d + tot["game"]["equiv_bytes"] + tot["lib"]["equiv_bytes"], all_b)
     summary = [
         f"**Código do jogo decompilado em C (byte-matching):** `{bar(pg)}` **{pg:.2f}%**  ",
         f"**Total incluindo SDK PsyQ:** `{bar(pa)}` **{pa:.2f}%**  ",
         f"**Cobertura (C + funções que já eram assembly no original):** `{bar(cov)}` **{cov:.2f}%**  ",
+        f"**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** "
+        f"`{bar(fun)}` **{fun:.2f}%**  ",
         f"**Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)",
         "",
     ]
