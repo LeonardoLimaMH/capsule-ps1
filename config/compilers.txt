@@ -146,7 +146,6 @@ src/slpm/sdk_libpress_libpress.c 2.8.1-psx
 src/yuugi/main__80012144.c 2.8.1-psx
 src/yuugi/main__80012A14.c 2.8.1-psx
 src/yuugi/main_8001A1DC__8001B0E0.c 2.8.1-psx
-src/yuugi/main_8001A1DC__8001CB88.c 2.8.1-psx
 src/yuugi/main_800282A0.c 2.8.1-psx
 src/yuugi/main_800282A0__8002E708.c 2.8.1-psx
 src/yuugi/main_8002E7A4__800337E0.c 2.8.1-psx
@@ -163,3 +162,5 @@ src/raise/raise_800C07B8.c 2.8.1-psx
 src/chess/chess_800C4ECC__800C7F74.c 2.8.1-psx
 src/chess/chess_800C4ECC__800CAE14.c 2.8.1-psx
 src/yuugi/main_8001A1DC__8001A818.c 2.8.1-psx
+src/yuugi/main_8001A1DC__8001CB88.c 2.8.1-psx
+src/yuugi/sdk_libgpu_sys__DrawMode.c 2.8.1-psx

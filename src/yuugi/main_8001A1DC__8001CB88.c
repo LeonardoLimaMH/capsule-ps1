@@ -29,7 +29,3 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001CB88", func_8001DB54);
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001CB88", func_8001DB68);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001CB88", func_8001DB8C);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001CB88", func_8001DBF4);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001CB88", func_8001DC44);

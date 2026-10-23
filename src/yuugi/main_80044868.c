@@ -1,4 +1,9 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80044868", func_80044868);
+void func_80044868(s32 arg0) {
+    extern M2C_UNK (*D_80094C58)(s32);
+    if (D_80094C58 != NULL) {
+        D_80094C58(arg0 & 0xFF);
+    }
+}
