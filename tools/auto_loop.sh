@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 # Ciclo automático (roda no host, fora do container): permuter/autodecomp por alvo,
-# aplicação, validação (SHA-1 dos 5 binários + testes do alvo) e commit. Se a
-# validação falhar, desfaz as mudanças daquele alvo e segue para o próximo.
+# aplicação, validação (SHA-1 dos 5 binários + testes) e commit.
+#
+# Validação: build com os 5 SHA-1 idênticos + teste diferencial das funções que
+# acabaram de entrar em C + rebuild/overlays. Se algum teste diferencial falhar, as
+# funções reprovadas vão para .cache/auto_rejected/<alvo>/ (quarentena, com o motivo)
+# e o resto do alvo é reaplicado; se o build falhar, o alvo inteiro é desfeito.
 #
 # Uso:  nohup tools/auto_loop.sh > .cache/logs/auto_loop.log 2>&1 &
 #       tools/auto_loop.sh --wait-log .cache/logs/permute_all.log   (espera a rodada em
@@ -29,51 +33,78 @@ revert() {
     ./run.sh make -j2 >/dev/null 2>&1
 }
 
-# aplica os casamentos de um alvo, valida e faz o commit
-apply_and_commit() {
-    local t=$1 label=$2
-    fix_includes "$t"
-    ./run.sh python3 tools/assign_compilers.py --split
-    ./run.sh python3 tools/autodecomp.py "$t" --apply
-    if git diff --quiet -- src && [ -z "$(git ls-files --others --exclude-standard src)" ]; then
-        log "$t: nada novo para aplicar"
-        return
-    fi
-    local build
-    build=$(./run.sh make -j2 2>&1)
-    if [ "$(echo "$build" | grep -c '^\[OK\]')" != 5 ]; then
-        log "$t: SHA-1 diferente ou erro de build; desfazendo"
-        echo "$build" | grep -E 'FAIL|rror' | head -5
-        revert
-        return
-    fi
-    local tests
-    tests=$(./run.sh python3 -m pytest -q tests -k "$t or rebuild or overlay" 2>&1 | tail -1)
-    if ! echo "$tests" | grep -q ' passed' || echo "$tests" | grep -q 'failed'; then
-        log "$t: testes falharam ($tests); desfazendo"
-        revert
-        return
-    fi
-    local n
-    n=$(git diff -U0 -- src | grep -c '^-INCLUDE_ASM')
-    python tools/progress.py --readme >/dev/null 2>&1 || python3 tools/progress.py --readme >/dev/null
-    git add -A src config README.md
-    git commit -q -m "$t: +$n funções ($label, ciclo automático)
+quarantine() {  # alvo, função, motivo
+    local t=$1 f=$2 why=$3 d=.cache/auto_rejected/$1
+    mkdir -p "$d"
+    mv -f .cache/auto/"$t"/"$f".c .cache/auto/"$t"/"$f".gcc "$d"/ 2>/dev/null
+    echo "$why" > "$d/$f.why"
+    log "$t: $f em quarentena ($why)"
+}
 
-Testes: $tests
+# aplica os casamentos de um alvo, valida e faz o commit (tenta de novo sem as reprovadas)
+apply_and_commit() {
+    local t=$1 label=$2 attempt
+    for attempt in 1 2 3; do
+        fix_includes "$t"
+        ./run.sh python3 tools/assign_compilers.py --split
+        ./run.sh python3 tools/autodecomp.py "$t" --apply
+        if git diff --quiet -- src && [ -z "$(git ls-files --others --exclude-standard src)" ]; then
+            log "$t: nada novo para aplicar"
+            return
+        fi
+        local build
+        build=$(./run.sh make -j2 2>&1)
+        if [ "$(echo "$build" | grep -c '^\[OK\]')" != 5 ]; then
+            log "$t: SHA-1 diferente ou erro de build; desfazendo"
+            echo "$build" | grep -E 'FAIL|rror' | head -5
+            revert
+            return
+        fi
+        # funções que acabaram de entrar em C neste alvo
+        local new sel tests failed
+        new=$(git diff -U0 -- src | sed -n 's/^-INCLUDE_ASM("[^"]*", \([A-Za-z0-9_]*\));$/\1/p' | sort -u)
+        sel="rebuild or overlay"
+        for f in $new; do sel="$sel or $t-$f]"; done
+        tests=$(./run.sh python3 -m pytest -q -rf tests/test_difftest.py tests/test_rebuild.py \
+                tests/test_overlays.py -k "$sel" 2>&1)
+        failed=$(echo "$tests" | sed -n "s/^FAILED tests\/test_difftest.py::test_function_is_equivalent\[$t-\([A-Za-z0-9_]*\)\].*/\1/p")
+        local summary
+        summary=$(echo "$tests" | tail -1)
+        if [ -n "$failed" ]; then
+            log "$t: teste diferencial reprovou: $(echo $failed)"
+            revert
+            for f in $failed; do quarantine "$t" "$f" "difftest falhou no arquivo-fonte ($label)"; done
+            continue
+        fi
+        if ! echo "$summary" | grep -q ' passed' || echo "$summary" | grep -q 'failed'; then
+            log "$t: testes falharam ($summary); desfazendo"
+            echo "$tests" | grep '^FAILED' | head -5
+            revert
+            return
+        fi
+        local n
+        n=$(echo "$new" | grep -c .)
+        python tools/progress.py --readme >/dev/null 2>&1 || python3 tools/progress.py --readme >/dev/null
+        git add -A src config README.md
+        git commit -q -m "$t: +$n funções ($label, ciclo automático)
+
+Testes: $summary
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-    log "$t: commit $(git log --oneline -1)"
+        log "$t: commit $(git log --oneline -1)"
+        return
+    done
+    log "$t: desisti depois de 3 tentativas"
 }
 
 # 0) espera uma rodada já em andamento terminar (último alvo: slpm) e aplica
 if [ "${1:-}" = "--wait-log" ]; then
     wl=$2
     log "esperando a rodada em $wl terminar"
-    idle=0  # se nenhum container rodar por 10 min, a rodada morreu: segue assim mesmo
+    idle=0  # se o container do permuter sumir por 10 min, a rodada morreu: segue assim mesmo
     until [ "$(grep -c '^permuter em lote' "$wl")" -ge 5 ] || [ $idle -ge 10 ]; do
         sleep 60
-        if [ -z "$(docker ps -q)" ]; then idle=$((idle + 1)); else idle=0; fi
+        if docker ps --format '{{.Command}}' | grep -q permute; then idle=0; else idle=$((idle + 1)); fi
     done
     for t in yuugi slpm; do apply_and_commit "$t" "permuter em lote"; done
 fi
@@ -98,6 +129,11 @@ auto_stage() {
         apply_and_commit "$t" "$label"
     done
 }
+
+# casamentos pendentes de rodadas anteriores (ex.: yuugi desfeito antes da quarentena)
+if [ "${1:-}" = "--apply-pending" ]; then
+    for t in $TARGETS; do apply_and_commit "$t" "pendentes"; done
+fi
 
 # rodada do autodecomp (grava .cache/best para o permuter reusar)
 auto_stage "autodecomp" --max-size 0x800 --jobs 2
