@@ -233,7 +233,11 @@ def run(entry, regs, ram, stubs, extra, game_names=frozenset()):
                 args += tuple(int.from_bytes(raw[i:i + 4], "little") for i in range(0, 4 * k, 4))
         calls.append((name,) + args)
         strings.append(tuple(read_cstr(uc, v) for v in args))
-        uc.reg_write(UC_MIPS_REG_V0, (len(calls) * 0x9E3779B1) & 0xFFFF)  # retorno determinístico
+        if game_names:
+            # --isolate: retorno que serve de inteiro e de ponteiro (alinhado, dentro da RAM)
+            uc.reg_write(UC_MIPS_REG_V0, 0x80120000 + len(calls) * 0x40)
+        else:
+            uc.reg_write(UC_MIPS_REG_V0, (len(calls) * 0x9E3779B1) & 0xFFFF)  # retorno determinístico
 
     def on_intr(uc, intno, user):
         pc = uc.reg_read(UC_MIPS_REG_PC)
