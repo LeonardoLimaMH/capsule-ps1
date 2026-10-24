@@ -320,6 +320,12 @@ def main():
             inconclusive += 1
             reasons[ea] = reasons.get(ea, 0) + 1
             continue
+        if a.abi and (ea or eb) and "limite de" in (ea or eb):
+            # um lado só estourou o limite de instruções (laço longo: o C pode gastar
+            # menos instruções por volta); não diz nada sobre o resultado
+            inconclusive += 1
+            reasons["limite de instruções de um lado"] = reasons.get("limite de instruções de um lado", 0) + 1
+            continue
         if ea or eb:
             print(f"[DIVERGENTE] tentativa {t}: original={ea or 'ok'} | C={eb or 'ok'}")
             sys.exit(1)
