@@ -166,3 +166,10 @@ src/yuugi/main_8001A1DC__8001CB88.c 2.8.1-psx
 src/yuugi/sdk_libgpu_sys__DrawMode.c 2.8.1-psx
 src/slpm/sdk_libgpu_sys__DrawSync.c 2.8.1-psx
 src/slpm/sdk_libgpu_sys__DrawMode.c 2.8.1-psx
+src/raise/raise_8009B150.c 2.8.1-psx
+src/raise/raise_8009D2A8__800A04F4.c 2.8.1-psx
+src/raise/raise_800B61E4__800B84BC.c 2.8.1-psx
+src/raise/raise_800B9C3C__800BBC28.c 2.8.1-psx
+src/raise/raise_800B9C3C__800BCF98.c 2.8.1-psx
+src/raise/raise_800B9C3C__800BEB68.c 2.8.1-psx
+src/raise/raise_800E6E68.c 2.8.1-psx
