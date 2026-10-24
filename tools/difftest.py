@@ -35,6 +35,7 @@ from unicorn import (Uc, UcError, UC_ARCH_MIPS, UC_MODE_MIPS32, UC_MODE_LITTLE_E
 from unicorn.mips_const import *
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import arity  # noqa: E402
 import g0fill  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -164,8 +165,10 @@ def read_cstr(uc, v):
 
 
 def same_calls(a, b, cand_lo, cand_hi, relaxed):
-    """Chamadas iguais. relaxed (--abi): um ponteiro diferente também vale se o do C aponta
-    para a área do próprio candidato (string literal copiada) e as duas strings são iguais."""
+    """Chamadas iguais. relaxed (--abi): só os argumentos que a função chamada lê contam
+    (tools/arity.py; o resto é lixo nos registradores), e um ponteiro diferente também
+    vale se o do C aponta para a área do próprio candidato (string literal copiada) e as
+    duas strings são iguais."""
     (ca, sa), (cb, sb) = a, b
     if ca == cb:
         return True, None
@@ -174,7 +177,8 @@ def same_calls(a, b, cand_lo, cand_hi, relaxed):
             continue
         if not relaxed or x[0] != y[0] or len(x) != len(y):
             return False, k
-        for i, (u, w) in enumerate(zip(x[1:], y[1:])):
+        n = len(x) - 1 if x[0].startswith("BIOS") or x[0] == "syscall" else arity.arity(x[0])
+        for i, (u, w) in enumerate(zip(x[1:1 + n], y[1:1 + n])):
             if u != w and not (cand_lo <= w < cand_hi and sa[k][i] is not None and sa[k][i] == sb[k][i]):
                 return False, k
     if len(ca) != len(cb):
