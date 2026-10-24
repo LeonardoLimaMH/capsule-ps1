@@ -101,6 +101,33 @@ def gp_symbols(asm_text):
     return set(re.findall(r"%gp_rel\((\w+)\)", asm_text))
 
 
+def fix_indirect_calls(body):
+    """Chamada por ponteiro calculado do m2c, `*(expr)(args)` (não é C válido: chama o
+    resultado do *), vira `(*(void (**)())(expr))(args)`: lê a palavra em expr e chama."""
+    out, i = [], 0
+    while True:
+        j = body.find("*(", i)
+        if j < 0:
+            break
+        # só no início de uma expressão (não multiplicação: antes vem operador/abre/;)
+        prev = body[:j].rstrip()[-1:] if body[:j].strip() else ";"
+        k, depth = j + 1, 0
+        while k < len(body):
+            depth += body[k] == "("
+            depth -= body[k] == ")"
+            if depth == 0:
+                break
+            k += 1
+        if prev in ";{}(,=!&|?:" and k + 1 < len(body) and body[k + 1] == "(":
+            out.append(body[i:j] + "(*(void (**)())" + body[j + 1:k + 1] + ")")
+            i = k + 1
+        else:
+            out.append(body[i:j + 2])
+            i = j + 2
+    out.append(body[i:])
+    return "".join(out)
+
+
 def to_c(draft, func, asm_text, variant):
     """Converte a saída do m2c num arquivo C compilável e autocontido."""
     gp_syms = gp_symbols(asm_text)
@@ -129,6 +156,12 @@ def to_c(draft, func, asm_text, variant):
             typ = typ.replace("?", "s32").strip()
             if typ.startswith("struct") or typ.startswith("union"):
                 typ = "s32"  # tipos compostos desconhecidos: tratar como palavra
+            if re.fullmatch(r"func_[0-9A-F]{8}", name):
+                continue  # função usada como valor: declarada como função mais abaixo
+            if typ == "M2C_UNK" and not (name in gp_syms or arr):
+                # tipo desconhecido usado só por endereço: o m2c faz a aritmética em bytes
+                # (D + n, M2C_FIELD); como vetor de s32 o C multiplicaria n por 4
+                typ = "u8"
             if name in gp_syms or arr:
                 out_decls.append(f"extern {typ} {name}{arr or ''};")
             else:
@@ -158,6 +191,7 @@ def to_c(draft, func, asm_text, variant):
     for name in sorted(set(re.findall(r"(?<![\w.])&?(func_[0-9A-F]{8})\b(?!\s*\()", body_text))):
         if name != func and not re.search(rf"\b{name}\s*\(", declared):
             out_decls.append(f"extern int {name}();")
+    body_text = fix_indirect_calls(body_text)
     if not variant.get("ghidra"):  # no Ghidra, "?" é operador ternário, não tipo desconhecido
         body_text = body_text.replace("?", "s32")
     if variant.get("unsigned"):

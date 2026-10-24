@@ -73,3 +73,10 @@ Cada linha é uma rodada no mesmo conjunto `config/bench.txt`. *Casadas* = bytes
   `M2C_FIELD(&D, …)` / `f(&D)` passavam a usar o valor guardado em D. Uma passada só: **+2 casadas** (yuugi
   OpenTMD, slpm slpm_GetDrawEnv), 0 perdidas, compila 143 → 155, tamanho igual 78 → 87. Na frente funcional
   a mesma causa explicava boa parte das divergências "C lê o endereço 0".
+| 2026-10-24 | valfunc-v4 | g0fill, gcc281, ghidra | 18/180 | 42/42 | 154 | 85 | 23.5 | registradores (80); ordem/instrução diferente (39); não compila (20); extensão/truncamento (14) |
+| 2026-10-24 | valfunc-v4 | gcc281, ghidra, g0fill | 18/180 | 42/42 | 154 | 85 | 23.5 | registradores (80); ordem/instrução diferente (39); não compila (20); extensão/truncamento (14) |
+- 2026-10-24 — **`to_c`: aritmética em bytes, funções como valor e chamadas por ponteiro.** Globais de tipo
+  desconhecido (`M2C_UNK`) usados só por endereço passam a `u8` (o m2c soma deslocamentos em bytes; como `s32` o
+  C multiplicava por 4); funções usadas como valor deixam de ser declaradas como vetor de dados; `*(expr)(args)`
+  vira `(*(void (**)())(expr))(args)`. **+4 casadas** (yuugi func_8003A594, slpm slpm_startIntrVSync, raise
+  func_8009D2A8, func_800AA990), 0 perdidas.
