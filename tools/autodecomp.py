@@ -194,6 +194,9 @@ def to_c(draft, func, asm_text, variant):
         if name != func and not re.search(rf"\b{name}\s*\(", declared):
             out_decls.append(f"extern int {name}();")
     body_text = fix_indirect_calls(body_text)
+    # ponteiros locais de tipo desconhecido: o m2c os avança em bytes (p += 4); como
+    # M2C_UNK (s32) o C andaria 4 elementos
+    body_text = re.sub(r"\bM2C_UNK \*", "u8 *", body_text)
     if not variant.get("ghidra"):  # no Ghidra, "?" é operador ternário, não tipo desconhecido
         body_text = body_text.replace("?", "s32")
     if variant.get("unsigned"):
