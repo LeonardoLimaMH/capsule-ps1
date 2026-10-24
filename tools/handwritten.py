@@ -45,6 +45,12 @@ def reason(words, vram):
         name = i.getOpcodeName().lower()
         if name in COP_NAMES or (i.getRaw() >> 26) in (0x10, 0x12) and not i.isNop():
             return f"coprocessador ({name})"
+    # trampolim de serviço da BIOS: li $t2, 0xA0/0xB0/0xC0; jr $t2; li $t1, N
+    # (o número do serviço vai em $t1, coisa que C não expressa)
+    if (len(ins) >= 3 and words[0] >> 16 == 0x240A and (words[0] & 0xFFFF) in (0xA0, 0xB0, 0xC0)
+            and words[1] == 0x01400008 and words[2] >> 16 == 0x2409):
+        return f"trampolim da BIOS ({words[0] & 0xFFFF:#04x}, serviço {words[2] & 0xFFFF:#04x})"
+
     def ends(i):
         return i.hasDelaySlot() and (i.isReturn() or i.isJrNotRa() or i.isUnconditionalBranch()
                                      or (i.isJump() and not i.doesLink()))
