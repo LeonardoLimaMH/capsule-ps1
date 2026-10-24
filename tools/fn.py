@@ -44,7 +44,7 @@ def show(t, f):
 
 def test(t, f, src):
     extra = [] if retuse.used(f) else ["--ignore-v0"]
-    r = subprocess.run(["python3", "tools/difftest.py", t, f, "--src", src, "--abi"] + extra,
+    r = subprocess.run(["python3", "tools/difftest.py", t, f, "--src", src, "--abi", "--isolate"] + extra,
                        cwd=ROOT, capture_output=True, text=True, timeout=900)
     msg = (r.stdout.strip().splitlines() or [r.stderr.strip()[-600:]])[-1]
     print(msg if r.returncode == 0 or r.stdout.strip() else r.stderr[-1500:])

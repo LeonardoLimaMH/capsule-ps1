@@ -32,7 +32,7 @@ TRIED = ROOT / ".cache" / "functional"  # resultado da última tentativa por fun
 
 def difftest(target, func, src):
     extra = [] if retuse.used(func) else ["--ignore-v0"]  # retorno que nenhum chamador lê
-    r = subprocess.run(["python3", "tools/difftest.py", target, func, "--src", str(src), "--abi"] + extra,
+    r = subprocess.run(["python3", "tools/difftest.py", target, func, "--src", str(src), "--abi", "--isolate"] + extra,
                        cwd=ROOT, capture_output=True, text=True, timeout=900)
     out = (r.stdout.strip().splitlines() or [r.stderr.strip()[-200:]])[-1]
     return r.returncode, out

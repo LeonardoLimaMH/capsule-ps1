@@ -17,6 +17,6 @@ EQUIV = sorted((ROOT / "equiv").glob("*/*.c"))
 def test_equivalent(src: pathlib.Path):
     extra = [] if retuse.used(src.stem) else ["--ignore-v0"]
     r = subprocess.run(["python3", "tools/difftest.py", src.parent.name, src.stem,
-                        "--src", str(src.relative_to(ROOT)), "--abi"] + extra,
+                        "--src", str(src.relative_to(ROOT)), "--abi", "--isolate"] + extra,
                        cwd=ROOT, capture_output=True, text=True, timeout=900)
     assert r.returncode == 0, r.stdout + r.stderr

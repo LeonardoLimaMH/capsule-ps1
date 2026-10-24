@@ -153,6 +153,19 @@ def stub_addrs(target):
     return stubs
 
 
+def game_func_addrs(target):
+    """Funções do jogo (para --isolate): nomes do assembly completo, endereços do ELF;
+    em overlays, também as do executável principal."""
+    out = {}
+    for t in [target] + (["yuugi"] if target in ("chess", "raise", "etc") else []):
+        names = {p.stem for p in (ROOT / ".cache" / "fullasm" / t).rglob("*.s")}
+        for l in sh(f"mips-linux-gnu-nm {TARGETS[t][3]}").splitlines():
+            q = l.split()
+            if len(q) == 3 and q[1] in "Tt" and q[2] in names:
+                out[int(q[0], 16)] = q[2]
+    return out
+
+
 def read_cstr(uc, v):
     """Bytes da string C apontada por v (texto imprimível terminado em NUL), ou None."""
     if not 0x80000000 <= v < 0x80000000 + RAM_SIZE:
@@ -177,8 +190,12 @@ def same_calls(a, b, cand_lo, cand_hi, relaxed):
             continue
         if not relaxed or x[0] != y[0] or len(x) != len(y):
             return False, k
-        n = len(x) - 1 if x[0].startswith("BIOS") or x[0] == "syscall" else arity.arity(x[0])
-        for i, (u, w) in enumerate(zip(x[1:1 + n], y[1:1 + n])):
+        if x[0].startswith("BIOS") or x[0] == "syscall":
+            idx = range(len(x) - 1)
+        else:
+            idx = list(range(arity.arity(x[0]))) + list(range(4, len(x) - 1))
+        for i in idx:
+            u, w = x[1 + i], y[1 + i]
             if u != w and not (cand_lo <= w < cand_hi and sa[k][i] is not None and sa[k][i] == sb[k][i]):
                 return False, k
     if len(ca) != len(cb):
@@ -186,7 +203,7 @@ def same_calls(a, b, cand_lo, cand_hi, relaxed):
     return True, None
 
 
-def run(entry, regs, ram, stubs, extra):
+def run(entry, regs, ram, stubs, extra, game_names=frozenset()):
     mu = Uc(UC_ARCH_MIPS, UC_MODE_MIPS32 | UC_MODE_LITTLE_ENDIAN)
     mu.mem_map(0x00000000, RAM_SIZE)           # kseg0 0x80000000 -> físico 0
     mu.mem_map(0x1F800000, 0x2000)             # scratchpad + registradores de I/O
@@ -208,6 +225,12 @@ def run(entry, regs, ram, stubs, extra):
                                                UC_MIPS_REG_A3))
         if name.startswith("BIOS"):
             args = (uc.reg_read(UC_MIPS_REG_T1),) + args
+        elif name in game_names:
+            sp = uc.reg_read(UC_MIPS_REG_SP)
+            k = arity.stack_args(name)
+            if k and 0x80000000 <= sp < 0x80000000 + RAM_SIZE - 0x10 - 4 * k:
+                raw = bytes(uc.mem_read((sp + 0x10) & 0x1FFFFFFF, 4 * k))
+                args += tuple(int.from_bytes(raw[i:i + 4], "little") for i in range(0, 4 * k, 4))
         calls.append((name,) + args)
         strings.append(tuple(read_cstr(uc, v) for v in args))
         uc.reg_write(UC_MIPS_REG_V0, (len(calls) * 0x9E3779B1) & 0xFFFF)  # retorno determinístico
@@ -250,6 +273,9 @@ def main():
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--abi", action="store_true",
                     help="equivalência funcional: ignora v1 (temporário, só usado em retorno de 64 bits)")
+    ap.add_argument("--isolate", action="store_true",
+                    help="com --abi: funções do jogo chamadas também viram stubs (argumentos de "
+                         "registrador e de pilha comparados)")
     ap.add_argument("--ignore-v0", action="store_true",
                     help="nenhum chamador lê o retorno (tools/retuse.py): v0 não é comparado")
     a = ap.parse_args()
@@ -260,9 +286,20 @@ def main():
         src = next(str(p.relative_to(ROOT)) for p in sorted((ROOT / "src" / a.target).rglob("*.c"))
                    if re.search(rf"^\S.*\b{a.func}\s*\([^;]*$", p.read_text(encoding="utf-8"), re.M))
     image = (ROOT / path).read_bytes()[hdr:]
+    main_image = None
+    if a.target in ("chess", "raise", "etc"):
+        mpath, mhdr = TARGETS["yuugi"][0], TARGETS["yuugi"][1]
+        main_image = (ROOT / mpath).read_bytes()[mhdr:]
     cand, cand_entry = build_candidate(a.target, src, a.func, force_g0=a.abi)
     entry = elf_symbols(a.target)[a.func] & 0xFFFFFFFF
     stubs = stub_addrs(a.target)
+    game_names = frozenset()
+    if a.isolate:
+        # a função testada em isolamento: as funções do jogo que ela chama são o mesmo
+        # código original dos dois lados; viram stubs que registram os argumentos
+        games = game_func_addrs(a.target)
+        stubs = {**games, **stubs}
+        game_names = frozenset(games.values())
     if entry in stubs:
         del stubs[entry]  # testando uma função do próprio SDK
     jump = ((0x02 << 26) | ((cand_entry >> 2) & 0x3FFFFFF)).to_bytes(4, "little") + bytes(4)
@@ -293,6 +330,11 @@ def main():
             ram = bytearray(RAM_SIZE)   # metade das tentativas com RAM zerada
         else:
             ram = bytearray(rng.getrandbits(8) for _ in range(0x1000)) * (RAM_SIZE // 0x1000)
+        if main_image is not None:
+            # overlay: o executável principal fica na memória, como no jogo (as funções
+            # comuns que o overlay chama existem de verdade)
+            moff = TARGETS["yuugi"][2] & 0x1FFFFFFF
+            ram[moff:moff + len(main_image)] = main_image
         off = base & 0x1FFFFFFF
         ram[off:off + len(image)] = image
         s = SENTINEL & 0x1FFFFFFF
@@ -311,8 +353,8 @@ def main():
         regs[UC_MIPS_REG_SP] = STACK_TOP
         regs[UC_MIPS_REG_GP] = GP.get(a.target, 0x80078B6C)
         try:
-            ra, ea = run(entry, regs, bytes(ram), stubs, [])
-            rb, eb = run(entry, regs, bytes(ram), stubs, [(CAND_BASE, cand), (entry, jump)])
+            ra, ea = run(entry, regs, bytes(ram), stubs, [], game_names)
+            rb, eb = run(entry, regs, bytes(ram), stubs, [(CAND_BASE, cand), (entry, jump)], game_names)
         except Unsupported:
             unsupported += 1
             continue

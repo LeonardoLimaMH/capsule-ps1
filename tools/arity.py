@@ -60,6 +60,34 @@ def arity(func):
     return max((ARGS.index(r) + 1 for r in params), default=0)
 
 
+LOADS = re.compile(r"^(lw|lh|lhu|lb|lbu)$")
+
+
+@functools.lru_cache(maxsize=None)
+def stack_args(func):
+    """Quantos argumentos a função lê da pilha (5º em diante): leituras em
+    OFF($sp) com OFF >= frame + 0x10, onde frame vem do `addiu $sp, $sp, -N`."""
+    s = asm_files().get(func)
+    if s is None:
+        return 0
+    frame, best = 0, -1
+    for l in s.read_text(encoding="utf-8", errors="ignore").splitlines():
+        m = INSN.search(l)
+        if not m:
+            continue
+        op, args = m.groups()
+        fm = re.match(r"\$sp, \$sp, (-?0x[0-9A-Fa-f]+|-?\d+)", args)
+        if op == "addiu" and fm and frame == 0 and int(fm.group(1), 0) < 0:
+            frame = -int(fm.group(1), 0)
+            continue
+        lm = re.search(r",\s*(-?0x[0-9A-Fa-f]+|-?\d+)\(\$sp\)", args)
+        if LOADS.match(op) and lm:
+            off = int(lm.group(1), 0) - frame - 0x10
+            if off >= 0:
+                best = max(best, off // 4)
+    return best + 1
+
+
 if __name__ == "__main__":
     for f in sys.argv[1:]:
-        print(f, arity(f))
+        print(f, arity(f), "+ pilha:", stack_args(f))
