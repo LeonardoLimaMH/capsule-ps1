@@ -118,7 +118,9 @@ def fix_indirect_calls(body):
             if depth == 0:
                 break
             k += 1
-        if prev in ";{}(,=!&|?:" and k + 1 < len(body) and body[k + 1] == "(":
+        inner = body[j + 2:k]
+        is_cast = re.fullmatch(r"[\w\s]+\*+\s*", inner) is not None  # *(T *)(p): cast, não chamada
+        if prev in ";{}(,=!&|?:" and not is_cast and k + 1 < len(body) and body[k + 1] == "(":
             out.append(body[i:j] + "(*(void (**)())" + body[j + 1:k + 1] + ")")
             i = k + 1
         else:
