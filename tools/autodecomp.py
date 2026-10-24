@@ -365,6 +365,39 @@ def load_best(target, func):
     return json.loads(p.read_text(encoding="utf-8")) if p.exists() else None
 
 
+def retype_derefs(c, width):
+    """`*(expr)` cuja expressão usa um global de tipo desconhecido (declarado `u8 X[]`):
+    o m2c não sabe a largura da leitura; vira `*(width *)(expr)`."""
+    names = re.findall(r"extern u8 (\w+)\[\];", c)
+    if not names:
+        return None
+    pat = re.compile(r"\b(" + "|".join(map(re.escape, names)) + r")\b")
+    out, i, changed = [], 0, False
+    while True:
+        j = c.find("*(", i)
+        if j < 0:
+            break
+        k, depth = j + 1, 0
+        while k < len(c):
+            depth += c[k] == "("
+            depth -= c[k] == ")"
+            if depth == 0:
+                break
+            k += 1
+        inner = c[j + 2:k]
+        prev = c[:j].rstrip()[-1:] if c[:j].strip() else ";"
+        after_kw = re.search(r"\breturn\s*$", c[:j]) is not None
+        if ((prev in ";{}(,=!&|?:<>+-" or after_kw) and pat.search(inner) and not re.fullmatch(r"[\w\s]+\*+\s*", inner)
+                and not (k + 1 < len(c) and c[k + 1] == "(")):
+            out.append(c[i:j] + f"*({width} *)(" + inner + ")")
+            changed = True
+        else:
+            out.append(c[i:k + 1])
+        i = k + 1
+    out.append(c[i:])
+    return "".join(out) if changed else None
+
+
 def all_drafts(target, func):
     """Todos os rascunhos C de uma função, sem compilar (frente funcional: qualquer um
     que passe no teste diferencial serve, não só o mais próximo em instruções)."""
@@ -388,6 +421,10 @@ def all_drafts(target, func):
     if g:
         c = to_c(g, func, asm_text, {"ghidra": True})
         add(ghidra2c.TYPES + c if c else None)
+    # leituras diretas de base de tipo desconhecido: uma variante por largura
+    for c in list(out[:2]):
+        for w in ("s32", "s16", "u16", "s8"):
+            add(retype_derefs(c, w))
     return out
 
 
