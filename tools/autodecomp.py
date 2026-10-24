@@ -329,6 +329,32 @@ def load_best(target, func):
     return json.loads(p.read_text(encoding="utf-8")) if p.exists() else None
 
 
+def all_drafts(target, func):
+    """Todos os rascunhos C de uma função, sem compilar (frente funcional: qualquer um
+    que passe no teste diferencial serve, não só o mais próximo em instruções)."""
+    asm = asm_path(target, func)
+    if asm is None:
+        return []
+    asm_text = asm.read_text(encoding="utf-8")
+    out, seen = [], set()
+
+    def add(c):
+        if c and c not in seen:
+            seen.add(c)
+            out.append(c)
+    base = run_m2c(target, func, asm)
+    for flags in [(), ("--no-andor",)]:
+        d = base if not flags else run_m2c(target, func, asm, flags)
+        if d:
+            for v in ({}, {"unsigned": True}):
+                add(to_c(d, func, asm_text, v))
+    g = ghidra2c.draft(target, func, base, asm_text)
+    if g:
+        c = to_c(g, func, asm_text, {"ghidra": True})
+        add(ghidra2c.TYPES + c if c else None)
+    return out
+
+
 def try_function(target, func):
     c, gcc, rec = evaluate(target, func)
     if not c:

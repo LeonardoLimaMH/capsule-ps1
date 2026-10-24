@@ -45,19 +45,27 @@ def draft(target, func):
     return rec.get("c")
 
 
-def try_function(target, func):
+def try_function(target, func, every=False):
+    """Testa o rascunho mais próximo; com every, também os demais (all_drafts) até um passar."""
     c = draft(target, func)
-    if not c:
-        return func, "sem rascunho que compile"
-    if "+g0fill" in (ad.load_best(target, func) or {}).get("gcc", ""):
+    if c and "+g0fill" in (ad.load_best(target, func) or {}).get("gcc", ""):
         c = ad.scalarize(c)
+    cands = [c] if c else []
+    if every:
+        cands += [d for d in ad.all_drafts(target, func) if d != c]
+    if not cands:
+        return func, "sem rascunho que compile"
     out = EQUIV / target / f"{func}.c"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(ad.HEADER + c.strip() + "\n", encoding="utf-8", newline="\n")
-    try:
-        code, msg = difftest(target, func, out.relative_to(ROOT))
-    except subprocess.TimeoutExpired:
-        code, msg = 2, "tempo esgotado"
+    code, msg = 2, "sem rascunho"
+    for cand in cands:
+        out.write_text(ad.HEADER + cand.strip() + "\n", encoding="utf-8", newline="\n")
+        try:
+            code, msg = difftest(target, func, out.relative_to(ROOT))
+        except subprocess.TimeoutExpired:
+            code, msg = 2, "tempo esgotado"
+        if code == 0:
+            break
     if code != 0:
         out.unlink()
     d = TRIED / target
@@ -74,6 +82,8 @@ def main():
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--only")
     ap.add_argument("--retry", action="store_true", help="tentar de novo as que já falharam")
+    ap.add_argument("--every", action="store_true",
+                    help="além do rascunho mais próximo, testar todas as variantes (m2c, Ghidra)")
     ap.add_argument("--check", action="store_true")
     a = ap.parse_args()
     t = a.target
@@ -106,7 +116,7 @@ def main():
     print(f"{t}: {len(funcs)} funções a tentar", flush=True)
     stats = {}
     with cf.ThreadPoolExecutor(a.jobs) as ex:
-        for f, why in ex.map(lambda f: try_function(t, f), funcs):
+        for f, why in ex.map(lambda f: try_function(t, f, a.every), funcs):
             stats[why] = stats.get(why, 0) + 1
             if why == "EQUIVALENTE":
                 print(f"  EQUIVALENTE {f}", flush=True)
