@@ -355,6 +355,12 @@ def main():
     # "/* argN: small */" (N = 0..3): só aquele argumento pequeno
     _t = (ROOT / src).read_text(encoding="utf-8", errors="replace")
     small_args = {0, 1, 2, 3} if "/* args: small */" in _t else {int(k) for k in re.findall(r"/\* arg([0-3]): small \*/", _t)}
+    # "/* argN: 0xENDEREÇO */": argumento fixo (p.ex. apontando para um buffer preparado)
+    fixed_args = {int(k): int(v, 16) for k, v in re.findall(r"/\* arg([0-3]): (0x[0-9A-Fa-f]+) \*/", _t)}
+    # "/* rand-u16: 0xEND N v1,v2,... */": N halfwords sorteados da lista (textos com
+    # códigos de controle e terminador, p.ex.)
+    rand_u16 = [(int(x, 16), int(n, 0), [int(v, 0) for v in vs.split(",")]) for x, n, vs in re.findall(
+        r"/\* rand-u16: (0x[0-9A-Fa-f]+) (\w+) ([0-9A-Fa-fx,]+) \*/", _t)]
     rand_ptr = [(int(x, 16), int(n, 0)) for x, n in re.findall(
         r"/\* rand-ptr: (0x[0-9A-Fa-f]+) (\w+) \*/", (ROOT / src).read_text(encoding="utf-8", errors="replace"))]
     image = (ROOT / path).read_bytes()[hdr:]
@@ -434,6 +440,10 @@ def main():
         for addr, n, mx in rand_mem:
             o = addr & 0x1FFFFFFF
             ram[o:o + n] = bytes(rng.randrange(mx) for _ in range(n))
+        for addr, n, vals in rand_u16:
+            o = addr & 0x1FFFFFFF
+            for i in range(n):
+                ram[o + 2 * i:o + 2 * i + 2] = rng.choice(vals).to_bytes(2, "little")
         for addr, n in rand_ptr:
             o = addr & 0x1FFFFFFF
             for i in range(n):
@@ -442,6 +452,8 @@ def main():
 
         def arg(i):
             k = rng.random()
+            if i in fixed_args:
+                return fixed_args[i]
             if i in small_args:
                 return rng.randrange(0, 16)
             if k < 0.3:
