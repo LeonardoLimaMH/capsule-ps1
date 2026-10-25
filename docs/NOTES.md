@@ -208,3 +208,21 @@ mais próximas (`func_80113004` 17 → 2, `func_801131D0` 23 → 15, `slpm__putc
 14 → 10). Integrado ao build: os arquivos listados em `config/g0fill.txt` são compilados com esse
 perfil pelo Makefile, por `tools/difftest.py` e por `tools/match.py --g0fill`
 (implementação comum em `tools/g0fill.py`). Primeiro arquivo: `sdk_libcd_cdread.c`.
+
+## Frente funcional: o que o teste diferencial garante (e o que não)
+
+`tools/difftest.py --abi --isolate` (usado por `tools/functional.py`, `tools/fn.py` e
+`tests/test_equiv.py`) executa original e C lado a lado no Unicorn, com o executável
+principal carregado junto dos overlays, e compara: registradores visíveis ao chamador
+(`v0`, salvo quando nenhum chamador o lê — `tools/retuse.py`; `s0`–`s8`, `sp`, `gp`), a RAM
+inteira (menos a pilha morta) e cada chamada a outra função: as funções do jogo e do SDK
+chamadas viram stubs (são o mesmo código original dos dois lados), e são comparados os
+argumentos que a função chamada lê (`tools/arity.py`: registradores e pilha). String
+literal do C vale pelo conteúdo. Até 3000 estados aleatórios; aceita com ≥ 50 execuções
+completas idênticas e nenhuma divergente.
+
+Limitações conhecidas: (1) ponteiro para a pilha passado a uma função chamada é comparado
+pelo endereço, não pelo conteúdo apontado (o conteúdo inclui bytes de preenchimento não
+inicializados que diferem entre as versões); (2) funções cujo comportamento depende de
+estado global realista (índices válidos, ponteiros) quase sempre travam com estados
+aleatórios e ficam inconclusivas — pedem entradas capturadas do jogo em execução.
