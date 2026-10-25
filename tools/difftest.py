@@ -339,6 +339,10 @@ def main():
     m = re.search(r"/\* stub-ret: (\w+) \*/", (ROOT / src).read_text(encoding="utf-8", errors="replace"))
     if m:
         a.stub_ret = m.group(1)
+    # "/* rand-mem: ENDEREÇO N MÁX */": N bytes sorteados em [0, MÁX) a cada tentativa
+    # (iguais nos dois lados), p.ex. a variável de estado de uma máquina de estados
+    rand_mem = [(int(x, 16), int(n, 0), int(mx, 0)) for x, n, mx in re.findall(
+        r"/\* rand-mem: (0x[0-9A-Fa-f]+) (\w+) (\w+) \*/", (ROOT / src).read_text(encoding="utf-8", errors="replace"))]
     image = (ROOT / path).read_bytes()[hdr:]
     main_image = None
     if a.target in ("chess", "raise", "etc"):
@@ -413,6 +417,9 @@ def main():
         ram[off:off + len(image)] = image
         s = SENTINEL & 0x1FFFFFFF
         ram[s:s + 8] = (0x1000FFFF).to_bytes(4, "little") + bytes(4)
+        for addr, n, mx in rand_mem:
+            o = addr & 0x1FFFFFFF
+            ram[o:o + n] = bytes(rng.randrange(mx) for _ in range(n))
 
         def arg():
             k = rng.random()
