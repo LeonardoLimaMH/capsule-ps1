@@ -111,7 +111,7 @@ def build_candidate(target, src, func, force_g0=False):
     # renomeia as funções definidas no objeto (X -> X__cand) para não colidirem com
     # os símbolos do binário original; referências internas acompanham o rename
     defined = [l.split()[2] for l in sh(f"mips-linux-gnu-nm {obj}").splitlines()
-               if len(l.split()) == 3 and l.split()[1] in "Tt" and not l.split()[2].startswith("L")]
+               if len(l.split()) == 3 and l.split()[1] in "Tt" and not re.match(r"\$?\.?L\d|L[0-9A-F]{8}$", l.split()[2])]
     if func not in defined:
         sys.exit(f"{func} não está em C em {src}")
     ren = " ".join(f"--redefine-sym {s}={s}__cand" for s in defined)
