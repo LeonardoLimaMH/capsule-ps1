@@ -50,6 +50,9 @@ def reason(words, vram):
         raw = i.getRaw()
         if name == "syscall" or (name == "break" and not ((raw >> 16) & 0x3FF in (6, 7) and (raw >> 6) & 0x3FF == 0)):
             return f"instrução {name} (C não a emite)"
+        # guarda/carrega o próprio $sp em memória (setjmp/longjmp, troca de contexto)
+        if name in ("sw", "lw") and reg(i.rt) == 29 and reg(i.rs) != 29:
+            return f"{name} do próprio $sp (troca de contexto)"
     # trampolim de serviço da BIOS: li $t2, 0xA0/0xB0/0xC0; jr $t2; li $t1, N
     # (o número do serviço vai em $t1, coisa que C não expressa)
     if (len(ins) >= 3 and words[0] >> 16 == 0x240A and (words[0] & 0xFFFF) in (0xA0, 0xB0, 0xC0)

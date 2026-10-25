@@ -89,6 +89,8 @@ func_8004E41C 0x10 trampolim da BIOS (0xb0, serviço 0x4b)
 func_8004E42C 0x3c trampolim da BIOS (0xb0, serviço 0x4c)
 func_8004E468 0x44 lê v1 antes de escrevê-lo
 func_8004E4AC 0x28 não termina em salto (continua na próxima função)
+setjmp 0x3c sw do próprio $sp (troca de contexto)
+longjmp 0x44 lw do próprio $sp (troca de contexto)
 func_8004FD9C 0x10 trampolim da BIOS (0xb0, serviço 0x38)
 func_8004FDAC 0x10 trampolim da BIOS (0xa0, serviço 0x39)
 func_8004FDBC 0x10 trampolim da BIOS (0xa0, serviço 0x44)
