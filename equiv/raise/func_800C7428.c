@@ -1,0 +1,23 @@
+#include "common.h"
+
+extern u8 D_80100F38[];
+extern s16 D_800F0760;
+extern s32 func_800B1260(s32);
+extern void func_800D8E90(s32), func_800B0A94(s32, s32), func_800D1CC4(s32, s32, s32, s32);
+extern void func_800CE4B8(s32, s32, s32, s32);
+extern s32 func_800B5034(s32, s32, s32);
+extern void func_800E134C(s32);
+
+s32 func_800C7428(s32 a0, s32 a1) {
+    u16 k = func_800B1260(a1);
+    u8 *p = D_80100F38 + k * 0x79C;
+    func_800D8E90(a1);
+    func_800B0A94(k, 1);
+    func_800D1CC4(k, 4, 1, 0);
+    func_800CE4B8(a1, a0, D_800F0760, 0);
+    *(u16 *)(p + 0x364) = func_800B5034(a1, k, 7);
+    *(u16 *)(p + 0x344) = 0;
+    *(s32 *)(p + 0x2BC) += 1;
+    func_800E134C(0);
+    return *(s32 *)(p + 0x2BC);
+}
