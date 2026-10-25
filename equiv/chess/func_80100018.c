@@ -86,20 +86,14 @@ block_13:
 block_21:
         var_a0 = arg0 << 0x10;
     }
-    temp_v1_3 = *((var_a0 >> 0xF) + D_801024D0) + *(((s32) (arg1 << 0x10) >> 0xF) + D_801024D0);
+    temp_v1_3 = *(s16 *)((var_a0 >> 0xF) + D_801024D0) + *(s16 *)(((s32) (arg1 << 0x10) >> 0xF) + D_801024D0);
     temp_v0_2 = temp_v1_3 << 0x10;
     if (temp_v1_3 & 1) {
         var_a2 = ((s32) (temp_v1_3 + (temp_v0_2 >> 0x1F)) >> 1) + 1;
     } else {
         var_a2 = (u32) (temp_v1_3 + (temp_v0_2 >> 0x1F)) >> 1;
     }
-    if (*(((s32) (arg0 << 0x10) >> 0xF) + D_801024D0) != 3) {
-        var_v0_2 = var_t0 << 0x10;
-        if (*(((s32) (arg1 << 0x10) >> 0xF) + D_801024D0) == 3) {
-            goto block_27;
-        }
-    } else {
-block_27:
+    if ((*(s16 *)(((s32) (arg0 << 0x10) >> 0xF) + D_801024D0) == 3) || (var_v0_2 = var_t0 << 0x10, (*(s16 *)(((s32) (arg1 << 0x10) >> 0xF) + D_801024D0) == 3))) {
         temp_v0_3 = var_a2 + 1;
         var_a2 = temp_v0_3;
         var_v0_2 = var_t0 << 0x10;
@@ -115,7 +109,7 @@ block_27:
     }
     temp_a3_2 = temp_t3 * 0x48;
     temp_a1 = var_t1 * 0x18;
-    temp_v1_4 = *(((s32) (var_t0 << 0x10) >> 0xF) + (((s16) var_a2 * 6) + (temp_a1 + (temp_a3_2 + D_801025A0))));
+    temp_v1_4 = *(s16 *)(((s32) (var_t0 << 0x10) >> 0xF) + (((s16) var_a2 * 6) + (temp_a1 + (temp_a3_2 + D_801025A0))));
     var_a2_2 = temp_v1_4;
     if (temp_v1_4 < 0) {
         var_v0 = M2C_FIELD((((temp_v1_4 + 3) * 6) + temp_a1 + temp_a3_2 + D_801025A0), u16 *, 4) << 0x10;
