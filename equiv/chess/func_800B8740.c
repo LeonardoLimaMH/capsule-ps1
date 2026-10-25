@@ -23,17 +23,23 @@ loop_2:
         var_a1 = (func_800202A4(0xD) * 4) + ((temp_s0 * 0x34) + arg0);
         temp_a0 = *var_a1;
         var_v0 = var_s1;
-        if (((temp_a0 & 0x3F) == 2) && (temp_v1 = (temp_a0 >> 6) & 0x1FFF, var_v0 = var_s1, ((temp_v1 < 3) != 0))) {
-            var_v0_2 = var_v0 < 0x97;
-            if (temp_v1 != 0) {
-                var_v0 = var_s1;
-                if (!((temp_a0 >> 0x16) & 3)) {
-                    *var_a1 = (temp_a0 & ~0x3F) | ((s32) temp_s3 & 0x3F);
+        if ((temp_a0 & 0x3F) == 2) {
+            temp_v1 = (temp_a0 >> 6) & 0x1FFF;
+            var_v0 = var_s1;
+            if (temp_v1 < 3) {
+                var_v0_2 = var_v0 < 0x97;
+                if (temp_v1 != 0) {
+                    var_v0 = var_s1;
+                    if (!((temp_a0 >> 0x16) & 3)) {
+                        *var_a1 = (temp_a0 & ~0x3F) | ((s32) temp_s3 & 0x3F);
+                    } else {
+                        goto loop_1;
+                    }
                 } else {
-                    goto loop_1;
+                    goto loop_2;
                 }
             } else {
-                goto loop_2;
+                goto loop_1;
             }
         } else {
             goto loop_1;
