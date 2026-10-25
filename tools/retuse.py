@@ -40,8 +40,13 @@ def listing():
             lm = LABEL.match(l)
             if lm:
                 labels[lm.group(1)] = len(ins)
+                if l.lstrip().startswith("jlabel"):
+                    JTARGETS.setdefault(s.stem, []).append(len(ins))
         out.append((s.stem, ins, labels))
     return out
+
+
+JTARGETS = {}  # função -> índices dos alvos de tabela de salto (jlabel)
 
 
 @functools.lru_cache(maxsize=None)
@@ -79,6 +84,15 @@ def reads_v0_from(caller, ins, labels, k, seen, stack, reg="$v0"):
             # o $v0 vira o retorno do chamador: usado só se o retorno dele for usado.
             # $v1 só sai de função que devolve 64 bits (raro): aqui ele é lixo
             return reg == "$v0" and used(caller, stack, reg)
+        if op == "jr" and reg != "$v0" and caller in JTARGETS:
+            # tabela de salto (switch): segue todos os alvos da função (superconjunto)
+            if k + 1 < len(ins):
+                dsrcs, ddst = regs_of(*ins[k + 1])
+                if reg in dsrcs:
+                    return True
+                if ddst == reg:
+                    return False
+            return any(reads_v0_from(caller, ins, labels, t, seen, stack, reg) for t in JTARGETS[caller])
         if op in ("jr", "jalr"):
             return True  # salto indireto: conservador
         if op in BRANCH or op in ("j", "b"):
