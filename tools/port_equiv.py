@@ -40,7 +40,7 @@ def main():
         if len(ta) != len(tb):
             sys.exit(f"operandos diferentes: {xa} x {xb}")
         for u, v in zip(ta, tb):
-            if u != v and not u.startswith(("L", "hi", "lo", "gp_rel")):
+            if u != v and not re.fullmatch(r"L[0-9A-Fa-f_]+", u):
                 if m.get(u, v) != v:
                     sys.exit(f"mapeamento ambíguo: {u} -> {m[u]} / {v}")
                 m[u] = v
