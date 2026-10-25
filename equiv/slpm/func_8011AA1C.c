@@ -6,7 +6,7 @@ void func_8011AA1C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 arg5) {
     extern void * D_80132130[];
     s32 *temp_a1_2;
     s32 *temp_a1_3;
-    s32 temp_a1;
+    u32 temp_a1;
     s32 var_a0;
     s8 var_v0;
 
