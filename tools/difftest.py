@@ -354,6 +354,20 @@ def main():
         games = game_func_addrs(a.target)
         stubs = {**games, **stubs}
         game_names = frozenset(games.values())
+    if a.isolate:
+        # chamadas para fora das imagens carregadas (funções de overlay chamadas pelo
+        # principal): ali não há código, então também viram stubs
+        loaded = [(base, base + len(image))]
+        if main_image is not None:
+            loaded.append((TARGETS["yuugi"][2], TARGETS["yuugi"][2] + len(main_image)))
+        fo = entry - base
+        for i in range(fo, fo + func_size(a.func), 4):
+            w = int.from_bytes(image[i:i + 4], "little")
+            if w >> 26 == 3:
+                t = (entry & 0xF0000000) | ((w & 0x3FFFFFF) << 2)
+                if t not in stubs and not any(lo <= t < hi for lo, hi in loaded):
+                    stubs[t] = f"func_{t:08X}"
+                    game_names = game_names | {stubs[t]}
     if entry in stubs:
         del stubs[entry]  # testando uma função do próprio SDK
     guard = ((entry, entry + func_size(a.func)), (CAND_BASE, CAND_BASE + len(cand)))

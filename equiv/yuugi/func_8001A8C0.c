@@ -1,68 +1,65 @@
 #include "common.h"
 
-u8 *func_8001A8C0(u8 *arg0, u8 *arg1) {
-    s32 temp_v0_2;
-    s32 var_a3;
-    s32 var_v1;
-    s32 var_v1_2;
-    u32 var_t0;
-    u8 *var_a0;
-    u8 *var_a1;
-    u8 temp_a2;
-    u8 temp_a2_2;
-    u8 temp_a3;
-    u8 temp_v0;
+#include "ghidra.h"
+byte * func_8001A8C0(byte *param_1,byte *param_2)
 
-    var_a0 = arg0;
-    var_a1 = arg1;
-    var_t0 = 0;
-loop_1:
-    var_t0 = var_t0 >> 1;
-loop_2:
-    if (!(var_t0 & 0x100)) {
-        temp_v0 = *var_a0;
-        var_a0 += 1;
-        var_t0 = temp_v0 | 0xFF00;
-    }
-    temp_a2 = M2C_FIELD(var_a0, u8 *, 0);
-    if (!(var_t0 & 1)) {
-        *var_a1 = temp_a2;
-        var_a1 += 1;
-        var_a0 += 1;
-        goto loop_1;
-    }
-    if (!(temp_a2 & 0x80)) {
-        temp_a3 = M2C_FIELD(var_a0, u8 *, 1);
-        var_a0 += 2;
-        var_v1 = (temp_a2 >> 2) + 2;
-        var_a3 = temp_a3 | ((temp_a2 & 3) << 8);
+{
+  byte bVar1;
+  int iVar2;
+  byte *pbVar3;
+  uint uVar4;
+  uint uVar5;
+  
+  uVar5 = 0;
+  do {
+    uVar5 = uVar5 >> 1;
+    while( true ) {
+      if ((uVar5 & 0x100) == 0) {
+        bVar1 = *param_1;
+        param_1 = param_1 + 1;
+        uVar5 = bVar1 | 0xff00;
+      }
+      bVar1 = *param_1;
+      uVar4 = (uint)bVar1;
+      if ((uVar5 & 1) == 0) break;
+      if ((bVar1 & 0x80) == 0) {
+        pbVar3 = param_1 + 1;
+        param_1 = param_1 + 2;
+        iVar2 = (bVar1 >> 2) + 2;
+        uVar4 = (uint)*pbVar3 | (uVar4 & 3) << 8;
+L8001A944:
         do {
-loop_10:
-            var_v1 -= 1;
-            *var_a1 = *(var_a1 - var_a3);
-            var_a1 += 1;
-        } while (var_v1 >= 0);
-        var_t0 = var_t0 >> 1;
-        goto loop_2;
-    }
-    var_a0 += 1;
-    if (!(temp_a2 & 0x40)) {
-        var_a3 = (temp_a2 & 0xF) + 1;
-        var_v1 = (temp_a2 >> 4) - 7;
-        goto loop_10;
-    }
-    temp_v0_2 = temp_a2 & 0xFF;
-    var_v1_2 = temp_v0_2 - 0xB9;
-    if (temp_v0_2 != 0xFF) {
+          iVar2 = iVar2 + -1;
+          *param_2 = param_2[-uVar4];
+          param_2 = param_2 + 1;
+        } while (-1 < iVar2);
+        uVar5 = uVar5 >> 1;
+      }
+      else {
+        param_1 = param_1 + 1;
+        if ((bVar1 & 0x40) == 0) {
+          uVar4 = (uVar4 & 0xf) + 1;
+          iVar2 = (bVar1 >> 4) - 7;
+          goto L8001A944;
+        }
+        iVar2 = uVar4 - 0xb9;
+        pbVar3 = param_2;
+        if (uVar4 == 0xff) {
+          return param_2;
+        }
         do {
-            temp_a2_2 = *var_a0;
-            var_a0 += 1;
-            var_a1 += 1;
-            var_v1_2 -= 1;
-            M2C_FIELD(var_a1, u8 *, -1) = temp_a2_2;
-        } while (var_v1_2 >= 0);
-        var_t0 = var_t0 >> 1;
-        goto loop_2;
+          bVar1 = *param_1;
+          param_1 = param_1 + 1;
+          param_2 = pbVar3 + 1;
+          iVar2 = iVar2 + -1;
+          *pbVar3 = bVar1;
+          pbVar3 = param_2;
+        } while (-1 < iVar2);
+        uVar5 = uVar5 >> 1;
+      }
     }
-    return var_a1;
+    *param_2 = bVar1;
+    param_2 = param_2 + 1;
+    param_1 = param_1 + 1;
+  } while( true );
 }
