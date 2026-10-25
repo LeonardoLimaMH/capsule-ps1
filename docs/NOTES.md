@@ -226,3 +226,12 @@ pelo endereço, não pelo conteúdo apontado (o conteúdo inclui bytes de preenc
 inicializados que diferem entre as versões); (2) funções cujo comportamento depende de
 estado global realista (índices válidos, ponteiros) quase sempre travam com estados
 aleatórios e ficam inconclusivas — pedem entradas capturadas do jogo em execução.
+
+Detalhes que evitam falsos resultados: a aridade vem de uma análise de fluxo (quais
+`$aN` ainda podem ter o valor de entrada em cada leitura, seguindo desvios e tabelas de
+saltos `jlabel`), não de blocos lineares; o código do candidato fica na memória dos dois
+lados (um ponteiro sorteado que caia ali lê o mesmo conteúdo); escrita sobre o código
+testado (original ou candidato) ou leitura do trecho do original tornam a execução
+inconclusiva (cada lado estaria modificando/lendo um código diferente — os ganchos de
+memória do Unicorn recebem endereço físico, sem o `0x80000000`); e uma função que passa o
+próprio endereço como callback é aceita (no candidato ela tem outro endereço).

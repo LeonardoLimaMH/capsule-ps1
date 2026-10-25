@@ -23,6 +23,7 @@ Uso (dentro do container):
 Saída: 0 = equivalente; 1 = divergência; 2 = inconclusivo/não suportado.
 """
 import argparse
+import os
 import pathlib
 import random
 import re
@@ -32,7 +33,7 @@ import tempfile
 import time
 
 from unicorn import (Uc, UcError, UC_ARCH_MIPS, UC_MODE_MIPS32, UC_MODE_LITTLE_ENDIAN,
-                     UC_HOOK_INTR, UC_HOOK_CODE)
+                     UC_HOOK_INTR, UC_HOOK_CODE, UC_HOOK_MEM_WRITE, UC_HOOK_MEM_READ)
 from unicorn.mips_const import *
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -180,11 +181,12 @@ def read_cstr(uc, v):
     return data[:end]
 
 
-def same_calls(a, b, cand_lo, cand_hi, relaxed):
+def same_calls(a, b, cand_lo, cand_hi, relaxed, alias=(None, None)):
     """Chamadas iguais. relaxed (--abi): só os argumentos que a função chamada lê contam
     (tools/arity.py; o resto é lixo nos registradores), e um ponteiro diferente também
     vale se o do C aponta para a área do próprio candidato (string literal copiada) e as
-    duas strings são iguais."""
+    duas strings são iguais. alias: (endereço da função no candidato, no original): a
+    função que passa o próprio endereço (callback de si mesma) é a mesma dos dois lados."""
     (ca, sa), (cb, sb) = a, b
     if ca == cb:
         return True, None
@@ -199,14 +201,21 @@ def same_calls(a, b, cand_lo, cand_hi, relaxed):
             idx = list(range(arity.arity(x[0]))) + list(range(4, len(x) - 1))
         for i in idx:
             u, w = x[1 + i], y[1 + i]
-            if u != w and not (cand_lo <= w < cand_hi and sa[k][i] is not None and sa[k][i] == sb[k][i]):
+            if u != w and (w, u) != alias and not (cand_lo <= w < cand_hi and sa[k][i] is not None
+                                                   and sa[k][i] == sb[k][i]):
                 return False, k
     if len(ca) != len(cb):
         return False, min(len(ca), len(cb))
     return True, None
 
 
-def run(entry, regs, ram, stubs, extra, game_names=frozenset()):
+def func_size(func):
+    s = arity.asm_files().get(func)
+    m = s and re.search(r"nonmatching\s+\S+,\s*(0x[0-9A-Fa-f]+)", s.read_text(encoding="utf-8", errors="ignore"))
+    return int(m.group(1), 16) if m else 8
+
+
+def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=()):
     mu = Uc(UC_ARCH_MIPS, UC_MODE_MIPS32 | UC_MODE_LITTLE_ENDIAN)
     mu.mem_map(0x00000000, RAM_SIZE)           # kseg0 0x80000000 -> físico 0
     mu.mem_map(0x1F800000, 0x2000)             # scratchpad + registradores de I/O
@@ -255,6 +264,24 @@ def run(entry, regs, ram, stubs, extra, game_names=frozenset()):
         mu.mem_write(addr & 0x1FFFFFFF, JR_RA_NOP)
         mu.hook_add(UC_HOOK_CODE, on_stub, begin=addr, end=addr)
     mu.hook_add(UC_HOOK_INTR, on_intr)
+
+    def on_code_write(uc, access, addr, size, value, user):
+        # a função escreve sobre o código testado (o original ou o candidato): cada lado
+        # modificaria um código diferente, então a execução não diz nada
+        state["err"] = state["err"] or f"escrita no código da função em {addr:#x}"
+        uc.emu_stop()
+
+    for lo, hi in guard:
+        # ganchos de memória recebem o endereço físico (kseg0 sem o 0x80000000)
+        mu.hook_add(UC_HOOK_MEM_WRITE, on_code_write, begin=lo & 0x1FFFFFFF, end=(hi - 1) & 0x1FFFFFFF)
+
+    def on_code_read(uc, access, addr, size, value, user):
+        # leitura (como dado) do trecho do original, que no lado do C virou o desvio
+        state["err"] = state["err"] or f"leitura do código da função em {addr:#x}"
+        uc.emu_stop()
+
+    if guard:
+        mu.hook_add(UC_HOOK_MEM_READ, on_code_read, begin=guard[0][0] & 0x1FFFFFFF, end=(guard[0][1] - 1) & 0x1FFFFFFF)
     try:
         mu.emu_start(entry, SENTINEL, count=MAX_INSNS)
     except UcError as e:
@@ -309,6 +336,7 @@ def main():
         game_names = frozenset(games.values())
     if entry in stubs:
         del stubs[entry]  # testando uma função do próprio SDK
+    guard = ((entry, entry + func_size(a.func)), (CAND_BASE, CAND_BASE + len(cand)))
     jump = ((0x02 << 26) | ((cand_entry >> 2) & 0x3FFFFFF)).to_bytes(4, "little") + bytes(4)
     rng = random.Random(a.seed)
     same = inconclusive = unsupported = 0
@@ -365,8 +393,10 @@ def main():
         regs[UC_MIPS_REG_SP] = STACK_TOP
         regs[UC_MIPS_REG_GP] = GP.get(a.target, 0x80078B6C)
         try:
-            ra, ea = run(entry, regs, bytes(ram), stubs, [], game_names)
-            rb, eb = run(entry, regs, bytes(ram), stubs, [(CAND_BASE, cand), (entry, jump)], game_names)
+            # o candidato fica na memória dos dois lados: uma leitura por ponteiro sorteado
+            # que caia ali lê o mesmo conteúdo
+            ra, ea = run(entry, regs, bytes(ram), stubs, [(CAND_BASE, cand)], game_names, guard)
+            rb, eb = run(entry, regs, bytes(ram), stubs, [(CAND_BASE, cand), (entry, jump)], game_names, guard)
         except Unsupported:
             unsupported += 1
             continue
@@ -384,9 +414,11 @@ def main():
             print(f"[DIVERGENTE] tentativa {t}: original={ea or 'ok'} | C={eb or 'ok'}")
             sys.exit(1)
         (rega, mema, calla), (regb, memb, callb) = ra, rb
+        if os.environ.get("DT_DEBUG"):
+            print([(n, hex(x), hex(y)) for n, x, y in zip(REG_NAMES, rega, regb) if x != y], {k: hex(v) for k, v in regs.items()})
         bad = [n for n, x, y in zip(REG_NAMES, rega, regb)
                if x != y and not (a.abi and n == "v1") and not (a.ignore_v0 and n == "v0")]
-        ok, k = same_calls(calla, callb, CAND_BASE, CAND_BASE + len(cand), a.abi)
+        ok, k = same_calls(calla, callb, CAND_BASE, CAND_BASE + len(cand), a.abi, (cand_entry, entry))
         if not ok:
             calla, callb = calla[0], callb[0]
             fmt = lambda c: f"{c[0]}({', '.join(hex(v) for v in c[1:])})" if c else "-"
