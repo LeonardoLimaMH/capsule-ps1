@@ -98,6 +98,29 @@ def file_compiler(src):
     return m.group(1) if m else "2.7.2-psx"
 
 
+# divisão sem verificação (como no original quando ele não tem "break 7"): o cc1 emite a
+# macro "div $d,$s,$t", que o montador expande com testes de zero/estouro; aqui vira a
+# instrução crua + mflo/mfhi
+RAWDIV = (r"sed -E 's/^([[:space:]]*)(div|divu)([[:space:]]+)([$][0-9a-z]+),([$][0-9a-z]+),([$][0-9a-z]+)$/"
+          r"\1\2\3$0,\5,\6\n\1mflo\3\4/; "
+          r"s/^([[:space:]]*)rem(u?)([[:space:]]+)([$][0-9a-z]+),([$][0-9a-z]+),([$][0-9a-z]+)$/"
+          r"\1div\2\3$0,\5,\6\n\1mfhi\3\4/'")
+
+
+def wants_rawdiv(func, src):
+    """O original divide sem verificação? (tem div/divu e nenhum break 7)."""
+    t = pathlib.Path(src).read_text(encoding="utf-8", errors="replace")
+    if "/* div: raw */" in t:
+        return True
+    if "/* div: checked */" in t:
+        return False
+    a = arity.asm_files().get(func)
+    if a is None:
+        return False
+    body = a.read_text(encoding="utf-8", errors="ignore")
+    return bool(re.search(r"\bdivu?\s", body)) and "break" not in body
+
+
 def build_candidate(target, src, func, force_g0=False):
     """Compila o .c (sem os INCLUDE_ASM) e liga em CAND_BASE contra os símbolos originais.
 
@@ -110,7 +133,7 @@ def build_candidate(target, src, func, force_g0=False):
     back = g0fill.backend(obj) if g0 else f"{MASPSX} -o {obj}"
     sh(f"mips-linux-gnu-cpp {CPP_FLAGS} {src} | /opt/gcc-{file_compiler(src)}/cc1 -O2 "
        f"{'-G0' if g0 else '-G8'} {'-fno-builtin' if force_g0 else ''} -quiet -mcpu=3000 -fgnu-linker -mgas "
-       f"-msoft-float -gcoff | {back}")  # --abi: memcpy etc. chamados de verdade, como no original
+       f"-msoft-float -gcoff | {RAWDIV + ' | ' if wants_rawdiv(func, src) else ''}{back}")  # --abi: memcpy etc. chamados de verdade, como no original
     # renomeia as funções definidas no objeto (X -> X__cand) para não colidirem com
     # os símbolos do binário original; referências internas acompanham o rename
     defined = [l.split()[2] for l in sh(f"mips-linux-gnu-nm {obj}").splitlines()
