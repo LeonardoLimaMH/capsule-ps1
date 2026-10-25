@@ -1,15 +1,22 @@
 #include "common.h"
 
-extern u8 D_80091618[];
-extern u8 D_800EF364[];
-extern s32 func_800B1260(void);
+#include "ghidra.h"
+bool func_800296C0(undefined4 param_1,int param_2)
 
-s32 func_800296C0(s32 a0, s32 a1) {
-    u32 r = func_800B1260() & 0xFFFF;
-    u16 t;
-    if (r == 0xFFFF) return 0;
-    t = *(u16 *)(D_80091618 + r * 0x1A8 + 0x10);
-    if (t == 0xFFFF) return 0;
-    if (t != 1 && t != 5 && t != 3) return 0;
-    return D_800EF364[(t << 6) + a1] == 0xFF;
+{
+    extern u8 D_80091618[];
+    extern u8 D_800EF364[];
+  uint uVar1;
+  
+  uVar1 = func_800B1260();
+  if ((uVar1 & 0xffff) != 0xffff) {
+    uVar1 = (uint)*(ushort *)((uVar1 & 0xffff) * 0x1a8 + -0x7ff6e9d8);
+    if (uVar1 == 0xffff) {
+      return false;
+    }
+    if (((uVar1 == 1) || (uVar1 == 5)) || (uVar1 == 3)) {
+      return (D_800EF364)[param_2 + uVar1 * 0x40] == -1;
+    }
+  }
+  return false;
 }
