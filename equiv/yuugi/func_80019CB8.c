@@ -1,20 +1,26 @@
 #include "common.h"
 
-void func_80019CB8(void *arg0) {
-    s32 var_s0;
+#include "ghidra.h"
+void func_80019CB8(int param_1)
 
-    VSync(3);
-    do {
-
-    } while (DsControlB(9, 0, 0) == 0);
-    do {
-        var_s0 = 0;
-    } while (DsReset() == 0);
-    do {
-        VSync(0);
-        var_s0 += 1;
-    } while (var_s0 < 0xC8);
-    M2C_FIELD(arg0, s8 *, 3) = 0xFF;
-    M2C_FIELD(arg0, s8 *, 0x408) = 0;
-    M2C_FIELD(arg0, s8 *, 2) = 0;
+{
+  int iVar1;
+  int iVar2;
+  
+  VSync(3);
+  do {
+    iVar1 = DsControlB(9,0,0);
+  } while (iVar1 == 0);
+  do {
+    iVar1 = DsReset();
+    iVar2 = 0;
+  } while (iVar1 == 0);
+  do {
+    VSync(0);
+    iVar2 = iVar2 + 1;
+  } while (iVar2 < 200);
+  *(undefined1 *)(param_1 + 3) = 0xff;
+  *(undefined1 *)(param_1 + 0x408) = 0;
+  *(undefined1 *)(param_1 + 2) = 0;
+  return;
 }

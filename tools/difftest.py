@@ -45,7 +45,7 @@ STACK_TOP = 0x801FFF00
 SENTINEL = 0x80000400           # endereço de retorno falso
 MAX_INSNS = 2_000_000
 MIN_CONCLUSIVE = 0.25           # fração mínima de tentativas conclusivas
-ABI_MAX_TRIALS = 1000           # --abi: sorteios no máximo
+ABI_MAX_TRIALS = 3000           # --abi: sorteios no máximo (passa de 1000 só se já houver execuções idênticas)
 ABI_MIN_SAME = 50               # --abi: execuções completas idênticas exigidas (e nenhuma divergente)
 
 TARGETS = {
@@ -329,6 +329,8 @@ def main():
     for t in range(limit):
         if a.abi and same >= a.trials:
             break
+        if a.abi and t >= 1000 and same < 10:
+            break  # quase tudo inconclusivo: mais sorteios não vão ajudar
         done += 1
         if t % 2:
             ram = bytearray(RAM_SIZE)   # metade das tentativas com RAM zerada
