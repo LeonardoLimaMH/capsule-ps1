@@ -69,6 +69,8 @@ def todo(t, n):
         if a is None:
             continue
         txt = a.read_text(encoding="utf-8")
+        if "Handwritten function" in txt:
+            continue  # o splat já marcou como assembly escrito à mão
         if re.search(r"\b(rtps|rtpt|nclip|mvmva|avsz3|avsz4|ncds|nccs|mfc2|mtc2|cfc2|ctc2|lwc2|swc2)\b", txt):
             continue  # GTE: o difftest não emula
         m = re.search(r"nonmatching \w+, (0x[0-9A-Fa-f]+)", txt)
