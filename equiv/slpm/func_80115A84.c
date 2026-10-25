@@ -13,8 +13,8 @@ s32 func_80115A84(M2C_UNK (*arg0)(s32 *, s32), s32 *arg1, s32 arg2, s32 arg3) {
     extern u8 D_8013369C[];
     extern int func_80115D34();
     s32 *var_a3;
-    s32 temp_a0;
-    s32 temp_a1;
+    u32 temp_a0;
+    u32 temp_a1;
     s32 var_a2;
     s32 var_v0;
     s32 var_v0_2;
