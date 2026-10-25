@@ -74,7 +74,7 @@ $(BUILD_DIR)/%.ld: config/%.yaml
 # (src/<alvo>/<arq>.c -> asm/<alvo>/nonmatchings/<arq>/*.s)
 C_ASM_DEPS = $$(wildcard asm/$$(dir $$*)nonmatchings/$$(notdir $$*)/*.s)
 
-$(BUILD_DIR)/src/%.c.o: src/%.c $(C_ASM_DEPS) include/macro.inc $$(wildcard include/*.h) $$(wildcard config/compilers.txt) $$(wildcard config/g0fill.txt)
+$(BUILD_DIR)/src/%.c.o: src/%.c $(C_ASM_DEPS) include/macro.inc $$(wildcard include/*.h) $$(wildcard config/compilers.txt) $$(wildcard config/g0fill.txt) tools/aspsx_fill.py
 	@mkdir -p $(dir $@)
 	$(if $(call g0fill_for,$<),\
 	  $(CPP) $(CPP_FLAGS) $< | $(call cc1_for,$<) $(subst -G8,-G0,$(CC_FLAGS)) | $(MASPSX) $(MASPSX_NOAS) | $(PYTHON) tools/aspsx_fill.py | $(AS) $(AS_FLAGS) -o $@,\

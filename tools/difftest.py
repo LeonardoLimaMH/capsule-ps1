@@ -104,7 +104,8 @@ def build_candidate(target, src, func, force_g0=False):
     g0 = force_g0 or g0fill.enabled(src)
     back = g0fill.backend(obj) if g0 else f"{MASPSX} -o {obj}"
     sh(f"mips-linux-gnu-cpp {CPP_FLAGS} {src} | /opt/gcc-{file_compiler(src)}/cc1 -O2 "
-       f"{'-G0' if g0 else '-G8'} -quiet -mcpu=3000 -fgnu-linker -mgas -msoft-float -gcoff | {back}")
+       f"{'-G0' if g0 else '-G8'} {'-fno-builtin' if force_g0 else ''} -quiet -mcpu=3000 -fgnu-linker -mgas "
+       f"-msoft-float -gcoff | {back}")  # --abi: memcpy etc. chamados de verdade, como no original
     # renomeia as funções definidas no objeto (X -> X__cand) para não colidirem com
     # os símbolos do binário original; referências internas acompanham o rename
     defined = [l.split()[2] for l in sh(f"mips-linux-gnu-nm {obj}").splitlines()
