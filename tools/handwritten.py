@@ -45,7 +45,10 @@ def reason(words, vram):
         name = i.getOpcodeName().lower()
         if name in COP_NAMES or (i.getRaw() >> 26) in (0x10, 0x12) and not i.isNop():
             return f"coprocessador ({name})"
-        if name in ("syscall", "break"):
+        # syscall/break que o compilador não gera (break 6/7 são as verificações de
+        # divisão por zero e estouro que o GCC/ASPSX emitem em código C comum)
+        raw = i.getRaw()
+        if name == "syscall" or (name == "break" and not ((raw >> 16) & 0x3FF in (6, 7) and (raw >> 6) & 0x3FF == 0)):
             return f"instrução {name} (C não a emite)"
     # trampolim de serviço da BIOS: li $t2, 0xA0/0xB0/0xC0; jr $t2; li $t1, N
     # (o número do serviço vai em $t1, coisa que C não expressa)
