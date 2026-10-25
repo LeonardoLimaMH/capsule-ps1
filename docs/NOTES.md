@@ -243,3 +243,4 @@ próprio endereço como callback é aceita (no candidato ela tem outro endereço
 - `tools/port_equiv.py`: porta um C equivalente de função do SDK entre alvos (alinha os assemblies e troca os símbolos). O SDK PsyQ está linkado em mais de um executável.
 - difftest, outras diretivas no C: `/* rand-ptr: 0xEND N */` (N ponteiros válidos sorteados numa tabela), `/* args: small */` (a0-a3 em 0..15, índices de tabela) ou `/* argN: small */` (só o argumento N), `/* max-insns: N */` (limite menor por execução, para laços que esperam um valor que nunca chega).
 - difftest: `/* argN: 0xEND */` fixa um argumento; `/* rand-u16: 0xEND N v1,v2,... */` preenche N halfwords com valores da lista (textos com códigos de controle e terminador).
+- Frame com registros a menos que o original por constantes de laço içadas para s-regs: mover o trecho para um helper static (não é inlinado em -O2) resolve. A chamada interna não aparece no difftest, só stubs são comparados.
