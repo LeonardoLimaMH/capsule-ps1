@@ -352,7 +352,9 @@ def main():
     if m:
         global MAX_INSNS
         MAX_INSNS = int(m.group(1))
-    small_args = "/* args: small */" in (ROOT / src).read_text(encoding="utf-8", errors="replace")
+    # "/* argN: small */" (N = 0..3): só aquele argumento pequeno
+    _t = (ROOT / src).read_text(encoding="utf-8", errors="replace")
+    small_args = {0, 1, 2, 3} if "/* args: small */" in _t else {int(k) for k in re.findall(r"/\* arg([0-3]): small \*/", _t)}
     rand_ptr = [(int(x, 16), int(n, 0)) for x, n in re.findall(
         r"/\* rand-ptr: (0x[0-9A-Fa-f]+) (\w+) \*/", (ROOT / src).read_text(encoding="utf-8", errors="replace"))]
     image = (ROOT / path).read_bytes()[hdr:]
@@ -438,16 +440,16 @@ def main():
                 v = 0x80000000 | (rng.randrange(0x100000, 0x170000) & ~0xF)
                 ram[o + 4 * i:o + 4 * i + 4] = v.to_bytes(4, "little")
 
-        def arg():
+        def arg(i):
             k = rng.random()
-            if small_args:
+            if i in small_args:
                 return rng.randrange(0, 16)
             if k < 0.3:
                 return rng.randrange(0, 16)
             if k < 0.7:  # ponteiro para dentro da RAM (área de dados/heap)
                 return 0x80000000 | (rng.randrange(0x100000, 0x170000) & ~3)
             return rng.getrandbits(32)
-        regs = {r: arg() for r in (UC_MIPS_REG_A0, UC_MIPS_REG_A1, UC_MIPS_REG_A2, UC_MIPS_REG_A3)}
+        regs = {r: arg(i) for i, r in enumerate((UC_MIPS_REG_A0, UC_MIPS_REG_A1, UC_MIPS_REG_A2, UC_MIPS_REG_A3))}
         for r in REGS[2:11]:
             regs[r] = rng.getrandbits(32)
         regs[UC_MIPS_REG_SP] = STACK_TOP
