@@ -16,20 +16,20 @@ emulação contra a função original.
 ## Progresso
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.51%**  
-**Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.03%**  
-**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **4.53%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████░░░░░░░░░░░░░` **34.61%**  
+**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.11%**  
+**Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **1.12%**  
+**Cobertura (C + funções que já eram assembly no original):** `░░░░░░░░░░░░░░░░░░░░` **2.30%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████░░░░░░░░░░░░░` **34.98%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | executável principal | 2.80% (5,772 / 206,372 B) | 142 / 732 | 8.79% (84 / 303 fn) | **3.99%** |
-| `SLPM_860.96` | loader / boot | 4.76% (988 / 20,756 B) | 27 / 119 | 6.57% (70 / 215 fn) | **5.99%** |
+| `YUUGI.EXE` | executável principal | 0.00% (0 / 0 B) | 0 / 0 | 0.00% (0 / 0 fn) | **0.00%** |
+| `SLPM_860.96` | loader / boot | 0.00% (0 / 0 B) | 0 / 0 | 0.00% (0 / 0 fn) | **0.00%** |
 | `CHESS.BIN` | overlay de batalha (tabuleiro) | 0.82% (3,476 / 421,956 B) | 61 / 867 | 100.00% (2 / 2 fn) | **0.84%** |
 | `RAISE.BIN` | overlay de criação de monstros | 1.52% (4,972 / 326,576 B) | 181 / 940 | 100.00% (2 / 2 fn) | **1.54%** |
 | `ETC.BIN` | overlay de menus/diversos | 0.92% (816 / 88,992 B) | 10 / 189 | 0.00% (0 / 0 fn) | **0.92%** |
-| **Total** | | **1.51%** (16,024 / 1,064,652 B) | 421 / 2847 | 7.89% (158 / 522 fn) | **2.03%** |
+| **Total** | | **1.11%** (9,264 / 837,524 B) | 252 / 1996 | 100.00% (4 / 4 fn) | **1.12%** |
 <!-- PROGRESS:END -->
 
 A **cobertura** soma ao C as funções que já eram escritas em assembly no
