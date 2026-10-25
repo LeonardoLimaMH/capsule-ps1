@@ -237,3 +237,4 @@ memória do Unicorn recebem endereço físico, sem o `0x80000000`); e uma funç�
 próprio endereço como callback é aceita (no candidato ela tem outro endereço).
 
 - difftest: um C avulso (equiv/, rascunho) pode escolher o compilador com a diretiva `/* compiler: 2.8.1-psx */` no próprio arquivo (necessário para funções da libc/libcard compiladas com 2.8.1, cujo frame difere no 2.7.2).
+- difftest `--stub-ret mixed` (ou a diretiva `/* stub-ret: mixed */` no C): com --isolate, os stubs devolvem também 0..31 (sorteado por tentativa, igual nos dois lados). Cobre laços que dependem do retorno (OpenTMD/ReadTMD, esperas por status) que com o retorno-ponteiro fixo nunca rodavam ou não terminavam.

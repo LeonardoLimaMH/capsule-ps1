@@ -217,7 +217,7 @@ def func_size(func):
     return int(m.group(1), 16) if m else 8
 
 
-def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=()):
+def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=None):
     mu = Uc(UC_ARCH_MIPS, UC_MODE_MIPS32 | UC_MODE_LITTLE_ENDIAN)
     mu.mem_map(0x00000000, RAM_SIZE)           # kseg0 0x80000000 -> físico 0
     mu.mem_map(0x1F800000, 0x2000)             # scratchpad + registradores de I/O
@@ -249,7 +249,15 @@ def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=()):
         strings.append(tuple(read_cstr(uc, v) for v in args))
         if game_names:
             # --isolate: retorno que serve de inteiro e de ponteiro (alinhado, dentro da RAM)
-            uc.reg_write(UC_MIPS_REG_V0, 0x80120000 + len(calls) * 0x40)
+            v = 0x80120000 + len(calls) * 0x40
+            if salt is not None:
+                # --stub-ret mixed: retorno sorteado por tentativa (igual nos dois lados),
+                # para exercitar caminhos que dependem de 0/1/contagens pequenas
+                h = ((salt ^ (len(calls) * 0x9E3779B1)) * 0x85EBCA6B) & 0xFFFFFFFF
+                h ^= h >> 13
+                k = h % 10
+                v = h >> 8 & 3 if k < 4 else h >> 8 & 31 if k < 6 else v
+            uc.reg_write(UC_MIPS_REG_V0, v)
         else:
             uc.reg_write(UC_MIPS_REG_V0, (len(calls) * 0x9E3779B1) & 0xFFFF)  # retorno determinístico
 
@@ -315,6 +323,9 @@ def main():
     ap.add_argument("--check-v1", action="store_true",
                     help="com --abi: compara também v1 (algum chamador lê a metade alta de um "
                          "retorno de 64 bits, tools/retuse.py)")
+    ap.add_argument("--stub-ret", choices=("ptr", "mixed"), default="ptr",
+                    help="com --isolate: 'mixed' faz os stubs devolverem também 0..31 (sorteado por "
+                         "tentativa), cobrindo laços que dependem do retorno")
     ap.add_argument("--ignore-v0", action="store_true",
                     help="nenhum chamador lê o retorno (tools/retuse.py): v0 não é comparado")
     a = ap.parse_args()
@@ -324,6 +335,10 @@ def main():
     else:
         src = next(str(p.relative_to(ROOT)) for p in sorted((ROOT / "src" / a.target).rglob("*.c"))
                    if re.search(rf"^\S.*\b{a.func}\s*\([^;]*$", p.read_text(encoding="utf-8"), re.M))
+    # diretiva no próprio C: "/* stub-ret: mixed */" (o teste fica reproduzível em rechecagens)
+    m = re.search(r"/\* stub-ret: (\w+) \*/", (ROOT / src).read_text(encoding="utf-8", errors="replace"))
+    if m:
+        a.stub_ret = m.group(1)
     image = (ROOT / path).read_bytes()[hdr:]
     main_image = None
     if a.target in ("chess", "raise", "etc"):
@@ -397,11 +412,12 @@ def main():
             regs[r] = rng.getrandbits(32)
         regs[UC_MIPS_REG_SP] = STACK_TOP
         regs[UC_MIPS_REG_GP] = GP.get(a.target, 0x80078B6C)
+        salt = rng.getrandbits(32) if a.stub_ret == "mixed" else None
         try:
             # o candidato fica na memória dos dois lados: uma leitura por ponteiro sorteado
             # que caia ali lê o mesmo conteúdo
-            ra, ea = run(entry, regs, bytes(ram), stubs, [(CAND_BASE, cand)], game_names, guard)
-            rb, eb = run(entry, regs, bytes(ram), stubs, [(CAND_BASE, cand), (entry, jump)], game_names, guard)
+            ra, ea = run(entry, regs, bytes(ram), stubs, [(CAND_BASE, cand)], game_names, guard, salt)
+            rb, eb = run(entry, regs, bytes(ram), stubs, [(CAND_BASE, cand), (entry, jump)], game_names, guard, salt)
         except Unsupported:
             unsupported += 1
             continue
