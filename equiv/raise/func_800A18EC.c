@@ -10,7 +10,7 @@ void func_800A18EC(void) {
     extern u8 D_800F2D98[];
     extern u8 D_8010126A[];
     s16 *var_a1;
-    s32 temp_v0;
+    u32 temp_v0;
     s32 var_a0;
     s32 var_a0_2;
     s32 var_a2;

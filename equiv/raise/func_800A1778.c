@@ -6,8 +6,8 @@ s32 func_800A1778(void) {
     extern u8 D_800F2D30[];
     extern u8 D_800F2D98[];
     extern int func_80012508();
-    s32 temp_a0;
-    s32 temp_s3;
+    u32 temp_a0;
+    u32 temp_s3;
     s32 var_v0;
     u16 temp_s2;
     u8 *temp_s0;
@@ -16,7 +16,7 @@ s32 func_800A1778(void) {
     u8 temp_s1;
     u8 var_v1;
 
-    temp_s2 = *(u16 *)(((*D_8006AF80) * 0x1A8) + D_80091618);
+    temp_s2 = *(s8 *)(((*D_8006AF80) * 0x1A8) + D_80091618);
     temp_a0 = temp_s2 & 0xFFFF;
     temp_s0 = temp_a0 + D_800F2D30;
     temp_s1 = *temp_s0;
