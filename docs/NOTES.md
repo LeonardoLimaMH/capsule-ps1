@@ -240,3 +240,4 @@ próprio endereço como callback é aceita (no candidato ela tem outro endereço
 - difftest `--stub-ret mixed` (ou a diretiva `/* stub-ret: mixed */` no C): com --isolate, os stubs devolvem também 0..31 (sorteado por tentativa, igual nos dois lados). Cobre laços que dependem do retorno (OpenTMD/ReadTMD, esperas por status) que com o retorno-ponteiro fixo nunca rodavam ou não terminavam.
 - difftest --isolate: `jal` para fora das imagens carregadas (função de overlay chamada pelo principal) também vira stub, em vez de executar memória vazia.
 - difftest: diretiva `/* rand-mem: 0xENDEREÇO N MÁX */` sorteia N bytes da RAM em [0, MÁX) por tentativa (iguais nos dois lados). Globais da imagem são fixas em todas as tentativas; sem isso, uma máquina de estados só teria o estado inicial testado.
+- `tools/port_equiv.py`: porta um C equivalente de função do SDK entre alvos (alinha os assemblies e troca os símbolos). O SDK PsyQ está linkado em mais de um executável.
