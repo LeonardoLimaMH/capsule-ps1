@@ -343,6 +343,18 @@ def main():
     # (iguais nos dois lados), p.ex. a variável de estado de uma máquina de estados
     rand_mem = [(int(x, 16), int(n, 0), int(mx, 0)) for x, n, mx in re.findall(
         r"/\* rand-mem: (0x[0-9A-Fa-f]+) (\w+) (\w+) \*/", (ROOT / src).read_text(encoding="utf-8", errors="replace"))]
+    # "/* rand-ptr: ENDEREÇO N */": N palavras com ponteiros sorteados para a RAM de dados
+    # (alinhados), p.ex. uma tabela de ponteiros que na imagem ainda está vazia
+    # "/* args: small */": argumentos sempre pequenos (0..15), p.ex. índices de tabela
+    # "/* max-insns: N */": limite menor de instruções por execução (laços que esperam
+    # um valor que nunca chega terminam logo como inconclusivos, sem gastar o tempo todo)
+    m = re.search(r"/\* max-insns: (\d+) \*/", (ROOT / src).read_text(encoding="utf-8", errors="replace"))
+    if m:
+        global MAX_INSNS
+        MAX_INSNS = int(m.group(1))
+    small_args = "/* args: small */" in (ROOT / src).read_text(encoding="utf-8", errors="replace")
+    rand_ptr = [(int(x, 16), int(n, 0)) for x, n in re.findall(
+        r"/\* rand-ptr: (0x[0-9A-Fa-f]+) (\w+) \*/", (ROOT / src).read_text(encoding="utf-8", errors="replace"))]
     image = (ROOT / path).read_bytes()[hdr:]
     main_image = None
     if a.target in ("chess", "raise", "etc"):
@@ -420,9 +432,16 @@ def main():
         for addr, n, mx in rand_mem:
             o = addr & 0x1FFFFFFF
             ram[o:o + n] = bytes(rng.randrange(mx) for _ in range(n))
+        for addr, n in rand_ptr:
+            o = addr & 0x1FFFFFFF
+            for i in range(n):
+                v = 0x80000000 | (rng.randrange(0x100000, 0x170000) & ~0xF)
+                ram[o + 4 * i:o + 4 * i + 4] = v.to_bytes(4, "little")
 
         def arg():
             k = rng.random()
+            if small_args:
+                return rng.randrange(0, 16)
             if k < 0.3:
                 return rng.randrange(0, 16)
             if k < 0.7:  # ponteiro para dentro da RAM (área de dados/heap)
