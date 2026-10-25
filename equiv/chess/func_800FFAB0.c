@@ -4,8 +4,8 @@ void func_800FFAB0(s32 arg0, s32 arg1) {
     extern u8 D_8008ED68[];
     extern u8 D_801010B0[];
     extern u8 D_801021B8[];
-    s32 temp_fp;
-    s32 temp_s0;
+    u32 temp_fp;
+    u32 temp_s0;
     s32 var_a2;
     s32 var_s1;
     s32 var_v0;
@@ -21,7 +21,7 @@ void func_800FFAB0(s32 arg0, s32 arg1) {
 
     temp_s4 = arg0 + 0x5D0;
     temp_s0 = M2C_FIELD((arg0 + arg1), u8 *, 0x5DE) - 1;
-    temp_fp = *(s8 *)((M2C_FIELD(temp_s4, u8 *, 9) * 0x34) + D_801010B0);
+    temp_fp = *(u16 *)((M2C_FIELD(temp_s4, u8 *, 9) * 0x34) + D_801010B0);
     if (M2C_FIELD((temp_s4 + arg1), u8 *, 0x10) == 0) {
         temp_a1 = (arg1 * 4) + D_8008ED68;
         var_a2 = M2C_FIELD(temp_a1, s32 *, 0x9EC);
