@@ -13,9 +13,9 @@ s32 slpm_CD_sync(s32 arg0, u8 *arg1) {
     extern s32 D_80134EF0[];
     extern s32 D_80134EF4[];
     extern M2C_UNK * D_80134EF8[];
-    s32 temp_a2;
-    s32 temp_v0;
-    s32 temp_v1;
+    u32 temp_a2;
+    u32 temp_v0;
+    u32 temp_v1;
     s32 var_v0;
     s32 var_v0_2;
     s32 var_v0_3;
