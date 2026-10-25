@@ -29,6 +29,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 
 from unicorn import (Uc, UcError, UC_ARCH_MIPS, UC_MODE_MIPS32, UC_MODE_LITTLE_ENDIAN,
                      UC_HOOK_INTR, UC_HOOK_CODE)
@@ -46,6 +47,7 @@ SENTINEL = 0x80000400           # endereço de retorno falso
 MAX_INSNS = 2_000_000
 MIN_CONCLUSIVE = 0.25           # fração mínima de tentativas conclusivas
 ABI_MAX_TRIALS = 3000           # --abi: sorteios no máximo (passa de 1000 só se já houver execuções idênticas)
+ABI_MAX_SECONDS = 240           # --abi: tempo máximo de sorteios por função
 ABI_MIN_SAME = 50               # --abi: execuções completas idênticas exigidas (e nenhuma divergente)
 
 TARGETS = {
@@ -326,12 +328,15 @@ def main():
     # --abi: estados em que os dois lados travam não contam; continua sorteando (até
     # ABI_MAX_TRIALS) até juntar a.trials execuções completas idênticas
     limit = ABI_MAX_TRIALS if a.abi else a.trials
+    started = time.monotonic()
     done = 0
     for t in range(limit):
         if a.abi and same >= a.trials:
             break
         if a.abi and t >= 1000 and same < 10:
             break  # quase tudo inconclusivo: mais sorteios não vão ajudar
+        if a.abi and time.monotonic() - started > ABI_MAX_SECONDS:
+            break  # laços longos no limite de instruções: decide com o que já tem
         done += 1
         if t % 2:
             ram = bytearray(RAM_SIZE)   # metade das tentativas com RAM zerada
