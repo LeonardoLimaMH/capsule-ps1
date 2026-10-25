@@ -17,6 +17,7 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import autodecomp as ad  # noqa: E402
 import retuse  # noqa: E402
+from handwritten import load as load_handwritten  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
@@ -60,8 +61,9 @@ def test(t, f, src):
 
 def todo(t, n):
     rows = []
+    hand = load_handwritten(t)
     for _, f in ad.pending_functions(t):
-        if (ROOT / "equiv" / t / f"{f}.c").exists():
+        if (ROOT / "equiv" / t / f"{f}.c").exists() or f in hand:
             continue
         a = ad.asm_path(t, f)
         if a is None:
