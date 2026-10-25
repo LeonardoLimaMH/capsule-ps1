@@ -59,58 +59,61 @@ def regs_of(op, args):
     return (regs if op in NO_DEST else regs[1:]), (None if op in NO_DEST or not regs else regs[0])
 
 
-def reads_v0_from(caller, ins, labels, k, seen, stack):
-    """$v0 é lido em algum caminho a partir da instrução k (dentro de `caller`)?"""
+def reads_v0_from(caller, ins, labels, k, seen, stack, reg="$v0"):
+    """$v0 (ou `reg`) é lido em algum caminho a partir da instrução k (dentro de `caller`)?"""
     while k < len(ins):
         if k in seen:
             return False
         seen.add(k)
         op, args = ins[k]
         srcs, dst = regs_of(op, args)
-        if "$v0" in srcs:
+        if reg in srcs:
             return True
-        if op == "jal":
+        if op == "jal" or (op == "jalr" and reg != "$v0"):
+            # (jalr: chamada por ponteiro; para $v0 continua conservador)
             # o delay slot ainda executa antes da chamada; depois o $v0 está morto
-            if k + 1 < len(ins) and "$v0" in regs_of(*ins[k + 1])[0]:
+            if k + 1 < len(ins) and reg in regs_of(*ins[k + 1])[0]:
                 return True
             return False
         if op == "jr" and args.strip() == "$ra":
-            # o $v0 vira o retorno do chamador: usado só se o retorno dele for usado
-            return used(caller, stack)
+            # o $v0 vira o retorno do chamador: usado só se o retorno dele for usado.
+            # $v1 só sai de função que devolve 64 bits (raro): aqui ele é lixo
+            return reg == "$v0" and used(caller, stack, reg)
         if op in ("jr", "jalr"):
             return True  # salto indireto: conservador
         if op in BRANCH or op in ("j", "b"):
             # o delay slot executa nos dois caminhos
             if k + 1 < len(ins):
                 dsrcs, ddst = regs_of(*ins[k + 1])
-                if "$v0" in dsrcs:
+                if reg in dsrcs:
                     return True
-                if ddst == "$v0":
+                if ddst == reg:
                     return False
             target = args.split(",")[-1].strip()
             t = labels.get(target)
             if t is None:
                 return True  # destino fora da função ou não reconhecido
-            if reads_v0_from(caller, ins, labels, t, seen, stack):
+            if reads_v0_from(caller, ins, labels, t, seen, stack, reg):
                 return True
             if op in ("j", "b"):
                 return False
             k += 2  # condicional: segue também o caminho que não salta
             continue
-        if dst == "$v0":
+        if dst == reg:
             return False  # sobrescrito antes de qualquer leitura
         k += 1
     return True
 
 
-def used(func, stack=()):
+def used(func, stack=(), reg="$v0"):
+    """reg="$v1": a metade alta de um retorno de 64 bits (double/long long)."""
     if func in stack or len(stack) > 12:
         return True  # ciclo/cadeia longa: conservador
     sites = call_sites().get(func)
     if not sites:
-        return True  # sem chamada direta visível: não dá para afirmar nada
+        return reg == "$v0"  # sem chamada direta visível: não dá para afirmar nada ($v1: raro)
     stack = stack + (func,)
-    return any(reads_v0_from(name, ins, labels, i + 2, set(), stack) for name, ins, labels, i in sites)
+    return any(reads_v0_from(name, ins, labels, i + 2, set(), stack, reg) for name, ins, labels, i in sites)
 
 
 if __name__ == "__main__":

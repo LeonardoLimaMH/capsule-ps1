@@ -310,6 +310,9 @@ def main():
     ap.add_argument("--isolate", action="store_true",
                     help="com --abi: funções do jogo chamadas também viram stubs (argumentos de "
                          "registrador e de pilha comparados)")
+    ap.add_argument("--check-v1", action="store_true",
+                    help="com --abi: compara também v1 (algum chamador lê a metade alta de um "
+                         "retorno de 64 bits, tools/retuse.py)")
     ap.add_argument("--ignore-v0", action="store_true",
                     help="nenhum chamador lê o retorno (tools/retuse.py): v0 não é comparado")
     a = ap.parse_args()
@@ -417,7 +420,7 @@ def main():
         if os.environ.get("DT_DEBUG"):
             print([(n, hex(x), hex(y)) for n, x, y in zip(REG_NAMES, rega, regb) if x != y], {k: hex(v) for k, v in regs.items()})
         bad = [n for n, x, y in zip(REG_NAMES, rega, regb)
-               if x != y and not (a.abi and n == "v1") and not (a.ignore_v0 and n == "v0")]
+               if x != y and not (a.abi and n == "v1" and not a.check_v1) and not (a.ignore_v0 and n == "v0")]
         ok, k = same_calls(calla, callb, CAND_BASE, CAND_BASE + len(cand), a.abi, (cand_entry, entry))
         if not ok:
             calla, callb = calla[0], callb[0]

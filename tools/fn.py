@@ -45,6 +45,8 @@ def show(t, f):
 
 def test(t, f, src):
     extra = [] if retuse.used(f) else ["--ignore-v0"]
+    if retuse.used(f, reg="$v1"):
+        extra.append("--check-v1")  # retorno de 64 bits: a metade alta também conta
     r = subprocess.run(["python3", "tools/difftest.py", t, f, "--src", src, "--abi", "--isolate"] + extra,
                        cwd=ROOT, capture_output=True, text=True, timeout=900)
     msg = (r.stdout.strip().splitlines() or [r.stderr.strip()[-600:]])[-1]
