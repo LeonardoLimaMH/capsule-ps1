@@ -58,6 +58,11 @@ def reason(words, vram):
     if (len(ins) >= 3 and words[0] >> 16 == 0x240A and (words[0] & 0xFFFF) in (0xA0, 0xB0, 0xC0)
             and words[1] == 0x01400008 and words[2] >> 16 == 0x2409):
         return f"trampolim da BIOS ({words[0] & 0xFFFF:#04x}, serviço {words[2] & 0xFFFF:#04x})"
+    # chamada direta à BIOS no meio da função: li $t2, 0xA0/0xB0/0xC0 seguido de jalr $t2
+    # (número do serviço em $t1, o que C não expressa)
+    for k, w in enumerate(words):
+        if w >> 16 == 0x240A and (w & 0xFFFF) in (0xA0, 0xB0, 0xC0) and 0x0140F809 in words[k + 1:k + 4]:
+            return f"chamada direta à BIOS ({w & 0xFFFF:#04x})"
 
     def ends(i):
         return i.hasDelaySlot() and (i.isReturn() or i.isJrNotRa() or i.isUnconditionalBranch()
