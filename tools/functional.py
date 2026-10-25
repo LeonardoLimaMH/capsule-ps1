@@ -58,6 +58,10 @@ def try_function(target, func, every=False):
     if not cands:
         return func, "sem rascunho que compile"
     out = EQUIV / target / f"{func}.c"
+    if out.exists():
+        # a lista é montada no início da rodada (que pode durar horas): um C aceito
+        # nesse meio-tempo (p.ex. escrito à mão) não pode ser sobrescrito nem apagado
+        return func, "já equivalente"
     out.parent.mkdir(parents=True, exist_ok=True)
     code, msg = 2, "sem rascunho"
     for cand in cands:
