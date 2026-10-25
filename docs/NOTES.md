@@ -235,3 +235,5 @@ testado (original ou candidato) ou leitura do trecho do original tornam a execu�
 inconclusiva (cada lado estaria modificando/lendo um código diferente — os ganchos de
 memória do Unicorn recebem endereço físico, sem o `0x80000000`); e uma função que passa o
 próprio endereço como callback é aceita (no candidato ela tem outro endereço).
+
+- difftest: um C avulso (equiv/, rascunho) pode escolher o compilador com a diretiva `/* compiler: 2.8.1-psx */` no próprio arquivo (necessário para funções da libc/libcard compiladas com 2.8.1, cujo frame difere no 2.7.2).

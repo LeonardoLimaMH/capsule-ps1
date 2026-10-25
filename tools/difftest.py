@@ -93,7 +93,9 @@ def file_compiler(src):
             p = l.split("#")[0].split()
             if len(p) == 2 and p[0] == key:
                 return p[1]
-    return "2.7.2-psx"
+    # C avulso (equiv/, rascunhos): diretiva "/* compiler: X */" no próprio arquivo
+    m = re.search(r"/\* compiler: (\S+) \*/", pathlib.Path(src).read_text(encoding="utf-8", errors="replace"))
+    return m.group(1) if m else "2.7.2-psx"
 
 
 def build_candidate(target, src, func, force_g0=False):
