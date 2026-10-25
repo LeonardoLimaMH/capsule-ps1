@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.51%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.03%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **4.64%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `█████████████░░░░░░░` **63.04%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `█████████████░░░░░░░` **64.43%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
