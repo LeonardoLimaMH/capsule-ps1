@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `████████████████░░░░` **78.68%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `████████████████░░░░` **79.16%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -37,10 +37,10 @@ emulação contra a função original.
 |---|---|---|---|---|
 | `YUUGI.EXE` | 83.93% (648 fn) | `█████████░` **87.93%** | 874 / 1,035 (84.44%) | **161** |
 | `SLPM_860.96` | 82.92% (198 fn) | `█████████░` **88.90%** | 295 / 334 (88.32%) | **39** |
-| `CHESS.BIN` | 60.81% (565 fn) | `██████░░░░` **62.55%** | 667 / 869 (76.75%) | **202** |
-| `RAISE.BIN` | 82.52% (713 fn) | `████████░░` **84.38%** | 905 / 942 (96.07%) | **37** |
+| `CHESS.BIN` | 61.12% (566 fn) | `██████░░░░` **62.86%** | 668 / 869 (76.87%) | **201** |
+| `RAISE.BIN` | 83.83% (716 fn) | `█████████░` **85.69%** | 908 / 942 (96.39%) | **34** |
 | `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 76.23% (2,303 fn) | `████████░░` **78.68%** | 2,930 / 3,369 (86.97%) | **439** |
+| **Total** | 76.71% (2,307 fn) | `████████░░` **79.16%** | 2,934 / 3,369 (87.09%) | **435** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
@@ -269,6 +269,15 @@ o pseudo-C nem sempre explicita o sinal correto. O gerador testa variantes `s8`
 e `u8`, confrontadas com `lb`/`lbu` e as execuções originais, em vez de aplicar
 uma conversão global como certeza. Essas regras produzem candidatos;
 a compilação e os testes diferenciais ainda decidem se cada função é aceita.
+
+Na frente funcional, o m2c recebe `--target mipsel-gcc-c`, correspondente à ordem
+de bytes do PS1. Interpretar um par `lwl/lwr` little-endian como MIPS big-endian
+produzia erros de pares incompletos e offsets incorretos. As cópias completas de
+32 bits usam acessos packed nos dois lados; testes executam todas as combinações
+de alinhamento da origem e destino com GCC 2.7.2 e 2.8.1, verificando também os
+bytes vizinhos. Instruções parciais não resolvidas continuam reprovadas.
+`--m2c-target mips-gcc-c` permite uma rodada de comparação. Essa seleção é da
+frente funcional; o pipeline padrão de busca byte-exact mantém sua configuração.
 
 Há também uma candidata separada para aritmética de endereços em bytes.
 Inferir `u32` de um load não prova que `&objeto + deslocamento` deva multiplicar

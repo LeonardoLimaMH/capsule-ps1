@@ -18,12 +18,14 @@ import time
 import arggaps
 import autodecomp as ad
 import functional_ghidra
+import functional_m2c
 import retuse
 from handwritten import load as handwritten
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CACHE = ROOT / '.cache/functional_batch'
 REAL_CALLEES = set()
+M2C_TARGET = 'mipsel-gcc-c'
 
 
 def candidates(target, func):
@@ -37,7 +39,8 @@ def candidates(target, func):
     for name in sorted(REAL_CALLEES & set(re.findall(r'\bjal\s+(\w+)', asm_text))):
         state_profile += '/* real-callee: ' + name + ' */\n'
     out = []
-    m2c = ad.run_m2c(target, func, asm)
+    m2c_flags = ('--target', M2C_TARGET)
+    m2c = ad.run_m2c(target, func, asm, m2c_flags)
     for char_signed in (True, False):
         typed = functional_ghidra.draft(target, func, asm_text, m2c or '', char_signed=char_signed)
         if typed:
@@ -49,7 +52,8 @@ def candidates(target, func):
     best = ad.load_best(target, func)
     if best and best.get('c'):
         out.append(('cached', ad.scalarize(best['c']) if '+g0fill' in best.get('gcc', '') else best['c']))
-    out.extend(('draft', c) for c in ad.all_drafts(target, func))
+    out.extend(('draft', functional_m2c.unaligned_words(c))
+               for c in ad.all_drafts(target, func, m2c_flags=m2c_flags))
     seen, result = set(), []
     char_variants = []
     for label, code in out:
@@ -121,12 +125,14 @@ def try_function(target, func, seconds=45, budget=180, prepared=None, seeds=(1, 
             break
     rec = {'target': target, 'func': func, 'status': 'accepted' if accepted else 'pending',
            'sha256': accepted, 'seeds': list(seeds),
+           'return_options': extra, 'm2c_target': M2C_TARGET,
            'seconds': round(time.monotonic() - started, 2), 'attempts': attempts}
     (folder / 'result.json').write_text(json.dumps(rec, ensure_ascii=False, indent=2))
     return rec
 
 
 def main():
+    global M2C_TARGET
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('targets', nargs='+', choices=['chess', 'raise', 'yuugi', 'slpm', 'etc'])
     ap.add_argument('--jobs', type=int, default=4)
@@ -142,8 +148,11 @@ def main():
                     help='defer functions larger than this byte size (0 means no size limit)')
     ap.add_argument('--resume', action='store_true', help='skip completed result records; omit after changing draft generation')
     ap.add_argument('--ghidra-cache', help='alternative Ghidra C cache containing target/function.c')
+    ap.add_argument('--m2c-target', choices=['mipsel-gcc-c', 'mips-gcc-c'], default='mipsel-gcc-c',
+                    help='m2c input byte order; PS1 uses mipsel (byte-exact search defaults are unchanged)')
     ap.add_argument('--real-callee', action='append', default=[], help='execute this helper when called; persist the test profile in C')
     args = ap.parse_args()
+    M2C_TARGET = args.m2c_target
     if args.jobs < 1 or args.draft_jobs < 1 or args.prefetch < 0 or not args.seeds:
         ap.error('worker counts must be positive; prefetch must not be negative')
     REAL_CALLEES.update(args.real_callee)

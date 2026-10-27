@@ -409,7 +409,7 @@ def retype_derefs(c, width):
     return "".join(out) if changed else None
 
 
-def all_drafts(target, func):
+def all_drafts(target, func, m2c_flags=()):
     """Todos os rascunhos C de uma função, sem compilar (frente funcional: qualquer um
     que passe no teste diferencial serve, não só o mais próximo em instruções)."""
     asm = asm_path(target, func)
@@ -422,9 +422,9 @@ def all_drafts(target, func):
         if c and c not in seen:
             seen.add(c)
             out.append(c)
-    base = run_m2c(target, func, asm)
+    base = run_m2c(target, func, asm, m2c_flags)
     for flags in [(), ("--no-andor",)]:
-        d = base if not flags else run_m2c(target, func, asm, flags)
+        d = base if not flags else run_m2c(target, func, asm, tuple(flags) + tuple(m2c_flags))
         if d:
             for v in ({}, {"unsigned": True}):
                 add(to_c(d, func, asm_text, v))

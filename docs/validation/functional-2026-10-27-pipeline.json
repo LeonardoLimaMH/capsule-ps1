@@ -445,5 +445,95 @@
     ],
     "validated_source_sha256": "e8e1c631943dbeb52fc030ca7333805a6c45ef6d47448ba48349d1bdeb6f7915",
     "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800D0360",
+    "source_sha256": "cdb8a3517ddeeacde73fe39d57db118c3a58dd9dccfa5cffead1cde5e84a7daa",
+    "accepted": true,
+    "candidate_batch": "functional_v8",
+    "results": [
+      {
+        "variant": "draft",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D0360 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "draft",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D0360 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ]
+  },
+  {
+    "target": "raise",
+    "func": "func_800B6624",
+    "source_sha256": "a3f45e14726fe169051aa49dbceaeb5c8505fa657391e61e0a7d9522c633cfae",
+    "accepted": true,
+    "candidate_batch": "functional_v8",
+    "results": [
+      {
+        "variant": "ghidra-typed+byte-address",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800B6624 \u2014 200 tentativas id\u00eanticas, 206 inconclusivas, 5 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "ghidra-typed+byte-address",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800B6624 \u2014 200 tentativas id\u00eanticas, 198 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ],
+    "validated_source_sha256": "a8d920822a34fb5ed2df30019c3c5e959bb6b4bfecc7456b2dafe1307e63494e",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "raise",
+    "func": "func_800D1598",
+    "source_sha256": "49181510fe15c7d72aa432f007391bfef694445a96bcce50457310f90eb35ff5",
+    "accepted": true,
+    "candidate_batch": "functional_v8",
+    "results": [
+      {
+        "variant": "ghidra-typed",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800D1598 \u2014 200 tentativas id\u00eanticas, 185 inconclusivas, 5 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "ghidra-typed",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800D1598 \u2014 200 tentativas id\u00eanticas, 189 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ],
+    "validated_source_sha256": "8c1e99f255ce4c0f6a6788b2315d1d3f790721a436858cd4bf30fdadda244e14",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "raise",
+    "func": "func_800D4EC0",
+    "source_sha256": "f52f7a8313df78ddb12de04eb70d1b3c4e160274ff3d5231ef3f44e13138864f",
+    "accepted": true,
+    "candidate_batch": "functional_v8",
+    "results": [
+      {
+        "variant": "ghidra-typed+byte-address",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800D4EC0 \u2014 200 tentativas id\u00eanticas, 206 inconclusivas, 5 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "ghidra-typed+byte-address",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800D4EC0 \u2014 200 tentativas id\u00eanticas, 198 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ],
+    "validated_source_sha256": "3fb82b14a67740f9f4e369a782e75f6125dbbe51a13927080672b25d58bac3af",
+    "whitespace_cleanup_identical_linked_blob": true
   }
 ]
