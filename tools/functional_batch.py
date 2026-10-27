@@ -23,6 +23,7 @@ from handwritten import load as handwritten
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CACHE = ROOT / '.cache/functional_batch'
+REAL_CALLEES = set()
 
 
 def candidates(target, func):
@@ -33,8 +34,11 @@ def candidates(target, func):
     state_profile = ''
     if functional_ghidra.access_types(asm_text).get(0x8008EE54) in ('s16', 'u16'):
         state_profile = '/* rand-u16: 0x8008EE54 1 0,1,2,3,4,5,6,7,8,9,10,15,19,20,21,31,32,63,64,98,99,100,65535 */\n'
+    for name in sorted(REAL_CALLEES & set(re.findall(r'\bjal\s+(\w+)', asm_text))):
+        state_profile += '/* real-callee: ' + name + ' */\n'
     out = []
-    typed = functional_ghidra.draft(target, func, asm_text)
+    m2c = ad.run_m2c(target, func, asm)
+    typed = functional_ghidra.draft(target, func, asm_text, m2c or '')
     if typed:
         out.append(('ghidra-typed', typed))
     best = ad.load_best(target, func)
@@ -43,6 +47,8 @@ def candidates(target, func):
     out.extend(('draft', c) for c in ad.all_drafts(target, func))
     seen, result = set(), []
     for label, code in out:
+        if '#include "ghidra.h"' in code:
+            code = functional_ghidra.signed_chars(code)
         for variant in [code, arggaps.restore(code, func)]:
             if variant and variant not in seen:
                 seen.add(variant)
@@ -50,7 +56,7 @@ def candidates(target, func):
     return result
 
 
-def try_function(target, func, seconds=45, budget=180):
+def try_function(target, func, seconds=45, budget=180, prepared=None):
     dest = ROOT / 'equiv' / target / (func + '.c')
     if dest.exists():
         return {'target': target, 'func': func, 'status': 'already present'}
@@ -61,7 +67,7 @@ def try_function(target, func, seconds=45, budget=180):
         extra.append('--check-v1')
     started, attempts = time.monotonic(), []
     try:
-        drafts = candidates(target, func)
+        drafts = candidates(target, func) if prepared is None else prepared
     except (subprocess.TimeoutExpired, ValueError) as exc:
         drafts = []
         attempts.append({'status': 'draft failed', 'message': str(exc)})
@@ -104,12 +110,24 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('targets', nargs='+', choices=['chess', 'raise', 'yuugi', 'slpm', 'etc'])
     ap.add_argument('--jobs', type=int, default=4)
+    ap.add_argument('--draft-jobs', type=int, default=2, help='independent workers preparing the next candidates')
+    ap.add_argument('--prefetch', type=int, default=0, help='maximum functions in flight (default: twice the validator count plus draft workers)')
     ap.add_argument('--seconds', type=int, default=45, help='time per draft; timeout never counts as accepted')
     ap.add_argument('--budget', type=int, default=180, help='total time per function')
     ap.add_argument('--only')
     ap.add_argument('--limit', type=int, default=0)
+    ap.add_argument('--max-size', type=lambda value: int(value, 0), default=0,
+                    help='defer functions larger than this byte size (0 means no size limit)')
     ap.add_argument('--resume', action='store_true', help='skip completed result records; omit after changing draft generation')
+    ap.add_argument('--ghidra-cache', help='alternative Ghidra C cache containing target/function.c')
+    ap.add_argument('--real-callee', action='append', default=[], help='execute this helper when called; persist the test profile in C')
     args = ap.parse_args()
+    if args.jobs < 1 or args.draft_jobs < 1 or args.prefetch < 0:
+        ap.error('worker counts must be positive; prefetch must not be negative')
+    REAL_CALLEES.update(args.real_callee)
+    if args.ghidra_cache:
+        functional_ghidra.CACHE = pathlib.Path(args.ghidra_cache).resolve()
+        ad.ghidra2c.CACHE = functional_ghidra.CACHE
     jobs = []
     for t in args.targets:
         hand = handwritten(t)
@@ -117,25 +135,59 @@ def main():
             if f not in hand and not (ROOT / 'equiv' / t / (f + '.c')).exists() and (not args.only or f == args.only):
                 if args.resume and (CACHE / t / f / 'result.json').exists():
                     continue
-                jobs.append((t, f, ad.func_size(ad.asm_path(t, f))))
+                size = ad.func_size(ad.asm_path(t, f))
+                if args.max_size and size > args.max_size:
+                    continue
+                jobs.append((t, f, size))
     # Larger functions move the byte-based progress most. Time budgets prevent
     # one difficult function from occupying a worker indefinitely.
     jobs.sort(key=lambda x: -x[2])
     if args.limit:
         jobs = jobs[:args.limit]
     retuse.used(jobs[0][1]) if jobs else None  # fill shared read-only indexes once
-    print(f'{len(jobs)} pending functions; {args.jobs} workers; 200 complete executions required', flush=True)
+    print(f'{len(jobs)} pending functions; {args.draft_jobs} generators + {args.jobs} validators; '
+          '200 complete executions required', flush=True)
     accepted, done = 0, 0
-    with cf.ThreadPoolExecutor(args.jobs) as pool:
-        futures = {pool.submit(try_function, t, f, args.seconds, args.budget): size for t, f, size in jobs}
-        for future in cf.as_completed(futures):
-            rec = future.result()
-            done += 1
-            if rec['status'] == 'accepted':
-                accepted += 1
-                print(f"ACCEPT {rec['target']} {rec['func']} {futures[future]} bytes {rec['seconds']}s", flush=True)
-            if done % 20 == 0:
-                print(f'PROGRESS {done}/{len(jobs)}; accepted {accepted}', flush=True)
+    iterator = iter(jobs)
+    with cf.ThreadPoolExecutor(args.draft_jobs) as generators, cf.ThreadPoolExecutor(args.jobs) as validators:
+        pending, generating, validating = set(), {}, {}
+
+        def prepare_next():
+            job = next(iterator, None)
+            if job is None:
+                return
+            t, f, size = job
+            future = generators.submit(candidates, t, f)
+            generating[future] = job
+            pending.add(future)
+
+        for _ in range(args.prefetch or (2 * args.jobs + args.draft_jobs)):
+            prepare_next()
+        while pending:
+            ready, _ = cf.wait(pending, return_when=cf.FIRST_COMPLETED)
+            for future in ready:
+                pending.remove(future)
+                if future in generating:
+                    t, f, size = generating.pop(future)
+                    try:
+                        drafts = future.result()
+                    except (subprocess.TimeoutExpired, ValueError) as exc:
+                        print(f'DEFER {t} {f}: candidate generation: {exc}', flush=True)
+                        drafts = []
+                    validation = validators.submit(try_function, t, f, args.seconds, args.budget, drafts)
+                    validating[validation] = size
+                    pending.add(validation)
+                    continue
+                size = validating.pop(future)
+                rec = future.result()
+                done += 1
+                if rec['status'] == 'accepted':
+                    accepted += 1
+                    print(f"ACCEPT {rec['target']} {rec['func']} {size} bytes {rec['seconds']}s", flush=True)
+                if done % 20 == 0:
+                    print(f'PROGRESS {done}/{len(jobs)}; accepted {accepted}; '
+                          f'generating {len(generating)}; validating/queued {len(validating)}', flush=True)
+                prepare_next()
     print(f'COMPLETE {done}; accepted {accepted}', flush=True)
 
 

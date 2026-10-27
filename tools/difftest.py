@@ -475,6 +475,12 @@ def main():
         m[e:e + 8] = bytes(8)
         s = STACK_TOP & 0x1FFFFFFF
         m[s - 0x10000:s] = bytes(0x10000)
+        if a.abi:
+            # MIPS o32 reserves four incoming register-argument home slots for
+            # the callee. C may spill parameters here; this is call-owned storage,
+            # not a live caller local. Stack arguments beyond these 16 bytes and
+            # all other caller memory remain compared.
+            m[s:s + 0x10] = bytes(0x10)
         return bytes(m)
 
     # --abi: estados em que os dois lados travam não contam; continua sorteando (até

@@ -7,16 +7,24 @@ each resulting draft still needs the ordinary differential validator.
 import functools
 import pathlib
 import re
+from collections import Counter
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+CACHE = ROOT / '.cache/ghidra/c'
 INSN = re.compile(r"\*/\s+(\w+)\s+(.*)")
 ADDRESS = re.compile(r"(?:D_|jtbl_)([0-9A-Fa-f]{8})(?:\s*\+\s*(0x[0-9a-fA-F]+|\d+))?")
 WIDTHS = {"lb": "s8", "lbu": "u8", "lh": "s16", "lhu": "u16", "lw": "s32",
           "sb": "u8", "sh": "u16", "sw": "u32"}
 BITS = {"s8": 8, "u8": 8, "s16": 16, "u16": 16, "s32": 32, "u32": 32}
 GLOBAL = re.compile(r"\b(_?D_[0-9A-Fa-f]{8}|[A-Za-z]+Ram[0-9a-fA-F]{8}|"
-                    r"UNK_[0-9a-fA-F]{8}|DAT_[0-9a-fA-F]{8}|PTR_[0-9a-fA-F]{8}|"
+                    r"_?UNK_[0-9a-fA-F]{8}|_?DAT_[0-9a-fA-F]{8}|_?PTR_[0-9a-fA-F]{8}|"
                     r"null_ARRAY_[0-9a-fA-F]{8})\b")
+
+
+def signed_chars(code):
+    """Ghidra char is signed; PSX GCC plain char is unsigned. Preserve literals."""
+    tokens = re.compile(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'|\b(?:unsigned\s+char|signed\s+char|char)\b')
+    return tokens.sub(lambda m: 's8' if m[0] == 'char' else m[0], code)
 
 
 def address(expr):
@@ -63,6 +71,15 @@ def access_types(asm):
                 regs[rs[0]] = regs[src]
             else:
                 regs.pop(rs[0], None)
+        elif op in ('addu', 'subu') and len(rs) == 3 and ((rs[1] in regs) != (rs[2] in regs)):
+            # Preserve the constant base of an indexed global. A following
+            # byte/halfword load still identifies its element/field width.
+            if rs[1] in regs:
+                regs[rs[0]] = regs[rs[1]]
+            elif op == 'addu':
+                regs[rs[0]] = regs[rs[2]]
+            else:
+                regs.pop(rs[0], None)
         elif op.startswith('b') or op in ('j', 'jr', 'jal', 'jalr', 'sb', 'sh', 'sw', 'swl', 'swr', 'mult', 'multu', 'div', 'divu', 'nop'):
             continue
         else:
@@ -82,12 +99,35 @@ def symbols(target):
     return result
 
 
-def draft(target, func, asm):
-    path = ROOT / '.cache/ghidra/c' / target / (func + '.c')
+def memory_types(m2c):
+    """Distinguish an array in RAM from a pointer variable stored in RAM."""
+    result = {}
+    for m in re.finditer(r'^extern\s+(.+?)\s*(D_[0-9A-Fa-f]{8})\s*(\[[^\]]*\])?\s*;', m2c, re.M):
+        typ, name, array = m.groups()
+        addr = int(name[-8:], 16)
+        result[addr] = {'pointer': '*' in typ and not array, 'declared': typ.strip().replace('*', '').strip(), 'fields': []}
+    for m in re.finditer(r'M2C_FIELD\(\s*&?(D_[0-9A-Fa-f]{8})\s*,\s*(s8|u8|s16|u16|s32|u32)\s*\*', m2c):
+        addr = int(m[1][-8:], 16)
+        result.setdefault(addr, {'pointer': False, 'declared': '', 'fields': []})['fields'].append(m[2])
+    for info in result.values():
+        if info['declared'] in BITS:
+            info['element'] = info['declared']
+        elif info['fields']:
+            typ = Counter(info['fields']).most_common(1)[0][0]
+            signed = 's' + typ[1:]
+            info['element'] = signed if signed in info['fields'] else typ
+        else:
+            info['element'] = 'u8' if info['pointer'] else None
+    return result
+
+
+def draft(target, func, asm, m2c=''):
+    path = CACHE / target / (func + '.c')
     if not path.exists():
         return None
     body = re.sub(r'/\*.*?\*/', '', path.read_text(), flags=re.S).strip()
     body = body.replace('_NON_MATCHING', '').replace('.NON_MATCHING', '')
+    body = signed_chars(body)
     if re.search(r'\b(in_\w+|unaff_\w+|extraout_\w+|halt_baddata)\b', body):
         return None
     head = re.search(r'^[\w\s*]+?\b(\w+)\s*\(', body)
@@ -103,13 +143,24 @@ def draft(target, func, asm):
         if addr not in names:
             unresolved = True
             return m[0]
-        return names[addr]
+        name = names[addr]
+        return 'func_' + f'{addr:08X}' if name.startswith('D_') else name
 
-    body = re.sub(r'\bfunc_0x([0-9a-fA-F]{8})\b', call, body)
+    body = re.sub(r'\b(?:func_0x|FUN_)([0-9a-fA-F]{8})\b', call, body)
     if unresolved:
         return None
+    if re.search(r'\bgcc2_compiled_\s*\(', body):
+        import ghidra2c
+        body = ghidra2c.fix_callees(body, func, asm)
+        if body is None:
+            return None
     widths = access_types(asm)
+    memory = memory_types(m2c)
     definitions = []
+    if re.search(r'\bSVECTOR\b', body):
+        definitions.append('typedef struct { s16 vx, vy, vz, pad; } SVECTOR;')
+    if re.search(r'\bDVECTOR\b', body):
+        definitions.append('typedef struct { s16 vx, vy; } DVECTOR;')
     # The battle state is a halfword inside the main work area. Uniform random
     # RAM almost never reaches its small switch cases. Exercise those states,
     # neighbouring values and a negative halfword explicitly.
@@ -130,10 +181,21 @@ def draft(target, func, asm):
                 typ = 'u8 *'
         # Bracketed globals are arrays. Scalar globals are memory lvalues, so
         # &global is still its address and writes reach the original RAM.
+        info = memory.get(addr, {})
+        indexed = bool(re.search(rf'\b{re.escape(name)}\s*\[', body))
+        address_indexed = bool(re.search(rf'\(&\s*{re.escape(name)}\)\s*\[', body))
         if name.startswith('null_ARRAY_'):
             typ = 'u8'
-        if name.startswith('null_ARRAY_') or re.search(rf'\b{re.escape(name)}\s*\[', body):
-            value = f'(({typ} *)0x{addr:08X})'
+        if indexed or name.startswith('null_ARRAY_'):
+            typ = info.get('element') or typ
+            value = (f'(*({typ} **)0x{addr:08X})' if info.get('pointer')
+                     else f'(({typ} *)0x{addr:08X})')
+        elif address_indexed and info.get('element'):
+            typ = info['element']
+            value = f'(*({typ} *)0x{addr:08X})'
+        elif info.get('declared') in BITS and not info.get('pointer'):
+            typ = info['declared']
+            value = f'(*({typ} *)0x{addr:08X})'
         else:
             value = f'(*({typ} *)0x{addr:08X})'
         definitions.append(f'#define {name} {value}')
@@ -155,6 +217,11 @@ def draft(target, func, asm):
     ignored = {'if', 'for', 'while', 'switch', 'return', 'sizeof', func}
     for name in sorted(called - ignored):
         if re.fullmatch(r'(CONCAT|SUB|ZEXT|SEXT)\d+', name):
+            continue
+        function_address = re.fullmatch(r'func_([0-9A-Fa-f]{8})', name)
+        if function_address:
+            definitions.append(f'#define {name} ((s32 (*)())0x{int(function_address[1], 16):08X})')
+            body = re.sub(r'&\s*\b' + re.escape(name) + r'\b', name, body)
             continue
         definitions.append(f'extern s32 {name}();')
     return '#include "ghidra.h"\n' + '\n'.join(definitions) + '\n' + body + '\n'

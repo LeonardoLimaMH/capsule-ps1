@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████░░░░░` **74.53%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████░░░░░` **76.39%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -227,7 +227,7 @@ validado em `equiv/`**; os ajustes de alocação de registradores para byte-exac
 ficam para depois. Um rascunho que apenas compila não aumenta a cobertura.
 
 ```sh
-./run.sh python3 tools/functional_batch.py chess yuugi slpm raise --jobs 4
+./run.sh python3 tools/functional_batch.py chess yuugi slpm raise --jobs 4 --draft-jobs 2
 ```
 
 O lote usa variantes m2c e Ghidra, recupera larguras de globais pelas instruções
@@ -237,6 +237,44 @@ atomicamente em `equiv/`. Tentativas que excedem o orçamento continuam pendente
 `--seconds`, `--budget` e `--resume` permitem distribuir o trabalho. O cache de
 resultados está em `.cache/functional_batch/`; depois de mudar a geração de C,
 omitir `--resume` para não reutilizar falhas antigas.
+
+A geração tem uma fila própria: dois workers preparam candidatos enquanto
+quatro validadores executam os anteriores. `--prefetch` limita o total de funções
+em andamento; a fila é reabastecida conforme os testes terminam. Não aguardar o
+fim de uma validação para gerar o próximo candidato. O teste de concorrência usa
+eventos para verificar que a geração avança com uma validação ainda bloqueada.
+
+O contexto m2c distingue um array no endereço global de um ponteiro armazenado
+nesse endereço. Os acessos MIPS também recuperam larguras após somar um índice a
+uma base conhecida. O gerador preserva `char` assinado do Ghidra como `s8`: o GCC
+PSX usado aqui trata `char` simples como unsigned. Essas regras produzem candidatos;
+a compilação e os testes diferenciais ainda decidem se cada função é aceita.
+
+Para analisar chamadas entre o executável e um overlay no mesmo programa:
+
+```sh
+./run.sh python3 tools/ghidra_merged.py chess
+```
+
+O gerador exige os rebuilds idênticos de YUUGI e do overlay. Importar o ELF de
+`.cache/ghidra-merged/chess/` em uma pasta separada do projeto Ghidra, deixando o
+loader detectar o formato ELF. O arquivo contém bytes privados do dump e deve
+permanecer no cache ignorado. Prototipar helpers nesse programa separado evita
+alterar a análise usada pela outra IA. `--ghidra-cache caminho` permite testar
+uma nova exportação de C sem substituir o cache anterior.
+
+No modo `--abi`, os 16 bytes de home area dos argumentos em registradores
+pertencem ao callee e podem conter spills diferentes. O comparador normaliza
+somente esse intervalo e a pilha morta já existente; o quinto argumento em
+`sp+16` e a memória externa continuam comparados. Controles negativos escrevem
+fora do intervalo e na heap e exigem reprovação. O modo estrito permanece igual.
+
+A rodada registrada em
+[functional-2026-10-27-next.json](docs/validation/functional-2026-10-27-next.json)
+integra 31 funções, cada uma com duas sementes de 200 execuções completas.
+Inclui os shifts de 64 bits do SDK com ambos os sentidos, contagens negativas e
+fronteiras 31/32 e 63/64. Tentativas inconclusivas ou não suportadas estão nos
+registros e não contam entre as 200; isso continua sendo validação amostrada.
 
 Para funções que leem o estado de batalha `0x8008EE54`, o lote também sorteia
 estados pequenos e valores de fronteira. A RAM aleatória sozinha quase nunca

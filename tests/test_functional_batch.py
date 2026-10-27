@@ -2,6 +2,7 @@
 import pathlib
 import subprocess
 import sys
+import threading
 
 from conftest import ROOT
 
@@ -56,3 +57,35 @@ def test_global_load_width_uses_interior_address_and_signedness():
     widths = ghidra.access_types(asm)
     assert widths[0x8008EE54] == 'u16'
     assert widths[0x80069BBE] == 's16'
+
+
+def test_next_candidate_is_prepared_while_previous_is_validating(tmp_path, monkeypatch):
+    validating, prepared = threading.Event(), threading.Event()
+    generated, tested = [], []
+    monkeypatch.setattr(batch, 'ROOT', tmp_path)
+    monkeypatch.setattr(batch, 'handwritten', lambda target: set())
+    monkeypatch.setattr(batch.retuse, 'used', lambda *a, **k: True)
+    monkeypatch.setattr(batch.ad, 'pending_functions', lambda target: [(None, f) for f in ['first', 'second', 'third']])
+    monkeypatch.setattr(batch.ad, 'asm_path', lambda *a: None)
+    monkeypatch.setattr(batch.ad, 'func_size', lambda path: 4)
+    monkeypatch.setattr(sys, 'argv', ['functional_batch.py', 'chess', '--jobs', '1', '--draft-jobs', '1', '--prefetch', '2'])
+
+    def generate(target, func):
+        if func == 'second':
+            assert validating.wait(10), 'first validation never started'
+            prepared.set()
+        generated.append(func)
+        return [('fixture', func)]
+
+    def validate(target, func, seconds, budget, drafts):
+        assert drafts == [('fixture', func)]
+        if func == 'first':
+            validating.set()
+            assert prepared.wait(10), 'generation blocked behind validation'
+        tested.append(func)
+        return {'status': 'pending'}
+
+    monkeypatch.setattr(batch, 'candidates', generate)
+    monkeypatch.setattr(batch, 'try_function', validate)
+    batch.main()
+    assert sorted(generated) == sorted(tested) == ['first', 'second', 'third']

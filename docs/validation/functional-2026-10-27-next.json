@@ -1,0 +1,615 @@
+[
+  {
+    "target": "chess",
+    "func": "func_800E41E0",
+    "accepted": true,
+    "source_sha256": "f9e984bc5526390e9b252b4d82ed7910daf55cf0d79033961b029d90cd9dbebb",
+    "return_options": [],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E41E0 \u2014 200 tentativas id\u00eanticas, 26 inconclusivas, 1 n\u00e3o suportadas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E41E0 \u2014 200 tentativas id\u00eanticas, 24 inconclusivas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800FEE40",
+    "accepted": true,
+    "source_sha256": "e79bc79da2e3d8299f9ee73d82e326585d266fea4c9e6571155030718e1f3729",
+    "return_options": [],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FEE40 \u2014 200 tentativas id\u00eanticas, 309 inconclusivas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FEE40 \u2014 200 tentativas id\u00eanticas, 267 inconclusivas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800A6DA8",
+    "accepted": true,
+    "source_sha256": "f3b3f0a2a2038bfa1723f6752edb7c8836f550545f0cfa74f7510fa17cf895b3",
+    "return_options": [],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A6DA8 \u2014 200 tentativas id\u00eanticas, 206 inconclusivas, 5 n\u00e3o suportadas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A6DA8 \u2014 200 tentativas id\u00eanticas, 198 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800BE46C",
+    "accepted": true,
+    "source_sha256": "dd84316a17cbaef3b0fa627b72f08f14e09463b9ba105ed338cc1061b51b21a1",
+    "return_options": [
+      "--ignore-v0"
+    ],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BE46C \u2014 200 tentativas id\u00eanticas, 162 inconclusivas, 2 n\u00e3o suportadas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BE46C \u2014 200 tentativas id\u00eanticas, 155 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800A924C",
+    "accepted": true,
+    "source_sha256": "ea66891df04a9bec0a11724ba9cb0eb31ccab0fb0a9c147de6b40e5429cb30ef",
+    "return_options": [
+      "--ignore-v0"
+    ],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A924C \u2014 200 tentativas id\u00eanticas, 306 inconclusivas, 2 n\u00e3o suportadas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A924C \u2014 200 tentativas id\u00eanticas, 294 inconclusivas, 2 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800BE8F4",
+    "accepted": true,
+    "source_sha256": "67321b3b60c6bb899756b0c52142363e09a6ad323a204fdebfd678ff29fa6ac2",
+    "return_options": [
+      "--ignore-v0"
+    ],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BE8F4 \u2014 200 tentativas id\u00eanticas, 118 inconclusivas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BE8F4 \u2014 200 tentativas id\u00eanticas, 112 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800FED90",
+    "accepted": true,
+    "source_sha256": "c2e0ec528907fa4af480bbc2888fb4f6960e4bf0ca1703edbd770b264d5ec79f",
+    "return_options": [],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FED90 \u2014 200 tentativas id\u00eanticas, 90 inconclusivas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FED90 \u2014 200 tentativas id\u00eanticas, 81 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800E6C14",
+    "accepted": true,
+    "source_sha256": "4a2926fc04b7b6342a6c097c8d8f6a0d9e83f44017941b97fa1aea8ec21b429c",
+    "return_options": [],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E6C14 \u2014 200 tentativas id\u00eanticas, 240 inconclusivas, 1 n\u00e3o suportadas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E6C14 \u2014 200 tentativas id\u00eanticas, 238 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800CA574",
+    "accepted": true,
+    "source_sha256": "225118fc69a17fc3bd057392822b98c454f78afffbb7a24e26ca5dc13e1f15f9",
+    "return_options": [
+      "--ignore-v0"
+    ],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CA574 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CA574 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800B7790",
+    "accepted": true,
+    "source_sha256": "43c0b998e5329df87a7b8a87d99ed7d41b66c2119b5e2ddea1f81897313d1d3b",
+    "return_options": [
+      "--ignore-v0"
+    ],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B7790 \u2014 200 tentativas id\u00eanticas, 552 inconclusivas, 2 n\u00e3o suportadas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B7790 \u2014 200 tentativas id\u00eanticas, 603 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800E85E0",
+    "accepted": true,
+    "source_sha256": "1d56397db12da267db15caaa5f5cb782b64339becce2f0f1c8145c016e9977ff",
+    "return_options": [],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E85E0 \u2014 200 tentativas id\u00eanticas, 36 inconclusivas, 1 n\u00e3o suportadas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E85E0 \u2014 200 tentativas id\u00eanticas, 42 inconclusivas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800D28C0",
+    "accepted": true,
+    "source_sha256": "bee274744f76d4c4da3766a96b44cea4ecdec18ff97d5b823466ed04cc35946e",
+    "return_options": [],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D28C0 \u2014 200 tentativas id\u00eanticas, 1 inconclusivas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D28C0 \u2014 200 tentativas id\u00eanticas, 1 inconclusivas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800C44BC",
+    "accepted": true,
+    "source_sha256": "e01b62c12b1624c088efafe36bd1d3244e198fc384b2f75e362ab2fd4a056c2b",
+    "return_options": [
+      "--ignore-v0"
+    ],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C44BC \u2014 200 tentativas id\u00eanticas, 420 inconclusivas, 5 n\u00e3o suportadas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C44BC \u2014 200 tentativas id\u00eanticas, 436 inconclusivas, 3 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800AFEA4",
+    "accepted": true,
+    "source_sha256": "792cd5d8c7dafa8e46bb229141d97ce14888490d58cc8ae251ad394709a321fe",
+    "return_options": [],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800AFEA4 \u2014 200 tentativas id\u00eanticas, 144 inconclusivas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800AFEA4 \u2014 200 tentativas id\u00eanticas, 120 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800E9294",
+    "accepted": true,
+    "source_sha256": "aebab6b38888bc8406240a256ee3cc7d11a596c4f816e360a5022d52ccfbe90b",
+    "return_options": [
+      "--ignore-v0"
+    ],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E9294 \u2014 200 tentativas id\u00eanticas, 252 inconclusivas, 2 n\u00e3o suportadas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E9294 \u2014 200 tentativas id\u00eanticas, 259 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800B81E0",
+    "accepted": true,
+    "source_sha256": "ddc2d2b97212c54841375c0110718b20768f7857aad9a833866e01fda00b990a",
+    "return_options": [
+      "--ignore-v0"
+    ],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B81E0 \u2014 200 tentativas id\u00eanticas, 90 inconclusivas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B81E0 \u2014 200 tentativas id\u00eanticas, 81 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800D113C",
+    "accepted": true,
+    "source_sha256": "c0a84b1e9584569c0099aca6e2d60814fd6347bfb74c70464ecb2517a9c5ba13",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D113C \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D113C \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "profile": "pointer, actor index, button-bit boundary sampling",
+    "validated_source_sha256": "b597672c6de1d9ef891e9169b27e1f57e18194fa512d2030f1f2d266846a28c4",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "yuugi",
+    "func": "_dbl_shift",
+    "accepted": true,
+    "source_sha256": "d670f8ebf29a371fbfc44506ab75d7719b3f40c98bd51f3b308e7cf768f9cb38",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:_dbl_shift \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:_dbl_shift \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "profile": "shift counts 0..127 including 31/32/63/64 boundaries, negative counts; both directions; valid output buffer"
+  },
+  {
+    "target": "yuugi",
+    "func": "_dbl_shift_us",
+    "accepted": true,
+    "source_sha256": "d74bc379d6d0aceb746293f1c5c0204ac9918293d4731c2f117ba4c029663d24",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:_dbl_shift_us \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:_dbl_shift_us \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "profile": "shift counts 0..127 including 31/32/63/64 boundaries, negative counts; both directions; valid output buffer"
+  },
+  {
+    "target": "chess",
+    "func": "func_800A3FC0",
+    "accepted": true,
+    "source_sha256": "b8ca950a230bd471d7f238a894db9c7a818c45c6a1d4602b3834e349937b4d63",
+    "return_options": [
+      "--ignore-v0"
+    ],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A3FC0 \u2014 200 tentativas id\u00eanticas, 90 inconclusivas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A3FC0 \u2014 200 tentativas id\u00eanticas, 81 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800B65CC",
+    "accepted": true,
+    "source_sha256": "6f0c41fdb1b40be2ebb75873c4df04b890b7d590cd822608405389303f000aaf",
+    "return_options": [],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B65CC \u2014 200 tentativas id\u00eanticas, 195 inconclusivas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B65CC \u2014 200 tentativas id\u00eanticas, 198 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800B6B70",
+    "accepted": true,
+    "source_sha256": "db65468396a2920cb799a5c8c3a8dc3056905334c6860e6cf52fab477f33791e",
+    "return_options": [],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B6B70 \u2014 200 tentativas id\u00eanticas, 295 inconclusivas, 1 n\u00e3o suportadas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B6B70 \u2014 200 tentativas id\u00eanticas, 294 inconclusivas, 2 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800B7630",
+    "accepted": true,
+    "source_sha256": "d540402d9ce8250f092b1757869462a1073325162955c6f01c80753ccabf132e",
+    "return_options": [],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B7630 \u2014 200 tentativas id\u00eanticas, 397 inconclusivas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B7630 \u2014 200 tentativas id\u00eanticas, 419 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800CAF74",
+    "accepted": true,
+    "source_sha256": "00f573a7e769403967f9083315747cc822e65af94a6edfe67b9dea0020c094bb",
+    "return_options": [],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CAF74 \u2014 200 tentativas id\u00eanticas, 199 inconclusivas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CAF74 \u2014 200 tentativas id\u00eanticas, 199 inconclusivas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800DC874",
+    "accepted": true,
+    "source_sha256": "3e39c69e048c3cbfd0ea337df451b946f66b50fa82811c7d40ea58ce45372d2f",
+    "return_options": [],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DC874 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DC874 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800DE518",
+    "accepted": true,
+    "source_sha256": "2c8326bf19e512e9534292f0d609589b36ca16b274242fb7727195fe9e7f4fb4",
+    "return_options": [],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DE518 \u2014 200 tentativas id\u00eanticas, 153 inconclusivas, 1 n\u00e3o suportadas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DE518 \u2014 200 tentativas id\u00eanticas, 124 inconclusivas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800DE944",
+    "accepted": true,
+    "source_sha256": "ab4208de71bde5fdc84596e8e2ecacc359af7257734a16cb0a5eca9791c2512b",
+    "return_options": [],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DE944 \u2014 200 tentativas id\u00eanticas, 20 inconclusivas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DE944 \u2014 200 tentativas id\u00eanticas, 16 inconclusivas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800E33FC",
+    "accepted": true,
+    "source_sha256": "5d6c5e3e3bb9311d07f2d422aa48342362e5ccf0d254a35f8d659b8353babcaa",
+    "return_options": [],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E33FC \u2014 200 tentativas id\u00eanticas, 23 inconclusivas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E33FC \u2014 200 tentativas id\u00eanticas, 24 inconclusivas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800E4B48",
+    "accepted": true,
+    "source_sha256": "8963f0b0c7f2af25abbce806f17d68b404e2c9b133b40df624b318a065332161",
+    "return_options": [],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E4B48 \u2014 200 tentativas id\u00eanticas, 149 inconclusivas, 1 n\u00e3o suportadas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E4B48 \u2014 200 tentativas id\u00eanticas, 130 inconclusivas\n"
+      }
+    ]
+  },
+  {
+    "target": "yuugi",
+    "func": "func_80033100",
+    "accepted": true,
+    "source_sha256": "edf81e4c8b152c10a087fd652d78c5820b8f00e6f8961c2b0063041947a37883",
+    "return_options": [
+      "--ignore-v0"
+    ],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_80033100 \u2014 200 tentativas id\u00eanticas, 90 inconclusivas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_80033100 \u2014 200 tentativas id\u00eanticas, 81 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "yuugi",
+    "func": "func_80039724",
+    "accepted": true,
+    "source_sha256": "880bd5a19acf8d7c92e94f699af824130cb4aff901c550b0b1e5b2ab8aafe86f",
+    "return_options": [
+      "--ignore-v0"
+    ],
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_80039724 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_80039724 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ]
+  }
+]
