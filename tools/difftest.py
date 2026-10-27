@@ -156,7 +156,40 @@ def build_candidate(target, src, func, force_g0=False):
        f"--just-symbols={TARGETS[target][3]} -T {lds} -e {func}__cand -o {elf} {obj}")
     sh(f"mips-linux-gnu-objcopy -O binary {elf} {binf}")
     addr = int(sh(f"mips-linux-gnu-nm {elf} | grep ' {func}__cand$'").split()[0], 16) & 0xFFFFFFFF
-    return binf.read_bytes(), addr
+    return binf.read_bytes(), addr, candidate_rodata_alias(target, src, elf)
+
+
+def candidate_rodata_alias(target, src, elf):
+    """Map private candidate rodata to the same input section in the full build.
+
+    A jump-table dispatch can leave its relocated address in the temporary v1.
+    Only accept an exact offset within equal-sized sections of this source file.
+    No mapping is inferred for standalone drafts or unrelated memory.
+    """
+    try:
+        key = pathlib.Path(src).resolve().relative_to(ROOT).as_posix()
+    except ValueError:
+        return None
+    if not key.startswith('src/'):
+        return None
+    mp = (ROOT / 'build' / (target + '.map')).read_text(encoding='utf-8')
+    original = re.search(r'^\s+\.rodata\s+0x([0-9a-fA-F]+)\s+0x([0-9a-fA-F]+)\s+'
+                         + re.escape('build/' + key + '.o') + r'\s*$', mp, re.M)
+    candidate = re.search(r'^\s*\d+\s+\.rodata\s+([0-9a-fA-F]+)\s+([0-9a-fA-F]+)',
+                          sh(f'mips-linux-gnu-objdump -h {elf}'), re.M)
+    if not original or not candidate:
+        return None
+    size = int(original.group(2), 16)
+    if size == 0 or size != int(candidate.group(1), 16):
+        return None
+    return int(original.group(1), 16) & 0xFFFFFFFF, int(candidate.group(2), 16) & 0xFFFFFFFF, size
+
+
+def same_rodata_address(original, candidate, alias):
+    if alias is None:
+        return False
+    old, new, size = alias
+    return 0 <= candidate - new < size and original - old == candidate - new
 
 
 def elf_symbols(target):
@@ -391,7 +424,7 @@ def main():
     if a.target in ("chess", "raise", "etc"):
         mpath, mhdr = TARGETS["yuugi"][0], TARGETS["yuugi"][1]
         main_image = (ROOT / mpath).read_bytes()[mhdr:]
-    cand, cand_entry = build_candidate(a.target, src, a.func, force_g0=a.abi)
+    cand, cand_entry, rodata_alias = build_candidate(a.target, src, a.func, force_g0=a.abi)
     entry = elf_symbols(a.target)[a.func] & 0xFFFFFFFF
     stubs = stub_addrs(a.target)
     game_names = frozenset()
@@ -515,7 +548,9 @@ def main():
         if os.environ.get("DT_DEBUG"):
             print([(n, hex(x), hex(y)) for n, x, y in zip(REG_NAMES, rega, regb) if x != y], {k: hex(v) for k, v in regs.items()})
         bad = [n for n, x, y in zip(REG_NAMES, rega, regb)
-               if x != y and not (a.abi and n == "v1" and not a.check_v1) and not (a.ignore_v0 and n == "v0")]
+               if x != y and not (a.abi and n == "v1" and not a.check_v1)
+               and not (n == "v1" and not a.check_v1 and same_rodata_address(x, y, rodata_alias))
+               and not (a.ignore_v0 and n == "v0")]
         ok, k = same_calls(calla, callb, CAND_BASE, CAND_BASE + len(cand), a.abi, (cand_entry, entry))
         if not ok:
             calla, callb = calla[0], callb[0]

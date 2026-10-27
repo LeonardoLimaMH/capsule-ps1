@@ -79,9 +79,33 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009C964);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009CA60);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009CBDC);
+void func_8009CBDC(void) {
+    s32 i;
+     s32 z;
+     i=0;
+     do {
+    if(i==0) z=i;
+     else z=0;
+     func_80012A20(func_80019F30(0x20013,i+0x18),1,z,z);
+    i++;
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009CC34);
+}while(i<2);
+
+}
+
+void func_8009CC34(void) {
+    s32 i;
+     s32 z;
+     i=0;
+     do {
+    if(i==0) z=i;
+     else z=0;
+     func_80012A20(func_80019F30(0x20013,i+0x1B),1,z,z);
+    i++;
+
+}while(i<2);
+
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009CC8C);
 
@@ -349,13 +373,37 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A44E8);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A461C);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A4678);
+#include "ghidra.h"
+undefined4 func_800A4678(undefined4 param_1)
+
+{
+    extern int func_800CBBB4();
+  undefined4 uVar1;
+
+  uVar1 = func_80015B3C(param_1,func_800CBBB4,3);
+  func_8001602C(uVar1);
+  return uVar1;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A46B8);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A475C);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A4858);
+s32 func_800A4858(s32 unused_arg0, s32 arg1, s32 arg2, void *arg3) {
+    s16 temp_a0;
+    s16 temp_a3;
+
+    temp_a0 = M2C_FIELD(arg3, s16 *, 0);
+    if ((temp_a0 >= ((arg1 * 0x64) - 0x258)) && ((((arg1 + 1) * 0x64) - 0x258) >= temp_a0)) {
+        temp_a3 = M2C_FIELD(arg3, s16 *, 4);
+        if (temp_a3 >= ((arg2 * 0x64) - 0x258)) {
+            return ((((arg2 + 1) * 0x64) - 0x258) < temp_a3) ^ 1;
+        }
+        /* Duplicate return node #5. Try simplifying control flow for better match */
+        return 0;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A4900);
 
@@ -429,7 +477,38 @@ s32 func_800A835C(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8378);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A83E0);
+s32 func_800A83E0(s32 unused_arg0, void *arg1, void *arg2) {
+    s32 temp_a0;
+    s32 temp_a3;
+    s32 var_v0;
+
+    temp_a3 = M2C_FIELD(arg2, u8 *, 0x15) - M2C_FIELD(arg1, u8 *, 0x15);
+    temp_a0 = M2C_FIELD(arg2, u8 *, 0x16) - M2C_FIELD(arg1, u8 *, 0x16);
+    if (temp_a3 > 0) {
+        var_v0 = 5;
+        if (temp_a0 <= 0) {
+            var_v0 = 6;
+            if (temp_a0 < 0) {
+                return 7;
+            }
+        }
+        /* Duplicate return node #9. Try simplifying control flow for better match */
+        return var_v0;
+    }
+    if (temp_a3 < 0) {
+        var_v0 = 3;
+        if (temp_a0 <= 0) {
+            var_v0 = 2;
+            if (temp_a0 < 0) {
+                return 1;
+            }
+        }
+        /* Duplicate return node #9. Try simplifying control flow for better match */
+        return var_v0;
+    }
+    var_v0 = (temp_a0 > 0) * 4;
+    return var_v0;
+}
 
 #include "ghidra.h"
 int func_800A8444(undefined4 param_1, int param_2, int param_3, int param_4)
@@ -473,7 +552,10 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A87C8);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A8830);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A88C4);
+s16 func_800A88C4(s16 a) {
+     return 0x4020 / a;
+
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A88E8);
 
@@ -673,22 +755,3 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AE8AC);
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AEA4C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AEBD0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AECC4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AECE0);
-
-void func_800AED34(void)
-{
-  int new_var4;
-  extern M2C_UNK D_8008ED68[];
-  s8 *new_var5;
-  int new_var;
-  u16 new_var3;
-  u16 *new_var2;
-  new_var5 = (s8 *) D_8008ED68;
-  new_var2 = (u16 *) (new_var5 + 0xE8);
-  new_var4 = *new_var2;
- do { new_var = new_var4 + 1; } while (0);
-  *new_var2 = (new_var3 = (u16) new_var);
-}

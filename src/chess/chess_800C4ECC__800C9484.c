@@ -5,7 +5,15 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800C9484);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800C94DC);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800C9534);
+void func_800C9534(s32 unused,u8 *o,s32 v) {
+     s32 s = (v << 12) / *(s16 *)(o + 0x4E);
+     *(u16 *)(o+0x52)=s;
+     *(u16 *)(o+0x50)=s;
+     s &= -0x10;
+     *(u16 *)(o+0x52)=s;
+     *(u16 *)(o+0x50)=s;
+
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800C9560);
 
@@ -29,7 +37,18 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800C9CA8);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800C9D18);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800C9F98);
+void func_800C9F98(void) {
+    extern int func_800161C4();
+    extern int func_800C9D18();
+    void *temp_v0;
+
+    temp_v0 = func_80015B3C(&func_800C9D18, &func_800161C4, 5);
+    func_80015EF8(temp_v0);
+    M2C_FIELD(temp_v0, s32 *, 0x18) = func_80019F30(0x60012, 0x3A);
+    M2C_FIELD(temp_v0, s16 *, 0x4A) = -0x6C;
+    M2C_FIELD(temp_v0, s16 *, 0x4E) = 4;
+    M2C_FIELD(temp_v0, s32 *, 0x38) = (s32) (M2C_FIELD(temp_v0, s32 *, 0x38) | 0x40);
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CA00C);
 
@@ -169,9 +188,29 @@ s16 func_800CAA6C(void *arg0, s32 arg1)
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CAABC);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CABDC);
+void func_800CABDC(void *arg0, s32 arg1, s32 arg2) {
+    extern u8 D_80018600[];
+    extern int func_800CAABC();
+    void *temp_v0;
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CAC50);
+    temp_v0 = func_80015B3C(&func_800CAABC, D_80018600, 0);
+    func_80015EF8(temp_v0);
+    M2C_FIELD(temp_v0, s32 *, 0x7C) = arg1;
+    M2C_FIELD(temp_v0, s32 *, 0x80) = arg2;
+    M2C_FIELD(arg0, s8 *, 0xCF0) = 0;
+}
+
+void func_800CAC50(void *arg0, s32 arg1, s32 arg2) {
+    extern u8 D_80018600[];
+    extern int func_800CBA14();
+    void *temp_v0;
+
+    temp_v0 = func_80015B3C(&func_800CBA14, D_80018600, 0);
+    func_80015EF8(temp_v0);
+    M2C_FIELD(temp_v0, s32 *, 0x7C) = arg1;
+    M2C_FIELD(temp_v0, s32 *, 0x80) = arg2;
+    M2C_FIELD(arg0, s8 *, 0xCF0) = 0;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CACC4);
 

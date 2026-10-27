@@ -109,6 +109,11 @@ Comandos de revalidação, usando o container padrão do projeto:
 
 ### Próximas funções
 
+Atualização: a segunda rodada resolveu `func_800C22A0`, `func_800C2324`,
+`func_800AECC4`, `func_800A88C4` e `func_800C9534`. O registro abaixo preserva
+o diagnóstico da primeira rodada; os resultados novos estão em
+[wip/chess/2026-10-27-round2.md](wip/chess/2026-10-27-round2.md).
+
 - `func_800C22A0`: já há C candidato que casa no comparador de instruções, mas a
   jump table original reside no `.rodata` compartilhado. A integração exige
   preservar seus rótulos e posições; não foi promovida nesta rodada.

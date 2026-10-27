@@ -14,9 +14,12 @@ log() { echo "[$(date '+%F %T')] $*"; }
 
 commit() {  # o outro ciclo também faz commits: tenta de novo se o índice estiver ocupado
     local msg=$1 i
-    python tools/progress.py --readme >/dev/null 2>&1
     for i in 1 2 3 4 5 6 7 8 9 10; do
-        if git add -A equiv README.md && git commit -q -m "$msg"; then
+        if git add -A equiv \
+            && python tools/progress.py --readme --staged >/dev/null \
+            && git add README.md \
+            && python tools/progress.py --check --staged >/dev/null \
+            && git commit -q -m "$msg"; then
             log "commit $(git log --oneline -1)"
             return
         fi

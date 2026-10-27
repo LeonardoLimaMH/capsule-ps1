@@ -19,7 +19,7 @@ GCC_VERSION ?= 2.7.2-psx
 CC1         := /opt/gcc-$(GCC_VERSION)/cc1
 # compilador por arquivo (config/compilers.txt: "src/x/y.c 2.8.1-psx"); padrão: GCC_VERSION
 cc1_for      = /opt/gcc-$(or $(shell awk '$$1=="$(1)"{print $$2}' config/compilers.txt 2>/dev/null),$(GCC_VERSION))/cc1
-MASPSX      := $(PYTHON) /opt/maspsx/maspsx.py
+MASPSX      := $(PYTHON) tools/psx_as.py
 # perfil das bibliotecas PsyQ (config/g0fill.txt): -G0 + delay slot do ASPSX antigo
 g0fill_for   = $(shell grep -qx '$(1)' config/g0fill.txt 2>/dev/null && echo 1)
 MASPSX_NOAS := --aspsx-version=2.79 --expand-div --use-comm-section --dont-force-G0
@@ -51,6 +51,7 @@ $(1)_S_SRCS   := $$(shell find asm/$(1) -name '*.s' -not -path '*/nonmatchings/*
 $(1)_OBJS     := $$(patsubst %,$(BUILD_DIR)/%.o,$$($(1)_C_SRCS) $$($(1)_S_SRCS))
 
 $(BUILD_DIR)/$(1).elf: $$($(1)_OBJS) $(BUILD_DIR)/$(1).ld config/extra_syms.$(1).ld
+	+$$(MAKE) --no-print-directory $$(patsubst %,$(BUILD_DIR)/%.o,$$(shell find src/$(1) -name '*.c' 2>/dev/null) $$(shell find asm/$(1) -name '*.s' -not -path '*/nonmatchings/*' 2>/dev/null))
 	$(LD) -EL -nostdlib --no-check-sections -Map $(BUILD_DIR)/$(1).map \
 	    -T $(BUILD_DIR)/$(1).ld \
 	    -T config/undefined_syms_auto.$(1).txt -T config/undefined_funcs_auto.$(1).txt \
@@ -74,11 +75,11 @@ $(BUILD_DIR)/%.ld: config/%.yaml
 # (src/<alvo>/<arq>.c -> asm/<alvo>/nonmatchings/<arq>/*.s)
 C_ASM_DEPS = $$(wildcard asm/$$(dir $$*)nonmatchings/$$(notdir $$*)/*.s)
 
-$(BUILD_DIR)/src/%.c.o: src/%.c $(C_ASM_DEPS) include/macro.inc $$(wildcard include/*.h) $$(wildcard config/compilers.txt) $$(wildcard config/g0fill.txt) tools/aspsx_fill.py
+$(BUILD_DIR)/src/%.c.o: src/%.c $(C_ASM_DEPS) include/macro.inc $$(wildcard include/*.h) $$(wildcard config/compilers.txt) $$(wildcard config/g0fill.txt) $(wildcard config/rawdiv.*.txt) tools/aspsx_fill.py tools/psx_as.py
 	@mkdir -p $(dir $@)
 	$(if $(call g0fill_for,$<),\
-	  $(CPP) $(CPP_FLAGS) $< | $(call cc1_for,$<) $(subst -G8,-G0,$(CC_FLAGS)) | $(MASPSX) $(MASPSX_NOAS) | $(PYTHON) tools/aspsx_fill.py | $(AS) $(AS_FLAGS) -o $@,\
-	  $(CPP) $(CPP_FLAGS) $< | $(call cc1_for,$<) $(CC_FLAGS) | $(MASPSX) $(MASPSX_FLAGS) -o $@)
+	  $(CPP) $(CPP_FLAGS) $< | $(call cc1_for,$<) $(subst -G8,-G0,$(CC_FLAGS)) | $(MASPSX) --target $(firstword $(subst /, ,$*)) $(MASPSX_NOAS) | $(PYTHON) tools/aspsx_fill.py | $(AS) $(AS_FLAGS) -o $@,\
+	  $(CPP) $(CPP_FLAGS) $< | $(call cc1_for,$<) $(CC_FLAGS) | $(MASPSX) --target $(firstword $(subst /, ,$*)) $(MASPSX_FLAGS) -o $@)
 
 $(BUILD_DIR)/%.s.o: %.s include/macro.inc
 	@mkdir -p $(dir $@)

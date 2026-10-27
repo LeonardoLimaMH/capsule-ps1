@@ -84,3 +84,5 @@ Cada linha é uma rodada no mesmo conjunto `config/bench.txt`. *Casadas* = bytes
 | 2026-10-24 | valfunc-v5 | gcc281, ghidra, g0fill | 18/180 | 42/42 | 164 | 92 | 27.0 | registradores (86); ordem/instrução diferente (43); extensão/truncamento (13); não compila (10) |
 - 2026-10-24 — ponteiros locais `M2C_UNK *` passam a `u8 *` (o m2c os avança em bytes) e `fix_indirect_calls`
   deixa de confundir cast `*(T *)(p)` com chamada: compila 154 → 164, 18 mais próximas, 0 mais distantes, 0 perdidas.
+| 2026-10-27 | codex-rawdiv-base | g0fill, gcc281, ghidra | 18/180 | 42/42 | 164 | 93 | 27.0 | registradores (86); ordem/instrução diferente (43); extensão/truncamento (13); não compila (10) |
+| 2026-10-27 | codex-arggaps | arggaps, g0fill, gcc281, ghidra | 21/180 | 42/42 | 164 | 94 | 28 | registradores (85); ordem/instrução diferente (40); extensão/truncamento (14); não compila (10) |

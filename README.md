@@ -16,20 +16,20 @@ emulação contra a função original.
 ## Progresso
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.59%**  
-**Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.11%**  
-**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **4.72%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `██████████████░░░░░░` **69.00%**  
+**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.85%**  
+**Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.35%**  
+**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **4.96%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `██████████████░░░░░░` **70.12%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
 |---|---|---|---|---|---|
 | `YUUGI.EXE` | executável principal | 2.80% (5,772 / 206,372 B) | 142 / 732 | 8.79% (84 / 303 fn) | **3.99%** |
 | `SLPM_860.96` | loader / boot | 4.76% (988 / 20,756 B) | 27 / 119 | 6.57% (70 / 215 fn) | **5.99%** |
-| `CHESS.BIN` | overlay de batalha (tabuleiro) | 1.04% (4,388 / 421,956 B) | 77 / 867 | 100.00% (2 / 2 fn) | **1.05%** |
+| `CHESS.BIN` | overlay de batalha (tabuleiro) | 1.70% (7,180 / 421,956 B) | 99 / 867 | 100.00% (2 / 2 fn) | **1.72%** |
 | `RAISE.BIN` | overlay de criação de monstros | 1.52% (4,972 / 326,576 B) | 181 / 940 | 100.00% (2 / 2 fn) | **1.54%** |
 | `ETC.BIN` | overlay de menus/diversos | 0.92% (816 / 88,992 B) | 10 / 189 | 0.00% (0 / 0 fn) | **0.92%** |
-| **Total** | | **1.59%** (16,936 / 1,064,652 B) | 437 / 2847 | 7.89% (158 / 522 fn) | **2.11%** |
+| **Total** | | **1.85%** (19,728 / 1,064,652 B) | 459 / 2847 | 7.89% (158 / 522 fn) | **2.35%** |
 <!-- PROGRESS:END -->
 
 A **cobertura** soma ao C as funções que já eram escritas em assembly no
@@ -224,12 +224,18 @@ outra revisão, o `make check` vai acusar a diferença.
 ### Estratégia para obter byte-exact — validada no CHESS
 
 **Prioridade: tentar byte-matching antes de aceitar uma função apenas como
-C equivalente.** Em 2026-10-27, esta estratégia integrou **16 funções / 912 bytes**
+C equivalente.** Na primeira rodada de 2026-10-27, esta estratégia integrou **16 funções / 912 bytes**
 do CHESS: dez traduções novas e seis candidatos recuperados do cache. O código do
 jogo neste overlay passou de **61 para 77 funções** e de **0,82% para 1,04%** em C
 byte-matching. Os cinco binários continuaram idênticos e os **22 testes da rodada
 passaram, sem skips**. Veja a lista e a auditoria em
 [docs/AUDIT_CODEX_2026-10-27.md](docs/AUDIT_CODEX_2026-10-27.md).
+
+A segunda rodada integrou mais **22 funções / 2.792 bytes**: o CHESS chegou a
+**99 / 867 funções do jogo** e **7.180 / 421.956 bytes (1,70%)** em C byte-exact.
+As duas jump tables migradas também são geradas pelo compilador. O rebuild dos
+cinco binários permanece idêntico; os resultados e limites dos testes estão em
+[docs/wip/chess/2026-10-27-round2.md](docs/wip/chess/2026-10-27-round2.md).
 
 #### 1. Procurar casamentos bloqueados antes de repetir o pipeline
 
@@ -291,11 +297,17 @@ Depois da mudança no YAML, o `make` regenera o split e o linker script do CHESS
   avaliação de expressões, temporários e compilador antes de usar o permuter.
 - Se o comparador aprova mas o build falha, examinar headers, contexto da unidade
   de tradução, `$gp`, relocações, alinhamento e `.rodata` antes de descartar o C.
-- `func_800C22A0` continua pendente: seu candidato casa no comparador, mas a jump
-  table está no `.rodata` compartilhado. É preciso preservar seus rótulos e posições.
-- Em `func_800A88C4` e `func_800C9534`, o original divide sem checks. O difftest
-  pode reescrever a divisão para a instrução crua, enquanto o build padrão ainda
-  gera verificações. Aprovação funcional nesse perfil não demonstra byte-matching.
+- `func_800C22A0` e `func_800C2324` foram integradas após parear o intervalo
+  `[0xF94, 0xFE0)` com `.rodata, chess_800C22A0` no YAML. O linker usa os 76 bytes
+  de tabelas do objeto C na posição original. O Makefile redescobre os objetos
+  depois do split para compilar também os arquivos de dados recém-gerados.
+- `func_800A88C4` e `func_800C9534` foram integradas após corrigir a divisão.
+  `tools/psx_as.py` seleciona a expansão sem checks do próprio maspsx por função,
+  conforme `config/rawdiv.chess.txt`, preservando suas regras de nops. Build,
+  comparador e permuter usam o mesmo perfil; as demais funções mantêm seus checks.
+- Preservar os parâmetros ausentes dos rascunhos: `arg1` continua sendo `a1`.
+  A heurística `arggaps` tenta acrescentar os slots não usados. Foi aceita após
+  elevar a bancada de 18 para 21 pendentes casadas, com 42/42 controles intactos.
 
 #### 5. Aceitar somente depois de integrar e reconstruir
 
@@ -342,6 +354,8 @@ entram nessa medição. `--check --staged` falha se o bloco de progresso do READ
 não corresponde ao mesmo estado. Em trabalho paralelo, repetir o cálculo se o
 índice mudar antes do commit. O mapa de build deve ser o da integração validada.
 Não copiar percentuais de logs antigos ou da árvore temporária de outra rodada.
+Os ciclos automáticos também recalculam e verificam o README depois de preparar
+os fontes e antes de executar o commit.
 
 <!-- BYTE_MATCHING_STRATEGY:END -->
 

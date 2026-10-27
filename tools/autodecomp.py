@@ -32,6 +32,7 @@ from handwritten import load as load_handwritten  # noqa: E402
 import typeinfer  # noqa: E402
 import ghidra2c  # noqa: E402
 import g0fill  # noqa: E402
+import arggaps  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CACHE = ROOT / ".cache" / "auto"
@@ -220,6 +221,7 @@ COMPILERS = ["2.7.2-psx", "2.8.1-psx"]
 # fixa (tools/bench.py). Só entram em DEFAULT_HEURISTICS depois de mostrarem
 # ganho sem regressões (ver docs/PROCESS.md).
 ALL_HEURISTICS = {
+    "arggaps": "restore unused m2c argument slots without removing the original variant",
     "protos": "protótipos exatos das funções já casadas para as funções chamadas",
     "ptypes": "tipos de parâmetros inferidos da normalização na entrada (sll/sra, andi)",
     "unproto": "variante com declarações sem protótipo",
@@ -235,8 +237,8 @@ ALL_HEURISTICS = {
 # "protos", "ptypes" e "unproto": nenhum efeito medido; disponíveis, desligadas.
 # 2026-10-22: "ghidra" +6 pendentes casadas (3 -> 9/180), 0 controles perdidos, 65 mais próximas.
 # 2026-10-22: "g0fill" +3 (9 -> 12/180), 0 perdidas (perfil das bibliotecas PsyQ).
-DEFAULT_HEURISTICS = frozenset({"gcc281", "ghidra", "g0fill"})
-DRAFT_HEURISTICS = frozenset({"gcc281", "ghidra", "g0fill", "noandor", "unsigned"})
+DEFAULT_HEURISTICS = frozenset({"gcc281", "ghidra", "g0fill", "arggaps"})
+DRAFT_HEURISTICS = frozenset({"gcc281", "ghidra", "g0fill", "noandor", "unsigned", "arggaps"})
 ROW = re.compile(r"^(>>|  ) [0-9A-F]{8}  (.{40}) \| (.*)$")
 LOADS = {"lh", "lhu", "lb", "lbu", "lw"}
 
@@ -334,20 +336,26 @@ def evaluate(target, func, heur=DEFAULT_HEURISTICS):
             if c is None:
                 reason = "tipo composto"
                 continue
-            for gcc in compilers:
-                cc = scalarize(c) if gcc.endswith("+g0fill") else c
-                rec = _attempt(target, func, cc, gcc)
-                rec["variant"] = ",".join(k for k, x in v.items() if x and k != "protos") or "base"
-                if rec["match"]:
-                    rec["reason"] = "MATCH"
-                    return cc, gcc, rec
-                if not rec["compiles"]:
-                    reason = "não compila" if reason != "não casou" else reason
-                    break  # não compila: inútil tentar outro compilador
-                reason = "não casou"
-                if best is None or rec["n"] < best["n"]:
-                    rec["c"] = cc  # C da melhor tentativa (ponto de partida para permuter/wip)
-                    best = rec
+            sources = [c]
+            if "arggaps" in heur:
+                fixed = arggaps.restore(c, func)
+                if fixed != c:
+                    sources.append(fixed)
+            for draft_c in sources:
+                for gcc in compilers:
+                    cc = scalarize(draft_c) if gcc.endswith("+g0fill") else draft_c
+                    rec = _attempt(target, func, cc, gcc)
+                    rec["variant"] = ",".join(k for k, x in v.items() if x and k != "protos") or "base"
+                    if rec["match"]:
+                        rec["reason"] = "MATCH"
+                        return cc, gcc, rec
+                    if not rec["compiles"]:
+                        reason = "não compila" if reason != "não casou" else reason
+                        break  # não compila: inútil tentar outro compilador
+                    reason = "não casou"
+                    if best is None or rec["n"] < best["n"]:
+                        rec["c"] = cc  # C da melhor tentativa (ponto de partida para permuter/wip)
+                        best = rec
     rec = dict(best or {})
     rec["reason"] = reason
     return None, None, rec

@@ -11,9 +11,34 @@ s32 func_800CB898(s32 arg0) {
     return (arg0 & 0xC0) != 0;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844", func_800CB8A4);
+s16 func_800CB8A4(s16 arg0, s16 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    s16 var_v0;
+    s32 var_v0_2;
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844", func_800CB960);
+    if (arg4 == 0) {
+        var_v0 = arg0 + ((s32) ((arg1 - arg0) * arg2) / arg3);
+    } else {
+        var_v0_2 = (arg1 - arg0) * rsin((s32) (arg2 << 0xC) / (s32) (arg3 * 4));
+        if (var_v0_2 < 0) {
+            var_v0_2 += 0xFFF;
+        }
+        var_v0 = arg0 + (var_v0_2 >> 0xC);
+    }
+    return var_v0;
+}
+
+s32 func_800CB960(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    s32 var_v0;
+
+    if (arg4 == 0) {
+        return arg0 + ((s32) ((arg1 - arg0) * arg2) / arg3);
+    }
+    var_v0 = (arg1 - arg0) * rsin((s32) (arg2 << 0xC) / (s32) (arg3 * 4));
+    if (var_v0 < 0) {
+        var_v0 += 0xFFF;
+    }
+    return arg0 + (var_v0 >> 0xC);
+}
 
 void func_800CB9F4(void *arg0, s8 arg1, s8 arg2) {
     M2C_FIELD(arg0, s16 *, 0x71C) = 0;
@@ -146,7 +171,7 @@ undefined1 func_800D2C9C(int param_1,uint param_2,uint param_3)
 
 {
   undefined1 uVar1;
-  
+
   if (((param_2 & 0xff) < 0xd) && ((param_3 & 0xff) < 0xd)) {
     uVar1 = *(undefined1 *)((param_2 & 0xff) * 0xd + param_1 + (param_3 & 0xff));
   }
@@ -348,4 +373,8 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844", func_800DCD20);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844", func_800DCDE4);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844", func_800DCE48);
+void func_800DCE48(void) {
+    extern u8 D_80119710[];
+    func_8001A998(D_80119710, 0x4C);
+    func_800FE7B8();
+}

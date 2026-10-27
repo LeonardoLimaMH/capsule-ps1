@@ -84,8 +84,16 @@ apply_and_commit() {
         fi
         local n
         n=$(echo "$new" | grep -c .)
-        python tools/progress.py --readme >/dev/null 2>&1 || python3 tools/progress.py --readme >/dev/null
-        git add -A src config README.md
+        git add -A src config
+        if ! (python tools/progress.py --readme --staged >/dev/null 2>&1 || python3 tools/progress.py --readme --staged >/dev/null); then
+            log "$t: falha ao calcular o progresso preparado; commit interrompido"
+            return 1
+        fi
+        git add README.md
+        if ! (python tools/progress.py --check --staged >/dev/null 2>&1 || python3 tools/progress.py --check --staged >/dev/null); then
+            log "$t: README divergente do indice; commit interrompido"
+            return 1
+        fi
         git commit -q -m "$t: +$n funções ($label, ciclo automático)
 
 Testes: $summary

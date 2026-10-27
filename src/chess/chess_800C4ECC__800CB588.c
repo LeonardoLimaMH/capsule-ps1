@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ghidra.h"
 
 void func_800CB588(void *arg0, s32 arg1) {
     extern u8 D_80069BAC[];
@@ -24,3 +25,5 @@ void func_800CB588(void *arg0, s32 arg1) {
     func_8001A998(temp_s0 + 0x50, 8);
     func_8001A998(temp_s0 + 0x58, 8);
 }
+
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB588", func_800CB6A0);

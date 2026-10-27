@@ -28,7 +28,7 @@ LINE = re.compile(r"/\* [0-9A-F]+ ([0-9A-F]{8}) ([0-9A-F]{8}) \*/")
 CPP_FLAGS = ("-Iinclude -undef -Wall -lang-c -nostdinc -D__GNUC__=2 -D__OPTIMIZE__ -Dmips "
              "-D__mips__ -D__mips -Dpsx -D__psx__ -D__psx -D_PSYQ -D__EXTENSIONS__ -D_MIPSEL "
              "-D_LANGUAGE_C -DLANGUAGE_C")
-MASPSX = (f"python3 /opt/maspsx/maspsx.py --aspsx-version={__import__('os').environ.get('ASPSX', '2.79')} --expand-div --use-comm-section --dont-force-G0 "
+MASPSX = (f"python3 tools/psx_as.py --aspsx-version={__import__('os').environ.get('ASPSX', '2.79')} --expand-div --use-comm-section --dont-force-G0 "
           "--run-assembler --gnu-as-path mips-linux-gnu-as -EL -Iinclude -march=r3000 "
           "-mtune=r3000 -no-pad-sections -O1 -G8")
 
@@ -47,10 +47,10 @@ def original(target, func):
     return words, vram
 
 
-def compile_c(src, gcc, cflags, g0fill=False):
+def compile_c(src, gcc, cflags, g0fill=False, target=None):
     tmp = pathlib.Path(tempfile.mkdtemp())
     obj = tmp / "f.o"
-    back = g0fill_profile.backend(obj) if g0fill else f"{MASPSX} -o {obj}"
+    back = g0fill_profile.backend(obj) if g0fill else f"{MASPSX} --target {target} -o {obj}"
     if g0fill:
         cflags = cflags.replace("-G8", "-G0")
     cmd = (f"mips-linux-gnu-cpp {CPP_FLAGS} {src} | /opt/gcc-{gcc}/cc1 {cflags} -quiet "
@@ -115,7 +115,7 @@ def main():
                     help="perfil das bibliotecas PsyQ: -G0 + tools/aspsx_fill.py")
     a = ap.parse_args()
     ow, vram = original(a.target, a.func)
-    cw, masks = compiled(compile_c(a.src, a.gcc, a.cflags, a.g0fill), a.func)
+    cw, masks = compiled(compile_c(a.src, a.gcc, a.cflags, a.g0fill, a.target), a.func)
     while len(cw) > len(ow) and cw[-1] == 0:
         cw.pop()
         masks.pop()

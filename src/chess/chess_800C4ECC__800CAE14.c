@@ -27,7 +27,3 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CB24C);
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CB400);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CB540);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CB588);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CB6A0);

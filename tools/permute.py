@@ -17,14 +17,14 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 COMPILE_SH = """#!/bin/bash
-set -e
+set -euo pipefail
 INPUT="$(realpath "$1")"
 OUTPUT="$(realpath -m "$3")"
 cd /work
 mips-linux-gnu-cpp -Iinclude -undef -lang-c -nostdinc -D__GNUC__=2 -Dmips -D__mips__ \\
     -Dpsx -D_MIPSEL -DLANGUAGE_C -DPERMUTER "$INPUT" \\
   | /opt/gcc-{gcc}/cc1 -O2 -G8 -quiet -mcpu=3000 -fgnu-linker -mgas -msoft-float \\
-  | python3 /opt/maspsx/maspsx.py --aspsx-version=2.79 --expand-div --use-comm-section \\
+  | python3 tools/psx_as.py --target {target} --aspsx-version=2.79 --expand-div --use-comm-section \\
       --dont-force-G0 --run-assembler --gnu-as-path mips-linux-gnu-as -EL -Iinclude \\
       -march=r3000 -mtune=r3000 -no-pad-sections -O1 -G8 -o "$OUTPUT"
 """
@@ -53,7 +53,7 @@ def main():
     pre = subprocess.run(f"mips-linux-gnu-cpp -Iinclude -undef -lang-c -nostdinc -P -DPERMUTER {a.src}",
                          shell=True, cwd=ROOT, capture_output=True, text=True, check=True).stdout
     (d / "base.c").write_text(pre, encoding="utf-8")
-    (d / "compile.sh").write_text(COMPILE_SH.replace("{gcc}", a.gcc), encoding="utf-8")
+    (d / "compile.sh").write_text(COMPILE_SH.replace("{gcc}", a.gcc).replace("{target}", a.target), encoding="utf-8")
     (d / "compile.sh").chmod(0o755)
     (d / "settings.toml").write_text(f'func_name = "{a.func}"\ncompiler_type = "gcc"\n', encoding="utf-8")
     cmd = ["timeout", str(a.seconds), "python3", "/opt/decomp-permuter/permuter.py", str(d),
