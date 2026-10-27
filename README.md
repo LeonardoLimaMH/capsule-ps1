@@ -30,6 +30,21 @@ emulação contra a função original.
 | `RAISE.BIN` | overlay de criação de monstros | 1.84% (6,008 / 326,576 B) | 190 / 940 | 100.00% (2 / 2 fn) | **1.86%** |
 | `ETC.BIN` | overlay de menus/diversos | 0.92% (816 / 88,992 B) | 10 / 189 | 0.00% (0 / 0 fn) | **0.92%** |
 | **Total** | | **1.96%** (20,852 / 1,064,652 B) | 469 / 2847 | 7.89% (158 / 522 fn) | **2.45%** |
+
+**Equivalentes e pendências por binário (jogo + SDK):**
+
+| Binário | C equivalente (`equiv/`) | Funcional (bytes) | Funções em C | Faltam C |
+|---|---|---|---|---|
+| `YUUGI.EXE` | 83.93% (648 fn) | `█████████░` **87.93%** | 874 / 1,035 (84.44%) | **161** |
+| `SLPM_860.96` | 82.92% (198 fn) | `█████████░` **88.90%** | 295 / 334 (88.32%) | **39** |
+| `CHESS.BIN` | 59.72% (559 fn) | `██████░░░░` **61.46%** | 661 / 869 (76.06%) | **208** |
+| `RAISE.BIN` | 82.24% (712 fn) | `████████░░` **84.10%** | 904 / 942 (95.97%) | **38** |
+| `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
+| **Total** | 75.75% (2,296 fn) | `████████░░` **78.20%** | 2,923 / 3,369 (86.76%) | **446** |
+
+Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
+As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
+Faltam C inclui as rotinas que permanecem em assembly original, contabilizadas separadamente na cobertura acima.
 <!-- PROGRESS:END -->
 
 A **cobertura** soma ao C as funções que já eram escritas em assembly no

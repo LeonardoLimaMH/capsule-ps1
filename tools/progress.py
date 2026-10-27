@@ -34,6 +34,8 @@ NONMATCH = re.compile(r"^nonmatching\s+(\S+),\s*(0x[0-9A-Fa-f]+)", re.M)
 INCLUDE = re.compile(r'INCLUDE_ASM\(\s*"[^"]+"\s*,\s*(\w+)\s*\)')
 START, END = "<!-- PROGRESS:START -->", "<!-- PROGRESS:END -->"
 STAGED = False
+COUNTERS = ('funcs', 'done_funcs', 'bytes', 'done_bytes', 'asm_bytes',
+            'equiv_bytes', 'equiv_funcs', 'asm_funcs', 'pending_funcs')
 
 
 class IndexSnapshot(dict):
@@ -156,8 +158,7 @@ def collect(t):
     lib = psyq_names(t)
     hand = handwritten(t)
     equiv = {p.stem for p in source_files('equiv/' + t)}
-    r = {k: {"funcs": 0, "done_funcs": 0, "bytes": 0, "done_bytes": 0, "asm_bytes": 0, "equiv_bytes": 0}
-         for k in ("game", "lib")}
+    r = {k: dict.fromkeys(COUNTERS, 0) for k in ("game", "lib")}
     for name, size in sizes.items():
         k = "lib" if name in lib else "game"
         r[k]["funcs"] += 1
@@ -167,8 +168,12 @@ def collect(t):
             r[k]["done_bytes"] += size
         elif name in hand:
             r[k]["asm_bytes"] += size  # escrita em assembly no original: fica como .s
+            r[k]["asm_funcs"] += 1
         elif name in equiv:
             r[k]["equiv_bytes"] += size  # C equivalente (difftest), ainda não byte-idêntico
+            r[k]["equiv_funcs"] += 1
+    for group in r.values():
+        group['pending_funcs'] = group['funcs'] - group['done_funcs'] - group['equiv_funcs']
     return r
 
 
@@ -186,14 +191,32 @@ def bar(p, width=20):
     return "█" * n + "░" * (width - n)
 
 
+def functional_table(data, total):
+    rows = ['**Equivalentes e pendências por binário (jogo + SDK):**', '',
+            '| Binário | C equivalente (`equiv/`) | Funcional (bytes) | Funções em C | Faltam C |',
+            '|---|---|---|---|---|']
+    for target, label in [(t, '`' + name + '`') for t, name, _ in TARGETS] + [(None, '**Total**')]:
+        groups = data[target] if target else total
+        counts = {key: sum(group[key] for group in groups.values()) for key in COUNTERS}
+        ready = counts['done_funcs'] + counts['equiv_funcs']
+        coverage = pct(counts['done_bytes'] + counts['equiv_bytes'], counts['bytes'])
+        rows.append(f"| {label} | {pct(counts['equiv_bytes'], counts['bytes']):.2f}% "
+                    f"({counts['equiv_funcs']:,} fn) | `{bar(coverage, 10)}` **{coverage:.2f}%** | "
+                    f"{ready:,} / {counts['funcs']:,} ({pct(ready, counts['funcs']):.2f}%) | "
+                    f"**{counts['pending_funcs']:,}** |")
+    rows += ['', 'Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.',
+             'As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.',
+             'Faltam C inclui as rotinas que permanecem em assembly original, contabilizadas separadamente na cobertura acima.']
+    return rows
+
+
 def main():
     global STAGED
     STAGED = '--staged' in sys.argv
     staged_files.cache_clear()
     sys.stdout.reconfigure(encoding="utf-8")
     data = {t: collect(t) for t, _, _ in TARGETS}
-    tot = {k: {"funcs": 0, "done_funcs": 0, "bytes": 0, "done_bytes": 0, "asm_bytes": 0, "equiv_bytes": 0}
-           for k in ("game", "lib")}
+    tot = {k: dict.fromkeys(COUNTERS, 0) for k in ("game", "lib")}
     for t in data:
         for k in tot:
             for f in tot[k]:
@@ -232,7 +255,7 @@ def main():
         f"**Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)",
         "",
     ]
-    block = "\n".join(summary + rows)
+    block = "\n".join(summary + rows + [''] + functional_table(data, tot))
     print(block)
     if '--check' in sys.argv:
         readme_text = source_text(ROOT / 'README.md')
