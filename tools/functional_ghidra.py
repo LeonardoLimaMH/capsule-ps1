@@ -21,10 +21,36 @@ GLOBAL = re.compile(r"\b(_?D_[0-9A-Fa-f]{8}|[A-Za-z]+Ram[0-9a-fA-F]{8}|"
                     r"null_ARRAY_[0-9a-fA-F]{8})\b")
 
 
-def signed_chars(code):
-    """Ghidra char is signed; PSX GCC plain char is unsigned. Preserve literals."""
+def signed_chars(code, signed=True):
+    """Make ambiguous plain char explicit; leave signed/unsigned char and literals."""
     tokens = re.compile(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'|\b(?:unsigned\s+char|signed\s+char|char)\b')
-    return tokens.sub(lambda m: 's8' if m[0] == 'char' else m[0], code)
+    return tokens.sub(lambda m: ('s8' if signed else 'u8') if m[0] == 'char' else m[0], code)
+
+
+def byte_address_variant(code):
+    """Alternative for undefined Ghidra objects whose offsets count bytes.
+
+    A width inferred from a load can incorrectly multiply &object + offset.
+    Keep scalar loads unchanged and preserve the original draft as a separate
+    candidate: some objects really do use typed pointer arithmetic.
+    """
+    addresses = {}
+    for match in re.finditer(r'^#define (\w+) \(\*\([^\n]*?\*\)0x([0-9a-fA-F]{8})\)$', code, re.M):
+        if GLOBAL.fullmatch(match[1]):
+            addresses[match[1]] = match[2]
+    tokens = re.compile(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'|&\s*(\w+)\s*(?=[+-])')
+    changed = False
+
+    def replace(match):
+        nonlocal changed
+        name = match[1]
+        if name not in addresses:
+            return match[0]
+        changed = True
+        return '((u8 *)0x' + addresses[name] + ') '
+
+    result = tokens.sub(replace, code)
+    return result if changed else None
 
 
 def address(expr):
@@ -121,13 +147,13 @@ def memory_types(m2c):
     return result
 
 
-def draft(target, func, asm, m2c=''):
+def draft(target, func, asm, m2c='', char_signed=True):
     path = CACHE / target / (func + '.c')
     if not path.exists():
         return None
     body = re.sub(r'/\*.*?\*/', '', path.read_text(), flags=re.S).strip()
     body = body.replace('_NON_MATCHING', '').replace('.NON_MATCHING', '')
-    body = signed_chars(body)
+    body = signed_chars(body, char_signed)
     if re.search(r'\b(in_\w+|unaff_\w+|extraout_\w+|halt_baddata)\b', body):
         return None
     head = re.search(r'^[\w\s*]+?\b(\w+)\s*\(', body)

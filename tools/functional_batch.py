@@ -2,7 +2,7 @@
 """Functional-first batch: independent drafts, bounded attempts, atomic acceptance.
 
 Run in the toolchain container. Timed-out drafts remain pending; acceptance
-requires 200 complete equal executions and the ordinary differential checks.
+requires 200 complete equal executions per seed and ordinary differential checks.
 """
 import argparse
 import concurrent.futures as cf
@@ -38,17 +38,27 @@ def candidates(target, func):
         state_profile += '/* real-callee: ' + name + ' */\n'
     out = []
     m2c = ad.run_m2c(target, func, asm)
-    typed = functional_ghidra.draft(target, func, asm_text, m2c or '')
-    if typed:
-        out.append(('ghidra-typed', typed))
+    for char_signed in (True, False):
+        typed = functional_ghidra.draft(target, func, asm_text, m2c or '', char_signed=char_signed)
+        if typed:
+            label = 'ghidra-typed' if char_signed else 'ghidra-unsigned-char'
+            out.append((label, typed))
+            byte_addressed = functional_ghidra.byte_address_variant(typed)
+            if byte_addressed:
+                out.append((label + '+byte-address', byte_addressed))
     best = ad.load_best(target, func)
     if best and best.get('c'):
         out.append(('cached', ad.scalarize(best['c']) if '+g0fill' in best.get('gcc', '') else best['c']))
     out.extend(('draft', c) for c in ad.all_drafts(target, func))
     seen, result = set(), []
+    char_variants = []
     for label, code in out:
         if '#include "ghidra.h"' in code:
-            code = functional_ghidra.signed_chars(code)
+            char_variants.extend((label + suffix, functional_ghidra.signed_chars(code, signed))
+                                 for suffix, signed in [('', True), ('+unsigned-char', False)])
+        else:
+            char_variants.append((label, code))
+    for label, code in char_variants:
         for variant in [code, arggaps.restore(code, func)]:
             if variant and variant not in seen:
                 seen.add(variant)
@@ -56,7 +66,7 @@ def candidates(target, func):
     return result
 
 
-def try_function(target, func, seconds=45, budget=180, prepared=None):
+def try_function(target, func, seconds=45, budget=180, prepared=None, seeds=(1, 2)):
     dest = ROOT / 'equiv' / target / (func + '.c')
     if dest.exists():
         return {'target': target, 'func': func, 'status': 'already present'}
@@ -78,18 +88,27 @@ def try_function(target, func, seconds=45, budget=180, prepared=None):
         src = folder / (str(i) + '.c')
         text = ad.HEADER + code.strip() + '\n'
         src.write_text(text)
-        cmd = [sys.executable, 'tools/difftest.py', target, func, '--src',
-               str(src.relative_to(ROOT)), '--abi', '--isolate', '--trials', '200'] + extra
-        try:
-            proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True,
-                                  timeout=min(seconds, max(1, budget - (time.monotonic() - started))))
-            message = proc.stdout + proc.stderr
-            match = re.search(r'\[EQUIVALENTE\].*?\b(\d+) tentativas', message)
-            passed = proc.returncode == 0 and match is not None and int(match[1]) >= 200
-            attempts.append({'variant': label, 'exit': proc.returncode, 'message': message})
-        except subprocess.TimeoutExpired:
-            attempts.append({'variant': label, 'status': 'deferred: time budget'})
-            passed = False
+        passed = bool(seeds)
+        for seed in seeds:
+            if time.monotonic() - started >= budget:
+                attempts.append({'variant': label, 'seed': seed, 'status': 'deferred: time budget'})
+                passed = False
+                break
+            cmd = [sys.executable, 'tools/difftest.py', target, func, '--src',
+                   str(src.relative_to(ROOT)), '--abi', '--isolate', '--trials', '200',
+                   '--seed', str(seed)] + extra
+            try:
+                proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True,
+                                      timeout=min(seconds, max(1, budget - (time.monotonic() - started))))
+                message = proc.stdout + proc.stderr
+                match = re.search(r'\[EQUIVALENTE\].*?\b(\d+) tentativas', message)
+                passed = proc.returncode == 0 and match is not None and int(match[1]) >= 200
+                attempts.append({'variant': label, 'seed': seed, 'exit': proc.returncode, 'message': message})
+            except subprocess.TimeoutExpired:
+                attempts.append({'variant': label, 'seed': seed, 'status': 'deferred: time budget'})
+                passed = False
+            if not passed:
+                break
         if passed:
             # A concurrently accepted source must never be overwritten. The
             # candidate is fully written outside equiv/ before the atomic link.
@@ -101,7 +120,8 @@ def try_function(target, func, seconds=45, budget=180, prepared=None):
                 pass
             break
     rec = {'target': target, 'func': func, 'status': 'accepted' if accepted else 'pending',
-           'sha256': accepted, 'seconds': round(time.monotonic() - started, 2), 'attempts': attempts}
+           'sha256': accepted, 'seeds': list(seeds),
+           'seconds': round(time.monotonic() - started, 2), 'attempts': attempts}
     (folder / 'result.json').write_text(json.dumps(rec, ensure_ascii=False, indent=2))
     return rec
 
@@ -114,6 +134,8 @@ def main():
     ap.add_argument('--prefetch', type=int, default=0, help='maximum functions in flight (default: twice the validator count plus draft workers)')
     ap.add_argument('--seconds', type=int, default=45, help='time per draft; timeout never counts as accepted')
     ap.add_argument('--budget', type=int, default=180, help='total time per function')
+    ap.add_argument('--seeds', type=lambda value: tuple(int(x) for x in value.split(',')), default=(1, 2),
+                    help='require 200 complete equal executions for every seed (default: 1,2)')
     ap.add_argument('--only')
     ap.add_argument('--limit', type=int, default=0)
     ap.add_argument('--max-size', type=lambda value: int(value, 0), default=0,
@@ -122,7 +144,7 @@ def main():
     ap.add_argument('--ghidra-cache', help='alternative Ghidra C cache containing target/function.c')
     ap.add_argument('--real-callee', action='append', default=[], help='execute this helper when called; persist the test profile in C')
     args = ap.parse_args()
-    if args.jobs < 1 or args.draft_jobs < 1 or args.prefetch < 0:
+    if args.jobs < 1 or args.draft_jobs < 1 or args.prefetch < 0 or not args.seeds:
         ap.error('worker counts must be positive; prefetch must not be negative')
     REAL_CALLEES.update(args.real_callee)
     if args.ghidra_cache:
@@ -146,7 +168,7 @@ def main():
         jobs = jobs[:args.limit]
     retuse.used(jobs[0][1]) if jobs else None  # fill shared read-only indexes once
     print(f'{len(jobs)} pending functions; {args.draft_jobs} generators + {args.jobs} validators; '
-          '200 complete executions required', flush=True)
+          f'200 complete executions required per seed {args.seeds}', flush=True)
     accepted, done = 0, 0
     iterator = iter(jobs)
     with cf.ThreadPoolExecutor(args.draft_jobs) as generators, cf.ThreadPoolExecutor(args.jobs) as validators:
@@ -174,7 +196,7 @@ def main():
                     except (subprocess.TimeoutExpired, ValueError) as exc:
                         print(f'DEFER {t} {f}: candidate generation: {exc}', flush=True)
                         drafts = []
-                    validation = validators.submit(try_function, t, f, args.seconds, args.budget, drafts)
+                    validation = validators.submit(try_function, t, f, args.seconds, args.budget, drafts, args.seeds)
                     validating[validation] = size
                     pending.add(validation)
                     continue

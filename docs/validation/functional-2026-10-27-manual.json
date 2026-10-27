@@ -1,0 +1,78 @@
+[
+  {
+    "target": "yuugi",
+    "func": "ClearOTag",
+    "source_sha256": "75ec7d8e476e76a170dfc886dfabce8475c49c790865b0d1ec5683220fb7ffca",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:ClearOTag \u2014 200 tentativas id\u00eanticas, 9 inconclusivas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:ClearOTag \u2014 200 tentativas id\u00eanticas, 21 inconclusivas\n"
+      }
+    ],
+    "return_options": [],
+    "accepted": true
+  },
+  {
+    "target": "slpm",
+    "func": "slpm_ClearOTag",
+    "source_sha256": "bb64a1f6a481c5411c704f8de7e991a0b56983fee73100773fb822743f16d95a",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] slpm:slpm_ClearOTag \u2014 200 tentativas id\u00eanticas, 9 inconclusivas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] slpm:slpm_ClearOTag \u2014 200 tentativas id\u00eanticas, 21 inconclusivas\n"
+      }
+    ],
+    "return_options": [],
+    "accepted": true
+  },
+  {
+    "target": "chess",
+    "func": "func_8009AC88",
+    "source_sha256": "9e779e6ef486c57890d7b2044d3d5c38beedd3e5afc45b678caf932990a1144f",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009AC88 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009AC88 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "return_options": [],
+    "accepted": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800AA15C",
+    "source_sha256": "c0820dc928e9400de5c895b5e030be947d43b7ce74fa1ef8dcb0b689ada358e1",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800AA15C \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800AA15C \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "profile": "valid actor buffer; party and actor indices 0..15 including the special case 5",
+    "accepted": true
+  }
+]

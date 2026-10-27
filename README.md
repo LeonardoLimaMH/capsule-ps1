@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████░░░░░` **76.39%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `████████████████░░░░` **78.20%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -232,11 +232,14 @@ ficam para depois. Um rascunho que apenas compila não aumenta a cobertura.
 
 O lote usa variantes m2c e Ghidra, recupera larguras de globais pelas instruções
 MIPS e restaura posições de argumentos omitidos. Exige **200 execuções completas
-idênticas**, comparando retorno utilizado, RAM e chamadas, antes de publicar o C
+idênticas por semente** (sementes 1 e 2 por padrão), comparando retorno utilizado,
+RAM e chamadas, antes de publicar o C
 atomicamente em `equiv/`. Tentativas que excedem o orçamento continuam pendentes;
 `--seconds`, `--budget` e `--resume` permitem distribuir o trabalho. O cache de
 resultados está em `.cache/functional_batch/`; depois de mudar a geração de C,
 omitir `--resume` para não reutilizar falhas antigas.
+`--seeds 1,2` explicita a seleção: a falha na segunda semente impede a aceitação
+mesmo que a primeira tenha completado todas as 200 execuções.
 
 A geração tem uma fila própria: dois workers preparam candidatos enquanto
 quatro validadores executam os anteriores. `--prefetch` limita o total de funções
@@ -246,9 +249,19 @@ eventos para verificar que a geração avança com uma validação ainda bloquea
 
 O contexto m2c distingue um array no endereço global de um ponteiro armazenado
 nesse endereço. Os acessos MIPS também recuperam larguras após somar um índice a
-uma base conhecida. O gerador preserva `char` assinado do Ghidra como `s8`: o GCC
-PSX usado aqui trata `char` simples como unsigned. Essas regras produzem candidatos;
+uma base conhecida. O GCC PSX usado aqui trata `char` simples como unsigned;
+o pseudo-C nem sempre explicita o sinal correto. O gerador testa variantes `s8`
+e `u8`, confrontadas com `lb`/`lbu` e as execuções originais, em vez de aplicar
+uma conversão global como certeza. Essas regras produzem candidatos;
 a compilação e os testes diferenciais ainda decidem se cada função é aceita.
+
+Há também uma candidata separada para aritmética de endereços em bytes.
+Inferir `u32` de um load não prova que `&objeto + deslocamento` deva multiplicar
+o deslocamento por quatro. A variante converte somente esse uso em soma a um
+`u8 *`, preservando loads escalares, índices tipados e literais. A candidata
+original continua na fila, pois há objetos que usam deslocamentos tipados.
+Isso resolveu funções como `func_800AA15C` e `func_800D5DAC`; diferenças em outros
+caminhos continuam exigindo correção e nova validação.
 
 Para analisar chamadas entre o executável e um overlay no mesmo programa:
 
@@ -275,6 +288,23 @@ integra 31 funções, cada uma com duas sementes de 200 execuções completas.
 Inclui os shifts de 64 bits do SDK com ambos os sentidos, contagens negativas e
 fronteiras 31/32 e 63/64. Tentativas inconclusivas ou não suportadas estão nos
 registros e não contam entre as 200; isso continua sendo validação amostrada.
+
+As traduções manuais seguintes estão em
+[functional-2026-10-27-manual.json](docs/validation/functional-2026-10-27-manual.json).
+`ClearOTag` e sua cópia no loader preservam o callback de debug, os links de 24
+bits e o último ponteiro retornado. `func_8009AC88` passa os endereços dos textos,
+sem confundi-los com a primeira palavra armazenada ali, e sorteia os estados
+principais e secundários para exercitar os switches.
+
+Os resultados da fila seguinte estão em
+[functional-2026-10-27-pipeline.json](docs/validation/functional-2026-10-27-pipeline.json),
+com o SHA-256 do fonte e as duas sementes. Quando há apenas limpeza de espaços,
+o manifesto também registra que o blob ligado antes e depois é idêntico.
+Em `func_800CBA14`, o produto tem 32 bits: armazenar seus 16 bits baixos não
+autoriza truncar a variável antes de comparar o overflow. Em `func_800C1F84`, o
+assembly usa a coordenada recebida em 32 bits; uma assinatura inferida com `s8`
+altera entradas que o original não truncava. Conferir as instruções e os efeitos
+dos helpers é necessário mesmo em funções pequenas.
 
 Para funções que leem o estado de batalha `0x8008EE54`, o lote também sorteia
 estados pequenos e valores de fronteira. A RAM aleatória sozinha quase nunca

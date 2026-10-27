@@ -11,8 +11,24 @@ from unicorn import Uc, UC_ARCH_MIPS, UC_MODE_LITTLE_ENDIAN, UC_MODE_MIPS32
 from unicorn.mips_const import UC_MIPS_REG_RA, UC_MIPS_REG_V0
 
 
+def test_byte_offsets_do_not_change_scalar_loads_typed_indexing_or_literals():
+    source = '''#define D_80020000 (*(u32 *)0x80020000)
+int sample(void) {
+    (void)"&D_80020000 + 7";
+    return D_80020000 + (&D_80020000)[2] +
+           *(u32 *)(&D_80020000 + 7);
+}
+'''
+    variant = ghidra.byte_address_variant(source)
+    assert 'D_80020000 + (&D_80020000)[2]' in variant
+    assert '"&D_80020000 + 7"' in variant
+    assert '*(u32 *)(((u8 *)0x80020000) + 7)' in variant
+    assert ghidra.byte_address_variant('return &local + 7;') is None
+
+
 @pytest.mark.parametrize('array_access', ['D_80021000[1]', '(&D_80021000)[1]'])
-def test_generated_memory_accesses_execute_with_correct_widths(tmp_path, monkeypatch, array_access):
+@pytest.mark.parametrize('char_signed', [True, False])
+def test_generated_memory_accesses_execute_with_correct_widths(tmp_path, monkeypatch, array_access, char_signed):
     cache = tmp_path / 'c'
     (cache / 'chess').mkdir(parents=True)
     (cache / 'chess/sample.c').write_text(
@@ -33,7 +49,7 @@ extern M2C_UNK D_80021000;
 M2C_FIELD(D_80020000, s16 *, 4);
 M2C_FIELD(&D_80021000, u8 *, 1);
 '''
-    code = ghidra.draft('chess', 'sample', asm, context)
+    code = ghidra.draft('chess', 'sample', asm, context, char_signed=char_signed)
     assert '"char"' in code
     source = tmp_path / 'sample.c'
     source.write_text('#include "common.h"\n' + code)
@@ -48,4 +64,4 @@ M2C_FIELD(&D_80021000, u8 *, 1);
         uc.mem_write(0x21001, bytes([byte]))
         uc.reg_write(UC_MIPS_REG_RA, 0x80000400)
         uc.emu_start(0x80010000, 0x80000400, count=100)
-        assert uc.reg_read(UC_MIPS_REG_V0) == (value + byte) & 0xFFFFFFFF
+        assert uc.reg_read(UC_MIPS_REG_V0) == (value + byte + (0 if char_signed else 256)) & 0xFFFFFFFF

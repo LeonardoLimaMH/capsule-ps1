@@ -19,8 +19,11 @@ def prepare(monkeypatch, tmp_path, count, concurrent=False):
     dest = tmp_path / 'equiv/chess/sample.c'
 
     def validate(*args, **kwargs):
-        assert not dest.exists(), 'unvalidated draft must stay outside equiv/'
-        if concurrent:
+        if concurrent and dest.exists():
+            assert dest.read_text() == 'accepted by another worker\n'
+        else:
+            assert not dest.exists(), 'unvalidated draft must stay outside equiv/'
+        if concurrent and not dest.exists():
             dest.parent.mkdir(parents=True)
             dest.write_text('accepted by another worker\n')
         return subprocess.CompletedProcess([], 0, f'[EQUIVALENTE] chess:sample — {count} tentativas idênticas\n', '')
@@ -45,6 +48,24 @@ def test_concurrently_accepted_source_is_preserved(tmp_path, monkeypatch):
     dest = prepare(monkeypatch, tmp_path, 200, concurrent=True)
     batch.try_function('chess', 'sample')
     assert dest.read_text() == 'accepted by another worker\n'
+
+
+def test_second_seed_divergence_prevents_publication(tmp_path, monkeypatch):
+    dest = prepare(monkeypatch, tmp_path, 200)
+    seeds = []
+
+    def validate(cmd, **kwargs):
+        seed = cmd[cmd.index('--seed') + 1]
+        seeds.append(seed)
+        assert not dest.exists()
+        if seed == '1':
+            return subprocess.CompletedProcess(cmd, 0, '[EQUIVALENTE] 200 tentativas idênticas\n', '')
+        return subprocess.CompletedProcess(cmd, 1, '[DIVERGENTE] second seed\n', '')
+
+    monkeypatch.setattr(batch.subprocess, 'run', validate)
+    assert batch.try_function('chess', 'sample')['status'] == 'pending'
+    assert seeds == ['1', '2']
+    assert not dest.exists()
 
 
 def test_global_load_width_uses_interior_address_and_signedness():
@@ -77,8 +98,9 @@ def test_next_candidate_is_prepared_while_previous_is_validating(tmp_path, monke
         generated.append(func)
         return [('fixture', func)]
 
-    def validate(target, func, seconds, budget, drafts):
+    def validate(target, func, seconds, budget, drafts, seeds):
         assert drafts == [('fixture', func)]
+        assert seeds == (1, 2)
         if func == 'first':
             validating.set()
             assert prepared.wait(10), 'generation blocked behind validation'
