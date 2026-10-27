@@ -1,9 +1,7 @@
 #include "common.h"
 #include "ghidra.h"
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800C9484);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800C94DC);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C94DC);
 
 void func_800C9534(s32 unused,u8 *o,s32 v) {
      s32 s = (v << 12) / *(s16 *)(o + 0x4E);
@@ -15,15 +13,15 @@ void func_800C9534(s32 unused,u8 *o,s32 v) {
 
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800C9560);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9560);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800C9648);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9648);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800C9A34);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9A34);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800C9B78);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9B78);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800C9C38);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9C38);
 
 s32 func_800C9C90(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 0x5CC) & 0x40;
@@ -33,9 +31,9 @@ s32 func_800C9C9C(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 0x5CC) & 0x80;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800C9CA8);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9CA8);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800C9D18);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9D18);
 
 void func_800C9F98(void) {
     extern int func_800161C4();
@@ -50,7 +48,7 @@ void func_800C9F98(void) {
     M2C_FIELD(temp_v0, s32 *, 0x38) = (s32) (M2C_FIELD(temp_v0, s32 *, 0x38) | 0x40);
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CA00C);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA00C);
 
 #include "ghidra.h"
 void func_800CA268(short param_1,short param_2,short param_3,short param_4,short param_5,
@@ -62,9 +60,9 @@ void func_800CA268(short param_1,short param_2,short param_3,short param_4,short
   return;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CA2C8);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA2C8);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CA35C);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA35C);
 
 s32 func_800CA3DC(s32 arg0) {
     s32 var_v1;
@@ -80,7 +78,7 @@ loop_1:
     return var_v1;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CA408);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA408);
 
 s32 func_800CA474(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x5D9) + 0x29;
@@ -114,11 +112,11 @@ s32 func_800CA4AC(s32 arg0, s32 arg1) {
     return var_a2;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CA4CC);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA4CC);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CA574);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA574);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CA664);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA664);
 
 u32 func_800CA69C(void *arg0) {
     return (u32) (M2C_FIELD(arg0, u8 *, 0xBE1) & 6) >> 1;
@@ -128,13 +126,13 @@ s32 func_800CA6B0(void) {
     return 0;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CA6B8);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA6B8);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CA730);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA730);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CA7B0);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA7B0);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CA87C);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA87C);
 
 #include "ghidra.h"
 void func_800CAA44(undefined4 param_1,int param_2)
@@ -186,7 +184,7 @@ s16 func_800CAA6C(void *arg0, s32 arg1)
   return var_a2;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CAABC);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CAABC);
 
 void func_800CABDC(void *arg0, s32 arg1, s32 arg2) {
     extern u8 D_80018600[];
@@ -212,7 +210,7 @@ void func_800CAC50(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s8 *, 0xCF0) = 0;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C9484", func_800CACC4);
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CACC4);
 
 void func_800CAD74(s32 arg0) {
     s32 temp_s4;

@@ -29,3 +29,9 @@ int func_800C942C(undefined4 param_1, int param_2)
   new_var = param_2 + ((iVar1 >> 3) * (-8));
   return new_var;
 }
+
+/* rand-u16: 0x80069BBE 1 0,127,128,255,256,4095,4096,32767,32768,65535 */
+s32 func_800C9484(s32 unused_arg0, s32 column) {
+    extern s16 D_80069BBE[];
+    return (column + ((*D_80069BBE + 128) % 4096) / 256) % 16;
+}

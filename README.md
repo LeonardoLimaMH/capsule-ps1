@@ -16,20 +16,20 @@ emulação contra a função original.
 ## Progresso
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.85%**  
-**Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.35%**  
+**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.86%**  
+**Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.36%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **4.96%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `██████████████░░░░░░` **70.12%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `██████████████░░░░░░` **70.52%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
 |---|---|---|---|---|---|
 | `YUUGI.EXE` | executável principal | 2.80% (5,772 / 206,372 B) | 142 / 732 | 8.79% (84 / 303 fn) | **3.99%** |
 | `SLPM_860.96` | loader / boot | 4.76% (988 / 20,756 B) | 27 / 119 | 6.57% (70 / 215 fn) | **5.99%** |
-| `CHESS.BIN` | overlay de batalha (tabuleiro) | 1.70% (7,180 / 421,956 B) | 99 / 867 | 100.00% (2 / 2 fn) | **1.72%** |
+| `CHESS.BIN` | overlay de batalha (tabuleiro) | 1.72% (7,268 / 421,956 B) | 100 / 867 | 100.00% (2 / 2 fn) | **1.74%** |
 | `RAISE.BIN` | overlay de criação de monstros | 1.52% (4,972 / 326,576 B) | 181 / 940 | 100.00% (2 / 2 fn) | **1.54%** |
 | `ETC.BIN` | overlay de menus/diversos | 0.92% (816 / 88,992 B) | 10 / 189 | 0.00% (0 / 0 fn) | **0.92%** |
-| **Total** | | **1.85%** (19,728 / 1,064,652 B) | 459 / 2847 | 7.89% (158 / 522 fn) | **2.35%** |
+| **Total** | | **1.86%** (19,816 / 1,064,652 B) | 460 / 2847 | 7.89% (158 / 522 fn) | **2.36%** |
 <!-- PROGRESS:END -->
 
 A **cobertura** soma ao C as funções que já eram escritas em assembly no
@@ -236,6 +236,22 @@ A segunda rodada integrou mais **22 funções / 2.792 bytes**: o CHESS chegou a
 As duas jump tables migradas também são geradas pelo compilador. O rebuild dos
 cinco binários permanece idêntico; os resultados e limites dos testes estão em
 [docs/wip/chess/2026-10-27-round2.md](docs/wip/chess/2026-10-27-round2.md).
+
+A passagem seguinte recuperou `func_800C9484`: manter o primeiro argumento
+sem uso restaurou o segundo em `$a1`; a expressão com resto e divisão assinados
+casou com GCC 2.8.1. O CHESS chegou a **100 / 867 funções** e **1,72% dos bytes**
+em C byte-exact. Antes de copiar as correções de sinal do pseudo-C, testar
+também os operadores C que as originam. Detalhes em
+[docs/wip/chess/2026-10-27-round3.md](docs/wip/chess/2026-10-27-round3.md).
+
+O Ghidra também pode ser consultado ao vivo por `python tools/ghidra.py status`,
+`decompile chess <função>` e `xrefs chess <endereço>`. A API local do GhidraMCP
+fica em `127.0.0.1:8089`; é necessário abrir o projeto no Ghidra. O pipeline já
+consulta os rascunhos em `.cache/ghidra/c/`, mas esse cache não substitui a análise
+de tipos e referências. Conferir sempre o assembly: cargas não alinhadas de
+uma cópia de struct podem aparecer como operações de bits e locais fragmentados
+no pseudo-C. Alterações de protótipos no projeto compartilhado devem ser
+coordenadas com a outra IA; consultas de leitura permitem investigar sem isso.
 
 #### 1. Procurar casamentos bloqueados antes de repetir o pipeline
 
