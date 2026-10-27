@@ -31,6 +31,7 @@ import subprocess
 import sys
 import tempfile
 import time
+from collections import Counter
 
 from unicorn import (Uc, UcError, UC_ARCH_MIPS, UC_MODE_MIPS32, UC_MODE_LITTLE_ENDIAN,
                      UC_HOOK_INTR, UC_HOOK_CODE, UC_HOOK_MEM_WRITE, UC_HOOK_MEM_READ)
@@ -273,7 +274,7 @@ def func_size(func):
     return int(m.group(1), 16) if m else 8
 
 
-def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=None):
+def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=None, group_stubs=True):
     mu = Uc(UC_ARCH_MIPS, UC_MODE_MIPS32 | UC_MODE_LITTLE_ENDIAN)
     mu.mem_map(0x00000000, RAM_SIZE)           # kseg0 0x80000000 -> físico 0
     mu.mem_map(0x1F800000, 0x2000)             # scratchpad + registradores de I/O
@@ -326,9 +327,25 @@ def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=N
         state["err"] = state["err"] or f"exceção {intno} em {pc:#x}"
         uc.emu_stop()
 
-    for addr in list(stubs) + [0x800000A0, 0x800000B0, 0x800000C0]:
+    points = list(stubs) + [0x800000A0, 0x800000B0, 0x800000C0]
+    for addr in points:
         mu.mem_write(addr & 0x1FFFFFFF, JR_RA_NOP)
-        mu.hook_add(UC_HOOK_CODE, on_stub, begin=addr, end=addr)
+        if not group_stubs:
+            mu.hook_add(UC_HOOK_CODE, on_stub, begin=addr, end=addr)
+    if group_stubs:
+        counts = Counter(points)
+
+        def dispatch(uc, addr, size, user):
+            count = counts.get(addr, 0)
+            if count:
+                on_stub(uc, addr, size, user)
+                for _ in range(1, count):
+                    on_stub(uc, addr, size, user)
+
+        # One bounded hook replaces thousands of registrations. Exact entry
+        # addresses still select the same callbacks, including duplicate BIOS
+        # points. Byte patches, instruction stepping and memory guards are equal.
+        mu.hook_add(UC_HOOK_CODE, dispatch, begin=min(points), end=max(points))
     mu.hook_add(UC_HOOK_INTR, on_intr)
 
     def on_code_write(uc, access, addr, size, value, user):

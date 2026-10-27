@@ -17,6 +17,7 @@ import time
 
 import arggaps
 import autodecomp as ad
+import functional_context
 import functional_ghidra
 import functional_m2c
 import retuse
@@ -26,6 +27,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 CACHE = ROOT / '.cache/functional_batch'
 REAL_CALLEES = set()
 M2C_TARGET = 'mipsel-gcc-c'
+CALLEE_CONTEXT = True
 
 
 def candidates(target, func):
@@ -40,6 +42,13 @@ def candidates(target, func):
         state_profile += '/* real-callee: ' + name + ' */\n'
     out = []
     m2c_flags = ('--target', M2C_TARGET)
+    context = functional_context.leaf_context(target, asm_text) if CALLEE_CONTEXT else None
+    if context:
+        folder = CACHE / target / func
+        folder.mkdir(parents=True, exist_ok=True)
+        path = folder / 'context.c'
+        path.write_text(context, encoding='utf-8')
+        m2c_flags += ('--context', str(path))
     m2c = ad.run_m2c(target, func, asm, m2c_flags)
     for char_signed in (True, False):
         typed = functional_ghidra.draft(target, func, asm_text, m2c or '', char_signed=char_signed)
@@ -125,14 +134,14 @@ def try_function(target, func, seconds=45, budget=180, prepared=None, seeds=(1, 
             break
     rec = {'target': target, 'func': func, 'status': 'accepted' if accepted else 'pending',
            'sha256': accepted, 'seeds': list(seeds),
-           'return_options': extra, 'm2c_target': M2C_TARGET,
+           'return_options': extra, 'm2c_target': M2C_TARGET, 'callee_context': CALLEE_CONTEXT,
            'seconds': round(time.monotonic() - started, 2), 'attempts': attempts}
     (folder / 'result.json').write_text(json.dumps(rec, ensure_ascii=False, indent=2))
     return rec
 
 
 def main():
-    global M2C_TARGET
+    global M2C_TARGET, CALLEE_CONTEXT
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('targets', nargs='+', choices=['chess', 'raise', 'yuugi', 'slpm', 'etc'])
     ap.add_argument('--jobs', type=int, default=4)
@@ -150,9 +159,12 @@ def main():
     ap.add_argument('--ghidra-cache', help='alternative Ghidra C cache containing target/function.c')
     ap.add_argument('--m2c-target', choices=['mipsel-gcc-c', 'mips-gcc-c'], default='mipsel-gcc-c',
                     help='m2c input byte order; PS1 uses mipsel (byte-exact search defaults are unchanged)')
+    ap.add_argument('--no-callee-context', action='store_true',
+                    help='disable leaf-helper signatures when comparing generation strategies')
     ap.add_argument('--real-callee', action='append', default=[], help='execute this helper when called; persist the test profile in C')
     args = ap.parse_args()
     M2C_TARGET = args.m2c_target
+    CALLEE_CONTEXT = not args.no_callee_context
     if args.jobs < 1 or args.draft_jobs < 1 or args.prefetch < 0 or not args.seeds:
         ap.error('worker counts must be positive; prefetch must not be negative')
     REAL_CALLEES.update(args.real_callee)

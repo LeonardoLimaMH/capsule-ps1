@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `████████████████░░░░` **79.16%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `████████████████░░░░` **79.87%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -37,10 +37,10 @@ emulação contra a função original.
 |---|---|---|---|---|
 | `YUUGI.EXE` | 83.93% (648 fn) | `█████████░` **87.93%** | 874 / 1,035 (84.44%) | **161** |
 | `SLPM_860.96` | 82.92% (198 fn) | `█████████░` **88.90%** | 295 / 334 (88.32%) | **39** |
-| `CHESS.BIN` | 61.12% (566 fn) | `██████░░░░` **62.86%** | 668 / 869 (76.87%) | **201** |
+| `CHESS.BIN` | 63.08% (580 fn) | `██████░░░░` **64.81%** | 682 / 869 (78.48%) | **187** |
 | `RAISE.BIN` | 83.83% (716 fn) | `█████████░` **85.69%** | 908 / 942 (96.39%) | **34** |
 | `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 76.71% (2,307 fn) | `████████░░` **79.16%** | 2,934 / 3,369 (87.09%) | **435** |
+| **Total** | 77.42% (2,321 fn) | `████████░░` **79.87%** | 2,948 / 3,369 (87.50%) | **421** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
@@ -278,6 +278,27 @@ de alinhamento da origem e destino com GCC 2.7.2 e 2.8.1, verificando também os
 bytes vizinhos. Instruções parciais não resolvidas continuam reprovadas.
 `--m2c-target mips-gcc-c` permite uma rodada de comparação. Essa seleção é da
 frente funcional; o pipeline padrão de busca byte-exact mantém sua configuração.
+
+O lote também fornece ao m2c assinaturas mínimas de helpers leaf, identificados
+no assembly do overlay correto (ou no executável principal). Uma chamada pode
+reutilizar `a0..a2` sem os reatribuir imediatamente antes do `jal`; sem contexto,
+o m2c chegava a substituir esses três argumentos por um único zero. Essa correção
+resolveu `func_8009BE30` nas duas sementes. Wrappers que chamam outras funções,
+saltos não resolvidos, syscalls, possíveis retornos em `v0/v1` e parâmetros de
+pilha ficam fora dessa inferência.
+Usar `--no-callee-context` para comparar o resultado sem essa ajuda.
+
+O difftest usa um único hook com despacho por endereço exato para os stubs,
+preservando callbacks duplicados, delay slots, registradores, RAM e conteúdo
+dos argumentos string. Uma comparação de dez execuções com 1.903 stubs manteve
+todos esses estados idênticos e reduziu o tempo de emulação em cerca de 4,7×
+naquela medição. Os testes também comparam o modo anterior e exigem que versões
+erradas continuem sendo reprovadas; o critério de aceitação permanece o mesmo.
+
+`func_800DD428` tem um perfil de scheduler inicializado e executa os helpers
+originais `func_80015B3C`, `func_800136C8` e `func_80013C14`. Assim, o teste compara
+as escritas no objeto realmente alocado, incluindo cópias de buffers desalinhados.
+O controle negativo troca as coordenadas copiadas e precisa falhar pela RAM.
 
 Há também uma candidata separada para aritmética de endereços em bytes.
 Inferir `u32` de um load não prova que `&objeto + deslocamento` deva multiplicar

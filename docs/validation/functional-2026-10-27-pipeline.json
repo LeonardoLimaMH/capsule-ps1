@@ -535,5 +535,315 @@
     ],
     "validated_source_sha256": "3fb82b14a67740f9f4e369a782e75f6125dbbe51a13927080672b25d58bac3af",
     "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_8009BE30",
+    "source_sha256": "4f4af577ee11974b52f27a6d734b8a2893fcab1d2649c37a2a7a1d4084bdb0de",
+    "accepted": true,
+    "candidate_batch": "functional_v9",
+    "results": [
+      {
+        "variant": "draft",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009BE30 \u2014 200 tentativas id\u00eanticas, 2 inconclusivas\n"
+      },
+      {
+        "variant": "draft",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009BE30 \u2014 200 tentativas id\u00eanticas, 5 inconclusivas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800CF450",
+    "source_sha256": "28dc43445de4dd8a25ea8da8d62e8c7df56e3234950af6728313714673746948",
+    "accepted": true,
+    "candidate_batch": "functional_v8",
+    "results": [
+      {
+        "variant": "draft",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CF450 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "draft",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CF450 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800D741C",
+    "source_sha256": "08180f846399215e93f1c1856be45284ac94dcd7cfb8487d0b12784bba806533",
+    "accepted": true,
+    "candidate_batch": "functional_v8",
+    "results": [
+      {
+        "variant": "ghidra-unsigned-char+byte-address",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D741C \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "ghidra-unsigned-char+byte-address",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D741C \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validated_source_sha256": "14defe6354b5a278f2941e32950fa50cb82697c462fd6b19cece1243dbc87d23",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800DD428",
+    "source_sha256": "09e54d89d511e5c204318525fb39ea77fe09e80cff4e654fbc1cb2903c813bfb",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DD428 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DD428 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "profile": "real task allocator, empty scheduler with valid sentinel, unaligned source buffers",
+    "accepted": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800ADBE4",
+    "source_sha256": "85cf274da749fbc2fdfc42669d25552ad3a08569edd4a55e43f8dcdd798c33c6",
+    "accepted": true,
+    "candidate_batch": "functional_v8",
+    "results": [
+      {
+        "variant": "ghidra-typed+byte-address",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800ADBE4 \u2014 200 tentativas id\u00eanticas, 720 inconclusivas, 1 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "ghidra-typed+byte-address",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800ADBE4 \u2014 200 tentativas id\u00eanticas, 773 inconclusivas, 2 n\u00e3o suportadas\n"
+      }
+    ],
+    "validated_source_sha256": "efaee260a3e164edad8d986b36fb3124dfc8ac9b9dd07d9147c22ccf0e2f68b3",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800B0530",
+    "source_sha256": "173d93e6744e8b8ace5c2d79637bee35631a90d64256908d478e22017960ed33",
+    "accepted": true,
+    "candidate_batch": "functional_v8",
+    "results": [
+      {
+        "variant": "ghidra-typed+byte-address",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B0530 \u2014 200 tentativas id\u00eanticas, 720 inconclusivas, 1 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "ghidra-typed+byte-address",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B0530 \u2014 200 tentativas id\u00eanticas, 773 inconclusivas, 2 n\u00e3o suportadas\n"
+      }
+    ],
+    "validated_source_sha256": "8b972df41416e7d695fb78bb89c640f92a015fdf174d87f3114c3ce52ba68747",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800B2ABC",
+    "source_sha256": "7694d1dea6d39969275cb18a29a10b405a6687b469265be3f8dd2ffe0297c059",
+    "accepted": true,
+    "candidate_batch": "functional_v9",
+    "results": [
+      {
+        "variant": "ghidra-typed",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B2ABC \u2014 200 tentativas id\u00eanticas, 207 inconclusivas, 4 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "ghidra-typed",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B2ABC \u2014 200 tentativas id\u00eanticas, 198 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ],
+    "validated_source_sha256": "2dc1fe5b2957b57980bf3ef75aeee0ea7a4b9b6b5576b295df861bf2b2159380",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800C31E8",
+    "source_sha256": "e35281e86859623bc0c9eb08dbcd6e630c8febce6f252da0f64f2642e6fbbdff",
+    "accepted": true,
+    "candidate_batch": "functional_alloc",
+    "results": [
+      {
+        "variant": "ghidra-typed+byte-address+task-pool",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C31E8 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "ghidra-typed+byte-address+task-pool",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C31E8 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validated_source_sha256": "120112d9f1ed64ae78d0528040a8c3e918f359172c9a95ea8cb05acac2f71515",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800C349C",
+    "source_sha256": "88b60613db6b9decb610fef7e87fc692c92fc839ec5a4c7197b0cfd92bb68c3b",
+    "accepted": true,
+    "candidate_batch": "functional_alloc",
+    "results": [
+      {
+        "variant": "ghidra-typed+byte-address+task-pool",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C349C \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "ghidra-typed+byte-address+task-pool",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C349C \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validated_source_sha256": "d67777e4583319d863d2113207a1b9a0e0d1ddc7297a919d57df53e6f32e7c34",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800C372C",
+    "source_sha256": "0e44bed609c898da565252b71d999a693fe66c0890793772cc26fa106bab5076",
+    "accepted": true,
+    "candidate_batch": "functional_alloc",
+    "results": [
+      {
+        "variant": "ghidra-typed+byte-address+task-pool",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C372C \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "ghidra-typed+byte-address+task-pool",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C372C \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validated_source_sha256": "2a2254107f08118e54951c2767754ab8591f0e06d976146f80c19dd93821ef4f",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800C48DC",
+    "source_sha256": "4e6677939dcd48b3581bcce9a16b0e94a2e82a83d6f3ee00befed021b120ee7c",
+    "accepted": true,
+    "candidate_batch": "functional_alloc",
+    "results": [
+      {
+        "variant": "ghidra-typed+task-pool",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C48DC \u2014 200 tentativas id\u00eanticas, 521 inconclusivas, 3 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "ghidra-typed+task-pool",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C48DC \u2014 200 tentativas id\u00eanticas, 551 inconclusivas, 8 n\u00e3o suportadas\n"
+      }
+    ],
+    "validated_source_sha256": "628a4c70caa8051f78afcd79988f8dd091325d3cbd4ba0bc08925f20c18622ca",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800D79A4",
+    "source_sha256": "4d2cda17a75e9fa0712a6f9e5ae6de2b92d566f3ff789c8599779c7a4ebc7099",
+    "accepted": true,
+    "candidate_batch": "functional_v8",
+    "results": [
+      {
+        "variant": "draft",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D79A4 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "draft",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D79A4 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800D90C0",
+    "source_sha256": "0a87fab93e8ee154043f17bffc544d314f1eee0fcabed235a284c678f0096664",
+    "accepted": true,
+    "candidate_batch": "functional_v8",
+    "results": [
+      {
+        "variant": "draft",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D90C0 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "draft",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D90C0 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800EBD84",
+    "source_sha256": "57eab0edf3d01af5db01e13329a17df52e6725318d4c48cdbea43c5ebca4b441",
+    "accepted": true,
+    "candidate_batch": "functional_alloc",
+    "results": [
+      {
+        "variant": "ghidra-typed+task-pool",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EBD84 \u2014 200 tentativas id\u00eanticas, 12 inconclusivas\n"
+      },
+      {
+        "variant": "ghidra-typed+task-pool",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EBD84 \u2014 200 tentativas id\u00eanticas, 19 inconclusivas\n"
+      }
+    ],
+    "validated_source_sha256": "4ef97b9ff4015412e22c0c73f9ba068833cb868ad2051ac231f85d572dac3888",
+    "whitespace_cleanup_identical_linked_blob": true
   }
 ]
