@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████░░░░░` **74.24%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████░░░░░` **74.53%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -244,6 +244,14 @@ alcança os casos de um switch de 16 bits. Candidatos aprovados apenas nesse
 caminho inicial foram separados antes da integração, sem aumentar o progresso.
 Não ignorar diferenças em ponteiros para buffers locais: verificar o conteúdo e
 os efeitos dos callees antes de atribuir a rejeição apenas ao layout da pilha.
+
+Quando um helper preenche ou consome esse buffer, o difftest aceita a diretiva
+`/* real-callee: func_800FE188 */` no C (ou `--real-callee` na linha de comando).
+Ela executa o helper original nos dois lados, com suas leituras e escritas reais.
+As comparações de retorno, RAM e demais chamadas continuam ativas. Isso resolveu
+`func_800E21D8`, `func_800EA3E4` e `func_800E5078`, cada uma com dois conjuntos de
+200 execuções completas e estados de batalha explícitos. Um controle negativo
+altera o vetor produzido pelo helper e exige que a validação detecte a diferença.
 
 Para acelerar lotes grandes, usar uma cópia de trabalho no filesystem Linux do
 container e manter os binários originais em acesso local de leitura. Isso evita

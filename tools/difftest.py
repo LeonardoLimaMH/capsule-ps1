@@ -376,6 +376,8 @@ def main():
     ap.add_argument("--isolate", action="store_true",
                     help="com --abi: funções do jogo chamadas também viram stubs (argumentos de "
                          "registrador e de pilha comparados)")
+    ap.add_argument("--real-callee", action="append", default=[],
+                    help="com --isolate: executar esta função auxiliar original em vez de substituí-la por stub")
     ap.add_argument("--check-v1", action="store_true",
                     help="com --abi: compara também v1 (algum chamador lê a metade alta de um "
                          "retorno de 64 bits, tools/retuse.py)")
@@ -410,6 +412,7 @@ def main():
         MAX_INSNS = int(m.group(1))
     # "/* argN: small */" (N = 0..3): só aquele argumento pequeno
     _t = (ROOT / src).read_text(encoding="utf-8", errors="replace")
+    real_callees = set(a.real_callee) | set(re.findall(r"/\* real-callee: (\w+) \*/", _t))
     small_args = {0, 1, 2, 3} if "/* args: small */" in _t else {int(k) for k in re.findall(r"/\* arg([0-3]): small \*/", _t)}
     # "/* argN: 0xENDEREÇO */": argumento fixo (p.ex. apontando para um buffer preparado)
     fixed_args = {int(k): int(v, 16) for k, v in re.findall(r"/\* arg([0-3]): (0x[0-9A-Fa-f]+) \*/", _t)}
@@ -432,6 +435,13 @@ def main():
         # a função testada em isolamento: as funções do jogo que ela chama são o mesmo
         # código original dos dois lados; viram stubs que registram os argumentos
         games = game_func_addrs(a.target)
+        unknown = real_callees - set(games.values())
+        if unknown:
+            sys.exit("real-callee não encontrado nas imagens carregadas: " + ", ".join(sorted(unknown)))
+        # Helpers that fill/read caller-owned buffers must run with their real
+        # memory effects when selected. No pointer or RAM comparisons are waived.
+        games = {addr: name for addr, name in games.items() if name not in real_callees}
+        stubs = {addr: name for addr, name in stubs.items() if name not in real_callees}
         stubs = {**games, **stubs}
         game_names = frozenset(games.values())
     if a.isolate:
