@@ -98,7 +98,15 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98", func_800D577C);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98", func_800D5A94);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98", func_800D5C10);
+
+extern u8 D_80100F38[];
+
+u8 *func_800D5C10(s32 idx) {
+    u8 *rec = D_80100F38 + (idx & 0xFFFF) * 0x79C;
+
+    *(s16 *)(rec + 0x396) = 0;
+    return rec;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98", func_800D5C44);
 
@@ -117,7 +125,18 @@ void func_800D6960(void *arg0, s8 arg1, s8 arg2, s8 arg3) {
     M2C_FIELD(arg0, s8 *, 3) = 0x38;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98", func_800D6978);
+
+extern u8 D_80100F38[];
+extern void func_800D0730(s16 *, s32, s32, s32);
+extern s32 func_800D6A2C(s32, s32, s32, s32, s32, s32);
+
+s32 func_800D6978(s32 a0, s32 a1, s32 a2) {
+    s16 b[4];
+    u16 k = a0;
+    u8 *p = D_80100F38 + k * 0x79C;
+    func_800D0730(b, (s16)(*(u16 *)(p + 0x332) - 1), (s16)(*(u16 *)(p + 0x334) - 1), 0);
+    return func_800D6A2C(k, b[0], b[2], 3, (u8)a1, (u16)a2);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98", func_800D6A2C);
 

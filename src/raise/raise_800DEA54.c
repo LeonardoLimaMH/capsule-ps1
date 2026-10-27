@@ -44,7 +44,15 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800DF67C);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800DF734);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800DF7EC);
+
+extern u8 D_80092008[];
+
+void func_800DF7EC(s32 unused, s32 idx) {
+    u8 *rec = D_80092008 + (idx & 0xFFFF) * 0x44;
+    u8 *slot = rec + (((*(u32 *)rec >> 11) & 0x3F) - 1) * 2;
+
+    *(u16 *)(slot + 4) |= 0x8000;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800DF838);
 
@@ -115,7 +123,17 @@ void func_800E1068(s32 arg0) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E10BC);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E1140);
+
+extern u8 D_80100F38[];
+
+s32 func_800E1140(s32 idx) {
+    u8 *obj = D_80100F38 + (idx & 0xFFFF) * 0x79C;
+
+    if (*(s16 *)(obj + 0x228) == 1) {
+        return 0;
+    }
+    return ((*(u32 *)(obj + 0x798) >> 5) & 1) ^ 1;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E11A0);
 
@@ -174,6 +192,20 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E1848);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E186C);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E194C);
+
+extern u8 D_80105320[];
+
+void func_800E194C(s32 unused, s32 idx, s16 x, s16 y, s32 value) {
+    u8 *rec = D_80105320 + (idx & 0xFFFF) * 0x110;
+    u8 *slot = rec + *(s16 *)(rec + 4) * 8;
+    s32 next;
+
+    *(s16 *)(slot + 0x10) = x;
+    *(s16 *)(slot + 0x12) = y;
+    *(s32 *)(slot + 0x14) = value;
+    next = *(s16 *)(rec + 4) + 1;
+    *(u16 *)(rec + 6) += 1;
+    *(s16 *)(rec + 4) = next % 31;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E19D0);
