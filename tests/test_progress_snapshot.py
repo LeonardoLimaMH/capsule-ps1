@@ -36,3 +36,20 @@ def test_staged_progress_excludes_unaccepted_work(tmp_path, monkeypatch):
     progress.staged_files.cache_clear()
     assert progress.collect('chess')['game']['done_bytes'] == 8
     progress.staged_files.cache_clear()
+
+
+def test_index_batch_uses_byte_lengths_and_immutable_hashes(tmp_path, monkeypatch):
+    subprocess.run(['git', 'init', '-q', str(tmp_path)], check=True)
+    first, second = tmp_path / 'a.c', tmp_path / 'b.c'
+    first.write_text('/* peça: ♟ */\n', encoding='utf-8')
+    second.write_text('/* another blob */\n', encoding='utf-8')
+    subprocess.run(['git', 'add', '.'], cwd=tmp_path, check=True)
+    monkeypatch.setattr(progress, 'ROOT', tmp_path)
+    monkeypatch.setattr(progress, 'STAGED', True)
+    progress.staged_files.cache_clear()
+    progress.staged_files()  # capture hashes before a concurrent index update
+    first.write_text('changed\n', encoding='utf-8')
+    subprocess.run(['git', 'add', '.'], cwd=tmp_path, check=True)
+    assert progress.source_text(first) == '/* peça: ♟ */\n'
+    assert progress.source_text(second) == '/* another blob */\n'
+    progress.staged_files.cache_clear()

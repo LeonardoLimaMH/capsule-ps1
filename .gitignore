@@ -1,15 +1,31 @@
 # Conteúdo protegido / derivado da mídia original: NUNCA versionar
+.env
+.env.*
 disc/
 disc_manifest.json
 *.bin
 *.BIN
 *.EXE
 *.cue
+*.iso
+*.ISO
+*.img
+*.IMG
+*.ccd
+*.mdf
+*.mds
+*.pbp
+*.chd
+*.ecm
 asm/
 assets/
 
 # Saídas de build
 build/
+*.exe
+*.elf
+*.zip
+*.7z
 __pycache__/
 *.pyc
 .pytest_cache/

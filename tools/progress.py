@@ -36,10 +36,14 @@ START, END = "<!-- PROGRESS:START -->", "<!-- PROGRESS:END -->"
 STAGED = False
 
 
+class IndexSnapshot(dict):
+    texts = None
+
+
 @functools.lru_cache(maxsize=None)
 def staged_files():
     out = subprocess.check_output(['git', 'ls-files', '--stage', '-z'], cwd=ROOT)
-    result = {}
+    result = IndexSnapshot()
     for entry in out.split(b'\0'):
         if not entry:
             continue
@@ -55,9 +59,31 @@ def source_text(path):
     """Read the exact commit snapshot when --staged is requested."""
     if STAGED:
         name = path.relative_to(ROOT).as_posix()
-        if name not in staged_files():
+        snapshot = staged_files()
+        if name not in snapshot:
             return ''
-        return subprocess.check_output(['git', 'cat-file', 'blob', staged_files()[name]], cwd=ROOT).decode('utf-8')
+        if snapshot.texts is None:
+            # One immutable batch instead of starting thousands of git processes
+            # on Windows. Hashes come from the already captured index snapshot.
+            objects = sorted({blob for file, blob in snapshot.items()
+                              if file.endswith('.c') or file == 'README.md'
+                              or (file.startswith('config/') and file.endswith('.txt'))})
+            raw = subprocess.check_output(['git', 'cat-file', '--batch'], cwd=ROOT,
+                                          input=('\n'.join(objects) + '\n').encode())
+            texts, offset = {}, 0
+            for expected in objects:
+                end = raw.index(b'\n', offset)
+                oid, kind, count = raw[offset:end].split()
+                if oid.decode() != expected or kind != b'blob':
+                    sys.exit('Invalid git blob response while calculating progress')
+                begin, size = end + 1, int(count)
+                texts[expected] = raw[begin:begin + size].decode('utf-8')
+                offset = begin + size + 1
+            snapshot.texts = texts
+        blob = snapshot[name]
+        if blob not in snapshot.texts:
+            snapshot.texts[blob] = subprocess.check_output(['git', 'cat-file', 'blob', blob], cwd=ROOT).decode('utf-8')
+        return snapshot.texts[blob]
     return path.read_text(encoding='utf-8') if path.exists() else ''
 
 

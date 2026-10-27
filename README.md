@@ -16,10 +16,10 @@ emulação contra a função original.
 ## Progresso
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.86%**  
-**Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.36%**  
-**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **4.96%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `██████████████░░░░░░` **70.52%**  
+**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
+**Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
+**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████░░░░░` **74.24%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -27,9 +27,9 @@ emulação contra a função original.
 | `YUUGI.EXE` | executável principal | 2.80% (5,772 / 206,372 B) | 142 / 732 | 8.79% (84 / 303 fn) | **3.99%** |
 | `SLPM_860.96` | loader / boot | 4.76% (988 / 20,756 B) | 27 / 119 | 6.57% (70 / 215 fn) | **5.99%** |
 | `CHESS.BIN` | overlay de batalha (tabuleiro) | 1.72% (7,268 / 421,956 B) | 100 / 867 | 100.00% (2 / 2 fn) | **1.74%** |
-| `RAISE.BIN` | overlay de criação de monstros | 1.52% (4,972 / 326,576 B) | 181 / 940 | 100.00% (2 / 2 fn) | **1.54%** |
+| `RAISE.BIN` | overlay de criação de monstros | 1.84% (6,008 / 326,576 B) | 190 / 940 | 100.00% (2 / 2 fn) | **1.86%** |
 | `ETC.BIN` | overlay de menus/diversos | 0.92% (816 / 88,992 B) | 10 / 189 | 0.00% (0 / 0 fn) | **0.92%** |
-| **Total** | | **1.86%** (19,816 / 1,064,652 B) | 460 / 2847 | 7.89% (158 / 522 fn) | **2.36%** |
+| **Total** | | **1.96%** (20,852 / 1,064,652 B) | 469 / 2847 | 7.89% (158 / 522 fn) | **2.45%** |
 <!-- PROGRESS:END -->
 
 A **cobertura** soma ao C as funções que já eram escritas em assembly no
@@ -220,11 +220,43 @@ outra revisão, o `make check` vai acusar a diferença.
    ```
 6. Atualize o progresso: `./run.sh python3 tools/progress.py --readme`.
 
+### Prioridade atual: completar a frente funcional
+
+Em 2026-10-27, a pedido do usuário, a prioridade passou a ser **C equivalente
+validado em `equiv/`**; os ajustes de alocação de registradores para byte-exact
+ficam para depois. Um rascunho que apenas compila não aumenta a cobertura.
+
+```sh
+./run.sh python3 tools/functional_batch.py chess yuugi slpm raise --jobs 4
+```
+
+O lote usa variantes m2c e Ghidra, recupera larguras de globais pelas instruções
+MIPS e restaura posições de argumentos omitidos. Exige **200 execuções completas
+idênticas**, comparando retorno utilizado, RAM e chamadas, antes de publicar o C
+atomicamente em `equiv/`. Tentativas que excedem o orçamento continuam pendentes;
+`--seconds`, `--budget` e `--resume` permitem distribuir o trabalho. O cache de
+resultados está em `.cache/functional_batch/`; depois de mudar a geração de C,
+omitir `--resume` para não reutilizar falhas antigas.
+
+Para funções que leem o estado de batalha `0x8008EE54`, o lote também sorteia
+estados pequenos e valores de fronteira. A RAM aleatória sozinha quase nunca
+alcança os casos de um switch de 16 bits. Candidatos aprovados apenas nesse
+caminho inicial foram separados antes da integração, sem aumentar o progresso.
+Não ignorar diferenças em ponteiros para buffers locais: verificar o conteúdo e
+os efeitos dos callees antes de atribuir a rejeição apenas ao layout da pilha.
+
+Para acelerar lotes grandes, usar uma cópia de trabalho no filesystem Linux do
+container e manter os binários originais em acesso local de leitura. Isso evita
+reler milhares de arquivos pelo bind mount do Windows. Promover somente C
+aprovado, conferir alterações concorrentes e atualizar o README pelo snapshot
+do índice a cada commit. O cálculo desse snapshot agora lê os blobs em uma única
+chamada Git, mantendo os hashes capturados mesmo se a outra IA alterar o índice.
+
 <!-- BYTE_MATCHING_STRATEGY:START -->
 ### Estratégia para obter byte-exact — validada no CHESS
 
-**Prioridade: tentar byte-matching antes de aceitar uma função apenas como
-C equivalente.** Na primeira rodada de 2026-10-27, esta estratégia integrou **16 funções / 912 bytes**
+**Histórico das rodadas byte-exact; a prioridade atual é a frente funcional acima.**
+Na primeira rodada de 2026-10-27, esta estratégia integrou **16 funções / 912 bytes**
 do CHESS: dez traduções novas e seis candidatos recuperados do cache. O código do
 jogo neste overlay passou de **61 para 77 funções** e de **0,82% para 1,04%** em C
 byte-matching. Os cinco binários continuaram idênticos e os **22 testes da rodada
