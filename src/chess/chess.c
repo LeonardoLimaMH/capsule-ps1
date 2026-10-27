@@ -174,25 +174,55 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009FE90);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009FF58);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A0238);
+void func_800A0238(s32 arg0, s32 arg1) {
+    extern u8 D_80100D58[];
+    func_8009FF58(arg0, D_80100D58, 0x18, arg1);
+}
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A0264);
+void func_800A0264(s32 arg0, s32 arg1) {
+    extern u8 D_80100D88[];
+    func_8009FF58(arg0, D_80100D88, 0x16, arg1);
+}
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A0290);
+void func_800A0290(s32 arg0, s32 arg1) {
+    extern u8 D_80100DB4[];
+    func_8009FF58(arg0, D_80100DB4, 0xB, arg1);
+}
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A02BC);
+void func_800A02BC(s32 arg0, s32 arg1) {
+    extern u8 D_80100DCC[];
+    func_8009FF58(arg0, D_80100DCC, 0x8, arg1);
+}
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A02E8);
+void func_800A02E8(s32 arg0, s32 arg1) {
+    extern u8 D_80100DDC[];
+    func_8009FF58(arg0, D_80100DDC, 0x28, arg1);
+}
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A0314);
+void func_800A0314(s32 arg0, s32 arg1) {
+    extern u8 D_80100E2C[];
+    func_8009FF58(arg0, D_80100E2C, 0xC, arg1);
+}
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A0340);
+void func_800A0340(s32 arg0, s32 arg1) {
+    extern u8 D_80100E44[];
+    func_8009FF58(arg0, D_80100E44, 0x13, arg1);
+}
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A036C);
+void func_800A036C(s32 arg0, s32 arg1) {
+    extern u8 D_80100E6C[];
+    func_8009FF58(arg0, D_80100E6C, 0x17, arg1);
+}
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A0398);
+void func_800A0398(s32 arg0, s32 arg1) {
+    extern u8 D_80100E9C[];
+    func_8009FF58(arg0, D_80100E9C, 0x1B, arg1);
+}
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A03C4);
+void func_800A03C4(s32 arg0, s32 arg1) {
+    extern u8 D_80100ED4[];
+    func_8009FF58(arg0, D_80100ED4, 0x13, arg1);
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800A03F0);
 
@@ -648,4 +678,17 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AECC4);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AECE0);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_800AED34);
+void func_800AED34(void)
+{
+  int new_var4;
+  extern M2C_UNK D_8008ED68[];
+  s8 *new_var5;
+  int new_var;
+  u16 new_var3;
+  u16 *new_var2;
+  new_var5 = (s8 *) D_8008ED68;
+  new_var2 = (u16 *) (new_var5 + 0xE8);
+  new_var4 = *new_var2;
+ do { new_var = new_var4 + 1; } while (0);
+  *new_var2 = (new_var3 = (u16) new_var);
+}

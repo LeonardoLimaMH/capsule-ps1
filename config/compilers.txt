@@ -173,3 +173,6 @@ src/raise/raise_800B9C3C__800BBC28.c 2.8.1-psx
 src/raise/raise_800B9C3C__800BCF98.c 2.8.1-psx
 src/raise/raise_800B9C3C__800BEB68.c 2.8.1-psx
 src/raise/raise_800E6E68.c 2.8.1-psx
+src/chess/chess__800B3878.c 2.8.1-psx
+src/chess/chess_800C4ECC__800C942C.c 2.8.1-psx
+src/chess/chess_800DCF3C__800FE958.c 2.8.1-psx

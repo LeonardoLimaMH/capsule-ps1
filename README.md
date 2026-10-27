@@ -16,20 +16,20 @@ emulação contra a função original.
 ## Progresso
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.51%**  
-**Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.03%**  
-**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **4.64%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `█████████████░░░░░░░` **66.51%**  
+**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.59%**  
+**Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.11%**  
+**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **4.72%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `█████████████░░░░░░░` **67.01%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
 |---|---|---|---|---|---|
 | `YUUGI.EXE` | executável principal | 2.80% (5,772 / 206,372 B) | 142 / 732 | 8.79% (84 / 303 fn) | **3.99%** |
 | `SLPM_860.96` | loader / boot | 4.76% (988 / 20,756 B) | 27 / 119 | 6.57% (70 / 215 fn) | **5.99%** |
-| `CHESS.BIN` | overlay de batalha (tabuleiro) | 0.82% (3,476 / 421,956 B) | 61 / 867 | 100.00% (2 / 2 fn) | **0.84%** |
+| `CHESS.BIN` | overlay de batalha (tabuleiro) | 1.04% (4,388 / 421,956 B) | 77 / 867 | 100.00% (2 / 2 fn) | **1.05%** |
 | `RAISE.BIN` | overlay de criação de monstros | 1.52% (4,972 / 326,576 B) | 181 / 940 | 100.00% (2 / 2 fn) | **1.54%** |
 | `ETC.BIN` | overlay de menus/diversos | 0.92% (816 / 88,992 B) | 10 / 189 | 0.00% (0 / 0 fn) | **0.92%** |
-| **Total** | | **1.51%** (16,024 / 1,064,652 B) | 421 / 2847 | 7.89% (158 / 522 fn) | **2.03%** |
+| **Total** | | **1.59%** (16,936 / 1,064,652 B) | 437 / 2847 | 7.89% (158 / 522 fn) | **2.11%** |
 <!-- PROGRESS:END -->
 
 A **cobertura** soma ao C as funções que já eram escritas em assembly no
@@ -219,6 +219,111 @@ outra revisão, o `make check` vai acusar a diferença.
    ./run.sh make test
    ```
 6. Atualize o progresso: `./run.sh python3 tools/progress.py --readme`.
+
+<!-- BYTE_MATCHING_STRATEGY:START -->
+### Estratégia para obter byte-exact — validada no CHESS
+
+**Prioridade: tentar byte-matching antes de aceitar uma função apenas como
+C equivalente.** Em 2026-10-27, esta estratégia integrou **16 funções / 912 bytes**
+do CHESS: dez traduções novas e seis candidatos recuperados do cache. O código do
+jogo neste overlay passou de **61 para 77 funções** e de **0,82% para 1,04%** em C
+byte-matching. Os cinco binários continuaram idênticos e os **22 testes da rodada
+passaram, sem skips**. Veja a lista e a auditoria em
+[docs/AUDIT_CODEX_2026-10-27.md](docs/AUDIT_CODEX_2026-10-27.md).
+
+#### 1. Procurar casamentos bloqueados antes de repetir o pipeline
+
+Cruzar os `INCLUDE_ASM` ainda presentes em `src/chess/` com os candidatos de
+`.cache/auto/chess/<função>.c` e seus arquivos `.gcc`. Um candidato salvo pode
+estar correto e ainda não ter sido integrado por conflito de compilador, `$gp`,
+headers ou `.rodata`. Revalidar com `tools/match.py`; o cache não é prova atual.
+
+Nesta rodada, `func_800AED34`, `func_800DCC28` e `func_800F5228` casaram com GCC
+2.7.2; `func_800B3878`, `func_800C942C` e `func_800FE958` casaram com GCC 2.8.1.
+Esses seis candidatos já existiam. O avanço foi revalidar e resolver sua integração.
+
+#### 2. Traduzir famílias pequenas a partir do assembly
+
+Começar por wrappers, acessos a campos e funções curtas; comparar funções
+vizinhas com a mesma sequência de instruções. Identificar quais argumentos são
+preservados ou movidos, o símbolo de dados, a constante, o retorno e o delay slot.
+Usar símbolos do projeto e tipos com sinal/largura confirmados no assembly.
+
+Exemplo que casou com GCC 2.7.2:
+
+```c
+void func_800A0238(s32 arg0, s32 arg1) {
+    extern u8 D_80100D58[];
+    func_8009FF58(arg0, D_80100D58, 0x18, arg1);
+}
+```
+
+O original move `a1` para `a3`, coloca o endereço em `a1`, chama
+`func_8009FF58` e carrega `a2` com a constante no delay slot. O mesmo molde resolveu
+as dez funções de `func_800A0238` até `func_800A03C4`, variando símbolo e constante.
+Cada função foi comparada separadamente; semelhança de forma não substitui o teste.
+
+#### 3. Escolher o compilador por evidência e preservar o contexto do arquivo
+
+Tentar os perfis já confirmados, GCC 2.7.2 e 2.8.1, com as opções do projeto.
+Comparar prólogo/epílogo, registradores, extensões, ordem e deslocamentos antes de
+gastar tempo em permutações. O compilador correto de uma função pode ser diferente
+do compilador do arquivo C em que ela está agrupada atualmente.
+
+Se uma função só casa com GCC 2.8.1, isolá-la em uma unidade de tradução e restaurar
+GCC 2.7.2 na função seguinte, quando a evidência exigir isso. Atualizar
+`config/chess.yaml` e `config/compilers.txt`. O modelo de separação é:
+
+```sh
+./run.sh python3 tools/split_tu.py chess ARQUIVO TRECHO_281 PRIMEIRA_FUNCAO --gcc 2.8.1-psx
+./run.sh python3 tools/split_tu.py chess TRECHO_281 RESTANTE PROXIMA_FUNCAO --gcc 2.7.2-psx
+```
+
+Substituir os nomes em maiúsculas pelos do caso analisado. Preservar os headers e
+as declarações necessários em cada trecho novo: um `#include "ghidra.h"` situado
+no meio do arquivo original pode ficar para trás durante o split. Nesta rodada,
+as três funções GCC 2.8.1 foram isoladas entre fronteiras exatas, sem deslocar código.
+Depois da mudança no YAML, o `make` regenera o split e o linker script do CHESS.
+
+#### 4. Separar diferença de código de problema de integração
+
+- Se o C chama a função certa mas o assembly difere, revisar tipos, sinal,
+  avaliação de expressões, temporários e compilador antes de usar o permuter.
+- Se o comparador aprova mas o build falha, examinar headers, contexto da unidade
+  de tradução, `$gp`, relocações, alinhamento e `.rodata` antes de descartar o C.
+- `func_800C22A0` continua pendente: seu candidato casa no comparador, mas a jump
+  table está no `.rodata` compartilhado. É preciso preservar seus rótulos e posições.
+- Em `func_800A88C4` e `func_800C9534`, o original divide sem checks. O difftest
+  pode reescrever a divisão para a instrução crua, enquanto o build padrão ainda
+  gera verificações. Aprovação funcional nesse perfil não demonstra byte-matching.
+
+#### 5. Aceitar somente depois de integrar e reconstruir
+
+`tools/match.py` **mascara campos de relocação**. Um `[MATCH]` isolado ainda pode
+esconder símbolo ou endereço incorreto; a prova final é o rebuild completo idêntico.
+Exemplos de comparação dos fontes já integrados:
+
+```sh
+./run.sh python3 tools/match.py chess func_800A0238 src/chess/chess.c --gcc 2.7.2-psx -q
+./run.sh python3 tools/match.py chess func_800C942C src/chess/chess_800C4ECC__800C942C.c --gcc 2.8.1-psx -q
+./run.sh make -j2
+./run.sh python3 -m pytest -q tests/test_difftest.py -k 'chess and (func_800A0238 or func_800C942C)'
+./run.sh python3 -m pytest -q tests/test_rebuild.py 'tests/test_overlays.py::test_overlay_calls_resolve[chess]'
+```
+
+Exigir os cinco SHA-1 corretos e testar todas as funções novas, não apenas os dois
+exemplos acima. Se um teste for inconclusivo ou pulado, registrar essa limitação.
+Promover o C para `src/`, remover sua cópia de `equiv/` e atualizar o progresso
+somente após validar a integração. O relatório da rodada contém a seleção completa
+dos 16 testes diferenciais, que passaram sem skips.
+
+Com duas IAs trabalhando, usar checkouts/worktrees separados para experimentar,
+conferir o diff e os arquivos atuais antes de aplicar. Evitar o rollback global de
+`tools/auto_loop.sh` na pasta compartilhada: ele restaura `src/` e `config/` e limpa
+arquivos novos em `src/`. Uma heurística automática nova continua sujeita à bancada
+fixa e aos controles de regressão de [docs/PROCESS.md](docs/PROCESS.md).
+
+<!-- BYTE_MATCHING_STRATEGY:END -->
 
 ### Como o teste diferencial funciona
 
