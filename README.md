@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.59%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.11%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **4.72%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `█████████████░░░░░░░` **67.01%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `██████████████░░░░░░` **69.00%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -322,6 +322,26 @@ conferir o diff e os arquivos atuais antes de aplicar. Evitar o rollback global 
 `tools/auto_loop.sh` na pasta compartilhada: ele restaura `src/` e `config/` e limpa
 arquivos novos em `src/`. Uma heurística automática nova continua sujeita à bancada
 fixa e aos controles de regressão de [docs/PROCESS.md](docs/PROCESS.md).
+
+#### 6. Manter os percentuais coerentes em cada commit
+
+Antes de **todo commit**, preparar somente as alterações aceitas, recalcular o
+progresso do índice e incluir o README no mesmo commit:
+
+```sh
+git add -- src/chess config/chess.yaml config/compilers.txt equiv/chess
+python tools/progress.py --readme --staged
+git add README.md
+python tools/progress.py --check --staged
+git commit
+```
+
+`--staged` mede os conteúdos exatos preparados no índice Git, incluindo arquivos
+novos já adicionados. Rascunhos não versionados e edições ainda não preparadas não
+entram nessa medição. `--check --staged` falha se o bloco de progresso do README
+não corresponde ao mesmo estado. Em trabalho paralelo, repetir o cálculo se o
+índice mudar antes do commit. O mapa de build deve ser o da integração validada.
+Não copiar percentuais de logs antigos ou da árvore temporária de outra rodada.
 
 <!-- BYTE_MATCHING_STRATEGY:END -->
 

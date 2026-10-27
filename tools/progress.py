@@ -18,7 +18,9 @@ Uso:
 import json
 import pathlib
 import re
+import subprocess
 import sys
+import functools
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 TARGETS = [
@@ -31,13 +33,44 @@ TARGETS = [
 NONMATCH = re.compile(r"^nonmatching\s+(\S+),\s*(0x[0-9A-Fa-f]+)", re.M)
 INCLUDE = re.compile(r'INCLUDE_ASM\(\s*"[^"]+"\s*,\s*(\w+)\s*\)')
 START, END = "<!-- PROGRESS:START -->", "<!-- PROGRESS:END -->"
+STAGED = False
+
+
+@functools.lru_cache(maxsize=None)
+def staged_files():
+    out = subprocess.check_output(['git', 'ls-files', '--stage', '-z'], cwd=ROOT)
+    result = {}
+    for entry in out.split(b'\0'):
+        if not entry:
+            continue
+        info, name = entry.split(b'\t', 1)
+        _, blob, stage = info.split()
+        if stage != b'0':
+            sys.exit('Resolve index conflicts before calculating commit progress')
+        result[name.decode('utf-8')] = blob.decode('ascii')
+    return result
+
+
+def source_text(path):
+    """Read the exact commit snapshot when --staged is requested."""
+    if STAGED:
+        name = path.relative_to(ROOT).as_posix()
+        if name not in staged_files():
+            return ''
+        return subprocess.check_output(['git', 'cat-file', 'blob', staged_files()[name]], cwd=ROOT).decode('utf-8')
+    return path.read_text(encoding='utf-8') if path.exists() else ''
+
+
+def source_files(folder):
+    if STAGED:
+        return [ROOT / name for name in sorted(staged_files())
+                if name.startswith(folder + '/') and name.endswith('.c')]
+    return (ROOT / folder).rglob('*.c')
 
 
 def psyq_names(t):
     p = ROOT / "config" / f"symbols.{t}.psyq.txt"
-    if not p.exists():
-        return set()
-    return {l.split("=")[0].strip() for l in p.read_text(encoding="utf-8").splitlines()
+    return {l.split("=")[0].strip() for l in source_text(p).splitlines()
             if "=" in l and not l.startswith("//")}
 
 
@@ -92,11 +125,11 @@ def function_sizes(t):
 def collect(t):
     sizes = function_sizes(t)
     pending = set()
-    for c in (ROOT / "src" / t).rglob("*.c"):
-        pending |= set(INCLUDE.findall(c.read_text(encoding="utf-8", errors="replace")))
+    for c in source_files('src/' + t):
+        pending |= set(INCLUDE.findall(source_text(c)))
     lib = psyq_names(t)
     hand = handwritten(t)
-    equiv = {p.stem for p in (ROOT / "equiv" / t).glob("*.c")}  # trilha funcional
+    equiv = {p.stem for p in source_files('equiv/' + t)}
     r = {k: {"funcs": 0, "done_funcs": 0, "bytes": 0, "done_bytes": 0, "asm_bytes": 0, "equiv_bytes": 0}
          for k in ("game", "lib")}
     for name, size in sizes.items():
@@ -115,9 +148,7 @@ def collect(t):
 
 def handwritten(t):
     p = ROOT / "config" / f"handwritten.{t}.txt"
-    if not p.exists():
-        return set()
-    return {l.split()[0] for l in p.read_text(encoding="utf-8").splitlines() if l and not l.startswith("#")}
+    return {l.split()[0] for l in source_text(p).splitlines() if l and not l.startswith("#")}
 
 
 def pct(a, b):
@@ -130,6 +161,9 @@ def bar(p, width=20):
 
 
 def main():
+    global STAGED
+    STAGED = '--staged' in sys.argv
+    staged_files.cache_clear()
     sys.stdout.reconfigure(encoding="utf-8")
     data = {t: collect(t) for t, _, _ in TARGETS}
     tot = {k: {"funcs": 0, "done_funcs": 0, "bytes": 0, "done_bytes": 0, "asm_bytes": 0, "equiv_bytes": 0}
@@ -174,11 +208,20 @@ def main():
     ]
     block = "\n".join(summary + rows)
     print(block)
+    if '--check' in sys.argv:
+        readme_text = source_text(ROOT / 'README.md')
+        if START not in readme_text or END not in readme_text:
+            sys.exit('README progress block is missing')
+        actual = readme_text.split(START, 1)[1].split(END, 1)[0].strip()
+        if actual != block.strip():
+            sys.exit('README progress is stale; stage accepted source changes, run '
+                     '`python tools/progress.py --readme --staged`, then stage README.md')
+        print('README progress matches the staged snapshot.' if STAGED else 'README progress is current.')
     if "--readme" in sys.argv:
         readme = ROOT / "README.md"
         s = readme.read_text(encoding="utf-8")
         i, j = s.index(START) + len(START), s.index(END)
-        readme.write_text(s[:i] + "\n" + block + "\n" + s[j:], encoding="utf-8")
+        readme.write_text(s[:i] + "\n" + block + "\n" + s[j:], encoding="utf-8", newline='\n')
         print("\nREADME.md atualizado.")
 
 
