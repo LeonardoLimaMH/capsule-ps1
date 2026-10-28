@@ -6,7 +6,7 @@ deterministic samples shared by both executions; ordinary RAM checks still apply
 import struct
 import zlib
 
-NAMES = frozenset({'RotTransPers', 'RotTransPers4', 'RotAverage3', 'RotAverage4', 'SetRotMatrix', 'SetTransMatrix'})
+NAMES = frozenset({'RotTransPers', 'RotTransPers4', 'RotAverage3', 'RotAverage4', 'SetRotMatrix', 'SetTransMatrix', 'func_800CD950'})
 
 
 def _offset(pointer, size):
@@ -39,6 +39,21 @@ def _sample(vector, state, call_index, salt):
 
 def execute(name, uc, args, state, call_index, salt):
     pointer = args[0]
+    if name == 'func_800CD950':
+        # CHESS projection boundary: the wrapper consumes XYZ and writes two
+        # screen halfwords in an actor-shaped buffer. Camera setup, GTE values
+        # and the helper's internal matrix scratch writes are opaque here.
+        vector_base = _offset(pointer, 8)
+        vector = bytes(uc.mem_read(vector_base, 8))[:6]
+        output = args[1] & 0x1FFFFFFF
+        if args[1] & 1 or not 0 <= output <= 0x200000 - 0x4C:
+            raise ValueError('unaligned or unmapped projection output')
+        xy, _, _, depth = _sample(vector, state, call_index, salt)
+        uc.mem_write(output + 0x46, struct.pack('<H', xy & 0xFFFF))
+        uc.mem_write(output + 0x4A, struct.pack('<H', xy >> 16))
+        spans = [(vector_base, 6), (output + 0x46, 2), (output + 0x4A, 2)]
+        return ('contract:' + name, *map(_identity, args[:2]),
+                *struct.unpack('<3H', vector), *_aliases(spans)), depth
     if name == 'SetRotMatrix':
         data = bytes(uc.mem_read(_offset(pointer, 18), 18))
         state[name] = data

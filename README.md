@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████████░` **93.79%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████████░` **94.04%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -37,10 +37,10 @@ emulação contra a função original.
 |---|---|---|---|---|
 | `YUUGI.EXE` | 84.97% (660 fn) | `█████████░` **88.96%** | 886 / 1,035 (85.60%) | **149** |
 | `SLPM_860.96` | 85.01% (200 fn) | `█████████░` **91.00%** | 297 / 334 (88.92%) | **37** |
-| `CHESS.BIN` | 95.13% (749 fn) | `██████████` **96.87%** | 851 / 869 (97.93%) | **18** |
+| `CHESS.BIN` | 95.81% (751 fn) | `██████████` **97.55%** | 853 / 869 (98.16%) | **16** |
 | `RAISE.BIN` | 90.62% (736 fn) | `█████████░` **92.48%** | 928 / 942 (98.51%) | **14** |
 | `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 91.34% (2,524 fn) | `█████████░` **93.79%** | 3,151 / 3,369 (93.53%) | **218** |
+| **Total** | 91.59% (2,526 fn) | `█████████░` **94.04%** | 3,153 / 3,369 (93.59%) | **216** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
@@ -740,3 +740,17 @@ vínculo com Konami, Kazuki Takahashi ou Sony Interactive Entertainment.
 As técnicas de gêmeos e de detecção de assembly escrito à mão foram inspiradas
 no [decomp.wtf](https://github.com/i12bp8/decomp.wtf) e reimplementadas do zero
 sobre as ferramentas deste projeto.
+
+
+`func_800BAF44` agora tem perfis separados para os estados 0 a 10 e para
+os dois caminhos do quinto argumento na pilha. A proje??o `func_800CD950`
+usa um contrato expl?cito de fronteira: observa os tr?s componentes XYZ,
+a sobreposi??o dos buffers e as escritas de 16 bits em `+0x46` e `+0x4A`.
+As coordenadas projetadas e a profundidade s?o amostras determin?sticas opacas;
+a matem?tica da GTE e as altera??es internas de matrizes desse helper n?o s?o
+validadas por esse contrato. Um controle negativo que desloca X ? rejeitado.
+`func_800E1258` executa os helpers originais de dire??o, vetores, interpola??o
+e cria??o de efeitos, cobrindo seus seis estados e c?lulas vazias, bloqueadas,
+ocupadas pelos dois lados e reis. Os manifestos registram os helpers isolados
+e as limita??es de cada valida??o. Cada perfil exige 200 execu??es completas
+por semente, com retorno, RAM viva e sequ?ncia de chamadas iguais.

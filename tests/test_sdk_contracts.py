@@ -50,6 +50,30 @@ def test_outputs_are_written_without_touching_adjacent_bytes():
         assert data[4:8] != b'\xA5' * 4
 
 
+def test_chess_projection_boundary_checks_coordinates_aliases_and_halfword_writes():
+    def project(base, changed=False, alias=False):
+        uc = Uc(UC_ARCH_MIPS, UC_MODE_MIPS32 | UC_MODE_LITTLE_ENDIAN)
+        uc.mem_map(0, 0x200000)
+        vector, output = base, base + 0x40
+        if alias:
+            output = vector - 0x46
+        uc.mem_write(output & 0x1FFFFFFF, b'\xA5' * 0x50)
+        uc.mem_write(vector & 0x1FFFFFFF, struct.pack('<4h', -200, 50, 600 + changed, 0))
+        before = bytes(uc.mem_read(output & 0x1FFFFFFF, 0x50))
+        event, depth = sdk.execute('func_800CD950', uc, (vector, output), {}, 1, 17)
+        after = bytes(uc.mem_read(output & 0x1FFFFFFF, 0x50))
+        for i in range(0x50):
+            if i not in (0x46, 0x47, 0x4A, 0x4B):
+                assert after[i] == before[i]
+        return event, depth, after
+    a = project(0x801FFD00)
+    assert a == project(0x801FFB00)
+    for bad in (project(0x801FFD00, changed=True), project(0x801FFD00, alias=True)):
+        assert difftest.same_calls(([a[0]], [(None,) * (len(a[0]) - 1)]),
+                                  ([bad[0]], [(None,) * (len(bad[0]) - 1)]),
+                                  0x80180000, 0x80190000, True) == (False, 0)
+
+
 @pytest.mark.parametrize('pointer', [0x801FFE21, 0x80200000])
 def test_invalid_output_buffers_are_rejected(pointer):
     with pytest.raises(ValueError):
