@@ -3528,5 +3528,251 @@
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
     "validated_source_sha256": "26a44fdd54f8c7e126c066af6ae4328f291cd2ca781e3d1b9c5a51b6635eaa49",
     "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800BC49C",
+    "source_sha256": "01493e49de6a82383ca6b73a1759f8ecd282f0806882bb83e0f5e70a46a0286a",
+    "accepted": true,
+    "candidate_batch": "functional_battle24",
+    "results": [
+      {
+        "variant": "unsigned-counter+actor-fixture",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BC49C \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "unsigned-counter+actor-fixture",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BC49C \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Original RAM, registers, calls and MMIO bus events; actual declared game helpers; fixed hardware response fixtures where applicable",
+    "validated_source_sha256": "8266fbd8890ab7a30c578c68d1a4a4976dc8e10fdc7ae3b471ce2d25a89625fb",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800D0270",
+    "source_sha256": "57201c2a19a896ae252a419ac3990a5d8c8f8a8003aa2e1b5eef1826e9cde558",
+    "accepted": true,
+    "candidate_batch": "functional_proto23",
+    "results": [
+      {
+        "variant": "pointer-array-layout+gcc-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D0270 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "pointer-array-layout+gcc-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D0270 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Original RAM, registers, calls and MMIO bus events; actual declared game helpers; fixed hardware response fixtures where applicable",
+    "validated_source_sha256": "bde477e2d4c1ebf00063c7f6bd754ef71a479843d0b4bf64307e9d1e971424bf",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_8010053C",
+    "source_sha256": "f2f1e2b74c5d6052e51978b32e4901f5e440d513c04d6f28e70bc1f878aaab66",
+    "accepted": true,
+    "candidate_batch": "functional_proto23",
+    "results": [
+      {
+        "variant": "pointer-array-layout+gcc-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8010053C \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "pointer-array-layout+gcc-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8010053C \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Original RAM, registers, calls and MMIO bus events; actual declared game helpers; fixed hardware response fixtures where applicable",
+    "validated_source_sha256": "7e0751c90f5c5d767e01394c6af82f056522862caf6db58d80767195976568a0",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_801007D8",
+    "source_sha256": "88d4ba2c9b478c85159c02840e22aec0eb99dad4a5125ff54b41c3b863aa84a0",
+    "accepted": true,
+    "candidate_batch": "functional_proto23",
+    "results": [
+      {
+        "variant": "pointer-array-layout+gcc-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_801007D8 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "pointer-array-layout+gcc-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_801007D8 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Original RAM, registers, calls and MMIO bus events; actual declared game helpers; fixed hardware response fixtures where applicable",
+    "validated_source_sha256": "267fd9b155caa5fa4d736cf716c074c4c08b44ece21a84e205792253e991adbb",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "raise",
+    "func": "func_800CCAA8",
+    "source_sha256": "ce93a84554dc76e1c1c5588bd1a8cf2ac1047497312def68783cfa217d94e2bb",
+    "accepted": true,
+    "candidate_batch": "functional_m2c25",
+    "results": [
+      {
+        "variant": "draft+original-buffer-helpers",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800CCAA8 \u2014 200 tentativas id\u00eanticas, 450 inconclusivas\n"
+      },
+      {
+        "variant": "draft+original-buffer-helpers",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800CCAA8 \u2014 200 tentativas id\u00eanticas, 445 inconclusivas\n"
+      }
+    ],
+    "validation_model": "Original RAM, registers, calls and MMIO bus events; actual declared game helpers; fixed hardware response fixtures where applicable"
+  },
+  {
+    "target": "slpm",
+    "func": "slpm_CD_ready",
+    "source_sha256": "965590aca9f126a0f58c91287df5b867bfebbb3084c4523ac0fb6edc7aed2a09",
+    "accepted": true,
+    "candidate_batch": "functional_loader26",
+    "results": [
+      {
+        "variant": "loader-real-event-poll+volatile-array-layout",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] slpm:slpm_CD_ready \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "loader-real-event-poll+volatile-array-layout",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] slpm:slpm_CD_ready \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Original RAM, registers, calls and MMIO bus events; actual declared game helpers; fixed hardware response fixtures where applicable",
+    "validated_source_sha256": "a97f97e344c6d51d67ffa4cd3fd395ae176f200772485f29aab34cc69b480e3a",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "slpm",
+    "func": "slpm_CD_sync",
+    "source_sha256": "821644702da3f278bce7ab05deddef92e7c9146c8c85a127b3814f88db91f610",
+    "accepted": true,
+    "candidate_batch": "functional_loader26",
+    "results": [
+      {
+        "variant": "loader-real-event-poll+volatile-array-layout",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] slpm:slpm_CD_sync \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "loader-real-event-poll+volatile-array-layout",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] slpm:slpm_CD_sync \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Original RAM, registers, calls and MMIO bus events; actual declared game helpers; fixed hardware response fixtures where applicable",
+    "validated_source_sha256": "cb1e82a5988fbc2815683cb30c012ca39a26a5c922a2ad1491d063ecea89a3ac",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "yuugi",
+    "func": "CD_ready",
+    "source_sha256": "8844e14d68b4e1c81d930a7d403897cd10f1cf169075efc3512003b4e42dc75e",
+    "accepted": true,
+    "candidate_batch": "functional_cd21_full",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Original RAM, registers, calls and MMIO bus events; actual declared game helpers; fixed hardware response fixtures where applicable",
+    "extra_profiles": [
+      {
+        "profile": "timeout",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true
+      },
+      {
+        "profile": "timeout",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true
+      },
+      {
+        "profile": "ready_primary",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true
+      },
+      {
+        "profile": "ready_primary",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true
+      },
+      {
+        "profile": "ready_secondary",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true
+      },
+      {
+        "profile": "ready_secondary",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true
+      },
+      {
+        "profile": "nonblocking_empty",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true
+      },
+      {
+        "profile": "nonblocking_empty",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true
+      }
+    ],
+    "validated_source_sha256": "455d82617a54252f5078b37eae8386625cb80da4c2f166f82cdf88dd07fbef62",
+    "whitespace_cleanup_identical_linked_blob": true
   }
 ]

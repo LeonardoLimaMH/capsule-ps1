@@ -8,7 +8,8 @@ sys.path.insert(0, str(ROOT / 'tools'))
 import functional_ghidra as ghidra
 import match
 from unicorn import Uc, UC_ARCH_MIPS, UC_MODE_LITTLE_ENDIAN, UC_MODE_MIPS32
-from unicorn.mips_const import UC_MIPS_REG_RA, UC_MIPS_REG_V0
+from unicorn.mips_const import UC_MIPS_REG_RA, UC_MIPS_REG_V0, UC_MIPS_REG_SP
+import difftest
 
 
 def test_byte_offsets_do_not_change_scalar_loads_typed_indexing_or_literals():
@@ -65,3 +66,65 @@ M2C_FIELD(&D_80021000, u8 *, 1);
         uc.reg_write(UC_MIPS_REG_RA, 0x80000400)
         uc.emu_start(0x80010000, 0x80000400, count=100)
         assert uc.reg_read(UC_MIPS_REG_V0) == (value + byte + (0 if char_signed else 256)) & 0xFFFFFFFF
+
+
+@pytest.mark.parametrize('compiler', ['2.7.2-psx', '2.8.1-psx'])
+@pytest.mark.parametrize('pointer', [False, True])
+def test_unindexed_global_pointer_and_array_are_distinct(tmp_path, monkeypatch, compiler, pointer):
+    (tmp_path / 'chess').mkdir()
+    (tmp_path / 'chess/read_global.c').write_text('uint read_global(void) { return *D_80110000; }')
+    monkeypatch.setattr(ghidra, 'CACHE', tmp_path)
+    context = 'extern u32 *D_80110000;' if pointer else 'extern u32 D_80110000[4];'
+    code = ghidra.draft('chess', 'read_global', '', context)
+    source = tmp_path / 'read_global.c'
+    source.write_text('/* compiler: ' + compiler + ' */\n#include "common.h"\n' + code)
+    blob, entry, _ = difftest.build_candidate('chess', source, 'read_global', True)
+    for value in [0x89ABCDEF, 0x12345678]:
+        uc = Uc(UC_ARCH_MIPS, UC_MODE_MIPS32 | UC_MODE_LITTLE_ENDIAN)
+        uc.mem_map(0, 0x200000)
+        uc.mem_write(difftest.CAND_BASE & 0x1FFFFFFF, blob)
+        uc.mem_write(0x110000, ((0x80112000 if pointer else value)).to_bytes(4, 'little'))
+        uc.mem_write(0x112000, value.to_bytes(4, 'little'))
+        uc.reg_write(UC_MIPS_REG_RA, difftest.SENTINEL)
+        uc.reg_write(UC_MIPS_REG_SP, difftest.STACK_TOP)
+        uc.emu_start(entry, difftest.SENTINEL, count=1000)
+        assert uc.reg_read(UC_MIPS_REG_V0) == value
+
+
+@pytest.mark.parametrize('compiler', ['2.7.2-psx', '2.8.1-psx'])
+def test_volatile_pointer_preserves_each_device_read(tmp_path, monkeypatch, compiler):
+    (tmp_path / 'chess').mkdir()
+    (tmp_path / 'chess/read_device.c').write_text('uint read_device(void) { return *D_80110000 + *D_80110000; }')
+    monkeypatch.setattr(ghidra, 'CACHE', tmp_path)
+    code = ghidra.draft('chess', 'read_device', '', 'extern u8 *D_80110000;', volatile_pointers=True)
+    source = tmp_path / 'read_device.c'
+    source.write_text('/* compiler: ' + compiler + ' */\n#include "common.h"\n' + code)
+    blob, entry, _ = difftest.build_candidate('chess', source, 'read_device', True)
+    ram = bytearray(difftest.RAM_SIZE)
+    ram[0x110000:0x110004] = (0xBF801100).to_bytes(4, 'little')
+    result, error = difftest.run(entry, {UC_MIPS_REG_SP: difftest.STACK_TOP}, bytes(ram),
+                                {}, [(difftest.CAND_BASE, blob)])
+    assert error is None
+    assert result[2][0] == [('io:R', 0x1F801100, 1, 0)] * 2
+
+
+@pytest.mark.parametrize('compiler', ['2.7.2-psx', '2.8.1-psx'])
+def test_string_metadata_preserves_array_address_and_size(tmp_path, monkeypatch, compiler):
+    (tmp_path / 'chess').mkdir()
+    (tmp_path / 'chess/read_string.c').write_text(
+        'uint read_string(void) { return D_80110000[1] + sizeof(D_80110000); }')
+    monkeypatch.setattr(ghidra, 'CACHE', tmp_path)
+    code = ghidra.draft('chess', 'read_string', '')
+    code = ghidra.string_array_variant(code, [{'address': '80110000', 'type': 'string', 'size': 3}])
+    assert code
+    source = tmp_path / 'read_string.c'
+    source.write_text('/* compiler: ' + compiler + ' */\n#include "common.h"\n' + code)
+    blob, entry, _ = difftest.build_candidate('chess', source, 'read_string', True)
+    uc = Uc(UC_ARCH_MIPS, UC_MODE_MIPS32 | UC_MODE_LITTLE_ENDIAN)
+    uc.mem_map(0, 0x200000)
+    uc.mem_write(difftest.CAND_BASE & 0x1FFFFFFF, blob)
+    uc.mem_write(0x110000, b'X\xE9\x00')
+    uc.reg_write(UC_MIPS_REG_RA, difftest.SENTINEL)
+    uc.reg_write(UC_MIPS_REG_SP, difftest.STACK_TOP)
+    uc.emu_start(entry, difftest.SENTINEL, count=1000)
+    assert uc.reg_read(UC_MIPS_REG_V0) == 0xE9 + 3

@@ -34,7 +34,8 @@ import time
 from collections import Counter
 
 from unicorn import (Uc, UcError, UC_ARCH_MIPS, UC_MODE_MIPS32, UC_MODE_LITTLE_ENDIAN,
-                     UC_HOOK_INTR, UC_HOOK_CODE, UC_HOOK_MEM_WRITE, UC_HOOK_MEM_READ)
+                     UC_HOOK_INTR, UC_HOOK_CODE, UC_HOOK_MEM_WRITE, UC_HOOK_MEM_READ,
+                     UC_MEM_WRITE)
 from unicorn.mips_const import *
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -254,7 +255,7 @@ def same_calls(a, b, cand_lo, cand_hi, relaxed, alias=(None, None)):
     for k, (x, y) in enumerate(zip(ca, cb)):
         if x == y:
             continue
-        if x[0].startswith('contract:') or y[0].startswith('contract:'):
+        if x[0].startswith(('contract:', 'io:')) or y[0].startswith(('contract:', 'io:')):
             return False, k  # compare all input bytes and alias relationships
         if not relaxed or x[0] != y[0] or len(x) != len(y):
             return False, k
@@ -299,6 +300,14 @@ def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=N
         entered.add(address)
         calls.append((f'entry:{address:08X}',))
         strings.append(())
+
+    def observe_io(uc, access, address, size, value, user):
+        writing = access == UC_MEM_WRITE
+        if not writing:
+            value = int.from_bytes(uc.mem_read(address, size), 'little')
+        value &= (1 << (size * 8)) - 1
+        calls.append(('io:W' if writing else 'io:R', address, size, value))
+        strings.append((None, None, None))
 
     def on_stub(uc, addr, size, user):
         name = stubs.get(addr) or {0xA0: "BIOS_A0", 0xB0: "BIOS_B0", 0xC0: "BIOS_C0"}.get(addr & 0x1FFFFFFF)
@@ -373,6 +382,11 @@ def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=N
         # points. Byte patches, instruction stepping and memory guards are equal.
         mu.hook_add(UC_HOOK_CODE, dispatch, begin=min(points), end=max(points))
     mu.hook_add(UC_HOOK_INTR, on_intr)
+    # Device registers are outside the 2 MiB RAM snapshot. Observe every bus
+    # transaction, including width/order and repeated reads, without call-arity
+    # or pointer-address relaxations. Scratchpad RAM is a separate region.
+    mu.hook_add(UC_HOOK_MEM_READ | UC_HOOK_MEM_WRITE, observe_io,
+                begin=0x1F801000, end=0x1F801FFF)
     for address in required_entries:
         mu.hook_add(UC_HOOK_CODE, observe_entry, begin=address, end=address)
 

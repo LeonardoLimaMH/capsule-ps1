@@ -94,6 +94,34 @@ def data_address_variant(code, items):
     return result if changed else None
 
 
+def string_array_variant(code, items):
+    """A defined string is an array at its address, not the byte stored there."""
+    sizes = {}
+    for item in items:
+        if item.get('type') != 'string':
+            continue
+        try:
+            addr, size = int(item['address'], 16), int(item['size'])
+        except (KeyError, TypeError, ValueError):
+            continue
+        if 0 < size <= 0x10000:
+            sizes[addr] = size
+    changed = False
+
+    def replace(m):
+        nonlocal changed
+        if not GLOBAL.fullmatch(m[1]):
+            return m[0]
+        size = sizes.get(int(m[2], 16))
+        if not size:
+            return m[0]
+        changed = True
+        return f'#define {m[1]} (*(u8 (*)[{size}])0x{m[2]})'
+
+    result = re.sub(r'^#define (\w+) [^\n]*?0x([0-9a-fA-F]{8})\)+$', replace, code, flags=re.M)
+    return result if changed else None
+
+
 def address(expr):
     m = ADDRESS.search(expr)
     return int(m[1], 16) + (int(m[2], 0) if m[2] else 0) if m else None
@@ -172,7 +200,11 @@ def memory_types(m2c):
     for m in re.finditer(r'^extern\s+(.+?)\s*(D_[0-9A-Fa-f]{8})\s*(\[[^\]]*\])?\s*;', m2c, re.M):
         typ, name, array = m.groups()
         addr = int(name[-8:], 16)
-        result[addr] = {'pointer': '*' in typ and not array, 'declared': typ.strip().replace('*', '').strip(), 'fields': []}
+        result[addr] = {'pointer': '*' in typ and not array, 'array': bool(array),
+                        'declared': typ.strip().replace('*', '').strip(), 'fields': []}
+    for m in re.finditer(r'^extern\s+[^;\n]+?\(\s*\*\s*(D_[0-9A-Fa-f]{8})\s*\)\s*\(', m2c, re.M):
+        result[int(m[1][-8:], 16)] = {'pointer': True, 'function_pointer': True,
+                                     'declared': 'code', 'fields': []}
     for m in re.finditer(r'M2C_FIELD\(\s*&?(D_[0-9A-Fa-f]{8})\s*,\s*(s8|u8|s16|u16|s32|u32)\s*\*', m2c):
         addr = int(m[1][-8:], 16)
         result.setdefault(addr, {'pointer': False, 'declared': '', 'fields': []})['fields'].append(m[2])
@@ -188,13 +220,23 @@ def memory_types(m2c):
     return result
 
 
-def draft(target, func, asm, m2c='', char_signed=True):
+def draft(target, func, asm, m2c='', char_signed=True, volatile_pointers=False, resolve_gp=False):
     path = CACHE / target / (func + '.c')
     if not path.exists():
         return None
     body = re.sub(r'/\*.*?\*/', '', path.read_text(), flags=re.S).strip()
     body = body.replace('_NON_MATCHING', '').replace('.NON_MATCHING', '')
     body = signed_chars(body, char_signed)
+    if resolve_gp and 'unaff_gp' in body:
+        if '$gp' not in asm:
+            return None
+        for line in asm.splitlines():
+            match = INSN.search(line)
+            if match and match[2].split(',')[0].strip() == '$gp' and match[1] not in ('sw', 'sh', 'sb', 'swl', 'swr'):
+                return None  # a changing register cannot be an ABI constant
+        body = re.sub(r'^\s*(?:int|uint|undefined4)\s+unaff_gp\s*;\s*$', '', body, flags=re.M)
+        gp = 0x80133474 if target == 'slpm' else 0x80078B6C
+        body = re.sub(r'\bunaff_gp\b', f'((s32)0x{gp:08X})', body)
     if re.search(r'\b(in_\w+|unaff_\w+|extraout_\w+|halt_baddata)\b', body):
         return None
     head = re.search(r'^[\w\s*]+?\b(\w+)\s*\(', body)
@@ -256,7 +298,18 @@ def draft(target, func, asm, m2c='', char_signed=True):
         address_indexed = bool(re.search(rf'\(&\s*{re.escape(name)}\)\s*\[', body))
         if name.startswith('null_ARRAY_'):
             typ = 'u8'
-        if indexed or name.startswith('null_ARRAY_'):
+        function_pointer = info.get('function_pointer') or re.search(r'\(\s*\*\s*' + re.escape(name) + r'\s*\)\s*\(', body)
+        if function_pointer:
+            value = f'(*(code **)0x{addr:08X})'
+        elif info.get('pointer'):
+            typ = info.get('element') or 'u8'
+            if volatile_pointers:
+                typ = 'volatile ' + typ
+            value = f'(*({typ} **)0x{addr:08X})'
+        elif info.get('array') and not address_indexed and not re.search(r'&\s*' + re.escape(name) + r'\b', body):
+            typ = info.get('element') or typ
+            value = f'(({typ} *)0x{addr:08X})'
+        elif indexed or name.startswith('null_ARRAY_'):
             typ = info.get('element') or typ
             value = (f'(*({typ} **)0x{addr:08X})' if info.get('pointer')
                      else f'(({typ} *)0x{addr:08X})')

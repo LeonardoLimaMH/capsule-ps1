@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `██████████████████░░` **89.10%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `██████████████████░░` **89.65%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -35,12 +35,12 @@ emulação contra a função original.
 
 | Binário | C equivalente (`equiv/`) | Funcional (bytes) | Funções em C | Faltam C |
 |---|---|---|---|---|
-| `YUUGI.EXE` | 83.93% (648 fn) | `█████████░` **87.93%** | 874 / 1,035 (84.44%) | **161** |
-| `SLPM_860.96` | 82.92% (198 fn) | `█████████░` **88.90%** | 295 / 334 (88.32%) | **39** |
-| `CHESS.BIN` | 87.56% (684 fn) | `█████████░` **89.30%** | 786 / 869 (90.45%) | **83** |
-| `RAISE.BIN` | 84.99% (720 fn) | `█████████░` **86.85%** | 912 / 942 (96.82%) | **30** |
+| `YUUGI.EXE` | 84.21% (649 fn) | `█████████░` **88.20%** | 875 / 1,035 (84.54%) | **160** |
+| `SLPM_860.96` | 85.01% (200 fn) | `█████████░` **91.00%** | 297 / 334 (88.92%) | **37** |
+| `CHESS.BIN` | 88.32% (688 fn) | `█████████░` **90.05%** | 790 / 869 (90.91%) | **79** |
+| `RAISE.BIN` | 85.34% (721 fn) | `█████████░` **87.20%** | 913 / 942 (96.92%) | **29** |
 | `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 86.66% (2,429 fn) | `█████████░` **89.10%** | 3,056 / 3,369 (90.71%) | **313** |
+| **Total** | 87.21% (2,437 fn) | `█████████░` **89.65%** | 3,064 / 3,369 (90.95%) | **305** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
@@ -645,10 +645,26 @@ função original recebe um salto para ele — assim todos os outros endereços
 continuam iguais. Funções do jogo chamadas por ela executam de verdade; funções
 do SDK (que dependem de hardware) e a BIOS viram *stubs* que **registram cada
 chamada com seus argumentos**. Ao final, comparam-se registradores, a RAM
-inteira (exceto pilha morta) e o log de chamadas. Tentativas em que os dois
-lados travam igualmente são **inconclusivas** e nunca contam como aprovação. A
+inteira (exceto pilha morta), o log de chamadas e os acessos ao barramento de
+dispositivos do PS1 (`0x1F801000–0x1F801FFF`). Para cada leitura ou escrita de
+dispositivo, o teste compara endereço, largura, valor e ordem. Assim, uma
+escrita de 8 bits diferente de uma de 16 bits, ou uma leitura extra, reprova
+mesmo quando os registradores finais e a RAM principal coincidem. A memória
+de dispositivos ainda é um modelo simples: os testes de CD precisam de estados
+de resposta explícitos e não demonstram a temporização real do hardware.
+Tentativas em que os dois lados travam igualmente são **inconclusivas** e nunca
+contam como aprovação. A
 suíte inclui um teste negativo que garante que o harness reprova uma versão
 propositalmente errada.
+
+Para gerar candidatos C, a análise do Ghidra é cruzada com os tipos de memória
+inferidos pelo `m2c` e com as larguras de acesso do MIPS. Ponteiros armazenados
+em globais, vetores de caracteres e endereços de strings são preservados como
+tais; uma string em RAM não pode virar o valor de seu primeiro byte. Quando o
+assembly lê `$gp` e não o modifica, o gerador pode resolver o endereço inicial
+desse registrador a partir da ABI do executável. Cada variante ainda passa pelo
+teste diferencial com as funções auxiliares reais e estados que exercitam os
+ramos relevantes. A resolução de `$gp` é opcional (`--resolve-gp`).
 
 ---
 

@@ -31,6 +31,7 @@ M2C_TARGET = 'mipsel-gcc-c'
 CALLEE_CONTEXT = True
 STACK_FRAMES = False
 GHIDRA_DATA = {}
+RESOLVE_GP = False
 BATTLE_PROFILE = ('/* rand-u16: 0x8008EE54 1 '
                   '0,1,2,3,4,5,6,7,8,9,10,15,19,20,21,31,32,63,64,98,99,100,65535 */\n')
 
@@ -60,7 +61,7 @@ def candidates(target, func):
         m2c_flags += ('--context', str(path))
     m2c = ad.run_m2c(target, func, asm, m2c_flags)
     for char_signed in (True, False):
-        typed = functional_ghidra.draft(target, func, asm_text, m2c or '', char_signed=char_signed)
+        typed = functional_ghidra.draft(target, func, asm_text, m2c or '', char_signed=char_signed, resolve_gp=RESOLVE_GP)
         if typed:
             label = 'ghidra-typed' if char_signed else 'ghidra-unsigned-char'
             out.append((label, typed))
@@ -167,7 +168,7 @@ def try_function(target, func, seconds=45, budget=180, prepared=None, seeds=(1, 
 
 
 def main():
-    global M2C_TARGET, CALLEE_CONTEXT, STACK_FRAMES
+    global M2C_TARGET, CALLEE_CONTEXT, STACK_FRAMES, RESOLVE_GP
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('targets', nargs='+', choices=['chess', 'raise', 'yuugi', 'slpm', 'etc'])
     ap.add_argument('--jobs', type=int, default=4)
@@ -190,11 +191,14 @@ def main():
                     help='disable leaf-helper signatures when comparing generation strategies')
     ap.add_argument('--stack-frames', action='store_true',
                     help='also test layouts recovered from explicit Ghidra stack offsets')
+    ap.add_argument('--resolve-gp', action='store_true',
+                    help='recover read-only unaff_gp from the target ABI; reject functions that change gp')
     ap.add_argument('--real-callee', action='append', default=[], help='execute this helper when called; persist the test profile in C')
     args = ap.parse_args()
     M2C_TARGET = args.m2c_target
     CALLEE_CONTEXT = not args.no_callee_context
     STACK_FRAMES = args.stack_frames
+    RESOLVE_GP = args.resolve_gp
     if args.jobs < 1 or args.draft_jobs < 1 or args.prefetch < 0 or not args.seeds:
         ap.error('worker counts must be positive; prefetch must not be negative')
     REAL_CALLEES.update(args.real_callee)
