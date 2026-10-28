@@ -485,9 +485,10 @@ def main():
     if callback_context and (not a.abi or not a.isolate or a.target == 'slpm'
                              or not task_callbacks.eligible(a.target, a.func)):
         sys.exit('Task context requires --abi --isolate, constructor registration and no visible direct calls')
-    small_args = {0, 1, 2, 3} if "/* args: small */" in _t else {int(k) for k in re.findall(r"/\* arg([0-3]): small \*/", _t)}
+    small_args = {0, 1, 2, 3} if "/* args: small */" in _t else {int(k) for k in re.findall(r"/\* arg([0-5]): small \*/", _t)}
     # "/* argN: 0xENDEREÇO */": argumento fixo (p.ex. apontando para um buffer preparado)
-    fixed_args = {int(k): int(v, 16) for k, v in re.findall(r"/\* arg([0-3]): (0x[0-9A-Fa-f]+) \*/", _t)}
+    fixed_args = {int(k): int(v, 16) for k, v in re.findall(r"/\* arg([0-5]): (0x[0-9A-Fa-f]+) \*/", _t)}
+    stack_args = (small_args | fixed_args.keys()) & {4, 5}
     # "/* rand-u16: 0xEND N v1,v2,... */": N halfwords sorteados da lista (textos com
     # códigos de controle e terminador, p.ex.)
     rand_u16 = [(int(x, 16), int(n, 0), [int(v, 0) for v in vs.split(",")]) for x, n, vs in re.findall(
@@ -620,6 +621,9 @@ def main():
             regs[r] = rng.getrandbits(32)
         regs[UC_MIPS_REG_SP] = STACK_TOP
         regs[UC_MIPS_REG_GP] = GP.get(a.target, 0x80078B6C)
+        for i in sorted(stack_args):
+            offset = (STACK_TOP + 4 * i) & 0x1FFFFFFF
+            ram[offset:offset + 4] = (arg(i) & 0xFFFFFFFF).to_bytes(4, 'little')
         salt = rng.getrandbits(32) if a.stub_ret == "mixed" else None
         try:
             # o candidato fica na memória dos dois lados: uma leitura por ponteiro sorteado

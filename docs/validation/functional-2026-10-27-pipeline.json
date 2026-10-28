@@ -3926,5 +3926,75 @@
         "message": "[EQUIVALENTE] chess:func_800B7F34 ? 200 tentativas id?nticas\n"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800AFDB0",
+    "source_sha256": "1640be7516d04172d5c1678076ac2d9fc0e1e7e8ca1880eda3e8e19e936d4bc1",
+    "validated_source_sha256": "5cc8fc12f74d860a912648685b90af39680ffff5a28ab43c041058597b50df5d",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_stack_argument_fixture",
+    "validation_model": "Original registers and RAM; fifth/sixth o32 stack arguments randomized; valid board pointers and active cell values",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800AFDB0 ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800AFDB0 ? 200 tentativas id?nticas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "fixed zero coordinates and boundary cell states",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800AFDB0 ? 200 tentativas id?nticas\n",
+        "identical_linked_blob": true
+      },
+      {
+        "profile": "fixed zero coordinates and boundary cell states",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800AFDB0 ? 200 tentativas id?nticas\n",
+        "identical_linked_blob": true
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800C9560",
+    "source_sha256": "b895c7a0b7f56d05f8647d3ad97065f16e81b3453cf58ed790de2a03e66e8e25",
+    "validated_source_sha256": "92ce9374a741481256d2a2dd28dad6a5e414153d9ae9dff76a9e18b4dbe2daaa",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_return_recovery",
+    "validation_model": "Original registers including full v0 return, RAM and calls; randomized actor state, depth, board index and mode",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C9560 ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C9560 ? 200 tentativas id?nticas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "depth one and full 32-bit return",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C9560 ? 50 tentativas id?nticas\n",
+        "identical_linked_blob": true
+      }
+    ],
+    "negative_control": "Truncating v0 to u16 diverges on first trial of depth-one profile"
   }
 ]
