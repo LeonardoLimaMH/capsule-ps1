@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████████░` **94.18%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████████░` **94.44%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -37,10 +37,10 @@ emulação contra a função original.
 |---|---|---|---|---|
 | `YUUGI.EXE` | 84.97% (660 fn) | `█████████░` **88.96%** | 886 / 1,035 (85.60%) | **149** |
 | `SLPM_860.96` | 85.01% (200 fn) | `█████████░` **91.00%** | 297 / 334 (88.92%) | **37** |
-| `CHESS.BIN` | 96.22% (752 fn) | `██████████` **97.95%** | 854 / 869 (98.27%) | **15** |
+| `CHESS.BIN` | 96.91% (754 fn) | `██████████` **98.65%** | 856 / 869 (98.50%) | **13** |
 | `RAISE.BIN` | 90.62% (736 fn) | `█████████░` **92.48%** | 928 / 942 (98.51%) | **14** |
 | `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 91.74% (2,527 fn) | `█████████░` **94.18%** | 3,154 / 3,369 (93.62%) | **215** |
+| **Total** | 91.99% (2,529 fn) | `█████████░` **94.44%** | 3,156 / 3,369 (93.68%) | **213** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
@@ -762,3 +762,13 @@ da versão corrigida cobrem os estados 0, 1, 2, 3, 4 e 99, divisores positivos
 nos limites, listas de alvos vazias, preenchidas e já consumidas. O construtor
 da lista, a criação de efeitos, o alocador e as funções trigonométricas rodam
 em código original; somente o som fica isolado por stub.
+
+`func_800F1BDC` e `func_800ECC94` completam as candidatas CHESS que vieram
+de C no original. Seus estados e limites de temporizadores têm perfis próprios.
+O cancelamento de `func_800F1BDC` recebe o registrador `s3` sem inicializá-lo
+no assembly original; uma pequena instrução inline captura esse valor para
+preservar a convenção existente. Os testes variam os registradores salvos,
+e zerar esse valor reprova o controle negativo. Isso não é byte-matching.
+As 13 rotinas CHESS escritas originalmente em assembly continuam pendentes
+e permanecem na coluna **Faltam C**; a cobertura ainda não é 100%.
+A suíte do validador e dos rebuilds passou em **102 testes**.
