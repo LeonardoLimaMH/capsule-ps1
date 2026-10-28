@@ -5326,5 +5326,93 @@
         "message": "[EQUIVALENTE] chess:func_80099B48 - 200 tentativas identicas\n"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800BE244",
+    "source_sha256": "705c5bdcc6506c3b72ef118e59b1755695488a749d217fe824c57f5d07178e34",
+    "validated_source_sha256": "3daa3b961974353b0fb5215311ec2fd86b40f67905fd2327d61a535175faa642",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_piece_selection_direction_and_sparse_grid",
+    "validation_model": "Original board flag helper; both player sides and automatic/directional mode, randomized forward/backward/no input and occupied flags; sparse eligibility grid exercises outer search and side wrap; strict v0, calls and RAM; 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BE244 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BE244 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "m0s1",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BE244 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "9ffbcf212aa862b441f2be0818c7cd39d25569f796a6725e0867e5de4ccada59"
+      },
+      {
+        "profile": "m0s1",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BE244 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "9ffbcf212aa862b441f2be0818c7cd39d25569f796a6725e0867e5de4ccada59"
+      },
+      {
+        "profile": "m1s0",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BE244 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "05b24d42baddabfbc8d10bbffa2b183dab9bbed4edaa56653ade47c732c6d6cb"
+      },
+      {
+        "profile": "m1s0",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BE244 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "05b24d42baddabfbc8d10bbffa2b183dab9bbed4edaa56653ade47c732c6d6cb"
+      },
+      {
+        "profile": "m1s1",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BE244 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "1fbf0b208008d12a335bf81f7da09545b2adb42c1735ca58bce2fa8665fb86bc"
+      },
+      {
+        "profile": "m1s1",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BE244 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "1fbf0b208008d12a335bf81f7da09545b2adb42c1735ca58bce2fa8665fb86bc"
+      },
+      {
+        "profile": "sparse",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BE244 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "239d4acbbd9c96ad0982ce7d2b60f71bc0b7ee1fd6fc7acf3ff2eaa4ded3a4ca"
+      },
+      {
+        "profile": "sparse",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BE244 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "239d4acbbd9c96ad0982ce7d2b60f71bc0b7ee1fd6fc7acf3ff2eaa4ded3a4ca"
+      }
+    ]
   }
 ]
