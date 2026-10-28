@@ -3794,5 +3794,27 @@
         "message": "[EQUIVALENTE] yuugi:func_8003AAF0 ? 200 tentativas id?nticas, 43 inconclusivas\n"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800A360C",
+    "source_sha256": "4e9058b4ceff25a65387cdaae96b97eae2f5a3ecac8d57356b983048ca2cde4e",
+    "accepted": true,
+    "candidate_batch": "functional_proto23_actor_fixture",
+    "validation_model": "Original registers, RAM and calls; valid actor pointer, randomized actor phase and both rendering modes",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A360C ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A360C ? 200 tentativas id?nticas\n"
+      }
+    ],
+    "validated_source_sha256": "3054df595813b88c71d93b3abf15321bdc2e29c0603f12030bd9884d06503d74",
+    "whitespace_cleanup_identical_linked_blob": true
   }
 ]
