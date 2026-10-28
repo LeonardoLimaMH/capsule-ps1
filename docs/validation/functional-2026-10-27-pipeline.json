@@ -4546,5 +4546,189 @@
         "identical_linked_blob": true
       }
     ]
+  },
+  {
+    "target": "yuugi",
+    "func": "func_8001A6B8",
+    "source_sha256": "9f2bcfb677fa341b0b4d594ad6f97f1616d45c482685a46ae1fbda9f3aecb978",
+    "validated_source_sha256": "af636521be3c94231e0e6811a82f6942a14c3794a358111398807ab2186fdcec",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "relocation_loop_two_path_profiles",
+    "validation_model": "Original executable versus linked C, strict return and RAM; nonempty relocated list and empty sentinel list, each 200 complete trials for seeds 1 and 2",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001A6B8 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001A6B8 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "empty sentinel list",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001A6B8 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "55357285b58b98a93fbbb5704b83bd4af815441d2541d8225cd16584f7dadea0"
+      },
+      {
+        "profile": "empty sentinel list",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001A6B8 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "55357285b58b98a93fbbb5704b83bd4af815441d2541d8225cd16584f7dadea0"
+      }
+    ]
+  },
+  {
+    "target": "yuugi",
+    "func": "func_8001E044",
+    "source_sha256": "6cfc5b44274a246701e0064162f08de1bc612e853d44c659b7c51d329cd14360",
+    "validated_source_sha256": "2e3b5240c2f46d609a0b04af144d71a468c8d16db32a40d07e19108635550958",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "decimal_format_from_mips_call_argument",
+    "validation_model": "Original digit conversion helper; zero and small, multidigit, and fixed width profiles; strict return and RAM, 200 complete trials per seed",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001E044 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001E044 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "number",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001E044 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "862e230dd4523f17db0ca448f73f4fb2c0d9c9a7880f86631727586118586598"
+      },
+      {
+        "profile": "number",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001E044 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "862e230dd4523f17db0ca448f73f4fb2c0d9c9a7880f86631727586118586598"
+      },
+      {
+        "profile": "width",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001E044 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "154832d5ce50769cfc5be20335e189e6e50cb8de0680c3c44b6d4a2a2c9c9b21"
+      },
+      {
+        "profile": "width",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001E044 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "154832d5ce50769cfc5be20335e189e6e50cb8de0680c3c44b6d4a2a2c9c9b21"
+      }
+    ]
+  },
+  {
+    "target": "yuugi",
+    "func": "func_8001A8C0",
+    "source_sha256": "de272a09dc76c063a282db9979f05141d38e991bd1ac75a2e7bd1999c791f170",
+    "validated_source_sha256": "8a129b39bc6fb0b7c3e20ae9f4aaedeba5b230746f07a62150c3ec2edf9cf205",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "lz_stream_five_branch_profiles",
+    "validation_model": "Valid compressed streams for immediate terminator, literal, short and long backreferences, block copy; strict return and RAM, 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001A8C0 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001A8C0 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "literal",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001A8C0 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "b4ff470fc4824e0e21b76a3cd06066724d08229a3e07c7b8c7f32007a8c33b46"
+      },
+      {
+        "profile": "literal",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001A8C0 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "b4ff470fc4824e0e21b76a3cd06066724d08229a3e07c7b8c7f32007a8c33b46"
+      },
+      {
+        "profile": "short-backref",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001A8C0 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "d048eeac93bd311c9fe066c0ae4cface85e0beb75a32d1c01b631d8c0329945c"
+      },
+      {
+        "profile": "short-backref",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001A8C0 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "d048eeac93bd311c9fe066c0ae4cface85e0beb75a32d1c01b631d8c0329945c"
+      },
+      {
+        "profile": "long-backref",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001A8C0 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "6c3cd800b2fb557f5fd83f93a8d2a29541c5dca22b2b77f1f8e336b7011a6303"
+      },
+      {
+        "profile": "long-backref",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001A8C0 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "6c3cd800b2fb557f5fd83f93a8d2a29541c5dca22b2b77f1f8e336b7011a6303"
+      },
+      {
+        "profile": "block-copy",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001A8C0 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "8b68a47932d83542beeb89e6e91dac608dd3c48f83f424421e77916f3f31aefa"
+      },
+      {
+        "profile": "block-copy",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8001A8C0 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "8b68a47932d83542beeb89e6e91dac608dd3c48f83f424421e77916f3f31aefa"
+      }
+    ]
   }
 ]
