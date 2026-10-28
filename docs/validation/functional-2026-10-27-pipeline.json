@@ -4882,5 +4882,61 @@
         "validated_source_sha256": "73b545e91b0e8a424b97f3f4faf66be4833a01b476ed7cc76a704cd5a6e0a5f7"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_8009FE90",
+    "source_sha256": "f0767c57e23bb09fa24fce3c8df22ae983f79c9126dee21912967c7169a87749",
+    "validated_source_sha256": "970440c8dcffbbdfd351b647434351a0f59f064996a6f2ce5143652832c62eaa",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_string_to_halfword_table",
+    "validation_model": "Real 8-byte length helper and original table lookup; randomized input, empty and full strings; strict v0 and RAM, 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009FE90 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009FE90 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "zero",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009FE90 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "d09f008ef41fd34f3b55fb8a59ebbd4313ae1b03a097ecc6005ed5b6eaeae3f3"
+      },
+      {
+        "profile": "zero",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009FE90 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "d09f008ef41fd34f3b55fb8a59ebbd4313ae1b03a097ecc6005ed5b6eaeae3f3"
+      },
+      {
+        "profile": "full",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009FE90 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "9da540067f515b4b398c4b4fe2ad9f05a86af7958de215c037b429f98c04f33c"
+      },
+      {
+        "profile": "full",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009FE90 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "9da540067f515b4b398c4b4fe2ad9f05a86af7958de215c037b429f98c04f33c"
+      }
+    ]
   }
 ]
