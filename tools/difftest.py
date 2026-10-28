@@ -301,9 +301,9 @@ def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=N
                                                UC_MIPS_REG_A3))
         if name.startswith("BIOS"):
             args = (uc.reg_read(UC_MIPS_REG_T1),) + args
-        elif name in game_names:
+        elif name in game_names or name in contracts:
             sp = uc.reg_read(UC_MIPS_REG_SP)
-            k = arity.stack_args(name)
+            k = 6 if name == 'RotTransPers4' and name in contracts else arity.stack_args(name)
             if k and 0x80000000 <= sp < 0x80000000 + RAM_SIZE - 0x10 - 4 * k:
                 raw = bytes(uc.mem_read((sp + 0x10) & 0x1FFFFFFF, 4 * k))
                 args += tuple(int.from_bytes(raw[i:i + 4], "little") for i in range(0, 4 * k, 4))

@@ -30,6 +30,14 @@ REAL_CALLEES = set()
 M2C_TARGET = 'mipsel-gcc-c'
 CALLEE_CONTEXT = True
 STACK_FRAMES = False
+BATTLE_PROFILE = ('/* rand-u16: 0x8008EE54 1 '
+                  '0,1,2,3,4,5,6,7,8,9,10,15,19,20,21,31,32,63,64,98,99,100,65535 */\n')
+
+
+def required_profile(asm_text):
+    if functional_ghidra.access_types(asm_text).get(0x8008EE54) in ('s16', 'u16'):
+        return BATTLE_PROFILE
+    return ''
 
 
 def candidates(target, func):
@@ -37,9 +45,7 @@ def candidates(target, func):
     if asm is None:
         return []
     asm_text = asm.read_text()
-    state_profile = ''
-    if functional_ghidra.access_types(asm_text).get(0x8008EE54) in ('s16', 'u16'):
-        state_profile = '/* rand-u16: 0x8008EE54 1 0,1,2,3,4,5,6,7,8,9,10,15,19,20,21,31,32,63,64,98,99,100,65535 */\n'
+    state_profile = required_profile(asm_text)
     for name in sorted(REAL_CALLEES & set(re.findall(r'\bjal\s+(\w+)', asm_text))):
         state_profile += '/* real-callee: ' + name + ' */\n'
     out = []
@@ -103,10 +109,16 @@ def try_function(target, func, seconds=45, budget=180, prepared=None, seeds=(1, 
         drafts = []
         attempts.append({'status': 'draft failed', 'message': str(exc)})
     accepted = None
+    asm = ad.asm_path(target, func)
+    # Prepared/manual drafts bypass candidates(). Apply the same state fixture
+    # here too, so a switch cannot pass only its unchanged image/default state.
+    profile = required_profile(asm.read_text()) if asm else ''
     for i, (label, code) in enumerate(drafts):
         if time.monotonic() - started >= budget:
             break
         src = folder / (str(i) + '.c')
+        if profile and not re.search(r'/\* rand-u16:\s*0x8008[Ee][Ee]54\b', code):
+            code = profile + code
         text = ad.HEADER + code.strip() + '\n'
         src.write_text(text)
         passed = bool(seeds)

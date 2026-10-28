@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `████████████████░░░░` **80.80%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `█████████████████░░░` **84.30%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -37,10 +37,10 @@ emulação contra a função original.
 |---|---|---|---|---|
 | `YUUGI.EXE` | 83.93% (648 fn) | `█████████░` **87.93%** | 874 / 1,035 (84.44%) | **161** |
 | `SLPM_860.96` | 82.92% (198 fn) | `█████████░` **88.90%** | 295 / 334 (88.32%) | **39** |
-| `CHESS.BIN` | 65.20% (595 fn) | `███████░░░` **66.93%** | 697 / 869 (80.21%) | **172** |
+| `CHESS.BIN` | 74.82% (622 fn) | `████████░░` **76.56%** | 724 / 869 (83.31%) | **145** |
 | `RAISE.BIN` | 84.39% (718 fn) | `█████████░` **86.25%** | 910 / 942 (96.60%) | **32** |
 | `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 78.35% (2,338 fn) | `████████░░` **80.80%** | 2,965 / 3,369 (88.01%) | **404** |
+| **Total** | 81.85% (2,365 fn) | `████████░░` **84.30%** | 2,992 / 3,369 (88.81%) | **377** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
@@ -323,6 +323,25 @@ validar a projeção numérica no hardware. A seleção é por função, com
 `/* callee-contract: nome */` ou `--callee-contract nome`, somente em `--abi`.
 Os testes normais e o modo estrito preservam suas comparações anteriores.
 
+O contrato de `RotTransPers4` observa os quatro vetores e os seis argumentos de
+pilha, grava os seis resultados na ordem do assembly e carrega o quarto vetor
+somente depois das três primeiras escritas. Isso preserva também o caso em que
+um resultado sobrepõe esse vetor. Testes verificam essa ordem, os bytes vizinhos,
+o décimo argumento e o despacho do emulador sem depender de `--isolate`.
+
+As rotinas de sprites `func_800AADE0` e `func_800ABD9C` usam um perfil com três
+primitivas, buffers de textura e GPU válidos e animações com durações positivas.
+Executam `func_80015D14` original: substituir esse helper por um retorno sempre
+não zero prendia o teste no loop de atualização. O perfil varia flags, escala,
+rotação e timer. Cada rotina passou nas duas sementes; controles negativos
+alteram uma escrita de cor e precisam divergir na RAM. Casos inconclusivos ou
+com GTE não suportada continuam fora das 200 execuções aceitas por semente.
+
+Em `func_800B0F48`, o perfil prepara quatro mapas de 13×13 e coordenadas de dois
+atores no tabuleiro. A tabela de mapas usa offsets em bytes; multiplicá-los pelo
+tamanho de um `int` desviava a leitura para outra região. A correção passou nas
+duas sementes e não usa contratos gráficos.
+
 Há também uma candidata separada para aritmética de endereços em bytes.
 Inferir `u32` de um load não prova que `&objeto + deslocamento` deva multiplicar
 o deslocamento por quatro. A variante converte somente esse uso em soma a um
@@ -378,6 +397,8 @@ Para funções que leem o estado de batalha `0x8008EE54`, o lote também sorteia
 estados pequenos e valores de fronteira. A RAM aleatória sozinha quase nunca
 alcança os casos de um switch de 16 bits. Candidatos aprovados apenas nesse
 caminho inicial foram separados antes da integração, sem aumentar o progresso.
+Esse perfil também é aplicado aos rascunhos fornecidos diretamente para
+`try_function`, quando ainda não o declaram; um teste impede essa omissão.
 Não ignorar diferenças em ponteiros para buffers locais: verificar o conteúdo e
 os efeitos dos callees antes de atribuir a rejeição apenas ao layout da pilha.
 

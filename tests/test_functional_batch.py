@@ -44,6 +44,19 @@ def test_complete_validation_is_published_atomically(tmp_path, monkeypatch):
     assert 'return 1' in dest.read_text()
 
 
+def test_prepared_drafts_also_exercise_battle_switch_states(tmp_path, monkeypatch):
+    dest = prepare(monkeypatch, tmp_path, 200)
+    asm = tmp_path / 'sample.s'
+    asm.write_text('''
+/* 0 */ lui $s1, %hi(D_8008ED68)
+/* 4 */ addiu $s1, $s1, %lo(D_8008ED68)
+/* 8 */ lhu $v0, 0xEC($s1)
+''')
+    monkeypatch.setattr(batch.ad, 'asm_path', lambda *a: asm)
+    assert batch.try_function('chess', 'sample', prepared=[('manual', 'int sample(void) { return 1; }')])['status'] == 'accepted'
+    assert batch.BATTLE_PROFILE in dest.read_text()
+
+
 def test_concurrently_accepted_source_is_preserved(tmp_path, monkeypatch):
     dest = prepare(monkeypatch, tmp_path, 200, concurrent=True)
     batch.try_function('chess', 'sample')
