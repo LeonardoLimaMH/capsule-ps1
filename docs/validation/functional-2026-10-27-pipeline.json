@@ -7266,5 +7266,77 @@
         "validated_source_sha256": "8b4ba0f65ec66a1a816ece21c84164dc1ec04e0d878405b22518c8bee101e513"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800A9C9C",
+    "source_sha256": "6c689db465f8662ba60414c7232a952a56da5f510ae08468f3ec4f17b95a676a",
+    "validated_source_sha256": "a1a4400c74aa05ab9aac65c5df2c0ea0380fb17d508d2af250a783eb47d842d4",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess92_stat_panel",
+    "validation_model": "Strict v0, live RAM and ordered draw calls. Original CAA6C and CA664 helpers execute. Four profiles cover both players, first/last unit, negative and wrapping coordinates including stack arg4; card/faction/stat modifiers, selected unit and positive max HP randomized. Drawing helpers remain stubs: numerical rendering not claimed. Each profile has 200 complete identical executions for each seed.",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9C9C - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9C9C - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "last",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9C9C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "1f7f40ea9f21419a4abc4c427108f6a9888a968935cdfd9650f5fcc3eb216785"
+      },
+      {
+        "profile": "last",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9C9C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "1f7f40ea9f21419a4abc4c427108f6a9888a968935cdfd9650f5fcc3eb216785"
+      },
+      {
+        "profile": "negative",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9C9C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "2fe921778aeb7883398366ef2febbf4ef1ebf0eb1170eec3db5e2b3cf64f7ea0"
+      },
+      {
+        "profile": "negative",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9C9C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "2fe921778aeb7883398366ef2febbf4ef1ebf0eb1170eec3db5e2b3cf64f7ea0"
+      },
+      {
+        "profile": "wrap",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9C9C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "825d76b63fa6f0c634f8f1e892a11b48c4739b4a6b499b82c8adbe716042cb58"
+      },
+      {
+        "profile": "wrap",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9C9C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "825d76b63fa6f0c634f8f1e892a11b48c4739b4a6b499b82c8adbe716042cb58"
+      }
+    ]
   }
 ]
