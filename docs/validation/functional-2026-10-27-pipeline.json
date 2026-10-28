@@ -4217,5 +4217,96 @@
         "identical_linked_blob": true
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800D00B0",
+    "source_sha256": "c7e2cce9357cc81cfa17b7798e896d4b4344cc0a3fd95c0039703606777764ed",
+    "validated_source_sha256": "b0d2023e93bdd950a492eafcffa430ea5461c564e49b494f94a73e2a451cec9a",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_board47_strong_fixture",
+    "validation_model": "Wider 8-bit indices with original board data and resource update, full register and RAM comparison",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D00B0 ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D00B0 ? 200 tentativas id?nticas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800C8A48",
+    "source_sha256": "6058ee8468bc127c6a123e541d20011928abaff14c649ca846f7719a04594dc4",
+    "validated_source_sha256": "e5244444368068572f877b239fa175d66bb1b708aca710b10dc56ffd67fa21de",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_board47_strong_fixture",
+    "validation_model": "Original actor selector and task-creation helper, valid board and task state, full register and RAM comparison",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C8A48 ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C8A48 ? 200 tentativas id?nticas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_8009DB7C",
+    "source_sha256": "915e87b4218ed9c4cbcccebf06f3042336b2e9bfff2b9cb715965c4453d88433",
+    "validated_source_sha256": "31e6fd255cf78c9d2232983218298221537b18170eb3d33ada281632cfe50916",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_board47_strong_fixture",
+    "validation_model": "Valid actor coordinates and randomized orientation, original board and trig SDK calls, caller-visible registers and RAM",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009DB7C ? 200 tentativas id?nticas, 38 inconclusivas, 1 n?o suportadas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009DB7C ? 200 tentativas id?nticas, 42 inconclusivas\n"
+      }
+    ],
+    "return_options": [
+      "--ignore-v0"
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800C553C",
+    "source_sha256": "2814f10790e7f864140363fa0be4c5b1c59b9af6e7fc4544d174046032d3a3ca",
+    "validated_source_sha256": "61a44364dddaaa16ccfbb0c4068169538de7f009d0ef65583e41e166e9bb7293",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_board47_strong_fixture",
+    "validation_model": "Actual task allocation and geometry helper, valid board state, full register and RAM comparison",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C553C ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C553C ? 200 tentativas id?nticas\n"
+      }
+    ]
   }
 ]
