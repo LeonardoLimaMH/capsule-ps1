@@ -3774,5 +3774,25 @@
     ],
     "validated_source_sha256": "455d82617a54252f5078b37eae8386625cb80da4c2f166f82cdf88dd07fbef62",
     "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "yuugi",
+    "func": "func_8003AAF0",
+    "source_sha256": "ba2e7c073718a683acd9c741e93de7ad5a7d90eb6759a50a8e0e77067f1d8edd",
+    "accepted": true,
+    "candidate_batch": "functional_varint28",
+    "validation_model": "Original registers, RAM and call traces; gp-based stream descriptor with three group indices and byte-addressed layout",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8003AAF0 ? 200 tentativas id?nticas, 41 inconclusivas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8003AAF0 ? 200 tentativas id?nticas, 43 inconclusivas\n"
+      }
+    ]
   }
 ]
