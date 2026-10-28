@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████████░` **96.19%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████████░` **96.25%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -35,12 +35,12 @@ emulação contra a função original.
 
 | Binário | C equivalente (`equiv/`) | Funcional (bytes) | Funções em C | Faltam C |
 |---|---|---|---|---|
-| `YUUGI.EXE` | 84.97% (660 fn) | `█████████░` **88.96%** | 886 / 1,035 (85.60%) | **149** |
+| `YUUGI.EXE` | 85.22% (661 fn) | `█████████░` **89.21%** | 887 / 1,035 (85.70%) | **148** |
 | `SLPM_860.96` | 85.01% (200 fn) | `█████████░` **91.00%** | 297 / 334 (88.92%) | **37** |
 | `CHESS.BIN` | 96.91% (754 fn) | `██████████` **98.65%** | 856 / 869 (98.50%) | **13** |
 | `RAISE.BIN` | 96.87% (744 fn) | `██████████` **98.72%** | 936 / 942 (99.36%) | **6** |
 | `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 93.75% (2,537 fn) | `██████████` **96.19%** | 3,164 / 3,369 (93.92%) | **205** |
+| **Total** | 93.80% (2,538 fn) | `██████████` **96.25%** | 3,165 / 3,369 (93.94%) | **204** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
