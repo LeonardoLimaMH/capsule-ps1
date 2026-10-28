@@ -4179,5 +4179,43 @@
     "return_options": [
       "--ignore-v0"
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_8009C4B0",
+    "source_sha256": "914adca356d3094fe9704b63c2e5cf5c239aba759707544035be7d0186a5ce09",
+    "validated_source_sha256": "73f6f64391ce5f23bc1e0952b7d9eeabe7ee13d1da8326e1c61d680976ba03a1",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_resource_render_fixture",
+    "validation_model": "Original resource lookup and board cell helper; live registers, RAM and call traces; both sprite-type branches",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009C4B0 ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009C4B0 ? 200 tentativas id?nticas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "single-cell both sprite branches",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009C4B0 ? 200 tentativas id?nticas\n",
+        "identical_linked_blob": true
+      },
+      {
+        "profile": "single-cell both sprite branches",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009C4B0 ? 200 tentativas id?nticas\n",
+        "identical_linked_blob": true
+      }
+    ]
   }
 ]
