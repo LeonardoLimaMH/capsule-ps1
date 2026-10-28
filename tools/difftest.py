@@ -16,7 +16,9 @@ valor determinístico. O log de chamadas de A e B também é comparado.
 
 Resultado por tentativa: idêntica, divergente, ou inconclusiva (ambos os lados
 travaram/estouraram do mesmo modo). Inconclusivas nunca contam como aprovação.
-Instruções GTE (COP2) não são emuladas: o caso é "não suportado".
+Instruções GTE (COP2) do código testado são emuladas por tools/gte.py (RTPS, RTPT,
+NCLIP, AVSZ3, AVSZ4, MVMVA e movimentos de registradores); outros comandos GTE
+continuam "não suportados". Ver docs/gte.md.
 
 Uso (dentro do container):
   difftest.py <alvo> <função> [--src arquivo.c] [--trials 200] [--seed 1]
@@ -41,6 +43,7 @@ from unicorn.mips_const import *
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import arity  # noqa: E402
 import g0fill  # noqa: E402
+import gte  # noqa: E402
 import sdk_contracts  # noqa: E402
 import task_callbacks  # noqa: E402
 
@@ -421,8 +424,65 @@ def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=N
 
     if guard:
         mu.hook_add(UC_HOOK_MEM_READ, on_code_read, begin=guard[0][0] & 0x1FFFFFFF, end=(guard[0][1] - 1) & 0x1FFFFFFF)
+
+    # GTE (COP2): o Unicorn não emula o coprocessador 2 (gera exceção sem informar o pc).
+    # No código testado (original e candidato) cada instrução GTE é executada por tools/gte.py
+    # num gancho de código, que pula a instrução; no delay slot, o desvio anterior é decidido
+    # pelo gancho. O estado inicial do GTE é sorteado igual nos dois lados e o estado final
+    # entra na comparação (evento "io:gte").
+    cop2 = gte.GTE()
+    cop2.randomize(random.Random(repr(sorted(regs.items()))))
+
+    def gpr_read(r):
+        return mu.reg_read(UC_MIPS_REG_0 + r) if r else 0
+
+    def gpr_write(r, v):
+        if r:
+            mu.reg_write(UC_MIPS_REG_0 + r, v & 0xFFFFFFFF)
+
+    def mem_read32(addr):
+        return int.from_bytes(mu.mem_read(addr & 0x1FFFFFFF, 4), "little")
+
+    def mem_write32(addr, v):
+        mu.mem_write(addr & 0x1FFFFFFF, (v & 0xFFFFFFFF).to_bytes(4, "little"))
+
+    gte_words = set()
+    for lo, hi in guard:
+        lo_p, hi_p = lo & 0x1FFFFFFF, hi & 0x1FFFFFFF
+        if hi_p > RAM_SIZE or hi_p <= lo_p:
+            continue
+        code = bytes(mu.mem_read(lo_p, hi_p - lo_p))
+        found = {lo + k for k in range(0, len(code) - 3, 4)
+                 if gte.GTE.is_gte(int.from_bytes(code[k:k + 4], "little"))}
+        if found:
+            gte_words |= found
+            mu.hook_add(UC_HOOK_CODE, lambda uc, a, s, u: on_gte_code(a), begin=lo, end=hi - 1)
+
+    def on_gte_code(addr):
+        try:
+            if addr in gte_words:
+                cop2.execute(mem_read32(addr), gpr_read, gpr_write, mem_read32, mem_write32)
+                mu.reg_write(UC_MIPS_REG_PC, addr + 4)
+            elif addr + 4 in gte_words:
+                w = mem_read32(addr)
+                out = gte.branch_outcome(w, addr, gpr_read)
+                if out is None:
+                    return
+                nxt, link = out
+                cop2.execute(mem_read32(addr + 4), gpr_read, gpr_write, mem_read32, mem_write32)
+                if link is not None:
+                    gpr_write(link, addr + 8)
+                mu.reg_write(UC_MIPS_REG_PC, nxt)
+        except gte.GTEUnsupported as exc:
+            state["gte"] = str(exc)
+            mu.emu_stop()
+
     try:
         mu.emu_start(entry, SENTINEL, count=MAX_INSNS)
+        if state.get("gte"):
+            raise Unsupported(state["gte"])
+        calls.append(("io:gte",) + cop2.state())
+        strings.append((None,) * 64)
     except UcError as e:
         pc = mu.reg_read(UC_MIPS_REG_PC)
         p = pc & 0x1FFFFFFF

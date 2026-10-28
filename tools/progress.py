@@ -166,12 +166,14 @@ def collect(t):
         if name not in pending:
             r[k]["done_funcs"] += 1
             r[k]["done_bytes"] += size
+        elif name in equiv:
+            # C equivalente (difftest), ainda não byte-idêntico; vale também para as rotinas
+            # escritas à mão em assembly no original (GTE inline validado, ver docs/gte.md)
+            r[k]["equiv_bytes"] += size
+            r[k]["equiv_funcs"] += 1
         elif name in hand:
             r[k]["asm_bytes"] += size  # escrita em assembly no original: fica como .s
             r[k]["asm_funcs"] += 1
-        elif name in equiv:
-            r[k]["equiv_bytes"] += size  # C equivalente (difftest), ainda não byte-idêntico
-            r[k]["equiv_funcs"] += 1
     for group in r.values():
         group['pending_funcs'] = group['funcs'] - group['done_funcs'] - group['equiv_funcs']
     return r
