@@ -5242,5 +5242,45 @@
         "message": "[EQUIVALENTE] chess:func_800FE5B0 - 200 tentativas identicas\n"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800CB24C",
+    "source_sha256": "d1adffcddbb9af206972235ebedf544773d0e01863a3ce7d8673a96e3fd83574",
+    "validated_source_sha256": "ed3341d7a55c402c56112ecee9904e6cf05a434f6b42aa54d7be5a2bdaba3a4f",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_two_side_board_conditions",
+    "validation_model": "Randomized occupancy flags and piece counts for both sides; B8F38 helper stub has mixed returns; strict call arguments, RAM and v0; 200 complete trials per seed and side",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CB24C - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CB24C - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "second side",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CB24C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "d367d9e0793c8479ed8c891d063f57c472e9bda04975434145d91eb069aa5d25"
+      },
+      {
+        "profile": "second side",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CB24C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "d367d9e0793c8479ed8c891d063f57c472e9bda04975434145d91eb069aa5d25"
+      }
+    ]
   }
 ]
