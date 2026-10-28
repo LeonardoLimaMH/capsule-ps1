@@ -6756,5 +6756,117 @@
         "validated_source_sha256": "6582a3a2c15ea4a3621507934d342af8c30be7d3ec05848a0f6a5998eb77064b"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_8009B948",
+    "source_sha256": "0bb90a6374d6604351d5aaeb0e09ce82132fb77ffef3819de25e7dbc90762487",
+    "validated_source_sha256": "883f854f1415ff35f942d9e46ce9aecca56da2f6827c246f3ec970130411e825",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_object_constructor_and_sprite_animation",
+    "validation_model": "Original allocator, task clear, matrix/object setup, RotMatrix and trig helpers; group 0/1/3 and object kind 0/1/2, present and absent descriptors; corrected byte table stride; CE330 resource setup stubbed with all six arguments checked; strict v0, RAM and calls; 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009B948 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009B948 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "kind1",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009B948 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "0935a5c7d5c66df7070cab6affe75f5b4fac20d62439906bcf8e493cacc1d6dc"
+      },
+      {
+        "profile": "kind1",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009B948 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "0935a5c7d5c66df7070cab6affe75f5b4fac20d62439906bcf8e493cacc1d6dc"
+      },
+      {
+        "profile": "kind2",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009B948 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "3f7198853a23e2c4b8485f56c7986206b0f1a44e65ea1f93270777c17c54a07e"
+      },
+      {
+        "profile": "kind2",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009B948 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "3f7198853a23e2c4b8485f56c7986206b0f1a44e65ea1f93270777c17c54a07e"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800A7310",
+    "source_sha256": "9036acdeeec6e12ecbea030906c739b2c8dcdd56cf860db75d4cedb7d3c7b1c9",
+    "validated_source_sha256": "d07c89bcaae2c6a81b21f784a9db5ac202f8bfbe6a3c364ea992219c233fbf85",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_object_constructor_and_sprite_animation",
+    "validation_model": "Original resource selector, orientation, frame transition and positioning helpers; restored third C9A34 and fourth A7B30 arguments; first/last unit index, animated types, cache reuse/reload; sprite descriptor setter stubbed and resource loader internals stubbed through real dispatch; strict v0, RAM and calls; 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A7310 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A7310 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "last",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A7310 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "cffb2ed311c7dabeb005e9a37be8099c4bc1882a0a3682f35c89659c9d672d81"
+      },
+      {
+        "profile": "last",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A7310 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "cffb2ed311c7dabeb005e9a37be8099c4bc1882a0a3682f35c89659c9d672d81"
+      },
+      {
+        "profile": "animated",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A7310 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "89eb1141de68919e51b7f245684679ac26a18ac5002a91998441cfbaea6bbd1e"
+      },
+      {
+        "profile": "animated",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A7310 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "89eb1141de68919e51b7f245684679ac26a18ac5002a91998441cfbaea6bbd1e"
+      }
+    ]
   }
 ]
