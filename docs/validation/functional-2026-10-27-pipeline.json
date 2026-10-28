@@ -6612,5 +6612,149 @@
         "validated_source_sha256": "5a96cbf6665ee7d7dfa19a38283779e535508aaa5a39e855fe762c3e7291d88a"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800DC06C",
+    "source_sha256": "b010526f895dc945624b3255080ab56f1bb07c856826dc820fc0fa0c4d962757",
+    "validated_source_sha256": "37990f3e355c0eebe69292a0f0d00d7c33d98d84c355f58506c1beb27c6f6258",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_ai_target_swap_and_callback_dispatch",
+    "validation_model": "Original target list builder, area scan, RNG and buffer clear helpers; ten unique board pieces and land/water tiles, both sides and absent target profile; restored RNG count argument; action helpers stubbed; strict v0, RAM and calls; 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DC06C - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DC06C - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "side1",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DC06C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "7d8f64387af1b81c6cfdc05ec2d1e3fd935139adc74908680497ff63b4915c34"
+      },
+      {
+        "profile": "side1",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DC06C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "7d8f64387af1b81c6cfdc05ec2d1e3fd935139adc74908680497ff63b4915c34"
+      },
+      {
+        "profile": "none",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DC06C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "2d505cc37144db3399dc185fbe37eaec56b134059a56d7c9f66636798828e143"
+      },
+      {
+        "profile": "none",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DC06C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "2d505cc37144db3399dc185fbe37eaec56b134059a56d7c9f66636798828e143"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800DCA2C",
+    "source_sha256": "0550d783d7062a1eb21336121658ad9889249aed0c3d0c886ff364c0d4ce7cbb",
+    "validated_source_sha256": "0550d783d7062a1eb21336121658ad9889249aed0c3d0c886ff364c0d4ce7cbb",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_ai_target_swap_and_callback_dispatch",
+    "validation_model": "Reconstructed typed callback table and byte-addressed card/effect fields; null or original DAF10 callback with full movement helper chain; table indices 0/1/3, card 0/3 and both sides; action evaluator stub has mixed returns, packing types 0/16/17; strict v0, RAM and calls; 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DCA2C - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DCA2C - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "idx1",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DCA2C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "6f7675867cf1da9599effd6db892a519eefcac20bd24d3d85ac1e8936e5fa22b"
+      },
+      {
+        "profile": "idx1",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DCA2C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "6f7675867cf1da9599effd6db892a519eefcac20bd24d3d85ac1e8936e5fa22b"
+      },
+      {
+        "profile": "idx3",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DCA2C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "81318e78e526af553b62106d92b3a5a6e20fc1fdcf565103ee7691b4a7df4afb"
+      },
+      {
+        "profile": "idx3",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DCA2C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "81318e78e526af553b62106d92b3a5a6e20fc1fdcf565103ee7691b4a7df4afb"
+      },
+      {
+        "profile": "second",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DCA2C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "9e9d1468dc32579d06e411a193a6547cd429e302db89f18e8a0e70d11df68c9a"
+      },
+      {
+        "profile": "second",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DCA2C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "9e9d1468dc32579d06e411a193a6547cd429e302db89f18e8a0e70d11df68c9a"
+      },
+      {
+        "profile": "card3",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DCA2C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "6582a3a2c15ea4a3621507934d342af8c30be7d3ec05848a0f6a5998eb77064b"
+      },
+      {
+        "profile": "card3",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DCA2C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "6582a3a2c15ea4a3621507934d342af8c30be7d3ec05848a0f6a5998eb77064b"
+      }
+    ]
   }
 ]
