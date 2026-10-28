@@ -8,12 +8,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_8009E798 \u2014 200 tentativas id\u00eanticas, 78 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_8009E798 — 200 tentativas idênticas, 78 inconclusivas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_8009E798 \u2014 200 tentativas id\u00eanticas, 84 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_8009E798 — 200 tentativas idênticas, 84 inconclusivas\n"
       }
     ],
     "return_options": [
@@ -29,12 +29,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A1CA0 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800A1CA0 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A1CA0 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800A1CA0 — 200 tentativas idênticas\n"
       }
     ],
     "return_options": [
@@ -50,12 +50,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A46B8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800A46B8 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A46B8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800A46B8 — 200 tentativas idênticas\n"
       }
     ],
     "return_options": [
@@ -71,12 +71,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800CBA14 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800CBA14 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800CBA14 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800CBA14 — 200 tentativas idênticas\n"
       }
     ],
     "return_options": [],
@@ -91,12 +91,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D24B4 \u2014 200 tentativas id\u00eanticas, 1 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800D24B4 — 200 tentativas idênticas, 1 inconclusivas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D24B4 \u2014 200 tentativas id\u00eanticas, 1 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800D24B4 — 200 tentativas idênticas, 1 inconclusivas\n"
       }
     ],
     "return_options": [],
@@ -111,12 +111,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D595C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D595C — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D595C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D595C — 200 tentativas idênticas\n"
       }
     ],
     "return_options": [
@@ -133,12 +133,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D5DAC \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D5DAC — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D5DAC \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D5DAC — 200 tentativas idênticas\n"
       }
     ],
     "return_options": [
@@ -154,12 +154,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EEA30 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800EEA30 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EEA30 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800EEA30 — 200 tentativas idênticas\n"
       }
     ],
     "return_options": [],
@@ -176,13 +176,13 @@
         "variant": "ghidra-typed",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800CF4BC \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] raise:func_800CF4BC — 200 tentativas idênticas\n"
       },
       {
         "variant": "ghidra-typed",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800CF4BC \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] raise:func_800CF4BC — 200 tentativas idênticas\n"
       }
     ],
     "validated_source_sha256": "ba28a867d35edfc692d30b0865d3b509eb84bc3972bf84c78a06069034db8603",
@@ -199,13 +199,13 @@
         "variant": "ghidra-typed",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800D6A2C \u2014 200 tentativas id\u00eanticas, 84 inconclusivas, 2 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] raise:func_800D6A2C — 200 tentativas idênticas, 84 inconclusivas, 2 não suportadas\n"
       },
       {
         "variant": "ghidra-typed",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800D6A2C \u2014 200 tentativas id\u00eanticas, 66 inconclusivas\n"
+        "message": "[EQUIVALENTE] raise:func_800D6A2C — 200 tentativas idênticas, 66 inconclusivas\n"
       }
     ],
     "validated_source_sha256": "d86e8f9a278b822798e49b43da9e0b7eae6310ed2a9e006a23e5c88398c4721c",
@@ -219,12 +219,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B3558 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800B3558 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B3558 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800B3558 — 200 tentativas idênticas\n"
       }
     ],
     "return_options": [
@@ -240,12 +240,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C1F84 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800C1F84 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C1F84 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800C1F84 — 200 tentativas idênticas\n"
       }
     ],
     "return_options": [],
@@ -259,12 +259,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FFA00 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800FFA00 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FFA00 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800FFA00 — 200 tentativas idênticas\n"
       }
     ],
     "accepted": true
@@ -280,13 +280,13 @@
         "variant": "ghidra-byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800C75C0 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] raise:func_800C75C0 — 200 tentativas idênticas\n"
       },
       {
         "variant": "ghidra-byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800C75C0 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] raise:func_800C75C0 — 200 tentativas idênticas\n"
       }
     ],
     "validated_source_sha256": "9816105a4cf8550c3b6e58053a3bcb7aa88b5fbb9843fb1156a8d7ffdfcec94e",
@@ -303,13 +303,13 @@
         "variant": "ghidra-unsigned-char",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B5F8C \u2014 200 tentativas id\u00eanticas, 195 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800B5F8C — 200 tentativas idênticas, 195 inconclusivas\n"
       },
       {
         "variant": "ghidra-unsigned-char",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B5F8C \u2014 200 tentativas id\u00eanticas, 198 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B5F8C — 200 tentativas idênticas, 198 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validated_source_sha256": "953b257fe9079b4fc58dfb84a54cb1ef91e98b3bb1077f5ffebd13b4568b237a",
@@ -326,13 +326,13 @@
         "variant": "ghidra-unsigned-char",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B61C4 \u2014 200 tentativas id\u00eanticas, 195 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800B61C4 — 200 tentativas idênticas, 195 inconclusivas\n"
       },
       {
         "variant": "ghidra-unsigned-char",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B61C4 \u2014 200 tentativas id\u00eanticas, 198 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B61C4 — 200 tentativas idênticas, 198 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validated_source_sha256": "2befbc22cfbf5ba3a2e711d6570eefd0ea93660d39bf50c3fa1d689331c0c765",
@@ -347,12 +347,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D3A2C \u2014 200 tentativas id\u00eanticas, 6 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800D3A2C — 200 tentativas idênticas, 6 inconclusivas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D3A2C \u2014 200 tentativas id\u00eanticas, 4 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800D3A2C — 200 tentativas idênticas, 4 inconclusivas\n"
       }
     ],
     "return_options": [],
@@ -367,12 +367,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D56AC \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D56AC — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D56AC \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D56AC — 200 tentativas idênticas\n"
       }
     ],
     "return_options": [
@@ -391,13 +391,13 @@
         "variant": "ghidra-unsigned-char+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D6DA4 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D6DA4 — 200 tentativas idênticas\n"
       },
       {
         "variant": "ghidra-unsigned-char+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D6DA4 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D6DA4 — 200 tentativas idênticas\n"
       }
     ],
     "validated_source_sha256": "5c9694a19fa5d60e376a90ed98b6356c7e7dd114cc5db7835952efb5fc1ff9e6",
@@ -412,12 +412,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D8894 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D8894 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D8894 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D8894 — 200 tentativas idênticas\n"
       }
     ],
     "return_options": [],
@@ -434,13 +434,13 @@
         "variant": "ghidra-typed",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800BEDA8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] raise:func_800BEDA8 — 200 tentativas idênticas\n"
       },
       {
         "variant": "ghidra-typed",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800BEDA8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] raise:func_800BEDA8 — 200 tentativas idênticas\n"
       }
     ],
     "validated_source_sha256": "e8e1c631943dbeb52fc030ca7333805a6c45ef6d47448ba48349d1bdeb6f7915",
@@ -457,13 +457,13 @@
         "variant": "draft",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D0360 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D0360 — 200 tentativas idênticas\n"
       },
       {
         "variant": "draft",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D0360 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D0360 — 200 tentativas idênticas\n"
       }
     ]
   },
@@ -478,13 +478,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800B6624 \u2014 200 tentativas id\u00eanticas, 206 inconclusivas, 5 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] raise:func_800B6624 — 200 tentativas idênticas, 206 inconclusivas, 5 não suportadas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800B6624 \u2014 200 tentativas id\u00eanticas, 198 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] raise:func_800B6624 — 200 tentativas idênticas, 198 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validated_source_sha256": "a8d920822a34fb5ed2df30019c3c5e959bb6b4bfecc7456b2dafe1307e63494e",
@@ -501,13 +501,13 @@
         "variant": "ghidra-typed",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800D1598 \u2014 200 tentativas id\u00eanticas, 185 inconclusivas, 5 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] raise:func_800D1598 — 200 tentativas idênticas, 185 inconclusivas, 5 não suportadas\n"
       },
       {
         "variant": "ghidra-typed",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800D1598 \u2014 200 tentativas id\u00eanticas, 189 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] raise:func_800D1598 — 200 tentativas idênticas, 189 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validated_source_sha256": "8c1e99f255ce4c0f6a6788b2315d1d3f790721a436858cd4bf30fdadda244e14",
@@ -524,13 +524,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800D4EC0 \u2014 200 tentativas id\u00eanticas, 206 inconclusivas, 5 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] raise:func_800D4EC0 — 200 tentativas idênticas, 206 inconclusivas, 5 não suportadas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800D4EC0 \u2014 200 tentativas id\u00eanticas, 198 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] raise:func_800D4EC0 — 200 tentativas idênticas, 198 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validated_source_sha256": "3fb82b14a67740f9f4e369a782e75f6125dbbe51a13927080672b25d58bac3af",
@@ -547,13 +547,13 @@
         "variant": "draft",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_8009BE30 \u2014 200 tentativas id\u00eanticas, 2 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_8009BE30 — 200 tentativas idênticas, 2 inconclusivas\n"
       },
       {
         "variant": "draft",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_8009BE30 \u2014 200 tentativas id\u00eanticas, 5 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_8009BE30 — 200 tentativas idênticas, 5 inconclusivas\n"
       }
     ]
   },
@@ -568,13 +568,13 @@
         "variant": "draft",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800CF450 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800CF450 — 200 tentativas idênticas\n"
       },
       {
         "variant": "draft",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800CF450 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800CF450 — 200 tentativas idênticas\n"
       }
     ]
   },
@@ -589,13 +589,13 @@
         "variant": "ghidra-unsigned-char+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D741C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D741C — 200 tentativas idênticas\n"
       },
       {
         "variant": "ghidra-unsigned-char+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D741C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D741C — 200 tentativas idênticas\n"
       }
     ],
     "validated_source_sha256": "14defe6354b5a278f2941e32950fa50cb82697c462fd6b19cece1243dbc87d23",
@@ -609,12 +609,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800DD428 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800DD428 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800DD428 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800DD428 — 200 tentativas idênticas\n"
       }
     ],
     "profile": "real task allocator, empty scheduler with valid sentinel, unaligned source buffers",
@@ -631,13 +631,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800ADBE4 \u2014 200 tentativas id\u00eanticas, 720 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800ADBE4 — 200 tentativas idênticas, 720 inconclusivas, 1 não suportadas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800ADBE4 \u2014 200 tentativas id\u00eanticas, 773 inconclusivas, 2 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800ADBE4 — 200 tentativas idênticas, 773 inconclusivas, 2 não suportadas\n"
       }
     ],
     "validated_source_sha256": "efaee260a3e164edad8d986b36fb3124dfc8ac9b9dd07d9147c22ccf0e2f68b3",
@@ -654,13 +654,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B0530 \u2014 200 tentativas id\u00eanticas, 720 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B0530 — 200 tentativas idênticas, 720 inconclusivas, 1 não suportadas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B0530 \u2014 200 tentativas id\u00eanticas, 773 inconclusivas, 2 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B0530 — 200 tentativas idênticas, 773 inconclusivas, 2 não suportadas\n"
       }
     ],
     "validated_source_sha256": "8b972df41416e7d695fb78bb89c640f92a015fdf174d87f3114c3ce52ba68747",
@@ -677,13 +677,13 @@
         "variant": "ghidra-typed",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B2ABC \u2014 200 tentativas id\u00eanticas, 207 inconclusivas, 4 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B2ABC — 200 tentativas idênticas, 207 inconclusivas, 4 não suportadas\n"
       },
       {
         "variant": "ghidra-typed",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B2ABC \u2014 200 tentativas id\u00eanticas, 198 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B2ABC — 200 tentativas idênticas, 198 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validated_source_sha256": "2dc1fe5b2957b57980bf3ef75aeee0ea7a4b9b6b5576b295df861bf2b2159380",
@@ -700,13 +700,13 @@
         "variant": "ghidra-typed+byte-address+task-pool",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C31E8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800C31E8 — 200 tentativas idênticas\n"
       },
       {
         "variant": "ghidra-typed+byte-address+task-pool",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C31E8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800C31E8 — 200 tentativas idênticas\n"
       }
     ],
     "validated_source_sha256": "120112d9f1ed64ae78d0528040a8c3e918f359172c9a95ea8cb05acac2f71515",
@@ -723,13 +723,13 @@
         "variant": "ghidra-typed+byte-address+task-pool",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C349C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800C349C — 200 tentativas idênticas\n"
       },
       {
         "variant": "ghidra-typed+byte-address+task-pool",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C349C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800C349C — 200 tentativas idênticas\n"
       }
     ],
     "validated_source_sha256": "d67777e4583319d863d2113207a1b9a0e0d1ddc7297a919d57df53e6f32e7c34",
@@ -746,13 +746,13 @@
         "variant": "ghidra-typed+byte-address+task-pool",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C372C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800C372C — 200 tentativas idênticas\n"
       },
       {
         "variant": "ghidra-typed+byte-address+task-pool",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C372C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800C372C — 200 tentativas idênticas\n"
       }
     ],
     "validated_source_sha256": "2a2254107f08118e54951c2767754ab8591f0e06d976146f80c19dd93821ef4f",
@@ -769,13 +769,13 @@
         "variant": "ghidra-typed+task-pool",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C48DC \u2014 200 tentativas id\u00eanticas, 521 inconclusivas, 3 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800C48DC — 200 tentativas idênticas, 521 inconclusivas, 3 não suportadas\n"
       },
       {
         "variant": "ghidra-typed+task-pool",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C48DC \u2014 200 tentativas id\u00eanticas, 551 inconclusivas, 8 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800C48DC — 200 tentativas idênticas, 551 inconclusivas, 8 não suportadas\n"
       }
     ],
     "validated_source_sha256": "628a4c70caa8051f78afcd79988f8dd091325d3cbd4ba0bc08925f20c18622ca",
@@ -792,13 +792,13 @@
         "variant": "draft",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D79A4 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D79A4 — 200 tentativas idênticas\n"
       },
       {
         "variant": "draft",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D79A4 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D79A4 — 200 tentativas idênticas\n"
       }
     ]
   },
@@ -813,13 +813,13 @@
         "variant": "draft",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D90C0 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D90C0 — 200 tentativas idênticas\n"
       },
       {
         "variant": "draft",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D90C0 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D90C0 — 200 tentativas idênticas\n"
       }
     ]
   },
@@ -834,13 +834,13 @@
         "variant": "ghidra-typed+task-pool",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EBD84 \u2014 200 tentativas id\u00eanticas, 12 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800EBD84 — 200 tentativas idênticas, 12 inconclusivas\n"
       },
       {
         "variant": "ghidra-typed+task-pool",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EBD84 \u2014 200 tentativas id\u00eanticas, 19 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800EBD84 — 200 tentativas idênticas, 19 inconclusivas\n"
       }
     ],
     "validated_source_sha256": "4ef97b9ff4015412e22c0c73f9ba068833cb868ad2051ac231f85d572dac3888",
@@ -857,13 +857,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_8009BAD8 \u2014 200 tentativas id\u00eanticas, 720 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_8009BAD8 — 200 tentativas idênticas, 720 inconclusivas, 1 não suportadas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_8009BAD8 \u2014 200 tentativas id\u00eanticas, 773 inconclusivas, 2 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_8009BAD8 — 200 tentativas idênticas, 773 inconclusivas, 2 não suportadas\n"
       }
     ],
     "validated_source_sha256": "dce6c419150171249f2920b7979b123d007f4365b45e0a66a268b582fa77e0ba",
@@ -880,13 +880,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A0540 \u2014 200 tentativas id\u00eanticas, 1212 inconclusivas, 6 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800A0540 — 200 tentativas idênticas, 1212 inconclusivas, 6 não suportadas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A0540 \u2014 200 tentativas id\u00eanticas, 1232 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800A0540 — 200 tentativas idênticas, 1232 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validated_source_sha256": "6fa4cfcce4c30d4e4a14e1f76419c43febc5d046181fea2d95a5b0a7511c5428",
@@ -903,13 +903,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A0C54 \u2014 200 tentativas id\u00eanticas, 1212 inconclusivas, 6 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800A0C54 — 200 tentativas idênticas, 1212 inconclusivas, 6 não suportadas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A0C54 \u2014 200 tentativas id\u00eanticas, 1232 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800A0C54 — 200 tentativas idênticas, 1232 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validated_source_sha256": "d668f24632b3144d3c69cc1f34bb1669d70320e08320776f15765820cea52288",
@@ -926,13 +926,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A0D40 \u2014 200 tentativas id\u00eanticas, 408 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800A0D40 — 200 tentativas idênticas, 408 inconclusivas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A0D40 \u2014 200 tentativas id\u00eanticas, 431 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800A0D40 — 200 tentativas idênticas, 431 inconclusivas\n"
       }
     ],
     "validated_source_sha256": "395de24658ac725a2f6908d7d50a5f4bfb6ef6d0b32defb11a34fdb3865121f6",
@@ -949,13 +949,13 @@
         "variant": "ghidra-typed",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A0E60 \u2014 200 tentativas id\u00eanticas, 1041 inconclusivas, 5 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800A0E60 — 200 tentativas idênticas, 1041 inconclusivas, 5 não suportadas\n"
       },
       {
         "variant": "ghidra-typed",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A0E60 \u2014 200 tentativas id\u00eanticas, 1019 inconclusivas, 3 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800A0E60 — 200 tentativas idênticas, 1019 inconclusivas, 3 não suportadas\n"
       }
     ],
     "validated_source_sha256": "061d114bc1221ab06c4772951b8f1fccdb9c110bf4138a24babc8ce5a00367f5",
@@ -972,13 +972,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A1278 \u2014 200 tentativas id\u00eanticas, 1212 inconclusivas, 6 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800A1278 — 200 tentativas idênticas, 1212 inconclusivas, 6 não suportadas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A1278 \u2014 200 tentativas id\u00eanticas, 1232 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800A1278 — 200 tentativas idênticas, 1232 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validated_source_sha256": "dbc9466cb859fe85df51c84ba245a1e191026fab66449d60dc369eb2ac07404f",
@@ -995,13 +995,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A1924 \u2014 200 tentativas id\u00eanticas, 1376 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800A1924 — 200 tentativas idênticas, 1376 inconclusivas, 1 não suportadas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A1924 \u2014 200 tentativas id\u00eanticas, 1329 inconclusivas, 2 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800A1924 — 200 tentativas idênticas, 1329 inconclusivas, 2 não suportadas\n"
       }
     ],
     "validated_source_sha256": "70cc65a2ba60b826f35f74873e226c3c1d536cd24148728dcb4caec38c7a6958",
@@ -1018,13 +1018,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A1BD4 \u2014 200 tentativas id\u00eanticas, 615 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800A1BD4 — 200 tentativas idênticas, 615 inconclusivas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A1BD4 \u2014 200 tentativas id\u00eanticas, 727 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800A1BD4 — 200 tentativas idênticas, 727 inconclusivas\n"
       }
     ],
     "validated_source_sha256": "1505db33dfdb3154ba8bb88f03b7603314f01d4844df48bb2456ed6377dcd16c",
@@ -1041,13 +1041,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A3AE8 \u2014 200 tentativas id\u00eanticas, 720 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800A3AE8 — 200 tentativas idênticas, 720 inconclusivas, 1 não suportadas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A3AE8 \u2014 200 tentativas id\u00eanticas, 773 inconclusivas, 2 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800A3AE8 — 200 tentativas idênticas, 773 inconclusivas, 2 não suportadas\n"
       }
     ],
     "validated_source_sha256": "e7f0ccedda5b183e5ae102c7da60b91d3e9f3c0c9cf31b5ab01aa481c015eb80",
@@ -1064,13 +1064,13 @@
         "variant": "ghidra-typed",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800AEDB8 \u2014 200 tentativas id\u00eanticas, 1455 inconclusivas, 11 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800AEDB8 — 200 tentativas idênticas, 1455 inconclusivas, 11 não suportadas\n"
       },
       {
         "variant": "ghidra-typed",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800AEDB8 \u2014 200 tentativas id\u00eanticas, 1373 inconclusivas, 5 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800AEDB8 — 200 tentativas idênticas, 1373 inconclusivas, 5 não suportadas\n"
       }
     ],
     "validated_source_sha256": "15ac6c5d4e8ed8e45aaa41a3ea04c27fa9ea3b0b7fd06236153ff6cba8541f63",
@@ -1087,13 +1087,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B06A0 \u2014 200 tentativas id\u00eanticas, 776 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B06A0 — 200 tentativas idênticas, 776 inconclusivas, 1 não suportadas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B06A0 \u2014 200 tentativas id\u00eanticas, 859 inconclusivas, 2 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B06A0 — 200 tentativas idênticas, 859 inconclusivas, 2 não suportadas\n"
       }
     ],
     "validated_source_sha256": "d522f8c231e56801016655fe3ab37e0a2dac4911fbbe620f8571b388257cf026",
@@ -1110,13 +1110,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B90FC \u2014 200 tentativas id\u00eanticas, 1021 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800B90FC — 200 tentativas idênticas, 1021 inconclusivas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B90FC \u2014 200 tentativas id\u00eanticas, 1024 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B90FC — 200 tentativas idênticas, 1024 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validated_source_sha256": "2b6c01f7b3be45c65a605960285db43607f25c891c8c568728f3dffe6ba455e5",
@@ -1133,13 +1133,13 @@
         "variant": "ghidra-typed",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800CBAA0 \u2014 200 tentativas id\u00eanticas, 495 inconclusivas, 5 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800CBAA0 — 200 tentativas idênticas, 495 inconclusivas, 5 não suportadas\n"
       },
       {
         "variant": "ghidra-typed",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800CBAA0 \u2014 200 tentativas id\u00eanticas, 483 inconclusivas, 3 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800CBAA0 — 200 tentativas idênticas, 483 inconclusivas, 3 não suportadas\n"
       }
     ],
     "validated_source_sha256": "328912916bdbcf56d51865ffc9bdedf5d4298aafc25deac7957f387bc2e57493",
@@ -1156,13 +1156,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800DA0C8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800DA0C8 — 200 tentativas idênticas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800DA0C8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800DA0C8 — 200 tentativas idênticas\n"
       }
     ],
     "validated_source_sha256": "b430b4ac96f7e4c653c631b568f5f5921986efa3c17326715f9699067cf8149c",
@@ -1179,13 +1179,13 @@
         "variant": "frame+contracts+real-softfloat",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F234C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800F234C — 200 tentativas idênticas\n"
       },
       {
         "variant": "frame+contracts+real-softfloat",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F234C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800F234C — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1203,13 +1203,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800B5034 \u2014 200 tentativas id\u00eanticas, 398 inconclusivas\n"
+        "message": "[EQUIVALENTE] raise:func_800B5034 — 200 tentativas idênticas, 398 inconclusivas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800B5034 \u2014 200 tentativas id\u00eanticas, 499 inconclusivas\n"
+        "message": "[EQUIVALENTE] raise:func_800B5034 — 200 tentativas idênticas, 499 inconclusivas\n"
       }
     ],
     "validated_source_sha256": "b3a76f814f83f91a37cf866ddd7226f0d5b7b5fea50b53ff4d92a7b778ea32b4",
@@ -1226,13 +1226,13 @@
         "variant": "ghidra-typed",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800BB310 \u2014 200 tentativas id\u00eanticas, 951 inconclusivas, 2 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] raise:func_800BB310 — 200 tentativas idênticas, 951 inconclusivas, 2 não suportadas\n"
       },
       {
         "variant": "ghidra-typed",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800BB310 \u2014 200 tentativas id\u00eanticas, 866 inconclusivas\n"
+        "message": "[EQUIVALENTE] raise:func_800BB310 — 200 tentativas idênticas, 866 inconclusivas\n"
       }
     ],
     "validated_source_sha256": "2fe3dcc9b309a7c2cba2b8fa69d0a5c0cc3bebeb08b465daafb2137b67f8c23b",
@@ -1249,13 +1249,13 @@
         "variant": "functional_v8/0.c+frame+SDK",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_8009DD64 \u2014 200 tentativas id\u00eanticas, 213 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_8009DD64 — 200 tentativas idênticas, 213 inconclusivas, 1 não suportadas\n"
       },
       {
         "variant": "functional_v8/0.c+frame+SDK",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_8009DD64 \u2014 200 tentativas id\u00eanticas, 213 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_8009DD64 — 200 tentativas idênticas, 213 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1273,13 +1273,13 @@
         "variant": "functional_v9/1.c+frame+SDK",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A3080 \u2014 200 tentativas id\u00eanticas, 80 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800A3080 — 200 tentativas idênticas, 80 inconclusivas, 1 não suportadas\n"
       },
       {
         "variant": "functional_v9/1.c+frame+SDK",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A3080 \u2014 200 tentativas id\u00eanticas, 91 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800A3080 — 200 tentativas idênticas, 91 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1297,13 +1297,13 @@
         "variant": "renderer-with-real-animation",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800AADE0 \u2014 200 tentativas id\u00eanticas, 128 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800AADE0 — 200 tentativas idênticas, 128 inconclusivas\n"
       },
       {
         "variant": "renderer-with-real-animation",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800AADE0 \u2014 200 tentativas id\u00eanticas, 138 inconclusivas, 2 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800AADE0 — 200 tentativas idênticas, 138 inconclusivas, 2 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1321,13 +1321,13 @@
         "variant": "renderer-with-real-animation",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800ABD9C \u2014 200 tentativas id\u00eanticas, 128 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800ABD9C — 200 tentativas idênticas, 128 inconclusivas\n"
       },
       {
         "variant": "renderer-with-real-animation",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800ABD9C \u2014 200 tentativas id\u00eanticas, 138 inconclusivas, 2 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800ABD9C — 200 tentativas idênticas, 138 inconclusivas, 2 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1345,13 +1345,13 @@
         "variant": "board-profile+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B0F48 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800B0F48 — 200 tentativas idênticas\n"
       },
       {
         "variant": "board-profile+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B0F48 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800B0F48 — 200 tentativas idênticas\n"
       }
     ],
     "validated_source_sha256": "e2e3cc69667f5dff4c3530a755a73545003da3feaf824fca797c4811d7cf2ca8",
@@ -1368,13 +1368,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B5DA0 \u2014 200 tentativas id\u00eanticas, 1395 inconclusivas, 4 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B5DA0 — 200 tentativas idênticas, 1395 inconclusivas, 4 não suportadas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B5DA0 \u2014 200 tentativas id\u00eanticas, 1296 inconclusivas, 5 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B5DA0 — 200 tentativas idênticas, 1296 inconclusivas, 5 não suportadas\n"
       }
     ],
     "validated_source_sha256": "da27505ce773896e45889b6f9830f08f6f851aa055ea7d763fef8df0d43b2c0a",
@@ -1391,13 +1391,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B698C \u2014 200 tentativas id\u00eanticas, 1395 inconclusivas, 4 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B698C — 200 tentativas idênticas, 1395 inconclusivas, 4 não suportadas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B698C \u2014 200 tentativas id\u00eanticas, 1296 inconclusivas, 5 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B698C — 200 tentativas idênticas, 1296 inconclusivas, 5 não suportadas\n"
       }
     ],
     "validated_source_sha256": "a647fb72617afbe09f911462a1630c410d1a337f742f63b3523f31d66064d29b",
@@ -1414,13 +1414,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B881C \u2014 200 tentativas id\u00eanticas, 1108 inconclusivas, 7 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B881C — 200 tentativas idênticas, 1108 inconclusivas, 7 não suportadas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B881C \u2014 200 tentativas id\u00eanticas, 1164 inconclusivas, 3 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B881C — 200 tentativas idênticas, 1164 inconclusivas, 3 não suportadas\n"
       }
     ],
     "validated_source_sha256": "dfb4651a94e86b90e154053eb6d4a49160b122b27e9a989d461d0201c8e4cbcb",
@@ -1437,13 +1437,13 @@
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800BBD20 \u2014 200 tentativas id\u00eanticas, 793 inconclusivas, 8 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800BBD20 — 200 tentativas idênticas, 793 inconclusivas, 8 não suportadas\n"
       },
       {
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800BBD20 \u2014 200 tentativas id\u00eanticas, 732 inconclusivas, 5 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800BBD20 — 200 tentativas idênticas, 732 inconclusivas, 5 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1461,13 +1461,13 @@
         "variant": "ghidra-typed",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C3944 \u2014 200 tentativas id\u00eanticas, 648 inconclusivas, 5 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800C3944 — 200 tentativas idênticas, 648 inconclusivas, 5 não suportadas\n"
       },
       {
         "variant": "ghidra-typed",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C3944 \u2014 200 tentativas id\u00eanticas, 628 inconclusivas, 2 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800C3944 — 200 tentativas idênticas, 628 inconclusivas, 2 não suportadas\n"
       }
     ],
     "validated_source_sha256": "b0227ae92bd7ba14b51a542e55097084ed3921c12acc1c9d62601c3202c1b81d",
@@ -1484,13 +1484,13 @@
         "variant": "functional_v9/0.c+frame+SDK",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800DF95C \u2014 200 tentativas id\u00eanticas, 833 inconclusivas, 8 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800DF95C — 200 tentativas idênticas, 833 inconclusivas, 8 não suportadas\n"
       },
       {
         "variant": "functional_v9/0.c+frame+SDK",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800DF95C \u2014 200 tentativas id\u00eanticas, 743 inconclusivas, 6 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800DF95C — 200 tentativas idênticas, 743 inconclusivas, 6 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1508,13 +1508,13 @@
         "variant": "functional_v9/0.c+frame+SDK",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E2D34 \u2014 200 tentativas id\u00eanticas, 26 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800E2D34 — 200 tentativas idênticas, 26 inconclusivas\n"
       },
       {
         "variant": "functional_v9/0.c+frame+SDK",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E2D34 \u2014 200 tentativas id\u00eanticas, 34 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800E2D34 — 200 tentativas idênticas, 34 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1532,13 +1532,13 @@
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E392C \u2014 200 tentativas id\u00eanticas, 17 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800E392C — 200 tentativas idênticas, 17 inconclusivas\n"
       },
       {
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E392C \u2014 200 tentativas id\u00eanticas, 20 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800E392C — 200 tentativas idênticas, 20 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1556,13 +1556,13 @@
         "variant": "functional_v8/0.c+frame+SDK",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EB968 \u2014 200 tentativas id\u00eanticas, 547 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800EB968 — 200 tentativas idênticas, 547 inconclusivas, 1 não suportadas\n"
       },
       {
         "variant": "functional_v8/0.c+frame+SDK",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EB968 \u2014 200 tentativas id\u00eanticas, 510 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800EB968 — 200 tentativas idênticas, 510 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1580,13 +1580,13 @@
         "variant": "functional_v9/0.c+frame+SDK",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EC878 \u2014 200 tentativas id\u00eanticas, 227 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800EC878 — 200 tentativas idênticas, 227 inconclusivas, 1 não suportadas\n"
       },
       {
         "variant": "functional_v9/0.c+frame+SDK",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EC878 \u2014 200 tentativas id\u00eanticas, 228 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800EC878 — 200 tentativas idênticas, 228 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1604,13 +1604,13 @@
         "variant": "functional_v9/0.c+frame+SDK",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F1FF8 \u2014 200 tentativas id\u00eanticas, 12 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800F1FF8 — 200 tentativas idênticas, 12 inconclusivas\n"
       },
       {
         "variant": "functional_v9/0.c+frame+SDK",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F1FF8 \u2014 200 tentativas id\u00eanticas, 22 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800F1FF8 — 200 tentativas idênticas, 22 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1628,13 +1628,13 @@
         "variant": "functional_v9/0.c+frame+SDK",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F4CAC \u2014 200 tentativas id\u00eanticas, 16 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800F4CAC — 200 tentativas idênticas, 16 inconclusivas\n"
       },
       {
         "variant": "functional_v9/0.c+frame+SDK",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F4CAC \u2014 200 tentativas id\u00eanticas, 10 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800F4CAC — 200 tentativas idênticas, 10 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1652,13 +1652,13 @@
         "variant": "functional_v8/0.c+frame+SDK",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F5894 \u2014 200 tentativas id\u00eanticas, 631 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800F5894 — 200 tentativas idênticas, 631 inconclusivas, 1 não suportadas\n"
       },
       {
         "variant": "functional_v8/0.c+frame+SDK",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F5894 \u2014 200 tentativas id\u00eanticas, 655 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800F5894 — 200 tentativas idênticas, 655 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1676,13 +1676,13 @@
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F5AF4 \u2014 200 tentativas id\u00eanticas, 443 inconclusivas, 4 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800F5AF4 — 200 tentativas idênticas, 443 inconclusivas, 4 não suportadas\n"
       },
       {
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F5AF4 \u2014 200 tentativas id\u00eanticas, 397 inconclusivas, 3 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800F5AF4 — 200 tentativas idênticas, 397 inconclusivas, 3 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1700,13 +1700,13 @@
         "variant": "functional_v9/0.c+frame+SDK",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F77D4 \u2014 200 tentativas id\u00eanticas, 630 inconclusivas, 2 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800F77D4 — 200 tentativas idênticas, 630 inconclusivas, 2 não suportadas\n"
       },
       {
         "variant": "functional_v9/0.c+frame+SDK",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F77D4 \u2014 200 tentativas id\u00eanticas, 655 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800F77D4 — 200 tentativas idênticas, 655 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1724,13 +1724,13 @@
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F9154 \u2014 200 tentativas id\u00eanticas, 501 inconclusivas, 5 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800F9154 — 200 tentativas idênticas, 501 inconclusivas, 5 não suportadas\n"
       },
       {
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F9154 \u2014 200 tentativas id\u00eanticas, 463 inconclusivas, 3 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800F9154 — 200 tentativas idênticas, 463 inconclusivas, 3 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1748,13 +1748,13 @@
         "variant": "functional_v9/0.c+frame+SDK",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F97FC \u2014 200 tentativas id\u00eanticas, 528 inconclusivas, 2 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800F97FC — 200 tentativas idênticas, 528 inconclusivas, 2 não suportadas\n"
       },
       {
         "variant": "functional_v9/0.c+frame+SDK",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F97FC \u2014 200 tentativas id\u00eanticas, 500 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800F97FC — 200 tentativas idênticas, 500 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1772,13 +1772,13 @@
         "variant": "functional_v9/1.c+frame+SDK",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FB0A0 \u2014 200 tentativas id\u00eanticas, 347 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800FB0A0 — 200 tentativas idênticas, 347 inconclusivas, 1 não suportadas\n"
       },
       {
         "variant": "functional_v9/1.c+frame+SDK",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FB0A0 \u2014 200 tentativas id\u00eanticas, 336 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800FB0A0 — 200 tentativas idênticas, 336 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1796,13 +1796,13 @@
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FB650 \u2014 200 tentativas id\u00eanticas, 509 inconclusivas, 5 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800FB650 — 200 tentativas idênticas, 509 inconclusivas, 5 não suportadas\n"
       },
       {
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FB650 \u2014 200 tentativas id\u00eanticas, 480 inconclusivas, 4 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800FB650 — 200 tentativas idênticas, 480 inconclusivas, 4 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1820,13 +1820,13 @@
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FCB5C \u2014 200 tentativas id\u00eanticas, 434 inconclusivas, 4 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800FCB5C — 200 tentativas idênticas, 434 inconclusivas, 4 não suportadas\n"
       },
       {
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FCB5C \u2014 200 tentativas id\u00eanticas, 403 inconclusivas, 3 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800FCB5C — 200 tentativas idênticas, 403 inconclusivas, 3 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1844,13 +1844,13 @@
         "variant": "functional_v8/0.c+frame+SDK",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FF190 \u2014 200 tentativas id\u00eanticas, 1529 inconclusivas, 9 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800FF190 — 200 tentativas idênticas, 1529 inconclusivas, 9 não suportadas\n"
       },
       {
         "variant": "functional_v8/0.c+frame+SDK",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FF190 \u2014 200 tentativas id\u00eanticas, 1185 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800FF190 — 200 tentativas idênticas, 1185 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1868,13 +1868,13 @@
         "variant": "functional_v8/0.c+frame+SDK",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FF2CC \u2014 200 tentativas id\u00eanticas, 1527 inconclusivas, 9 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800FF2CC — 200 tentativas idênticas, 1527 inconclusivas, 9 não suportadas\n"
       },
       {
         "variant": "functional_v8/0.c+frame+SDK",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FF2CC \u2014 200 tentativas id\u00eanticas, 1184 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800FF2CC — 200 tentativas idênticas, 1184 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1892,13 +1892,13 @@
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A4A10 \u2014 200 tentativas id\u00eanticas, 1908 inconclusivas, 8 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800A4A10 — 200 tentativas idênticas, 1908 inconclusivas, 8 não suportadas\n"
       },
       {
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A4A10 \u2014 200 tentativas id\u00eanticas, 1873 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800A4A10 — 200 tentativas idênticas, 1873 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -1916,13 +1916,13 @@
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B3488 \u2014 200 tentativas id\u00eanticas, 1924 inconclusivas, 5 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B3488 — 200 tentativas idênticas, 1924 inconclusivas, 5 não suportadas\n"
       },
       {
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B3488 \u2014 200 tentativas id\u00eanticas, 2382 inconclusivas, 7 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B3488 — 200 tentativas idênticas, 2382 inconclusivas, 7 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation"
@@ -1938,13 +1938,13 @@
         "variant": "draft",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B52FC \u2014 200 tentativas id\u00eanticas, 90 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800B52FC — 200 tentativas idênticas, 90 inconclusivas\n"
       },
       {
         "variant": "draft",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B52FC \u2014 200 tentativas id\u00eanticas, 81 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B52FC — 200 tentativas idênticas, 81 inconclusivas, 1 não suportadas\n"
       }
     ]
   },
@@ -1959,13 +1959,13 @@
         "variant": "ghidra-typed+byte-address",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C2524 \u2014 200 tentativas id\u00eanticas, 135 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800C2524 — 200 tentativas idênticas, 135 inconclusivas, 1 não suportadas\n"
       },
       {
         "variant": "ghidra-typed+byte-address",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C2524 \u2014 200 tentativas id\u00eanticas, 145 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800C2524 — 200 tentativas idênticas, 145 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validated_source_sha256": "f474669465bffb485103ee9e2ec7c09cb8df0884db6a25224c35ae3c5b36d835",
@@ -1982,13 +1982,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C71D4 \u2014 200 tentativas id\u00eanticas, 329 inconclusivas, 2 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800C71D4 — 200 tentativas idênticas, 329 inconclusivas, 2 não suportadas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C71D4 \u2014 200 tentativas id\u00eanticas, 344 inconclusivas, 2 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800C71D4 — 200 tentativas idênticas, 344 inconclusivas, 2 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2006,13 +2006,13 @@
         "variant": "draft",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800DDD34 \u2014 200 tentativas id\u00eanticas, 162 inconclusivas, 2 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800DDD34 — 200 tentativas idênticas, 162 inconclusivas, 2 não suportadas\n"
       },
       {
         "variant": "draft",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800DDD34 \u2014 200 tentativas id\u00eanticas, 155 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800DDD34 — 200 tentativas idênticas, 155 inconclusivas, 1 não suportadas\n"
       }
     ]
   },
@@ -2027,13 +2027,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800DED1C \u2014 200 tentativas id\u00eanticas, 21 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800DED1C — 200 tentativas idênticas, 21 inconclusivas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800DED1C \u2014 200 tentativas id\u00eanticas, 13 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800DED1C — 200 tentativas idênticas, 13 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2051,13 +2051,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E0538 \u2014 200 tentativas id\u00eanticas, 24 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800E0538 — 200 tentativas idênticas, 24 inconclusivas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E0538 \u2014 200 tentativas id\u00eanticas, 15 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800E0538 — 200 tentativas idênticas, 15 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2075,13 +2075,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E0A1C \u2014 200 tentativas id\u00eanticas, 41 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800E0A1C — 200 tentativas idênticas, 41 inconclusivas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E0A1C \u2014 200 tentativas id\u00eanticas, 22 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800E0A1C — 200 tentativas idênticas, 22 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2099,13 +2099,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E2778 \u2014 200 tentativas id\u00eanticas, 28 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800E2778 — 200 tentativas idênticas, 28 inconclusivas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E2778 \u2014 200 tentativas id\u00eanticas, 19 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800E2778 — 200 tentativas idênticas, 19 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2123,13 +2123,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E9C98 \u2014 200 tentativas id\u00eanticas, 8 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800E9C98 — 200 tentativas idênticas, 8 inconclusivas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E9C98 \u2014 200 tentativas id\u00eanticas, 8 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800E9C98 — 200 tentativas idênticas, 8 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2147,13 +2147,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EA97C \u2014 200 tentativas id\u00eanticas, 17 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800EA97C — 200 tentativas idênticas, 17 inconclusivas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EA97C \u2014 200 tentativas id\u00eanticas, 6 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800EA97C — 200 tentativas idênticas, 6 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2171,13 +2171,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EAFE0 \u2014 200 tentativas id\u00eanticas, 501 inconclusivas, 3 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800EAFE0 — 200 tentativas idênticas, 501 inconclusivas, 3 não suportadas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EAFE0 \u2014 200 tentativas id\u00eanticas, 465 inconclusivas, 3 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800EAFE0 — 200 tentativas idênticas, 465 inconclusivas, 3 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2195,13 +2195,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EC22C \u2014 200 tentativas id\u00eanticas, 23 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800EC22C — 200 tentativas idênticas, 23 inconclusivas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EC22C \u2014 200 tentativas id\u00eanticas, 30 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800EC22C — 200 tentativas idênticas, 30 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2219,13 +2219,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800ED3E0 \u2014 200 tentativas id\u00eanticas, 35 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800ED3E0 — 200 tentativas idênticas, 35 inconclusivas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800ED3E0 \u2014 200 tentativas id\u00eanticas, 22 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800ED3E0 — 200 tentativas idênticas, 22 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2243,13 +2243,13 @@
         "variant": "compact+compiler-2.7.2-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EF478 \u2014 200 tentativas id\u00eanticas, 10 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800EF478 — 200 tentativas idênticas, 10 inconclusivas\n"
       },
       {
         "variant": "compact+compiler-2.7.2-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EF478 \u2014 200 tentativas id\u00eanticas, 2 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800EF478 — 200 tentativas idênticas, 2 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2267,13 +2267,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F0BEC \u2014 200 tentativas id\u00eanticas, 33 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800F0BEC — 200 tentativas idênticas, 33 inconclusivas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F0BEC \u2014 200 tentativas id\u00eanticas, 18 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800F0BEC — 200 tentativas idênticas, 18 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2291,13 +2291,13 @@
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F197C \u2014 200 tentativas id\u00eanticas, 16 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800F197C — 200 tentativas idênticas, 16 inconclusivas\n"
       },
       {
         "variant": "fresh-prototypes+SDK4+real-tasks",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F197C \u2014 200 tentativas id\u00eanticas, 26 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800F197C — 200 tentativas idênticas, 26 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2315,13 +2315,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F373C \u2014 200 tentativas id\u00eanticas, 7 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800F373C — 200 tentativas idênticas, 7 inconclusivas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F373C \u2014 200 tentativas id\u00eanticas, 6 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800F373C — 200 tentativas idênticas, 6 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2339,13 +2339,13 @@
         "variant": "compact+gcc281",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F3BB4 \u2014 200 tentativas id\u00eanticas, 2 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800F3BB4 — 200 tentativas idênticas, 2 inconclusivas\n"
       },
       {
         "variant": "compact+gcc281",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F3BB4 \u2014 200 tentativas id\u00eanticas, 3 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800F3BB4 — 200 tentativas idênticas, 3 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2363,13 +2363,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F4484 \u2014 200 tentativas id\u00eanticas, 16 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800F4484 — 200 tentativas idênticas, 16 inconclusivas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F4484 \u2014 200 tentativas id\u00eanticas, 8 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800F4484 — 200 tentativas idênticas, 8 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2387,13 +2387,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F68C8 \u2014 200 tentativas id\u00eanticas, 500 inconclusivas, 6 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800F68C8 — 200 tentativas idênticas, 500 inconclusivas, 6 não suportadas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F68C8 \u2014 200 tentativas id\u00eanticas, 474 inconclusivas, 4 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800F68C8 — 200 tentativas idênticas, 474 inconclusivas, 4 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2411,13 +2411,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A14EC \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800A14EC — 200 tentativas idênticas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800A14EC \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800A14EC — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2435,13 +2435,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B711C \u2014 200 tentativas id\u00eanticas, 200 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B711C — 200 tentativas idênticas, 200 inconclusivas, 1 não suportadas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B711C \u2014 200 tentativas id\u00eanticas, 211 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B711C — 200 tentativas idênticas, 211 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2459,13 +2459,13 @@
         "variant": "actual-scheduler+recovered-loaded-arguments",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B7988 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800B7988 — 200 tentativas idênticas\n"
       },
       {
         "variant": "actual-scheduler+recovered-loaded-arguments",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B7988 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800B7988 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2484,13 +2484,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B8DA0 \u2014 200 tentativas id\u00eanticas, 522 inconclusivas, 6 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B8DA0 — 200 tentativas idênticas, 522 inconclusivas, 6 não suportadas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800B8DA0 \u2014 200 tentativas id\u00eanticas, 499 inconclusivas, 4 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800B8DA0 — 200 tentativas idênticas, 499 inconclusivas, 4 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2508,13 +2508,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800BB344 \u2014 200 tentativas id\u00eanticas, 270 inconclusivas, 3 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800BB344 — 200 tentativas idênticas, 270 inconclusivas, 3 não suportadas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800BB344 \u2014 200 tentativas id\u00eanticas, 276 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800BB344 — 200 tentativas idênticas, 276 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2532,13 +2532,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C5300 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800C5300 — 200 tentativas idênticas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C5300 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800C5300 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2557,13 +2557,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C5748 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800C5748 — 200 tentativas idênticas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800C5748 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800C5748 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2582,13 +2582,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800CC99C \u2014 200 tentativas id\u00eanticas, 696 inconclusivas, 8 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800CC99C — 200 tentativas idênticas, 696 inconclusivas, 8 não suportadas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800CC99C \u2014 200 tentativas id\u00eanticas, 616 inconclusivas, 6 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800CC99C — 200 tentativas idênticas, 616 inconclusivas, 6 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2606,13 +2606,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D2FA0 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D2FA0 — 200 tentativas idênticas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D2FA0 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D2FA0 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2630,13 +2630,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D862C \u2014 200 tentativas id\u00eanticas, 1 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800D862C — 200 tentativas idênticas, 1 inconclusivas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D862C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D862C — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2654,13 +2654,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800DD4D8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800DD4D8 — 200 tentativas idênticas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800DD4D8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800DD4D8 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2679,13 +2679,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E1F68 \u2014 200 tentativas id\u00eanticas, 172 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800E1F68 — 200 tentativas idênticas, 172 inconclusivas, 1 não suportadas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E1F68 \u2014 200 tentativas id\u00eanticas, 171 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800E1F68 — 200 tentativas idênticas, 171 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2703,13 +2703,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E4914 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800E4914 — 200 tentativas idênticas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E4914 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800E4914 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2727,13 +2727,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E5530 \u2014 200 tentativas id\u00eanticas, 233 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800E5530 — 200 tentativas idênticas, 233 inconclusivas, 1 não suportadas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E5530 \u2014 200 tentativas id\u00eanticas, 234 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800E5530 — 200 tentativas idênticas, 234 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2751,13 +2751,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EC5B0 \u2014 200 tentativas id\u00eanticas, 5 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800EC5B0 — 200 tentativas idênticas, 5 inconclusivas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EC5B0 \u2014 200 tentativas id\u00eanticas, 5 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800EC5B0 — 200 tentativas idênticas, 5 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2775,13 +2775,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F1280 \u2014 200 tentativas id\u00eanticas, 18 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800F1280 — 200 tentativas idênticas, 18 inconclusivas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F1280 \u2014 200 tentativas id\u00eanticas, 13 inconclusivas\n"
+        "message": "[EQUIVALENTE] chess:func_800F1280 — 200 tentativas idênticas, 13 inconclusivas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2799,13 +2799,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F6320 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800F6320 — 200 tentativas idênticas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F6320 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800F6320 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2824,13 +2824,13 @@
         "variant": "actual-scheduler+typed-AddPrim",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F7DE4 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800F7DE4 — 200 tentativas idênticas\n"
       },
       {
         "variant": "actual-scheduler+typed-AddPrim",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F7DE4 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800F7DE4 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2849,13 +2849,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F8374 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800F8374 — 200 tentativas idênticas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F8374 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800F8374 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2874,13 +2874,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F8B48 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800F8B48 — 200 tentativas idênticas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800F8B48 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800F8B48 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2899,13 +2899,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FA548 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800FA548 — 200 tentativas idênticas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FA548 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800FA548 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2924,13 +2924,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FB368 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800FB368 — 200 tentativas idênticas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FB368 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800FB368 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2949,13 +2949,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FC42C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800FC42C — 200 tentativas idênticas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FC42C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800FC42C — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -2974,13 +2974,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FDA08 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800FDA08 — 200 tentativas idênticas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800FDA08 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800FDA08 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3007,12 +3007,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_8009CC8C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_8009CC8C — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_8009CC8C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_8009CC8C — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3038,12 +3038,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_8009D2AC \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_8009D2AC — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_8009D2AC \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_8009D2AC — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3069,12 +3069,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800ACD58 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800ACD58 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800ACD58 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800ACD58 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3100,12 +3100,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800AD7B8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800AD7B8 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800AD7B8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800AD7B8 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3131,12 +3131,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800BCFB8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800BCFB8 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800BCFB8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800BCFB8 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3162,12 +3162,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800DD920 \u2014 200 tentativas id\u00eanticas, 199 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800DD920 — 200 tentativas idênticas, 199 inconclusivas, 1 não suportadas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800DD920 \u2014 200 tentativas id\u00eanticas, 197 inconclusivas, 3 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800DD920 — 200 tentativas idênticas, 197 inconclusivas, 3 não suportadas\n"
       }
     ],
     "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3193,12 +3193,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E3864 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800E3864 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E3864 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800E3864 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3224,12 +3224,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E4764 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800E4764 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E4764 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800E4764 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3255,12 +3255,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E4EAC \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800E4EAC — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E4EAC \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800E4EAC — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3278,13 +3278,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E6F18 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800E6F18 — 200 tentativas idênticas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800E6F18 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800E6F18 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3314,12 +3314,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EA824 \u2014 200 tentativas id\u00eanticas, 199 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800EA824 — 200 tentativas idênticas, 199 inconclusivas, 1 não suportadas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EA824 \u2014 200 tentativas id\u00eanticas, 197 inconclusivas, 3 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] chess:func_800EA824 — 200 tentativas idênticas, 197 inconclusivas, 3 não suportadas\n"
       }
     ],
     "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3345,12 +3345,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EE0C8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800EE0C8 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EE0C8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800EE0C8 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3376,12 +3376,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EE2D4 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800EE2D4 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EE2D4 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800EE2D4 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3407,12 +3407,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EE4F4 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800EE4F4 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EE4F4 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800EE4F4 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3438,12 +3438,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EE7D4 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800EE7D4 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EE7D4 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800EE7D4 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3469,12 +3469,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EEBC0 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800EEBC0 — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800EEBC0 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800EEBC0 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3492,13 +3492,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_8009BB30 \u2014 200 tentativas id\u00eanticas, 575 inconclusivas, 7 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] raise:func_8009BB30 — 200 tentativas idênticas, 575 inconclusivas, 7 não suportadas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_8009BB30 \u2014 200 tentativas id\u00eanticas, 483 inconclusivas, 5 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] raise:func_8009BB30 — 200 tentativas idênticas, 483 inconclusivas, 5 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3516,13 +3516,13 @@
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800C0124 \u2014 200 tentativas id\u00eanticas, 198 inconclusivas, 2 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] raise:func_800C0124 — 200 tentativas idênticas, 198 inconclusivas, 2 não suportadas\n"
       },
       {
         "variant": "compact+compiler-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800C0124 \u2014 200 tentativas id\u00eanticas, 199 inconclusivas, 1 n\u00e3o suportadas\n"
+        "message": "[EQUIVALENTE] raise:func_800C0124 — 200 tentativas idênticas, 199 inconclusivas, 1 não suportadas\n"
       }
     ],
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
@@ -3540,13 +3540,13 @@
         "variant": "unsigned-counter+actor-fixture",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800BC49C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800BC49C — 200 tentativas idênticas\n"
       },
       {
         "variant": "unsigned-counter+actor-fixture",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800BC49C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800BC49C — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Original RAM, registers, calls and MMIO bus events; actual declared game helpers; fixed hardware response fixtures where applicable",
@@ -3564,13 +3564,13 @@
         "variant": "pointer-array-layout+gcc-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D0270 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D0270 — 200 tentativas idênticas\n"
       },
       {
         "variant": "pointer-array-layout+gcc-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_800D0270 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_800D0270 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Original RAM, registers, calls and MMIO bus events; actual declared game helpers; fixed hardware response fixtures where applicable",
@@ -3588,13 +3588,13 @@
         "variant": "pointer-array-layout+gcc-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_8010053C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_8010053C — 200 tentativas idênticas\n"
       },
       {
         "variant": "pointer-array-layout+gcc-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_8010053C \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_8010053C — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Original RAM, registers, calls and MMIO bus events; actual declared game helpers; fixed hardware response fixtures where applicable",
@@ -3612,13 +3612,13 @@
         "variant": "pointer-array-layout+gcc-2.8.1-psx",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_801007D8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_801007D8 — 200 tentativas idênticas\n"
       },
       {
         "variant": "pointer-array-layout+gcc-2.8.1-psx",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] chess:func_801007D8 \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] chess:func_801007D8 — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Original RAM, registers, calls and MMIO bus events; actual declared game helpers; fixed hardware response fixtures where applicable",
@@ -3636,13 +3636,13 @@
         "variant": "draft+original-buffer-helpers",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800CCAA8 \u2014 200 tentativas id\u00eanticas, 450 inconclusivas\n"
+        "message": "[EQUIVALENTE] raise:func_800CCAA8 — 200 tentativas idênticas, 450 inconclusivas\n"
       },
       {
         "variant": "draft+original-buffer-helpers",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] raise:func_800CCAA8 \u2014 200 tentativas id\u00eanticas, 445 inconclusivas\n"
+        "message": "[EQUIVALENTE] raise:func_800CCAA8 — 200 tentativas idênticas, 445 inconclusivas\n"
       }
     ],
     "validation_model": "Original RAM, registers, calls and MMIO bus events; actual declared game helpers; fixed hardware response fixtures where applicable"
@@ -3658,13 +3658,13 @@
         "variant": "loader-real-event-poll+volatile-array-layout",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] slpm:slpm_CD_ready \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] slpm:slpm_CD_ready — 200 tentativas idênticas\n"
       },
       {
         "variant": "loader-real-event-poll+volatile-array-layout",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] slpm:slpm_CD_ready \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] slpm:slpm_CD_ready — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Original RAM, registers, calls and MMIO bus events; actual declared game helpers; fixed hardware response fixtures where applicable",
@@ -3682,13 +3682,13 @@
         "variant": "loader-real-event-poll+volatile-array-layout",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] slpm:slpm_CD_sync \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] slpm:slpm_CD_sync — 200 tentativas idênticas\n"
       },
       {
         "variant": "loader-real-event-poll+volatile-array-layout",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] slpm:slpm_CD_sync \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] slpm:slpm_CD_sync — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Original RAM, registers, calls and MMIO bus events; actual declared game helpers; fixed hardware response fixtures where applicable",
@@ -3705,12 +3705,12 @@
       {
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] yuugi:CD_ready — 200 tentativas idênticas\n"
       },
       {
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n"
+        "message": "[EQUIVALENTE] yuugi:CD_ready — 200 tentativas idênticas\n"
       }
     ],
     "validation_model": "Original RAM, registers, calls and MMIO bus events; actual declared game helpers; fixed hardware response fixtures where applicable",
@@ -3719,56 +3719,56 @@
         "profile": "timeout",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n",
+        "message": "[EQUIVALENTE] yuugi:CD_ready — 200 tentativas idênticas\n",
         "identical_linked_blob": true
       },
       {
         "profile": "timeout",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n",
+        "message": "[EQUIVALENTE] yuugi:CD_ready — 200 tentativas idênticas\n",
         "identical_linked_blob": true
       },
       {
         "profile": "ready_primary",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n",
+        "message": "[EQUIVALENTE] yuugi:CD_ready — 200 tentativas idênticas\n",
         "identical_linked_blob": true
       },
       {
         "profile": "ready_primary",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n",
+        "message": "[EQUIVALENTE] yuugi:CD_ready — 200 tentativas idênticas\n",
         "identical_linked_blob": true
       },
       {
         "profile": "ready_secondary",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n",
+        "message": "[EQUIVALENTE] yuugi:CD_ready — 200 tentativas idênticas\n",
         "identical_linked_blob": true
       },
       {
         "profile": "ready_secondary",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n",
+        "message": "[EQUIVALENTE] yuugi:CD_ready — 200 tentativas idênticas\n",
         "identical_linked_blob": true
       },
       {
         "profile": "nonblocking_empty",
         "seed": 1,
         "exit": 0,
-        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n",
+        "message": "[EQUIVALENTE] yuugi:CD_ready — 200 tentativas idênticas\n",
         "identical_linked_blob": true
       },
       {
         "profile": "nonblocking_empty",
         "seed": 2,
         "exit": 0,
-        "message": "[EQUIVALENTE] yuugi:CD_ready \u2014 200 tentativas id\u00eanticas\n",
+        "message": "[EQUIVALENTE] yuugi:CD_ready — 200 tentativas idênticas\n",
         "identical_linked_blob": true
       }
     ],
@@ -5064,6 +5064,120 @@
         "message": "[EQUIVALENTE] chess:func_8009C278 - 200 tentativas identicas\n",
         "identical_linked_blob": true,
         "validated_source_sha256": "f31dae5679c9b9b0aaa9a6007a005d46de2ff2364fd7953d6b429f4e1a091811"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800B3338",
+    "source_sha256": "2149bab8080ce760c6374716167f2262258f59576d349beac132df1b556b4066",
+    "validated_source_sha256": "42b007d78fd7d45bd22a0ba38912d7a09d00eb97dc2abd71d63b2236f4dfdc62",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_signed_interpolation_two_targets",
+    "validation_model": "Signed interpolation values including negative differences, randomized 1-4 steps and both target vectors; strict v0, RAM and call trace, 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B3338 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B3338 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "alternate actor target vector",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B3338 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "92865fef0967ea002fb2b75804956dd05db482c985361321d506c76c2d359d30"
+      },
+      {
+        "profile": "alternate actor target vector",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B3338 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "92865fef0967ea002fb2b75804956dd05db482c985361321d506c76c2d359d30"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800A9100",
+    "source_sha256": "479a3d7d8067ec3cd5ac1c33aaf9a7eec8a4e548c3ce6a52f472921c375371b7",
+    "accepted": true,
+    "candidate_batch": "chess_actor_slot_reset",
+    "validation_model": "Actor table index and slot pointers initialised; first, fifth and full five-slot sweep plus the preserved 0xFE marker; strict v0, RAM and call trace, 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9100 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9100 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "first square (arg3=0)",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9100 - 200 tentativas identicas\n"
+      },
+      {
+        "profile": "first square (arg3=0)",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9100 - 200 tentativas identicas\n"
+      },
+      {
+        "profile": "fifth square (arg3=5)",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9100 - 200 tentativas identicas\n"
+      },
+      {
+        "profile": "fifth square (arg3=5)",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9100 - 200 tentativas identicas\n"
+      },
+      {
+        "profile": "full sweep of the five slots",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9100 - 200 tentativas identicas\n"
+      },
+      {
+        "profile": "full sweep of the five slots",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9100 - 200 tentativas identicas\n"
+      },
+      {
+        "profile": "preserved 0xFE marker",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9100 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "03a18515464b733494a54ac6b97f35a4b9b0dcf0a8ac648eaf08a81b0d7319fd"
+      },
+      {
+        "profile": "preserved 0xFE marker",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A9100 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "03a18515464b733494a54ac6b97f35a4b9b0dcf0a8ac648eaf08a81b0d7319fd"
       }
     ]
   }
