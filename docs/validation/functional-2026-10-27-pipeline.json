@@ -4730,5 +4730,157 @@
         "validated_source_sha256": "8b68a47932d83542beeb89e6e91dac608dd3c48f83f424421e77916f3f31aefa"
       }
     ]
+  },
+  {
+    "target": "yuugi",
+    "func": "func_8004CC60",
+    "source_sha256": "42af892e445caee33d1696ccfd0a20db18f8854a33caa3967528ad4455ba2ff0",
+    "validated_source_sha256": "da9fa926cf4f187183dbdafb3acaf65eb84180307624c8e500a6ef40ef4a9f0a",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "graph_debug_both_branches_stack_arguments",
+    "validation_model": "Real GetGraphDebug helper, randomized debug state 0 or 2, randomized fields and explicit fifth stack argument; strict call trace, RAM and v0, 200 complete trials per seed",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8004CC60 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8004CC60 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "stubbed debug helper comparison",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8004CC60 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "b7b7c87359b7f12d656dbc9fefe9050aa03b4c30ee0505d4b0d7262b69a2bee6"
+      },
+      {
+        "profile": "stubbed debug helper comparison",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8004CC60 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "b7b7c87359b7f12d656dbc9fefe9050aa03b4c30ee0505d4b0d7262b69a2bee6"
+      }
+    ]
+  },
+  {
+    "target": "yuugi",
+    "func": "func_8003B6F4",
+    "source_sha256": "914819967c86d9220338abfa0b5832c1c72b7adb01db0e29415e18bdf500ed37",
+    "validated_source_sha256": "3d5a516c91f5b27e6f5b383a6916e1a03689a9ee9af638a81d788d471c0755cc",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "stream_state_branch_fixture",
+    "validation_model": "Real stream length helper; early sentinel, count limit, end of stream and zero count profiles, strict v0 and RAM; 200 complete trials for seeds 1 and 2 per profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8003B6F4 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8003B6F4 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "count",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8003B6F4 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "b14b33857e787676e6dcf3d1ef67e31ab53e3799c8abb44217bb07e9bda48f73"
+      },
+      {
+        "profile": "count",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8003B6F4 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "b14b33857e787676e6dcf3d1ef67e31ab53e3799c8abb44217bb07e9bda48f73"
+      },
+      {
+        "profile": "end",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8003B6F4 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "12d639a4d70e6811210595ffa8831dee99bfb9aae24477355e00e132955b6432"
+      },
+      {
+        "profile": "end",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8003B6F4 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "12d639a4d70e6811210595ffa8831dee99bfb9aae24477355e00e132955b6432"
+      },
+      {
+        "profile": "zero",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8003B6F4 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "6509db4465cfbe697facd868c4a4c2ae9b90e81d65fbc748503727378555fa87"
+      },
+      {
+        "profile": "zero",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_8003B6F4 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "6509db4465cfbe697facd868c4a4c2ae9b90e81d65fbc748503727378555fa87"
+      }
+    ]
+  },
+  {
+    "target": "yuugi",
+    "func": "func_80025E54",
+    "source_sha256": "a88ca20605a17a9fde1abd71e22ded846913b438208d2ca577e9b3f20d23f48a",
+    "validated_source_sha256": "a88ca20605a17a9fde1abd71e22ded846913b438208d2ca577e9b3f20d23f48a",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "stream_state_branch_fixture",
+    "validation_model": "All three state branches; overlay helper stub with randomized small return for state 0, strict call arguments, v0 and RAM; 200 complete trials for seeds 1 and 2 per profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_80025E54 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_80025E54 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "state1",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_80025E54 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "73b545e91b0e8a424b97f3f4faf66be4833a01b476ed7cc76a704cd5a6e0a5f7"
+      },
+      {
+        "profile": "state1",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] yuugi:func_80025E54 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "73b545e91b0e8a424b97f3f4faf66be4833a01b476ed7cc76a704cd5a6e0a5f7"
+      }
+    ]
   }
 ]
