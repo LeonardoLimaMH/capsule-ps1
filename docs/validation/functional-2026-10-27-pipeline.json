@@ -5774,5 +5774,149 @@
         "validated_source_sha256": "3626e2c0eeaeff2b312eb85e8b43ce17cd731186228252e80ab1f10e3000482d"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800B63CC",
+    "source_sha256": "08070adfeee3c8ca7fdd1074d7932eb9770e93b39c75a8e3210e09d226db910d",
+    "validated_source_sha256": "08070adfeee3c8ca7fdd1074d7932eb9770e93b39c75a8e3210e09d226db910d",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_range_search_recovered_switch",
+    "validation_model": "Eight directional cases recovered from MIPS jump table; randomized range 0/1/2/5 and height costs; original B75C4 with B74BC call trace in walk/target profiles; both original helpers in real/edge profiles; strict v0, RAM and calls; 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B63CC - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B63CC - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "target",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B63CC - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "b31bbc86755095b3ac1dba14fabbe8589e4e6149b72df84d4d7c8624eccb956d"
+      },
+      {
+        "profile": "target",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B63CC - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "b31bbc86755095b3ac1dba14fabbe8589e4e6149b72df84d4d7c8624eccb956d"
+      },
+      {
+        "profile": "real",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B63CC - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "3ae0de2a21d8787395e6ac114d6e0885ce1c630feaffe478226374b8fc020887"
+      },
+      {
+        "profile": "real",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B63CC - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "3ae0de2a21d8787395e6ac114d6e0885ce1c630feaffe478226374b8fc020887"
+      },
+      {
+        "profile": "edge",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B63CC - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "b1ab1406114476b223a2f34fd149d3b868f52c0f301c3cf316b6599ad62b45d1"
+      },
+      {
+        "profile": "edge",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B63CC - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "b1ab1406114476b223a2f34fd149d3b868f52c0f301c3cf316b6599ad62b45d1"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800B678C",
+    "source_sha256": "109c9e044eb7767516b8b74cd8206ad2635af49c5a765d492525a0e011804590",
+    "validated_source_sha256": "109c9e044eb7767516b8b74cd8206ad2635af49c5a765d492525a0e011804590",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_range_search_recovered_switch",
+    "validation_model": "Eight directional cases recovered from MIPS jump table; randomized range 0/1/2/5 and height costs; original B75C4 with B74BC call trace in walk/target profiles; both original helpers in real/edge profiles; strict v0, RAM and calls; 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B678C - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B678C - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "target",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B678C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "bfee897b1d1c0a70b2d66c9ed44434b85a949843b456d12b2228a6f1f0e6ecf0"
+      },
+      {
+        "profile": "target",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B678C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "bfee897b1d1c0a70b2d66c9ed44434b85a949843b456d12b2228a6f1f0e6ecf0"
+      },
+      {
+        "profile": "real",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B678C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "5da56819ae463ff2d45bff4ea09636aa9003e2e3af44ff76acb0c78d6b302b15"
+      },
+      {
+        "profile": "real",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B678C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "5da56819ae463ff2d45bff4ea09636aa9003e2e3af44ff76acb0c78d6b302b15"
+      },
+      {
+        "profile": "edge",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B678C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "d7fed93c09657de15d3f00906d9a704f2413305ba5b7382d6ecaad5febd8411a"
+      },
+      {
+        "profile": "edge",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B678C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "d7fed93c09657de15d3f00906d9a704f2413305ba5b7382d6ecaad5febd8411a"
+      }
+    ]
   }
 ]

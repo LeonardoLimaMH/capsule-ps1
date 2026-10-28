@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `██████████████████░░` **92.44%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████████░` **92.53%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -37,10 +37,10 @@ emulação contra a função original.
 |---|---|---|---|---|
 | `YUUGI.EXE` | 84.97% (660 fn) | `█████████░` **88.96%** | 886 / 1,035 (85.60%) | **149** |
 | `SLPM_860.96` | 85.01% (200 fn) | `█████████░` **91.00%** | 297 / 334 (88.92%) | **37** |
-| `CHESS.BIN` | 91.42% (726 fn) | `█████████░` **93.16%** | 828 / 869 (95.28%) | **41** |
+| `CHESS.BIN` | 91.66% (728 fn) | `█████████░` **93.40%** | 830 / 869 (95.51%) | **39** |
 | `RAISE.BIN` | 90.62% (736 fn) | `█████████░` **92.48%** | 928 / 942 (98.51%) | **14** |
 | `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 89.99% (2,501 fn) | `█████████░` **92.44%** | 3,128 / 3,369 (92.85%) | **241** |
+| **Total** | 90.08% (2,503 fn) | `█████████░` **92.53%** | 3,130 / 3,369 (92.91%) | **239** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
@@ -680,6 +680,14 @@ assembly lê `$gp` e não o modifica, o gerador pode resolver o endereço inicia
 desse registrador a partir da ABI do executável. Cada variante ainda passa pelo
 teste diferencial com as funções auxiliares reais e estados que exercitam os
 ramos relevantes. A resolução de `$gp` é opcional (`--resolve-gp`).
+
+Se o Ghidra transformar um `switch` em chamada indireta, ler os endereços da
+tabela de saltos no binário original e seguir cada destino no MIPS, incluindo
+as instruções nos delay slots. Isso recuperou as oito direções de
+`func_800B5C4C`, `func_800B63CC` e `func_800B678C`. Para validar a ordem dos
+casos, usar um auxiliar como stub que registre as coordenadas e executar o
+outro auxiliar original para selecionar cada destino. Complementar com os
+dois auxiliares originais, terreno bloqueado, alturas e bordas do tabuleiro.
 
 ---
 
