@@ -4041,5 +4041,49 @@
       }
     ],
     "negative_control": "Changing cell mask to 0xffffff80 diverged on first trial: RAM 0x8015214c"
+  },
+  {
+    "target": "chess",
+    "func": "func_800BA744",
+    "source_sha256": "ff1eeeac4d39660d58a260501d683352e89a63f3d2b6f1bba1333e89190a7cd1",
+    "validated_source_sha256": "58b390d42b97b9894df397ed45c78104018b636a7fa539597154c014ef67f6f1",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_board_fields_fixture",
+    "validation_model": "Original registers, RAM and calls; Original selector helper, forwarded actor and player arguments, valid board indices",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BA744 ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BA744 ? 200 tentativas id?nticas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800B360C",
+    "source_sha256": "6ba94cca767377c591752cc2aed8876978b0e16739f5f0f40fb969c8110391fb",
+    "validated_source_sha256": "ea44bf8d956e389fd33c3d8eb6b68ab6e81e28b9292f5bad28c0535f8fbb3095",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_board_fields_fixture",
+    "validation_model": "Original registers, RAM and calls; Two valid actor pointers, randomized board positions and populated board data",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B360C ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B360C ? 200 tentativas id?nticas\n"
+      }
+    ]
   }
 ]
