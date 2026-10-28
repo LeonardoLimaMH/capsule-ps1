@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `██████████████████░░` **89.91%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `██████████████████░░` **89.94%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -37,10 +37,10 @@ emulação contra a função original.
 |---|---|---|---|---|
 | `YUUGI.EXE` | 84.33% (650 fn) | `█████████░` **88.32%** | 876 / 1,035 (84.64%) | **159** |
 | `SLPM_860.96` | 85.01% (200 fn) | `█████████░` **91.00%** | 297 / 334 (88.92%) | **37** |
-| `CHESS.BIN` | 88.93% (696 fn) | `█████████░` **90.67%** | 798 / 869 (91.83%) | **71** |
+| `CHESS.BIN` | 89.04% (698 fn) | `█████████░` **90.78%** | 800 / 869 (92.06%) | **69** |
 | `RAISE.BIN` | 85.34% (721 fn) | `█████████░` **87.20%** | 913 / 942 (96.92%) | **29** |
 | `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 87.46% (2,446 fn) | `█████████░` **89.91%** | 3,073 / 3,369 (91.21%) | **296** |
+| **Total** | 87.50% (2,448 fn) | `█████████░` **89.94%** | 3,075 / 3,369 (91.27%) | **294** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
@@ -662,6 +662,10 @@ podem fixar ou limitar os valores enviados na pilha MIPS (`sp+0x10` e
 `sp+0x14`). Essas posições pertencem aos argumentos do chamador e continuam
 na comparação de RAM. Assim, funções de tabuleiro são testadas com índices
 válidos e inválidos em vez de receber sempre zero nessas posições.
+Para preencher grades inteiras sem centenas de comentários repetidos, a diretiva
+`rand-u32-strided` sorteia palavras de uma lista com passo fixo. Ela permite
+exercitar buscas e sorteios de peças em casas ocupadas; o teste compara a grade
+final e inclui um controle negativo para alterações nos bits das peças.
 
 Para gerar candidatos C, a análise do Ghidra é cruzada com os tipos de memória
 inferidos pelo `m2c` e com as larguras de acesso do MIPS. Ponteiros armazenados

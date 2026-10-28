@@ -493,6 +493,9 @@ def main():
     # códigos de controle e terminador, p.ex.)
     rand_u16 = [(int(x, 16), int(n, 0), [int(v, 0) for v in vs.split(",")]) for x, n, vs in re.findall(
         r"/\* rand-u16: (0x[0-9A-Fa-f]+) (\w+) ([0-9A-Fa-fx,]+) \*/", _t)]
+    rand_u32_strided = [(int(x, 16), int(n, 0), int(stride, 0), [int(v, 0) for v in vs.split(",")])
+                        for x, n, stride, vs in re.findall(
+                            r"/\* rand-u32-strided: (0x[0-9A-Fa-f]+) (\w+) (\w+) ([0-9A-Fa-fx,]+) \*/", _t)]
     rand_ptr = [(int(x, 16), int(n, 0)) for x, n in re.findall(
         r"/\* rand-ptr: (0x[0-9A-Fa-f]+) (\w+) \*/", (ROOT / src).read_text(encoding="utf-8", errors="replace"))]
     image = (ROOT / path).read_bytes()[hdr:]
@@ -596,6 +599,13 @@ def main():
             o = addr & 0x1FFFFFFF
             for i in range(n):
                 ram[o + 2 * i:o + 2 * i + 2] = rng.choice(vals).to_bytes(2, "little")
+        for addr, n, stride, vals in rand_u32_strided:
+            o = addr & 0x1FFFFFFF
+            for i in range(n):
+                at = o + stride * i
+                if stride < 4 or at + 4 > RAM_SIZE:
+                    sys.exit('Invalid rand-u32-strided fixture')
+                ram[at:at + 4] = rng.choice(vals).to_bytes(4, 'little')
         for addr, n in rand_ptr:
             o = addr & 0x1FFFFFFF
             for i in range(n):

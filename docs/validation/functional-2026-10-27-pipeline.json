@@ -3996,5 +3996,50 @@
       }
     ],
     "negative_control": "Truncating v0 to u16 diverges on first trial of depth-one profile"
+  },
+  {
+    "target": "chess",
+    "func": "func_800B8F38",
+    "source_sha256": "7246829e64bf7675c14b4dc7f06b15139ee8209afdd8b544dd6d967bc4253e1c",
+    "validated_source_sha256": "9614f0f04d7df151e6b63740e2d567c502d5801ccc08ce8bc529d72135c83670",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_populated_board_fixture",
+    "validation_model": "Original registers, RAM and calls; Two player board pointers, randomized neighboring cells and ownership checks",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B8F38 ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B8F38 ? 200 tentativas id?nticas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800B8740",
+    "source_sha256": "8fc3bd675c5ca9a365a8097a24779e2f380159160dd60d64ddab847c80e7af91",
+    "validated_source_sha256": "20eeb1e4a271f901d2de8e0347c01fc992b3d75d55ce7981a827d6bec92cf4e9",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_populated_board_fixture",
+    "validation_model": "Original registers, RAM and calls; Original random helper, fully occupied 13x13 board and visible cell writes",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B8740 ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B8740 ? 200 tentativas id?nticas\n"
+      }
+    ],
+    "negative_control": "Changing cell mask to 0xffffff80 diverged on first trial: RAM 0x8015214c"
   }
 ]
