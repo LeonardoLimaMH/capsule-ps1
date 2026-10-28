@@ -5414,5 +5414,77 @@
         "validated_source_sha256": "239d4acbbd9c96ad0982ce7d2b60f71bc0b7ee1fd6fc7acf3ff2eaa4ded3a4ca"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800A3C5C",
+    "source_sha256": "21b4db59c3a0430c85d516308c7600111f7708a425c0b1bebbab14ffccb6b220",
+    "validated_source_sha256": "4419b5354dd4d9dafa1c43abcd0422f075e7ab674aec38c7afbe714f273d304a",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_actor_animation_byte_globals",
+    "validation_model": "Original rsin; explicit active animation and states 0/1/2 with global state 0/1/11/65535, index/count boundaries and counter wrapping; byte globals confirmed by lbu, renderer and task deletion calls stubbed; strict v0, calls and RAM; 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A3C5C - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A3C5C - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "state0",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A3C5C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "414957742fbe1f8b0061f3729fa88e271e20b45ab04cae255514f1417b9b1f41"
+      },
+      {
+        "profile": "state0",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A3C5C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "414957742fbe1f8b0061f3729fa88e271e20b45ab04cae255514f1417b9b1f41"
+      },
+      {
+        "profile": "state1",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A3C5C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "2949e8b32a43c949bf2e787cf52219badfcf3edf2421d29c0b691b1d67a494ac"
+      },
+      {
+        "profile": "state1",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A3C5C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "2949e8b32a43c949bf2e787cf52219badfcf3edf2421d29c0b691b1d67a494ac"
+      },
+      {
+        "profile": "state2",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A3C5C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "f4c6e7988b4f238b80d66f2832b8797ce51bf4008c9e4db47b0d7c16b9db2e1b"
+      },
+      {
+        "profile": "state2",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A3C5C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "f4c6e7988b4f238b80d66f2832b8797ce51bf4008c9e4db47b0d7c16b9db2e1b"
+      }
+    ]
   }
 ]
