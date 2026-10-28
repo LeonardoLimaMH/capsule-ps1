@@ -6180,5 +6180,77 @@
         "validated_source_sha256": "0ac6d05898ea01fe02b146af5c60afb0e19b584e1808c8a6ad199c87a899e386"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800C9648",
+    "source_sha256": "8d7c5c33fdfdcbde54bc483455d8578e94a49593810f8d3cf4c617ad41d14b4d",
+    "validated_source_sha256": "1a1316d938d769f22ea8697f8d6578acd10c8d04a24d2ea17bfe11841c218683",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_sprite_position_animation_scale_stack_args",
+    "validation_model": "Original flag, actor type, animation state and rsin helpers; A924C movement renderer stubbed with strict call trace; geometry pointer and grid fixtures, both fifth stack argument modes, negative signed sixth stack argument, animation counters and scale descriptor bit boundaries; fixed byte-addressed card field; strict v0 and RAM; 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C9648 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C9648 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "mode1",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C9648 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "735b7330d79534fe72591a304af80b32715d612124f6e01ede5ee931fcc739e1"
+      },
+      {
+        "profile": "mode1",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C9648 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "735b7330d79534fe72591a304af80b32715d612124f6e01ede5ee931fcc739e1"
+      },
+      {
+        "profile": "negative",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C9648 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "4caa6d876d404e5f5faf6b86a8a78a9f7e6751eb0401b8488cbf7f4874d30d34"
+      },
+      {
+        "profile": "negative",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C9648 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "4caa6d876d404e5f5faf6b86a8a78a9f7e6751eb0401b8488cbf7f4874d30d34"
+      },
+      {
+        "profile": "scale",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C9648 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "89a31cbd7069e449d10d952f76921b55b0045ea9147fd7764a872c722a320ea2"
+      },
+      {
+        "profile": "scale",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C9648 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "89a31cbd7069e449d10d952f76921b55b0045ea9147fd7764a872c722a320ea2"
+      }
+    ]
   }
 ]
