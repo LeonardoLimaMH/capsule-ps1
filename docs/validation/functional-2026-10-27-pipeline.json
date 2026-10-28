@@ -8082,5 +8082,364 @@
         "validated_source_sha256": "8677ce4436f0fc073384d9c5ec7b52c269bf9262e30cf3d2b002642f8dd0b499"
       }
     ]
+  },
+  {
+    "target": "raise",
+    "func": "func_800C2E04",
+    "source_sha256": "ad8b08fec0bdcc0d6cd8ecf7bbfe18e71dbdbf928fb6dbb53beeb47339804b90",
+    "validated_source_sha256": "ad8b08fec0bdcc0d6cd8ecf7bbfe18e71dbdbf928fb6dbb53beeb47339804b90",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "raise98",
+    "validation_model": "Strict v0, live RAM and calls. Pure RAM parser runs original B1260 player selector, six player records with both selector branches, stack depth -1..2, stat thresholds and simple/delimited string token streams with 0..5 entries. Byte bases restored for stack records instead of typed pointer scaling. No graphical or helper buffer stubs; 200 complete identical executions per seed/profile.",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800C2E04 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800C2E04 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "string",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800C2E04 \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "8c4ffaa9b8ba56823dec045f9b9301e7c1693584a9c27d780572f7b301e41e7f"
+      },
+      {
+        "profile": "string",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800C2E04 \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "8c4ffaa9b8ba56823dec045f9b9301e7c1693584a9c27d780572f7b301e41e7f"
+      }
+    ]
+  },
+  {
+    "target": "raise",
+    "func": "func_800994FC",
+    "source_sha256": "171d18d8accafc962c975d487cb9c61bed02b58a41f207bc9d12315628dbcba5",
+    "validated_source_sha256": "2c4170ac0376c4a2bd12f3e351bbc0897981d107dcd8c429f08a8554c435a1ae",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "raise99",
+    "validation_model": "Strict v0, live RAM and ordered calls. All widget roles 0..17 have independent profiles; callback states 0..7 and invalid, timer thresholds, modes, flags, selected player and signed offsets randomized. Corrected normalized jump switch index role-1, actual global pointer types and byte offsets for strings. Draw/resource/destruction/event helpers remain stubs; strict live RAM writes and all stacked draw arguments checked. 200 complete identical executions per seed/profile.",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "r1",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "a05b15e718e90ccf735943434a9137f8a72707510e5b91c68de7d91134e14b8b"
+      },
+      {
+        "profile": "r1",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "a05b15e718e90ccf735943434a9137f8a72707510e5b91c68de7d91134e14b8b"
+      },
+      {
+        "profile": "r2",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "f530b95fd94a377b7e19fd204764923defe11aa869db208c639c781e3afc4bc5"
+      },
+      {
+        "profile": "r2",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "f530b95fd94a377b7e19fd204764923defe11aa869db208c639c781e3afc4bc5"
+      },
+      {
+        "profile": "r3",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "7f8f602cc728bc5d894f2c2ed4f1621acc9a1e12574ce78783cb3007429a3bec"
+      },
+      {
+        "profile": "r3",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "7f8f602cc728bc5d894f2c2ed4f1621acc9a1e12574ce78783cb3007429a3bec"
+      },
+      {
+        "profile": "r4",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "d585a0ee762c9ea23a52b6b9c1aa1dff238b2218de375a452df41b41b158dce8"
+      },
+      {
+        "profile": "r4",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "d585a0ee762c9ea23a52b6b9c1aa1dff238b2218de375a452df41b41b158dce8"
+      },
+      {
+        "profile": "r5",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "6565168463aa6d6f14c0c936b6f01ed95185a3a639555a06fd3603a1956d6d22"
+      },
+      {
+        "profile": "r5",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "6565168463aa6d6f14c0c936b6f01ed95185a3a639555a06fd3603a1956d6d22"
+      },
+      {
+        "profile": "r6",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "be0136936393f49ddc6431877c7c238f13a640b91bc4f4fb1e9702e5d6f841fe"
+      },
+      {
+        "profile": "r6",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "be0136936393f49ddc6431877c7c238f13a640b91bc4f4fb1e9702e5d6f841fe"
+      },
+      {
+        "profile": "r7",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "290a442ff089e872a6ee362e7643a9e51715d67caa47612b554cf80b593fb329"
+      },
+      {
+        "profile": "r7",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "290a442ff089e872a6ee362e7643a9e51715d67caa47612b554cf80b593fb329"
+      },
+      {
+        "profile": "r8",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "b5f1022f6e920128cf066619d80f5cf6e2882d2076fb7f2c87a9aeccd0af0bd6"
+      },
+      {
+        "profile": "r8",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "b5f1022f6e920128cf066619d80f5cf6e2882d2076fb7f2c87a9aeccd0af0bd6"
+      },
+      {
+        "profile": "r9",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "d53453fbbc651cdc4bb861f9a87a5b0c986bfb57ea29802e8d37732ed880cf0c"
+      },
+      {
+        "profile": "r9",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "d53453fbbc651cdc4bb861f9a87a5b0c986bfb57ea29802e8d37732ed880cf0c"
+      },
+      {
+        "profile": "r10",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "d6d0b9081b64e1ebacc2f57ef439071fcecf0685004e574560c6ca05a29ac27d"
+      },
+      {
+        "profile": "r10",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "d6d0b9081b64e1ebacc2f57ef439071fcecf0685004e574560c6ca05a29ac27d"
+      },
+      {
+        "profile": "r11",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "7e10371059b1c2622dd3d0b23fc9eebdb0e2400c9fb12afca71fca62d4c9bfc6"
+      },
+      {
+        "profile": "r11",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "7e10371059b1c2622dd3d0b23fc9eebdb0e2400c9fb12afca71fca62d4c9bfc6"
+      },
+      {
+        "profile": "r12",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "2de265ff49342408f7a3de71a784d110cf63fe9d36ae0620d02e096407440af5"
+      },
+      {
+        "profile": "r12",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "2de265ff49342408f7a3de71a784d110cf63fe9d36ae0620d02e096407440af5"
+      },
+      {
+        "profile": "r13",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "37d594fa4373d4e9e955ce0fda41980f89cb7118fd17fce3c53ccabe4539b5ed"
+      },
+      {
+        "profile": "r13",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "37d594fa4373d4e9e955ce0fda41980f89cb7118fd17fce3c53ccabe4539b5ed"
+      },
+      {
+        "profile": "r14",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "bdea324678fb80f109bfca8af270cd2997cba0ccfccf9b471efd59f81a4a7ea3"
+      },
+      {
+        "profile": "r14",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "bdea324678fb80f109bfca8af270cd2997cba0ccfccf9b471efd59f81a4a7ea3"
+      },
+      {
+        "profile": "r15",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "4de4c92eddcf05dd975f7a3876c33fdb22df021f703810629140c251f53c31a7"
+      },
+      {
+        "profile": "r15",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "4de4c92eddcf05dd975f7a3876c33fdb22df021f703810629140c251f53c31a7"
+      },
+      {
+        "profile": "r16",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "0ed8f0a400419704d2a206c45f713cd60ce10b5f3be7384871f862a502d73623"
+      },
+      {
+        "profile": "r16",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "0ed8f0a400419704d2a206c45f713cd60ce10b5f3be7384871f862a502d73623"
+      },
+      {
+        "profile": "r17",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "1d997b24b1e1a00198bdd8b87c34cd2610307468b3f0bc415060d83eb30a4448"
+      },
+      {
+        "profile": "r17",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800994FC \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "1d997b24b1e1a00198bdd8b87c34cd2610307468b3f0bc415060d83eb30a4448"
+      }
+    ]
+  },
+  {
+    "target": "raise",
+    "func": "func_80099F54",
+    "source_sha256": "5e1e94ce3143d3df3e29c927cdd95ba719a602d4e651df83492693ab4a5ad216",
+    "validated_source_sha256": "5e1e94ce3143d3df3e29c927cdd95ba719a602d4e651df83492693ab4a5ad216",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "raise100",
+    "validation_model": "Strict v0, live RAM and ordered calls. Recovered five-way constructor loop from original jump table: cases0/1/3 versus2/4. Original allocator and sprite initialization execute, six player selections and both panel layouts randomized. Resources, sprite resource assignment, availability and BE020 remain isolated stubs, mixed return values exercise available/unavailable paths. 200 complete identical executions per seed. Final transient v0 preserved.",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_80099F54 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_80099F54 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "extra_profiles": []
   }
 ]

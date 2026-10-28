@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████████░` **94.44%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████████░` **94.85%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -38,9 +38,9 @@ emulação contra a função original.
 | `YUUGI.EXE` | 84.97% (660 fn) | `█████████░` **88.96%** | 886 / 1,035 (85.60%) | **149** |
 | `SLPM_860.96` | 85.01% (200 fn) | `█████████░` **91.00%** | 297 / 334 (88.92%) | **37** |
 | `CHESS.BIN` | 96.91% (754 fn) | `██████████` **98.65%** | 856 / 869 (98.50%) | **13** |
-| `RAISE.BIN` | 90.62% (736 fn) | `█████████░` **92.48%** | 928 / 942 (98.51%) | **14** |
+| `RAISE.BIN` | 92.08% (739 fn) | `█████████░` **93.94%** | 931 / 942 (98.83%) | **11** |
 | `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 91.99% (2,529 fn) | `█████████░` **94.44%** | 3,156 / 3,369 (93.68%) | **213** |
+| **Total** | 92.40% (2,532 fn) | `█████████░` **94.85%** | 3,159 / 3,369 (93.77%) | **210** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
@@ -772,3 +772,12 @@ e zerar esse valor reprova o controle negativo. Isso não é byte-matching.
 As 13 rotinas CHESS escritas originalmente em assembly continuam pendentes
 e permanecem na coluna **Faltam C**; a cobertura ainda não é 100%.
 A suíte do validador e dos rebuilds passou em **102 testes**.
+
+Em RAISE, `func_800C2E04` valida o parser com os seis jogadores, profundidades
+da pilha e sequências de tokens simples ou delimitados por `$` e `%`.
+`func_800994FC` cobre separadamente os papéis de widget 0 a 17; a tabela
+original usa o índice `papel - 1`, que precisava ser corrigido no pseudo-C.
+`func_80099F54` recupera os cinco caminhos de criação de widgets que o Ghidra
+não estruturou. O alocador e a inicialização de sprites executam código
+original; chamadas isoladas de recursos e desenho ficam identificadas nos
+manifestos. Todas as três mantêm também o retorno `v0` na comparação.
