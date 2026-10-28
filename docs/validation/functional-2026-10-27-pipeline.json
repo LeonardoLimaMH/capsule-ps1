@@ -4308,5 +4308,90 @@
         "message": "[EQUIVALENTE] chess:func_800C553C ? 200 tentativas id?nticas\n"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_8009C5C4",
+    "source_sha256": "efb2ead281f3794c2aa3144f4ead20cee761eb6f6314d258f39434c9c164e1a3",
+    "validated_source_sha256": "549a5318a89c80342d2ad01e634ea3090c80af0e0f07d495aac7179e4edad7b6",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_board47_branch_fixtures",
+    "validation_model": "Original resource helper and MoveImage call trace; both image-transfer and sprite branches, full registers and RAM",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009C5C4 ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009C5C4 ? 200 tentativas id?nticas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "MoveImage branch",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009C5C4 ? 200 tentativas id?nticas\n",
+        "identical_linked_blob": true
+      },
+      {
+        "profile": "MoveImage branch",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009C5C4 ? 200 tentativas id?nticas\n",
+        "identical_linked_blob": true
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800C867C",
+    "source_sha256": "4abfb3ad051e4ccb3f5f27965fd8ea91c0c7c49c8580925da3ae57c154df5541",
+    "validated_source_sha256": "94fe3ebf316a5b5a27f9b12238f2ba338f20c81825423492a2f81dac749ab3da",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_board47_branch_fixtures",
+    "validation_model": "Initialized resource, board and GPU pointers; live actor and rendering effects, caller-visible registers and RAM",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C867C ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C867C ? 200 tentativas id?nticas\n"
+      }
+    ],
+    "return_options": [
+      "--ignore-v0"
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800C6F80",
+    "source_sha256": "739f7cba29405b8a6ca52353058540a5f2b2c434d1bedeed9d35599d018d79ac",
+    "validated_source_sha256": "1d2efea767616248965d81ed2b9f29665b9ccba40cd95c6fcb118e8ac336fd2d",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_board47_branch_fixtures",
+    "validation_model": "All eight battle-state values with valid task and actor pointers; original allocation and geometry helpers, full registers and RAM",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C6F80 ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C6F80 ? 200 tentativas id?nticas\n"
+      }
+    ]
   }
 ]
