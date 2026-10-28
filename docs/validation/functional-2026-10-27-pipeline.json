@@ -7342,8 +7342,8 @@
   {
     "target": "chess",
     "func": "func_800BAF44",
-    "source_sha256": "0c720e0f3334a34d3933221555c8e8099c7f75ddee862eae41ab396badcc07d6",
-    "validated_source_sha256": "e8344596180841fd16d8ab2a0524a05e797b844c3a2ea2af8719a5e33a3ae688",
+    "source_sha256": "03b842ff10401bc1b9981d7b56e9e19cf24ac4c269d7741759ef136d55e1c267",
+    "validated_source_sha256": "03b842ff10401bc1b9981d7b56e9e19cf24ac4c269d7741759ef136d55e1c267",
     "whitespace_cleanup_identical_linked_blob": true,
     "accepted": true,
     "candidate_batch": "chess93",
@@ -7537,7 +7537,8 @@
         "identical_linked_blob": true,
         "validated_source_sha256": "f3a1f67f06c40980901b9269868e81a09d269eec97d083ad5e51e721e4d7f1f8"
       }
-    ]
+    ],
+    "note_arg_fixture": "arg4 directive rewritten in hex (decimal form was ignored by difftest); revalidated seeds 1,2: 200 identical each."
   },
   {
     "target": "chess",
@@ -8441,5 +8442,112 @@
       }
     ],
     "extra_profiles": []
+  },
+  {
+    "target": "raise",
+    "func": "func_800E7B80",
+    "source_sha256": "c548f1cb987a569faf201b322ddfe4d348ffa0d2e940a84a22d0257285ce50ae",
+    "validated_source_sha256": "c548f1cb987a569faf201b322ddfe4d348ffa0d2e940a84a22d0257285ce50ae",
+    "accepted": true,
+    "candidate_batch": "raise101",
+    "validation_model": "Strict v0, live RAM and calls. Real func_800202A4/rand, player index fixed per profile (arg0 0..5) plus an empty-list profile; unit stats sampled at threshold boundaries, D_801061E0 records randomized. Profiles drafted by the parallel agent and revalidated before commit; 200 complete identical executions per seed/profile.",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800E7B80 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800E7B80 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "p1",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800E7B80 \u2014 200 tentativas id\u00eanticas\n",
+        "validated_source_sha256": "97993f40be69943adbe117e8a4e5cfe76e67cbd81fdff2b69ddbb0fc6cf20f59"
+      },
+      {
+        "profile": "p1",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800E7B80 \u2014 200 tentativas id\u00eanticas\n",
+        "validated_source_sha256": "97993f40be69943adbe117e8a4e5cfe76e67cbd81fdff2b69ddbb0fc6cf20f59"
+      },
+      {
+        "profile": "p2",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800E7B80 \u2014 200 tentativas id\u00eanticas\n",
+        "validated_source_sha256": "43c52276b4edaa275a93bed1d80c0a5d9f23451a67a0dad0e75ecb9838ee2257"
+      },
+      {
+        "profile": "p2",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800E7B80 \u2014 200 tentativas id\u00eanticas\n",
+        "validated_source_sha256": "43c52276b4edaa275a93bed1d80c0a5d9f23451a67a0dad0e75ecb9838ee2257"
+      },
+      {
+        "profile": "p3",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800E7B80 \u2014 200 tentativas id\u00eanticas\n",
+        "validated_source_sha256": "86a14a46e8c76586a2b47ccf259cd35edb133a30468af548b9a3a3745f824b0d"
+      },
+      {
+        "profile": "p3",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800E7B80 \u2014 200 tentativas id\u00eanticas\n",
+        "validated_source_sha256": "86a14a46e8c76586a2b47ccf259cd35edb133a30468af548b9a3a3745f824b0d"
+      },
+      {
+        "profile": "p4",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800E7B80 \u2014 200 tentativas id\u00eanticas\n",
+        "validated_source_sha256": "adffc9b16781eb883040d510e07ef5dfaefeecb096bec43bac8f66cfb6b2aae7"
+      },
+      {
+        "profile": "p4",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800E7B80 \u2014 200 tentativas id\u00eanticas\n",
+        "validated_source_sha256": "adffc9b16781eb883040d510e07ef5dfaefeecb096bec43bac8f66cfb6b2aae7"
+      },
+      {
+        "profile": "p5",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800E7B80 \u2014 200 tentativas id\u00eanticas\n",
+        "validated_source_sha256": "49540ef755c5eb6af54927752c4efa0645fab76a45ba12e3422677eb6758297c"
+      },
+      {
+        "profile": "p5",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800E7B80 \u2014 200 tentativas id\u00eanticas\n",
+        "validated_source_sha256": "49540ef755c5eb6af54927752c4efa0645fab76a45ba12e3422677eb6758297c"
+      },
+      {
+        "profile": "empty",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800E7B80 \u2014 200 tentativas id\u00eanticas\n",
+        "validated_source_sha256": "230d342e814e0fd646b71ff6cecd1159e98c7bb9dd34be8542ad3e6084a691ce"
+      },
+      {
+        "profile": "empty",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] raise:func_800E7B80 \u2014 200 tentativas id\u00eanticas\n",
+        "validated_source_sha256": "230d342e814e0fd646b71ff6cecd1159e98c7bb9dd34be8542ad3e6084a691ce"
+      }
+    ]
   }
 ]

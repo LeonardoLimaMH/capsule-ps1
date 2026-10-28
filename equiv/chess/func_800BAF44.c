@@ -225,7 +225,7 @@ undefined4 func_800BAF44(int param_1,int param_2,int param_3,undefined1 *param_4
 /* arg1: 0x80140000 */
 /* arg2: 0x80150000 */
 /* arg3: 0x80160000 */
-/* arg4: 5 */
+/* arg4: 0x00000005 */
 /* real-callee: func_800A46B8 */
 /* real-callee: func_800A88C4 */
 /* real-callee: func_800A88E8 */
