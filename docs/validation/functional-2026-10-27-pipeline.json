@@ -5304,5 +5304,27 @@
         "message": "[EQUIVALENTE] chess:func_800EDC1C - 200 tentativas identicas\n"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_80099B48",
+    "source_sha256": "4f21ff691b0dc0cb3635c5b086ff90f54076d2a17003be1e4a596f56e6493691",
+    "validated_source_sha256": "5551b309b093dbca61384b21ad8a05a5ee26877d6f42d1509ec6b7f94e3cce94",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_full_board_and_piece_initialization",
+    "validation_model": "Original rand, bounded random helper and piece attribute helper; board initialized with nonzero occupancy words; full 13x13 board clearing and twelve piece writes, byte table type confirmed by lbu; strict RAM, v0 and call trace; 200 complete trials per seed",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_80099B48 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_80099B48 - 200 tentativas identicas\n"
+      }
+    ]
   }
 ]
