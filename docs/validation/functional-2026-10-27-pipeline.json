@@ -7122,5 +7122,149 @@
       "exit": 1,
       "result": "DIVERGENTE: contract:RotAverage3 input coordinate mismatch"
     }
+  },
+  {
+    "target": "chess",
+    "func": "func_80099D38",
+    "source_sha256": "8e0d55eb645ea3b406753fa00cc12c1f17bf6a8c3cb87a5e44358e40f5274691",
+    "validated_source_sha256": "5624cb3b393b8b5c5c5b192a458528fec25b6610a456febe4220d0c0d57a6c5d",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_placement_and_polygon_resource_initialization",
+    "validation_model": "Original bounded RNG, rand, tile validation (already compiled original function) and orientation helpers; 12 and 35 colored source cells per side, valid empty terrain, groups 0/1/3 and full twelve-unit positioning; corrected byte table stride; strict v0, RAM and calls; 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_80099D38 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_80099D38 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "small",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_80099D38 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "a940f40ee67e980c97f8ad20838db246d656fa5f77153fd187d2432f75fa9b3b"
+      },
+      {
+        "profile": "small",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_80099D38 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "a940f40ee67e980c97f8ad20838db246d656fa5f77153fd187d2432f75fa9b3b"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800CE330",
+    "source_sha256": "aabe577a77438f115ae53b76af80869cfe4ce86750fe658d20e8daa916542129",
+    "validated_source_sha256": "6c91b43155bc7832a5bcbec01ad7edab40f5f5102b445f003a2cca0005985da6",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_placement_and_polygon_resource_initialization",
+    "validation_model": "Original object buffer binding and SDK SetPolyFT4/G4 helpers; both frame buffers and single-buffer mode, polygon types 0/1/2/5, group 0/1/3, terrain 0/1/2, counts 0/1/3 and texture index 97/98 boundary; random UV records and sixth stack argument; corrected byte metadata stride and avoided unused pointer arithmetic; strict v0, RAM and calls; 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CE330 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CE330 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "t0m1",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CE330 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "d28349602ef6dded818dd14ba498fc0c2181d3d9edd4ed25a880070c5aaeba85"
+      },
+      {
+        "profile": "t0m1",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CE330 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "d28349602ef6dded818dd14ba498fc0c2181d3d9edd4ed25a880070c5aaeba85"
+      },
+      {
+        "profile": "t1m0",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CE330 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "4785fc5c7cdb383f47766e81b67ba794a46ee444603f9a17107834a2a910314e"
+      },
+      {
+        "profile": "t1m0",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CE330 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "4785fc5c7cdb383f47766e81b67ba794a46ee444603f9a17107834a2a910314e"
+      },
+      {
+        "profile": "t1m1",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CE330 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "0fbd4aff9c08f1726447b8eb4eb5b4205c586632615e9e07e195c46f72edd0f9"
+      },
+      {
+        "profile": "t1m1",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CE330 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "0fbd4aff9c08f1726447b8eb4eb5b4205c586632615e9e07e195c46f72edd0f9"
+      },
+      {
+        "profile": "t2m0",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CE330 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "02190a737c9c4d9375ddae9e22dd743b1731535b5d500ed225b8c692890c8920"
+      },
+      {
+        "profile": "t2m0",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CE330 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "02190a737c9c4d9375ddae9e22dd743b1731535b5d500ed225b8c692890c8920"
+      },
+      {
+        "profile": "t2m1",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CE330 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "8b4ba0f65ec66a1a816ece21c84164dc1ec04e0d878405b22518c8bee101e513"
+      },
+      {
+        "profile": "t2m1",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CE330 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "8b4ba0f65ec66a1a816ece21c84164dc1ec04e0d878405b22518c8bee101e513"
+      }
+    ]
   }
 ]
