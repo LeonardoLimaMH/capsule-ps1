@@ -53,6 +53,47 @@ def byte_address_variant(code):
     return result if changed else None
 
 
+def data_address_variant(code, items):
+    """Preserve Ghidra's element type for &global arithmetic, not scalar loads.
+
+    A symbol can be a halfword in Ghidra while this function accesses its first
+    word through a cast. A word load does not change the original pointer stride.
+    Metadata is a candidate hint; the differential test remains authoritative.
+    """
+    types = {'undefined1': 'u8', 'undefined2': 'u16', 'undefined4': 'u32', 'undefined8': 'u64',
+             'byte': 'u8', 'char': 'u8', 'short': 's16', 'ushort': 'u16',
+             'int': 's32', 'uint': 'u32', 'long': 's32', 'ulong': 'u32',
+             'float': 'float', 'double': 'double'}
+    hints = {}
+    for item in items:
+        typ = types.get(item.get('type'))
+        if not typ:
+            continue
+        try:
+            addr = int(item['address'], 16)
+        except (KeyError, ValueError, TypeError):
+            continue
+        hints[addr] = typ
+    names = {}
+    for m in re.finditer(r'^#define (\w+) \(\*\(([^\n]*?) \*\)0x([0-9a-fA-F]{8})\)$', code, re.M):
+        typ = hints.get(int(m[3], 16))
+        if GLOBAL.fullmatch(m[1]) and typ and typ != m[2]:
+            names[m[1]] = typ, m[3]
+    changed = False
+
+    def replace(m):
+        nonlocal changed
+        if m[1] not in names:
+            return m[0]
+        changed = True
+        typ, addr = names[m[1]]
+        return f'(({typ} *)0x{addr})'
+
+    tokens = re.compile(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'|&\s*(\w+)\b')
+    result = tokens.sub(replace, code)
+    return result if changed else None
+
+
 def address(expr):
     m = ADDRESS.search(expr)
     return int(m[1], 16) + (int(m[2], 0) if m[2] else 0) if m else None
@@ -252,6 +293,7 @@ def draft(target, func, asm, m2c='', char_signed=True):
         # These software-double helpers return the raw IEEE bits in v0/v1.
         # Declaring s32 silently discards the high half even when Ghidra's body
         # already carries the result in a 64-bit variable.
-        result_type = 'u64' if name in {'__floatsidf', '__muldf3'} else 's32'
+        result_type = 'u64' if name in {'__floatsidf', '__adddf3', '__subdf3', '__muldf3',
+                                      '__divdf3', '__negdf2'} else 's32'
         definitions.append(f'extern {result_type} {name}();')
     return '#include "ghidra.h"\n' + '\n'.join(definitions) + '\n' + body + '\n'

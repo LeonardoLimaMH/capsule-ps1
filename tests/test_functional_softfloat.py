@@ -17,6 +17,10 @@ import functional_ghidra as ghidra
 @pytest.mark.parametrize('helper,params,forwarded', [
     ('__floatsidf', 'int value', 'value'),
     ('__muldf3', 'ulonglong a, ulonglong b', 'a, b'),
+    ('__adddf3', 'ulonglong a, ulonglong b', 'a, b'),
+    ('__subdf3', 'ulonglong a, ulonglong b', 'a, b'),
+    ('__divdf3', 'ulonglong a, ulonglong b', 'a, b'),
+    ('__negdf2', 'ulonglong a', 'a'),
 ])
 def test_generated_c_preserves_high_return_half(tmp_path, monkeypatch, compiler, helper, params, forwarded):
     cache = tmp_path / 'chess'
@@ -48,6 +52,7 @@ def test_generated_c_preserves_high_return_half(tmp_path, monkeypatch, compiler,
         uc.reg_write(UC_MIPS_REG_RA, difftest.SENTINEL)
         uc.reg_write(UC_MIPS_REG_SP, difftest.STACK_TOP)
         uc.emu_start(entry, difftest.SENTINEL, count=1000)
-        assert observed and observed[0][:1 if helper == '__floatsidf' else 4] == inputs[:1 if helper == '__floatsidf' else 4]
+        count = 1 if helper == '__floatsidf' else 2 if helper == '__negdf2' else 4
+        assert observed and observed[0][:count] == inputs[:count]
         assert uc.reg_read(UC_MIPS_REG_V0) == low
         assert uc.reg_read(UC_MIPS_REG_V1) == high

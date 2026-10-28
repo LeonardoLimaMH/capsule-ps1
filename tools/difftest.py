@@ -41,6 +41,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import arity  # noqa: E402
 import g0fill  # noqa: E402
 import sdk_contracts  # noqa: E402
+import task_callbacks  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 RAM_SIZE = 0x200000
@@ -278,7 +279,7 @@ def func_size(func):
 
 
 def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=None, group_stubs=True,
-        contracts=frozenset()):
+        contracts=frozenset(), required_entries=()):
     mu = Uc(UC_ARCH_MIPS, UC_MODE_MIPS32 | UC_MODE_LITTLE_ENDIAN)
     mu.mem_map(0x00000000, RAM_SIZE)           # kseg0 0x80000000 -> físico 0
     mu.mem_map(0x1F800000, 0x2000)             # scratchpad + registradores de I/O
@@ -292,6 +293,12 @@ def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=N
     strings = []  # conteúdo de cada argumento que aponte para uma string (ver same_calls)
     state = {"err": None}
     contract_state = {}
+    entered = set()
+
+    def observe_entry(uc, address, size, user):
+        entered.add(address)
+        calls.append((f'entry:{address:08X}',))
+        strings.append(())
 
     def on_stub(uc, addr, size, user):
         name = stubs.get(addr) or {0xA0: "BIOS_A0", 0xB0: "BIOS_B0", 0xC0: "BIOS_C0"}.get(addr & 0x1FFFFFFF)
@@ -303,7 +310,7 @@ def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=N
             args = (uc.reg_read(UC_MIPS_REG_T1),) + args
         elif name in game_names or name in contracts:
             sp = uc.reg_read(UC_MIPS_REG_SP)
-            k = 6 if name == 'RotTransPers4' and name in contracts else arity.stack_args(name)
+            k = 6 if name in ('RotTransPers4', 'RotAverage4') and name in contracts else arity.stack_args(name)
             if k and 0x80000000 <= sp < 0x80000000 + RAM_SIZE - 0x10 - 4 * k:
                 raw = bytes(uc.mem_read((sp + 0x10) & 0x1FFFFFFF, 4 * k))
                 args += tuple(int.from_bytes(raw[i:i + 4], "little") for i in range(0, 4 * k, 4))
@@ -366,6 +373,8 @@ def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=N
         # points. Byte patches, instruction stepping and memory guards are equal.
         mu.hook_add(UC_HOOK_CODE, dispatch, begin=min(points), end=max(points))
     mu.hook_add(UC_HOOK_INTR, on_intr)
+    for address in required_entries:
+        mu.hook_add(UC_HOOK_CODE, observe_entry, begin=address, end=address)
 
     def on_code_write(uc, access, addr, size, value, user):
         # a função escreve sobre o código testado (o original ou o candidato): cada lado
@@ -397,6 +406,8 @@ def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=N
         return None, state["err"]
     if mu.reg_read(UC_MIPS_REG_PC) != SENTINEL:
         return None, f"limite de {MAX_INSNS} instruções"
+    if set(required_entries) - entered:
+        return None, 'caller context did not execute the tested function'
     return ([mu.reg_read(r) for r in REGS], bytes(mu.mem_read(0, RAM_SIZE)), (calls, strings)), None
 
 
@@ -416,6 +427,8 @@ def main():
                     help="com --isolate: executar esta função auxiliar original em vez de substituí-la por stub")
     ap.add_argument('--callee-contract', action='append', default=[],
                     help='com --abi: modelo explícito de buffers do SDK; não emula a GTE')
+    ap.add_argument('--task-callback', action='store_true',
+                    help='com --abi --isolate: validar callback pelo dispatcher original de tarefas')
     ap.add_argument("--check-v1", action="store_true",
                     help="com --abi: compara também v1 (algum chamador lê a metade alta de um "
                          "retorno de 64 bits, tools/retuse.py)")
@@ -454,6 +467,10 @@ def main():
     contracts = set(a.callee_contract) | set(re.findall(r'/\* callee-contract: (\w+) \*/', _t))
     if contracts and (not a.abi or contracts - sdk_contracts.NAMES or contracts & real_callees):
         sys.exit('SDK contracts require --abi, known contract names, and separate real callees')
+    callback_context = a.task_callback or '/* task-callback */' in _t
+    if callback_context and (not a.abi or not a.isolate or a.target == 'slpm'
+                             or not task_callbacks.eligible(a.target, a.func)):
+        sys.exit('Task context requires --abi --isolate, constructor registration and no visible direct calls')
     small_args = {0, 1, 2, 3} if "/* args: small */" in _t else {int(k) for k in re.findall(r"/\* arg([0-3]): small \*/", _t)}
     # "/* argN: 0xENDEREÇO */": argumento fixo (p.ex. apontando para um buffer preparado)
     fixed_args = {int(k): int(v, 16) for k, v in re.findall(r"/\* arg([0-3]): (0x[0-9A-Fa-f]+) \*/", _t)}
@@ -501,6 +518,12 @@ def main():
                     game_names = game_names | {stubs[t]}
     if entry in stubs:
         del stubs[entry]  # testando uma função do próprio SDK
+    run_entry, required_entries = entry, ()
+    if callback_context:
+        symbols = elf_symbols('yuugi')
+        run_entry = symbols[task_callbacks.DISPATCHER] & 0xFFFFFFFF
+        stubs.pop(run_entry, None)
+        required_entries = (entry,)
     guard = ((entry, entry + func_size(a.func)), (CAND_BASE, CAND_BASE + len(cand)))
     jump = ((0x02 << 26) | ((cand_entry >> 2) & 0x3FFFFFF)).to_bytes(4, "little") + bytes(4)
     rng = random.Random(a.seed)
@@ -562,6 +585,8 @@ def main():
             for i in range(n):
                 v = 0x80000000 | (rng.randrange(0x100000, 0x170000) & ~0xF)
                 ram[o + 4 * i:o + 4 * i + 4] = v.to_bytes(4, "little")
+        if callback_context:
+            task_callbacks.prepare(ram, entry, symbols['func_80018600'] & 0xFFFFFFFF)
 
         def arg(i):
             k = rng.random()
@@ -583,10 +608,10 @@ def main():
         try:
             # o candidato fica na memória dos dois lados: uma leitura por ponteiro sorteado
             # que caia ali lê o mesmo conteúdo
-            ra, ea = run(entry, regs, bytes(ram), stubs, [(CAND_BASE, cand)], game_names, guard, salt,
-                         contracts=contracts)
-            rb, eb = run(entry, regs, bytes(ram), stubs, [(CAND_BASE, cand), (entry, jump)], game_names, guard, salt,
-                         contracts=contracts)
+            ra, ea = run(run_entry, regs, bytes(ram), stubs, [(CAND_BASE, cand)], game_names, guard, salt,
+                         contracts=contracts, required_entries=required_entries)
+            rb, eb = run(run_entry, regs, bytes(ram), stubs, [(CAND_BASE, cand), (entry, jump)], game_names, guard, salt,
+                         contracts=contracts, required_entries=required_entries)
         except Unsupported:
             unsupported += 1
             continue

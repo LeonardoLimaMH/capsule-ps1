@@ -30,6 +30,7 @@ REAL_CALLEES = set()
 M2C_TARGET = 'mipsel-gcc-c'
 CALLEE_CONTEXT = True
 STACK_FRAMES = False
+GHIDRA_DATA = {}
 BATTLE_PROFILE = ('/* rand-u16: 0x8008EE54 1 '
                   '0,1,2,3,4,5,6,7,8,9,10,15,19,20,21,31,32,63,64,98,99,100,65535 */\n')
 
@@ -63,6 +64,9 @@ def candidates(target, func):
         if typed:
             label = 'ghidra-typed' if char_signed else 'ghidra-unsigned-char'
             out.append((label, typed))
+            addressed = functional_ghidra.data_address_variant(typed, GHIDRA_DATA.get(target, []))
+            if addressed:
+                out.append((label + '+data-address', addressed))
             byte_addressed = functional_ghidra.byte_address_variant(typed)
             if byte_addressed:
                 out.append((label + '+byte-address', byte_addressed))
@@ -179,6 +183,7 @@ def main():
                     help='defer functions larger than this byte size (0 means no size limit)')
     ap.add_argument('--resume', action='store_true', help='skip completed result records; omit after changing draft generation')
     ap.add_argument('--ghidra-cache', help='alternative Ghidra C cache containing target/function.c')
+    ap.add_argument('--ghidra-data', help='Ghidra data-item JSON, mapping each target to its item list')
     ap.add_argument('--m2c-target', choices=['mipsel-gcc-c', 'mips-gcc-c'], default='mipsel-gcc-c',
                     help='m2c input byte order; PS1 uses mipsel (byte-exact search defaults are unchanged)')
     ap.add_argument('--no-callee-context', action='store_true',
@@ -193,6 +198,11 @@ def main():
     if args.jobs < 1 or args.draft_jobs < 1 or args.prefetch < 0 or not args.seeds:
         ap.error('worker counts must be positive; prefetch must not be negative')
     REAL_CALLEES.update(args.real_callee)
+    if args.ghidra_data:
+        data = json.loads(pathlib.Path(args.ghidra_data).read_text())
+        if not isinstance(data, dict) or any(not isinstance(data.get(t, []), list) for t in args.targets):
+            ap.error('--ghidra-data expects a target-to-item-list mapping')
+        GHIDRA_DATA.update(data)
     if args.ghidra_cache:
         functional_ghidra.CACHE = pathlib.Path(args.ghidra_cache).resolve()
         ad.ghidra2c.CACHE = functional_ghidra.CACHE

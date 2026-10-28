@@ -2399,5 +2399,593 @@
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
     "validated_source_sha256": "8a3e9fd502fda020c6a2c81feaf6c4e068749a6abfbb1a1e14e881ced59ee137",
     "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800A14EC",
+    "source_sha256": "0cfcf6547ccbbc71b921cc4a23b8c5b7982a9bab28bc8afe3ecc1ded1c991313",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A14EC \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A14EC \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "9cc6002f8d75723c6cc56f49cd9e2ef9ec1e0010a69662fad6220cb54321628c",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800B711C",
+    "source_sha256": "8db9844efb8efc65c46e18b50815535e93d039a8e962da3a45b5df8e79617ebc",
+    "accepted": true,
+    "candidate_batch": "functional_proto12",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B711C \u2014 200 tentativas id\u00eanticas, 200 inconclusivas, 1 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B711C \u2014 200 tentativas id\u00eanticas, 211 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "2e1bd6fcc1dda9a301e0f4a275a745ac439f579e98c49b95da66fbd3d5d82da9",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800B7988",
+    "source_sha256": "a5a45427890693ae52300eb6bfd1cea1e048697b296864876c3c39107d607e21",
+    "accepted": true,
+    "candidate_batch": "functional_callback14d",
+    "results": [
+      {
+        "variant": "actual-scheduler+recovered-loaded-arguments",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B7988 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "actual-scheduler+recovered-loaded-arguments",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B7988 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "entry_context": "Original func_80013A68 task dispatcher; constructor registration, no direct jal sites, and target entry required on both executions",
+    "validated_source_sha256": "3882d14a926021550f0a790ec9479544a7f969fc4557ad54cbeb4c89931e076c",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800B8DA0",
+    "source_sha256": "ae0d6f3d3d2cf57401ac8c0b8095305abb1973a2d24dbc943606d1fcabcd6aac",
+    "accepted": true,
+    "candidate_batch": "functional_proto12",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B8DA0 \u2014 200 tentativas id\u00eanticas, 522 inconclusivas, 6 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B8DA0 \u2014 200 tentativas id\u00eanticas, 499 inconclusivas, 4 n\u00e3o suportadas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "f8ef36341a500c83b321cc5649f01dd1bd48a011adc4432553522b963bc6d8cf",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800BB344",
+    "source_sha256": "5576067f90c189851a1b6f190fa14a9139b5a4ff8bef3242624ff4ca87fea755",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BB344 \u2014 200 tentativas id\u00eanticas, 270 inconclusivas, 3 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BB344 \u2014 200 tentativas id\u00eanticas, 276 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "6bff780d0fbbcd960eb512f2342403654eb8bd5f42418604471378c9767a19d6",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800C5300",
+    "source_sha256": "8342eea9673d74a20dc908cda4f7dad7d3a2826606c2ed4924f622ea7f11c0f1",
+    "accepted": true,
+    "candidate_batch": "functional_callback15",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C5300 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C5300 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "entry_context": "Original func_80013A68 task dispatcher; constructor registration, no direct jal sites, and target entry required on both executions",
+    "validated_source_sha256": "7f1c6488d10643d4284ecdb70fdb86807017e9c711f4315401696c4bb81b2d72",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800C5748",
+    "source_sha256": "a003cbb3aee014b791f31e6de67e3d5684c7c3ae3093ce1dd09916ef86a9d3ec",
+    "accepted": true,
+    "candidate_batch": "functional_callback15",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C5748 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C5748 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "entry_context": "Original func_80013A68 task dispatcher; constructor registration, no direct jal sites, and target entry required on both executions",
+    "validated_source_sha256": "542fc3496826a3ee4e84908f0f2d934e4091f5463509a57c1cfa6e7decf2e85d",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800CC99C",
+    "source_sha256": "eb5944c3598b02f4601ef4f57cd44e90d02197c82a3dc06b23deaf5d50d453f1",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CC99C \u2014 200 tentativas id\u00eanticas, 696 inconclusivas, 8 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800CC99C \u2014 200 tentativas id\u00eanticas, 616 inconclusivas, 6 n\u00e3o suportadas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "4c8cde2f37d7f3995add133a013e2df8199b4273b4d05a7ec693d063257c66d2",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800D2FA0",
+    "source_sha256": "6eff2e97911165218f0630d9c9867c3ec437f9e33deceea911dfa474c88c25f3",
+    "accepted": true,
+    "candidate_batch": "functional_proto12",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D2FA0 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D2FA0 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "8d392c8fc40a5f602f0d15d7aebd6bbd55062e5bf92fd7db97d427129f4cdd1d",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800D862C",
+    "source_sha256": "7cda0fed62aee1a02b2dda227d3337fb47e545045b294049be1eb4743577d15b",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D862C \u2014 200 tentativas id\u00eanticas, 1 inconclusivas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800D862C \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "1094c3d6625c4db08325e097eaaf1968167ce8113a2bc63ed27e7d35d17a6388",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800DD4D8",
+    "source_sha256": "9199ee1489bfc11c64583e46593e01e54aadb0ecfa59a69d05f780321bd049af",
+    "accepted": true,
+    "candidate_batch": "functional_callback15",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DD4D8 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DD4D8 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "entry_context": "Original func_80013A68 task dispatcher; constructor registration, no direct jal sites, and target entry required on both executions",
+    "validated_source_sha256": "58db5b12d7cdbc820319241f4899d7be329b38bfd31e340a874f50e012e01741",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800E1F68",
+    "source_sha256": "6eac24bc4bdf6711007868da7f64cfa5e7c5891564a1df748a132666bc28269e",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E1F68 \u2014 200 tentativas id\u00eanticas, 172 inconclusivas, 1 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E1F68 \u2014 200 tentativas id\u00eanticas, 171 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "ae0149eb685b8a96268c76306148ed09303b5f7b819f52cf4aa921978cb77634",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800E4914",
+    "source_sha256": "832d649f92195d8e70649cd969c85a7f341a4fb872b61982c733b35c7729ceb6",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E4914 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E4914 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "fa3282c054707be182803986f6a29c9806dc4373acaea63bedc74a0004921735",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800E5530",
+    "source_sha256": "b5a43c38e5e32bfaf20873b1c961a2bd1cc7629677edb0ab1604868047126e2f",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E5530 \u2014 200 tentativas id\u00eanticas, 233 inconclusivas, 1 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E5530 \u2014 200 tentativas id\u00eanticas, 234 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "3e81ae143eef50cd05a069e73e54fc9d4dd6bd1f60234e7c8a65d68f7ef46e48",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800EC5B0",
+    "source_sha256": "a3c78f462f8ae825fc5f154664732d74c8fa58b72afb44bcf94531cd6eb11f68",
+    "accepted": true,
+    "candidate_batch": "functional_proto12",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EC5B0 \u2014 200 tentativas id\u00eanticas, 5 inconclusivas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EC5B0 \u2014 200 tentativas id\u00eanticas, 5 inconclusivas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "5b9d739e6990777a4e8945e17c6fecf03e874b3c35bef6a8b07d608468fe924d",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800F1280",
+    "source_sha256": "7cf18cbe07e32819e0ece6b63ce0ec6753ce2d0121a0279411ce748b827448cd",
+    "accepted": true,
+    "candidate_batch": "functional_data13",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F1280 \u2014 200 tentativas id\u00eanticas, 18 inconclusivas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F1280 \u2014 200 tentativas id\u00eanticas, 13 inconclusivas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "6c0799ac9b068afae1d9fa0a6876081a2c425c8685b8220fc767d43fe40b6c92",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800F6320",
+    "source_sha256": "04a621cd5578ad39154feee1bf42c8d41fb9a03ec5296069ee3912c34180f345",
+    "accepted": true,
+    "candidate_batch": "functional_callback15",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F6320 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F6320 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "entry_context": "Original func_80013A68 task dispatcher; constructor registration, no direct jal sites, and target entry required on both executions",
+    "validated_source_sha256": "aaf10c76b889b28af98c0e5267484f8973f03b56270c222c849b0b8fc90bca3f",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800F7DE4",
+    "source_sha256": "7de0d13b7d7eed7aa1e5c1d7e324005f21732a4088f8da261bd6e51a6e00e08c",
+    "accepted": true,
+    "candidate_batch": "functional_callback14c",
+    "results": [
+      {
+        "variant": "actual-scheduler+typed-AddPrim",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F7DE4 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "actual-scheduler+typed-AddPrim",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F7DE4 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "entry_context": "Original func_80013A68 task dispatcher; constructor registration, no direct jal sites, and target entry required on both executions",
+    "validated_source_sha256": "9d6e2118abb4680e7618dda92455865d6db01d64848ff3890086064ef38ac476",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800F8374",
+    "source_sha256": "bc6e95077a7f67463176f91a8488de5aaa5069cbc4c333d7b8d901ae724cadb2",
+    "accepted": true,
+    "candidate_batch": "functional_callback15",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F8374 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F8374 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "entry_context": "Original func_80013A68 task dispatcher; constructor registration, no direct jal sites, and target entry required on both executions",
+    "validated_source_sha256": "1783754af2d5baf203d432d4ee244a837f16e8757b6e0e924fc2ad8b16c3aeb6",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800F8B48",
+    "source_sha256": "ab92ce75ea347ed4c1df4b6a0189fe90533a1ca3e8b64415f24336f5441cd63f",
+    "accepted": true,
+    "candidate_batch": "functional_callback15",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F8B48 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F8B48 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "entry_context": "Original func_80013A68 task dispatcher; constructor registration, no direct jal sites, and target entry required on both executions",
+    "validated_source_sha256": "454c35e1a9c0256ca7dfb1fe3daa68499c59a07b7c148ab092aa30fa0ddd4756",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800FA548",
+    "source_sha256": "6cfb1ef77b9da41d4606e4731c3604c42fa43df32fa074c42fd9193373a06abf",
+    "accepted": true,
+    "candidate_batch": "functional_callback15",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FA548 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FA548 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "entry_context": "Original func_80013A68 task dispatcher; constructor registration, no direct jal sites, and target entry required on both executions",
+    "validated_source_sha256": "710c7df28efac1cd2c2d5f76a444af48d586b02404b6bbc732de3fdd54b75c45",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800FB368",
+    "source_sha256": "7faf0a7f89b1a28d01819ad9c457f51b98205526ee7d25b979334bb32be44c4d",
+    "accepted": true,
+    "candidate_batch": "functional_callback15",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FB368 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FB368 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "entry_context": "Original func_80013A68 task dispatcher; constructor registration, no direct jal sites, and target entry required on both executions",
+    "validated_source_sha256": "e19135c1f452a174f090db625dfc93dce014fb01fc1875b46459fb643eb3aca3",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800FC42C",
+    "source_sha256": "ac47702e26780aecf3800fcd9975122ead3794ac23f48783afc25f9d02399f36",
+    "accepted": true,
+    "candidate_batch": "functional_callback15",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FC42C \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FC42C \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "entry_context": "Original func_80013A68 task dispatcher; constructor registration, no direct jal sites, and target entry required on both executions",
+    "validated_source_sha256": "089a0edf1a2b0c226b985c7650f8e6cc888b5dbfcdaae2d327c9665b0b723aec",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800FDA08",
+    "source_sha256": "2acdff70ebb0aa5df85e5010435bea3a1daef14f6cf786bacc9e4494f284c06f",
+    "accepted": true,
+    "candidate_batch": "functional_callback15",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FDA08 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FDA08 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "entry_context": "Original func_80013A68 task dispatcher; constructor registration, no direct jal sites, and target entry required on both executions",
+    "validated_source_sha256": "e84547a8b00be1e7fa4385d2386614fc7d6146ff8bd83d6dfa45244f6d68ce7c",
+    "whitespace_cleanup_identical_linked_blob": true
   }
 ]

@@ -70,7 +70,7 @@ def test_matrix_bytes_are_observed_and_affect_later_projections():
     assert before != after
 
 
-def projection4(base=0x801FFD00, alias_fourth_input=False):
+def projection4(base=0x801FFD00, alias_fourth_input=False, name='RotTransPers4'):
     uc = Uc(UC_ARCH_MIPS, UC_MODE_MIPS32 | UC_MODE_LITTLE_ENDIAN)
     uc.mem_map(0, 0x200000)
     inputs = tuple(base + i * 8 for i in range(4))
@@ -82,13 +82,14 @@ def projection4(base=0x801FFD00, alias_fourth_input=False):
     for pointer in outputs:
         if pointer not in inputs:
             uc.mem_write((pointer & 0x1FFFFFFF) - 4, b'\xA5' * 12)
-    event, result = sdk.execute('RotTransPers4', uc, inputs + outputs, {}, 1, 17)
+    event, result = sdk.execute(name, uc, inputs + outputs, {}, 1, 17)
     return uc, inputs, outputs, event, result
 
 
-def test_four_vectors_compare_stack_arguments_and_write_all_six_outputs():
-    uc, _, outputs, event, result = projection4()
-    _, _, _, relocated, other = projection4(0x801FFB00)
+@pytest.mark.parametrize('name', ['RotTransPers4', 'RotAverage4'])
+def test_four_vectors_compare_stack_arguments_and_write_all_six_outputs(name):
+    uc, _, outputs, event, result = projection4(name=name)
+    _, _, _, relocated, other = projection4(0x801FFB00, name=name)
     assert event == relocated and result == other
     for pointer in outputs:
         data = bytes(uc.mem_read((pointer & 0x1FFFFFFF) - 4, 12))
@@ -103,17 +104,19 @@ def test_four_vectors_compare_stack_arguments_and_write_all_six_outputs():
                                   0x80180000, 0x80190000, True) == (False, 0)
 
 
-def test_fourth_vector_is_read_after_first_three_output_stores():
-    uc, inputs, _, event, _ = projection4(alias_fourth_input=True)
+@pytest.mark.parametrize('name', ['RotTransPers4', 'RotAverage4'])
+def test_fourth_vector_is_read_after_first_three_output_stores(name):
+    uc, inputs, _, event, _ = projection4(alias_fourth_input=True, name=name)
     observed_fourth = struct.pack('<3H', *event[20:23])
     assert observed_fourth == bytes(uc.mem_read(inputs[3] & 0x1FFFFFFF, 6))
     assert observed_fourth != struct.pack('<3H', 4, 5, 6)
     with pytest.raises(ValueError):
-        sdk.execute('RotTransPers4', uc, inputs, {}, 1, 17)
+        sdk.execute(name, uc, inputs, {}, 1, 17)
 
 
-def test_dispatch_reads_all_six_stack_arguments_without_isolation():
-    uc, inputs, outputs, expected, value = projection4()
+@pytest.mark.parametrize('name', ['RotTransPers4', 'RotAverage4'])
+def test_dispatch_reads_all_six_stack_arguments_without_isolation(name):
+    uc, inputs, outputs, expected, value = projection4(name=name)
     ram = bytearray(uc.mem_read(0, difftest.RAM_SIZE))
     # Save RA, call the SDK with six prepared stack arguments, restore and return.
     words = [0x27BDFFD0, 0xAFBF0028, 0x0C004400, 0,
@@ -124,8 +127,8 @@ def test_dispatch_reads_all_six_stack_arguments_without_isolation():
     ram[offset:offset + 24] = struct.pack('<6I', *outputs)
     regs = dict(zip((UC_MIPS_REG_A0, UC_MIPS_REG_A1, UC_MIPS_REG_A2, UC_MIPS_REG_A3), inputs))
     regs[UC_MIPS_REG_SP] = difftest.STACK_TOP
-    result, error = difftest.run(0x80010000, regs, bytes(ram), {0x80011000: 'RotTransPers4'},
-                                [], salt=17, contracts={'RotTransPers4'})
+    result, error = difftest.run(0x80010000, regs, bytes(ram), {0x80011000: name},
+                                [], salt=17, contracts={name})
     assert error is None
     assert result[0][0] == value
     assert result[2][0] == [expected]

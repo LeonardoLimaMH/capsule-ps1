@@ -6,7 +6,7 @@ deterministic samples shared by both executions; ordinary RAM checks still apply
 import struct
 import zlib
 
-NAMES = frozenset({'RotTransPers', 'RotTransPers4', 'SetRotMatrix', 'SetTransMatrix'})
+NAMES = frozenset({'RotTransPers', 'RotTransPers4', 'RotAverage4', 'SetRotMatrix', 'SetTransMatrix'})
 
 
 def _offset(pointer, size):
@@ -48,9 +48,9 @@ def execute(name, uc, args, state, call_index, salt):
         data = bytes(uc.mem_read(base + 20, 12))
         state[name] = data
         return ('contract:' + name, _identity(pointer), *struct.unpack('<3I', data)), None
-    if name == 'RotTransPers4':
+    if name in ('RotTransPers4', 'RotAverage4'):
         if len(args) != 10:
-            raise ValueError('RotTransPers4 requires four register and six stack arguments')
+            raise ValueError(name + ' requires four register and six stack arguments')
         inputs = [_offset(p, 8) for p in args[:4]]
         outputs = [_offset(p, 4) for p in args[4:]]
         vectors = [bytes(uc.mem_read(p, 8))[:6] for p in inputs[:3]]
@@ -68,7 +68,7 @@ def execute(name, uc, args, state, call_index, salt):
         spans = [(p, 6) for p in inputs] + [(p, 4) for p in outputs]
         event = ('contract:' + name, *map(_identity, args),
                  *struct.unpack('<12H', b''.join(vectors)), *_aliases(spans))
-        return event, result
+        return event, result if name == 'RotTransPers4' else (result << 2) | (p & 3)
     if name != 'RotTransPers':
         raise ValueError('unknown SDK contract')
     # LWC2 reads eight bytes, but the upper padding halfword is not a coordinate.

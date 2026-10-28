@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `█████████████████░░░` **86.42%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `██████████████████░░` **88.31%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -37,10 +37,10 @@ emulação contra a função original.
 |---|---|---|---|---|
 | `YUUGI.EXE` | 83.93% (648 fn) | `█████████░` **87.93%** | 874 / 1,035 (84.44%) | **161** |
 | `SLPM_860.96` | 82.92% (198 fn) | `█████████░` **88.90%** | 295 / 334 (88.32%) | **39** |
-| `CHESS.BIN` | 80.64% (644 fn) | `████████░░` **82.38%** | 746 / 869 (85.85%) | **123** |
+| `CHESS.BIN` | 85.84% (668 fn) | `█████████░` **87.58%** | 770 / 869 (88.61%) | **99** |
 | `RAISE.BIN` | 84.39% (718 fn) | `█████████░` **86.25%** | 910 / 942 (96.60%) | **32** |
 | `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 83.97% (2,387 fn) | `█████████░` **86.42%** | 3,014 / 3,369 (89.46%) | **355** |
+| **Total** | 85.86% (2,411 fn) | `█████████░` **88.31%** | 3,038 / 3,369 (90.18%) | **331** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
@@ -321,6 +321,17 @@ As declarações de `__floatsidf` e `__muldf3` preservam o retorno bruto de 64 b
 em `v0/v1`; declarar `s32` descartava a metade alta. Testes geram o C pelo mesmo
 adaptador Ghidra, compilam com os dois GCCs e verificam argumentos e ambas as
 metades do retorno em emulação.
+Isso inclui também `__adddf3`, `__subdf3`, `__divdf3` e `__negdf2`; a seleção
+dos helpers originais executados acompanha o grafo de `jal` do próprio dump.
+
+`--ghidra-data arquivo.json` aceita metadados de data items no formato
+`{"chess": [{"address": "8008f7ac", "type": "undefined2", "size": 2}]}`.
+A variante preserva o tipo original em `&global`, mantendo a largura das
+leituras escalares. Em `func_800F1280`, o ponteiro a um símbolo de dois bytes
+precisava avançar em passos de dois, embora a leitura fosse de quatro bytes.
+O cast para o load continua explícito. Testes compilados verificam ambas as
+propriedades, incluindo a leitura dos bytes altos. Tipos não resolvidos ficam
+fora dessa variante; os metadados são pistas, sujeitos ao teste diferencial.
 
 Em `func_800F234C`, a recuperação da pilha foi combinada com a restauração de
 argumentos do scheduler e a execução dos helpers originais de geometria, alocação
@@ -337,6 +348,30 @@ GTE**. Portanto, a aprovação é equivalência amostrada sob esse modelo, sem
 validar a projeção numérica no hardware. A seleção é por função, com
 `/* callee-contract: nome */` ou `--callee-contract nome`, somente em `--abi`.
 Os testes normais e o modo estrito preservam suas comparações anteriores.
+
+Callbacks do scheduler têm um contexto adicional, selecionado explicitamente
+por `/* task-callback */` ou `difftest --task-callback --abi --isolate`.
+O teste exige referência em um construtor de tarefas e ausência de chamadas
+diretas visíveis. Executa `func_80013A68` original com uma tarefa preparada,
+desvia somente a função candidata e exige que ela seja alcançada nos dois lados.
+Também compara a sequência de entradas: um scheduler que pula o callback não
+aprova o C. O dispatcher sobrescreve o retorno temporário do callback; seus
+registradores finais, a RAM viva e as chamadas continuam comparados. O modo
+normal de validação permanece disponível para chamadas diretas.
+
+Essa validação cobre o uso como callback registrado, sem afirmar equivalência
+de um retorno indefinido quando a função é chamada isoladamente. O manifesto
+registra esse contexto. Os controles usam o dispatcher do dump, mostram que uma
+mudança apenas no retorno é descartada por ele e que escritas erradas continuam
+observáveis. Mutações em `func_800B7988` e `func_800F7DE4` precisam divergir.
+Na primeira, os argumentos omitidos de `func_800B3558` vêm dos campos `+0x5c`
+e `+0x60` da tarefa. Na segunda, `AddPrim` precisa receber também o ponteiro da
+primitiva. Corrigir esses protótipos no programa Ghidra separado evita perder
+os argumentos na exportação seguinte.
+
+`RotAverage4` tem um contrato explícito de quatro vetores com os mesmos seis
+buffers de saída, ordem de leitura/escrita conferida no assembly e um retorno
+opaco de 16 bits. Também não emula os cálculos da GTE.
 
 O contrato de `RotTransPers4` observa os quatro vetores e os seis argumentos de
 pilha, grava os seis resultados na ordem do assembly e carrega o quarto vetor
