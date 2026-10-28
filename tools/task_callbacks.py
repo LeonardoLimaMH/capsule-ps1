@@ -11,8 +11,8 @@ NODE = 0x80130000
 
 
 @functools.lru_cache(maxsize=None)
-def registered(target):
-    result = set()
+def registrations(target):
+    result = {}
     targets = [target] + (['yuugi'] if target in ('chess', 'raise', 'etc') else [])
     for current in targets:
         for path in (ROOT / '.cache/fullasm' / current).rglob('*.s'):
@@ -35,8 +35,12 @@ def registered(target):
                 elif dst:
                     values.pop(dst, None)
                 if pending:
-                    if pending in ('func_80015B3C', 'func_800136C8'):
-                        result.update(values[r] for r in ('$a0', '$a1') if values.get(r))
+                    slots = (('$a0', 16), ('$a1', 12)) if pending in ('func_80015B3C', 'func_800136C8') else ()
+                    if pending == 'func_80020CE4':
+                        slots = (('$a1', 16),)  # verified wrapper forwards a1 into constructor a0
+                    for reg, slot in slots:
+                        if values.get(reg):
+                            result.setdefault(values[reg], set()).add(slot)
                     for reg in ('$v0', '$v1', '$a0', '$a1', '$a2', '$a3',
                                 '$t0', '$t1', '$t2', '$t3', '$t4', '$t5', '$t6', '$t7', '$t8', '$t9'):
                         values.pop(reg, None)
@@ -45,7 +49,12 @@ def registered(target):
                     pending = args.strip()
                 elif op in retuse.BRANCH or op in ('j', 'jr', 'jalr'):
                     values.clear()
-    return frozenset(result)
+    return {name: tuple(sorted(slots)) for name, slots in result.items()}
+
+
+@functools.lru_cache(maxsize=None)
+def registered(target):
+    return frozenset(registrations(target))
 
 
 def eligible(target, func):
@@ -53,7 +62,9 @@ def eligible(target, func):
     return func in registered(target) and not retuse.call_sites().get(func)
 
 
-def prepare(ram, entry, no_op):
+def prepare(ram, entry, no_op, slot=16):
+    if slot not in (12, 16):
+        raise ValueError('unknown task callback slot')
     def word(address, value):
         offset = address & 0x1FFFFFFF
         ram[offset:offset + 4] = value.to_bytes(4, 'little')
@@ -68,5 +79,6 @@ def prepare(ram, entry, no_op):
     word(0x8012C578, NODE)
     word(0x8012C57C, 0)
     for address, value in [(NODE, 0x00010090), (NODE + 4, 0), (NODE + 8, 0),
-                           (NODE + 12, no_op), (NODE + 16, entry)]:
+                           (NODE + 12, entry if slot == 12 else no_op),
+                           (NODE + 16, entry if slot == 16 else no_op)]:
         word(address, value)

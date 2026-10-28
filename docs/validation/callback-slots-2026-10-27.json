@@ -1,0 +1,872 @@
+[
+  {
+    "target": "chess",
+    "func": "func_8009CC8C",
+    "source_sha256": "0d1746d483c5ca8dd007d9e06f3111557f163883a3bbbc53c8df1122f47dfd2c",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009CC8C \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009CC8C \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "366a0bd1cb4de2ce1c808a0c42d247f4f4a89008d7c973d5bec445cb7b837f83",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_8009D2AC",
+    "source_sha256": "bb5cbc9f2530a521f56ba662993852320f9af6e2778040b2cecd3f4c0ebf77c8",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009D2AC \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009D2AC \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "e10bde97e077ea4b2f2bf90da8525115e1d918b2c0f49e14d6ca3cf5470e5505",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800ACD58",
+    "source_sha256": "2fd6d63069ea5a8a62d5ca3cc323367de14e3f557c8a5b23838a813b8beb8b09",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800ACD58 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800ACD58 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "144bc08b899d106d6d5e5e921a45741e331325275ff812082ad9f3197b58ccc2",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800AD7B8",
+    "source_sha256": "e8ca7250f3c7d2ad907139c4108d4d65c20e8a95cc6595a4dc0932e40b9f1c49",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800AD7B8 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800AD7B8 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "5f8b9c64507cca05b6580bf0098257cca38ae753799d97cb2d62ab0f864d2d94",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800B7988",
+    "source_sha256": "a5a45427890693ae52300eb6bfd1cea1e048697b296864876c3c39107d607e21",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B7988 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B7988 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "3882d14a926021550f0a790ec9479544a7f969fc4557ad54cbeb4c89931e076c",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800BCFB8",
+    "source_sha256": "392b420927fb8276bff030937b10dc8dd11af9e74de2a0fdc560c690223302d2",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BCFB8 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800BCFB8 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "6c9b98b915b54c1156e93081e774b93b5d6c6615f2c74cc49119d450f0248703",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800C5300",
+    "source_sha256": "8342eea9673d74a20dc908cda4f7dad7d3a2826606c2ed4924f622ea7f11c0f1",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C5300 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C5300 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "7f1c6488d10643d4284ecdb70fdb86807017e9c711f4315401696c4bb81b2d72",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800C5748",
+    "source_sha256": "a003cbb3aee014b791f31e6de67e3d5684c7c3ae3093ce1dd09916ef86a9d3ec",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C5748 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C5748 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "542fc3496826a3ee4e84908f0f2d934e4091f5463509a57c1cfa6e7decf2e85d",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800DD4D8",
+    "source_sha256": "9199ee1489bfc11c64583e46593e01e54aadb0ecfa59a69d05f780321bd049af",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DD4D8 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DD4D8 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "58db5b12d7cdbc820319241f4899d7be329b38bfd31e340a874f50e012e01741",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800DD920",
+    "source_sha256": "5f7b4cd7264ca8980894eb867743b869b5e30cff45f6ea6ccacbc482ce66f4be",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DD920 \u2014 200 tentativas id\u00eanticas, 199 inconclusivas, 1 n\u00e3o suportadas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DD920 \u2014 200 tentativas id\u00eanticas, 197 inconclusivas, 3 n\u00e3o suportadas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "57d2971cdad8e88d53f35b7bb3e4d4d4691321905edd54b5bdb2178808949202",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800E3864",
+    "source_sha256": "e931097c2f7c467756795118c5e4c8fa13e16fb2730b91440502f29f51cdbcd1",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E3864 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E3864 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "7f311418a3a7145ef7f1adb768bbd0b816882533651ffe7447d41f82b1cb817b",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800E4764",
+    "source_sha256": "5d66ccdfa6f20d4bf3cc0869c6ad37cbfb68bca7c75d282635f7267b9112a436",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E4764 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E4764 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "fea66f73455b8889f9a50f489cf645fafcc98896415061266cc932342aa0b6fa",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800E4EAC",
+    "source_sha256": "205f75460a9b307aa65e886a78f9fb39557e6e77d337c120fbdf04c93ff9ae32",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      12
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E4EAC \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E4EAC \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "04cb8a29c19080bd32880cd4ada63993ae87805c5c8a459a0f22514c405dc6bc",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800E6F18",
+    "source_sha256": "a7f2b6e0325601a259ca88677cba129b220662974dafc91dc6383654f0006f27",
+    "accepted": true,
+    "candidate_batch": "functional_callback19",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E6F18 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E6F18 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Caller-visible registers, full live RAM and calls; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original func_80013A68 task dispatcher; constructor registration, no direct jal sites, and target entry required on both executions",
+    "validated_source_sha256": "b1ece395a8c115a876a0bc15c9e92687ce3a96dc53e0e7bbe861639c02a27e88",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    }
+  },
+  {
+    "target": "chess",
+    "func": "func_800EA824",
+    "source_sha256": "61a18fb332f09c104aadbb58ed6286742f1e027e2c2f3627dbf40de8525019f8",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EA824 \u2014 200 tentativas id\u00eanticas, 199 inconclusivas, 1 n\u00e3o suportadas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EA824 \u2014 200 tentativas id\u00eanticas, 197 inconclusivas, 3 n\u00e3o suportadas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "3747f60323849f9122a1f4c95b3cefca84e0292258ba26434a221e4f9315ebe0",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800EE0C8",
+    "source_sha256": "34d57854cbc3043604552463f0267cb24675d261f38bfb68694c3d103f05cf3a",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EE0C8 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EE0C8 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "cd27188b6a20ab636d1a5bbfa1c6ff3e0070bdc75e38630fbe99e6cb245d16b8",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800EE2D4",
+    "source_sha256": "f52d22d440cd79c5d87c204e185effc7a61b949386b6f96089dae32bc40ba16d",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EE2D4 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EE2D4 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "0a77b1214094f223ea691094744fe3a88b6ed2a024cccbe6205ee0382f55fb24",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800EE4F4",
+    "source_sha256": "251e6c4a00b126677d365203026b133fab1e433b5c2f8031cd255bda174530de",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EE4F4 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EE4F4 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "ee6732ed533981da925b8b8f3c995fed93793c87162ed01a7c316ecde3e21dfb",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800EE7D4",
+    "source_sha256": "ceab51d2c841b9d69cdb0ff1d7f0c4da57e59e6ed5b80845fc78c3cdefc2c3c9",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EE7D4 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EE7D4 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "fcc4f8ab42e9da465cd35f6163cc73f2cb42894ec5792127b88c3da5ee12a44f",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800EEBC0",
+    "source_sha256": "6bb4d2e1884bfea1156b162aa05a0809f19e2606f8d221a50a856a1654adbe94",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      16
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EEBC0 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EEBC0 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "8395361723646b7084d714f101eccae2ef8703d2919eb9cc0dd6c6463c59ab6f",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800F6320",
+    "source_sha256": "04a621cd5578ad39154feee1bf42c8d41fb9a03ec5296069ee3912c34180f345",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      12
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F6320 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F6320 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "aaf10c76b889b28af98c0e5267484f8973f03b56270c222c849b0b8fc90bca3f",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800F7DE4",
+    "source_sha256": "7de0d13b7d7eed7aa1e5c1d7e324005f21732a4088f8da261bd6e51a6e00e08c",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      12
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F7DE4 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F7DE4 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "9d6e2118abb4680e7618dda92455865d6db01d64848ff3890086064ef38ac476",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800F8374",
+    "source_sha256": "bc6e95077a7f67463176f91a8488de5aaa5069cbc4c333d7b8d901ae724cadb2",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      12
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F8374 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F8374 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "1783754af2d5baf203d432d4ee244a837f16e8757b6e0e924fc2ad8b16c3aeb6",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800F8B48",
+    "source_sha256": "ab92ce75ea347ed4c1df4b6a0189fe90533a1ca3e8b64415f24336f5441cd63f",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      12
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F8B48 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F8B48 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "454c35e1a9c0256ca7dfb1fe3daa68499c59a07b7c148ab092aa30fa0ddd4756",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800FA548",
+    "source_sha256": "6cfb1ef77b9da41d4606e4731c3604c42fa43df32fa074c42fd9193373a06abf",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      12
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FA548 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FA548 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "710c7df28efac1cd2c2d5f76a444af48d586b02404b6bbc732de3fdd54b75c45",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800FB368",
+    "source_sha256": "7faf0a7f89b1a28d01819ad9c457f51b98205526ee7d25b979334bb32be44c4d",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      12
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FB368 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FB368 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "e19135c1f452a174f090db625dfc93dce014fb01fc1875b46459fb643eb3aca3",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800FC42C",
+    "source_sha256": "ac47702e26780aecf3800fcd9975122ead3794ac23f48783afc25f9d02399f36",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      12
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FC42C \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FC42C \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "089a0edf1a2b0c226b985c7650f8e6cc888b5dbfcdaae2d327c9665b0b723aec",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800FDA08",
+    "source_sha256": "2acdff70ebb0aa5df85e5010435bea3a1daef14f6cf786bacc9e4494f284c06f",
+    "accepted": true,
+    "candidate_batch": "callback-slot-revalidation",
+    "task_slots": [
+      12
+    ],
+    "entry_context": "Original task dispatcher in the callback slot(s) recovered from constructor registration",
+    "harness_sha256": {
+      "tools/difftest.py": "d55d7465aeaab9bd6ae8f6c02b905d6d5af6dbe0917ed505166e37a832118054",
+      "tools/task_callbacks.py": "990fa59ac9384d8c18d32d49125d553966f6c714688e883a22d74315075e285b",
+      "tools/sdk_contracts.py": "5787a110a86eab858bdfe0712ffb32bcda5416d253928f842107fa95ba19bf58"
+    },
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FDA08 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FDA08 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "validation_model": "Actual registered task slot; caller-visible registers, live RAM and calls; opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "e84547a8b00be1e7fa4385d2386614fc7d6146ff8bd83d6dfa45244f6d68ce7c",
+    "whitespace_cleanup_identical_linked_blob": true
+  }
+]

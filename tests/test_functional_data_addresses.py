@@ -45,3 +45,26 @@ def test_unknown_metadata_and_literals_are_preserved():
     assert ghidra.data_address_variant(source, [{'address': '80110000', 'type': 'undefined2'}]) is None
     assert ghidra.data_address_variant(source + 'void *p = &DAT_80110000;\n',
                                       [{'address': '80110000', 'type': 'undefined[7]'}]) is None
+
+
+@pytest.mark.parametrize('compiler', ['2.7.2-psx', '2.8.1-psx'])
+def test_ptr_dat_symbol_loads_pointer_from_ram(tmp_path, monkeypatch, compiler):
+    cache = tmp_path / 'chess'
+    cache.mkdir()
+    (cache / 'read_pointer.c').write_text('uint read_pointer(uint index) { return PTR_DAT_80110000[index]; }')
+    monkeypatch.setattr(ghidra, 'CACHE', tmp_path)
+    code = ghidra.draft('chess', 'read_pointer', '')
+    path = tmp_path / 'read_pointer.c'
+    path.write_text('/* compiler: ' + compiler + ' */\n#include "common.h"\n' + code)
+    blob, entry, _ = difftest.build_candidate('chess', path, 'read_pointer', True)
+    for index, expected in enumerate([12, 34, 56, 78]):
+        uc = Uc(UC_ARCH_MIPS, UC_MODE_MIPS32 | UC_MODE_LITTLE_ENDIAN)
+        uc.mem_map(0, 0x200000)
+        uc.mem_write(difftest.CAND_BASE & 0x1FFFFFFF, blob)
+        uc.mem_write(0x110000, (0x80112000).to_bytes(4, 'little'))
+        uc.mem_write(0x112000, bytes([12, 34, 56, 78]))
+        uc.reg_write(UC_MIPS_REG_A0, index)
+        uc.reg_write(UC_MIPS_REG_RA, difftest.SENTINEL)
+        uc.reg_write(UC_MIPS_REG_SP, difftest.STACK_TOP)
+        uc.emu_start(entry, difftest.SENTINEL, count=1000)
+        assert uc.reg_read(UC_MIPS_REG_V0) == expected

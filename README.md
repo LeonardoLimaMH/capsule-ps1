@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `██████████████████░░` **88.31%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `██████████████████░░` **89.10%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -37,10 +37,10 @@ emulação contra a função original.
 |---|---|---|---|---|
 | `YUUGI.EXE` | 83.93% (648 fn) | `█████████░` **87.93%** | 874 / 1,035 (84.44%) | **161** |
 | `SLPM_860.96` | 82.92% (198 fn) | `█████████░` **88.90%** | 295 / 334 (88.32%) | **39** |
-| `CHESS.BIN` | 85.84% (668 fn) | `█████████░` **87.58%** | 770 / 869 (88.61%) | **99** |
-| `RAISE.BIN` | 84.39% (718 fn) | `█████████░` **86.25%** | 910 / 942 (96.60%) | **32** |
+| `CHESS.BIN` | 87.56% (684 fn) | `█████████░` **89.30%** | 786 / 869 (90.45%) | **83** |
+| `RAISE.BIN` | 84.99% (720 fn) | `█████████░` **86.85%** | 912 / 942 (96.82%) | **30** |
 | `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 85.86% (2,411 fn) | `█████████░` **88.31%** | 3,038 / 3,369 (90.18%) | **331** |
+| **Total** | 86.66% (2,429 fn) | `█████████░` **89.10%** | 3,056 / 3,369 (90.71%) | **313** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
@@ -352,7 +352,10 @@ Os testes normais e o modo estrito preservam suas comparações anteriores.
 Callbacks do scheduler têm um contexto adicional, selecionado explicitamente
 por `/* task-callback */` ou `difftest --task-callback --abi --isolate`.
 O teste exige referência em um construtor de tarefas e ausência de chamadas
-diretas visíveis. Executa `func_80013A68` original com uma tarefa preparada,
+diretas visíveis. Recupera o slot real: o primeiro callback do construtor fica
+em `+0x10`, e o segundo em `+0x0c`. O wrapper `func_80020CE4` encaminha seu segundo
+argumento para o slot `+0x10`. Os testes cobrem as duas posições do dispatcher.
+Executa `func_80013A68` original com uma tarefa preparada,
 desvia somente a função candidata e exige que ela seja alcançada nos dois lados.
 Também compara a sequência de entradas: um scheduler que pula o callback não
 aprova o C. O dispatcher sobrescreve o retorno temporário do callback; seus
@@ -372,6 +375,17 @@ os argumentos na exportação seguinte.
 `RotAverage4` tem um contrato explícito de quatro vetores com os mesmos seis
 buffers de saída, ordem de leitura/escrita conferida no assembly e um retorno
 opaco de 16 bits. Também não emula os cálculos da GTE.
+
+A revalidação dos callbacks nos slots recuperados está em
+[callback-slots-2026-10-27.json](docs/validation/callback-slots-2026-10-27.json),
+com hashes dos fontes e das ferramentas e duas sementes de 200 execuções.
+`PTR_DAT_...` representa um ponteiro armazenado na RAM: o adaptador gera o load
+desse ponteiro, preservando o acesso posterior à tabela apontada. A flag de
+`func_8009D2AC` usa `lbu` e compara `0xff`; compará-la a `-1` em C unsigned pula
+o caminho ativo. Em `func_800EE0C8` e `func_800EE2D4`, o argumento montado com
+shifts precisa da conversão final para `u8`, correspondente ao `andi 0xff`.
+`func_800E4764` usa cópias packed de palavras nos offsets desalinhados do objeto.
+Controles negativos removem essas correções e exigem divergência.
 
 O contrato de `RotTransPers4` observa os quatro vetores e os seis argumentos de
 pilha, grava os seis resultados na ordem do assembly e carrega o quarto vetor

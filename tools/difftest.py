@@ -524,6 +524,7 @@ def main():
         run_entry = symbols[task_callbacks.DISPATCHER] & 0xFFFFFFFF
         stubs.pop(run_entry, None)
         required_entries = (entry,)
+        callback_slots = task_callbacks.registrations(a.target)[a.func]
     guard = ((entry, entry + func_size(a.func)), (CAND_BASE, CAND_BASE + len(cand)))
     jump = ((0x02 << 26) | ((cand_entry >> 2) & 0x3FFFFFF)).to_bytes(4, "little") + bytes(4)
     rng = random.Random(a.seed)
@@ -586,7 +587,8 @@ def main():
                 v = 0x80000000 | (rng.randrange(0x100000, 0x170000) & ~0xF)
                 ram[o + 4 * i:o + 4 * i + 4] = v.to_bytes(4, "little")
         if callback_context:
-            task_callbacks.prepare(ram, entry, symbols['func_80018600'] & 0xFFFFFFFF)
+            slot = callback_slots[0] if len(callback_slots) == 1 else rng.choice(callback_slots)
+            task_callbacks.prepare(ram, entry, symbols['func_80018600'] & 0xFFFFFFFF, slot=slot)
 
         def arg(i):
             k = rng.random()

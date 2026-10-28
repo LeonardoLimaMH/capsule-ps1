@@ -17,7 +17,7 @@ WIDTHS = {"lb": "s8", "lbu": "u8", "lh": "s16", "lhu": "u16", "lw": "s32",
           "sb": "u8", "sh": "u16", "sw": "u32"}
 BITS = {"s8": 8, "u8": 8, "s16": 16, "u16": 16, "s32": 32, "u32": 32}
 GLOBAL = re.compile(r"\b(_?D_[0-9A-Fa-f]{8}|[A-Za-z]+Ram[0-9a-fA-F]{8}|"
-                    r"_?UNK_[0-9a-fA-F]{8}|_?DAT_[0-9a-fA-F]{8}|_?PTR_[0-9a-fA-F]{8}|"
+                    r"_?UNK_[0-9a-fA-F]{8}|_?DAT_[0-9a-fA-F]{8}|_?PTR_(?:DAT_)?[0-9a-fA-F]{8}|"
                     r"null_ARRAY_[0-9a-fA-F]{8})\b")
 
 
@@ -240,6 +240,9 @@ def draft(target, func, asm, m2c='', char_signed=True):
         definitions.append('/* rand-u16: 0x8008EE54 1 ' + ','.join(map(str, sorted(values))) + ' */')
     for name in sorted(set(GLOBAL.findall(body))):
         addr = int(name[-8:], 16)
+        if name.lstrip('_').startswith('PTR_DAT_'):
+            definitions.append(f'#define {name} (*(u8 **)0x{addr:08X})')
+            continue
         typ = widths.get(addr)
         if typ is None:
             prefix = name.split('Ram')[0]

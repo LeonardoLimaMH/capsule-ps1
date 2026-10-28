@@ -1,0 +1,134 @@
+#include "common.h"
+
+#include "common.h"
+
+#include "common.h"
+
+/* task-callback */
+/* callee-contract: RotAverage4 */
+/* rand-u16: 0x8008ED68 1 0 */
+/* rand-u16: 0x8008ED6A 1 32786 */
+/* rand-u16: 0x80121090 1 8192 */
+/* rand-u16: 0x80121092 1 32786 */
+/* rand-u16: 0x80130014 1 0 */
+/* rand-u16: 0x80130016 1 32788 */
+/* rand-u16: 0x80130038 1 4,5,8,12,16 */
+/* rand-u16: 0x8013003A 1 8,16,32,64,128 */
+/* rand-u16: 0x8013003C 1 8,16,32,64,128 */
+/* rand-u16: 0x8013003E 1 0,1,2,15,255,4095 */
+/* rand-u16: 0x80130042 1 0,1,2,255,65535 */
+/* rand-u16: 0x8013004E 1 0,1,2,3,4,5,6,7,65535 */
+/* rand-u16: 0x80130054 1 0,1,2,3,4,5,19,20,79,80,81,100 */
+/* rand-u16: 0x80130056 1 0 */
+/* rand-u16: 0x80130064 1 0,1,5,19,20,40,80,100 */
+/* rand-u16: 0x80130066 1 0 */
+#include "common.h"
+
+/* real-callee: func_80015B3C */
+/* real-callee: func_800136C8 */
+/* real-callee: func_80013C14 */
+/* rand-u16: 0x80078B7C 1 0 */
+/* rand-u16: 0x80078B7E 1 32786 */
+/* rand-u16: 0x8012C554 1 0 */
+/* rand-u16: 0x8012C556 1 0 */
+/* rand-u16: 0x8012C578 1 4096 */
+/* rand-u16: 0x8012C57A 1 32786 */
+/* rand-u16: 0x8012C57C 1 0 */
+/* rand-u16: 0x8012C57E 1 0 */
+/* rand-u16: 0x80121008 1 0 */
+/* rand-u16: 0x8012100A 1 0 */
+/* rand-u16: 0x8012C558 16 0 */
+/* rand-u16: 0x80121000 1 144 */
+/* rand-u16: 0x80119714 1 0,1,5,19,20,29,30,31,199 */
+/* rand-u16: 0x80119716 1 0 */
+/* rand-ptr: 0x8008F760 3 */
+/* rand-u16: 0x8008EE54 1 0,1,2,3,4,5,6,7,8,9,10,15,19,20,21,31,32,63,64,98,99,100,65535 */
+/* real-callee: __adddf3 */
+/* real-callee: __divdf3 */
+/* real-callee: __fixdfsi */
+/* real-callee: __floatsidf */
+/* real-callee: __muldf3 */
+/* real-callee: __negdf2 */
+/* real-callee: __subdf3 */
+/* real-callee: _add_mant_d */
+/* real-callee: _comp_mant */
+/* real-callee: _dbl_shift */
+/* real-callee: _dbl_shift_us */
+/* real-callee: _err_math */
+/* real-callee: _mainasu */
+/* real-callee: _mul_mant_d */
+/* real-callee: func_80015D14 */
+/* real-callee: func_8004FE2C */
+/* real-callee: func_800DD428 */
+/* real-callee: func_800DDA78 */
+/* real-callee: func_800FE188 */
+/* real-callee: func_800FE21C */
+/* real-callee: func_800FE74C */
+/* real-callee: func_800FEBF4 */
+/* real-callee: func_800FEC2C */
+/* real-callee: func_800FF0A0 */
+/* real-callee: func_800FF190 */
+/* real-callee: func_800FF2CC */
+/* real-callee: func_800FF3B4 */
+/* real-callee: func_800FF460 */
+/* callee-contract: RotTransPers */
+/* callee-contract: RotTransPers4 */
+/* callee-contract: SetRotMatrix */
+/* callee-contract: SetTransMatrix */
+/* compiler: 2.8.1-psx */
+/* rand-u16: 0x8013007A 1 0,1,2,3,4,5,6,7,8,9,10,15,31,65535 */
+/* rand-u16: 0x8013003C 1 0,1,5,19,20,29,30,31,39,40,49,50,79,80,89,90,99,100,127,128,199 */
+/* rand-u16: 0x8013003E 1 0 */
+/* rand-u16: 0x80130070 1 4096 */
+/* rand-u16: 0x80130072 1 32788 */
+/* rand-u16: 0x80130074 1 8192 */
+/* rand-u16: 0x80130076 1 32788 */
+/* compiler: 2.8.1-psx */
+#include "ghidra.h"
+#define DAT_8008601c (*(u8 *)0x8008601C)
+#define DAT_8008601e (*(s8 *)0x8008601E)
+#define DAT_8008601f (*(s8 *)0x8008601F)
+#define DAT_8008ee4c (*(u16 *)0x8008EE4C)
+#define func_800185F8 ((s32 (*)())0x800185F8)
+void func_8009CC8C(int param_1)
+
+{
+  uint uVar1;
+
+  if (DAT_8008601c == 0) {
+    func_800185F8();
+    return;
+  }
+  if (*(short *)(param_1 + 0x7a) == 0) {
+    if (DAT_8008601c < 0xfe) {
+      uVar1 = *(uint *)(param_1 + 0x38) & 0xfffffffe;
+    }
+    else {
+      uVar1 = *(uint *)(param_1 + 0x38) | 1;
+    }
+    *(uint *)(param_1 + 0x38) = uVar1;
+    if (DAT_8008ee4c != 1) {
+      return;
+    }
+    if ((*(uint *)(param_1 + 0x34) & 0x7f) == (int)DAT_8008601e) {
+      *(undefined2 *)(param_1 + 0x66) = 1;
+      return;
+    }
+  }
+  else {
+    if (*(short *)(param_1 + 0x7a) != 1) {
+      return;
+    }
+    if (DAT_8008ee4c != 2) {
+      *(uint *)(param_1 + 0x38) = *(uint *)(param_1 + 0x38) | 1;
+      return;
+    }
+    *(uint *)(param_1 + 0x38) = *(uint *)(param_1 + 0x38) & 0xfffffffe;
+    if ((*(uint *)(param_1 + 0x34) & 0x7f) == (int)DAT_8008601f) {
+      *(undefined2 *)(param_1 + 0x66) = 1;
+      return;
+    }
+  }
+  *(undefined2 *)(param_1 + 0x66) = 0;
+  return;
+}
