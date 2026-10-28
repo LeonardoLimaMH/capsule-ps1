@@ -20,6 +20,7 @@ import autodecomp as ad
 import functional_context
 import functional_ghidra
 import functional_m2c
+import functional_stack
 import retuse
 from handwritten import load as handwritten
 
@@ -28,6 +29,7 @@ CACHE = ROOT / '.cache/functional_batch'
 REAL_CALLEES = set()
 M2C_TARGET = 'mipsel-gcc-c'
 CALLEE_CONTEXT = True
+STACK_FRAMES = False
 
 
 def candidates(target, func):
@@ -72,10 +74,16 @@ def candidates(target, func):
         else:
             char_variants.append((label, code))
     for label, code in char_variants:
-        for variant in [code, arggaps.restore(code, func)]:
-            if variant and variant not in seen:
-                seen.add(variant)
-                result.append((label, state_profile + variant))
+        layouts = [(label, code)]
+        if STACK_FRAMES:
+            frame = functional_stack.frame_variant(code, func)
+            if frame:
+                layouts.append((label + '+stack-frame', frame))
+        for variant_label, layout in layouts:
+            for variant in [layout, arggaps.restore(layout, func)]:
+                if variant and variant not in seen:
+                    seen.add(variant)
+                    result.append((variant_label, state_profile + variant))
     return result
 
 
@@ -135,13 +143,14 @@ def try_function(target, func, seconds=45, budget=180, prepared=None, seeds=(1, 
     rec = {'target': target, 'func': func, 'status': 'accepted' if accepted else 'pending',
            'sha256': accepted, 'seeds': list(seeds),
            'return_options': extra, 'm2c_target': M2C_TARGET, 'callee_context': CALLEE_CONTEXT,
+           'stack_frames': STACK_FRAMES,
            'seconds': round(time.monotonic() - started, 2), 'attempts': attempts}
     (folder / 'result.json').write_text(json.dumps(rec, ensure_ascii=False, indent=2))
     return rec
 
 
 def main():
-    global M2C_TARGET, CALLEE_CONTEXT
+    global M2C_TARGET, CALLEE_CONTEXT, STACK_FRAMES
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('targets', nargs='+', choices=['chess', 'raise', 'yuugi', 'slpm', 'etc'])
     ap.add_argument('--jobs', type=int, default=4)
@@ -161,10 +170,13 @@ def main():
                     help='m2c input byte order; PS1 uses mipsel (byte-exact search defaults are unchanged)')
     ap.add_argument('--no-callee-context', action='store_true',
                     help='disable leaf-helper signatures when comparing generation strategies')
+    ap.add_argument('--stack-frames', action='store_true',
+                    help='also test layouts recovered from explicit Ghidra stack offsets')
     ap.add_argument('--real-callee', action='append', default=[], help='execute this helper when called; persist the test profile in C')
     args = ap.parse_args()
     M2C_TARGET = args.m2c_target
     CALLEE_CONTEXT = not args.no_callee_context
+    STACK_FRAMES = args.stack_frames
     if args.jobs < 1 or args.draft_jobs < 1 or args.prefetch < 0 or not args.seeds:
         ap.error('worker counts must be positive; prefetch must not be negative')
     REAL_CALLEES.update(args.real_callee)

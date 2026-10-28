@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `████████████████░░░░` **79.87%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `████████████████░░░░` **80.80%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -37,10 +37,10 @@ emulação contra a função original.
 |---|---|---|---|---|
 | `YUUGI.EXE` | 83.93% (648 fn) | `█████████░` **87.93%** | 874 / 1,035 (84.44%) | **161** |
 | `SLPM_860.96` | 82.92% (198 fn) | `█████████░` **88.90%** | 295 / 334 (88.32%) | **39** |
-| `CHESS.BIN` | 63.08% (580 fn) | `██████░░░░` **64.81%** | 682 / 869 (78.48%) | **187** |
-| `RAISE.BIN` | 83.83% (716 fn) | `█████████░` **85.69%** | 908 / 942 (96.39%) | **34** |
+| `CHESS.BIN` | 65.20% (595 fn) | `███████░░░` **66.93%** | 697 / 869 (80.21%) | **172** |
+| `RAISE.BIN` | 84.39% (718 fn) | `█████████░` **86.25%** | 910 / 942 (96.60%) | **32** |
 | `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 77.42% (2,321 fn) | `████████░░` **79.87%** | 2,948 / 3,369 (87.50%) | **421** |
+| **Total** | 78.35% (2,338 fn) | `████████░░` **80.80%** | 2,965 / 3,369 (88.01%) | **404** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
@@ -299,6 +299,29 @@ erradas continuem sendo reprovadas; o critério de aceitação permanece o mesmo
 originais `func_80015B3C`, `func_800136C8` e `func_80013C14`. Assim, o teste compara
 as escritas no objeto realmente alocado, incluindo cópias de buffers desalinhados.
 O controle negativo troca as coordenadas copiadas e precisa falhar pela RAM.
+
+A opção `--stack-frames` acrescenta candidatos que recuperam os offsets dos
+locais do Ghidra em um buffer alinhado. Por exemplo, três `short` consecutivos
+passados como vetor precisam continuar contíguos; variáveis C independentes não
+garantem isso. Views `volatile` preservam os acessos sobrepostos. Tipos e tamanhos
+não resolvidos continuam pendentes. Os testes compilam com GCC 2.7.2 e 2.8.1 e
+verificam os seis bytes do vetor e uma escrita por uma view sobreposta.
+
+Em `func_800F234C`, a recuperação da pilha foi combinada com a restauração de
+argumentos do scheduler e a execução dos helpers originais de geometria, alocação
+e ponto flutuante por software. A validação completou as duas sementes de 200
+execuções. Essa função usa **contratos explícitos de buffers do SDK** para
+`RotTransPers`, `SetRotMatrix` e `SetTransMatrix`: comparam coordenadas, matrizes,
+aliases e escritas; endereços de buffers na pilha morta podem diferir. Heap e
+memória global continuam comparadas. Um controle negativo altera uma coordenada
+da animação e exige divergência na chamada de projeção.
+
+Esses contratos, implementados em `tools/sdk_contracts.py`, produzem saídas
+opacas determinísticas para exercitar o chamador; **não emulam a matemática da
+GTE**. Portanto, a aprovação é equivalência amostrada sob esse modelo, sem
+validar a projeção numérica no hardware. A seleção é por função, com
+`/* callee-contract: nome */` ou `--callee-contract nome`, somente em `--abi`.
+Os testes normais e o modo estrito preservam suas comparações anteriores.
 
 Há também uma candidata separada para aritmética de endereços em bytes.
 Inferir `u32` de um load não prova que `&objeto + deslocamento` deva multiplicar

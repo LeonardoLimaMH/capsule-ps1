@@ -40,6 +40,7 @@ from unicorn.mips_const import *
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import arity  # noqa: E402
 import g0fill  # noqa: E402
+import sdk_contracts  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 RAM_SIZE = 0x200000
@@ -252,6 +253,8 @@ def same_calls(a, b, cand_lo, cand_hi, relaxed, alias=(None, None)):
     for k, (x, y) in enumerate(zip(ca, cb)):
         if x == y:
             continue
+        if x[0].startswith('contract:') or y[0].startswith('contract:'):
+            return False, k  # compare all input bytes and alias relationships
         if not relaxed or x[0] != y[0] or len(x) != len(y):
             return False, k
         if x[0].startswith("BIOS") or x[0] == "syscall":
@@ -274,7 +277,8 @@ def func_size(func):
     return int(m.group(1), 16) if m else 8
 
 
-def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=None, group_stubs=True):
+def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=None, group_stubs=True,
+        contracts=frozenset()):
     mu = Uc(UC_ARCH_MIPS, UC_MODE_MIPS32 | UC_MODE_LITTLE_ENDIAN)
     mu.mem_map(0x00000000, RAM_SIZE)           # kseg0 0x80000000 -> físico 0
     mu.mem_map(0x1F800000, 0x2000)             # scratchpad + registradores de I/O
@@ -287,6 +291,7 @@ def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=N
     calls = []
     strings = []  # conteúdo de cada argumento que aponte para uma string (ver same_calls)
     state = {"err": None}
+    contract_state = {}
 
     def on_stub(uc, addr, size, user):
         name = stubs.get(addr) or {0xA0: "BIOS_A0", 0xB0: "BIOS_B0", 0xC0: "BIOS_C0"}.get(addr & 0x1FFFFFFF)
@@ -302,8 +307,22 @@ def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=N
             if k and 0x80000000 <= sp < 0x80000000 + RAM_SIZE - 0x10 - 4 * k:
                 raw = bytes(uc.mem_read((sp + 0x10) & 0x1FFFFFFF, 4 * k))
                 args += tuple(int.from_bytes(raw[i:i + 4], "little") for i in range(0, 4 * k, 4))
-        calls.append((name,) + args)
-        strings.append(tuple(read_cstr(uc, v) for v in args))
+        contract_return = None
+        if name in contracts:
+            try:
+                event, contract_return = sdk_contracts.execute(name, uc, args, contract_state, len(calls) + 1, salt)
+            except (UcError, ValueError) as exc:
+                state['err'] = 'SDK contract: ' + str(exc)
+                uc.emu_stop()
+                return
+            calls.append(event)
+            strings.append((None,) * (len(event) - 1))
+        else:
+            calls.append((name,) + args)
+            strings.append(tuple(read_cstr(uc, v) for v in args))
+        if contract_return is not None:
+            uc.reg_write(UC_MIPS_REG_V0, contract_return)
+            return
         if game_names:
             # --isolate: retorno que serve de inteiro e de ponteiro (alinhado, dentro da RAM)
             v = 0x80120000 + len(calls) * 0x40
@@ -395,6 +414,8 @@ def main():
                          "registrador e de pilha comparados)")
     ap.add_argument("--real-callee", action="append", default=[],
                     help="com --isolate: executar esta função auxiliar original em vez de substituí-la por stub")
+    ap.add_argument('--callee-contract', action='append', default=[],
+                    help='com --abi: modelo explícito de buffers do SDK; não emula a GTE')
     ap.add_argument("--check-v1", action="store_true",
                     help="com --abi: compara também v1 (algum chamador lê a metade alta de um "
                          "retorno de 64 bits, tools/retuse.py)")
@@ -430,6 +451,9 @@ def main():
     # "/* argN: small */" (N = 0..3): só aquele argumento pequeno
     _t = (ROOT / src).read_text(encoding="utf-8", errors="replace")
     real_callees = set(a.real_callee) | set(re.findall(r"/\* real-callee: (\w+) \*/", _t))
+    contracts = set(a.callee_contract) | set(re.findall(r'/\* callee-contract: (\w+) \*/', _t))
+    if contracts and (not a.abi or contracts - sdk_contracts.NAMES or contracts & real_callees):
+        sys.exit('SDK contracts require --abi, known contract names, and separate real callees')
     small_args = {0, 1, 2, 3} if "/* args: small */" in _t else {int(k) for k in re.findall(r"/\* arg([0-3]): small \*/", _t)}
     # "/* argN: 0xENDEREÇO */": argumento fixo (p.ex. apontando para um buffer preparado)
     fixed_args = {int(k): int(v, 16) for k, v in re.findall(r"/\* arg([0-3]): (0x[0-9A-Fa-f]+) \*/", _t)}
@@ -559,8 +583,10 @@ def main():
         try:
             # o candidato fica na memória dos dois lados: uma leitura por ponteiro sorteado
             # que caia ali lê o mesmo conteúdo
-            ra, ea = run(entry, regs, bytes(ram), stubs, [(CAND_BASE, cand)], game_names, guard, salt)
-            rb, eb = run(entry, regs, bytes(ram), stubs, [(CAND_BASE, cand), (entry, jump)], game_names, guard, salt)
+            ra, ea = run(entry, regs, bytes(ram), stubs, [(CAND_BASE, cand)], game_names, guard, salt,
+                         contracts=contracts)
+            rb, eb = run(entry, regs, bytes(ram), stubs, [(CAND_BASE, cand), (entry, jump)], game_names, guard, salt,
+                         contracts=contracts)
         except Unsupported:
             unsupported += 1
             continue
