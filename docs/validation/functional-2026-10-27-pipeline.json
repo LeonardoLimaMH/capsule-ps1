@@ -4085,5 +4085,52 @@
         "message": "[EQUIVALENTE] chess:func_800B360C ? 200 tentativas id?nticas\n"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800A475C",
+    "source_sha256": "eebf82d41642c6307caba31039d6f69807ae7d3db45c4afe27ad89b2db3a4f63",
+    "validated_source_sha256": "dee8d47d07aedd08308f9c1ce6ca713915b9483c687afb8637492d92c3d42c74",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_board_coordinates_fixture",
+    "validation_model": "Original registers, RAM and calls; Original random-position helper and populated board, full v0 return",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A475C ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A475C ? 200 tentativas id?nticas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800A4900",
+    "source_sha256": "b3f561a9c24ec3e4c19e334909de162bddb00fd0f02cf2471a6c584ac265b0e9",
+    "validated_source_sha256": "7a0f8dc17af971bde6208177ecf23eef2bdca11ebdcf641c63f6ea3b735239e3",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_board_coordinates_fixture",
+    "validation_model": "Original registers, RAM and calls; Populated board, randomized coordinates and output vector; caller does not use v0",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A4900 ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A4900 ? 200 tentativas id?nticas\n"
+      }
+    ],
+    "return_options": [
+      "--ignore-v0"
+    ]
   }
 ]
