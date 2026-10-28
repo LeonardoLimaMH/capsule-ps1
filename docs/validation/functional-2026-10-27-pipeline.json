@@ -4132,5 +4132,52 @@
     "return_options": [
       "--ignore-v0"
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800C4D88",
+    "source_sha256": "19c6f142069b2eaff06f8d5a9d5edf2835d9295f1df506315ea73662d9314450",
+    "validated_source_sha256": "ea403f96d074aa09b1e0956f7339f6cbc46d0101775ff0749bc44a33de1ab1b4",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_real_geometry_task_fixture",
+    "validation_model": "Original registers, RAM and calls; Original geometry and random helpers, actual task allocation, valid actor and board indices",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C4D88 ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C4D88 ? 200 tentativas id?nticas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800C5928",
+    "source_sha256": "35f51cf83824c12449b3c35f937a593b5c1fb2725e2457fe6c2bdae82c346505",
+    "validated_source_sha256": "53ea20f2f7a86cace390d1bda20f00b487449c6328e12966ff4014f923ea8f6d",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_real_geometry_task_fixture",
+    "validation_model": "Original registers, RAM and calls; Original geometry and random helpers, 30 actual task allocations per execution, valid actor and board indices",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C5928 ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C5928 ? 200 tentativas id?nticas\n"
+      }
+    ],
+    "return_options": [
+      "--ignore-v0"
+    ]
   }
 ]
