@@ -7642,5 +7642,141 @@
         "validated_source_sha256": "5814a47919864104217cd69bb2f013a581df50e67f2722caf594357c23d787d4"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800F3080",
+    "source_sha256": "79110e8cbe5db8fa57da18613b2587d7591d0eb2aa25f5cbdfd75a0c960db5ba",
+    "validated_source_sha256": "6d625b812717af0e6e8f45f025d85d5dde0bb8269e26532a348fb157a5c1833d",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess94",
+    "validation_model": "Strict v0, live RAM, ordered calls. Original trig, D7388/D6DA4/D4F74 list generation, DDA78 and allocation helpers execute. States 0,1,2,3,4,99, positive divisor limits, timer multiples, zero and nonzero target counts and exhausted list index tested. Signed 16-bit amplitude recovered from original LH and signed comparison after subtraction; unsigned draft rejected. Sound remains stub. 200 complete identical executions per seed and profile.",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3080 \u2014 200 tentativas id\u00eanticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3080 \u2014 200 tentativas id\u00eanticas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "s1",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3080 \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "9d83da777213aa8d02aa5a597909d3f95099ee9a66473a0eecbe829ec210552d"
+      },
+      {
+        "profile": "s1",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3080 \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "9d83da777213aa8d02aa5a597909d3f95099ee9a66473a0eecbe829ec210552d"
+      },
+      {
+        "profile": "s2",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3080 \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "20ced3a59044b1a14fd4e8f399d9e720d6048e75da8b0999b856955ecdd3579f"
+      },
+      {
+        "profile": "s2",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3080 \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "20ced3a59044b1a14fd4e8f399d9e720d6048e75da8b0999b856955ecdd3579f"
+      },
+      {
+        "profile": "s3",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3080 \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "7143f14ce411608729b010c2278a0361882c3e5b031377a61e302bc7511f93e9"
+      },
+      {
+        "profile": "s3",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3080 \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "7143f14ce411608729b010c2278a0361882c3e5b031377a61e302bc7511f93e9"
+      },
+      {
+        "profile": "s4",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3080 \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "b0abb0cfacedd73beb7ccd7ac715c009ba137842f4951cb73e450b88bae54b79"
+      },
+      {
+        "profile": "s4",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3080 \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "b0abb0cfacedd73beb7ccd7ac715c009ba137842f4951cb73e450b88bae54b79"
+      },
+      {
+        "profile": "s99",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3080 \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "ef9624cb4c8af570748c55625b95fceafd68281ccb2f89ad0389a88834326688"
+      },
+      {
+        "profile": "s99",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3080 \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "ef9624cb4c8af570748c55625b95fceafd68281ccb2f89ad0389a88834326688"
+      },
+      {
+        "profile": "target",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3080 \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "e95e09564a7fe4d3618ffc6f64dec72a1cb2a23b88b12976de6aadf0cdab21ba"
+      },
+      {
+        "profile": "target",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3080 \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "e95e09564a7fe4d3618ffc6f64dec72a1cb2a23b88b12976de6aadf0cdab21ba"
+      },
+      {
+        "profile": "target-done",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3080 \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "8a4a180ed6ded6445063927d17e0597314f224fdc2ed365bbf0d867b1bd86322"
+      },
+      {
+        "profile": "target-done",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3080 \u2014 200 tentativas id\u00eanticas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "8a4a180ed6ded6445063927d17e0597314f224fdc2ed365bbf0d867b1bd86322"
+      }
+    ]
   }
 ]

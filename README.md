@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████████░` **94.04%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████████░` **94.18%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -37,10 +37,10 @@ emulação contra a função original.
 |---|---|---|---|---|
 | `YUUGI.EXE` | 84.97% (660 fn) | `█████████░` **88.96%** | 886 / 1,035 (85.60%) | **149** |
 | `SLPM_860.96` | 85.01% (200 fn) | `█████████░` **91.00%** | 297 / 334 (88.92%) | **37** |
-| `CHESS.BIN` | 95.81% (751 fn) | `██████████` **97.55%** | 853 / 869 (98.16%) | **16** |
+| `CHESS.BIN` | 96.22% (752 fn) | `██████████` **97.95%** | 854 / 869 (98.27%) | **15** |
 | `RAISE.BIN` | 90.62% (736 fn) | `█████████░` **92.48%** | 928 / 942 (98.51%) | **14** |
 | `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 91.59% (2,526 fn) | `█████████░` **94.04%** | 3,153 / 3,369 (93.59%) | **216** |
+| **Total** | 91.74% (2,527 fn) | `█████████░` **94.18%** | 3,154 / 3,369 (93.62%) | **215** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
@@ -743,14 +743,22 @@ sobre as ferramentas deste projeto.
 
 
 `func_800BAF44` agora tem perfis separados para os estados 0 a 10 e para
-os dois caminhos do quinto argumento na pilha. A proje??o `func_800CD950`
-usa um contrato expl?cito de fronteira: observa os tr?s componentes XYZ,
-a sobreposi??o dos buffers e as escritas de 16 bits em `+0x46` e `+0x4A`.
-As coordenadas projetadas e a profundidade s?o amostras determin?sticas opacas;
-a matem?tica da GTE e as altera??es internas de matrizes desse helper n?o s?o
-validadas por esse contrato. Um controle negativo que desloca X ? rejeitado.
-`func_800E1258` executa os helpers originais de dire??o, vetores, interpola??o
-e cria??o de efeitos, cobrindo seus seis estados e c?lulas vazias, bloqueadas,
+os dois caminhos do quinto argumento na pilha. A projeção `func_800CD950`
+usa um contrato explícito de fronteira: observa os três componentes XYZ,
+a sobreposição dos buffers e as escritas de 16 bits em `+0x46` e `+0x4A`.
+As coordenadas projetadas e a profundidade são amostras determinísticas opacas;
+a matemática da GTE e as alterações internas de matrizes desse helper não são
+validadas por esse contrato. Um controle negativo que desloca X é rejeitado.
+`func_800E1258` executa os helpers originais de direção, vetores, interpolação
+e criação de efeitos, cobrindo seus seis estados e células vazias, bloqueadas,
 ocupadas pelos dois lados e reis. Os manifestos registram os helpers isolados
-e as limita??es de cada valida??o. Cada perfil exige 200 execu??es completas
-por semente, com retorno, RAM viva e sequ?ncia de chamadas iguais.
+e as limitações de cada validação. Cada perfil exige 200 execuções completas
+por semente, com retorno, RAM viva e sequência de chamadas iguais.
+
+Em `func_800F3080`, a amplitude em `0x8008F756` precisa ser `s16`: o
+assembly usa `lh` e compara o resultado com sinal depois de subtrair 3.
+A primeira candidata com `u16` divergiu ao encerrar o efeito. Os oito perfis
+da versão corrigida cobrem os estados 0, 1, 2, 3, 4 e 99, divisores positivos
+nos limites, listas de alvos vazias, preenchidas e já consumidas. O construtor
+da lista, a criação de efeitos, o alocador e as funções trigonométricas rodam
+em código original; somente o som fica isolado por stub.
