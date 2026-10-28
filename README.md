@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████████░` **93.30%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `███████████████████░` **93.52%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -37,10 +37,10 @@ emulação contra a função original.
 |---|---|---|---|---|
 | `YUUGI.EXE` | 84.97% (660 fn) | `█████████░` **88.96%** | 886 / 1,035 (85.60%) | **149** |
 | `SLPM_860.96` | 85.01% (200 fn) | `█████████░` **91.00%** | 297 / 334 (88.92%) | **37** |
-| `CHESS.BIN` | 93.80% (743 fn) | `██████████` **95.54%** | 845 / 869 (97.24%) | **24** |
+| `CHESS.BIN` | 94.39% (746 fn) | `██████████` **96.13%** | 848 / 869 (97.58%) | **21** |
 | `RAISE.BIN` | 90.62% (736 fn) | `█████████░` **92.48%** | 928 / 942 (98.51%) | **14** |
 | `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 90.86% (2,518 fn) | `█████████░` **93.30%** | 3,145 / 3,369 (93.35%) | **224** |
+| **Total** | 91.07% (2,521 fn) | `█████████░` **93.52%** | 3,148 / 3,369 (93.44%) | **221** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
@@ -661,6 +661,14 @@ Em `MoveImage`, o comparador registra os oito bytes do `RECT` no momento da
 chamada. O compilador pode colocar o mesmo `RECT` em outra posição da pilha;
 os valores de origem, destino e dimensões precisam coincidir. Um teste negativo
 reprova dimensões diferentes mesmo quando o endereço do ponteiro é igual.
+
+O contrato de `RotAverage3` observa os três vetores antes das escritas, lê os
+quatro argumentos da pilha e escreve os cinco resultados na ordem do SDK.
+Também compara aliases e o conteúdo dos vetores. A profundidade é uma amostra
+determinística limitada às 1.024 entradas da tabela de ordenação do renderer;
+o modelo valida o uso dos buffers e das chamadas, com resultados numéricos
+opacos em vez de emular a matemática do GTE. Os testes negativos alteram uma
+coordenada e os aliases dos buffers para garantir a detecção dessas diferenças.
 
 Para funções com cinco ou seis argumentos, as diretivas `arg4` e `arg5` também
 podem fixar ou limitar os valores enviados na pilha MIPS (`sp+0x10` e

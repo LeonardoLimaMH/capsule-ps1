@@ -86,6 +86,61 @@ def projection4(base=0x801FFD00, alias_fourth_input=False, name='RotTransPers4')
     return uc, inputs, outputs, event, result
 
 
+def projection3(base=0x801FFD00, alias_third_input=False, changed_z=False):
+    uc = Uc(UC_ARCH_MIPS, UC_MODE_MIPS32 | UC_MODE_LITTLE_ENDIAN)
+    uc.mem_map(0, 0x200000)
+    inputs = tuple(base + i * 8 for i in range(3))
+    outputs = tuple(base + 0x40 + i * 8 for i in range(5))
+    if alias_third_input:
+        outputs = (inputs[2],) + outputs[1:]
+    for i, pointer in enumerate(inputs):
+        uc.mem_write(pointer & 0x1FFFFFFF,
+                     struct.pack('<4h', i + 1, i + 2, i + 3 + int(changed_z and i == 1), 0))
+    for pointer in outputs:
+        if pointer not in inputs:
+            uc.mem_write((pointer & 0x1FFFFFFF) - 4, b'\xA5' * 12)
+    event, result = sdk.execute('RotAverage3', uc, inputs + outputs, {}, 1, 17)
+    return uc, inputs, outputs, event, result
+
+
+def test_three_vector_contract_observes_content_aliases_and_exact_output_widths():
+    uc, _, outputs, event, result = projection3()
+    assert 0 <= result < 1024
+    assert (event, result) == projection3(0x801FFB00)[3:]
+    for pointer in outputs:
+        data = bytes(uc.mem_read((pointer & 0x1FFFFFFF) - 4, 12))
+        assert data[:4] == data[8:] == b'\xA5' * 4
+        assert data[4:8] != b'\xA5' * 4
+    for changed in [projection3(changed_z=True)[3], projection3(alias_third_input=True)[3]]:
+        assert difftest.same_calls(([event], [(None,) * (len(event) - 1)]),
+                                  ([changed], [(None,) * (len(changed) - 1)]),
+                                  0x80180000, 0x80190000, True) == (False, 0)
+    _, _, _, aliased, _ = projection3(alias_third_input=True)
+    assert aliased[15:18] == (3, 4, 5)  # input three was captured before its overwrite
+
+
+def test_three_vector_dispatch_reads_all_four_stack_arguments():
+    uc, inputs, outputs, expected, value = projection3()
+    ram = bytearray(uc.mem_read(0, difftest.RAM_SIZE))
+    words = [0x27BDFFD0, 0xAFBF0028, 0x0C004400, 0,
+             0x8FBF0028, 0x03E00008, 0x27BD0030]
+    ram[0x10000:0x10000 + len(words) * 4] = b''.join(w.to_bytes(4, 'little') for w in words)
+    sp = difftest.STACK_TOP - 0x30
+    offset = (sp + 0x10) & 0x1FFFFFFF
+    ram[offset:offset + 16] = struct.pack('<4I', *outputs[1:])
+    regs = dict(zip((UC_MIPS_REG_A0, UC_MIPS_REG_A1, UC_MIPS_REG_A2, UC_MIPS_REG_A3),
+                    inputs + (outputs[0],)))
+    regs[UC_MIPS_REG_SP] = difftest.STACK_TOP
+    result, error = difftest.run(0x80010000, regs, bytes(ram), {0x80011000: 'RotAverage3'},
+                                 [], salt=17, contracts=frozenset({'RotAverage3'}))
+    assert error is None
+    assert result[0][0] == value
+    assert result[2][0] == [expected]
+    for pointer in outputs:
+        offset = pointer & 0x1FFFFFFF
+        assert result[1][offset:offset + 4] == bytes(uc.mem_read(offset, 4))
+
+
 @pytest.mark.parametrize('name', ['RotTransPers4', 'RotAverage4'])
 def test_four_vectors_compare_stack_arguments_and_write_all_six_outputs(name):
     uc, _, outputs, event, result = projection4(name=name)

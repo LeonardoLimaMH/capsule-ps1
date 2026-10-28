@@ -6,7 +6,7 @@ deterministic samples shared by both executions; ordinary RAM checks still apply
 import struct
 import zlib
 
-NAMES = frozenset({'RotTransPers', 'RotTransPers4', 'RotAverage4', 'SetRotMatrix', 'SetTransMatrix'})
+NAMES = frozenset({'RotTransPers', 'RotTransPers4', 'RotAverage3', 'RotAverage4', 'SetRotMatrix', 'SetTransMatrix'})
 
 
 def _offset(pointer, size):
@@ -48,6 +48,25 @@ def execute(name, uc, args, state, call_index, salt):
         data = bytes(uc.mem_read(base + 20, 12))
         state[name] = data
         return ('contract:' + name, _identity(pointer), *struct.unpack('<3I', data)), None
+    if name == 'RotAverage3':
+        if len(args) != 8:
+            raise ValueError(name + ' requires four register and four stack arguments')
+        inputs = [_offset(p, 8) for p in args[:3]]
+        outputs = [_offset(p, 4) for p in args[3:]]
+        # RTPT loads all three vectors before the first output store.
+        vectors = [bytes(uc.mem_read(p, 8))[:6] for p in inputs]
+        flag = 0
+        for index, vector in enumerate(vectors):
+            xy, p, current_flag, result = _sample(vector, state, call_index * 3 + index, salt)
+            flag |= current_flag
+            uc.mem_write(outputs[index], struct.pack('<I', xy))
+        for offset, value in zip(outputs[3:], (p, flag)):
+            uc.mem_write(offset, struct.pack('<I', value))
+        spans = [(p, 6) for p in inputs] + [(p, 4) for p in outputs]
+        event = ('contract:' + name, *map(_identity, args),
+                 *struct.unpack('<9H', b''.join(vectors)), *_aliases(spans))
+        # Opaque samples stay inside the renderer's 1024-entry ordering table.
+        return event, result & 0x3FF
     if name in ('RotTransPers4', 'RotAverage4'):
         if len(args) != 10:
             raise ValueError(name + ' requires four register and six stack arguments')
