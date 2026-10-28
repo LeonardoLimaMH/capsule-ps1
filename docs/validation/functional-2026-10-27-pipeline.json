@@ -6252,5 +6252,133 @@
         "validated_source_sha256": "89a31cbd7069e449d10d952f76921b55b0045ea9147fd7764a872c722a320ea2"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_8009FF58",
+    "source_sha256": "059fb61e5fb6eba513a3b7d2e0cf219020d8312dcb4f277a3ed20b7d48ea612e",
+    "validated_source_sha256": "1c73fca9a730c0672270130347473faebb91eb29eccda89f3a66132c619e9514",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_text_thresholds_and_probability_effect",
+    "validation_model": "Text count thresholds 14/15/28/29, progress step clamping and negative step; drawing helpers stubbed, all nine call arguments compared; strict v0, RAM and calls; 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009FF58 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009FF58 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "count15",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009FF58 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "47f06eb80037cfc6e5ff739b6152ebbcdedc3d610e86dd2c24884678d49240a4"
+      },
+      {
+        "profile": "count15",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009FF58 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "47f06eb80037cfc6e5ff739b6152ebbcdedc3d610e86dd2c24884678d49240a4"
+      },
+      {
+        "profile": "count28",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009FF58 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "5dae9e3e614c5a716bbbcd8546510e34b18a6e0a517e69969d3c3f010df8825a"
+      },
+      {
+        "profile": "count28",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009FF58 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "5dae9e3e614c5a716bbbcd8546510e34b18a6e0a517e69969d3c3f010df8825a"
+      },
+      {
+        "profile": "count29",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009FF58 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "887afc230b8e951d4f48336a81bc8970042b92ced42cb6fa92e04dc84f10ec73"
+      },
+      {
+        "profile": "count29",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009FF58 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "887afc230b8e951d4f48336a81bc8970042b92ced42cb6fa92e04dc84f10ec73"
+      },
+      {
+        "profile": "negative",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009FF58 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "bb1841e4588dd6b49fe5c342c28d13053cd183f3fb5575c184e203bf4631aafe"
+      },
+      {
+        "profile": "negative",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009FF58 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "bb1841e4588dd6b49fe5c342c28d13053cd183f3fb5575c184e203bf4631aafe"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800EF1FC",
+    "source_sha256": "f0efcc9ccf5eedbd1d3e96a1fe6bc00051424fb5f60890258b1325c3a1e24c49",
+    "validated_source_sha256": "2a1b9d2c8c0e86fa189f9419be53d8f39fea03c1a1ac66760964e064100ce09b",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_text_thresholds_and_probability_effect",
+    "validation_model": "Original allocator, probability, RNG, orientation and vector helpers; both extreme unit indices and selected actor indices; random signed base rates, statistic differences, board heights and sprite shorts; fixed byte-addressed card fields; sound stubbed; strict v0, RAM and calls; 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EF1FC - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EF1FC - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "last",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EF1FC - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "18a683bcf59fc04953cc45fcfd8ad7f75fa41e93644394bc193059b219f1469c"
+      },
+      {
+        "profile": "last",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EF1FC - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "18a683bcf59fc04953cc45fcfd8ad7f75fa41e93644394bc193059b219f1469c"
+      }
+    ]
   }
 ]
