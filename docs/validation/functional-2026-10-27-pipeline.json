@@ -6030,5 +6030,27 @@
         "validated_source_sha256": "ef61d044e01a2585ada96a677e567be85cb8f2bfe9a8874c13c122468400be40"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800C87C0",
+    "source_sha256": "3ebef9d98fec110720814777dda8b412b87ea137d8368ee44887cee7d461b7fa",
+    "validated_source_sha256": "3fc186bbb455a1fd583edb8232fc84119c6594608cced06f77a569c17679ac8c",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_cell_texture_double_buffer_update",
+    "validation_model": "Prepared board, cell index map, descriptor table and two distinct renderer buffers; randomized 12-byte texture descriptors, texture and cell indices, 13-bit field boundaries and initial board words; strict v0 and full live RAM including both renderer buffers; 200 complete trials per seed",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C87C0 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C87C0 - 200 tentativas identicas\n"
+      }
+    ]
   }
 ]
