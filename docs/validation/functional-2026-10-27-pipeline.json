@@ -5282,5 +5282,27 @@
         "validated_source_sha256": "d367d9e0793c8479ed8c891d063f57c472e9bda04975434145d91eb069aa5d25"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800EDC1C",
+    "source_sha256": "cfbc9b23d13896703f13c76eada6e8258f8e265a55ac8d8676ef67ae1f448f54",
+    "validated_source_sha256": "efc8c6c2a1d007f826fc737a4349b358d1d7ec11a0e3fee318eca9c4c4cb8ed2",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_effect_constructor_signed_scale",
+    "validation_model": "Original task allocator and initialized task pool, descriptor heights 0/1/63 and signed short scale boundary values, board indices 0-15; strict v0, call trace and task RAM writes; 200 complete trials per seed",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EDC1C - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EDC1C - 200 tentativas identicas\n"
+      }
+    ]
   }
 ]
