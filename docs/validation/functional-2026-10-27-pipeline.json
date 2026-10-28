@@ -4938,5 +4938,133 @@
         "validated_source_sha256": "9da540067f515b4b398c4b4fe2ad9f05a86af7958de215c037b429f98c04f33c"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_8009EB3C",
+    "source_sha256": "b6341cdd47a389f797010ba67c62c9b9f3e37f4d9c41022eff99fe3ec99c5301",
+    "validated_source_sha256": "2c1296c9f1ddedc46abe307d43c2dab1a7feee51f5134012d673e0338ee5c1a3",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_actor_orientation_state_profiles",
+    "validation_model": "Real board flag and orientation lookup helpers, randomized board and actor bytes; state 0, 1, and 2 branches; strict calls, v0 and RAM, 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009EB3C - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009EB3C - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "state0-real",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009EB3C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "9483372cf2033c312c87f3f77f8533806911e73e3d305fbdd958240ec9f0f7ad"
+      },
+      {
+        "profile": "state0-real",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009EB3C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "9483372cf2033c312c87f3f77f8533806911e73e3d305fbdd958240ec9f0f7ad"
+      },
+      {
+        "profile": "state2-real",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009EB3C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "7ed302f56361847b12fc1b2298875744d29bb0811c7e4cc0985382f38e0a1f61"
+      },
+      {
+        "profile": "state2-real",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009EB3C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "7ed302f56361847b12fc1b2298875744d29bb0811c7e4cc0985382f38e0a1f61"
+      },
+      {
+        "profile": "state2",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009EB3C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "9011ac4ed0a909d2b5705fb11f7a1d95fcdab47c4704f1040330a5c01257a05f"
+      },
+      {
+        "profile": "state2",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009EB3C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "9011ac4ed0a909d2b5705fb11f7a1d95fcdab47c4704f1040330a5c01257a05f"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_8009C278",
+    "source_sha256": "c7fb8b726926fd16c94d9d9a31a2d1bc81d3296d937be550d7436308de9ad408",
+    "validated_source_sha256": "b69442d60b253925e37e5405cc1461cc00f21e44e9f86f8a09ac8a647d7a25bc",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_image_sprite_rect_contents",
+    "validation_model": "MoveImage RECT bytes at call boundary, original resource lookup helper and sprite path; image, sprite and broad board indices, strict v0/RAM and call arguments, 200 complete trials per seed",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009C278 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009C278 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "sprite",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009C278 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "894dc7dce8f7d8fa0b840c580b0b370411af50e033ac36d4a6981b81f127d483"
+      },
+      {
+        "profile": "sprite",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009C278 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "894dc7dce8f7d8fa0b840c580b0b370411af50e033ac36d4a6981b81f127d483"
+      },
+      {
+        "profile": "wide-sprite",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009C278 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "f31dae5679c9b9b0aaa9a6007a005d46de2ff2364fd7953d6b429f4e1a091811"
+      },
+      {
+        "profile": "wide-sprite",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_8009C278 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "f31dae5679c9b9b0aaa9a6007a005d46de2ff2364fd7953d6b429f4e1a091811"
+      }
+    ]
   }
 ]

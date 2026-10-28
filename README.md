@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `██████████████████░░` **90.54%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `██████████████████░░` **90.59%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -37,10 +37,10 @@ emulação contra a função original.
 |---|---|---|---|---|
 | `YUUGI.EXE` | 84.97% (660 fn) | `█████████░` **88.96%** | 886 / 1,035 (85.60%) | **149** |
 | `SLPM_860.96` | 85.01% (200 fn) | `█████████░` **91.00%** | 297 / 334 (88.92%) | **37** |
-| `CHESS.BIN` | 90.27% (713 fn) | `█████████░` **92.01%** | 815 / 869 (93.79%) | **54** |
+| `CHESS.BIN` | 90.41% (715 fn) | `█████████░` **92.15%** | 817 / 869 (94.02%) | **52** |
 | `RAISE.BIN` | 85.34% (721 fn) | `█████████░` **87.20%** | 913 / 942 (96.92%) | **29** |
 | `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 88.09% (2,473 fn) | `█████████░` **90.54%** | 3,100 / 3,369 (92.02%) | **269** |
+| **Total** | 88.14% (2,475 fn) | `█████████░` **90.59%** | 3,102 / 3,369 (92.07%) | **267** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
@@ -656,6 +656,11 @@ Tentativas em que os dois lados travam igualmente são **inconclusivas** e nunca
 contam como aprovação. A
 suíte inclui um teste negativo que garante que o harness reprova uma versão
 propositalmente errada.
+
+Em `MoveImage`, o comparador registra os oito bytes do `RECT` no momento da
+chamada. O compilador pode colocar o mesmo `RECT` em outra posição da pilha;
+os valores de origem, destino e dimensões precisam coincidir. Um teste negativo
+reprova dimensões diferentes mesmo quando o endereço do ponteiro é igual.
 
 Para funções com cinco ou seis argumentos, as diretivas `arg4` e `arg5` também
 podem fixar ou limitar os valores enviados na pilha MIPS (`sp+0x10` e

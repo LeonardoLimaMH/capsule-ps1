@@ -243,6 +243,13 @@ def read_cstr(uc, v):
     return data[:end]
 
 
+def read_move_image_rect(uc, v):
+    """MoveImage reads the four halfwords of RECT during the call."""
+    if not 0x80000000 <= v <= 0x80000000 + RAM_SIZE - 8:
+        return None
+    return bytes(uc.mem_read(v & 0x1FFFFFFF, 8))
+
+
 def same_calls(a, b, cand_lo, cand_hi, relaxed, alias=(None, None)):
     """Chamadas iguais. relaxed (--abi): só os argumentos que a função chamada lê contam
     (tools/arity.py; o resto é lixo nos registradores), e um ponteiro diferente também
@@ -250,9 +257,12 @@ def same_calls(a, b, cand_lo, cand_hi, relaxed, alias=(None, None)):
     duas strings são iguais. alias: (endereço da função no candidato, no original): a
     função que passa o próprio endereço (callback de si mesma) é a mesma dos dois lados."""
     (ca, sa), (cb, sb) = a, b
-    if ca == cb:
+    if ca == cb and all(x[0] != "MoveImage" or sa[k][0] == sb[k][0]
+                        for k, x in enumerate(ca)):
         return True, None
     for k, (x, y) in enumerate(zip(ca, cb)):
+        if x[0] == y[0] == "MoveImage" and (sa[k][0] is None or sa[k][0] != sb[k][0]):
+            return False, k
         if x == y:
             continue
         if x[0].startswith(('contract:', 'io:')) or y[0].startswith(('contract:', 'io:')):
@@ -266,7 +276,9 @@ def same_calls(a, b, cand_lo, cand_hi, relaxed, alias=(None, None)):
         for i in idx:
             u, w = x[1 + i], y[1 + i]
             if u != w and (w, u) != alias and not (cand_lo <= w < cand_hi and sa[k][i] is not None
-                                                   and sa[k][i] == sb[k][i]):
+                                                   and sa[k][i] == sb[k][i]) and not (
+                    x[0] == "MoveImage" and i == 0 and sa[k][i] is not None
+                    and sa[k][i] == sb[k][i]):
                 return False, k
     if len(ca) != len(cb):
         return False, min(len(ca), len(cb))
@@ -335,7 +347,8 @@ def run(entry, regs, ram, stubs, extra, game_names=frozenset(), guard=(), salt=N
             strings.append((None,) * (len(event) - 1))
         else:
             calls.append((name,) + args)
-            strings.append(tuple(read_cstr(uc, v) for v in args))
+            strings.append(tuple(read_move_image_rect(uc, v) if name == "MoveImage" and i == 0
+                                 else read_cstr(uc, v) for i, v in enumerate(args)))
         if contract_return is not None:
             uc.reg_write(UC_MIPS_REG_V0, contract_return)
             return

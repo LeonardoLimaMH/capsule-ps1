@@ -30,3 +30,13 @@ def test_io_differences_are_observed_outside_main_ram(kind):
     assert left[:2] == right[:2]  # all returned registers and the entire main RAM
     assert left[2][0][0] == ('io:W', 0x1F801100, 4, 0x1234)
     assert difftest.same_calls(left[2], right[2], 0x80180000, 0x80190000, True)[0] is False
+
+
+def test_move_image_compares_rect_contents_across_stack_locations():
+    rect = bytes.fromhex('c003800120008000')
+    original = ([('MoveImage', 0x801FFEE8, 320, 0, 0)], [(rect, None, None, None)])
+    relocated = ([('MoveImage', 0x801FFEE0, 320, 0, 0)], [(rect, None, None, None)])
+    assert difftest.same_calls(original, relocated, 0x80180000, 0x80190000, True)[0]
+
+    changed = ([('MoveImage', 0x801FFEE8, 320, 0, 0)], [(bytes.fromhex('c003800120000000'), None, None, None)])
+    assert not difftest.same_calls(original, changed, 0x80180000, 0x80190000, True)[0]
