@@ -5220,5 +5220,27 @@
         "validated_source_sha256": "ac5b127c52bfdccd27be8d59ed47ca206ba47635601f48b7c0b25456c13e4d42"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800FE5B0",
+    "source_sha256": "f752b44f151bc8d4a203d81ad5ab2a7c85e7a7f5f1dc4420cdbd0b0b5859b5d4",
+    "validated_source_sha256": "85a122ad7e5c5ccaed84cc94145b72e596ec6595cb33adee8f063b218f4abef6",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_distance_signed_board_height",
+    "validation_model": "Random 13x13 board heights and byte coordinates, target indices 0-15 cover valid and out-of-board branches; signed halfword height confirmed by lh in original; SquareRoot0 SDK stub records squared-distance input (original execution unsupported); strict v0, calls and RAM; 200 complete trials per seed",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FE5B0 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FE5B0 - 200 tentativas identicas\n"
+      }
+    ]
   }
 ]
