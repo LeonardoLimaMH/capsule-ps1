@@ -3838,5 +3838,27 @@
         "message": "[EQUIVALENTE] chess:func_800A95F8 ? 200 tentativas id?nticas\n"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800FF0A0",
+    "source_sha256": "7f99db809f7f254984fd4d4f5bfae71173826f807d7f565501192e3b0b2639a1",
+    "validated_source_sha256": "9c3bc07ef2330c32d878fd9d8afcb0841f07a144f8f0be47d24247b94e83e246",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_proto23_projection_fixture",
+    "validation_model": "Original registers, RAM and SDK RotTransPers contract; valid actor, vector and both initialization states; opaque GTE numerical output",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FF0A0 ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FF0A0 ? 200 tentativas id?nticas\n"
+      }
+    ]
   }
 ]
