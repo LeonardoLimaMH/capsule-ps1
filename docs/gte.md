@@ -23,6 +23,16 @@ instrução GTE contava como "não suportada", e essas rotinas não podiam ser v
   **Licença:** o DuckStation é CC BY-NC-ND 4.0. Nenhum código dele foi copiado ou
   adaptado: `tools/gte.py` é implementação própria a partir da especificação. O clone
   local fica em `ref/duckstation/`, fora do git (`.git/info/exclude`), e não é publicado.
+- **psxe** (Allkern): <https://github.com/allkern/psxe>, licença **MIT**. O GTE fica em
+  `psx/cpu.c`. É o oráculo independente previsto em `tools/gte_oracle.py`: o `cpu.c` é
+  compilado num harness e roda os mesmos estados e instruções que o `tools/gte.py`,
+  comparando os 64 registradores. O código não é copiado para o repositório; o clone
+  fica em `ref/psxe/` (fora do git) e o compilador nativo vem da imagem Docker.
+- **ARMSX1**: <https://github.com/ARMSX2/ARMSX1>, um fork do psxe. Licença mista: o
+  `LICENSE` é LGPLv3, o código herdado do psxe é MIT (`LICENSES/UPSTREAM-MIT.txt`) e o
+  README declara o material próprio do ARMSX como proprietário ("all rights reserved").
+  As funções do GTE no `psx/cpu.c` do ARMSX1 são idênticas às do psxe (conferido função a
+  função), então o projeto usa o psxe original, só MIT, e não o ARMSX1.
 
 ## Implementação (`tools/gte.py`)
 
