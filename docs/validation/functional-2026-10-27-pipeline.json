@@ -3816,5 +3816,27 @@
     ],
     "validated_source_sha256": "3054df595813b88c71d93b3abf15321bdc2e29c0603f12030bd9884d06503d74",
     "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800A95F8",
+    "source_sha256": "81fa28c0d0f380bad66c594763e18590fd390ed01b150e1889a95dc9ae81126f",
+    "validated_source_sha256": "bb2158d4435a4b7b24dbda7b9a9d4855f076d5b8e4dbf1b2f3426e33a85b7244",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_proto23_render_fixture",
+    "validation_model": "Original registers, RAM and calls; initialized GPU primitive buffer and active rendering branch",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A95F8 ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A95F8 ? 200 tentativas id?nticas\n"
+      }
+    ]
   }
 ]
