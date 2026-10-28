@@ -5918,5 +5918,117 @@
         "validated_source_sha256": "d7fed93c09657de15d3f00906d9a704f2413305ba5b7382d6ecaad5febd8411a"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800B6D2C",
+    "source_sha256": "83a902c5323719537a3190a19a2b34fea726aa9f02475727f285974b46504453",
+    "validated_source_sha256": "17ae00fcb15bbe3d1143b71111c4dc97bf6859f03d3fcde2645ab4ae1c5dd5e6",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_recursive_search_and_unique_placement",
+    "validation_model": "Original buffer clear, forward move, recursive diagonal search and tile helpers; missing forward helper coordinates recovered from MIPS; both sides, random heights/ranges, explicit diagonal target and blocked terrain; strict v0, RAM and calls; 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B6D2C - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B6D2C - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "side1",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B6D2C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "2c050b0a48f1895625b3f8587e37d5be782620bac2425bae256fec7a6e6e3a61"
+      },
+      {
+        "profile": "side1",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B6D2C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "2c050b0a48f1895625b3f8587e37d5be782620bac2425bae256fec7a6e6e3a61"
+      },
+      {
+        "profile": "target",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B6D2C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "37a525b0f49d234f817f6f31029939da33c3555360fae633f6c0a6041993a0a4"
+      },
+      {
+        "profile": "target",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B6D2C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "37a525b0f49d234f817f6f31029939da33c3555360fae633f6c0a6041993a0a4"
+      },
+      {
+        "profile": "blocked",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B6D2C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "1a1e0f746f1eb60569e5323d9de73e9a551f6d03a6c0b1e20db12315ae4b7dfc"
+      },
+      {
+        "profile": "blocked",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B6D2C - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "1a1e0f746f1eb60569e5323d9de73e9a551f6d03a6c0b1e20db12315ae4b7dfc"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800FFAB0",
+    "source_sha256": "bb223899590a55c0db6ad585825b247431f13e19bfcdf84bbe402a7269c50ece",
+    "validated_source_sha256": "c1efbe1e128e54da213f2fc242ee109b7fa331e31800a4808735ab1d4a26ddd5",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "chess_recursive_search_and_unique_placement",
+    "validation_model": "Original RNG, bounded selection and orientation helpers; both sides and types 1/2, stored and random layout mode, six distinct available cells require retries without duplicates; byte coordinate table confirmed by lbu; strict v0, RAM and calls; 200 complete trials per seed and profile",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FFAB0 - 200 tentativas identicas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FFAB0 - 200 tentativas identicas\n"
+      }
+    ],
+    "extra_profiles": [
+      {
+        "profile": "side1",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FFAB0 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "ef61d044e01a2585ada96a677e567be85cb8f2bfe9a8874c13c122468400be40"
+      },
+      {
+        "profile": "side1",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800FFAB0 - 200 tentativas identicas\n",
+        "identical_linked_blob": true,
+        "validated_source_sha256": "ef61d044e01a2585ada96a677e567be85cb8f2bfe9a8874c13c122468400be40"
+      }
+    ]
   }
 ]
