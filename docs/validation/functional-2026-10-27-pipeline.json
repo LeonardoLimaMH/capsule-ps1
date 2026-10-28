@@ -3882,5 +3882,27 @@
         "message": "[EQUIVALENTE] chess:func_800ADAA4 ? 200 tentativas id?nticas\n"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800B97B4",
+    "source_sha256": "25c52478c268ae39b9883f6437870f94b3fad2a4aa44c58de26c956172b7cf54",
+    "validated_source_sha256": "adef881ab4cf3e20253306aab86503ec375962454d2c93c3f1e934cee1f1fbda",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_proto23_board_fixture",
+    "validation_model": "Original board index lookup, display update and resource lookup helpers, registers, RAM and calls; bounded board positions",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B97B4 ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B97B4 ? 200 tentativas id?nticas\n"
+      }
+    ]
   }
 ]
