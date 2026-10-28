@@ -34,9 +34,11 @@ u32 recovered(s32 a, s32 b, s32 c) {
 
 
 @pytest.mark.parametrize('compiler', ['2.7.2-psx', '2.8.1-psx'])
-def test_compiled_frame_preserves_contiguity_and_aliases(tmp_path, compiler):
-    code = functional_stack.frame_variant(SOURCE, 'recovered')
+@pytest.mark.parametrize('compact', [False, True])
+def test_compiled_frame_preserves_contiguity_and_aliases(tmp_path, compiler, compact):
+    code = functional_stack.frame_variant(SOURCE, 'recovered', compact=compact)
     assert code and 's16 volatile *' in code
+    assert ('bytes[0x10]' if compact else 'bytes[0x20]') in code
     path = tmp_path / 'recovered.c'
     path.write_text(code)
     obj = match.compile_c(str(path), compiler, '-O2 -G8', target='chess')

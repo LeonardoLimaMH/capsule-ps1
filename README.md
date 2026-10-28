@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **1.96%**  
 **Total incluindo SDK PsyQ:** `░░░░░░░░░░░░░░░░░░░░` **2.45%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **5.05%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `█████████████████░░░` **84.30%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `█████████████████░░░` **86.42%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -37,10 +37,10 @@ emulação contra a função original.
 |---|---|---|---|---|
 | `YUUGI.EXE` | 83.93% (648 fn) | `█████████░` **87.93%** | 874 / 1,035 (84.44%) | **161** |
 | `SLPM_860.96` | 82.92% (198 fn) | `█████████░` **88.90%** | 295 / 334 (88.32%) | **39** |
-| `CHESS.BIN` | 74.82% (622 fn) | `████████░░` **76.56%** | 724 / 869 (83.31%) | **145** |
+| `CHESS.BIN` | 80.64% (644 fn) | `████████░░` **82.38%** | 746 / 869 (85.85%) | **123** |
 | `RAISE.BIN` | 84.39% (718 fn) | `█████████░` **86.25%** | 910 / 942 (96.60%) | **32** |
 | `ETC.BIN` | 99.08% (179 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 81.85% (2,365 fn) | `████████░░` **84.30%** | 2,992 / 3,369 (88.81%) | **377** |
+| **Total** | 83.97% (2,387 fn) | `█████████░` **86.42%** | 3,014 / 3,369 (89.46%) | **355** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
@@ -306,6 +306,21 @@ passados como vetor precisam continuar contíguos; variáveis C independentes n�
 garantem isso. Views `volatile` preservam os acessos sobrepostos. Tipos e tamanhos
 não resolvidos continuam pendentes. Os testes compilam com GCC 2.7.2 e 2.8.1 e
 verificam os seis bytes do vetor e uma escrita por uma view sobreposta.
+O gerador testa também um frame compacto, limitado ao intervalo efetivamente
+ocupado pelos locais, além do frame completo. Isso reduz espaço de pilha sem
+alterar os offsets entre views; ambas as formas são verificadas nos dois GCCs.
+
+Em `func_800F3BB4`, o helper original copia quatro bytes de cada cor, embora o
+chamador só inicialize RGB. O quarto byte continua observado na RAM do objeto.
+O frame compacto com `/* compiler: 2.8.1-psx */` preservou esse comportamento nas
+duas sementes, com atores e tarefas preparados. Um controle negativo aumenta o
+frame em oito bytes sem alterar RGB e precisa falhar pelos bytes de padding.
+Não descartar esses bytes para aprovar um candidato.
+
+As declarações de `__floatsidf` e `__muldf3` preservam o retorno bruto de 64 bits
+em `v0/v1`; declarar `s32` descartava a metade alta. Testes geram o C pelo mesmo
+adaptador Ghidra, compilam com os dois GCCs e verificam argumentos e ambas as
+metades do retorno em emulação.
 
 Em `func_800F234C`, a recuperação da pilha foi combinada com a restauração de
 argumentos do scheduler e a execução dos helpers originais de geometria, alocação

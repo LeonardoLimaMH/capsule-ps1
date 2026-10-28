@@ -249,5 +249,9 @@ def draft(target, func, asm, m2c='', char_signed=True):
             definitions.append(f'#define {name} ((s32 (*)())0x{int(function_address[1], 16):08X})')
             body = re.sub(r'&\s*\b' + re.escape(name) + r'\b', name, body)
             continue
-        definitions.append(f'extern s32 {name}();')
+        # These software-double helpers return the raw IEEE bits in v0/v1.
+        # Declaring s32 silently discards the high half even when Ghidra's body
+        # already carries the result in a 64-bit variable.
+        result_type = 'u64' if name in {'__floatsidf', '__muldf3'} else 's32'
+        definitions.append(f'extern {result_type} {name}();')
     return '#include "ghidra.h"\n' + '\n'.join(definitions) + '\n' + body + '\n'

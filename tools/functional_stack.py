@@ -11,7 +11,7 @@ DECL = re.compile(r'^[ \t]+([\w ]+?\s*\**)[ \t]*(' + NAME + r')'
                   r'[ \t]*(\[[ \t]*(0x[0-9a-fA-F]+|[0-9]+)[ \t]*\])?[ \t]*;[ \t]*$', re.M)
 
 
-def frame_variant(code, func):
+def frame_variant(code, func, compact=True):
     entry = re.search(r'\b' + re.escape(func) + r'\s*\([^;{}]*\)\s*\{', code)
     if not entry or 'recovered_local_frame' in code:
         return None
@@ -19,7 +19,7 @@ def frame_variant(code, func):
     declarations = list(DECL.finditer(body))
     if not declarations:
         return None
-    fields, top = {}, 0
+    fields, top, bottom = {}, 0, 0x4000
     for match in declarations:
         typ, name, offset, array, count = match.groups()
         typ = typ.strip()
@@ -33,6 +33,7 @@ def frame_variant(code, func):
             return None
         fields[name] = (typ, offset, number if array else None)
         top = max(top, offset)
+        bottom = min(bottom, offset - size)
     used = {m[0] for m in re.finditer(r'\b' + NAME + r'\b', body)}
     if used - fields.keys():
         return None
@@ -40,7 +41,8 @@ def frame_variant(code, func):
                for name, field in fields.items()):
         return None
     top = (top + 7) & ~7
-    lines = [f'\n  union {{ u64 align; u8 bytes[0x{top:X}]; }} recovered_local_frame;']
+    size = (top - bottom + 7) & ~7 if compact else top
+    lines = [f'\n  union {{ u64 align; u8 bytes[0x{size:X}]; }} recovered_local_frame;']
     for name, (typ, offset, count) in fields.items():
         cast = typ + ' volatile ' + (f'(*)[{count}]' if count else '*')
         lines.append(f'#define {name} (*({cast})(recovered_local_frame.bytes + 0x{top - offset:X}))')

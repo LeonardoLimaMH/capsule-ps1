@@ -1880,5 +1880,524 @@
     "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
     "validated_source_sha256": "56f6e6353625e95da2f0d38e9d3f235f231488166dd8ec86b2266663e6b62286",
     "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800A4A10",
+    "source_sha256": "a92b930945a05ef7a91467c25044d57afbceca0e4a21960139cf18c438c94e2a",
+    "accepted": true,
+    "candidate_batch": "functional_frames7",
+    "results": [
+      {
+        "variant": "fresh-prototypes+SDK4+real-tasks",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A4A10 \u2014 200 tentativas id\u00eanticas, 1908 inconclusivas, 8 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "fresh-prototypes+SDK4+real-tasks",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800A4A10 \u2014 200 tentativas id\u00eanticas, 1873 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "32cf8a599fffd69c8c1eac40d8275f5861f40af006db1ce7c976867bc3ef5a44",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800B3488",
+    "source_sha256": "b08f82dfe851654275d7d5e8ca0a0b5d1bdc46fefd626f41d3e3e8a167a0fa62",
+    "accepted": true,
+    "candidate_batch": "functional_frames7",
+    "results": [
+      {
+        "variant": "fresh-prototypes+SDK4+real-tasks",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B3488 \u2014 200 tentativas id\u00eanticas, 1924 inconclusivas, 5 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "fresh-prototypes+SDK4+real-tasks",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B3488 \u2014 200 tentativas id\u00eanticas, 2382 inconclusivas, 7 n\u00e3o suportadas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation"
+  },
+  {
+    "target": "chess",
+    "func": "func_800B52FC",
+    "source_sha256": "ff670f23edb79f9b50d875b9544a32794577b138efb0739b69c82f2b3b58e1a8",
+    "accepted": true,
+    "candidate_batch": "functional_v9",
+    "results": [
+      {
+        "variant": "draft",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B52FC \u2014 200 tentativas id\u00eanticas, 90 inconclusivas\n"
+      },
+      {
+        "variant": "draft",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B52FC \u2014 200 tentativas id\u00eanticas, 81 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800C2524",
+    "source_sha256": "a8d7fa2e713aca6b003a8bcd7aa5abd2342950b22d37a3563f4e90d3ccacc8e6",
+    "accepted": true,
+    "candidate_batch": "functional_v9",
+    "results": [
+      {
+        "variant": "ghidra-typed+byte-address",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C2524 \u2014 200 tentativas id\u00eanticas, 135 inconclusivas, 1 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "ghidra-typed+byte-address",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C2524 \u2014 200 tentativas id\u00eanticas, 145 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ],
+    "validated_source_sha256": "f474669465bffb485103ee9e2ec7c09cb8df0884db6a25224c35ae3c5b36d835",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800C71D4",
+    "source_sha256": "b13d5d59e203285b3f4a4d3d774509589eaec72150451755762d7c6b13a40452",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C71D4 \u2014 200 tentativas id\u00eanticas, 329 inconclusivas, 2 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800C71D4 \u2014 200 tentativas id\u00eanticas, 344 inconclusivas, 2 n\u00e3o suportadas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "e530a7552fa40ec98c2e5ab0b3aba8761b2985de2ffc4b0299efec9678b5f067",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800DDD34",
+    "source_sha256": "86a7c60489962f311898cb90a12e1dd11f5ed8a435121dce71a7ebeacc12ff4e",
+    "accepted": true,
+    "candidate_batch": "functional_v9",
+    "results": [
+      {
+        "variant": "draft",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DDD34 \u2014 200 tentativas id\u00eanticas, 162 inconclusivas, 2 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "draft",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DDD34 \u2014 200 tentativas id\u00eanticas, 155 inconclusivas, 1 n\u00e3o suportadas\n"
+      }
+    ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800DED1C",
+    "source_sha256": "4be97da4a34fa01f35f3f2511f774113eb095309fc7095d22444f2372784b576",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DED1C \u2014 200 tentativas id\u00eanticas, 21 inconclusivas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800DED1C \u2014 200 tentativas id\u00eanticas, 13 inconclusivas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "ffe1a1d3ac846fda24870215ce00d7858d7e387c1d940ce3bc6c60ef4097542d",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800E0538",
+    "source_sha256": "4c9ec247308570331d54919b02aa3c556342caa5c66b4a6f4e67ab0b19426414",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E0538 \u2014 200 tentativas id\u00eanticas, 24 inconclusivas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E0538 \u2014 200 tentativas id\u00eanticas, 15 inconclusivas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "63b587a43d87c3e14481fb0d8196d1be53c9284bef230b1d887b28dc515cca55",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800E0A1C",
+    "source_sha256": "1dc6ad70ebf84a3c17c5a9ff85b2613f8f12449c20f29a8d1ebc39f5e2b2b26c",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E0A1C \u2014 200 tentativas id\u00eanticas, 41 inconclusivas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E0A1C \u2014 200 tentativas id\u00eanticas, 22 inconclusivas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "4aba7a592503bf9ab0b75342af14402710beecea47d7051e21790d10b1d2cf16",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800E2778",
+    "source_sha256": "534bf52e5d67d2fb43e95bf2393bad84a753c66fb1a9c19047c73812cf636dc9",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E2778 \u2014 200 tentativas id\u00eanticas, 28 inconclusivas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E2778 \u2014 200 tentativas id\u00eanticas, 19 inconclusivas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "4c06ee4b28a184a2cd0193169e78ce054f17cfa6efdd9e4e1565f4a17b8a5d6d",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800E9C98",
+    "source_sha256": "d79303022c9afd9d79d6335843db65f657fc86083c27946c5f575f001a92b1ad",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E9C98 \u2014 200 tentativas id\u00eanticas, 8 inconclusivas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800E9C98 \u2014 200 tentativas id\u00eanticas, 8 inconclusivas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "71181df322a94d4954ec4fe338f21aca7adbc772f73e33a863a1524f0408b70e",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800EA97C",
+    "source_sha256": "7084c42f87a18e208fca4009c8f709ad5ee5be37e91337f06da522cb4ee628a1",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EA97C \u2014 200 tentativas id\u00eanticas, 17 inconclusivas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EA97C \u2014 200 tentativas id\u00eanticas, 6 inconclusivas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "a3e8483739762b184c1b34d480edbe8e4e2148dd9a9d4da788524f865e79f851",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800EAFE0",
+    "source_sha256": "7dae7f18f162579857fe1a75fd2feffc4fc0ab3bc7b81a0795e3575b1c22ffd4",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EAFE0 \u2014 200 tentativas id\u00eanticas, 501 inconclusivas, 3 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EAFE0 \u2014 200 tentativas id\u00eanticas, 465 inconclusivas, 3 n\u00e3o suportadas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "603b068b271f829954546c1d925ccbdab8d80cec24c11b6e7e2c6dc8e1d36927",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800EC22C",
+    "source_sha256": "49f350fb815dc6774810de9a0c89fed672339c5f2601f5c8525bd1eb9734e8c0",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EC22C \u2014 200 tentativas id\u00eanticas, 23 inconclusivas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EC22C \u2014 200 tentativas id\u00eanticas, 30 inconclusivas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "24f495398ce6a9666d81fb0ba2249c1e9243655031cb0484a694dfbcf8451e4d",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800ED3E0",
+    "source_sha256": "9277a3261004b3acd18d48bdb8ff1a0613188ae093ee9f2946e8d3372f5b9160",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800ED3E0 \u2014 200 tentativas id\u00eanticas, 35 inconclusivas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800ED3E0 \u2014 200 tentativas id\u00eanticas, 22 inconclusivas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "c0bd001abdbc815e851f68e694d032a90f1fae6fa3fed4fbf9c4fc412987f7b7",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800EF478",
+    "source_sha256": "e18a1e7d72d962112b12162cc04e512f561c3e7d4b028e27d0d8b27f1dc3a9c3",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.7.2-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EF478 \u2014 200 tentativas id\u00eanticas, 10 inconclusivas\n"
+      },
+      {
+        "variant": "compact+compiler-2.7.2-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800EF478 \u2014 200 tentativas id\u00eanticas, 2 inconclusivas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "de894b33df521f8024546073f35b9d10952cb6f468169630b6663e8d0fa3d84d",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800F0BEC",
+    "source_sha256": "b5532f239bccb41349eeb6cdbb47283fd5c05306c82a94813c006072ebd7fc23",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F0BEC \u2014 200 tentativas id\u00eanticas, 33 inconclusivas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F0BEC \u2014 200 tentativas id\u00eanticas, 18 inconclusivas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "5f29b00b0673240b800a84e58dcd955b647ed4607052cfc196558a542fb9e50c",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800F197C",
+    "source_sha256": "ca2f88ee1594f33225247d56d90afbecff58c4edb8e9a54d36abc2dde1d491c7",
+    "accepted": true,
+    "candidate_batch": "functional_frames7",
+    "results": [
+      {
+        "variant": "fresh-prototypes+SDK4+real-tasks",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F197C \u2014 200 tentativas id\u00eanticas, 16 inconclusivas\n"
+      },
+      {
+        "variant": "fresh-prototypes+SDK4+real-tasks",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F197C \u2014 200 tentativas id\u00eanticas, 26 inconclusivas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "9324da5e9d1d43da3cabcaaf50877ace666d7835e0fde4b9ab43f77c78591178",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800F373C",
+    "source_sha256": "a21735951167a6385501f854d3bd6db46329ef08db6d3b994873798ca4f292da",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F373C \u2014 200 tentativas id\u00eanticas, 7 inconclusivas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F373C \u2014 200 tentativas id\u00eanticas, 6 inconclusivas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "81046cb5190142d00f15fb28bba06c427ca4d94218ec74bd92c62b09c1acea6f",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800F3BB4",
+    "source_sha256": "aea35adf718732c7b41a52958b08abd9e3089b1363566c6fbbbc6bc6c9f2886d",
+    "accepted": true,
+    "candidate_batch": "functional_compact281b",
+    "results": [
+      {
+        "variant": "compact+gcc281",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3BB4 \u2014 200 tentativas id\u00eanticas, 2 inconclusivas\n"
+      },
+      {
+        "variant": "compact+gcc281",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F3BB4 \u2014 200 tentativas id\u00eanticas, 3 inconclusivas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "a33b3a1e05d5563ab6e5be693a72963787e5018bd8825e20edd6e890bff585ee",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800F4484",
+    "source_sha256": "bae4d974a0ed1a331526cf9606880da22add642ae36a81031f9491ff55cbb640",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F4484 \u2014 200 tentativas id\u00eanticas, 16 inconclusivas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F4484 \u2014 200 tentativas id\u00eanticas, 8 inconclusivas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "67d49df4e8665327846d3b127f87ada6e2128a0008329133da051bf7ffcc1437",
+    "whitespace_cleanup_identical_linked_blob": true
+  },
+  {
+    "target": "chess",
+    "func": "func_800F68C8",
+    "source_sha256": "9ddd50c64a4b565a7f69de674863753218c66e0c4222513908308f43e0125565",
+    "accepted": true,
+    "candidate_batch": "functional_frames9",
+    "results": [
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F68C8 \u2014 200 tentativas id\u00eanticas, 500 inconclusivas, 6 n\u00e3o suportadas\n"
+      },
+      {
+        "variant": "compact+compiler-2.8.1-psx",
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800F68C8 \u2014 200 tentativas id\u00eanticas, 474 inconclusivas, 4 n\u00e3o suportadas\n"
+      }
+    ],
+    "validation_model": "Original task/geometry/soft-float helpers; opt-in opaque SDK buffer contracts, without GTE numerical emulation",
+    "validated_source_sha256": "8a3e9fd502fda020c6a2c81feaf6c4e068749a6abfbb1a1e14e881ced59ee137",
+    "whitespace_cleanup_identical_linked_blob": true
   }
 ]

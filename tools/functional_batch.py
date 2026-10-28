@@ -82,9 +82,10 @@ def candidates(target, func):
     for label, code in char_variants:
         layouts = [(label, code)]
         if STACK_FRAMES:
-            frame = functional_stack.frame_variant(code, func)
-            if frame:
-                layouts.append((label + '+stack-frame', frame))
+            for compact in [True, False]:
+                frame = functional_stack.frame_variant(code, func, compact=compact)
+                if frame:
+                    layouts.append((label + '+stack-frame' + ('' if compact else '+full'), frame))
         for variant_label, layout in layouts:
             for variant in [layout, arggaps.restore(layout, func)]:
                 if variant and variant not in seen:
