@@ -3904,5 +3904,27 @@
         "message": "[EQUIVALENTE] chess:func_800B97B4 ? 200 tentativas id?nticas\n"
       }
     ]
+  },
+  {
+    "target": "chess",
+    "func": "func_800B7F34",
+    "source_sha256": "46b040ff23e1c428aab21ca5b88d3d393576b85faa53ac343c536d723f5a7623",
+    "validated_source_sha256": "8185d20f15fdbe26b33d6f6308c26d85a539170a78e48c7cbf96ad1f18dd1f14",
+    "whitespace_cleanup_identical_linked_blob": true,
+    "accepted": true,
+    "candidate_batch": "functional_proto23_board_scan_fixture",
+    "validation_model": "Original task allocator, resource helper and board accessor, registers, RAM and calls; two board pointers and randomized active first cell",
+    "results": [
+      {
+        "seed": 1,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B7F34 ? 200 tentativas id?nticas\n"
+      },
+      {
+        "seed": 2,
+        "exit": 0,
+        "message": "[EQUIVALENTE] chess:func_800B7F34 ? 200 tentativas id?nticas\n"
+      }
+    ]
   }
 ]
