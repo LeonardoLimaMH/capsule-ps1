@@ -869,3 +869,15 @@ reduziu a diferença a duas instruções. Inicializar a base inteira dentro do
 o match com GCC 2.8.1. Os dois estados e os jogadores 0 e 5 passaram em 1.600
 execuções completas; os cinco SHA-1 foram preservados. Ver
 `docs/validation/byte-matching-2026-10-29-conditional-base.json`.
+
+O `tools/permute.py` agora usa os mesmos defines, opções do compilador e
+backend de `match.py`, incluindo `-gcoff`, e aceita `--g0fill`. O script de
+compilação usa a raiz da cópia de trabalho atual, permitindo buscas isoladas.
+Chamadas C89 sem declaração recebem apenas o protótipo implícito `int f()`
+no arquivo temporário, para que o verificador de tipos do permutador possa
+processá-las. Isso não recupera assinaturas de argumentos. Três testes
+verificam os callbacks e a igualdade de instruções e relocações entre os
+dois fluxos, incluindo caminhos com espaços e o perfil G0. A pontuação do
+permutador continua sendo só uma pista: todo vencedor precisa passar por
+`match.py`, pelo rebuild completo e pela validação diferencial antes de entrar
+em `src/`.
