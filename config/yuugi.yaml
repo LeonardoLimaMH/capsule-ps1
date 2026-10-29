@@ -286,6 +286,7 @@ segments:
       - [0x40C2C, c, sdk_libapi_pad]
       - [0x40D98, c, main_80050598]
       - [0x40DD0, c, main_800505D0]
+      - [0x40E48, c, main_800505D0__80050648]
       - [0x40E80, c, main_80050680]
       - [0x40F2C, c, main_8005072C]
       - [0x40F8C, c, sdk_libapi_patch]

@@ -1,5 +1,16 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800E15DC", func_800E15DC);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800E15DC", func_800E1624);
+typedef struct {
+    u8 pad[0x38];
+    u32 flags;
+} WorkAuxTaskRecordTask;
+typedef struct {
+    u8 pad[0x184];
+    WorkAuxTaskRecordTask *task;
+    u8 tail[0x614];
+} WorkAuxTaskRecord;
+u32 func_800E15DC(u32 player) {
+    extern WorkAuxTaskRecord D_80100F38[];
+    WorkAuxTaskRecord *record = &D_80100F38[player & 0xFFFF];
+    return (record->task->flags & 1) ^ 1;
+}
