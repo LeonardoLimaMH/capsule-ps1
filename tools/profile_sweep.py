@@ -19,6 +19,7 @@ Resultados (retomável: funções já registradas não são refeitas):
 Uso (dentro do container):
   profile_sweep.py [alvos...] [--limit N] [--jobs 4]
   profile_sweep.py --stage <alvo>   copia os casados no perfil da TU para .cache/auto/<alvo>
+  profile_sweep.py --stage <alvo> --all   inclui os casados em outro perfil (para --split)
 """
 import argparse
 import concurrent.futures
@@ -109,14 +110,15 @@ def sweep_one(target, func, tu):
     return (target, func, "DIFERENTE" if best[0] < 10 ** 6 else "ERRO", best[1], tu, best[2])
 
 
-def stage(target):
-    """copia para .cache/auto/<alvo> os casados no mesmo perfil da TU (integração direta)."""
+def stage(target, every=False):
+    """copia para .cache/auto/<alvo> os casados no mesmo perfil da TU (integração direta);
+    com every=True copia todos, para o assign_compilers.py --split separar as TUs."""
     auto = ROOT / ".cache" / "auto" / target
     auto.mkdir(parents=True, exist_ok=True)
     n = 0
     for line in RESULTS.read_text(encoding="utf-8").splitlines():
         t, func, res, prof, tu = line.split("\t")[:5]
-        if t == target and res == "MATCH" and prof == tu:
+        if t == target and res == "MATCH" and (every or prof == tu):
             shutil.copy(SWEEP / t / f"{func}.c", auto / f"{func}.c")
             (auto / f"{func}.gcc").write_text(prof + "\n", encoding="utf-8")
             n += 1
@@ -129,10 +131,11 @@ def main():
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--jobs", type=int, default=4)
     ap.add_argument("--stage")
+    ap.add_argument("--all", action="store_true", help="com --stage: inclui os casados em outro perfil")
     a = ap.parse_args()
     SWEEP.mkdir(parents=True, exist_ok=True)
     if a.stage:
-        stage(a.stage)
+        stage(a.stage, a.all)
         return
     done = set()
     if RESULTS.exists():
