@@ -121,7 +121,38 @@ void func_800E1068(s32 arg0) {
     } while (var_s0 < 7);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E10BC);
+typedef struct {
+    u8 pad[0x38];
+    u32 flags;
+} Task_800E10BC;
+typedef struct {
+    u8 pad[0x184];
+    Task_800E10BC *task;
+    u32 state;
+    u8 tail[0x608];
+    u32 flags;
+} Work_800E10BC;
+typedef struct {
+    u8 pad[0x198];
+    s16 a;
+    s16 b;
+    s16 value;
+    u8 tail[0xA];
+} Monster_800E10BC;
+void func_800E10BC(u32 player) {
+    extern Monster_800E10BC D_80091618[];
+    extern Work_800E10BC D_80100F38[];
+    u32 index=player & 0xFFFF;
+    u32 offset=index*0x79C;
+    u32 wbase=(u32)D_80100F38;
+    Work_800E10BC *work=(Work_800E10BC *)(wbase+offset);
+    u32 mbase=(u32)D_80091618;
+    Monster_800E10BC *monster=(Monster_800E10BC *)(mbase+index*0x1A8);
+    work->task->flags |= 1;
+    work->state = 4;
+    monster->b=-1;
+    monster->a=-1;
+}
 
 
 extern u8 D_80100F38[];

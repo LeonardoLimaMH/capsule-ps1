@@ -88,7 +88,20 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E66A4);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E680C);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E68D8);
+typedef struct {
+    u8 pad[0x1A2];
+    u16 timer;
+    u8 tail[4];
+} Record_800E68D8;
+void func_800E68D8(u32 player) {
+    extern Record_800E68D8 D_80091618[];
+    u32 base = (u32)D_80091618;
+    u32 offset = (player & 0xFFFF) * 0x1A8;
+    Record_800E68D8 *record = (Record_800E68D8 *)(base + offset);
+    record->timer /= 0x18;
+    func_800A752C();
+    record->timer = 0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E6948);
 

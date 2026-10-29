@@ -111,11 +111,3 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800B0740);
 void func_800B0A8C(void) {
 
 }
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800B0A94);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800B0B0C);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800B0DE4);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800B1088);

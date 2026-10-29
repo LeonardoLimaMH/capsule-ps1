@@ -185,3 +185,4 @@ src/raise/raise_800DEA54__800E1388.c 2.8.1-psx
 src/raise/raise_800DEA54__800E1674.c 2.8.1-psx
 src/raise/raise_800DEA54__800E1594.c 2.8.1-psx
 src/raise/raise_800DEA54__800E15DC.c 2.8.1-psx
+src/raise/raise_800AC34C__800B0A94.c 2.8.1-psx

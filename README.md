@@ -16,9 +16,9 @@ emulação contra a função original.
 ## Progresso
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **2.27%**  
-**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **2.82%**  
-**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.19%**  
+**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **2.30%**  
+**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **2.86%**  
+**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.22%**  
 **Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`; sobre o código convertível em C):** `████████████████████` **99.44%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
@@ -27,9 +27,9 @@ emulação contra a função original.
 | `YUUGI.EXE` | executável principal | 3.25% (6,712 / 206,372 B) | 155 / 732 | 9.88% (94 / 303 fn) | **4.58%** |
 | `SLPM_860.96` | loader / boot | 5.22% (1,084 / 20,756 B) | 29 / 119 | 7.86% (77 / 215 fn) | **7.01%** |
 | `CHESS.BIN` | overlay de batalha (tabuleiro) | 1.72% (7,268 / 421,956 B) | 100 / 867 | 100.00% (2 / 2 fn) | **1.74%** |
-| `RAISE.BIN` | overlay de criação de monstros | 2.43% (7,940 / 326,576 B) | 214 / 940 | 100.00% (2 / 2 fn) | **2.45%** |
+| `RAISE.BIN` | overlay de criação de monstros | 2.54% (8,304 / 326,576 B) | 217 / 940 | 100.00% (2 / 2 fn) | **2.56%** |
 | `ETC.BIN` | overlay de menus/diversos | 1.25% (1,112 / 88,992 B) | 13 / 189 | 0.00% (0 / 0 fn) | **1.25%** |
-| **Total** | | **2.27%** (24,116 / 1,064,652 B) | 511 / 2847 | 9.08% (175 / 522 fn) | **2.82%** |
+| **Total** | | **2.30%** (24,480 / 1,064,652 B) | 514 / 2847 | 9.08% (175 / 522 fn) | **2.86%** |
 
 **Equivalentes e pendências por binário (jogo + SDK):**
 
@@ -38,9 +38,9 @@ emulação contra a função original.
 | `YUUGI.EXE` | 93.09% (714 fn) | `██████████` **98.56%** | 963 / 970 (99.28%) | 65 | **7** |
 | `SLPM_860.96` | 85.72% (193 fn) | `██████████` **95.49%** | 299 / 302 (99.01%) | 32 | **3** |
 | `CHESS.BIN` | 98.26% (767 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | 0 | **0** |
-| `RAISE.BIN` | 97.55% (726 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
+| `RAISE.BIN` | 97.44% (723 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
 | `ETC.BIN` | 98.75% (176 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | 0 | **0** |
-| **Total** | 96.25% (2,576 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
+| **Total** | 96.22% (2,573 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código convertível: ficam de fora as rotinas que já eram assembly no
@@ -834,3 +834,10 @@ gêmea `func_80050648`, em YUUGI, recebeu a correção do endereço do buffer da
 BIOS já identificada no loader. O lote passou por 3.600 execuções diferenciais
 completas e pelo SHA-1 dos cinco binários. A evidência está em
 `docs/validation/byte-matching-2026-10-29-task-records.json`.
+
+Em mais três rotinas de RAISE, a ordem de inicialização das bases recuperou
+o escalonamento original. Em `func_800B0A94`, limpar os bits 3 e 4 em duas
+atribuições gera as duas instruções `and` originais; juntar as máscaras
+mantém o resultado funcional, mas muda os bytes. O lote completou 2.400
+execuções diferenciais e preservou os SHA-1 dos cinco binários. Ver
+`docs/validation/byte-matching-2026-10-29-record-mutations.json`.
