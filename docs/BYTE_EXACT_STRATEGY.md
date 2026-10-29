@@ -138,3 +138,19 @@ o retorno. Os testes dessa função desconsideram apenas `v0` e continuam
 comparando memória, chamadas e os outros registradores observados. O rebuild
 completo preserva **todos** os bytes, sem essa exceção. O registro explicita
 o diagnóstico e a limitação da análise de chamadas indiretas.
+
+Depois dessas tabelas, 472 funções CHESS de até `0x200` bytes passaram por
+alternativas de m2c: quatro casaram com o CDK. A mesma busca em 240 funções
+entre `0x200` e `0x600` não produziu matches; não repetir essa rodada sem uma
+nova hipótese. Retestar 163 variantes distintas anteriormente próximas do
+matching, agora com o CDK, recuperou duas funções RAISE. Os campos tipados
+dos registros de `0x1A8` bytes foram decisivos, incluindo testes de `0xFFFF`
+como sentinela sem sinal. O lote de seis passou em 2.400 execuções diferenciais
+sem casos inconclusivos e no rebuild completo. Registro:
+`validation/byte-matching-2026-10-29-cdk-records.json`.
+
+Executar `tools/twins.py` após cada conjunto relevante de matches permite
+reaproveitar funções repetidas entre executáveis e overlays. As relocações
+precisam ser adaptadas para os símbolos de destino; cada cópia passa pela
+mesma validação de uma candidata nova. A varredura seguinte encontrou três
+candidatas dessa forma, ainda sujeitas à integração e aos testes.

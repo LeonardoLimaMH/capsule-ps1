@@ -35,10 +35,15 @@ seguinte: as faixas `.rodata` geradas pelo compilador ocupam seus endereços
 originais. Mais 2.400 execuções diferenciais e os cinco SHA-1 confirmaram
 [esse lote CHESS](docs/validation/byte-matching-2026-10-29-switch-tables.json).
 
+Outra rodada integrou quatro funções CHESS e duas RAISE, combinando alternativas
+de m2c com a recompilação de variantes antigas no CDK. Mais 2.400 execuções
+diferenciais passaram, sem inconclusivas, e os cinco SHA-1 foram preservados:
+[registro dos seis matches](docs/validation/byte-matching-2026-10-29-cdk-records.json).
+
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `█░░░░░░░░░░░░░░░░░░░` **3.77%**  
-**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **4.32%**  
-**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **4.68%**  
+**Código do jogo decompilado em C (byte-matching):** `█░░░░░░░░░░░░░░░░░░░` **3.91%**  
+**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **4.44%**  
+**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **4.80%**  
 **Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`; sobre o código convertível em C):** `████████████████████` **99.44%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
@@ -46,10 +51,10 @@ originais. Mais 2.400 execuções diferenciais e os cinco SHA-1 confirmaram
 |---|---|---|---|---|---|
 | `YUUGI.EXE` | executável principal | 4.80% (9,904 / 206,356 B) | 186 / 732 | 11.39% (114 / 303 fn) | **6.11%** |
 | `SLPM_860.96` | loader / boot | 5.43% (1,128 / 20,756 B) | 30 / 119 | 8.93% (81 / 215 fn) | **7.80%** |
-| `CHESS.BIN` | overlay de batalha (tabuleiro) | 2.65% (11,168 / 421,956 B) | 125 / 867 | 100.00% (2 / 2 fn) | **2.66%** |
-| `RAISE.BIN` | overlay de criação de monstros | 4.55% (14,864 / 326,576 B) | 280 / 940 | 100.00% (2 / 2 fn) | **4.57%** |
+| `CHESS.BIN` | overlay de batalha (tabuleiro) | 2.92% (12,316 / 421,956 B) | 129 / 867 | 100.00% (2 / 2 fn) | **2.93%** |
+| `RAISE.BIN` | overlay de criação de monstros | 4.63% (15,124 / 326,576 B) | 282 / 940 | 100.00% (2 / 2 fn) | **4.65%** |
 | `ETC.BIN` | overlay de menus/diversos | 3.49% (3,104 / 88,992 B) | 31 / 189 | 0.00% (0 / 0 fn) | **3.49%** |
-| **Total** | | **3.77%** (40,168 / 1,064,636 B) | 652 / 2847 | 10.38% (199 / 522 fn) | **4.32%** |
+| **Total** | | **3.91%** (41,576 / 1,064,636 B) | 658 / 2847 | 10.38% (199 / 522 fn) | **4.44%** |
 
 **Equivalentes e pendências por binário (jogo + SDK):**
 
@@ -57,10 +62,10 @@ originais. Mais 2.400 execuções diferenciais e os cinco SHA-1 confirmaram
 |---|---|---|---|---|---|
 | `YUUGI.EXE` | 91.55% (663 fn) | `██████████` **98.56%** | 963 / 970 (99.28%) | 65 | **7** |
 | `SLPM_860.96` | 84.92% (188 fn) | `██████████` **95.48%** | 299 / 302 (99.01%) | 32 | **3** |
-| `CHESS.BIN` | 97.34% (742 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | 0 | **0** |
-| `RAISE.BIN` | 95.43% (660 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
+| `CHESS.BIN` | 97.07% (738 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | 0 | **0** |
+| `RAISE.BIN` | 95.35% (658 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
 | `ETC.BIN` | 96.51% (158 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | 0 | **0** |
-| **Total** | 94.76% (2,411 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
+| **Total** | 94.64% (2,405 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código convertível: ficam de fora as rotinas que já eram assembly no

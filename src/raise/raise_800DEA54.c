@@ -129,7 +129,29 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E0C08);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E0D84);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E0DF8);
+#include "common.h"
+
+#include "ghidra.h"
+typedef struct { u8 pad_0[0x110]; ushort field_110; u8 tail[0x96]; } Record_800E0DF8;
+ushort func_800E0DF8(void)
+
+{
+    extern M2C_UNK D_80091618[];
+  uint uVar1;
+  int iVar2;
+  ushort uVar3;
+
+  uVar3 = 0;
+  iVar2 = 1;
+  do {
+    uVar1 = func_800B1260(iVar2);
+    if ((uVar1 & 0xffff) != 0xffff) {
+      uVar3 = uVar3 | ((Record_800E0DF8 *)((u32)D_80091618 + ((uVar1 & 0xffff) * 0x1a8)))->field_110;
+    }
+    iVar2 = iVar2 + -1;
+  } while (-1 < iVar2);
+  return uVar3 & 1;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E0E8C);
 

@@ -1,0 +1,382 @@
+{
+  "baseline_commit": "e0bc25da361922c54097164f4bf06f9bb828827f",
+  "strategy": "Four CHESS matches from m2c alternatives on 472 small pending functions; 163 distinct previously promising hand-adjusted sources retried under CDK produced two RAISE matches. Typed record fields preserve 0x1A8 layout and unsigned sentinel tests.",
+  "searches": {
+    "chess_max_0x200": {
+      "functions": 472,
+      "matched": 4
+    },
+    "chess_0x200_to_0x600": {
+      "functions": 240,
+      "matched": 0
+    },
+    "prior_variants_cdk": {
+      "distinct_sources": 163,
+      "matched_functions": 2
+    }
+  },
+  "functions": [
+    {
+      "target": "chess",
+      "func": "func_800CEC5C",
+      "gcc": "2.7.2-cdk",
+      "integrated_source": "src/chess/chess_800C4ECC__800CB844.c",
+      "candidate_source": ".cache/six-round/func_800CEC5C.c",
+      "equivalent_source": "equiv/chess/func_800CEC5C.c",
+      "source_sha256": "778a542756cbebbd9e9dfeede5661021a574a91f0af8041d9b1b33311392257d",
+      "masked_instruction_match": true
+    },
+    {
+      "target": "chess",
+      "func": "func_800B4400",
+      "gcc": "2.7.2-cdk",
+      "integrated_source": "src/chess/chess__800B38B0.c",
+      "candidate_source": ".cache/six-round/func_800B4400.c",
+      "equivalent_source": "equiv/chess/func_800B4400.c",
+      "source_sha256": "b3659e650a01ad3bb449dcc341084fbe1370cab22c4ce1d6edce7899c96cd507",
+      "masked_instruction_match": true
+    },
+    {
+      "target": "chess",
+      "func": "func_800B8DA0",
+      "gcc": "2.7.2-cdk",
+      "integrated_source": "src/chess/chess__800B38B0.c",
+      "candidate_source": ".cache/six-round/func_800B8DA0.c",
+      "equivalent_source": "equiv/chess/func_800B8DA0.c",
+      "source_sha256": "b3659e650a01ad3bb449dcc341084fbe1370cab22c4ce1d6edce7899c96cd507",
+      "masked_instruction_match": true
+    },
+    {
+      "target": "chess",
+      "func": "func_800AF1C0",
+      "gcc": "2.7.2-cdk",
+      "integrated_source": "src/chess/chess__800AED50.c",
+      "candidate_source": ".cache/six-round/func_800AF1C0.c",
+      "equivalent_source": "equiv/chess/func_800AF1C0.c",
+      "source_sha256": "17abd312e9485f187b39e6a88d1c6d76c65d94c5ae2c2af68ad7a5f065fac611",
+      "masked_instruction_match": true
+    },
+    {
+      "target": "raise",
+      "func": "func_800E0DF8",
+      "gcc": "2.7.2-cdk",
+      "integrated_source": "src/raise/raise_800DEA54.c",
+      "candidate_source": ".cache/six-round/func_800E0DF8.c",
+      "equivalent_source": "equiv/raise/func_800E0DF8.c",
+      "source_sha256": "4d5f6721111d383d8bc226f825423e4e0133d01376baf4386509152df4851789",
+      "masked_instruction_match": true
+    },
+    {
+      "target": "raise",
+      "func": "func_8009B018",
+      "gcc": "2.7.2-cdk",
+      "integrated_source": "src/raise/raise_80098FEC.c",
+      "candidate_source": ".cache/six-round/func_8009B018.c",
+      "equivalent_source": "equiv/raise/func_8009B018.c",
+      "source_sha256": "9be9b7288cb723700c56da984d592250062172f02afdf30d350307cdc2c02f88",
+      "masked_instruction_match": true
+    }
+  ],
+  "validation": [
+    {
+      "target": "chess",
+      "func": "func_800CEC5C",
+      "source": ".cache/six-round/profiles/func_800CEC5C.c",
+      "profile_sha256": "0848eaed45ba74fba4cc0d1f9c9b74c041c30a4837e34f6e86130b0b3542e326",
+      "seed": 1,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800CEC5C",
+        "--src",
+        ".cache/six-round/profiles/func_800CEC5C.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800CEC5C \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800CEC5C",
+      "source": ".cache/six-round/profiles/func_800CEC5C.c",
+      "profile_sha256": "0848eaed45ba74fba4cc0d1f9c9b74c041c30a4837e34f6e86130b0b3542e326",
+      "seed": 2,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800CEC5C",
+        "--src",
+        ".cache/six-round/profiles/func_800CEC5C.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800CEC5C \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800B4400",
+      "source": ".cache/six-round/profiles/func_800B4400.c",
+      "profile_sha256": "7b32efb41a9d74b6305e0480a5b496495ccc23ba343585bc68f3ed253c339fa5",
+      "seed": 1,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800B4400",
+        "--src",
+        ".cache/six-round/profiles/func_800B4400.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800B4400 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800B4400",
+      "source": ".cache/six-round/profiles/func_800B4400.c",
+      "profile_sha256": "7b32efb41a9d74b6305e0480a5b496495ccc23ba343585bc68f3ed253c339fa5",
+      "seed": 2,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800B4400",
+        "--src",
+        ".cache/six-round/profiles/func_800B4400.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800B4400 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800B8DA0",
+      "source": ".cache/six-round/profiles/func_800B8DA0.c",
+      "profile_sha256": "d109fe2225a9592d3398212222aabf3e702772c5dcba6faa366dfb7ace663fa1",
+      "seed": 1,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800B8DA0",
+        "--src",
+        ".cache/six-round/profiles/func_800B8DA0.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800B8DA0 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800B8DA0",
+      "source": ".cache/six-round/profiles/func_800B8DA0.c",
+      "profile_sha256": "d109fe2225a9592d3398212222aabf3e702772c5dcba6faa366dfb7ace663fa1",
+      "seed": 2,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800B8DA0",
+        "--src",
+        ".cache/six-round/profiles/func_800B8DA0.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800B8DA0 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800AF1C0",
+      "source": ".cache/six-round/profiles/func_800AF1C0.c",
+      "profile_sha256": "dbf7ecdeb2e86a7e2ef9d7f0fb40b0653b13ab4d6fd62f54de1bd516054ed0f3",
+      "seed": 1,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800AF1C0",
+        "--src",
+        ".cache/six-round/profiles/func_800AF1C0.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800AF1C0 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800AF1C0",
+      "source": ".cache/six-round/profiles/func_800AF1C0.c",
+      "profile_sha256": "dbf7ecdeb2e86a7e2ef9d7f0fb40b0653b13ab4d6fd62f54de1bd516054ed0f3",
+      "seed": 2,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800AF1C0",
+        "--src",
+        ".cache/six-round/profiles/func_800AF1C0.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800AF1C0 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "raise",
+      "func": "func_800E0DF8",
+      "source": ".cache/six-round/profiles/func_800E0DF8.c",
+      "profile_sha256": "3c4842bd0e565e058766c72b09b53797b1159ad896fa29e6f925812dbd51104e",
+      "seed": 1,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "raise",
+        "func_800E0DF8",
+        "--src",
+        ".cache/six-round/profiles/func_800E0DF8.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] raise:func_800E0DF8 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "raise",
+      "func": "func_800E0DF8",
+      "source": ".cache/six-round/profiles/func_800E0DF8.c",
+      "profile_sha256": "3c4842bd0e565e058766c72b09b53797b1159ad896fa29e6f925812dbd51104e",
+      "seed": 2,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "raise",
+        "func_800E0DF8",
+        "--src",
+        ".cache/six-round/profiles/func_800E0DF8.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] raise:func_800E0DF8 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "raise",
+      "func": "func_8009B018",
+      "source": ".cache/six-round/profiles/func_8009B018.c",
+      "profile_sha256": "f33b5769fcbfda428f19c3bed6677bf036892520520d7d087ebdb48f7c18597a",
+      "seed": 1,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "raise",
+        "func_8009B018",
+        "--src",
+        ".cache/six-round/profiles/func_8009B018.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] raise:func_8009B018 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "raise",
+      "func": "func_8009B018",
+      "source": ".cache/six-round/profiles/func_8009B018.c",
+      "profile_sha256": "f33b5769fcbfda428f19c3bed6677bf036892520520d7d087ebdb48f7c18597a",
+      "seed": 2,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "raise",
+        "func_8009B018",
+        "--src",
+        ".cache/six-round/profiles/func_8009B018.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] raise:func_8009B018 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    }
+  ],
+  "identical_trials": 2400,
+  "inconclusive_trials": 0,
+  "full_build": {
+    "command": "make -j4 check",
+    "sha1": {
+      "yuugi": "ded3d5e61d5906077d0171396fea4ca3959ecf23",
+      "slpm": "a4d3c7f4750acc79a29f2f941449f73950497e5e",
+      "chess": "a6a63cc46a633968573c23b5681bb178070dba25",
+      "raise": "92ccafd66ecb0030f9bfff109c855c09dbb4cf8b",
+      "etc": "f14bbffbbee2ec2013b481a2f814997b3984ce74"
+    }
+  }
+}

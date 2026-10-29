@@ -114,7 +114,6 @@ src/raise/raise_800D0F10.c 2.8.1-psx
 src/raise/raise_800DCC94.c 2.8.1-psx
 src/raise/raise_800DDCFC.c 2.8.1-psx
 src/raise/raise_800E20A8.c 2.8.1-psx
-src/chess/chess__800AED50.c 2.8.1-psx
 src/raise/raise_8009B150__8009CFB4.c 2.8.1-psx
 src/raise/raise_8009D2A8__8009DFF8.c 2.8.1-psx
 src/raise/raise_8009D2A8__800A9738.c 2.8.1-psx
@@ -203,7 +202,6 @@ src/raise/raise_800C75C0.c 2.7.2-cdk
 src/raise/raise_800CC1FC.c 2.7.2-cdk
 src/raise/raise_800CE204.c 2.7.2-cdk
 src/raise/raise_800DCD44.c 2.7.2-cdk
-src/raise/raise_800DEA54.c 2.7.2-cdk
 src/raise/raise_800E2110.c 2.7.2-cdk
 src/yuugi/main.c 2.7.2-cdk
 src/yuugi/main_8001A1DC__8001AA44.c 2.7.2-cdk
@@ -230,10 +228,14 @@ src/chess/chess_800C4E94.c 2.7.2-cdk
 src/chess/chess_800DCF3C__800DD3D8.c 2.7.2-cdk
 src/chess/chess_800DCF3C__800FE98C.c 2.7.2-cdk
 src/chess/chess_801002CC.c 2.7.2-cdk
-src/chess/chess__800B38B0.c 2.7.2-cdk
 src/chess/chess__800B9248.c 2.7.2-cdk
 src/etc/etc.c 2.7.2-cdk
 src/slpm/sdk_libsnd_sssv.c 2.7.2-cdk
 src/chess/chess__800A8444.c 2.7.2-cdk
 src/chess/chess_800C23A8.c 2.7.2-cdk
 src/chess/chess_800C4ECC__800CAE14.c 2.7.2-cdk
+src/chess/chess_800C4ECC__800CB844.c 2.7.2-cdk
+src/chess/chess__800B38B0.c 2.7.2-cdk
+src/chess/chess__800AED50.c 2.7.2-cdk
+src/raise/raise_800DEA54.c 2.7.2-cdk
+src/raise/raise_80098FEC.c 2.7.2-cdk
