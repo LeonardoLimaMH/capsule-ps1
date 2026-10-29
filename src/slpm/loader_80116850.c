@@ -1,6 +1,11 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80116850", func_80116850);
+#include "common.h"
+
+void func_80116850(void) {
+    extern int func_80115D34();
+    slpm_DMACallback(2, &func_80115D34);
+}
 
 void func_80116878(s8 *arg0, s8 arg1, s32 arg2) {
     s32 var_v0;
