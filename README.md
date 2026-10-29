@@ -16,31 +16,31 @@ emulação contra a função original.
 ## Progresso
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **2.31%**  
-**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **2.88%**  
-**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.24%**  
+**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **2.33%**  
+**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **2.91%**  
+**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.27%**  
 **Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`; sobre o código convertível em C):** `████████████████████` **99.44%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
 |---|---|---|---|---|---|
 | `YUUGI.EXE` | executável principal | 3.30% (6,808 / 206,372 B) | 159 / 732 | 10.08% (95 / 303 fn) | **4.65%** |
-| `SLPM_860.96` | loader / boot | 5.22% (1,084 / 20,756 B) | 29 / 119 | 7.86% (77 / 215 fn) | **7.01%** |
+| `SLPM_860.96` | loader / boot | 5.22% (1,084 / 20,756 B) | 29 / 119 | 8.13% (79 / 215 fn) | **7.19%** |
 | `CHESS.BIN` | overlay de batalha (tabuleiro) | 1.72% (7,268 / 421,956 B) | 100 / 867 | 100.00% (2 / 2 fn) | **1.74%** |
-| `RAISE.BIN` | overlay de criação de monstros | 2.55% (8,340 / 326,576 B) | 218 / 940 | 100.00% (2 / 2 fn) | **2.57%** |
-| `ETC.BIN` | overlay de menus/diversos | 1.25% (1,112 / 88,992 B) | 13 / 189 | 0.00% (0 / 0 fn) | **1.25%** |
-| **Total** | | **2.31%** (24,612 / 1,064,652 B) | 519 / 2847 | 9.19% (176 / 522 fn) | **2.88%** |
+| `RAISE.BIN` | overlay de criação de monstros | 2.58% (8,436 / 326,576 B) | 219 / 940 | 100.00% (2 / 2 fn) | **2.60%** |
+| `ETC.BIN` | overlay de menus/diversos | 1.38% (1,232 / 88,992 B) | 14 / 189 | 0.00% (0 / 0 fn) | **1.38%** |
+| **Total** | | **2.33%** (24,828 / 1,064,652 B) | 521 / 2847 | 9.31% (178 / 522 fn) | **2.91%** |
 
 **Equivalentes e pendências por binário (jogo + SDK):**
 
 | Binário | C equivalente (`equiv/`) | Funcional (bytes convertíveis) | Funções em C | Assembly original | Faltam C |
 |---|---|---|---|---|---|
 | `YUUGI.EXE` | 93.02% (709 fn) | `██████████` **98.56%** | 963 / 970 (99.28%) | 65 | **7** |
-| `SLPM_860.96` | 85.72% (193 fn) | `██████████` **95.49%** | 299 / 302 (99.01%) | 32 | **3** |
+| `SLPM_860.96` | 85.54% (191 fn) | `██████████` **95.49%** | 299 / 302 (99.01%) | 32 | **3** |
 | `CHESS.BIN` | 98.26% (767 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | 0 | **0** |
-| `RAISE.BIN` | 97.43% (722 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
-| `ETC.BIN` | 98.75% (176 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | 0 | **0** |
-| **Total** | 96.20% (2,567 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
+| `RAISE.BIN` | 97.40% (721 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
+| `ETC.BIN` | 98.62% (175 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | 0 | **0** |
+| **Total** | 96.17% (2,563 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código convertível: ficam de fora as rotinas que já eram assembly no
@@ -851,3 +851,14 @@ os headers usados pelas funções que ficaram na outra parte, pois alguns estão
 incluídos no meio do arquivo original. O lote passou por 2.800 execuções
 diferenciais completas e pelo rebuild dos cinco binários. Ver
 `docs/validation/byte-matching-2026-10-29-fresh-profiles.json`.
+
+A varredura das 2.573 candidatas terminou com nove matches: os cinco de YUUGI
+acima, `CdLastPos` e `slpm_DrawSync` no loader, `func_800E1720` em RAISE e
+`func_800A07AC` em ETC. No loader, use o símbolo da string original de
+`DrawSync`, pois um literal C novo duplica o `.rodata` mesmo quando as
+instruções isoladas casam. Preserve também os símbolos de dados que deixam
+de ser descobertos no assembly após a conversão. Os quatro matches finais
+completaram 2.000 execuções diferenciais, e os cinco SHA-1 permaneceram iguais.
+O match concorrente de `func_800E1848` foi preservado e revalidado após a
+separação dos arquivos. Ver
+`docs/validation/byte-matching-2026-10-29-sweep-complete.json`.

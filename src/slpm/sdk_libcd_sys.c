@@ -14,5 +14,3 @@ u8 CdLastCom(void) {
     extern u8 D_80131D3D[];
     return (*D_80131D3D);
 }
-
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libcd_sys", CdLastPos);

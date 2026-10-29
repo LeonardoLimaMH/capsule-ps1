@@ -98,6 +98,7 @@ segments:
       - [0x7208, c, loader_80116A08]
       - [0x7284, c, loader_80116A84]
       - [0x7294, c, sdk_libcd_sys]
+      - [0x72C4, c, sdk_libcd_sys__CdLastPos]
       - [0x72D0, c, loader_80116AD0]
       - [0x733C, c, loader_80116B3C]
       - [0x7440, c, loader_80116C40]

@@ -158,6 +158,8 @@ segments:
       - [0x49E74, c, raise_800DEA54__800E1674]
       - [0x49EAC, c, raise_800DEA54__800E16AC]
       - [0x49EEC, c, raise_800DEA54__800E16EC]
+      - [0x49F20, c, raise_800DEA54__800E16EC__800E1720]
+      - [0x49F80, c, raise_800DEA54__800E16EC__800E1780]
       - [0x4A330, c, raise_800DEA54__800E1B30]
       - [0x4A8A8, c, raise_800E20A8]
       - [0x4A910, c, raise_800E2110]
