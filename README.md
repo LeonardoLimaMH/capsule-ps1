@@ -16,31 +16,31 @@ emulação contra a função original.
 ## Progresso
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **2.18%**  
-**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **2.72%**  
-**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.08%**  
+**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **2.19%**  
+**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **2.75%**  
+**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.12%**  
 **Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`; sobre o código convertível em C):** `████████████████████` **99.44%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | executável principal | 3.18% (6,572 / 206,372 B) | 152 / 732 | 9.48% (89 / 303 fn) | **4.44%** |
-| `SLPM_860.96` | loader / boot | 4.95% (1,028 / 20,756 B) | 28 / 119 | 7.62% (75 / 215 fn) | **6.76%** |
+| `YUUGI.EXE` | executável principal | 3.23% (6,656 / 206,372 B) | 154 / 732 | 9.88% (94 / 303 fn) | **4.55%** |
+| `SLPM_860.96` | loader / boot | 4.95% (1,028 / 20,756 B) | 28 / 119 | 7.86% (77 / 215 fn) | **6.92%** |
 | `CHESS.BIN` | overlay de batalha (tabuleiro) | 1.72% (7,268 / 421,956 B) | 100 / 867 | 100.00% (2 / 2 fn) | **1.74%** |
-| `RAISE.BIN` | overlay de criação de monstros | 2.20% (7,180 / 326,576 B) | 202 / 940 | 100.00% (2 / 2 fn) | **2.22%** |
+| `RAISE.BIN` | overlay de criação de monstros | 2.21% (7,220 / 326,576 B) | 203 / 940 | 100.00% (2 / 2 fn) | **2.23%** |
 | `ETC.BIN` | overlay de menus/diversos | 1.25% (1,112 / 88,992 B) | 13 / 189 | 0.00% (0 / 0 fn) | **1.25%** |
-| **Total** | | **2.18%** (23,160 / 1,064,652 B) | 495 / 2847 | 8.75% (168 / 522 fn) | **2.72%** |
+| **Total** | | **2.19%** (23,284 / 1,064,652 B) | 498 / 2847 | 9.08% (175 / 522 fn) | **2.75%** |
 
 **Equivalentes e pendências por binário (jogo + SDK):**
 
 | Binário | C equivalente (`equiv/`) | Funcional (bytes convertíveis) | Funções em C | Assembly original | Faltam C |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | 93.23% (722 fn) | `██████████` **98.56%** | 963 / 970 (99.28%) | 65 | **7** |
-| `SLPM_860.96` | 85.96% (196 fn) | `██████████` **95.49%** | 299 / 302 (99.01%) | 32 | **3** |
+| `YUUGI.EXE` | 93.11% (715 fn) | `██████████` **98.56%** | 963 / 970 (99.28%) | 65 | **7** |
+| `SLPM_860.96` | 85.80% (194 fn) | `██████████` **95.49%** | 299 / 302 (99.01%) | 32 | **3** |
 | `CHESS.BIN` | 98.26% (767 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | 0 | **0** |
-| `RAISE.BIN` | 97.78% (738 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
+| `RAISE.BIN` | 97.77% (737 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
 | `ETC.BIN` | 98.75% (176 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | 0 | **0** |
-| **Total** | 96.36% (2,599 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
+| **Total** | 96.32% (2,589 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código convertível: ficam de fora as rotinas que já eram assembly no
@@ -799,3 +799,12 @@ compilador. Trocar os operandos no C sem observar o código gerado não bastou.
 As duas passaram por matching, duas sementes de 200 execuções e rebuild dos
 cinco binários. A evidência está em
 `docs/validation/byte-matching-2026-10-29-operands.json`.
+
+Ao revalidar as candidatas mais recentes com o perfil real de cada unidade de
+tradução, mais dez funções casaram: cinco setters da GTE, três rotinas do jogo
+e os dois conversores de códigos do CD no loader. As macros GTE continuam
+emitindo COP2; o matching verifica essas instruções e o rebuild confirma os
+endereços finais. O registro está em
+`docs/validation/byte-matching-2026-10-29-profiles-gte.json`.
+Os testes diferenciais de acesso por índices ainda descartam entradas inválidas;
+essas tentativas são registradas como inconclusivas e não contam como iguais.

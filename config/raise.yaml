@@ -129,6 +129,8 @@ segments:
       - [0x379B4, c, raise_800CF1B4]
       - [0x37A90, c, raise_800CF290]
       - [0x37AE4, c, raise_800CF2E4]
+      - [0x39414, c, raise_800CF2E4__800D0C14]
+      - [0x3943C, c, raise_800CF2E4__800D0C3C]
       - [0x39540, c, raise_800CF2E4__800D0D40]
       - [0x39710, c, raise_800D0F10]
       - [0x39818, c, raise_800D1018]

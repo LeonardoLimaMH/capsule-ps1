@@ -1,4 +1,7 @@
 #include "common.h"
+#include "yuugi.h"
+
+#include "common.h"
 
 extern s32 *D_80065310[];
 

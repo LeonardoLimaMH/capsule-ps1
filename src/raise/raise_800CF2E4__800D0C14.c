@@ -1,5 +1,7 @@
 #include "common.h"
 
+#include "common.h"
+
 void func_800D0C14(void) {
     extern M2C_UNK D_80103D38[];
     M2C_FIELD(D_80103D38, s16 *, 0) = -1;
