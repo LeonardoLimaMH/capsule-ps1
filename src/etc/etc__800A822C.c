@@ -51,9 +51,29 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A8988);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A8B74);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A8CAC);
+#include "ghidra.h"
+void func_800A8CAC(void)
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A8D38);
+{
+    extern u16 D_8008EE44[];
+    extern u8 D_800B399C[];
+    extern s16 D_800B3D0C[];
+  int iVar1;
+  
+  if ((((3 < (*D_8008EE44)) && ((*D_8008EE44) != 8)) && (iVar1 = func_800202A4(0x20), iVar1 == 0)) &&
+     ((*D_800B3D0C) < 3)) {
+    (*D_800B3D0C) = (*D_800B3D0C) + 1;
+    func_800A9EC8();
+  }
+  (**(code **)(D_800B399C + (uint)(*D_8008EE44) * 4))();
+  return;
+}
+
+void func_800A8D38(void) {
+    extern int func_80012508();
+    func_80019F30(0xB, func_80012508);
+    func_80012508();
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A8D68);
 
@@ -77,4 +97,12 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800AA020);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800AA0A0);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800AA20C);
+#include "ghidra.h"
+void func_800AA20C(undefined4 param_1)
+
+{
+    extern int func_80012508();
+  func_80097E40(param_1,&func_80012508);
+  func_80012508();
+  return;
+}

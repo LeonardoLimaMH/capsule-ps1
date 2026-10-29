@@ -2,7 +2,16 @@
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011B65C", func_8011B65C);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011B65C", func_8011B6C8);
+#include "ghidra.h"
+void func_8011B6C8(int param_1,int param_2)
+
+{
+    extern u8 D_80133284[];
+  if (param_2 != *(int *)(D_80133284 + param_1 * 4)) {
+    *(int *)(D_80133284 + param_1 * 4) = param_2;
+  }
+  return;
+}
 
 #include "ghidra.h"
 void func_8011B6F4(undefined4 *param_1,int param_2)

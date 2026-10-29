@@ -19,7 +19,11 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A6D68);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A6F10);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A7654);
+void func_800A7654(void) {
+    extern int func_80099394();
+    func_80013668();
+    func_80012200(&func_80099394);
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A7680);
 
