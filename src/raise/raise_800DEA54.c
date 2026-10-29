@@ -153,11 +153,3 @@ void func_800E134C(int param_1)
   }
   return;
 }
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E1388);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E13C8);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E1450);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E14C4);

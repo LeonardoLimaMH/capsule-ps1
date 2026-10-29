@@ -20,7 +20,15 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98", func_800D2828);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98", func_800D2864);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98", func_800D2894);
+#include "common.h"
+typedef struct { u8 pad[0x386]; s16 field; u8 tail[0x414]; } Record_800D2894;
+void func_800D2894(s32 unused, s32 player) {
+    extern Record_800D2894 D_80100F38[];
+    u32 offset = (player) * 0x79C;
+    u32 base = (u32)D_80100F38;
+    Record_800D2894 *record = (Record_800D2894 *)(base + offset);
+    record->field--;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98", func_800D28D0);
 
