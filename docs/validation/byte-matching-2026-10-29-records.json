@@ -1,0 +1,197 @@
+{
+  "baseline_commit": "85055b0",
+  "strategy": "Recover fixed-stride C record fields from original MIPS offsets; distinguish address arguments from loaded contents.",
+  "functions": [
+    {
+      "target": "raise",
+      "func": "func_800D0FE0",
+      "gcc": "2.8.1-psx",
+      "source": ".cache/byte-structs/func_800D0FE0-0.c",
+      "old_tu": "src/raise/raise_800D0F10.c",
+      "integrated_source": "src/raise/raise_800D0F10.c",
+      "profile": "2.8.1-psx",
+      "source_sha256": "c9a05146b88b5f61b0b049743f589862a336c21d17299a07411c02c722d8174a",
+      "words": 14,
+      "masked_instruction_match": true
+    },
+    {
+      "target": "raise",
+      "func": "func_800E1554",
+      "gcc": "2.8.1-psx",
+      "source": ".cache/byte-structs/func_800E1554-0.c",
+      "old_tu": "src/raise/raise_800DEA54.c",
+      "integrated_source": "src/raise/raise_800DEA54__800E1554.c",
+      "profile": "2.8.1-psx",
+      "source_sha256": "6462e886e7248428a8ef73f03eb968ccb8c87fca98f41b723328826c27f56e31",
+      "words": 14,
+      "masked_instruction_match": true
+    },
+    {
+      "target": "slpm",
+      "func": "func_80111EF0",
+      "gcc": "2.7.2-psx",
+      "source": ".cache/byte-structs/func_80111EF0-0.c",
+      "old_tu": "src/slpm/loader_80111E78.c",
+      "integrated_source": "src/slpm/loader_80111E78__80111EF0.c",
+      "profile": "2.7.2-psx",
+      "source_sha256": "1999689696edb16bb28631609bfc5877b184fd4fabe3e81424714a5f1735afa1",
+      "words": 14,
+      "masked_instruction_match": true
+    }
+  ],
+  "differential": [
+    {
+      "target": "raise",
+      "func": "func_800D0FE0",
+      "seed": 1,
+      "exit": 0,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "raise",
+        "func_800D0FE0",
+        "--src",
+        "src/raise/raise_800D0F10.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1",
+        "--ignore-v0"
+      ],
+      "stdout": "[EQUIVALENTE] raise:func_800D0FE0 \u2014 200 tentativas id\u00eanticas, 398 inconclusivas\n",
+      "stderr": ""
+    },
+    {
+      "target": "raise",
+      "func": "func_800D0FE0",
+      "seed": 2,
+      "exit": 0,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "raise",
+        "func_800D0FE0",
+        "--src",
+        "src/raise/raise_800D0F10.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2",
+        "--ignore-v0"
+      ],
+      "stdout": "[EQUIVALENTE] raise:func_800D0FE0 \u2014 200 tentativas id\u00eanticas, 496 inconclusivas\n",
+      "stderr": ""
+    },
+    {
+      "target": "raise",
+      "func": "func_800E1554",
+      "seed": 1,
+      "exit": 0,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "raise",
+        "func_800E1554",
+        "--src",
+        "src/raise/raise_800DEA54__800E1554.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1"
+      ],
+      "stdout": "[EQUIVALENTE] raise:func_800E1554 \u2014 200 tentativas id\u00eanticas, 501 inconclusivas\n",
+      "stderr": ""
+    },
+    {
+      "target": "raise",
+      "func": "func_800E1554",
+      "seed": 2,
+      "exit": 0,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "raise",
+        "func_800E1554",
+        "--src",
+        "src/raise/raise_800DEA54__800E1554.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2"
+      ],
+      "stdout": "[EQUIVALENTE] raise:func_800E1554 \u2014 200 tentativas id\u00eanticas, 411 inconclusivas\n",
+      "stderr": ""
+    },
+    {
+      "target": "slpm",
+      "func": "func_80111EF0",
+      "seed": 1,
+      "exit": 0,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "slpm",
+        "func_80111EF0",
+        "--src",
+        "src/slpm/loader_80111E78__80111EF0.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1",
+        "--ignore-v0"
+      ],
+      "stdout": "[EQUIVALENTE] slpm:func_80111EF0 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "slpm",
+      "func": "func_80111EF0",
+      "seed": 2,
+      "exit": 0,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "slpm",
+        "func_80111EF0",
+        "--src",
+        "src/slpm/loader_80111E78__80111EF0.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2",
+        "--ignore-v0"
+      ],
+      "stdout": "[EQUIVALENTE] slpm:func_80111EF0 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    }
+  ],
+  "cleanup": {
+    "source": "src/slpm/loader_80116B3C.c",
+    "source_sha256": "0419bacbb2207c656232fd243e29e1e16eddda7ace78d69b597b9e5c3c4763bf",
+    "change": "trailing whitespace only",
+    "verified_by": "full five-binary SHA1 check"
+  },
+  "rebuild": {
+    "command": "make -j4 check",
+    "identical_all_five": true,
+    "sha1": {
+      "yuugi": "ded3d5e61d5906077d0171396fea4ca3959ecf23",
+      "slpm": "a4d3c7f4750acc79a29f2f941449f73950497e5e",
+      "chess": "a6a63cc46a633968573c23b5681bb178070dba25",
+      "raise": "92ccafd66ecb0030f9bfff109c855c09dbb4cf8b",
+      "etc": "f14bbffbbee2ec2013b481a2f814997b3984ce74"
+    }
+  }
+}

@@ -52,6 +52,7 @@ segments:
       - [0x24F0, c, loader_80111CF0]
       - [0x2640, c, loader_80111E40]
       - [0x2678, c, loader_80111E78]
+      - [0x26F0, c, loader_80111E78__80111EF0]
       - [0x2728, c, loader_80111F28]
       - [0x27D4, c, loader_80111FD4]
       - [0x2854, c, sdk_libapi_patch]
