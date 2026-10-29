@@ -175,7 +175,9 @@ def collect(t):
             r[k]["asm_bytes"] += size  # escrita em assembly no original: fica como .s
             r[k]["asm_funcs"] += 1
     for group in r.values():
-        group['pending_funcs'] = group['funcs'] - group['done_funcs'] - group['equiv_funcs']
+        # assembly original (BIOS, syscall/break, COP0...) não tem equivalente em C: fica fora
+        group['pending_funcs'] = (group['funcs'] - group['done_funcs'] - group['equiv_funcs']
+                                  - group['asm_funcs'])
     return r
 
 
@@ -195,20 +197,24 @@ def bar(p, width=20):
 
 def functional_table(data, total):
     rows = ['**Equivalentes e pendências por binário (jogo + SDK):**', '',
-            '| Binário | C equivalente (`equiv/`) | Funcional (bytes) | Funções em C | Faltam C |',
-            '|---|---|---|---|---|']
+            '| Binário | C equivalente (`equiv/`) | Funcional (bytes convertíveis) | Funções em C '
+            '| Assembly original | Faltam C |',
+            '|---|---|---|---|---|---|']
     for target, label in [(t, '`' + name + '`') for t, name, _ in TARGETS] + [(None, '**Total**')]:
         groups = data[target] if target else total
         counts = {key: sum(group[key] for group in groups.values()) for key in COUNTERS}
         ready = counts['done_funcs'] + counts['equiv_funcs']
-        coverage = pct(counts['done_bytes'] + counts['equiv_bytes'], counts['bytes'])
+        conv_funcs = counts['funcs'] - counts['asm_funcs']
+        conv_bytes = counts['bytes'] - counts['asm_bytes']
+        coverage = pct(counts['done_bytes'] + counts['equiv_bytes'], conv_bytes)
         rows.append(f"| {label} | {pct(counts['equiv_bytes'], counts['bytes']):.2f}% "
                     f"({counts['equiv_funcs']:,} fn) | `{bar(coverage, 10)}` **{coverage:.2f}%** | "
-                    f"{ready:,} / {counts['funcs']:,} ({pct(ready, counts['funcs']):.2f}%) | "
-                    f"**{counts['pending_funcs']:,}** |")
+                    f"{ready:,} / {conv_funcs:,} ({pct(ready, conv_funcs):.2f}%) | "
+                    f"{counts['asm_funcs']:,} | **{counts['pending_funcs']:,}** |")
     rows += ['', 'Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.',
-             'As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.',
-             'Faltam C inclui as rotinas que permanecem em assembly original, contabilizadas separadamente na cobertura acima.']
+             'As barras medem bytes de código convertível: ficam de fora as rotinas que já eram assembly no',
+             'original e não têm equivalente em C (trampolins e chamadas da BIOS, `syscall`/`break`, COP0,',
+             'troca de contexto), listadas em `config/handwritten.*.txt` e contadas na coluna própria.']
     return rows
 
 
@@ -247,12 +253,14 @@ def main():
     pg = pct(g["done_bytes"], g["bytes"])
     pa = pct(all_d, all_b)
     cov = pct(all_d + tot["game"]["asm_bytes"] + tot["lib"]["asm_bytes"], all_b)
-    fun = pct(all_d + tot["game"]["equiv_bytes"] + tot["lib"]["equiv_bytes"], all_b)
+    fun = pct(all_d + tot["game"]["equiv_bytes"] + tot["lib"]["equiv_bytes"],
+              all_b - tot["game"]["asm_bytes"] - tot["lib"]["asm_bytes"])
     summary = [
         f"**Código do jogo decompilado em C (byte-matching):** `{bar(pg)}` **{pg:.2f}%**  ",
         f"**Total incluindo SDK PsyQ:** `{bar(pa)}` **{pa:.2f}%**  ",
         f"**Cobertura (C + funções que já eram assembly no original):** `{bar(cov)}` **{cov:.2f}%**  ",
-        f"**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** "
+        f"**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`; "
+        f"sobre o código convertível em C):** "
         f"`{bar(fun)}` **{fun:.2f}%**  ",
         f"**Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)",
         "",

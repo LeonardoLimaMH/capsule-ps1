@@ -19,7 +19,7 @@ emulação contra a função original.
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **2.16%**  
 **Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **2.70%**  
 **Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.06%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`):** `████████████████████` **99.08%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`; sobre o código convertível em C):** `████████████████████` **99.44%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
@@ -33,18 +33,19 @@ emulação contra a função original.
 
 **Equivalentes e pendências por binário (jogo + SDK):**
 
-| Binário | C equivalente (`equiv/`) | Funcional (bytes) | Funções em C | Faltam C |
-|---|---|---|---|---|
-| `YUUGI.EXE` | 93.25% (723 fn) | `██████████` **97.67%** | 963 / 1,035 (93.04%) | **72** |
-| `SLPM_860.96` | 85.96% (196 fn) | `█████████░` **92.73%** | 299 / 334 (89.52%) | **35** |
-| `CHESS.BIN` | 98.26% (767 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | **0** |
-| `RAISE.BIN` | 97.81% (739 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | **0** |
-| `ETC.BIN` | 98.75% (176 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | **0** |
-| **Total** | 96.38% (2,601 fn) | `██████████` **99.08%** | 3,262 / 3,369 (96.82%) | **107** |
+| Binário | C equivalente (`equiv/`) | Funcional (bytes convertíveis) | Funções em C | Assembly original | Faltam C |
+|---|---|---|---|---|---|
+| `YUUGI.EXE` | 93.25% (723 fn) | `██████████` **98.56%** | 963 / 970 (99.28%) | 65 | **7** |
+| `SLPM_860.96` | 85.96% (196 fn) | `██████████` **95.49%** | 299 / 302 (99.01%) | 32 | **3** |
+| `CHESS.BIN` | 98.26% (767 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | 0 | **0** |
+| `RAISE.BIN` | 97.81% (739 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
+| `ETC.BIN` | 98.75% (176 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | 0 | **0** |
+| **Total** | 96.38% (2,601 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
-As barras medem bytes de código. A coluna de funções mostra também seu percentual por quantidade.
-Faltam C inclui as rotinas que permanecem em assembly original, contabilizadas separadamente na cobertura acima.
+As barras medem bytes de código convertível: ficam de fora as rotinas que já eram assembly no
+original e não têm equivalente em C (trampolins e chamadas da BIOS, `syscall`/`break`, COP0,
+troca de contexto), listadas em `config/handwritten.*.txt` e contadas na coluna própria.
 <!-- PROGRESS:END -->
 
 A **cobertura** soma ao C as funções que já eram escritas em assembly no
