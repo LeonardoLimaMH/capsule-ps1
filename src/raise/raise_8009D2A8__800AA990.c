@@ -1,5 +1,7 @@
 #include "common.h"
 
+#include "common.h"
+
 void func_800AA990(s32 arg0, M2C_UNK arg1) {
     extern u8 D_80100F38[];
     void *temp_s0;
@@ -12,3 +14,11 @@ void func_800AA990(s32 arg0, M2C_UNK arg1) {
     }
     M2C_FIELD(temp_s0, s32 *, 0x21C) = 0;
 }
+
+INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800AA990", func_800AAA44);
+
+INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800AA990", func_800ABF44);
+
+INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800AA990", func_800ABF7C);
+
+INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800AA990", func_800AC1A4);

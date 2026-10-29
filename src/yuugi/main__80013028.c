@@ -1,4 +1,7 @@
 #include "common.h"
+#include "yuugi.h"
+
+#include "common.h"
 
 typedef struct {
     u32 mode;
@@ -35,3 +38,11 @@ void func_80013028(u8 *p) {
         LoadImage(t.prect, t.paddr);
     }
 }
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80013028", func_800130D8);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80013028", func_8001312C);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80013028", func_80013180);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80013028", func_800131C0);

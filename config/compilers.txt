@@ -121,7 +121,6 @@ src/raise/raise_800DDCFC.c 2.8.1-psx
 src/raise/raise_800E20A8.c 2.8.1-psx
 src/chess/chess__800AED50.c 2.8.1-psx
 src/raise/raise_8009B150__8009CFB4.c 2.8.1-psx
-src/raise/raise_8009D2A8.c 2.8.1-psx
 src/raise/raise_8009D2A8__8009DFF8.c 2.8.1-psx
 src/raise/raise_8009D2A8__800A9738.c 2.8.1-psx
 src/raise/raise_800AC34C__800B1150.c 2.8.1-psx
@@ -172,3 +171,7 @@ src/chess/chess_800C4ECC__800C942C.c 2.8.1-psx
 src/chess/chess_800DCF3C__800FE958.c 2.8.1-psx
 src/chess/chess__800AECC4.c 2.8.1-psx
 src/chess/chess_800C4ECC__800CAE14.c 2.8.1-psx
+src/etc/etc__800A4AC8__800A81F4.c 2.8.1-psx
+src/etc/etc__800AA238__800AB78C.c 2.8.1-psx
+src/raise/raise_8009D2A8__8009D324.c 2.8.1-psx
+src/raise/raise_800B9C3C__800BAD64.c 2.8.1-psx

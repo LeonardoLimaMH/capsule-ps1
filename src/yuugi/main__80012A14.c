@@ -25,13 +25,3 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14", func_80012F0C);
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14", func_80012FB8);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14", func_80012FF0);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14", func_80013028);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14", func_800130D8);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14", func_8001312C);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14", func_80013180);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14", func_800131C0);
