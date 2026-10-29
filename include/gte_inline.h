@@ -47,6 +47,8 @@
     __asm__ volatile("lwc2 $0, 0(%0)\n lwc2 $1, 4(%0)\n lwc2 $2, 0(%1)\n lwc2 $3, 4(%1)\n" \
                      "lwc2 $4, 0(%2)\n lwc2 $5, 4(%2)" :: "r"(a), "r"(b), "r"(c))
 #define gte_ldrgb(p)  __asm__ volatile("lwc2 $6, 0(%0)" :: "r"(p))
+#define gte_ldrgb3(a, b, c) /* fila de cores RGB0..2 */ \
+    __asm__ volatile("lwc2 $20, 0(%0)\n lwc2 $21, 0(%1)\n lwc2 $22, 0(%2)" :: "r"(a), "r"(b), "r"(c))
 #define gte_ldlvl(p) /* IR1..3 de um VECTOR (3 x s32) */ \
     __asm__ volatile("lwc2 $9, 0(%0)\n lwc2 $10, 4(%0)\n lwc2 $11, 8(%0)" :: "r"(p))
 #define gte_lddp(x)   __asm__ volatile("mtc2 %0, $8" :: "r"(x))
