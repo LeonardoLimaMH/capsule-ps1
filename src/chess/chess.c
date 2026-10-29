@@ -1,3 +1,4 @@
+#include "matching.h"
 #include "common.h"
 
 void func_80099B40(void) {
@@ -52,34 +53,20 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009BFD4);
 void func_8009C0E4(void)
 
 {
-    uint uVar1;
-    undefined4 uVar2;
-    int iVar3;
+  uint uVar1;
+  undefined4 uVar2;
+  int iVar3;
 
-    uVar1 = func_800CA480();
-    uVar2 = func_80019F30(uVar1 | 0x50000,0);
-    {
-        register u32 matching_a0 __asm__("$4") = (uVar2);
-        register s32 matching_a1 __asm__("$5") = (1);
-        register s32 matching_a2 __asm__("$6") = 0;
-        __asm__ volatile("" : "=r"(matching_a0), "=r"(matching_a1), "=r"(matching_a2)
-        : "0"(matching_a0), "1"(matching_a1), "2"(matching_a2));
-        func_80012A20(matching_a0, matching_a1, matching_a2, matching_a2);
-    }
-    iVar3 = 0;
-    do {
-        uVar2 = func_80019F30(uVar1 | 0x20000,iVar3);
-        {
-            register u32 matching_a0 __asm__("$4") = (uVar2);
-            register s32 matching_a1 __asm__("$5") = (1);
-            register s32 matching_a2 __asm__("$6") = 0;
-            __asm__ volatile("" : "=r"(matching_a0), "=r"(matching_a1), "=r"(matching_a2)
-            : "0"(matching_a0), "1"(matching_a1), "2"(matching_a2));
-            func_80012A20(matching_a0, matching_a1, matching_a2, matching_a2);
-        }
-        iVar3 = iVar3 + 1;
-    } while (iVar3 < 4);
-    return;
+  uVar1 = func_800CA480();
+  uVar2 = func_80019F30(uVar1 | 0x50000,0);
+  MATCHING_CALL4_REPEAT(func_80012A20, uVar2, 1, 0);
+  iVar3 = 0;
+  do {
+    uVar2 = func_80019F30(uVar1 | 0x20000,iVar3);
+    MATCHING_CALL4_REPEAT(func_80012A20, uVar2, 1, 0);
+    iVar3 = iVar3 + 1;
+  } while (iVar3 < 4);
+  return;
 }
 
 void func_8009C178(char arg1)
@@ -99,13 +86,42 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009C4B0);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009C5C4);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009C6F8);
+void func_8009C6F8(void) {
+    MATCHING_CALL4_REPEAT(func_80012A20, func_80019F30(0x20014, 3), 1, 0);
+    MATCHING_CALL4_REPEAT(func_80012A20, func_80019F30(0x50014, 1), 1, 0);
+}
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009C758);
+void func_8009C758(void) {
+    s32 var_s0;
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009C7D4);
+    var_s0 = 0;
+    do {
+        MATCHING_CALL4_REPEAT(func_80012A20, func_80019F30(0x20014, var_s0 + 6), 1, 0);
+        var_s0 += 1;
+    } while (var_s0 < 7);
+    MATCHING_CALL4_REPEAT(func_80012A20, func_80019F30(0x50014, 3), 1, 0);
+}
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009C898);
+void func_8009C7D4(void) {
+    s32 var_s0;
+
+    var_s0 = 0;
+    do {
+        MATCHING_CALL4_REPEAT(func_80012A20, func_80019F30(0x20014, var_s0 + 4), 1, 0);
+        var_s0 += 1;
+    } while (var_s0 < 2);
+    MATCHING_CALL4_REPEAT(func_80012A20, func_80019F30(0x50014, 2), 1, 0);
+    MATCHING_CALL4_REPEAT(func_80012A20, func_80019F30(0x50014, 7), 1, 0);
+    MATCHING_CALL4_REPEAT(func_80012A20, func_80019F30(0x50014, 6), 1, 0);
+}
+
+void func_8009C898(void) {
+    MATCHING_CALL4_REPEAT(func_80012A20, func_80019F30(0x20013, 0x1E), 1, 0);
+    MATCHING_CALL4_REPEAT(func_80012A20, func_80019F30(0x50014, 8), 1, 0);
+    MATCHING_CALL4_REPEAT(func_80012A20, func_80019F30(0x50014, 9), 1, 0);
+    MATCHING_CALL4_REPEAT(func_80012A20, func_80019F30(0x20014, 0x20), 1, 0);
+    MATCHING_CALL4_REPEAT(func_80012A20, func_80019F30(0x50014, 0xA), 1, 0);
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009C964);
 
