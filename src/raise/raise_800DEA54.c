@@ -168,7 +168,7 @@ typedef struct {
 } Monster_800E10BC;
 void func_800E10BC(u32 player) {
     extern Monster_800E10BC D_80091618[];
-    extern Work_800E10BC D_80100F38[];
+    extern u8 D_80100F38[];
     u32 index=player & 0xFFFF;
     u32 offset=index*0x79C;
     u32 wbase=(u32)D_80100F38;

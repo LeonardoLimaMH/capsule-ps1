@@ -7,7 +7,17 @@ void func_80012324(void) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_8001232C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012394);
+#include "common.h"
+
+#include "ghidra.h"
+void func_80012394(void)
+
+{
+    extern M2C_UNK D_800508C0[];
+    extern u16 D_8008EE48[];
+  (*(code *)(D_800508C0)[(*D_8008EE48)])();
+  return;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800123D4);
 
@@ -15,7 +25,22 @@ void func_80012430(void) {
 
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012438);
+#include "common.h"
+
+void func_80012438(void) {
+    extern u16 D_8008EE4C[];
+    switch ((*D_8008EE4C)) {                           /* irregular */
+    case 0:
+        func_8002009C(0);
+        func_800125D8();
+        return;
+    case 1:
+        if (func_80019654() != 0) {
+            func_80012578();
+        }
+        return;
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800124A0);
 

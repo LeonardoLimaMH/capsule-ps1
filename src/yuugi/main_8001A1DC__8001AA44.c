@@ -57,7 +57,13 @@ void func_8001ADCC(s32 arg0) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001AA44", func_8001ADF8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001AA44", func_8001AFA0);
+#include "common.h"
+
+extern s32 (*D_80063664[])(u8 *);
+
+s32 func_8001AFA0(u8 *obj) {
+    return D_80063664[*(u16 *)(obj + 0x40)](obj);
+}
 
 void func_8001AFDC(void *arg0) {
     M2C_FIELD(arg0, u16 *, 0x40) = (u16) (M2C_FIELD(arg0, u16 *, 0x40) + 1);

@@ -23,7 +23,27 @@ s32 func_8003A5F8(void) {
     return 0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A690);
+#include "common.h"
+
+extern s32 D_80078C94;
+extern s32 D_80078D5C;
+extern s32 D_80078C84;
+extern s32 func_8003A5F8();
+extern s32 func_8004FE3C();
+
+void func_8003A690(void) {
+    if (D_80078C94 == 0) {
+        D_80078C94 = 1;
+        func_8004FEDC();
+        D_80078D5C = func_8004FE3C(0xF2000002, 2, 0x1000, func_8003A5F8);
+        func_8004FE7C(D_80078D5C);
+        SetRCnt(0xF2000002, 0x1C00, 0x1000);
+        StartRCnt(0xF2000002);
+        func_8004FEEC();
+        D_80078C84 = 0;
+        D_80078C94 = 0;
+    }
+}
 
 void func_8003A71C(void) {
     extern s32 D_80078C84;
@@ -75,7 +95,21 @@ void func_8003A84C(void) {
 
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A854);
+#include "common.h"
+
+s32 func_8003A854(u8 *a, u8 *b, s32 n) {
+    if (n == 0) {
+        return -1;
+    }
+    while (--n != 0) {
+        if (*a != *b) {
+            return *a - *b;
+        }
+        a++;
+        b++;
+    }
+    return *a - *b;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A8A4);
 
@@ -133,4 +167,13 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C654);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C73C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C7C8);
+#include "common.h"
+
+extern u8 D_800949A8[];
+
+void func_8003C7C8(void) {
+    SpuInit();
+    func_80038890();
+    func_8003C73C();
+    SpuInitMalloc(0x10, D_800949A8);
+}

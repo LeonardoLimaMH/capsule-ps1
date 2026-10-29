@@ -46,7 +46,13 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C", func_8001E160);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C", func_8001E180);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C", func_8001E1E4);
+#include "common.h"
+
+void func_8001E1E4(void) {
+    extern s32 D_8008F6D0[];
+    (*D_8008F6D0) = 0;
+    func_8001F160();
+}
 
 #include "ghidra.h"
 void func_8001E208(undefined4 param_1)

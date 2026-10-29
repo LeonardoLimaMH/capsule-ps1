@@ -15,6 +15,8 @@ PYTHON      := python3
 SPLAT       := splat split
 
 # Compilador original: GCC 2.7.2 (cc1 do PsyQ) + maspsx (emula o ASPSX)
+.DELETE_ON_ERROR:  # objeto de compilação que falhou não pode ficar para trás
+
 GCC_VERSION ?= 2.7.2-psx
 CC1         := /opt/gcc-$(GCC_VERSION)/cc1
 # compilador por arquivo (config/compilers.txt: "src/x/y.c 2.8.1-psx"); padrão: GCC_VERSION
