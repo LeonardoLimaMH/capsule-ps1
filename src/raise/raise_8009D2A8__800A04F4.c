@@ -15,4 +15,10 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A04F4", func_800A0618);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A04F4", func_800A0780);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A04F4", func_800A09E4);
+#include "common.h"
+
+void func_800A09E4(void) {
+    extern s16 D_800ED88C[];
+    (*D_800ED88C) = 1;
+    func_800BCF98(1);
+}

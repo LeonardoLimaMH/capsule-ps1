@@ -10,9 +10,21 @@ void func_800CC3E4(void) {
     func_8001A998(D_80103CE8, 0x40);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CC40C);
+#include "common.h"
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CC43C);
+void func_800CC40C(void) {
+    extern M2C_UNK D_800EFFEC[];
+    extern M2C_UNK D_80103CE8[];
+    func_8001AA70(D_80103CE8, D_800EFFEC, 0x40);
+}
+
+#include "common.h"
+
+void func_800CC43C(void) {
+    extern M2C_UNK D_800EFFEC[];
+    extern M2C_UNK D_80103CE8[];
+    func_8001AA70(D_800EFFEC, D_80103CE8, 0x40);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CC46C);
 
@@ -20,7 +32,17 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CC5D4);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CC808);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CC868);
+#include "common.h"
+
+void func_800CC868(void *arg0) {
+    extern s16 D_80078C20[];
+    extern u16 D_8008EE44[];
+    if (((((u32) M2C_FIELD(arg0, u32 *, 0x34) >> 8) & 1) != (*D_80078C20)) || ((*D_8008EE44) == 0x41)) {
+        func_80013920();
+        return;
+    }
+    func_800CC5D4();
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CC8C4);
 

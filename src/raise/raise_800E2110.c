@@ -18,11 +18,28 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3090);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3260);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E32D0);
+#include "common.h"
+
+void func_800E32D0(s32 arg0, s16 *arg1, s16 *arg2) {
+    extern s16 D_800F1EE0[];
+    (*D_800F1EE0) = 1;
+    func_800A4984();
+    (*D_800F1EE0) = 0;
+    func_80025CEC(arg0, *arg1, *arg2, 1);
+    func_80025E54(arg0, *arg1, *arg2);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E334C);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E33E4);
+#include "common.h"
+
+void func_800E33E4(s32 arg0, s16 *arg1, s16 *arg2) {
+    extern s16 D_800F1EE0[];
+    (*D_800F1EE0) = 0;
+    func_800A4984();
+    func_80025CEC(arg0, *arg1, *arg2, 1);
+    func_80025E54(arg0, *arg1, *arg2);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3450);
 
@@ -46,7 +63,16 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3D18);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3F38);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E4158);
+#include "common.h"
+
+extern s32 D_800FAE10[];
+extern s32 D_800FDE08[];
+
+void func_800E4158(s32 side) {
+    s32 other = 1 - side;
+
+    func_800C5850(D_800FDE08[other], D_800FAE10[other], 0, 1, 4);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E41B0);
 
@@ -72,7 +98,15 @@ void func_800E47D8(void) {
     func_800E4AD0();
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E47F8);
+#include "common.h"
+
+void func_800E47F8(void) {
+    extern s16 D_80105990[];
+    func_800E4838(1, 1);
+    if ((*D_80105990) == 0) {
+        func_80015524();
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E4838);
 

@@ -24,3 +24,9 @@ WORKDIR /work
 # compilador nativo: oráculo do GTE (tools/gte_oracle.py compila o GTE do psxe, MIT)
 RUN apt-get update && apt-get install -y --no-install-recommends gcc libc6-dev \
     && rm -rf /var/lib/apt/lists/*
+
+# GCC 2.7.2 do CDK da Sony (decompals/old-gcc): parte do jogo foi compilada com ele (o
+# corpo das funções sai como no 2.8.x, o epílogo como no 2.7.2)
+RUN mkdir -p /opt/gcc-2.7.2-cdk \
+    && wget -q https://github.com/decompals/old-gcc/releases/download/0.17/gcc-2.7.2-cdk.tar.gz -O /tmp/g.tgz \
+    && tar xzf /tmp/g.tgz -C /opt/gcc-2.7.2-cdk && rm /tmp/g.tgz

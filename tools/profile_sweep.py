@@ -5,7 +5,8 @@ compilado com cada perfil de compilador, procurando byte-matching.
 Ideia adaptada do projeto Yu-Gi-Oh! Forbidden Memories Recompiled
 (tools/project/run_remaining_profile_pass.py, MIT): repassar toda função pendente por
 todos os perfis antes de mexer no C. Aqui os perfis são compilador (GCC 2.7.2 / 2.8.1)
-x perfil das bibliotecas PsyQ (-G0 + aspsx_fill). Flags extras (-fno-schedule-insns,
+x perfil das bibliotecas PsyQ (-G0 + aspsx_fill); o GCC 2.7.2 do CDK da Sony (2.7.2-cdk)
+entrou depois de casar uma família de funções que nenhum dos outros dois fechava. Flags extras (-fno-schedule-insns,
 -fno-strength-reduce, -fno-cse-follow-jumps, -O1, -msplit-addresses) foram medidas numa
 amostra de 57 funções e não casaram nenhuma: o jogo usa as flags padrão.
 
@@ -35,6 +36,7 @@ import g0fill  # noqa: E402
 
 SWEEP = ROOT / ".cache" / "sweep"
 RESULTS = SWEEP / "results.tsv"
+ONLY = []  # --profiles: testa só estes compiladores
 TARGETS = ("yuugi", "slpm", "raise", "chess", "etc")
 INCLUDE = re.compile(r'INCLUDE_ASM\("[^"]*",\s*(\w+)\)')
 STATUS = re.compile(r"\[(MATCH[^\]]*|DIFERENTE[^\]]*)\]")
@@ -62,10 +64,15 @@ def pending(target):
     return out
 
 
+BASE = ["2.7.2-psx", "2.8.1-psx", "2.7.2-cdk"]
+
+
 def profiles(target, tu, asm_text):
-    base = ["2.7.2-psx", "2.8.1-psx"]
+    base = BASE
     allp = base + ([g + "+g0fill" for g in base]
                    if target in ("yuugi", "slpm") and "$gp" not in asm_text else [])
+    if ONLY:
+        return [p for p in allp if p.split("+")[0] in ONLY]
     return [tu] + [p for p in allp if p != tu]
 
 
@@ -133,15 +140,26 @@ def main():
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--jobs", type=int, default=4)
     ap.add_argument("--stage")
+    ap.add_argument("--profiles", default="", help="só estes compiladores (ex.: 2.7.2-cdk)")
+    ap.add_argument("--results", default="", help="arquivo de resultados (padrão results.tsv)")
+    ap.add_argument("--skip-matched", default="", help="pula as casadas neste arquivo de resultados")
     ap.add_argument("--all", action="store_true", help="com --stage: inclui os casados em outro perfil")
     a = ap.parse_args()
     SWEEP.mkdir(parents=True, exist_ok=True)
+    global RESULTS, ONLY
+    if a.results:
+        RESULTS = ROOT / a.results
+    if a.profiles:
+        ONLY = a.profiles.split(",")
     if a.stage:
         stage(a.stage, a.all)
         return
     done = set()
     if RESULTS.exists():
         done = {tuple(l.split("\t")[:2]) for l in RESULTS.read_text(encoding="utf-8").splitlines()}
+    if a.skip_matched:
+        done |= {tuple(l.split("	")[:2]) for l in (ROOT / a.skip_matched).read_text(encoding="utf-8").splitlines()
+                 if l.split("	")[2] == "MATCH"}
     work = [(t, f, tu) for t in a.targets for f, tu in pending(t) if (t, f) not in done]
     total = len(work)
     if a.limit:
