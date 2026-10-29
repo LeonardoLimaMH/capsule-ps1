@@ -98,7 +98,3 @@ void ColorCol(void *v, void *rgb, void *out) {
     gte_cc();
     gte_strgb(out);
 }
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgte_smp", AverageSZ3);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgte_smp", AverageSZ4);

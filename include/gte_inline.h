@@ -68,8 +68,11 @@
     __asm__ volatile("mtc2 %0, $12\n mtc2 %2, $14\n mtc2 %1, $13" :: "r"(a), "r"(b), "r"(c))
 
 /* ---------------------------------------------------------------- leituras */
-#define GTE_MFC2(var, reg) __asm__ volatile("mfc2 %0, $" #reg "\n nop" : "=r"(var))
-#define GTE_CFC2(var, reg) __asm__ volatile("cfc2 %0, $" #reg "\n nop" : "=r"(var))
+#ifndef GTE_READ_WAIT
+#define GTE_READ_WAIT "\n nop"
+#endif
+#define GTE_MFC2(var, reg) __asm__ volatile("mfc2 %0, $" #reg GTE_READ_WAIT : "=r"(var))
+#define GTE_CFC2(var, reg) __asm__ volatile("cfc2 %0, $" #reg GTE_READ_WAIT : "=r"(var))
 #define gte_stsxy(p)   __asm__ volatile("swc2 $14, 0(%0)" :: "r"(p) : "memory")
 #define gte_stsxy3(a, b, c) \
     __asm__ volatile("swc2 $12, 0(%0)\n swc2 $13, 0(%1)\n swc2 $14, 0(%2)" \

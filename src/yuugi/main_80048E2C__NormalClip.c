@@ -1,6 +1,10 @@
+#define GTE_CMD_WAIT "nop\n nop\n "
+#define GTE_READ_WAIT ""
+#include "common.h"
+#include "yuugi.h"
+
 /* stub-ret: mixed */
 /* rand-u16: 0x80150000 64 0,1,0x10,0x40,0x80,0x100,0xFFC0,0xFFF0,0xFF80,0x1000 */
-#include "common.h"
 #include "gte_inline.h"
 
 /* libgte: sentido do triângulo na tela (NCLIP): > 0 de frente */

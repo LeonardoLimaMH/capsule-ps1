@@ -17,30 +17,30 @@ emulação contra a função original.
 
 <!-- PROGRESS:START -->
 **Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **2.35%**  
-**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **2.95%**  
-**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.31%**  
+**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **2.98%**  
+**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.34%**  
 **Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`; sobre o código convertível em C):** `████████████████████` **99.44%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | executável principal | 3.31% (6,824 / 206,372 B) | 160 / 732 | 10.68% (104 / 303 fn) | **4.78%** |
+| `YUUGI.EXE` | executável principal | 3.31% (6,824 / 206,372 B) | 160 / 732 | 11.33% (113 / 303 fn) | **4.91%** |
 | `SLPM_860.96` | loader / boot | 5.22% (1,084 / 20,756 B) | 29 / 119 | 8.13% (79 / 215 fn) | **7.19%** |
 | `CHESS.BIN` | overlay de batalha (tabuleiro) | 1.72% (7,268 / 421,956 B) | 100 / 867 | 100.00% (2 / 2 fn) | **1.74%** |
 | `RAISE.BIN` | overlay de criação de monstros | 2.63% (8,592 / 326,576 B) | 220 / 940 | 100.00% (2 / 2 fn) | **2.65%** |
 | `ETC.BIN` | overlay de menus/diversos | 1.38% (1,232 / 88,992 B) | 14 / 189 | 0.00% (0 / 0 fn) | **1.38%** |
-| **Total** | | **2.35%** (25,000 / 1,064,652 B) | 523 / 2847 | 9.63% (187 / 522 fn) | **2.95%** |
+| **Total** | | **2.35%** (25,000 / 1,064,652 B) | 523 / 2847 | 9.98% (196 / 522 fn) | **2.98%** |
 
 **Equivalentes e pendências por binário (jogo + SDK):**
 
 | Binário | C equivalente (`equiv/`) | Funcional (bytes convertíveis) | Funções em C | Assembly original | Faltam C |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | 92.89% (699 fn) | `██████████` **98.56%** | 963 / 970 (99.28%) | 65 | **7** |
+| `YUUGI.EXE` | 92.76% (690 fn) | `██████████` **98.56%** | 963 / 970 (99.28%) | 65 | **7** |
 | `SLPM_860.96` | 85.54% (191 fn) | `██████████` **95.49%** | 299 / 302 (99.01%) | 32 | **3** |
 | `CHESS.BIN` | 98.26% (767 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | 0 | **0** |
 | `RAISE.BIN` | 97.35% (720 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
 | `ETC.BIN` | 98.62% (175 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | 0 | **0** |
-| **Total** | 96.13% (2,552 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
+| **Total** | 96.10% (2,543 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código convertível: ficam de fora as rotinas que já eram assembly no
@@ -892,3 +892,13 @@ entre esses setters exigiram uma fronteira entre arquivos C; o match isolado
 não detecta esse deslocamento. O lote completou 4.000 execuções diferenciais,
 seis testes das ferramentas e o rebuild com os cinco SHA-1 originais. Ver
 `docs/validation/byte-matching-2026-10-29-gte-waits.json`.
+
+Mais nove rotinas GTE casaram ao selecionar também `GTE_READ_WAIT`. Em algumas
+leituras, o `jr` ou outra instrução original já ocupa a espera; acrescentar um
+`nop` muda o escalonamento. As médias que usam SZ já carregados não têm espera
+antes do comando, enquanto `NormalClip` usa duas. Essas sequências ficam em
+arquivos distintos, com padding preservado. Em `Square0` e `Square12`, vincular
+o ponteiro inicializado ao registrador de argumento `$5` mantém os stores no
+registrador original e a cópia do retorno no delay slot. Não são necessários
+valores locais sem inicialização. O lote passou em 3.600 execuções completas e
+nos cinco SHA-1: `docs/validation/byte-matching-2026-10-29-gte-reads.json`.
