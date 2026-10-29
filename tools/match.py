@@ -47,10 +47,11 @@ def original(target, func):
     return words, vram
 
 
-def compile_c(src, gcc, cflags, g0fill=False, target=None):
+def compile_c(src, gcc, cflags, g0fill=False, target=None, spfill=None):
     tmp = pathlib.Path(tempfile.mkdtemp())
     obj = tmp / "f.o"
-    back = g0fill_profile.backend(obj) if g0fill else f"{MASPSX} --target {target} -o {obj}"
+    sp = g0fill_profile.sp_enabled(src) if spfill is None else spfill
+    back = g0fill_profile.backend(obj, sp) if g0fill else f"{MASPSX} --target {target} -o {obj}"
     if g0fill:
         cflags = cflags.replace("-G8", "-G0")
     cmd = (f"mips-linux-gnu-cpp {CPP_FLAGS} {src} | /opt/gcc-{gcc}/cc1 {cflags} -quiet "
@@ -113,9 +114,11 @@ def main():
     ap.add_argument("-q", action="store_true")
     ap.add_argument("--g0fill", action="store_true",
                     help="perfil das bibliotecas PsyQ: -G0 + tools/aspsx_fill.py")
+    ap.add_argument("--spfill", action="store_true",
+                    help="com --g0fill: aspsx_fill.py --sp (padrão: se o arquivo está em config/spfill.txt)")
     a = ap.parse_args()
     ow, vram = original(a.target, a.func)
-    cw, masks = compiled(compile_c(a.src, a.gcc, a.cflags, a.g0fill, a.target), a.func)
+    cw, masks = compiled(compile_c(a.src, a.gcc, a.cflags, a.g0fill, a.target, a.spfill or None), a.func)
     while len(cw) > len(ow) and cw[-1] == 0:
         cw.pop()
         masks.pop()

@@ -28,6 +28,17 @@ def enabled(src):
     return p.as_posix() in files()
 
 
-def backend(obj):
+def sp_enabled(src):
+    """Arquivo em config/spfill.txt: o ASPSX também preenche o retorno com o `addu $sp`."""
+    p = pathlib.Path(src)
+    try:
+        p = p.resolve().relative_to(ROOT)
+    except ValueError:
+        pass
+    lst = ROOT / "config" / "spfill.txt"
+    return lst.exists() and p.as_posix() in {l.split("#")[0].strip() for l in lst.read_text(encoding="utf-8").splitlines()}
+
+
+def backend(obj, sp=False):
     """Parte do pipeline depois do cc1 (que deve receber -G0)."""
-    return f"{MASPSX_NOAS} | python3 tools/aspsx_fill.py | {AS} -o {obj}"
+    return f"{MASPSX_NOAS} | python3 tools/aspsx_fill.py{' --sp' if sp else ''} | {AS} -o {obj}"

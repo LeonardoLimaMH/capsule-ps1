@@ -6,7 +6,16 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011EF00", slpm__spu_t);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011EF00", slpm__spu_Fw);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011EF00", slpm__spu_Fr);
+#include "common.h"
+
+s32 slpm__spu_Fr(s32 arg0, s32 arg1) {
+    extern u16 D_801333EC[];
+    extern s32 D_801333FC[];
+    slpm__spu_t(2, (*D_801333EC) << (*D_801333FC));
+    slpm__spu_t(0);
+    slpm__spu_t(3, arg0, arg1);
+    return arg1;
+}
 
 #include "ghidra.h"
 void slpm__spu_FsetRXX(int param_1, uint param_2, int param_3)

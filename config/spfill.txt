@@ -1,0 +1,20 @@
+# Arquivos do perfil PsyQ (config/g0fill.txt) cujo ASPSX também põe a desalocação do
+# quadro (`addu $sp,$sp,N`) no delay slot do `j $31`: tools/aspsx_fill.py --sp.
+src/yuugi/main_800457C4.c
+src/yuugi/main_80046CF4.c
+src/yuugi/main_80047600.c
+src/yuugi/sdk_libapi_pad.c
+src/yuugi/sdk_libcd_bios.c
+src/yuugi/sdk_libgpu_sys__DrawSync.c
+src/slpm/loader_8011854C.c
+src/slpm/sdk_libcd_bios.c
+src/slpm/sdk_libcd_cdread.c
+src/slpm/sdk_libgpu_sys__DrawSync.c
+src/slpm/loader_80111CF0.c
+src/slpm/loader_80112F74.c
+src/slpm/loader_8011B65C.c
+src/slpm/loader_8011EF00.c
+src/slpm/sdk_libcd_c_005.c
+src/slpm/sdk_libcd_iso9660.c
+src/slpm/sdk_libgpu_ext.c
+src/slpm/sdk_libpress_libpress.c
