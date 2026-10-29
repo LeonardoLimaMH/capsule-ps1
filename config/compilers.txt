@@ -104,16 +104,12 @@ src/raise/raise_800B6014.c 2.8.1-psx
 src/raise/raise_800B617C.c 2.8.1-psx
 src/raise/raise_800BF800.c 2.8.1-psx
 src/raise/raise_800C0038.c 2.8.1-psx
-src/raise/raise_800C1360.c 2.8.1-psx
 src/raise/raise_800C17D8.c 2.8.1-psx
-src/raise/raise_800C1BFC.c 2.8.1-psx
 src/raise/raise_800C1DA4.c 2.8.1-psx
-src/raise/raise_800C2CE0.c 2.8.1-psx
 src/raise/raise_800C4964.c 2.8.1-psx
 src/raise/raise_800C5888.c 2.8.1-psx
 src/raise/raise_800C652C.c 2.8.1-psx
 src/raise/raise_800C6ACC.c 2.8.1-psx
-src/raise/raise_800C750C.c 2.8.1-psx
 src/raise/raise_800C8C44.c 2.8.1-psx
 src/raise/raise_800CB438.c 2.8.1-psx
 src/raise/raise_800CE164.c 2.8.1-psx
@@ -122,7 +118,6 @@ src/raise/raise_800CF290.c 2.8.1-psx
 src/raise/raise_800D0F10.c 2.8.1-psx
 src/raise/raise_800DCC94.c 2.8.1-psx
 src/raise/raise_800DDCFC.c 2.8.1-psx
-src/raise/raise_800DE9FC.c 2.8.1-psx
 src/raise/raise_800E20A8.c 2.8.1-psx
 src/chess/chess__800AED50.c 2.8.1-psx
 src/raise/raise_8009B150__8009CFB4.c 2.8.1-psx
