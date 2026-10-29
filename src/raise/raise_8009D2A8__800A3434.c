@@ -19,6 +19,11 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A3434", func_800A4BF8);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A3434", func_800A510C);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A3434", func_800A52C4);
+void func_800A52C4(void) {
+    extern s32 D_800ED8D8[];
+    (*D_800ED8D8) = 0;
+    func_800BD57C();
+    func_800BD66C(1);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A3434", func_800A52F0);

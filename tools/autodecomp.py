@@ -214,7 +214,7 @@ HANDWRITTEN = {}  # alvo -> funções escritas em assembly no original (tools/ha
 HEADER = '#include "common.h"\n\n'
 # compiladores tentados, em ordem: o código do jogo é majoritariamente GCC 2.7.2;
 # parte (sobretudo bibliotecas) foi compilada com GCC 2.8.1
-COMPILERS = ["2.7.2-psx", "2.8.1-psx"]
+COMPILERS = ["2.7.2-psx", "2.8.1-psx", "2.7.2-cdk"]  # 2.7.2-cdk: GCC do CDK da Sony, usado em parte do jogo
 
 
 # Heurísticas do pipeline, cada uma ligável/desligável para medição na bancada

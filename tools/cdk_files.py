@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Arquivos que podem passar para o GCC 2.7.2 do CDK (2.7.2-cdk).
 
-Para cada arquivo-fonte com funções casadas pelo CDK na varredura de perfis
-(.cache/sweep/results_cdk.tsv), confere se TODAS as funções já em C no arquivo também
+Para cada arquivo-fonte com funções casadas pelo CDK (varredura de perfis,
+.cache/sweep/results_cdk.tsv, ou autodecomp, .cache/auto/<alvo>/<f>.gcc), confere se TODAS
+as funções já em C no arquivo também
 casam com o CDK (tools/match.py sobre o próprio arquivo). Se sim, o arquivo pode trocar de
 compilador sem mudar nenhum byte do build e os candidatos do CDK entram nele.
 
@@ -39,6 +40,11 @@ def main():
     res = ROOT / ".cache" / "sweep" / "results_cdk.tsv"
     cdk = {l.split("\t")[1] for l in res.read_text(encoding="utf-8").splitlines()
            if l.split("\t")[0] == a.target and l.split("\t")[2] == "MATCH"}
+    # candidatos do autodecomp que casaram com o CDK (.cache/auto/<alvo>/<f>.gcc)
+    auto_dir = ROOT / ".cache" / "auto" / a.target
+    from_auto = ({g.stem for g in auto_dir.glob("*.gcc") if g.read_text().strip() == CDK}
+                 if auto_dir.exists() else set())
+    cdk |= from_auto
     ok_files, staged = [], 0
     for c in sorted((ROOT / "src" / a.target).rglob("*.c")):
         text = c.read_text(encoding="utf-8")
@@ -62,6 +68,8 @@ def main():
             auto = ROOT / ".cache" / "auto" / a.target
             auto.mkdir(parents=True, exist_ok=True)
             for f in mine:
+                if f in from_auto:
+                    continue  # já está em .cache/auto
                 shutil.copy(ROOT / ".cache" / "sweep" / a.target / f"{f}.c", auto / f"{f}.c")
                 (auto / f"{f}.gcc").write_text(CDK + "\n", encoding="utf-8")
                 staged += 1

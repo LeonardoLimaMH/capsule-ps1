@@ -2,7 +2,10 @@
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0124", func_800C0124);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0124", func_800C0560);
+void func_800C0560(void) {
+    extern u16 D_800F1ED2[];
+    func_800D1CC4((*D_800F1ED2), 7, 3, 1);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0124", func_800C0590);
 

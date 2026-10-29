@@ -39,7 +39,12 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009E3A8);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009E508);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009E568);
+void func_8009E568(void) {
+    extern s16 D_800ED88C[];
+    func_800BBF9C();
+    (*D_800ED88C) = 0;
+    func_800BBC28(1);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009E598);
 

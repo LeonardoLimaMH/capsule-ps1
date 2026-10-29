@@ -95,7 +95,20 @@ s32 func_800D4858(void) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98", func_800D4860);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98", func_800D4B7C);
+void func_800D4B7C(s32 unused_arg0, s32 arg1) {
+    extern u8 D_80100F38[];
+    s32 temp_a0;
+    s32 temp_a1;
+    void *temp_s0;
+
+    temp_a1 = arg1 & 0xFFFF;
+    temp_s0 = (temp_a1 * 0x79C) + D_80100F38;
+    temp_a0 = M2C_FIELD(temp_s0, s32 *, 0x180);
+    if (temp_a0 != 0) {
+        func_80013928(temp_a0, temp_a1);
+        M2C_FIELD(temp_s0, s32 *, 0x180) = 0;
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98", func_800D4BE4);
 

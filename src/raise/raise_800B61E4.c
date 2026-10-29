@@ -1,10 +1,22 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B61E4);
+void func_800B61E4(void) {
+    extern u8 D_800EE5D0[];
+    extern s32 D_800EF2FC[];
+    func_800B6D98(0x1A, 0x1E4, 0x35, 3, 0, D_800EE5D0, (*D_800EF2FC), 1, 0, 0, 2, 1);
+}
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B6248);
+void func_800B6248(void) {
+    extern u8 D_800EE5D0[];
+    extern s32 D_800EF318[];
+    func_800B6D98(1, 0x178, 0xC8, 9, 0, D_800EE5D0, (*D_800EF318), 1, 0, 1, 2, 1);
+}
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B62AC);
+void func_800B62AC(void) {
+    extern u8 D_800EE5D0[];
+    extern s32 D_800EF318[];
+    func_800B6D98(1, -0xBC, 0xC8, 9, 0, D_800EE5D0, (*D_800EF318), 1, 0, 1, 2, 1);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B6310);
 
