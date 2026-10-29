@@ -22,7 +22,16 @@ undefined2 GetRCnt(uint param_1)
   return uVar1;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libapi_counter", StartRCnt);
+#include "ghidra.h"
+bool StartRCnt(long param_1)
+{
+  extern void *D_80078B3C[];
+  int new_var;
+  extern u8 D_80078B44[];
+  new_var = (param_1 & 0xffff) * 4;
+  *((uint *) ((*D_80078B3C) + 4)) = (*((uint *) ((*D_80078B3C) + 4))) | (*((uint *) (D_80078B44 + new_var)));
+  return (param_1 & 0xffff) < 3;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libapi_counter", StopRCnt);
 

@@ -1,7 +1,13 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8004C798", func_8004C798);
+#include "common.h"
+
+extern void func_8004BC7C();
+
+s32 func_8004C798(void) {
+    return DMACallback(2, func_8004BC7C);
+}
 
 void func_8004C7C0(s8 *arg0, s8 arg1, s32 arg2) {
     s32 var_v0;

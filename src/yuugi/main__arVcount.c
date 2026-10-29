@@ -7,7 +7,15 @@ void GsClearVcount(void) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013350);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_800133A4);
+s32 func_800133A4(void)
+{
+  extern u8 D_8008ED68[];
+  s8 *new_var;
+  new_var = (s8 *) D_8008ED68;
+ do { } while (0);
+  *((s32 *) (new_var + 0x14)) = (s32) ((*((s32 *) (((s8 *) D_8008ED68) + 0x14))) + 1);
+  return 0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_800133C4);
 

@@ -40,7 +40,49 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002835C);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002840C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_800284C8);
+#include "common.h"
+
+typedef struct {
+    u32 mode;
+    void *crect;
+    u32 *caddr;
+    void *prect;
+    u32 *paddr;
+} Tim;
+
+extern s32 ReadTIM();
+extern s32 func_80019F30();
+
+void func_800284C8(s32 a) {
+    u8 *p;
+
+    Tim t;
+    u32 packed;
+
+    p = (u8 *)func_80019F30(a | 0xF0000);
+    if (p == 0) {
+        return;
+    }
+    p += 4;
+    OpenTIM(p);
+    packed = *(u32 *)(p - 4) & 0x100;
+    if (ReadTIM(&t) == 0) {
+        return;
+    }
+    if (t.caddr != 0) {
+        LoadImage(t.crect, t.caddr);
+    }
+    if (t.paddr == 0) {
+        return;
+    }
+    if (packed) {
+        func_8001A8C0(t.paddr, 0x801CC000);
+        LoadImage(t.prect, 0x801CC000);
+        DrawSync(0);
+    } else {
+        LoadImage(t.prect, t.paddr);
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002858C);
 
@@ -167,7 +209,21 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002C93C);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002CA80);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002CBDC);
+#include "common.h"
+
+void func_8002CBDC(void *arg0) {
+    extern M2C_UNK D_80078C5C[];
+    void *temp_s0;
+
+    temp_s0 = M2C_FIELD(arg0, void **, 0x18);
+    RotMatrix(D_80078C5C, temp_s0 + 0x20);
+    M2C_FIELD(temp_s0, s32 *, 0x5C) = 0;
+    M2C_FIELD(temp_s0, s32 *, 0x58) = 0;
+    M2C_FIELD(temp_s0, s32 *, 0x54) = 0;
+    M2C_FIELD(temp_s0, s32 *, 0x10) = 0x1000;
+    M2C_FIELD(temp_s0, s32 *, 0x14) = 0x1000;
+    M2C_FIELD(temp_s0, s32 *, 0x18) = 0x1000;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002CC2C);
 

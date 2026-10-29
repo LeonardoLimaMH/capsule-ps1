@@ -3,7 +3,18 @@
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80043134", func_80043134);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80043134", func_800431A0);
+#include "common.h"
+
+extern s32 D_80072E2C[];
+
+s32 func_800431A0(s32 i, s32 value) {
+    s32 old = D_80072E2C[i];
+
+    if (value != old) {
+        D_80072E2C[i] = value;
+    }
+    return old;
+}
 
 #include "ghidra.h"
 void func_800431CC(undefined4 *param_1,int param_2)
