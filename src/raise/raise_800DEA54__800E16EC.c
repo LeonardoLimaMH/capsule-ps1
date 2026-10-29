@@ -10,7 +10,28 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800E16EC", func_800E17F8);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800E16EC", func_800E1820);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800E16EC", func_800E1848);
+#include "common.h"
+
+extern u8 D_80105320[];
+
+void func_800E1848(s32 idx)
+{
+  s16 *new_var;
+  u8 *new_var2;
+  new_var2 = D_80105320;
+  new_var = (s16 *) (new_var2 + (0x110 * (idx & 0xFFFF)));
+  if (D_80105320)
+  {
+    *new_var = 0;
+  }
+  else
+  {
+    if (1)
+    {
+    }
+    *new_var = 0;
+  }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800E16EC", func_800E186C);
 
