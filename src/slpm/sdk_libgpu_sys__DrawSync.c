@@ -26,8 +26,26 @@ INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__DrawSync", slpm_PutDrawEnv);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__DrawSync", slpm_DrawOTagEnv);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__DrawSync", slpm_GetDrawEnv);
+#include "common.h"
+
+#include "ghidra.h"
+undefined4 slpm_GetDrawEnv(undefined4 param_1)
+
+{
+    extern M2C_UNK D_80131B44[];
+  slpm_memcpy(param_1,D_80131B44,0x5c);
+  return param_1;
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__DrawSync", slpm_PutDispEnv);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__DrawSync", slpm_GetDispEnv);
+#include "common.h"
+
+#include "ghidra.h"
+undefined4 slpm_GetDispEnv(undefined4 param_1)
+
+{
+    extern M2C_UNK D_80131BA0[];
+  slpm_memcpy(param_1,D_80131BA0,0x14);
+  return param_1;
+}
