@@ -80,6 +80,10 @@ Detalhes seguidos do psx-spx:
 - Casos manuais: projeção com matriz identidade, NCLIP, AVSZ3, MVMVA, IRGB/ORGB, LZCR,
   máscara do FLAG e extensão de sinal do H.
 - Tabela e divisão UNR cruzadas com o DuckStation.
+- Oráculo psxe (`./run.sh python3 tools/gte_oracle.py --n 200000 --seed 7`): 200.000 estados
+  e instruções sorteados (RTPS, RTPT, NCLIP, AVSZ3, AVSZ4, MVMVA com todos os mx/v/cv/sf/lm,
+  e escritas em todos os registradores), com valores de borda; os 64 registradores
+  (incluindo o FLAG) ficaram idênticos em todos os casos. Também 30.000 com `--seed 1`.
 - Mutações no C de `func_800E3C24` (deslocamento do SZ, `rtpt` no lugar de `rtps`) são
   detectadas como divergentes.
 - Regressão: uma amostra de funções já validadas mantém o mesmo veredito.

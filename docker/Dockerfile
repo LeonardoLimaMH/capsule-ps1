@@ -20,3 +20,7 @@ RUN git clone --depth 1 https://github.com/mkst/maspsx /opt/maspsx \
  && pip install --no-cache-dir "pycparser<3" graphviz || true
 RUN ln -sf /usr/bin/mips-linux-gnu-cpp /usr/local/bin/cpp
 WORKDIR /work
+
+# compilador nativo: oráculo do GTE (tools/gte_oracle.py compila o GTE do psxe, MIT)
+RUN apt-get update && apt-get install -y --no-install-recommends gcc libc6-dev \
+    && rm -rf /var/lib/apt/lists/*
