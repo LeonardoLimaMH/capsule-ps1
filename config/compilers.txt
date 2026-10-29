@@ -154,7 +154,6 @@ src/chess/chess__800B3878.c 2.8.1-psx
 src/chess/chess_800C4ECC__800C942C.c 2.8.1-psx
 src/chess/chess_800DCF3C__800FE958.c 2.8.1-psx
 src/chess/chess__800AECC4.c 2.8.1-psx
-src/chess/chess_800C4ECC__800CAE14.c 2.8.1-psx
 src/etc/etc__800A4AC8__800A81F4.c 2.8.1-psx
 src/etc/etc__800AA238__800AB78C.c 2.8.1-psx
 src/yuugi/main__arVcount__80019C20.c 2.8.1-psx
@@ -226,7 +225,6 @@ src/etc/etc__800A4AC8.c 2.7.2-cdk
 src/etc/etc__800A822C.c 2.7.2-cdk
 src/chess/chess.c 2.7.2-cdk
 src/chess/chess__8009ECF8.c 2.7.2-cdk
-src/chess/chess__800A8444.c 2.7.2-cdk
 src/chess/chess_800BB910.c 2.7.2-cdk
 src/chess/chess_800C4E94.c 2.7.2-cdk
 src/chess/chess_800DCF3C__800DD3D8.c 2.7.2-cdk
@@ -236,3 +234,6 @@ src/chess/chess__800B38B0.c 2.7.2-cdk
 src/chess/chess__800B9248.c 2.7.2-cdk
 src/etc/etc.c 2.7.2-cdk
 src/slpm/sdk_libsnd_sssv.c 2.7.2-cdk
+src/chess/chess__800A8444.c 2.7.2-cdk
+src/chess/chess_800C23A8.c 2.7.2-cdk
+src/chess/chess_800C4ECC__800CAE14.c 2.7.2-cdk

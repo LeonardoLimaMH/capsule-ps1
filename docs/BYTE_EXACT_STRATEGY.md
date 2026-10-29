@@ -120,13 +120,21 @@ locais. Não contar matches já integrados por outro colaborador como novos.
 | CHESS / helper | Quatro funções novas e uma refatoração usam a macro compartilhada. Evidências em `validation/byte-matching-2026-10-29-chess-helper.json`. |
 | Base `27d6006`, equivalentes / CDK | 1.113 equivalentes de CHESS, ETC e SLPM compilados com o CDK; 25 matches isolados, 22 integrados: 17 CHESS, quatro ETC e um SDK de SLPM. Dez mil execuções diferenciais idênticas, 5.420 inconclusivas e 38 não suportadas, separadas no registro; nenhum teste divergente entre os 22 aceitos. Cinco SHA-1 confirmados. Evidências em `validation/byte-matching-2026-10-29-cdk-equivalents.json`. |
 
-Restam três matches isolados desta varredura para integrar suas tabelas de
-`switch`: `CHESS:func_800A84A0`, `func_800C41E8` e `func_800CAE6C`. O link
-detectou referências às labels originais, que desapareceram ao converter as
-funções; o C também gera suas próprias tabelas. A próxima etapa é associar
-cada faixa `.rodata` à TU correta, preservando endereço, ordem e padding.
-Essas três funções continuam em `equiv/`, fora do progresso byte-exact.
+Os três matches com tabelas pendentes foram integrados na rodada seguinte:
+`CHESS:func_800A84A0`, `func_800C41E8` e `func_800CAE6C`. Os subsegmentos
+`.rodata` do splat agora associam as faixas originais `0x4B4..0x5E0`,
+`0x10B4..0x10C8` e `0x1198..0x11AC` aos respectivos arquivos C. O compilador
+gera as tabelas; o linker as posiciona nos endereços originais. Isso elimina
+as tabelas duplicadas e as referências a labels do assembly removido.
+Não foi preciso criar novas fronteiras de código. Os cinco SHA-1 e 2.400
+execuções diferenciais confirmaram o lote:
+`validation/byte-matching-2026-10-29-switch-tables.json`.
 
-Em `func_800A84A0`, o teste inicial também apontou diferença em `v0`; isso
-permanece pendente de investigação junto à relocação da tabela. Não ocultar
-essa divergência nem interpretar o match de instruções como aceitação.
+Em `func_800A84A0`, a diferença inicial em `v0` vinha do `lui` com a parte alta
+do endereço da tabela, executado no delay slot de um ramo. No teste, o C é
+realocado, mudando esse valor residual de `0x80090000` para `0x80180000`.
+A função é `void`; `retuse.py` confirmou que seus chamadores diretos não usam
+o retorno. Os testes dessa função desconsideram apenas `v0` e continuam
+comparando memória, chamadas e os outros registradores observados. O rebuild
+completo preserva **todos** os bytes, sem essa exceção. O registro explicita
+o diagnóstico e a limitação da análise de chamadas indiretas.
