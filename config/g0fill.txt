@@ -24,3 +24,5 @@ src/yuugi/main_80044868.c
 src/slpm/sdk_libgpu_sys__DrawSync.c
 src/yuugi/sdk_libetc_intr_dma.c
 src/yuugi/sdk_libetc_intr_vb.c
+src/yuugi/main_80044A0C__80044B3C.c
+src/yuugi/sdk_libgpu_sys__DrawSync.c

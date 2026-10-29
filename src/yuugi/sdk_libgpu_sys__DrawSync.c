@@ -1,4 +1,5 @@
 #include "common.h"
+#include "yuugi.h"
 
 extern u8 D_8007891E;
 extern char D_80011288[];

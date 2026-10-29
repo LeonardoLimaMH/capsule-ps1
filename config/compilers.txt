@@ -186,3 +186,7 @@ src/raise/raise_800DEA54__800E1674.c 2.8.1-psx
 src/raise/raise_800DEA54__800E1594.c 2.8.1-psx
 src/raise/raise_800DEA54__800E15DC.c 2.8.1-psx
 src/raise/raise_800AC34C__800B0A94.c 2.8.1-psx
+src/yuugi/main_8001A1DC__8001A464.c 2.8.1-psx
+src/yuugi/main_80044A0C__80044B30.c 2.8.1-psx
+src/yuugi/main__arVcount__80015524.c 2.8.1-psx
+src/yuugi/sdk_libgpu_sys__DrawSync.c 2.8.1-psx

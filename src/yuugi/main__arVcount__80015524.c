@@ -1,4 +1,5 @@
 #include "common.h"
+#include "yuugi.h"
 
 extern u8 D_8008ED68[];
 
