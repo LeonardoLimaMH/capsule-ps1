@@ -19,7 +19,19 @@ void func_80012394(void)
   return;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800123D4);
+void func_800123D4(void) {
+    extern u16 D_8008EE4C[];
+    extern int func_80011ED4();
+    switch ((*D_8008EE4C)) {                           /* irregular */
+    case 0:
+        func_800125D8();
+        return;
+    case 1:
+        func_80019F30(1, &func_80011ED4);
+        func_80012578();
+        return;
+    }
+}
 
 void func_80012430(void) {
 
