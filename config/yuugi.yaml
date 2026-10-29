@@ -214,6 +214,7 @@ segments:
       - [0x38FCC, c, main_800487CC]
       - [0x38FFC, c, sdk_libgte_mtx_08]
       - [0x3913C, c, main_8004893C]
+      - [0x3922C, c, main_8004893C__80048A2C]
       - [0x3923C, c, sdk_libgte_smp]
       - [0x3941C, c, sdk_libgte_smp_00]
       - [0x3962C, c, main_80048E2C]

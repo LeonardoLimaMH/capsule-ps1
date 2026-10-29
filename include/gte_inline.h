@@ -7,7 +7,12 @@
  * assembler GNU não conhece os mnemônicos do GTE. Ver docs/gte.md. */
 
 /* ---------------------------------------------------------------- comandos */
-#define GTE_CMD(word) __asm__ volatile("nop\n nop\n .word " #word "\n")
+/* The SDK also contains routines with one wait instruction. Select their
+ * original sequence per translation unit before including this header. */
+#ifndef GTE_CMD_WAIT
+#define GTE_CMD_WAIT "nop\n nop\n "
+#endif
+#define GTE_CMD(word) __asm__ volatile(GTE_CMD_WAIT ".word " #word "\n")
 #define gte_rtps()   GTE_CMD(0x4A180001)
 #define gte_rtpt()   GTE_CMD(0x4A280030)
 #define gte_nclip()  GTE_CMD(0x4B400006)

@@ -37,7 +37,7 @@ SWEEP = ROOT / ".cache" / "sweep"
 RESULTS = SWEEP / "results.tsv"
 TARGETS = ("yuugi", "slpm", "raise", "chess", "etc")
 INCLUDE = re.compile(r'INCLUDE_ASM\("[^"]*",\s*(\w+)\)')
-STATUS = re.compile(r"\[(MATCH|DIFERENTE[^\]]*)\]")
+STATUS = re.compile(r"\[(MATCH[^\]]*|DIFERENTE[^\]]*)\]")
 
 
 def tu_profile(path):
@@ -87,7 +87,9 @@ def try_profile(target, func, src, prof):
     m = STATUS.search(r.stdout)
     if not m:
         return "ERRO", (r.stderr.strip().splitlines() or ["?"])[-1][:120]
-    return ("MATCH", "") if m.group(1) == "MATCH" else ("DIFERENTE", m.group(1)[len("DIFERENTE "):])
+    if m.group(1).startswith("MATCH"):
+        return ("MATCH", "") if r.returncode == 0 else ("ERRO", "match retornou erro")
+    return "DIFERENTE", m.group(1)[len("DIFERENTE "):]
 
 
 def sweep_one(target, func, tu):
