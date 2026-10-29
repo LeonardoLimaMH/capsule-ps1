@@ -92,7 +92,6 @@ src/slpm/sdk_libspu_s_sva.c 2.8.1-psx
 src/slpm/sdk_libspu_s_n2p.c 2.8.1-psx
 src/chess/chess_800BB8BC.c 2.8.1-psx
 src/chess/chess_800C22A0.c 2.8.1-psx
-src/chess/chess_800C4E94.c 2.8.1-psx
 src/chess/chess_800DCE78.c 2.8.1-psx
 src/chess/chess_800FFE6C.c 2.8.1-psx
 src/raise/raise_8009B088.c 2.8.1-psx
@@ -225,3 +224,15 @@ src/etc/etc__8009BD30.c 2.7.2-cdk
 src/etc/etc__8009BD30__800A0824.c 2.7.2-cdk
 src/etc/etc__800A4AC8.c 2.7.2-cdk
 src/etc/etc__800A822C.c 2.7.2-cdk
+src/chess/chess.c 2.7.2-cdk
+src/chess/chess__8009ECF8.c 2.7.2-cdk
+src/chess/chess__800A8444.c 2.7.2-cdk
+src/chess/chess_800BB910.c 2.7.2-cdk
+src/chess/chess_800C4E94.c 2.7.2-cdk
+src/chess/chess_800DCF3C__800DD3D8.c 2.7.2-cdk
+src/chess/chess_800DCF3C__800FE98C.c 2.7.2-cdk
+src/chess/chess_801002CC.c 2.7.2-cdk
+src/chess/chess__800B38B0.c 2.7.2-cdk
+src/chess/chess__800B9248.c 2.7.2-cdk
+src/etc/etc.c 2.7.2-cdk
+src/slpm/sdk_libsnd_sssv.c 2.7.2-cdk

@@ -87,7 +87,13 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099394);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800993F8);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099444);
+#include "common.h"
+
+void func_80099444(void) {
+    extern int func_80012508();
+    func_80019F30(9, func_80012508);
+    func_80012508();
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099474);
 
@@ -108,7 +114,13 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099B18);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099C08);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099C48);
+#include "common.h"
+
+void func_80099C48(void) {
+    extern int func_80012508();
+    func_80019F30(8, func_80012508);
+    func_80012508();
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099C78);
 
@@ -120,13 +132,28 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099EA0);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099FCC);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009A094);
+#include "common.h"
+
+extern char D_800AEFB4[], D_800AEFC8[], D_800AEFD8[];
+extern s32 func_8001F1A8(s32, s32, s32, s32, s32, char *, s32, s32, s32);
+
+s32 func_8009A094(void) {
+    func_8001F1A8(-0x98, -0x18, 0, 1, 0, D_800AEFB4, 1, 9, 3);
+    func_8001F1A8(-0x80, 8, 0, 1, 0, D_800AEFC8, 1, 8, 3);
+    return func_8001F1A8(0x70, 8, 0, 1, 0, D_800AEFD8, 1, 2, 3);
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009A160);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009A1D4);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009A294);
+#include "common.h"
+
+void func_8009A294(void) {
+    extern int func_80012508();
+    func_80019F30(8, func_80012508);
+    func_80012508();
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009A2C4);
 
@@ -157,28 +184,3 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009B564);
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009B624);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009B6D0);
-
-void func_8009B738(void *arg0)
-{
-  extern u16 D_8008EE44[];
-  s32 var_v0;
-  int new_var;
-  new_var = ~1;
-  if (((u32) ((*D_8008EE44) - 8)) < 3U)
-  {
-    var_v0 = (*((s32 *) (((s8 *) arg0) + 0x38))) & new_var;
-  }
-  else
-  {
-    var_v0 = (*((s32 *) (((s8 *) arg0) + 0x38))) | 1;
-  }
-  *((s32 *) (((s8 *) arg0) + 0x38)) = var_v0;
-}
-
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009B774);
-
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009B7EC);
-
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009B864);
-
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009BBD0);

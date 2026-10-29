@@ -1,3 +1,4 @@
+#include "ghidra.h"
 #include "common.h"
 #include "ghidra.h"
 
@@ -43,7 +44,13 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF460);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF644);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF700);
+#include "common.h"
+
+void func_800FF700(void) {
+    extern M2C_UNK D_80119600[];
+    func_8001A998(D_80119600, 0x54);
+    M2C_FIELD(D_80119600, s32 *, 0x2C) = func_800FF644();
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF740);
 

@@ -53,6 +53,17 @@ Se outro compilador for necessário, testar todas as funções C da TU antes de
 trocar o perfil. Se houver conflito, separar a TU na fronteira correta e
 verificar novamente o build. Evitar criar fronteiras sem necessidade.
 
+Uma TU mista não exige alternar o compilador em cada candidata: testar também
+as funções C vizinhas no novo perfil e agrupar trechos consecutivos compatíveis.
+No lote CDK abaixo, isso reduziu 25 novas fronteiras para oito. Preservar os
+headers necessários em cada trecho; um `ghidra.h` colocado entre funções no
+arquivo antigo precisa preceder os usos dos tipos no arquivo separado.
+
+As fronteiras devem vir de endereços originais verificados. Um mapa produzido
+por um link que falhou pode conter posições deslocadas: não o usar como fonte
+de offsets. A tentativa com tabelas `.rodata` duplicadas mostrou esse problema;
+recalcular os offsets originais e repetir o build recuperou os cinco SHA-1.
+
 Antes de copiar o lote de volta, comparar os arquivos com a base da cópia
 isolada. Incorporar alterações concorrentes e repetir os testes afetados;
 nunca substituir a árvore atual por uma cópia antiga. Remover de `equiv/`
@@ -107,7 +118,15 @@ locais. Não contar matches já integrados por outro colaborador como novos.
 | `b678acd` | Argumentos vinculados e inicializados recuperaram nove matches; preservação dos valores verificada por testes e build. |
 | `fc15bf8` | A outra frente integrou o GCC do CDK. Sete de onze candidatas preparadas já estavam resolvidas; a integração desta frente foi reduzida às quatro novas funções CHESS, preservando esses avanços. |
 | CHESS / helper | Quatro funções novas e uma refatoração usam a macro compartilhada. Evidências em `validation/byte-matching-2026-10-29-chess-helper.json`. |
+| Base `27d6006`, equivalentes / CDK | 1.113 equivalentes de CHESS, ETC e SLPM compilados com o CDK; 25 matches isolados, 22 integrados: 17 CHESS, quatro ETC e um SDK de SLPM. Dez mil execuções diferenciais idênticas, 5.420 inconclusivas e 38 não suportadas, separadas no registro; nenhum teste divergente entre os 22 aceitos. Cinco SHA-1 confirmados. Evidências em `validation/byte-matching-2026-10-29-cdk-equivalents.json`. |
 
-As próximas rodadas começam pelos equivalentes de CHESS, ETC e SLPM ainda não
-testados no CDK. Os resultados só passam a progresso aceito após a integração
-e todas as verificações acima.
+Restam três matches isolados desta varredura para integrar suas tabelas de
+`switch`: `CHESS:func_800A84A0`, `func_800C41E8` e `func_800CAE6C`. O link
+detectou referências às labels originais, que desapareceram ao converter as
+funções; o C também gera suas próprias tabelas. A próxima etapa é associar
+cada faixa `.rodata` à TU correta, preservando endereço, ordem e padding.
+Essas três funções continuam em `equiv/`, fora do progresso byte-exact.
+
+Em `func_800A84A0`, o teste inicial também apontou diferença em `v0`; isso
+permanece pendente de investigação junto à relocação da tabela. Não ocultar
+essa divergência nem interpretar o match de instruções como aceitação.

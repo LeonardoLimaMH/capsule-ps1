@@ -1,6 +1,12 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_801002CC", func_801002CC);
+#include "common.h"
+
+void func_801002CC(void) {
+    extern u16 D_8008EE44[];
+    extern u8 D_80102870[];
+    (*(void (**)())(((*D_8008EE44) * 4) + D_80102870))();
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_801002CC", func_8010030C);
 
