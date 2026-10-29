@@ -7,7 +7,16 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_t);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_Fw);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_Fr);
+#include "common.h"
+
+s32 _spu_Fr(s32 arg0, s32 arg1) {
+    extern u16 D_800715B0[];
+    extern s32 D_800715C0[];
+    _spu_t(2, (*D_800715B0) << (*D_800715C0));
+    _spu_t(0);
+    _spu_t(3, arg0, arg1);
+    return arg1;
+}
 
 #include "ghidra.h"
 void _spu_FsetRXX(int param_1, uint param_2, int param_3)

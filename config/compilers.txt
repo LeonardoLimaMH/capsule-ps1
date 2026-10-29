@@ -11,7 +11,6 @@ src/yuugi/sdk_libmath_fixdfsi.c 2.8.1-psx
 src/yuugi/sdk_libmath_fixudfsi.c 2.8.1-psx
 src/yuugi/sdk_libmath_fltsidf.c 2.8.1-psx
 src/yuugi/sdk_libmath_mainasu.c 2.8.1-psx
-src/yuugi/sdk_libmath_muldf3.c 2.8.1-psx
 src/yuugi/sdk_libmath_mulsf3.c 2.8.1-psx
 src/yuugi/sdk_libmath_sqrt.c 2.8.1-psx
 src/yuugi/sdk_libmath_ferr.c 2.8.1-psx
@@ -22,9 +21,7 @@ src/yuugi/sdk_libspu_s_srmp.c 2.8.1-psx
 src/yuugi/sdk_libspu_s_crwa.c 2.8.1-psx
 src/yuugi/sdk_libspu_s_rdd.c 2.8.1-psx
 src/yuugi/main_800411E8.c 2.8.1-psx
-src/yuugi/sdk_libspu_s_w.c 2.8.1-psx
 src/yuugi/sdk_libspu_s_w0.c 2.8.1-psx
-src/yuugi/sdk_libspu_s_wp.c 2.8.1-psx
 src/yuugi/sdk_libspu_s_itc.c 2.8.1-psx
 src/yuugi/sdk_libspu_s_sva.c 2.8.1-psx
 src/yuugi/sdk_libspu_s_n2p.c 2.8.1-psx
@@ -37,12 +34,10 @@ src/yuugi/main_8004530C.c 2.8.1-psx
 src/yuugi/main_80045680.c 2.8.1-psx
 src/yuugi/main_80046CF4.c 2.7.2-psx
 src/yuugi/main_80047344.c 2.8.1-psx
-src/yuugi/main_800473C4.c 2.8.1-psx
 src/yuugi/main_8004749C.c 2.8.1-psx
 src/yuugi/main_80047EC4.c 2.8.1-psx
 src/yuugi/sdk_libgpu_ext.c 2.8.1-psx
 src/yuugi/main_8004B9CC.c 2.8.1-psx
-src/yuugi/main_8004C380.c 2.8.1-psx
 src/yuugi/main_8004C7FC.c 2.8.1-psx
 src/yuugi/main_8004C8A0.c 2.8.1-psx
 src/yuugi/sdk_libcard_card.c 2.8.1-psx

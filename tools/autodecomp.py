@@ -508,7 +508,8 @@ def apply(target):
                 rod += 1
                 return m.group(0)
             mine = gp_modes(code)
-            if any(modes.get(k, v) != v for k, v in mine.items()):
+            # com -G0 (perfil PsyQ) nenhum global é acessado via $gp: não há conflito
+            if not file_gcc.endswith("+g0fill") and any(modes.get(k, v) != v for k, v in mine.items()):
                 skipped += 1
                 return m.group(0)
             modes.update(mine)

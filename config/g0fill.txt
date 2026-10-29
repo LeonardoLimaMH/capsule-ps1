@@ -34,3 +34,11 @@ src/slpm/sdk_libcd_c_005.c
 src/slpm/sdk_libcd_iso9660.c
 src/slpm/sdk_libgpu_ext.c
 src/slpm/sdk_libpress_libpress.c
+src/yuugi/sdk_libgpu_sys__80049BC0.c
+src/yuugi/sdk_libmath_muldf3.c
+src/yuugi/sdk_libspu_s_w.c
+src/yuugi/sdk_libspu_s_wp.c
+src/yuugi/main_8003F6E4.c
+src/yuugi/main_80043248.c
+src/yuugi/main_800473C4.c
+src/yuugi/main_8004C380.c
