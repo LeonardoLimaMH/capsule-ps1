@@ -5,9 +5,18 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015540);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800158C4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015944);
+#include "common.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015A0C);
+void func_80015944(s32 arg0) {
+    func_80020688(-0x3C, -8, 0x44, 0x10, 0x3A0, 0x40, 0x3F0, (arg0 + 0x160) & 0xFFFF, 0x80, 0x80, 0x80, 0, 0, 0);
+    func_80020688(0xC, -0x20, 0x30, 0x30, 0x3B4, 0x40, 0x3F0, 0x173, 0x80, 0x80, 0x80, 0, 0, 0);
+}
+
+#include "common.h"
+
+void func_80015A0C(void) {
+    func_80020688(0xC, -0x20, 0x30, 0x30, 0x3B4, 0x40, 0x3F0, 0x173, 0x80, 0x80, 0x80, 0, 0, 0);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015A74);
 
