@@ -62,13 +62,20 @@ dentro dos executáveis, é contado à parte (`tools/progress.py`).
 | Garantia | Como é verificada | Estado |
 |---|---|---|
 | O build reproduz **todos** os binários de código do jogo | `make check` compara SHA-1 dos 5 executáveis/overlays | ✅ 100% |
-| Cada função em C gera exatamente os mesmos bytes | `tools/match.py` (por função) + SHA-1 do build | ✅ em todas as funções em C |
-| Cada função em C tem o mesmo comportamento | `tools/difftest.py` (emulação R3000, estado aleatório) | ✅ em todas as funções em C |
+| O C integrado em `src/` gera exatamente os mesmos bytes | `tools/match.py` (por função) + SHA-1 do build | ✅ no C da frente byte-matching |
+| O C de `equiv/` reproduz as execuções testadas | `tools/difftest.py`, com os perfis e helpers de cada validação | Equivalência amostrada; não é prova para todas as entradas |
 | Todo o código está em C legível | percentual acima | 🚧 em andamento |
 
 Como o build é sempre byte-idêntico, o jogo gerado a partir deste repositório é
 funcionalmente 100% igual ao original em qualquer estágio; o trabalho restante é
 converter o assembly em C.
+
+O build padrão usa `src/` e o assembly restante. Ele não integra automaticamente
+as versões de `equiv/`: seu SHA-1 confirma a reconstrução do original, enquanto
+os testes diferenciais avaliam essas candidatas separadamente. As macros GTE em
+`include/gte_inline.h` ainda emitem instruções MIPS/COP2 e precisam de outro
+backend para um port nativo. Veja a [auditoria de 29/10/2026](docs/reviews/2026-10-29-functional-audit.md)
+para o estado verificado, as pendências e a análise de `ref/`.
 
 ### Duas frentes
 
