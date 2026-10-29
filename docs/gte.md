@@ -36,15 +36,15 @@ instrução GTE contava como "não suportada", e essas rotinas não podiam ser v
 
 ## Implementação (`tools/gte.py`)
 
-Cobertura atual, escolhida pelo que as rotinas pendentes realmente usam:
+Cobertura: o GTE completo.
 
 | Grupo | Instruções |
 |---|---|
 | Movimentos | `mfc2`, `mtc2`, `cfc2`, `ctc2`, `lwc2`, `swc2` |
-| Comandos | `RTPS`, `RTPT`, `NCLIP`, `AVSZ3`, `AVSZ4`, `MVMVA` |
+| Geometria | `RTPS`, `RTPT`, `NCLIP`, `AVSZ3`, `AVSZ4`, `MVMVA`, `SQR`, `OP` |
+| Luz e cor | `NCS`, `NCT`, `NCCS`, `NCCT`, `NCDS`, `NCDT`, `CC`, `CDP`, `DCPL`, `DPCS`, `DPCT`, `INTPL`, `GPF`, `GPL` |
 
-Outro comando (`NCCS`, `NCDS`, `SQR`, `OP`, `DPCS`, `INTPL`, `CC`, `CDP`...) ainda levanta
-`GTEUnsupported`, e a tentativa continua contando como "não suportada".
+Só um código de comando fora da lista levanta `GTEUnsupported` (tentativa "não suportada").
 
 Detalhes seguidos do psx-spx:
 
@@ -84,6 +84,8 @@ Detalhes seguidos do psx-spx:
   e instruções sorteados (RTPS, RTPT, NCLIP, AVSZ3, AVSZ4, MVMVA com todos os mx/v/cv/sf/lm,
   e escritas em todos os registradores), com valores de borda; os 64 registradores
   (incluindo o FLAG) ficaram idênticos em todos os casos. Também 30.000 com `--seed 1`.
+- Depois dos comandos de luz e cor: `gte_oracle.py --n 400000 --seed 11` cobre os 22
+  comandos e as escritas de registradores: 400.000 de 400.000 idênticos.
 - Mutações no C de `func_800E3C24` (deslocamento do SZ, `rtpt` no lugar de `rtps`) são
   detectadas como divergentes.
 - Regressão: uma amostra de funções já validadas mantém o mesmo veredito.

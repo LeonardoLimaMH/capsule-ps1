@@ -59,6 +59,22 @@ int o_cmd(unsigned op) {
     case 0x2d: psx_gte_i_avsz3(&C); return 1;
     case 0x2e: psx_gte_i_avsz4(&C); return 1;
     case 0x30: psx_gte_i_rtpt(&C); return 1;
+    case 0x0c: psx_gte_i_op(&C); return 1;
+    case 0x10: psx_gte_i_dpcs(&C); return 1;
+    case 0x11: psx_gte_i_intpl(&C); return 1;
+    case 0x13: psx_gte_i_ncds(&C); return 1;
+    case 0x14: psx_gte_i_cdp(&C); return 1;
+    case 0x16: psx_gte_i_ncdt(&C); return 1;
+    case 0x1b: psx_gte_i_nccs(&C); return 1;
+    case 0x1c: psx_gte_i_cc(&C); return 1;
+    case 0x1e: psx_gte_i_ncs(&C); return 1;
+    case 0x20: psx_gte_i_nct(&C); return 1;
+    case 0x28: psx_gte_i_sqr(&C); return 1;
+    case 0x29: psx_gte_i_dcpl(&C); return 1;
+    case 0x2a: psx_gte_i_dpct(&C); return 1;
+    case 0x3d: psx_gte_i_gpf(&C); return 1;
+    case 0x3e: psx_gte_i_gpl(&C); return 1;
+    case 0x3f: psx_gte_i_ncct(&C); return 1;
     }
     return 0;
 }
@@ -70,6 +86,11 @@ COMMANDS = {
     "nclip": lambda r: 0x4A000006,
     "avsz3": lambda r: 0x4A00002D,
     "avsz4": lambda r: 0x4A00002E,
+    **{name: (lambda code: lambda r: 0x4A000000 | code | (r.getrandbits(1) << 19) | (r.getrandbits(1) << 10))(code)
+       for name, code in [("op", 0x0C), ("dpcs", 0x10), ("intpl", 0x11), ("ncds", 0x13), ("cdp", 0x14),
+                          ("ncdt", 0x16), ("nccs", 0x1B), ("cc", 0x1C), ("ncs", 0x1E), ("nct", 0x20),
+                          ("sqr", 0x28), ("dcpl", 0x29), ("dpct", 0x2A), ("gpf", 0x3D), ("gpl", 0x3E),
+                          ("ncct", 0x3F)]},
     "mvmva": lambda r: (0x4A000012 | (r.getrandbits(1) << 19) | (r.randrange(4) << 17) | (r.randrange(4) << 15)
                         | (r.randrange(4) << 13) | (r.getrandbits(1) << 10)),
 }
@@ -102,7 +123,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--n", type=int, default=200000)
     ap.add_argument("--seed", type=int, default=1)
-    ap.add_argument("--ops", default="rtps,rtpt,nclip,avsz3,avsz4,mvmva,regs")
+    ap.add_argument("--ops", default="rtps,rtpt,nclip,avsz3,avsz4,mvmva,op,dpcs,intpl,ncds,cdp,ncdt,"
+                                     "nccs,cc,ncs,nct,sqr,dcpl,dpct,gpf,gpl,ncct,regs")
     a = ap.parse_args()
     o = build()
     o.o_read.restype = ctypes.c_uint

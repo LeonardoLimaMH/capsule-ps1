@@ -3,9 +3,11 @@
 Implementação própria a partir da especificação do psx-spx
 (https://psx-spx.consoledev.net/geometrytransformationenginegte/); ver docs/gte.md.
 
-Cobre os movimentos de registradores (mfc2/mtc2/cfc2/ctc2/lwc2/swc2) e os comandos
-RTPS, RTPT, NCLIP, AVSZ3, AVSZ4 e MVMVA. Outro comando levanta GTEUnsupported (o
-teste então conta a tentativa como "não suportada", como antes).
+Cobre os movimentos de registradores (mfc2/mtc2/cfc2/ctc2/lwc2/swc2) e todos os
+comandos documentados: RTPS, RTPT, NCLIP, AVSZ3, AVSZ4, MVMVA, NCS, NCT, NCCS, NCCT,
+NCDS, NCDT, CC, CDP, DCPL, DPCS, DPCT, INTPL, SQR, OP, GPF e GPL. Um código de comando
+fora da lista levanta GTEUnsupported (tentativa "não suportada"). Conferido contra o
+GTE do psxe por tools/gte_oracle.py.
 
 Registradores: d[0..31] (dados) e c[0..31] (controle), sempre como u32.
 """
@@ -285,6 +287,56 @@ class GTE:
                 acc = self.mac_ext(k + 1, acc + m[k][1] * v[1])
                 self.set_mac_ir(k + 1, acc + m[k][2] * v[2], shift, lm)
 
+    # ---------------------------------------------------------------- cor e luz
+    def mulmat(self, m, v, t, shift, lm):
+        """MAC/IR = (T*1000h + M*V) SAR shift; sem translação quando t é None."""
+        for k in range(3):
+            if t is None:
+                acc = self.mac_ext(k + 1, m[k][0] * v[0] + m[k][1] * v[1])
+            else:
+                acc = self.mac_ext(k + 1, (t[k] << 12) + m[k][0] * v[0])
+                acc = self.mac_ext(k + 1, acc + m[k][1] * v[1])
+            self.set_mac_ir(k + 1, acc + m[k][2] * v[2], shift, lm)
+
+    def push_rgb(self):
+        """fila de cores: [MAC1..3 / 16 saturados em 0..FFh, CODE de RGBC]."""
+        out = 0
+        for k in range(3):
+            c = s32(self.d[25 + k]) >> 4
+            if c < 0:
+                c = 0
+                self.setf(21 - k)
+            elif c > 0xFF:
+                c = 0xFF
+                self.setf(21 - k)
+            out |= c << (8 * k)
+        out |= self.d[6] & 0xFF000000
+        self.d[20], self.d[21], self.d[22] = self.d[21], self.d[22], out
+
+    def interpolate(self, mac, shift, lm):
+        """[MAC] = MAC + (FC - MAC) * IR0, com IR intermediário saturado como se lm = 0
+        (não empurra a fila de cores)."""
+        fc = self.vec3(21)
+        for k in range(3):
+            self.set_mac_ir(k + 1, (fc[k] << 12) - mac[k], shift, False)
+        ir0 = s32(self.d[8])
+        ir = self.IR()
+        for k in range(3):
+            self.set_mac_ir(k + 1, ir[k] * ir0 + mac[k], shift, lm)
+
+    def rgbc(self):
+        return [(self.d[6] >> (8 * k)) & 0xFF for k in range(3)]
+
+    def light(self, v, shift, lm):
+        """etapa comum dos comandos NC*: luz (LLM * V) e cor da luz (BK + LCM * IR)."""
+        self.mulmat(self.matrix(8), v, None, shift, lm)
+        self.mulmat(self.matrix(16), self.IR(), self.vec3(13), shift, lm)
+
+    def color_by_rgbc(self, shift, lm):
+        """[MAC] = [R*IR1, G*IR2, B*IR3] SHL 4 (antes do deslocamento)."""
+        ir = self.IR()
+        return [(c * i) << 4 for c, i in zip(self.rgbc(), ir)]
+
     def command(self, word):
         op = word & 0x3F
         sf = (word >> 19) & 1
@@ -318,6 +370,52 @@ class GTE:
             self.d[7] = otz
         elif op == 0x12:  # MVMVA
             self.mvmva(sf, (word >> 17) & 3, (word >> 15) & 3, (word >> 13) & 3, lm)
+        elif op in (0x1E, 0x20, 0x1B, 0x3F, 0x13, 0x16):  # NCS/NCT, NCCS/NCCT, NCDS/NCDT
+            for n in (range(3) if op in (0x20, 0x3F, 0x16) else (0,)):
+                self.light(self.V(n), shift, lm)
+                if op in (0x1B, 0x3F):
+                    for k, mac in enumerate(self.color_by_rgbc(shift, lm)):
+                        self.set_mac_ir(k + 1, mac, shift, lm)
+                elif op in (0x13, 0x16):
+                    self.interpolate(self.color_by_rgbc(shift, lm), shift, lm)
+                self.push_rgb()
+        elif op in (0x1C, 0x14):  # CC / CDP
+            self.mulmat(self.matrix(16), self.IR(), self.vec3(13), shift, lm)
+            if op == 0x1C:
+                for k, mac in enumerate(self.color_by_rgbc(shift, lm)):
+                    self.set_mac_ir(k + 1, mac, shift, lm)
+            else:
+                self.interpolate(self.color_by_rgbc(shift, lm), shift, lm)
+            self.push_rgb()
+        elif op == 0x29:  # DCPL
+            self.interpolate(self.color_by_rgbc(shift, lm), shift, lm)
+            self.push_rgb()
+        elif op in (0x10, 0x2A):  # DPCS / DPCT (DPCT: três vezes sobre RGB0, que anda na fila)
+            for _ in range(3 if op == 0x2A else 1):
+                src = self.d[6] if op == 0x10 else self.d[20]
+                for k in range(3):
+                    self.set_mac(k + 1, ((src >> (8 * k)) & 0xFF) << 16, 0)
+                self.interpolate([s32(self.d[25 + k]) for k in range(3)], shift, lm)
+                self.push_rgb()
+        elif op == 0x11:  # INTPL
+            self.interpolate([i << 12 for i in self.IR()], shift, lm)
+            self.push_rgb()
+        elif op == 0x28:  # SQR
+            for k, i in enumerate(self.IR()):
+                self.d[25 + k] = ((i * i) >> shift) & 0xFFFFFFFF
+                self.set_ir(k + 1, s32(self.d[25 + k]), lm)
+        elif op == 0x0C:  # OP (produto vetorial com a diagonal de RT)
+            rt = self.matrix(0)
+            d1, d2, d3 = rt[0][0], rt[1][1], rt[2][2]
+            i1, i2, i3 = self.IR()
+            for k, v in enumerate((i3 * d2 - i2 * d3, i1 * d3 - i3 * d1, i2 * d1 - i1 * d2)):
+                self.set_mac_ir(k + 1, v, shift, lm)
+        elif op in (0x3D, 0x3E):  # GPF / GPL
+            ir0 = s32(self.d[8])
+            for k, i in enumerate(self.IR()):
+                v = i * ir0 + ((s32(self.d[25 + k]) << shift) if op == 0x3E else 0)
+                self.set_mac_ir(k + 1, v, shift, lm)
+            self.push_rgb()
         else:
             raise GTEUnsupported(f"comando GTE {op:#04x} ({word:#010x})")
 
