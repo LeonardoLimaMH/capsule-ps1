@@ -16,31 +16,31 @@ emulação contra a função original.
 ## Progresso
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **2.35%**  
-**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **2.98%**  
-**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.34%**  
+**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **2.42%**  
+**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **3.04%**  
+**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.40%**  
 **Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`; sobre o código convertível em C):** `████████████████████` **99.44%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | executável principal | 3.31% (6,824 / 206,372 B) | 160 / 732 | 11.33% (113 / 303 fn) | **4.91%** |
+| `YUUGI.EXE` | executável principal | 3.47% (7,156 / 206,372 B) | 164 / 732 | 11.33% (113 / 303 fn) | **5.04%** |
 | `SLPM_860.96` | loader / boot | 5.22% (1,084 / 20,756 B) | 29 / 119 | 8.13% (79 / 215 fn) | **7.19%** |
-| `CHESS.BIN` | overlay de batalha (tabuleiro) | 1.72% (7,268 / 421,956 B) | 100 / 867 | 100.00% (2 / 2 fn) | **1.74%** |
-| `RAISE.BIN` | overlay de criação de monstros | 2.63% (8,592 / 326,576 B) | 220 / 940 | 100.00% (2 / 2 fn) | **2.65%** |
+| `CHESS.BIN` | overlay de batalha (tabuleiro) | 1.76% (7,416 / 421,956 B) | 101 / 867 | 100.00% (2 / 2 fn) | **1.77%** |
+| `RAISE.BIN` | overlay de criação de monstros | 2.71% (8,860 / 326,576 B) | 224 / 940 | 100.00% (2 / 2 fn) | **2.73%** |
 | `ETC.BIN` | overlay de menus/diversos | 1.38% (1,232 / 88,992 B) | 14 / 189 | 0.00% (0 / 0 fn) | **1.38%** |
-| **Total** | | **2.35%** (25,000 / 1,064,652 B) | 523 / 2847 | 9.98% (196 / 522 fn) | **2.98%** |
+| **Total** | | **2.42%** (25,748 / 1,064,652 B) | 532 / 2847 | 9.98% (196 / 522 fn) | **3.04%** |
 
 **Equivalentes e pendências por binário (jogo + SDK):**
 
 | Binário | C equivalente (`equiv/`) | Funcional (bytes convertíveis) | Funções em C | Assembly original | Faltam C |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | 92.76% (690 fn) | `██████████` **98.56%** | 963 / 970 (99.28%) | 65 | **7** |
+| `YUUGI.EXE` | 92.63% (686 fn) | `██████████` **98.56%** | 963 / 970 (99.28%) | 65 | **7** |
 | `SLPM_860.96` | 85.54% (191 fn) | `██████████` **95.49%** | 299 / 302 (99.01%) | 32 | **3** |
-| `CHESS.BIN` | 98.26% (767 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | 0 | **0** |
-| `RAISE.BIN` | 97.35% (720 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
+| `CHESS.BIN` | 98.23% (766 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | 0 | **0** |
+| `RAISE.BIN` | 97.27% (716 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
 | `ETC.BIN` | 98.62% (175 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | 0 | **0** |
-| **Total** | 96.10% (2,543 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
+| **Total** | 96.04% (2,534 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código convertível: ficam de fora as rotinas que já eram assembly no
@@ -902,3 +902,14 @@ o ponteiro inicializado ao registrador de argumento `$5` mantém os stores no
 registrador original e a cópia do retorno no delay slot. Não são necessários
 valores locais sem inicialização. O lote passou em 3.600 execuções completas e
 nos cinco SHA-1: `docs/validation/byte-matching-2026-10-29-gte-reads.json`.
+
+A cópia de constantes entre argumentos também tem uma forma validada com
+extensões do GCC: variáveis inicializadas nos registradores de argumentos e
+um asm vazio com entradas e saídas vinculadas. Ele não emite instruções e
+preserva os valores, mas impede substituir a cópia `a3 = a2` por outra carga
+de constante. Isso fechou nove funções em YUUGI, RAISE e CHESS, inclusive
+`func_8009C0E4`. As chamadas e os laços continuam em C; não há instruções MIPS
+inseridas por esse asm vazio. Os perfis cobrem ponteiro nulo, os dois tipos de
+descritor e listas de 0, 1 e 4 elementos: 6.400 execuções completas e cinco
+SHA-1 iguais. Ver `docs/validation/byte-matching-2026-10-29-argument-copies.json`
+e o exemplo em `docs/NOTES.md`.

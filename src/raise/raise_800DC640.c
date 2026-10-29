@@ -120,13 +120,53 @@ void func_800DC84C(s32 arg0, s32 arg1) {
     func_800D1CC4(arg0, arg1, z, z);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DC640", func_800DC878);
+void func_800DC878(s32 arg0, s32 arg1) {
+    func_800E47F8();
+    {
+        register s32 matching_a0 __asm__("$4") = (arg0 & 0xFFFF);
+        register s32 matching_a1 __asm__("$5") = (arg1 & 0xFFFF);
+        register s32 matching_a2 __asm__("$6") = 0;
+        __asm__ volatile("" : "=r"(matching_a0), "=r"(matching_a1), "=r"(matching_a2)
+        : "0"(matching_a0), "1"(matching_a1), "2"(matching_a2));
+        func_800D1CC4(matching_a0, matching_a1, matching_a2, matching_a2);
+    }
+    func_8003422C(1);
+}
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DC640", func_800DC8C8);
+void func_800DC8C8(s32 arg0, s32 arg1) {
+    {
+        register s32 matching_a0 __asm__("$4") = (arg0 & 0xFFFF);
+        register s32 matching_a1 __asm__("$5") = (arg1 & 0xFFFF);
+        register s32 matching_a2 __asm__("$6") = 0;
+        __asm__ volatile("" : "=r"(matching_a0), "=r"(matching_a1), "=r"(matching_a2)
+        : "0"(matching_a0), "1"(matching_a1), "2"(matching_a2));
+        func_800D1CC4(matching_a0, matching_a1, matching_a2, matching_a2);
+    }
+}
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DC640", func_800DC8F4);
+void func_800DC8F4(s32 arg0, s32 arg1) {
+    func_800E47F8();
+    {
+        register s32 matching_a0 __asm__("$4") = (arg0 & 0xFFFF);
+        register s32 matching_a1 __asm__("$5") = (arg1 & 0xFFFF);
+        register s32 matching_a2 __asm__("$6") = 0;
+        __asm__ volatile("" : "=r"(matching_a0), "=r"(matching_a1), "=r"(matching_a2)
+        : "0"(matching_a0), "1"(matching_a1), "2"(matching_a2));
+        func_800D1CC4(matching_a0, matching_a1, matching_a2, matching_a2);
+    }
+}
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DC640", func_800DC93C);
+void func_800DC93C(s32 arg0, s32 arg1) {
+    func_8009D324();
+    {
+        register s32 matching_a0 __asm__("$4") = (arg0 & 0xFFFF);
+        register s32 matching_a1 __asm__("$5") = (arg1 & 0xFFFF);
+        register s32 matching_a2 __asm__("$6") = 0;
+        __asm__ volatile("" : "=r"(matching_a0), "=r"(matching_a1), "=r"(matching_a2)
+        : "0"(matching_a0), "1"(matching_a1), "2"(matching_a2));
+        func_800D1CC4(matching_a0, matching_a1, matching_a2, matching_a2);
+    }
+}
 
 void func_800DC984(void) {
     func_8009CFB4();

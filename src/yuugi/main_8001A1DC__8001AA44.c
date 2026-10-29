@@ -33,9 +33,27 @@ void func_8001AD74(s32 arg0) {
     func_8001ADF8(0, arg0, 2, 1);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001AA44", func_8001ADA0);
+void func_8001ADA0(s32 arg0) {
+    {
+        register s32 matching_a0 __asm__("$4") = (3);
+        register s32 matching_a1 __asm__("$5") = (arg0);
+        register s32 matching_a2 __asm__("$6") = 1;
+        __asm__ volatile("" : "=r"(matching_a0), "=r"(matching_a1), "=r"(matching_a2)
+        : "0"(matching_a0), "1"(matching_a1), "2"(matching_a2));
+        func_8001ADF8(matching_a0, matching_a1, matching_a2, matching_a2);
+    }
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001AA44", func_8001ADCC);
+void func_8001ADCC(s32 arg0) {
+    {
+        register s32 matching_a0 __asm__("$4") = (2);
+        register s32 matching_a1 __asm__("$5") = (arg0);
+        register s32 matching_a2 __asm__("$6") = 1;
+        __asm__ volatile("" : "=r"(matching_a0), "=r"(matching_a1), "=r"(matching_a2)
+        : "0"(matching_a0), "1"(matching_a1), "2"(matching_a2));
+        func_8001ADF8(matching_a0, matching_a1, matching_a2, matching_a2);
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001AA44", func_8001ADF8);
 

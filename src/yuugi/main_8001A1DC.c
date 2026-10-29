@@ -1,7 +1,37 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC", func_8001A1DC);
+#include "ghidra.h"
+undefined4 func_8001A1DC(undefined4 param_1,int param_2,undefined4 *param_3)
+
+{
+    if (param_3 != (undefined4 *)0x0) {
+        if (param_3[3] == 1) {
+            func_80019D48(param_3[1],*param_3,param_3[2]);
+        }
+        else {
+            {
+                register s32 matching_a0 __asm__("$4") = (0xfe);
+                register u32 * matching_a1 __asm__("$5") = (param_3);
+                register s32 matching_a2 __asm__("$6") = 0;
+                __asm__ volatile("" : "=r"(matching_a0), "=r"(matching_a1), "=r"(matching_a2)
+                : "0"(matching_a0), "1"(matching_a1), "2"(matching_a2));
+                func_800190F4(matching_a0, matching_a1, matching_a2, matching_a2);
+            }
+        }
+        if (param_2 != 0) {
+            {
+                register s32 matching_a0 __asm__("$4") = (0xff);
+                register s32 matching_a1 __asm__("$5") = (param_2);
+                register s32 matching_a2 __asm__("$6") = 0;
+                __asm__ volatile("" : "=r"(matching_a0), "=r"(matching_a1), "=r"(matching_a2)
+                : "0"(matching_a0), "1"(matching_a1), "2"(matching_a2));
+                func_800190F4(matching_a0, matching_a1, matching_a2, matching_a2);
+            }
+        }
+    }
+    return 0;
+}
 
 #include "ghidra.h"
 undefined4 func_8001A25C(undefined4 param_1,undefined4 param_2,undefined4 *param_3)

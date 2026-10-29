@@ -26,7 +26,28 @@ void func_80015B00(int param_1)
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015B3C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015B74);
+void func_80015B74(void *arg0) {
+    s32 temp_a0;
+    u32 temp_s1;
+    u32 var_s0;
+
+    temp_s1 = M2C_FIELD(arg0, u32 *, 8);
+    var_s0 = (temp_s1 + (M2C_FIELD(arg0, s32 *, 0) * 0x24)) - 0x24;
+    if (var_s0 >= temp_s1) {
+        do {
+            temp_a0 = M2C_FIELD(var_s0, s32 *, 4);
+            var_s0 -= 0x24;
+            {
+                register s32 matching_a0 __asm__("$4") = (temp_a0);
+                register s32 matching_a1 __asm__("$5") = (1);
+                register s32 matching_a2 __asm__("$6") = 0;
+                __asm__ volatile("" : "=r"(matching_a0), "=r"(matching_a1), "=r"(matching_a2)
+                : "0"(matching_a0), "1"(matching_a1), "2"(matching_a2));
+                func_80012A20(matching_a0, matching_a1, matching_a2, matching_a2);
+            }
+        } while (var_s0 >= temp_s1);
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015BE8);
 

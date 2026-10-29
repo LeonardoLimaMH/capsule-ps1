@@ -48,7 +48,39 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009BEE0);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009BFD4);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009C0E4);
+#include "ghidra.h"
+void func_8009C0E4(void)
+
+{
+    uint uVar1;
+    undefined4 uVar2;
+    int iVar3;
+
+    uVar1 = func_800CA480();
+    uVar2 = func_80019F30(uVar1 | 0x50000,0);
+    {
+        register u32 matching_a0 __asm__("$4") = (uVar2);
+        register s32 matching_a1 __asm__("$5") = (1);
+        register s32 matching_a2 __asm__("$6") = 0;
+        __asm__ volatile("" : "=r"(matching_a0), "=r"(matching_a1), "=r"(matching_a2)
+        : "0"(matching_a0), "1"(matching_a1), "2"(matching_a2));
+        func_80012A20(matching_a0, matching_a1, matching_a2, matching_a2);
+    }
+    iVar3 = 0;
+    do {
+        uVar2 = func_80019F30(uVar1 | 0x20000,iVar3);
+        {
+            register u32 matching_a0 __asm__("$4") = (uVar2);
+            register s32 matching_a1 __asm__("$5") = (1);
+            register s32 matching_a2 __asm__("$6") = 0;
+            __asm__ volatile("" : "=r"(matching_a0), "=r"(matching_a1), "=r"(matching_a2)
+            : "0"(matching_a0), "1"(matching_a1), "2"(matching_a2));
+            func_80012A20(matching_a0, matching_a1, matching_a2, matching_a2);
+        }
+        iVar3 = iVar3 + 1;
+    } while (iVar3 < 4);
+    return;
+}
 
 void func_8009C178(char arg1)
 {

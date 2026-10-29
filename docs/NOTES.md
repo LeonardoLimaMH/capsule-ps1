@@ -172,7 +172,7 @@ valor constante em dois argumentos, o original carrega a constante uma vez e cop
 registrador (`addu $a2, $zero, $zero` … `addu $a3, $a2, $zero`), enquanto o GCC 2.7.2
 com `f(x, y, 0, 0)` carrega as duas. Não reproduzem: variável local, atribuição dentro da
 chamada, `register`, `inline`, protótipos com `s16`/`float`/ponteiro, outro compilador ou
-nível de otimização. **Reproduz (fora de laço)** uma junção artificial em que a variável
+nível de otimização. **Tentativa histórica, não usar em código novo:** uma junção artificial em que a variável
 recebe a constante nos dois ramos de um `if` com condição opaca:
 
 ```c
@@ -186,6 +186,29 @@ pelo permuter) `yuugi:func_8001AD48`. Sem parâmetro útil para a condição, du
 opacas funcionam (`if (v || w)`; só `w` não basta): `raise:func_800A0A30`, `func_800A5378`. Dentro de
 laço (`chess:func_8009CC34`) a variável extra fica viva e aloca outro `$s`: em aberto. A
 forma original provavelmente é uma macro ou função `inline` que ainda não identificamos.
+
+O exemplo histórico lê `w` sem inicializá-lo, portanto não é uma solução C
+definida para todos os caminhos. Uma alternativa validada em nove funções,
+incluindo laços, usa os registradores da ABI e uma barreira vazia do GCC:
+
+```c
+register s32 first __asm__("$4") = arg0 & 0xFFFF;
+register s32 second __asm__("$5") = arg1 & 0xFFFF;
+register s32 repeated __asm__("$6") = 0;
+__asm__ volatile("" : "=r"(first), "=r"(second), "=r"(repeated)
+                 : "0"(first), "1"(second), "2"(repeated));
+f(first, second, repeated, repeated);
+```
+
+Todos os valores são inicializados. As entradas vinculadas às saídas preservam
+esses valores; o asm não emite instruções. O GCC 2.7.2 não aceita a forma moderna
+`+r`, por isso são usadas as restrições numéricas. Vincular só o argumento
+repetido recupera a cópia, mas pode mudar a ordem das máscaras ou das cargas
+anteriores. Vincular os três argumentos recuperou também essa ordem nas funções
+aceitas. É uma extensão específica do compilador para controlar a alocação;
+não prova como o fonte original foi escrito. Confirme cada uso com matching,
+SHA-1 do build completo e testes diferenciais; não copie o padrão cegamente.
+Registro: `docs/validation/byte-matching-2026-10-29-argument-copies.json`.
 
 ## Bibliotecas PsyQ: `-G0` e delay slot preenchido pelo ASPSX antigo
 
