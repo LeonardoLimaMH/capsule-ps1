@@ -462,6 +462,23 @@ class GTE:
         self.write_ctrl(31, 0)
         for i in range(32):
             self.write_data(i, rng.getrandbits(32) if rng.random() < 0.5 else rng.randrange(-0x1000, 0x1000) & 0xFFFFFFFF)
+        if rng.random() < 0.5:
+            # "câmera realista": com o estado todo sorteado, a profundidade quase nunca cai na
+            # faixa da tabela de ordenação e os caminhos depois do teste ficam sem cobertura
+            def j(n):
+                return rng.randrange(-n, n + 1)
+            for k, (a, b) in enumerate([(0x1000 + j(0x200), j(0x400)), (j(0x400), j(0x400)),
+                                        (0x1000 + j(0x200), j(0x400)), (j(0x400), j(0x400))]):
+                self.write_ctrl(k, (a & 0xFFFF) | ((b & 0xFFFF) << 16))
+            self.write_ctrl(4, 0x1000 + j(0x200))
+            self.write_ctrl(5, j(0x200))
+            self.write_ctrl(6, j(0x200))
+            self.write_ctrl(7, rng.randrange(0x200, 0x2000))   # TRZ: objeto à frente da câmera
+            self.write_ctrl(24, 160 << 16)
+            self.write_ctrl(25, 120 << 16)
+            self.write_ctrl(26, rng.randrange(0x100, 0x400))
+            self.write_ctrl(29, 0x155 + j(0x80))
+            self.write_ctrl(30, 0x100 + j(0x80))
         self.flag = 0
 
     def state(self):
