@@ -16,31 +16,31 @@ emulação contra a função original.
 ## Progresso
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **2.16%**  
-**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **2.70%**  
-**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.06%**  
+**Código do jogo decompilado em C (byte-matching):** `░░░░░░░░░░░░░░░░░░░░` **2.18%**  
+**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **2.72%**  
+**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **3.08%**  
 **Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`; sobre o código convertível em C):** `████████████████████` **99.44%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | executável principal | 3.16% (6,516 / 206,372 B) | 151 / 732 | 9.48% (89 / 303 fn) | **4.42%** |
+| `YUUGI.EXE` | executável principal | 3.18% (6,572 / 206,372 B) | 152 / 732 | 9.48% (89 / 303 fn) | **4.44%** |
 | `SLPM_860.96` | loader / boot | 4.95% (1,028 / 20,756 B) | 28 / 119 | 7.62% (75 / 215 fn) | **6.76%** |
 | `CHESS.BIN` | overlay de batalha (tabuleiro) | 1.72% (7,268 / 421,956 B) | 100 / 867 | 100.00% (2 / 2 fn) | **1.74%** |
-| `RAISE.BIN` | overlay de criação de monstros | 2.17% (7,084 / 326,576 B) | 201 / 940 | 100.00% (2 / 2 fn) | **2.19%** |
+| `RAISE.BIN` | overlay de criação de monstros | 2.20% (7,180 / 326,576 B) | 202 / 940 | 100.00% (2 / 2 fn) | **2.22%** |
 | `ETC.BIN` | overlay de menus/diversos | 1.25% (1,112 / 88,992 B) | 13 / 189 | 0.00% (0 / 0 fn) | **1.25%** |
-| **Total** | | **2.16%** (23,008 / 1,064,652 B) | 493 / 2847 | 8.75% (168 / 522 fn) | **2.70%** |
+| **Total** | | **2.18%** (23,160 / 1,064,652 B) | 495 / 2847 | 8.75% (168 / 522 fn) | **2.72%** |
 
 **Equivalentes e pendências por binário (jogo + SDK):**
 
 | Binário | C equivalente (`equiv/`) | Funcional (bytes convertíveis) | Funções em C | Assembly original | Faltam C |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | 93.25% (723 fn) | `██████████` **98.56%** | 963 / 970 (99.28%) | 65 | **7** |
+| `YUUGI.EXE` | 93.23% (722 fn) | `██████████` **98.56%** | 963 / 970 (99.28%) | 65 | **7** |
 | `SLPM_860.96` | 85.96% (196 fn) | `██████████` **95.49%** | 299 / 302 (99.01%) | 32 | **3** |
 | `CHESS.BIN` | 98.26% (767 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | 0 | **0** |
-| `RAISE.BIN` | 97.81% (739 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
+| `RAISE.BIN` | 97.78% (738 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
 | `ETC.BIN` | 98.75% (176 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | 0 | **0** |
-| **Total** | 96.38% (2,601 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
+| **Total** | 96.36% (2,599 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código convertível: ficam de fora as rotinas que já eram assembly no
@@ -789,3 +789,13 @@ original usa o índice `papel - 1`, que precisava ser corrigido no pseudo-C.
 não estruturou. O alocador e a inicialização de sprites executam código
 original; chamadas isoladas de recursos e desenho ficam identificadas nos
 manifestos. Todas as três mantêm também o retorno `v0` na comparação.
+
+Na frente byte-exact, o alinhamento das instruções revelou casos em que a
+única diferença era a ordem dos operandos de `addu`. Em `func_800C2DA4`, agrupar
+o deslocamento do índice e explicitar a base inteira recuperou o código do
+GCC 2.7.2. Em `func_80019C20`, uma variável para a base recuperou o código do
+GCC 2.8.1; somente essa função foi isolada numa unidade de tradução com esse
+compilador. Trocar os operandos no C sem observar o código gerado não bastou.
+As duas passaram por matching, duas sementes de 200 execuções e rebuild dos
+cinco binários. A evidência está em
+`docs/validation/byte-matching-2026-10-29-operands.json`.

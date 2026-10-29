@@ -1,0 +1,76 @@
+{
+  "baseline_commit": "3a89fcd",
+  "functions": [
+    {
+      "target": "raise",
+      "func": "func_800C2DA4",
+      "source": "src/raise/raise_800C2CE0.c",
+      "source_sha256": "5d97115f83054ab10e78ed594c06541b1853900a44f7d7d4d603029b7ceaf51b",
+      "compiler": "2.7.2-psx",
+      "cflags": "-O2 -G8",
+      "masked_instruction_match": true,
+      "words": 24,
+      "strategy": "Explicit integer base and grouped signed index shift recover original ADDU operands."
+    },
+    {
+      "target": "yuugi",
+      "func": "func_80019C20",
+      "source": "src/yuugi/main__arVcount__80019C20.c",
+      "source_sha256": "aca2788ea144c0af421f6ec0fb46dd460eb83685049b0cc65bd7b51553a32270",
+      "compiler": "2.8.1-psx",
+      "cflags": "-O2 -G8",
+      "masked_instruction_match": true,
+      "words": 14,
+      "strategy": "Explicit integer base temporary recovers original ADDU operands; isolate GCC2.8.1 TU between original function boundaries."
+    }
+  ],
+  "differential": [
+    {
+      "target": "raise",
+      "func": "func_800C2DA4",
+      "source": "src/raise/raise_800C2CE0.c",
+      "seed": 1,
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] raise:func_800C2DA4 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "raise",
+      "func": "func_800C2DA4",
+      "source": "src/raise/raise_800C2CE0.c",
+      "seed": 2,
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] raise:func_800C2DA4 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "yuugi",
+      "func": "func_80019C20",
+      "source": "src/yuugi/main__arVcount__80019C20.c",
+      "seed": 1,
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] yuugi:func_80019C20 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "yuugi",
+      "func": "func_80019C20",
+      "source": "src/yuugi/main__arVcount__80019C20.c",
+      "seed": 2,
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] yuugi:func_80019C20 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    }
+  ],
+  "rebuild": {
+    "command": "make -j4 check",
+    "identical_all_five": true,
+    "sha1": {
+      "yuugi": "ded3d5e61d5906077d0171396fea4ca3959ecf23",
+      "slpm": "a4d3c7f4750acc79a29f2f941449f73950497e5e",
+      "chess": "a6a63cc46a633968573c23b5681bb178070dba25",
+      "raise": "92ccafd66ecb0030f9bfff109c855c09dbb4cf8b",
+      "etc": "f14bbffbbee2ec2013b481a2f814997b3984ce74"
+    }
+  }
+}

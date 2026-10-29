@@ -51,6 +51,8 @@ segments:
       - [0x3214, c, main__80012A14]
       - [0x3828, c, main__80013028]
       - [0x3B2C, c, main__arVcount]
+      - [0xA420, c, main__arVcount__80019C20]
+      - [0xA458, c, main__arVcount__80019C58]
       - [0xA730, c, main_80019F30]
       - [0xA9DC, c, main_8001A1DC]
       - [0xB018, c, main_8001A1DC__8001A818]

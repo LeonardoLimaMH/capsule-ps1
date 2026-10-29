@@ -175,3 +175,4 @@ src/etc/etc__800A4AC8__800A81F4.c 2.8.1-psx
 src/etc/etc__800AA238__800AB78C.c 2.8.1-psx
 src/raise/raise_8009D2A8__8009D324.c 2.8.1-psx
 src/raise/raise_800B9C3C__800BAD64.c 2.8.1-psx
+src/yuugi/main__arVcount__80019C20.c 2.8.1-psx
