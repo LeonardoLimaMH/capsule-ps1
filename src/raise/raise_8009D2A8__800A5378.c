@@ -50,6 +50,12 @@ void func_800A6BDC(void) {
     func_80019F30(0x12000F, &func_80012508);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A5378", func_800A6CAC);
+#include "common.h"
+
+void func_800A6CAC(void) {
+    extern M2C_UNK D_80085428[];
+    M2C_GFIELD(D_80085428, u16, 0xC) = (u16) (M2C_GFIELD(D_80085428, u16, 0xC) + 1);
+    func_80018F90(M2C_GFIELD(D_80085428, u16, 0xC), 3);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A5378", func_800A6CE8);

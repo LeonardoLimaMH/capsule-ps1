@@ -19,6 +19,9 @@ typedef long long M2C_UNK64;
 #define M2C_FIELD(expr, type, offset) (*(type)((s8*)(expr) + (offset)))
 #define M2C_STRUCT_COPY(dst, src, size) (*(struct { u8 _[size]; }*)(dst) = *(struct { u8 _[size]; }*)(src))
 #define M2C_BITWISE(type, expr) ((type)(expr))
+/* campo de um global por meio de uma struct: o GCC mantém o deslocamento na
+ * instrução (lhu $v1,0xDC($a1)) em vez de somá-lo ao símbolo (%lo(D_X+0xDC)) */
+#define M2C_GFIELD(base, type, offset) (((struct { u8 _p[offset]; type v; } *)(base))->v)
 
 /* parte alta da multiplicação de 32x32 bits (divisão por constante, etc.) */
 #define MULT_HI(a, b) ((s32)(((long long)(s32)(a) * (long long)(s32)(b)) >> 32))

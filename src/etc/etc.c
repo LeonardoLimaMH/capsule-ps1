@@ -83,9 +83,30 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800991AC);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800992CC);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099394);
+#include "common.h"
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800993F8);
+extern u8 D_8008ED68[];
+extern void (*D_800AEF98[])(void);
+
+void func_80099394(void) {
+    if (M2C_GFIELD(D_8008ED68, u16, 0xDC) == 2) {
+        func_8001FD98(4);
+    }
+    D_800AEF98[M2C_GFIELD(D_8008ED68, u16, 0xDC)]();
+}
+
+#include "common.h"
+
+void func_800993F8(void) {
+    extern M2C_UNK D_80085428[];
+    extern s16 D_800B3ACC[];
+    func_80013668();
+    (*D_800B3ACC) = 0;
+    M2C_GFIELD(D_80085428, s8, 0x5CB) = 4;
+    M2C_GFIELD(D_80085428, s8, 0) = 3;
+    M2C_GFIELD(D_80085428, s8, 0x5D0) = 1;
+    func_80012508(D_80085428);
+}
 
 #include "common.h"
 

@@ -2,7 +2,22 @@
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A0824);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A0944);
+#include "common.h"
+
+void func_800A0944(void) {
+    extern M2C_UNK D_8002E38C[];
+    extern s32 D_8008F780[];
+    extern M2C_UNK D_800B3B38[];
+    s16 temp_v0;
+
+    func_8001611C(M2C_GFIELD(D_800B3B38, s16, 8));
+    temp_v0 = (u16) M2C_GFIELD(D_800B3B38, s16, 8) - 0x80;
+    M2C_GFIELD(D_800B3B38, s16, 8) = temp_v0;
+    if ((temp_v0 << 0x10) <= 0) {
+        (*D_8008F780) = 0;
+        func_80012200(D_8002E38C);
+    }
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A09A4);
 
@@ -141,7 +156,22 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A3128);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A3230);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A32F0);
+#include "common.h"
+
+void func_800A32F0(void *arg0) {
+    extern M2C_UNK D_8008ED68[];
+    extern s16 D_800B3B40[];
+    s32 temp_a0;
+
+    temp_a0 = M2C_FIELD(arg0, s32 *, 0x38) | 1;
+    M2C_FIELD(arg0, s32 *, 0x38) = temp_a0;
+    if ((M2C_GFIELD(D_8008ED68, u16, 0xDC) == 0x10) && ((M2C_FIELD(arg0, s32 *, 0x80) != 0) || (M2C_GFIELD(D_8008ED68, u16, 0xE0) == 0))) {
+        M2C_FIELD(arg0, s32 *, 0x38) = (s32) (temp_a0 & ~1);
+        if (M2C_FIELD(arg0, s32 *, 0x84) != 0) {
+            M2C_FIELD(arg0, s32 *, 0x18) = func_80019F30(0x60010, (*D_800B3B40) + 0x40);
+        }
+    }
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A3388);
 
@@ -194,7 +224,17 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A4884);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A4964);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A4A28);
+#include "common.h"
+
+extern u8 D_8008ED68[];
+extern void (*D_800B2E5C[])(void);
+
+void func_800A4A28(void) {
+    if (M2C_GFIELD(D_8008ED68, u16, 0xDC) == 1) {
+        func_8001FD98(5);
+    }
+    D_800B2E5C[M2C_GFIELD(D_8008ED68, u16, 0xDC)]();
+}
 
 void func_800A4A8C(void) {
     extern int func_80012508();

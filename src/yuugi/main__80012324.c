@@ -56,23 +56,139 @@ void func_80012438(void) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800124A0);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012508);
+#include "common.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012544);
+extern u8 D_8008ED68[];
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012578);
+u8 *func_80012508(void) {
+    u16 v = M2C_GFIELD(D_8008ED68, u16, 0xDC);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800125AC);
+    M2C_GFIELD(D_8008ED68, s16, 0xE0) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xDE) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xE2) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xE4) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xE6) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xE8) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEA) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEC) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEE) = 0;
+    M2C_GFIELD(D_8008ED68, u16, 0xDC) = v + 1;
+    return D_8008ED68;
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800125D8);
+#include "common.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012604);
+extern u8 D_8008ED68[];
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012628);
+u8 *func_80012544(s16 value) {
+    M2C_GFIELD(D_8008ED68, s16, 0xDC) = value;
+    M2C_GFIELD(D_8008ED68, s16, 0xE0) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xDE) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xE2) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xE4) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xE6) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xE8) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEA) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEC) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEE) = 0;
+    return D_8008ED68;
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_8001264C);
+#include "common.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012668);
+extern u8 D_8008ED68[];
+
+u8 *func_80012578(void) {
+    u16 v = M2C_GFIELD(D_8008ED68, u16, 0xE0);
+
+    M2C_GFIELD(D_8008ED68, s16, 0xE2) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xE4) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xE6) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xE8) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEA) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEC) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEE) = 0;
+    M2C_GFIELD(D_8008ED68, u16, 0xE0) = v + 1;
+    return D_8008ED68;
+}
+
+#include "common.h"
+
+extern u8 D_8008ED68[];
+
+u8 *func_800125AC(s16 value) {
+    M2C_GFIELD(D_8008ED68, s16, 0xE0) = value;
+    M2C_GFIELD(D_8008ED68, s16, 0xE2) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xE4) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xE6) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xE8) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEA) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEC) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEE) = 0;
+    return D_8008ED68;
+}
+
+#include "common.h"
+
+extern u8 D_8008ED68[];
+
+u8 *func_800125D8(void) {
+    u16 v = M2C_GFIELD(D_8008ED68, u16, 0xE4);
+
+    M2C_GFIELD(D_8008ED68, s16, 0xE6) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xE8) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEA) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEC) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEE) = 0;
+    M2C_GFIELD(D_8008ED68, u16, 0xE4) = v + 1;
+    return D_8008ED68;
+}
+
+#include "common.h"
+
+extern u8 D_8008ED68[];
+
+void func_80012604(s16 value) {
+    M2C_GFIELD(D_8008ED68, s16, 0xE4) = value;
+    M2C_GFIELD(D_8008ED68, s16, 0xE6) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xE8) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEA) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEC) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEE) = 0;
+}
+
+#include "common.h"
+
+extern u8 D_8008ED68[];
+
+u8 *func_80012628(void) {
+    u16 v = M2C_GFIELD(D_8008ED68, u16, 0xE8);
+
+    M2C_GFIELD(D_8008ED68, s16, 0xEA) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEC) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEE) = 0;
+    M2C_GFIELD(D_8008ED68, u16, 0xE8) = v + 1;
+    return D_8008ED68;
+}
+
+#include "common.h"
+
+extern u8 D_8008ED68[];
+
+void func_8001264C(s16 value) {
+    M2C_GFIELD(D_8008ED68, s16, 0xE8) = value;
+    M2C_GFIELD(D_8008ED68, s16, 0xEA) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEC) = 0;
+    M2C_GFIELD(D_8008ED68, s16, 0xEE) = 0;
+}
+
+#include "common.h"
+
+void func_80012668(void) {
+    extern u8 D_8008ED68[];
+    M2C_GFIELD(D_8008ED68, s16, 0xEE) = 0;
+    M2C_GFIELD(D_8008ED68, u16, 0xEC) = (u16) (M2C_GFIELD(D_8008ED68, u16, 0xEC) + 1);
+}
 
 #include "common.h"
 
@@ -93,9 +209,28 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012698);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800126F8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012764);
+#include "common.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012778);
+extern u8 D_8008ED50[];
+
+u8 *func_80012764(void) {
+    M2C_GFIELD(D_8008ED50, s32, 4) = 0;
+    M2C_GFIELD(D_8008ED50, s16, 0xC) = 0;
+    return D_8008ED50;
+}
+
+#include "common.h"
+
+extern u8 D_8008ED50[];
+
+s32 func_80012778(void) {
+    s32 v;
+
+    M2C_GFIELD(D_8008ED50, u16, 0xC) += 1;
+    v = (*(s32 **)(D_8008ED50 + 8))[M2C_GFIELD(D_8008ED50, u16, 0xC)];
+    M2C_GFIELD(D_8008ED50, s32, 4) = v;
+    return v;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800127AC);
 
