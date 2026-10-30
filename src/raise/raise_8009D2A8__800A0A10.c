@@ -39,7 +39,28 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A0ACC);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A0BB4);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A0D88);
+#include "common.h"
+
+typedef struct {
+    u8 pad0[0x344];
+    s32 idx;
+    u8 pad1[0x398 - 0x348];
+    s32 tblB[0xF];
+    s32 tblA[0x10];
+    u8 *obj;
+} Work_800A0D88;
+
+void func_800A0D88(s32 arg0) {
+    extern s32 D_800EE630[];
+    extern u8 D_800EFF58[];
+    s32 temp_s1;
+
+    if (arg0 == 1) {
+        temp_s1 = D_800EE630[6] + ((Work_800A0D88 *)D_800EFF58)->tblB[((Work_800A0D88 *)D_800EFF58)->tblA[((Work_800A0D88 *)D_800EFF58)->idx]];
+        func_80015CD0(((Work_800A0D88 *)D_800EFF58)->obj + 0x14, func_80019F30(D_800EE630[0] | 0x70000, temp_s1), 0);
+        *(s32 *)(((Work_800A0D88 *)D_800EFF58)->obj + 0x7C) = temp_s1;
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A0E20);
 
@@ -61,7 +82,20 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A1D58);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A1DD4);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A1F44);
+#include "common.h"
+
+typedef struct { u8 pad[0x38]; s32 flags; } Obj_800A1F44;
+
+void func_800A1F44(s32 arg0, s32 arg1, s32 arg2) {
+    extern s32 D_800FDE08[];
+    extern s32 D_800FAE10[];
+    s32 i = arg0 != 1;
+
+    ((Obj_800A1F44 **)D_800FDE08)[i]->flags = (((Obj_800A1F44 **)D_800FDE08)[i]->flags & ~1) | (arg1 & 1);
+    ((Obj_800A1F44 **)D_800FAE10)[i]->flags = (((Obj_800A1F44 **)D_800FAE10)[i]->flags & ~1) | (arg1 & 1);
+    ((Obj_800A1F44 **)D_800FDE08)[i]->flags = (((Obj_800A1F44 **)D_800FDE08)[i]->flags & ~0x40) | ((arg2 & 1) << 6);
+    ((Obj_800A1F44 **)D_800FAE10)[i]->flags = (((Obj_800A1F44 **)D_800FAE10)[i]->flags & ~0x40) | ((arg2 & 1) << 6);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A1FDC);
 
