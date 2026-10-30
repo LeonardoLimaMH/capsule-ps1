@@ -18,7 +18,14 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012144", func_800121C4);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012144", func_80012200);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012144", func_80012264);
+#include "common.h"
+
+extern s32 (*D_800508B4[])(void);
+extern u16 D_8008EE48[];
+
+s32 func_80012264(void) {
+    return D_800508B4[(*D_8008EE48)]();
+}
 
 #include "common.h"
 
