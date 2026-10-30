@@ -1,0 +1,254 @@
+{
+  "baseline_commit": "fa8f9c2f2cf3c7bb5c80a1f9f6ac5c61ab6e467b",
+  "strategy": "Apply the existing global-field transformation to CHESS equivalents and m2c alternatives, testing three compiler profiles. Promote the equivalent-based versions; preserve one incompatible neighboring TU through a split.",
+  "candidate_profile_pairs": 1191,
+  "matched_functions": 4,
+  "functions": [
+    {
+      "target": "chess",
+      "func": "func_8009CD9C",
+      "gcc": "2.7.2-cdk",
+      "integrated_source": "src/chess/chess__8009CD9C.c",
+      "candidate_source": ".cache/chess-gfield/func_8009CD9C-equiv.c",
+      "equivalent_source": "equiv/chess/func_8009CD9C.c",
+      "source_sha256": "4dbfd35a6d2caa3dfc9f5944eb117c87f4849d939fea07190b08fa62594a8600",
+      "masked_instruction_match": true
+    },
+    {
+      "target": "chess",
+      "func": "func_800A70EC",
+      "gcc": "2.7.2-cdk",
+      "integrated_source": "src/chess/chess__8009ECF8.c",
+      "candidate_source": ".cache/chess-gfield/func_800A70EC-equiv.c",
+      "equivalent_source": "equiv/chess/func_800A70EC.c",
+      "source_sha256": "b1c172d4886d354db4daa4ba7e7c30871d9aa60c75c376e029fa224201bca7ec",
+      "masked_instruction_match": true
+    },
+    {
+      "target": "chess",
+      "func": "func_800FEBF4",
+      "gcc": "2.7.2-cdk",
+      "integrated_source": "src/chess/chess_800DCF3C__800FE98C.c",
+      "candidate_source": ".cache/chess-gfield/func_800FEBF4-equiv.c",
+      "equivalent_source": "equiv/chess/func_800FEBF4.c",
+      "source_sha256": "2f8f4d96c06b8226eba47b1024916bff51b7bafd4d37bae1f3907095f98602c3",
+      "masked_instruction_match": true
+    },
+    {
+      "target": "chess",
+      "func": "func_80100900",
+      "gcc": "2.7.2-cdk",
+      "integrated_source": "src/chess/chess_801002CC.c",
+      "candidate_source": ".cache/chess-gfield/func_80100900-equiv.c",
+      "equivalent_source": "equiv/chess/func_80100900.c",
+      "source_sha256": "7f1368e664efb3a3a8b37ec353ffc7837ea819519f428aae0e57f9a3859f2a6c",
+      "masked_instruction_match": true
+    }
+  ],
+  "validation": [
+    {
+      "target": "chess",
+      "func": "func_8009CD9C",
+      "source": ".cache/gfield-round/profiles/func_8009CD9C.c",
+      "profile_sha256": "3f8370e07451e1ef7424af68c821909927edb3f7dfe44bcb529833bf8375422e",
+      "seed": 1,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_8009CD9C",
+        "--src",
+        ".cache/gfield-round/profiles/func_8009CD9C.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_8009CD9C \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_8009CD9C",
+      "source": ".cache/gfield-round/profiles/func_8009CD9C.c",
+      "profile_sha256": "3f8370e07451e1ef7424af68c821909927edb3f7dfe44bcb529833bf8375422e",
+      "seed": 2,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_8009CD9C",
+        "--src",
+        ".cache/gfield-round/profiles/func_8009CD9C.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_8009CD9C \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800A70EC",
+      "source": ".cache/gfield-round/profiles/func_800A70EC.c",
+      "profile_sha256": "134900e133af64b06f44373c8c890b23547c30db5484bcb22cf794341e95b4dd",
+      "seed": 1,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800A70EC",
+        "--src",
+        ".cache/gfield-round/profiles/func_800A70EC.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800A70EC \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800A70EC",
+      "source": ".cache/gfield-round/profiles/func_800A70EC.c",
+      "profile_sha256": "134900e133af64b06f44373c8c890b23547c30db5484bcb22cf794341e95b4dd",
+      "seed": 2,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800A70EC",
+        "--src",
+        ".cache/gfield-round/profiles/func_800A70EC.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800A70EC \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800FEBF4",
+      "source": ".cache/gfield-round/profiles/func_800FEBF4.c",
+      "profile_sha256": "e974812909c53e5e8b46764dc81410b140d7e194750939b5bfaf3e44d0066c76",
+      "seed": 1,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800FEBF4",
+        "--src",
+        ".cache/gfield-round/profiles/func_800FEBF4.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800FEBF4 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800FEBF4",
+      "source": ".cache/gfield-round/profiles/func_800FEBF4.c",
+      "profile_sha256": "e974812909c53e5e8b46764dc81410b140d7e194750939b5bfaf3e44d0066c76",
+      "seed": 2,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800FEBF4",
+        "--src",
+        ".cache/gfield-round/profiles/func_800FEBF4.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800FEBF4 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_80100900",
+      "source": ".cache/gfield-round/profiles/func_80100900.c",
+      "profile_sha256": "0b6334699c3cb2bf7440d8317518374c69b01e0b9d30ce9dbdf58a401d914dee",
+      "seed": 1,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_80100900",
+        "--src",
+        ".cache/gfield-round/profiles/func_80100900.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_80100900 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_80100900",
+      "source": ".cache/gfield-round/profiles/func_80100900.c",
+      "profile_sha256": "0b6334699c3cb2bf7440d8317518374c69b01e0b9d30ce9dbdf58a401d914dee",
+      "seed": 2,
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_80100900",
+        "--src",
+        ".cache/gfield-round/profiles/func_80100900.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_80100900 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    }
+  ],
+  "identical_trials": 1600,
+  "inconclusive_trials": 0,
+  "full_build": {
+    "command": "make -j4 check",
+    "sha1": {
+      "yuugi": "ded3d5e61d5906077d0171396fea4ca3959ecf23",
+      "slpm": "a4d3c7f4750acc79a29f2f941449f73950497e5e",
+      "chess": "a6a63cc46a633968573c23b5681bb178070dba25",
+      "raise": "92ccafd66ecb0030f9bfff109c855c09dbb4cf8b",
+      "etc": "f14bbffbbee2ec2013b481a2f814997b3984ce74"
+    }
+  }
+}

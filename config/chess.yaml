@@ -51,6 +51,7 @@ segments:
       - [0x11AC, rodata]
       - [0x2340, c, chess]
       - [0x53DC, c, chess__8009CBDC]
+      - [0x559C, c, chess__8009CD9C]
       - [0x74F8, c, chess__8009ECF8]
       - [0x10BE0, c, chess__800A83E0]
       - [0x10C44, c, chess__800A8444]

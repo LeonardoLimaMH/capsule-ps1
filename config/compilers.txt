@@ -229,3 +229,4 @@ src/chess/chess__800B38B0.c 2.7.2-cdk
 src/chess/chess__800AED50.c 2.7.2-cdk
 src/raise/raise_800DEA54.c 2.7.2-cdk
 src/raise/raise_80098FEC.c 2.7.2-cdk
+src/chess/chess__8009CD9C.c 2.7.2-cdk

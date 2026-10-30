@@ -163,3 +163,18 @@ mas a extensão da constante nas instruções é diferente. Examinar essas
 diferenças antes de iniciar buscas de permutação. O lote de quatro completou
 4.800 execuções diferenciais e os cinco SHA-1:
 `validation/byte-matching-2026-10-30-audit-next.json`.
+
+A técnica `M2C_GFIELD`, incorporada pela outra frente, também foi aplicada a
+CHESS: 397 fontes transformados, entre equivalentes e alternativas de m2c,
+foram testados em três perfis (1.191 pares candidata/perfil). Quatro funções
+casaram: `func_8009CD9C`, `func_800A70EC`, `func_800FEBF4` e `func_80100900`.
+Foram escolhidas as versões originadas dos equivalentes. O acesso por campo
+mantém o deslocamento na instrução de memória em vez de incorporá-lo ao
+endereço do símbolo. Conferir largura, sinal e alinhamento contra o assembly;
+a macro não demonstra, sozinha, o layout completo da estrutura original.
+
+Uma nova fronteira preservou o compilador das funções vizinhas. O lote passou
+em 1.600 execuções diferenciais sem inconclusivas, incluindo sentinelas,
+negação de halfwords, overflow do contador de 16 bits e o helper original
+`func_800CAE6C`, além dos cinco SHA-1. Registro:
+`validation/byte-matching-2026-10-30-chess-globals.json`.

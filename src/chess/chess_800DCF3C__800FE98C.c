@@ -4,7 +4,14 @@
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FE98C);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FEBF4);
+#include "common.h"
+
+void func_800FEBF4(void *arg0) {
+    extern M2C_UNK D_80069AD4[];
+    M2C_GFIELD(D_80069AD4, s32, 0x44) = (s32) -M2C_FIELD(arg0, s16 *, 0);
+    M2C_GFIELD(D_80069AD4, s32, 0x48) = (s32) -M2C_FIELD(arg0, s16 *, 2);
+    M2C_GFIELD(D_80069AD4, s32, 0x4C) = (s32) -M2C_FIELD(arg0, s16 *, 4);
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FEC2C);
 
