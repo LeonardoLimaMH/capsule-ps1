@@ -74,7 +74,20 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_8001264C);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012668);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012684);
+#include "common.h"
+
+typedef struct {
+    u8 pad[0xEC];
+    s16 a;
+    s16 b;
+} Rec_8008ED68;
+
+void func_80012684(s16 value) {
+    extern u8 D_8008ED68[];
+    Rec_8008ED68 *p = (Rec_8008ED68 *)D_8008ED68;
+    p->a = value;
+    p->b = 0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012698);
 

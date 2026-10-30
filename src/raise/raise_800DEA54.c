@@ -26,7 +26,16 @@ undefined4 func_800DED74(undefined4 param_1,undefined2 param_2,short param_3,sho
   return 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800DEDE4);
+#include "common.h"
+
+extern u8 D_80092008[];
+
+s32 func_800DEDE4(s32 idx)
+{
+  u32 *new_var;
+  new_var = &(*((u32 *) (D_80092008 + ((idx & 0xFFFF) * 0x44))));
+  return (((*new_var) >> 17) & 0x3F) == 0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800DEE18);
 
@@ -136,7 +145,7 @@ typedef struct { u8 pad_0[0x110]; ushort field_110; u8 tail[0x96]; } Record_800E
 ushort func_800E0DF8(void)
 
 {
-    extern M2C_UNK D_80091618[];
+    extern u8 D_80091618[];
   uint uVar1;
   int iVar2;
   ushort uVar3;
@@ -155,7 +164,32 @@ ushort func_800E0DF8(void)
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E0E8C);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E0FB8);
+#include "common.h"
+
+extern u8 D_80091618[];
+
+s32 func_800E0FB8(s32 idx)
+{
+  u8 *new_var;
+  u8 *rec;
+  s32 k;
+  idx &= 0xFFFF;
+  if (idx == 0xFFFF)
+  {
+    return 0;
+  }
+  new_var = D_80091618;
+  rec = new_var + (idx * 0x1A8);
+  for (k = 0; k < 4; k++)
+  {
+    if ((*((u16 *) ((rec + 0x62) + (k * 2)))) == 1)
+    {
+      return 1;
+    }
+  }
+
+  return 0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800E102C);
 
@@ -189,7 +223,7 @@ typedef struct {
     u8 tail[0xA];
 } Monster_800E10BC;
 void func_800E10BC(u32 player) {
-    extern Monster_800E10BC D_80091618[];
+    extern u8 D_80091618[];
     extern u8 D_80100F38[];
     u32 index=player & 0xFFFF;
     u32 offset=index*0x79C;
