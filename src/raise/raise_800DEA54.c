@@ -11,7 +11,18 @@ s32 func_800DEB28(void) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800DEB38);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800DEBA0);
+#include "common.h"
+
+void func_800DEBA0(s16 arg0, s16 arg1) {
+    extern M2C_UNK D_800F1EB4[];
+    void *temp_v0;
+
+    temp_v0 = (D_800F1EB4 + (M2C_GFIELD(D_800F1EB4, s16, 2)));
+    M2C_FIELD(temp_v0, s16 *, 6) = arg1;
+    M2C_FIELD(temp_v0, s16 *, 8) = arg0;
+    M2C_GFIELD(D_800F1EB4, u16, 4) = (u16) (M2C_GFIELD(D_800F1EB4, u16, 4) + 1);
+    M2C_GFIELD(D_800F1EB4, s16, 2) = (s16) ((M2C_GFIELD(D_800F1EB4, s16, 2) + 1) % 5);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54", func_800DEC04);
 

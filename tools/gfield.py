@@ -14,10 +14,21 @@ FIELD = re.compile(r"M2C_FIELD\(\s*(D_[0-9A-F]{8})\s*,\s*([\w ]+?)\s*\*\s*,\s*(0
 CAST = re.compile(r"\*\s*\(\s*([\w ]+?)\s*\*\s*\)\s*\(\s*(D_[0-9A-F]{8})\s*\+\s*(0x[0-9A-Fa-f]+|\d+)\s*\)")
 
 
+# `(x * 4) + D_X` do m2c com D_X já de elementos de 4 bytes escala o índice duas vezes
+SCALED = re.compile(r"\(((?:[^()]|\([^()]*\))+?) \* ([24])\) \+ (D_[0-9A-F]{8})\b")
+SIZES = {"M2C_UNK": 4, "s32": 4, "u32": 4, "M2C_UNK32": 4, "s16": 2, "u16": 2, "M2C_UNK16": 2}
+
+
 def rewrite(code):
     new = FIELD.sub(lambda m: f"M2C_GFIELD({m.group(1)}, {m.group(2)}, {m.group(3)})", code)
     new = CAST.sub(lambda m: f"M2C_GFIELD({m.group(2)}, {m.group(1)}, {m.group(3)})", new)
-    return new
+    decl = {n: SIZES.get(t) for t, n in re.findall(r"extern\s+(\w+)\s+(D_[0-9A-F]{8})\s*\[\]", new)}
+
+    def scaled(m):
+        if decl.get(m.group(3)) != int(m.group(2)):
+            return m.group(0)
+        return f"({m.group(3)} + ({m.group(1)}))"
+    return SCALED.sub(scaled, new)
 
 
 def main():
