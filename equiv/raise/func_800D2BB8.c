@@ -19,8 +19,8 @@ int func_800D2BB8(undefined4 param_1)
     bVar1 = false;
     if ((uVar2 & 0xffff) != 0xffff) {
       bVar1 = false;
-      if (*(ushort *)(D_80091618 + (uVar2 & 0xffff) * 0x1a8) != 0xffff) {
-        bVar1 = (*(uint *)((uint)*(ushort *)(D_80091618 + (uVar2 & 0xffff) * 0x1a8) * 0x3c +
+      if (*(ushort *)((u8 *)D_80091618 + (uVar2 & 0xffff) * 0x1a8) != 0xffff) {
+        bVar1 = (*(uint *)((uint)*(ushort *)((u8 *)D_80091618 + (uVar2 & 0xffff) * 0x1a8) * 0x3c +
                           -0x7ff9c6a8) & 3) == 2;
       }
     }
@@ -28,11 +28,11 @@ int func_800D2BB8(undefined4 param_1)
     if (!bVar1) {
       uVar2 = func_800B1260(param_1);
       if (((uVar2 & 0xffff) == 0xffff) ||
-         (*(ushort *)(D_80091618 + (uVar2 & 0xffff) * 0x1a8) == 0xffff)) {
+         (*(ushort *)((u8 *)D_80091618 + (uVar2 & 0xffff) * 0x1a8) == 0xffff)) {
         uVar2 = 0;
       }
       else {
-        uVar2 = (uint)((*(uint *)((uint)*(ushort *)(D_80091618 + (uVar2 & 0xffff) * 0x1a8) * 0x3c +
+        uVar2 = (uint)((*(uint *)((uint)*(ushort *)((u8 *)D_80091618 + (uVar2 & 0xffff) * 0x1a8) * 0x3c +
                                  -0x7ff9c6a8) & 3) == 1);
       }
       iVar3 = uVar2 << 1;

@@ -37,7 +37,7 @@ void func_80031EF0(void) {
             var_a2_2 = 3;
         }
         func_8001F35C(-0x48, temp_v0, var_a2_2, 1, 0, var_s2 + 1, 1, 0);
-        if (M2C_FIELD((var_s2 + D_80085428), u8 *, 0x34) == 0) {
+        if (M2C_FIELD((var_s2 + (u8 *)D_80085428), u8 *, 0x34) == 0) {
             func_8001F1A8(-0x40, (s16) (temp_s1 - 0x30), 0, 1, 0, D_8006D97C, 1, 9, 0);
             var_s4 += 8;
         } else {

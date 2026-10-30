@@ -48,11 +48,11 @@ s32 func_800AFEB8(void) {
                                     do {
                                         temp_a0 = var_s3 & 0xFFFF;
                                         var_s2 = -1;
-                                        if (M2C_FIELD(((temp_a0 * 0x1A8) + D_80091618), u16 *, 0x10) != 0xFFFF) {
+                                        if (M2C_FIELD(((temp_a0 * 0x1A8) + (u8 *)D_80091618), u16 *, 0x10) != 0xFFFF) {
                                             if (temp_a0 == (*D_8006AF80)) {
                                                 var_s2 = 1;
                                             } else {
-                                                var_s2 = (temp_a0 != M2C_FIELD((((*D_8006AF80) * 0x1A8) + D_80091618), u16 *, 0x8A)) * 2;
+                                                var_s2 = (temp_a0 != M2C_FIELD((((*D_8006AF80) * 0x1A8) + (u8 *)D_80091618), u16 *, 0x8A)) * 2;
                                             }
                                         }
                                         if ((var_s2 != -1) && (var_s2 != 2)) {
@@ -63,10 +63,10 @@ s32 func_800AFEB8(void) {
                                                     goto block_33;
                                                 }
                                                 temp_a3 = M2C_FIELD(var_s1, s16 *, 0xD0);
-                                                if ((temp_a3 < 5) && ((M2C_FIELD(var_s1, s32 *, 0xCC) / 28800) >= *((temp_a3 * 2) + ((M2C_FIELD(var_s1, u16 *, 0x92) * 0xA) + D_800ED1C4)))) {
+                                                if ((temp_a3 < 5) && ((M2C_FIELD(var_s1, s32 *, 0xCC) / 28800) >= *((temp_a3 * 2) + ((M2C_FIELD(var_s1, u16 *, 0x92) * 0xA) + (u8 *)D_800ED1C4)))) {
 block_33:
                                                     temp_a0_2 = var_s3 & 0xFFFF;
-                                                    temp_s0_2 = *M2C_FIELD(((temp_a0_2 * 0x79C) + D_80100F38), u8 **, 0x2BC);
+                                                    temp_s0_2 = *M2C_FIELD(((temp_a0_2 * 0x79C) + (u8 *)D_80100F38), u8 **, 0x2BC);
                                                     var_v0_2 = 0;
                                                     if (func_800E14C4(temp_a0_2) == 0) {
                                                         var_v0_2 = 1;

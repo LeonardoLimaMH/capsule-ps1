@@ -19,7 +19,7 @@ void func_80034148(s32 arg0) {
 loop_5:
     if (M2C_FIELD(D_800922F0, u8 *, 0x125) & var_s1) {
         temp_v1 = var_s0 & 0xFF;
-        if (M2C_FIELD(((temp_v1 * 2) + D_800922F0), u16 *, 0x12C) != (var_a0 & 0xFFFF)) {
+        if (M2C_FIELD(((temp_v1 * 2) + (u8 *)D_800922F0), u16 *, 0x12C) != (var_a0 & 0xFFFF)) {
             goto block_7;
         }
         SpuSetKey(0, 1 << (temp_v1 + 0x14), M2C_FIELD(D_800922F0, u8 *, 0x125));

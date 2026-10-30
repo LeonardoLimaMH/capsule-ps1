@@ -61,8 +61,8 @@ int func_8003CFBC(short param_1,short param_2,int param_3,short param_4,short pa
       sStack_50 = param_4;
       func_80038A60(iVar9);
       do {
-        SpuSetKey(0,*(undefined4 *)(D_8007142C + iVar9 * 4));
-        iVar2 = SpuGetKeyStatus(*(undefined4 *)(D_8007142C + iVar9 * 4));
+        SpuSetKey(0,*(undefined4 *)((u8 *)D_8007142C + iVar9 * 4));
+        iVar2 = SpuGetKeyStatus(*(undefined4 *)((u8 *)D_8007142C + iVar9 * 4));
         iVar7 = 0;
         if (iVar2 == 2) break;
       } while (iVar2 != 0);
@@ -80,7 +80,7 @@ int func_8003CFBC(short param_1,short param_2,int param_3,short param_4,short pa
       uStack_8c = 0x7019f;
       uStack_84 = 0;
       uStack_82 = 0;
-      uStack_90 = *(undefined4 *)(D_8007142C + iVar9 * 4);
+      uStack_90 = *(undefined4 *)((u8 *)D_8007142C + iVar9 * 4);
       iStack_74 = *(int *)(param_2 * 0x1c + -0x7ff6b808) + iVar2 * 8;
       uStack_56 = *(undefined2 *)(iVar3 + 0x10);
       *(undefined2 *)(iVar9 * 0x4e + -0x7ff6c258) = uStack_56;
@@ -141,13 +141,13 @@ int func_8003CFBC(short param_1,short param_2,int param_3,short param_4,short pa
                              *(undefined1 *)(iVar3 + 5));
       do {
         SpuSetKeyOnWithAttr(&uStack_90);
-        iVar8 = SpuGetKeyStatus(*(int *)(D_8007142C + iVar9 * 4) == 1);
+        iVar8 = SpuGetKeyStatus(*(int *)((u8 *)D_8007142C + iVar9 * 4) == 1);
       } while (iVar8 == 0);
       if ((*(byte *)(iVar3 + 1) & 4) == 0) {
-        SpuSetReverbVoice(0,*(undefined4 *)(D_8007142C + iVar9 * 4));
+        SpuSetReverbVoice(0,*(undefined4 *)((u8 *)D_8007142C + iVar9 * 4));
       }
       else {
-        SpuSetReverbVoice(1,*(undefined4 *)(D_8007142C + iVar9 * 4));
+        SpuSetReverbVoice(1,*(undefined4 *)((u8 *)D_8007142C + iVar9 * 4));
       }
     }
   }

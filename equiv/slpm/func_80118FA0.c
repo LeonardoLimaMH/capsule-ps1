@@ -12,7 +12,7 @@ s32 func_80118FA0(s32 arg0, M2C_UNK arg1) {
     var_s2 = D_8013551C;
     var_s1 = 0;
 loop_1:
-    temp_v0 = *(D_80135514 + var_s1);
+    temp_v0 = *(s32 *)((u8 *)D_80135514 + var_s1);
     if (temp_v0 != 0) {
         if (temp_v0 == arg0) {
             var_s2 += 0x2C;

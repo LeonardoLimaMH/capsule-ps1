@@ -11,7 +11,7 @@ void func_80025DA8(void) {
     case 0:
         temp_v1 = func_800B1260() & 0xFFFF;
         if (temp_v1 != 0xFFFF) {
-            temp_v0 = (temp_v1 * 0x79C) + D_80100F38;
+            temp_v0 = (temp_v1 * 0x79C) + (u8 *)D_80100F38;
             M2C_FIELD(temp_v0, u16 *, 0x32E) = (u16) M2C_FIELD(temp_v0, u16 *, 0x332);
             M2C_FIELD(temp_v0, u16 *, 0x330) = (u16) M2C_FIELD(temp_v0, u16 *, 0x334);
             M2C_FIELD(temp_v0, u16 *, 0x33A) = (u16) M2C_FIELD(temp_v0, u16 *, 0x33C);

@@ -17,7 +17,7 @@ s16 func_800340B4(s32 arg0) {
     var_a1 = M2C_FIELD(D_800922F0, u8 *, 0x126);
     var_v1 = 1 << var_a1;
     do {
-        if ((M2C_FIELD(D_800922F0, u8 *, 0x125) & var_v1) && (M2C_FIELD((((var_a1 & 0xFF) * 2) + D_800922F0), u16 *, 0x12C) == (var_a0 & 0xFFFF))) {
+        if ((M2C_FIELD(D_800922F0, u8 *, 0x125) & var_v1) && (M2C_FIELD((((var_a1 & 0xFF) * 2) + (u8 *)D_800922F0), u16 *, 0x12C) == (var_a0 & 0xFFFF))) {
             var_a3 += 1;
         }
         var_v1 *= 2;

@@ -21,7 +21,7 @@ block_6:
             (*D_800F2DAA) = 7;
             (*D_800F2DA8) = (u16) M2C_FIELD(D_800EEB9C, s32 *, 0x24);
             func_800AEB5C(2, 0, D_800EEB9C);
-            (*D_800F2DA8) = func_800AC1A4((s16) (*D_800F2DA8), (*D_800F2DAA), *(((s32) (arg0 << 0x10) >> 0xF) + D_800EEA80));
+            (*D_800F2DA8) = func_800AC1A4((s16) (*D_800F2DA8), (*D_800F2DAA), *(s16 *)(((s32) (arg0 << 0x10) >> 0xF) + (u8 *)D_800EEA80));
             func_800AEB5C(1, 0);
         }
     }

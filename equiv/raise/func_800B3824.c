@@ -32,12 +32,12 @@ s32 func_800B3824(s32 arg0, s32 arg1) {
             if (temp_s0_2 != 0) {
                 if ((temp_s0_2 == (((temp_s0 % 1200) / 600) * 0x258)) && ((M2C_FIELD(D_8006AFCC, s32 *, 0x48) == 0) || ((M2C_FIELD(D_8006AF80, s32 *, 4) - M2C_FIELD(D_8006AFCC, s32 *, 0x48)) >= var_a1))) {
                     var_s0 = 0x18;
-                    if (M2C_FIELD((((arg0 & 0xFFFF) * 0x1A8) + D_80091618), u16 *, 0x10) != 4) {
+                    if (M2C_FIELD((((arg0 & 0xFFFF) * 0x1A8) + (u8 *)D_80091618), u16 *, 0x10) != 4) {
                         var_a0 = func_800202A4(0x18, var_a1);
                         var_a1 = arg1 & 0xFFFF;
                         if (var_a1 != 0xFFFF) {
                             var_v0 = 0x18U >> 1;
-                            if (M2C_FIELD(((var_a1 * 0x1A8) + D_80091618), u16 *, 0x10) == 4) {
+                            if (M2C_FIELD(((var_a1 * 0x1A8) + (u8 *)D_80091618), u16 *, 0x10) == 4) {
                                 goto block_11;
                             }
                         } else {
@@ -98,7 +98,7 @@ block_25:
                         var_a0_2 = arg0 & 0xFFFF;
                     }
                     if (var_a0_2 != 0xFFFF) {
-                        temp_s3 = (var_a0_2 * 0x1A8) + D_80091618;
+                        temp_s3 = (var_a0_2 * 0x1A8) + (u8 *)D_80091618;
                         temp_s0_4 = var_a0_2 & 0xFFFF;
                         if ((M2C_FIELD(temp_s3, u16 *, 0) == 0xA) && (func_800E14C4(temp_s0_4) == 0) && (func_800E16AC(temp_s0_4) != 1) && (func_800E1140(temp_s0_4) != 0)) {
                             temp_v0 = func_800E1388(temp_s0_4);

@@ -13,7 +13,7 @@ s32 func_80042E58(s32 arg0, s32 arg1) {
     u16 var_s3;
     void *temp_a2;
 
-    temp_a0 = (arg0 * 4) + D_80071D88;
+    temp_a0 = (arg0 * 4) + (u8 *)D_80071D88;
     temp_s4 = *temp_a0;
     if (arg1 != temp_s4) {
         temp_a2 = D_80071D88 - 4;

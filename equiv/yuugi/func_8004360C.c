@@ -38,12 +38,12 @@ void func_8004360C(undefined1 param_1,undefined4 param_2)
     piVar2 = aiStack_70;
     iVar9 = (*D_80094B68);
     do {
-      iVar5 = *(int *)(D_80094AA8 + iVar8);
+      iVar5 = *(int *)((u8 *)D_80094AA8 + iVar8);
       if (iVar5 != iVar6) {
         func_80043A90(iVar5,param_1,param_2);
         iVar6 = iVar5;
       }
-      iVar3 = *(int *)(D_80094AB8 + iVar8);
+      iVar3 = *(int *)((u8 *)D_80094AB8 + iVar8);
       if (iVar3 != 0) {
         if (iVar10 == -1) {
           iVar10 = 0;

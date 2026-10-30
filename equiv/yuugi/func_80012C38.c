@@ -7,7 +7,7 @@ s32 func_80012C38(void) {
     void *var_a0;
 
     var_a1 = 0;
-    var_a0 = D_8008ED68 + 0x158;
+    var_a0 = (u8 *)D_8008ED68 + 0x158;
     var_v1 = 0;
 loop_1:
     if (M2C_FIELD(var_a0, u16 *, 6) != 0) {

@@ -28,10 +28,10 @@ void func_800B74A4(void) {
                 }
             } else {
 block_6:
-                var_a2 = var_s0 == M2C_FIELD((((*D_8006AF80) * 0x1A8) + D_80091618), u16 *, 0x8A);
+                var_a2 = var_s0 == M2C_FIELD((((*D_8006AF80) * 0x1A8) + (u8 *)D_80091618), u16 *, 0x8A);
             }
             temp_a0 = M2C_FIELD(var_s1, s16 *, 0x384);
-            if ((temp_a0 == 1) && ((var_s0 == (*D_8006AF80)) || (var_s0 == M2C_FIELD((((*D_8006AF80) * 0x1A8) + D_80091618), u16 *, 0x8A)))) {
+            if ((temp_a0 == 1) && ((var_s0 == (*D_8006AF80)) || (var_s0 == M2C_FIELD((((*D_8006AF80) * 0x1A8) + (u8 *)D_80091618), u16 *, 0x8A)))) {
                 if (M2C_FIELD(D_8008ED68, u8 *, 0x99A) != temp_a0) {
                     temp_v1 = M2C_FIELD(var_s1, s16 *, 0x386);
                     var_v0 = temp_v1;

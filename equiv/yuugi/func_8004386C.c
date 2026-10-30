@@ -25,7 +25,7 @@ void func_8004386C(s8 arg0, M2C_UNK arg1) {
     if (temp_v1 != 0) {
         M2C_FIELD(D_80094A78, s32 *, 0) = temp_v1;
         M2C_FIELD(D_80094A78, s8 *, 4) = arg0;
-        func_800458A0(D_80094A78 + 5, arg0);
+        func_800458A0((u8 *)D_80094A78 + 5, arg0);
         temp_v1_2 = arg0 & 0xFF;
         switch (temp_v1_2) {                        /* irregular */
         case 2:

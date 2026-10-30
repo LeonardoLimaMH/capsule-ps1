@@ -65,7 +65,7 @@ block_3:
                         M2C_FIELD(D_8008ED68, s32 *, 0xA24) = 1;
                         M2C_FIELD(arg0, u8 *, 0x5D4) = (u8) (M2C_FIELD(arg0, u8 *, 0x5D4) + 1);
                         temp_a0 = M2C_FIELD(arg0, u8 *, 0x5D4);
-                        M2C_FIELD(arg0, u8 *, 0x5D6) = (u8) (M2C_FIELD(arg0, u8 *, 0x5D6) | *(M2C_FIELD(arg0, u8 *, 0x5D4) + D_80078C6C));
+                        M2C_FIELD(arg0, u8 *, 0x5D6) = (u8) (M2C_FIELD(arg0, u8 *, 0x5D6) | *(u8 *)(M2C_FIELD(arg0, u8 *, 0x5D4) + (u8 *)D_80078C6C));
                         if (temp_a0 >= 8U) {
                             M2C_FIELD(D_8008ED68, s32 *, 0xA1C) = 2;
                             M2C_FIELD(arg0, u8 *, 0x5D8) = (u8) (M2C_FIELD(arg0, u8 *, 0x5D8) + 1);

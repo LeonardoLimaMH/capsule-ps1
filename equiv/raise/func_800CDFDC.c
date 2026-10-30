@@ -20,7 +20,7 @@ void func_800CDFDC(undefined4 param_1)
   func_800BA1D8(param_1);
   iVar4 = func_800E14C4(uVar2);
   if (iVar4 == 0) {
-    iVar4 = *(int *)(D_80101104 + iVar3 + 0xec);
+    iVar4 = *(int *)((u8 *)D_80101104 + iVar3 + 0xec);
     uVar5 = (*(short *)(iVar3 + -0x7fefed4c) + 1) % 0x7fff;
     *(short *)(iVar3 + -0x7fefed4c) = (short)uVar5;
     if (iVar4 == 0x30005) {

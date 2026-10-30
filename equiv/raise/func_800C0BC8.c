@@ -13,7 +13,7 @@ void func_800C0BC8(s16 arg0, s16 arg1, s16 arg2) {
         var_a3 = temp_v0 + 0x1F;
     }
     M2C_FIELD(D_80100E60, u16 *, 6) = (u16) (temp_v0 - ((var_a3 >> 5) << 5));
-    temp_v0_2 = ((s16) M2C_FIELD(D_80100E60, u16 *, 4) * 2) + D_80100E60;
+    temp_v0_2 = ((s16) M2C_FIELD(D_80100E60, u16 *, 4) * 2) + (u8 *)D_80100E60;
     M2C_FIELD(temp_v0_2, s16 *, 0xA) = arg0;
     M2C_FIELD(temp_v0_2, s16 *, 0x4A) = arg1;
     M2C_FIELD(temp_v0_2, s16 *, 0x8A) = arg2;

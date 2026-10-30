@@ -16,7 +16,7 @@ void func_800B8EF0(void) {
     var_t2 = 0;
     var_t0 = D_80100CD0;
     var_t1 = D_80100CD0;
-    var_a2 = ((*D_8006AF80) * 0x1A8) + D_80091618;
+    var_a2 = ((*D_8006AF80) * 0x1A8) + (u8 *)D_80091618;
     var_a3 = var_a2;
     M2C_FIELD(var_a2, u16 *, 0x12) = (u16) (*D_80100CD0);
     do {

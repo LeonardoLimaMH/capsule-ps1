@@ -7,7 +7,7 @@ void func_800979FC(void) {
     s32 var_s1;
     u8 temp_a0;
 
-    temp_a0 = M2C_FIELD(((M2C_FIELD(D_80085428, u8 *, 0xD78) * 0x7C) + (M2C_FIELD(D_80085428, u8 *, 0xD77) * 0x2E8) + D_80085428), u8 *, 0x612);
+    temp_a0 = M2C_FIELD(((M2C_FIELD(D_80085428, u8 *, 0xD78) * 0x7C) + (M2C_FIELD(D_80085428, u8 *, 0xD77) * 0x2E8) + (u8 *)D_80085428), u8 *, 0x612);
     if ((s32) temp_a0 < 0xA) {
         var_a0 = (temp_a0 * 0xE000) + 0x80140000;
     } else {

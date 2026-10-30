@@ -19,7 +19,7 @@ void func_80044794(s8 arg0, u8 *arg1) {
     case 5:
     case 1:
         var_v1_2 = D_80094A88;
-        var_a0 = D_80094A88 + 5;
+        var_a0 = (u8 *)D_80094A88 + 5;
 block_11:
         M2C_FIELD(var_v1_2, s32 *, 0) = 1;
         M2C_FIELD(var_v1_2, s8 *, 4) = arg0;
@@ -27,7 +27,7 @@ block_11:
         break;
     case 4:
         var_v1_2 = D_80094A98;
-        var_a0 = D_80094A98 + 5;
+        var_a0 = (u8 *)D_80094A98 + 5;
         goto block_11;
     }
     if (D_80094C54 != NULL) {

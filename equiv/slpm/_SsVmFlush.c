@@ -115,11 +115,11 @@ void _SsVmFlush(void) {
     } while (var_s0_2 < 0x18);
     var_s0_4 = 0;
     var_s1_4 = D_80138198;
-    var_s7 = D_801381B8 + 0xA;
-    var_s6 = D_801381B8 + 8;
-    var_s5 = D_801381B8 + 6;
-    var_s4 = D_801381B8 + 4;
-    var_s3 = D_801381B8 + 2;
+    var_s7 = (u8 *)D_801381B8 + 0xA;
+    var_s6 = (u8 *)D_801381B8 + 8;
+    var_s5 = (u8 *)D_801381B8 + 6;
+    var_s4 = (u8 *)D_801381B8 + 4;
+    var_s3 = (u8 *)D_801381B8 + 2;
     var_s2_3 = D_801381B8;
     do {
         sp14 = 0;

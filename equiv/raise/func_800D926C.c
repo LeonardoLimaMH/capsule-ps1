@@ -35,7 +35,7 @@ void func_800D926C(void *arg0, u8 *arg2) {
         if ((u16) (*D_8008EE44) < 0x41U) {
             switch ((*D_800F1DA4)) {
             case 0:
-                temp_a1 = D_80105308 + 2;
+                temp_a1 = (u8 *)D_80105308 + 2;
                 (*D_80105308) = 1;
                 *temp_a1 = 0x40;
                 (*D_800F1DA4) += 1;
@@ -78,7 +78,7 @@ block_42:
                 }
                 return;
             case 1:
-                temp_a0_2 = D_80105308 + 2;
+                temp_a0_2 = (u8 *)D_80105308 + 2;
                 if (M2C_FIELD(arg0, s16 *, 0x50) >= 0x1000) {
                     M2C_FIELD(arg0, u16 *, 0x52) = 0x1000U;
                     M2C_FIELD(arg0, s16 *, 0x50) = 0x1000;
@@ -117,7 +117,7 @@ block_19:
                     temp_v0_2 = func_80019F30(M2C_FIELD(D_800EE630, s32 *, 0) | 0x70000, temp_s1, var_a2);
                     func_80015CD0(arg0 + 0x14, temp_v0_2, 0);
                     (*D_80105308) = 1;
-                    *(D_80105308 + 2) = 0x40;
+                    *(s16 *)((u8 *)D_80105308 + 2) = 0x40;
                     M2C_FIELD(arg0, s32 *, 0x1C) = temp_v0_2;
                     M2C_FIELD(arg0, s32 *, 0x7C) = temp_s1;
                     M2C_FIELD(arg0, s32 *, 0x80) = temp_v0_2;

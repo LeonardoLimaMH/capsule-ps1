@@ -25,7 +25,7 @@ void func_80042C88(void) {
         do {
             var_s1 = 0;
             if (var_s0 != 0) {
-                var_s2 = D_80071D84 + 4;
+                var_s2 = (u8 *)D_80071D84 + 4;
 loop_6:
                 if (var_s1 < 0xB) {
                     if (var_s0 & 1) {

@@ -30,7 +30,7 @@ void func_800A6D68(void) {
             do {
                 temp_v1 = var_s0_2 * 2;
                 var_s0_2 += 1;
-                func_8001F1A8(var_s1_2 >> 0x10, 0x14, 0, 1, 0, (M2C_FIELD((temp_v1 + D_8006AF90), s16 *, 2) * 0xC) + D_80065164, 1, 6, 2);
+                func_8001F1A8(var_s1_2 >> 0x10, 0x14, 0, 1, 0, (M2C_FIELD((temp_v1 + (u8 *)D_8006AF90), s16 *, 2) * 0xC) + D_80065164, 1, 6, 2);
                 var_s1_2 += 0x600000;
             } while (var_s0_2 < (*D_8006AF90));
         }

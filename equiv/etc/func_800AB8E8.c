@@ -70,10 +70,10 @@ block_21:
     }
     if ((*D_800B3D34) & 0x20) {
         temp_a1 = arg0 * 3;
-        if (M2C_FIELD(((var_s0 * 0x7C) + (arg0 * 0x2E8) + D_80085428), u8 *, 0x613) != 1) {
+        if (M2C_FIELD(((var_s0 * 0x7C) + (arg0 * 0x2E8) + (u8 *)D_80085428), u8 *, 0x613) != 1) {
             if (arg0 != (*D_800B3D24)) {
                 if (var_s0 < 5) {
-                    if (*((arg0 * 6) + D_800B3D38 + var_s0) == 0) {
+                    if (*(u8 *)((arg0 * 6) + (u8 *)D_800B3D38 + var_s0) == 0) {
                         goto block_29;
                     }
                     goto block_30;

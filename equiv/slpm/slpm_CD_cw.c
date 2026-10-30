@@ -124,7 +124,7 @@ loop_27:
                         var_v0_5 = temp_v0 & 2;
                         if (temp_v0 & 4) {
                             if (D_80131D20 != NULL) {
-                                D_80131D20(*(D_80131FFC + 1), D_80134EE0);
+                                D_80131D20(*((u8 *)D_80131FFC + 1), D_80134EE0);
                             }
                             var_v0_5 = temp_v0 & 2;
                         }

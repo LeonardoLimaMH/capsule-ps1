@@ -25,7 +25,7 @@ void func_800CE204(int param_1,int param_2)
   if (iVar4 < 0) {
     iVar4 = iVar4 + 0x1ff;
   }
-  iVar3 = (int)*(short *)(D_80101104 + (uVar2 & 0xffff) * 0x79c + 0x15a) + (iVar4 >> 9);
+  iVar3 = (int)*(short *)((u8 *)D_80101104 + (uVar2 & 0xffff) * 0x79c + 0x15a) + (iVar4 >> 9);
   iVar4 = iVar3;
   if (iVar3 < 0) {
     iVar4 = iVar3 + 7;

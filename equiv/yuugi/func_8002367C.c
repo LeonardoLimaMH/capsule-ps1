@@ -33,7 +33,7 @@ s32 func_8002367C(void *arg0, s16 arg1, s16 arg2, s16 arg3) {
                     if (temp_s0 != 0) {
 
                     } else {
-                        if (*((var_s2 * 0x1E) + D_8006AF90) >= 4) {
+                        if (*(s16 *)((var_s2 * 0x1E) + (u8 *)D_8006AF90) >= 4) {
                             func_80012668(D_8008ED68, temp_a1, 1);
                             M2C_FIELD(arg0, s8 *, 0xBE0) = 0;
                         } else {
@@ -49,7 +49,7 @@ s32 func_8002367C(void *arg0, s16 arg1, s16 arg2, s16 arg3) {
                         var_s3 = func_800212AC(arg0, temp_a1, 2, 1);
                         var_v1 = var_s3;
                         if (var_s3 == temp_s0) {
-                            temp_v1 = (var_s2 * 0x1E) + D_8006AF90;
+                            temp_v1 = (var_s2 * 0x1E) + (u8 *)D_8006AF90;
                             *temp_v1 -= 1;
 block_21:
                             var_v1 = var_s3;

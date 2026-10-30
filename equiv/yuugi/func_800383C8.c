@@ -24,7 +24,7 @@ void func_800383C8(void) {
         if (M2C_FIELD(var_t0, s16 *, 0x28A) == 1) {
             var_s1 = 0;
             do {
-                temp_a1 = ((var_s1 + var_v0) * 0x54) + D_800937D0;
+                temp_a1 = ((var_s1 + var_v0) * 0x54) + (u8 *)D_800937D0;
                 if (M2C_FIELD(temp_a1, u8 *, 2) != 0) {
                     if (M2C_FIELD(temp_a1, u16 *, 0x14) != 0) {
                         if ((M2C_FIELD(temp_a1, s16 *, 0x1E) + M2C_FIELD(temp_a1, s16 *, 0x1C)) < M2C_FIELD(temp_a1, s16 *, 0x20)) {
@@ -73,7 +73,7 @@ block_18:
         var_s0 = D_80093D68;
         do {
             temp_v1 = M2C_FIELD(var_s0, u8 *, 3);
-            if ((temp_v1 < 0x10U) && (M2C_FIELD((((temp_v1 >> 4) * 0x2AC) + D_800944B8), s16 *, 0x28A) == 1)) {
+            if ((temp_v1 < 0x10U) && (M2C_FIELD((((temp_v1 >> 4) * 0x2AC) + (u8 *)D_800944B8), s16 *, 0x28A) == 1)) {
                 func_8003793C(var_s0);
                 func_80037704(var_s0);
                 func_800380C8(var_s0, 0);

@@ -12,7 +12,7 @@ void func_800C17D8(void) {
     void *temp_v1;
     void *temp_v1_2;
 
-    temp_a2 = ((func_800B1260() & 0xFFFF) * 0x79C) + D_80100F38;
+    temp_a2 = ((func_800B1260() & 0xFFFF) * 0x79C) + (u8 *)D_80100F38;
     var_a1 = 0;
     do {
         temp_a0 = M2C_FIELD((((s32) (var_a1 << 0x10) >> 0xE) + temp_a2), void **, 0x230);

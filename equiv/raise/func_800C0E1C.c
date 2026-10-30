@@ -11,7 +11,7 @@ void func_800C0E1C(s32 arg0, s16 arg1, s16 arg2) {
             if (func_800E17F8(temp_s0) == 0) {
                 goto block_4;
             }
-            temp_v0 = (temp_s0 * 0x79C) + D_80100F38;
+            temp_v0 = (temp_s0 * 0x79C) + (u8 *)D_80100F38;
             M2C_FIELD(temp_v0, s16 *, 0x2C0) = arg1;
             M2C_FIELD(temp_v0, s16 *, 0x2C2) = arg2;
             M2C_FIELD(temp_v0, s16 *, 0x2C8) = 1;

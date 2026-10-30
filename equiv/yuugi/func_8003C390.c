@@ -18,7 +18,7 @@ s32 func_8003C390(void) {
     temp_s3 = D_80078C9C;
     D_80078C9C = 0;
     do {
-        temp_s1 = (D_80078C9C * 0x2AC) + D_800944B8;
+        temp_s1 = (D_80078C9C * 0x2AC) + (u8 *)D_800944B8;
         if (M2C_FIELD(temp_s1, s16 *, 0x28A) == 1) {
             var_s2 = 0;
             if (M2C_FIELD(temp_s1, u16 *, 0x2A2) != 0) {

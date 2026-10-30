@@ -45,15 +45,15 @@ L800AF570:
           (iVar3 = func_800E14C4(param_2), iVar3 != 1)))) {
         func_800D0FE0(param_1,param_2,3);
         iVar3 = param_2 * 0x79c;
-        *(undefined2 *)(D_80101104 + iVar3 + 0xec) = 6;
-        *(undefined2 *)(D_80101104 + iVar3 + 0xf4) = 6;
-        *(undefined2 *)(D_80101104 + iVar3 + 0xee) = 4;
-        *(undefined2 *)(D_80101104 + iVar3 + 0xf6) = 4;
-        *(undefined2 *)(D_80101104 + iVar3 + 0xfc) = 0;
-        *(undefined2 *)(D_80101104 + iVar3 + 0xfe) = 0;
+        *(undefined2 *)((u8 *)D_80101104 + iVar3 + 0xec) = 6;
+        *(undefined2 *)((u8 *)D_80101104 + iVar3 + 0xf4) = 6;
+        *(undefined2 *)((u8 *)D_80101104 + iVar3 + 0xee) = 4;
+        *(undefined2 *)((u8 *)D_80101104 + iVar3 + 0xf6) = 4;
+        *(undefined2 *)((u8 *)D_80101104 + iVar3 + 0xfc) = 0;
+        *(undefined2 *)((u8 *)D_80101104 + iVar3 + 0xfe) = 0;
         uVar5 = (*D_800F0D38);
-        *(undefined1 **)(D_80101104 + iVar3 + 0xf8) = (*D_800F07E4);
-        *(undefined4 *)(D_80101104 + iVar3 + 0xf0) = uVar5;
+        *(undefined1 **)((u8 *)D_80101104 + iVar3 + 0xf8) = (*D_800F07E4);
+        *(undefined4 *)((u8 *)D_80101104 + iVar3 + 0xf0) = uVar5;
         uVar2 = func_800B5034(param_1,param_2,7);
         *(undefined2 *)(iVar3 + -0x7fefed64) = uVar2;
         *(short *)(iVar4 + -0x7ff6e914) = (short)(*(short *)(iVar4 + -0x7ff6e914) * 3) >> 2;

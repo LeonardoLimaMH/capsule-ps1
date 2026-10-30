@@ -8,7 +8,7 @@ s32 func_80044FFC(void) {
     CD_flush();
     M2C_FIELD(D_80072F6C, s32 *, 0) = (s32) (M2C_FIELD(D_80072F6C, s32 *, 0) + 1);
     var_v1 = 0x1E;
-    if (*(D_80072F74 + (M2C_FIELD(D_80072F6C, u8 *, -0x44) * 4)) != 0) {
+    if (*(s32 *)((u8 *)D_80072F74 + (M2C_FIELD(D_80072F6C, u8 *, -0x44) * 4)) != 0) {
         var_v1 = 0x3C0;
     }
     M2C_FIELD(D_80072F6C, s32 *, -4) = var_v1;

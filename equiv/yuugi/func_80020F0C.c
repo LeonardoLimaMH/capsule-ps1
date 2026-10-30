@@ -21,12 +21,12 @@ s32 func_80020F0C(void *arg0, s32 arg1) {
     if ((arg1 == 1) && (M2C_FIELD((temp_v0 + var_a2), u8 *, 0x10) != 0)) {
         return ((u16) M2C_FIELD(arg0, u16 *, 0x1E) < 0xBU) ^ 1;
     }
-    temp_v1 = M2C_FIELD(((var_a2 * 0x10) + D_8008ED68), s32 *, 0x88);
+    temp_v1 = M2C_FIELD(((var_a2 * 0x10) + (u8 *)D_8008ED68), s32 *, 0x88);
     var_v0 = temp_v1 & 0x4000;
     if (((temp_v1 & 0x1000) && (var_v0 = temp_v1 & 0x4000, (M2C_FIELD(temp_s0, u8 *, 1) != 0))) || ((var_v0 != 0) && (M2C_FIELD(temp_s0, u8 *, 1) == 0))) {
         func_80034AB0(0x84, var_a2);
         M2C_FIELD(temp_s0, u8 *, 1) = (u8) (1 - M2C_FIELD(temp_s0, u8 *, 1));
-    } else if (M2C_FIELD(((var_a2 * 0x10) + D_8008ED68), s32 *, 0x88) & 0x20) {
+    } else if (M2C_FIELD(((var_a2 * 0x10) + (u8 *)D_8008ED68), s32 *, 0x88) & 0x20) {
         func_80034AB0(0x48, var_a2);
         var_s1 = 1;
     }

@@ -22,7 +22,7 @@ void func_800ACC64(s16 arg0) {
             var_s1_2 = 8;
 loop_8:
             var_a1 = 0;
-            if (M2C_FIELD(D_800EEB9C, s32 *, 0xD0) < (M2C_FIELD(((M2C_FIELD(D_800EEB9C, s32 *, 0x24) * 4) + D_800EEB9C), s32 *, 0x60) - 1)) {
+            if (M2C_FIELD(D_800EEB9C, s32 *, 0xD0) < (M2C_FIELD(((M2C_FIELD(D_800EEB9C, s32 *, 0x24) * 4) + (u8 *)D_800EEB9C), s32 *, 0x60) - 1)) {
                 var_a1 = M2C_FIELD(D_800EEB9C, s32 *, 0xD0) + 1;
             }
             M2C_FIELD(D_800EEB9C, s32 *, 0xD0) = var_a1;
@@ -39,7 +39,7 @@ loop_13:
             var_v0 = M2C_FIELD(D_800EEB9C, s32 *, 0xD0);
             var_s1 -= 1;
             if (var_v0 <= 0) {
-                var_v0 = M2C_FIELD(((M2C_FIELD(D_800EEB9C, s32 *, 0x24) * 4) + D_800EEB9C), s32 *, 0x60);
+                var_v0 = M2C_FIELD(((M2C_FIELD(D_800EEB9C, s32 *, 0x24) * 4) + (u8 *)D_800EEB9C), s32 *, 0x60);
             }
             temp_a1 = var_v0 - 1;
             M2C_FIELD(D_800EEB9C, s32 *, 0xD0) = temp_a1;

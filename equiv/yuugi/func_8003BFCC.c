@@ -17,7 +17,7 @@ s32 func_8003BFCC(void *arg0) {
 
     var_t1 = -1U;
     var_a3 = M2C_FIELD(arg0, u32 *, 0);
-    temp_t0 = (D_80078C9C * 0x2AC) + D_800944B8;
+    temp_t0 = (D_80078C9C * 0x2AC) + (u8 *)D_800944B8;
     var_a1 = D_80078CAC;
 loop_1:
     var_a2 = M2C_FIELD(temp_t0, s32 *, 0x284) + var_a3;

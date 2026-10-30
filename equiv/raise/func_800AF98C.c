@@ -13,11 +13,11 @@ void func_800AF98C(void) {
             var_a0 = 0 & 0xFFFF;
             do {
                 var_v1 = -1;
-                if (M2C_FIELD(((var_a0 * 0x1A8) + D_80091618), u16 *, 0x10) != 0xFFFF) {
+                if (M2C_FIELD(((var_a0 * 0x1A8) + (u8 *)D_80091618), u16 *, 0x10) != 0xFFFF) {
                     if (var_a0 == M2C_FIELD(D_8006AF80, u16 *, 0)) {
                         var_v1 = 1;
                     } else {
-                        var_v1 = (var_a0 != M2C_FIELD(((M2C_FIELD(D_8006AF80, u16 *, 0) * 0x1A8) + D_80091618), u16 *, 0x8A)) * 2;
+                        var_v1 = (var_a0 != M2C_FIELD(((M2C_FIELD(D_8006AF80, u16 *, 0) * 0x1A8) + (u8 *)D_80091618), u16 *, 0x8A)) * 2;
                     }
                 }
                 if (var_v1 != -1) {

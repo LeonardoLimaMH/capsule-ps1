@@ -28,7 +28,7 @@ void func_8009B1CC(void *arg0) {
             var_v0 = temp_v0 - 1;
             if (temp_v0 == 0) {
                 if (M2C_FIELD(arg0, s32 *, 0x1C) == 0) {
-                    func_80015CD0(arg0 + 0x14, func_80019F30(0x70008, M2C_FIELD((((s16) temp_v1 * 0x12) + D_800AF000), s16 *, 4), D_8008ED68), 0);
+                    func_80015CD0(arg0 + 0x14, func_80019F30(0x70008, M2C_FIELD((((s16) temp_v1 * 0x12) + (u8 *)D_800AF000), s16 *, 4), D_8008ED68), 0);
                     return;
                 }
                 var_v0 = M2C_FIELD(arg0, s32 *, 0x80) - 1;
@@ -38,7 +38,7 @@ block_10:
             M2C_FIELD(arg0, s32 *, 0x80) = var_v0;
             return;
         }
-        M2C_FIELD(arg0, s32 *, 0x80) = (s32) M2C_FIELD((((s16) temp_v1 * 0x12) + D_800AF000), s16 *, 6);
+        M2C_FIELD(arg0, s32 *, 0x80) = (s32) M2C_FIELD((((s16) temp_v1 * 0x12) + (u8 *)D_800AF000), s16 *, 6);
         return;
     case 5:
         M2C_FIELD(arg0, s32 *, 0x38) = (s32) (temp_a1 & ~1);
@@ -48,7 +48,7 @@ block_10:
             if (temp_v0_2 > 0) {
                 goto block_10;
             }
-            temp_s2 = ((s16) temp_v1 * 4) + D_800B3AF8;
+            temp_s2 = ((s16) temp_v1 * 4) + (u8 *)D_800B3AF8;
             temp_v1_2 = *temp_s2;
             if (temp_v1_2 == 0) {
                 M2C_FIELD(arg0, u8 *, 0x58) = (u8) (M2C_FIELD(arg0, u8 *, 0x58) + 3);
@@ -66,7 +66,7 @@ block_10:
                 M2C_FIELD(arg0, u8 *, 0x59) = 0x80U;
                 M2C_FIELD(arg0, u8 *, 0x58) = 0x80U;
                 if (M2C_FIELD(arg0, s16 *, 0x24) < 0) {
-                    temp_s0 = ((s16) temp_v1 * 0x12) + D_800AF000;
+                    temp_s0 = ((s16) temp_v1 * 0x12) + (u8 *)D_800AF000;
                     func_80015CD0(arg0 + 0x14, func_80019F30(0x70008, M2C_FIELD(temp_s0, s16 *, 8) + 0xC, D_8008ED68), 0);
                     M2C_FIELD(arg0, s16 *, 0x4E) = 3;
                     M2C_FIELD(arg0, s32 *, 0x30) = (s32) ((M2C_FIELD(arg0, s32 *, 0x30) & ~0x30) | 0x20);
@@ -84,7 +84,7 @@ block_10:
                 }
                 temp_a0 = M2C_FIELD(arg0, s32 *, 0x3C) + 1;
                 M2C_FIELD(arg0, s32 *, 0x3C) = temp_a0;
-                if (temp_a0 == *((M2C_FIELD(arg0, s32 *, 0x88) * 2) + D_800AF198)) {
+                if (temp_a0 == *(u16 *)((M2C_FIELD(arg0, s32 *, 0x88) * 2) + (u8 *)D_800AF198)) {
                     func_80034AB0(0x50, (s32 *) (s16) temp_v1, D_8008ED68);
                     M2C_FIELD(arg0, s32 *, 0x88) = (s32) (M2C_FIELD(arg0, s32 *, 0x88) + 1);
                     return;

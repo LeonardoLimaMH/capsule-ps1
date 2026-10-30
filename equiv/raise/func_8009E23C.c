@@ -12,7 +12,7 @@ s32 func_8009E23C(void) {
     if ((M2C_FIELD(D_800EFF58, s32 *, 8) == 1) && ((*D_800ED87A) != M2C_FIELD(D_800EFF58, s32 *, 8))) {
         if (M2C_FIELD(D_8008ED68, s32 *, 0x88) & 0x20) {
             func_80034AB0(0x48);
-            M2C_FIELD((((*D_8006AF80) * 0x1A8) + D_80091618), u16 *, 0x10) = (u16) M2C_FIELD(D_800EFF58, u16 *, 0x1C);
+            M2C_FIELD((((*D_8006AF80) * 0x1A8) + (u8 *)D_80091618), u16 *, 0x10) = (u16) M2C_FIELD(D_800EFF58, u16 *, 0x1C);
             func_8009DC78(0, D_80091618);
             return -1;
         }

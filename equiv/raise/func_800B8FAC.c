@@ -13,7 +13,7 @@ s32 func_800B8FAC(void) {
     void *temp_s0;
     void *temp_s2;
 
-    temp_s0 = ((*D_8006AF80) * 0x79C) + D_80100F38;
+    temp_s0 = ((*D_8006AF80) * 0x79C) + (u8 *)D_80100F38;
     if ((func_800E14C4((*D_8006AF80)) != 1) && ((temp_v1 = *M2C_FIELD(temp_s0, u8 **, 0x2BC) & 0xFF, (temp_v1 == 0x52)) || (temp_v1 == 0xD) || (temp_v1 == 0x53) || (temp_v1 == 0x69) || (temp_v1 == 0x79) || (temp_v1 == 0x7A) || (temp_v1 == 0x71) || (temp_v1 == 0x74) || (temp_v1 == 0x77) || (temp_v1 == 0x70))) {
         switch (temp_v1) {                          /* irregular */
         case 0x52:
@@ -51,7 +51,7 @@ block_22:
     } else {
 block_28:
         func_800B8E34();
-        temp_s2 = ((*D_8006AF80) * 0x1A8) + D_80091618;
+        temp_s2 = ((*D_8006AF80) * 0x1A8) + (u8 *)D_80091618;
         M2C_FIELD(temp_s2, s32 *, 0xA4) = (s32) M2C_FIELD(temp_s0, s16 *, 0x336);
         temp_s1 = M2C_FIELD(temp_s2, u16 *, 0x12);
         var_s0 = 0;

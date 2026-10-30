@@ -23,7 +23,7 @@ void func_800A9AC0(void) {
         if ((u32) (M2C_FIELD(D_800EEB9C, s32 *, 0xC) - 0x1D) >= 4U) {
             if ((*D_800EEA88) != 1) {
                 if (M2C_FIELD(D_8006AF80, u16 *, 0) != 0xFFFF) {
-                    if (M2C_FIELD(((M2C_FIELD(D_8006AF80, u16 *, 0) * 0x1A8) + D_80091618), u16 *, 0x10) != 0xFFFF) {
+                    if (M2C_FIELD(((M2C_FIELD(D_8006AF80, u16 *, 0) * 0x1A8) + (u8 *)D_80091618), u16 *, 0x10) != 0xFFFF) {
                         if ((*D_80078C28) != 0) {
                             if (func_800E16EC(0xFFFF) != 1) {
                                 goto block_7;
@@ -31,8 +31,8 @@ void func_800A9AC0(void) {
                         } else {
 block_7:
                             if (func_800B1198() == 0) {
-                                if (func_800E0FB8(M2C_FIELD(D_8006AF80, u16 *, 0), M2C_FIELD(((M2C_FIELD(D_8006AF80, u16 *, 0) * 0x1A8) + D_80091618), u16 *, 0x8A)) != 0) {
-                                    var_v1 = func_800B0440(M2C_FIELD(D_8006AF80, u16 *, 0), M2C_FIELD(((M2C_FIELD(D_8006AF80, u16 *, 0) * 0x1A8) + D_80091618), u16 *, 0x8A)) & 0xFFFF;
+                                if (func_800E0FB8(M2C_FIELD(D_8006AF80, u16 *, 0), M2C_FIELD(((M2C_FIELD(D_8006AF80, u16 *, 0) * 0x1A8) + (u8 *)D_80091618), u16 *, 0x8A)) != 0) {
+                                    var_v1 = func_800B0440(M2C_FIELD(D_8006AF80, u16 *, 0), M2C_FIELD(((M2C_FIELD(D_8006AF80, u16 *, 0) * 0x1A8) + (u8 *)D_80091618), u16 *, 0x8A)) & 0xFFFF;
                                     goto block_24;
                                 }
                                 if ((u32) (M2C_FIELD(D_800EEB9C, s32 *, 0xC) - 0x28) >= 5U) {

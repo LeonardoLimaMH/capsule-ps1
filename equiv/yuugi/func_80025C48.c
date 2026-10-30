@@ -8,7 +8,7 @@ void func_80025C48(s8 arg1, s8 arg2) {
 
     switch ((*D_80085428)) {                           /* irregular */
     case 0:
-        temp_v1 = ((func_800B1260(arg2, arg1) & 0xFFFF) * 0x79C) + D_80100F38;
+        temp_v1 = ((func_800B1260(arg2, arg1) & 0xFFFF) * 0x79C) + (u8 *)D_80100F38;
         M2C_FIELD(temp_v1, s16 *, 0x33E) = (s16) arg1;
         M2C_FIELD(temp_v1, s16 *, 0x340) = (s16) arg2;
         return;

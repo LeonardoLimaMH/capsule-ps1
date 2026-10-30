@@ -105,14 +105,14 @@ L800DC090:
     }
     goto L800DC390;
   case 0xf:
-    sVar5 = *(short *)(D_80101104 + param_1 * 0x79c + 0xec);
+    sVar5 = *(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xec);
     sVar2 = 2;
     goto L800DC5D8;
   case 0x10:
-    uVar4 = *(ushort *)(D_80101104 + param_1 * 0x79c + 0xec) - 1;
+    uVar4 = *(ushort *)((u8 *)D_80101104 + param_1 * 0x79c + 0xec) - 1;
     goto L800DC198;
   case 0x11:
-    if (1 < *(ushort *)(D_80101104 + param_1 * 0x79c + 0xec) - 1) {
+    if (1 < *(ushort *)((u8 *)D_80101104 + param_1 * 0x79c + 0xec) - 1) {
       return 0;
     }
     if (*(short *)(param_1 * 0x79c + -0x7fefed50) != 0) {
@@ -121,32 +121,32 @@ L800DC090:
     iVar7 = 1;
     break;
   case 0x13:
-    if (*(short *)(D_80101104 + param_1 * 0x79c + 0xec) != 3) {
+    if (*(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xec) != 3) {
       return 0;
     }
-    if (*(short *)(D_80101104 + param_1 * 0x79c + 0xee) != 0x12) {
+    if (*(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xee) != 0x12) {
       return 0;
     }
     goto L800DC390;
   case 0x14:
-    if (*(short *)(D_80101104 + param_1 * 0x79c + 0xec) != 3) {
+    if (*(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xec) != 3) {
       return 0;
     }
-    if (*(short *)(D_80101104 + param_1 * 0x79c + 0xee) != 0x10) {
+    if (*(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xee) != 0x10) {
       return 0;
     }
     goto L800DC390;
   case 0x15:
-    if (*(short *)(D_80101104 + param_1 * 0x79c + 0xec) != 3) {
+    if (*(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xec) != 3) {
       return 0;
     }
     goto L800DC390;
   case 0x16:
     iVar7 = param_1 * 0x79c;
-    if (*(short *)(D_80101104 + iVar7 + 0xec) != 4) {
+    if (*(short *)((u8 *)D_80101104 + iVar7 + 0xec) != 4) {
       return 0;
     }
-    if (*(short *)(D_80101104 + iVar7 + 0xee) != 0x14) {
+    if (*(short *)((u8 *)D_80101104 + iVar7 + 0xee) != 0x14) {
       return 0;
     }
     bVar1 = *(short *)(param_1 * 0x1a8 + -0x7ff6e926) < 0x5a;
@@ -158,26 +158,26 @@ L800DC390:
     iVar7 = func_800DC5F8();
     break;
   case 0x17:
-    if (*(short *)(D_80101104 + param_1 * 0x79c + 0xec) != 5) {
+    if (*(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xec) != 5) {
       return 0;
     }
-    sVar5 = *(short *)(D_80101104 + param_1 * 0x79c + 0xee);
+    sVar5 = *(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xee);
     sVar2 = 3;
     goto L800DC5D8;
   case 0x19:
-    if (*(short *)(D_80101104 + param_1 * 0x79c + 0xec) != 5) {
+    if (*(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xec) != 5) {
       return 0;
     }
-    if (*(short *)(D_80101104 + param_1 * 0x79c + 0xee) != 5) {
+    if (*(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xee) != 5) {
       return 0;
     }
     iVar7 = 1;
     break;
   case 0x1a:
-    if (*(short *)(D_80101104 + param_1 * 0x79c + 0xec) != 5) {
+    if (*(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xec) != 5) {
       return 0;
     }
-    uVar4 = *(ushort *)(D_80101104 + param_1 * 0x79c + 0xee) - 7;
+    uVar4 = *(ushort *)((u8 *)D_80101104 + param_1 * 0x79c + 0xee) - 7;
 L800DC198:
     if (1 < uVar4) {
       return 0;
@@ -185,32 +185,32 @@ L800DC198:
     iVar7 = 1;
     break;
   case 0x1b:
-    if (*(short *)(D_80101104 + param_1 * 0x79c + 0xec) != 5) {
+    if (*(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xec) != 5) {
       return 0;
     }
-    sVar5 = *(short *)(D_80101104 + param_1 * 0x79c + 0xee);
+    sVar5 = *(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xee);
     sVar2 = 0xb;
     goto L800DC5D8;
   case 0x1c:
-    if (*(short *)(D_80101104 + param_1 * 0x79c + 0xec) != 5) {
+    if (*(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xec) != 5) {
       return 0;
     }
-    sVar5 = *(short *)(D_80101104 + param_1 * 0x79c + 0xee);
+    sVar5 = *(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xee);
     sVar2 = 0xc;
     goto L800DC5D8;
   case 0x1d:
-    if (*(short *)(D_80101104 + param_1 * 0x79c + 0xec) != 5) {
+    if (*(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xec) != 5) {
       return 0;
     }
-    sVar5 = *(short *)(D_80101104 + param_1 * 0x79c + 0xee);
+    sVar5 = *(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xee);
     sVar2 = 0xd;
     if (sVar5 != 5) goto L800DC5D8;
     goto L800DC5E0;
   case 0x1e:
-    if (*(short *)(D_80101104 + param_1 * 0x79c + 0xec) != 5) {
+    if (*(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xec) != 5) {
       return 0;
     }
-    sVar5 = *(short *)(D_80101104 + param_1 * 0x79c + 0xee);
+    sVar5 = *(short *)((u8 *)D_80101104 + param_1 * 0x79c + 0xee);
     if ((sVar5 == 5) || (sVar2 = 8, sVar5 == 7)) goto L800DC5E0;
 L800DC5D8:
     if (sVar5 != sVar2) {

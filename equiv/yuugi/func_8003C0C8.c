@@ -13,7 +13,7 @@ void func_8003C0C8(void *arg0) {
     u16 temp_v1;
     u32 var_v1;
 
-    temp_v1 = M2C_FIELD(((D_80078C9C * 0x2AC) + D_800944B8), u16 *, 0x2A4);
+    temp_v1 = M2C_FIELD(((D_80078C9C * 0x2AC) + (u8 *)D_800944B8), u16 *, 0x2A4);
     switch (temp_v1) {                              /* irregular */
     case 0x30:
         temp_v0 = M2C_FIELD(arg0, u16 *, 0x1C) * 0xA;

@@ -45,20 +45,20 @@ block_12:
                 if (temp_v0 != 2) {
                 default:
                     temp_a0 = (var_s6 & 0xFFFF) * 0x1A8;
-                    temp_fp = *(temp_a0 + D_80091618);
-                    temp_a2 = M2C_FIELD((((temp_v0 != (*D_800EEB90)) * 4) + D_800EEB94), s16 *, 2);
+                    temp_fp = *(u16 *)(temp_a0 + (u8 *)D_80091618);
+                    temp_a2 = M2C_FIELD((((temp_v0 != (*D_800EEB90)) * 4) + (u8 *)D_800EEB94), s16 *, 2);
                     sp38 = temp_a2;
-                    temp_s4 = (temp_fp * 0x3C) + D_80063940;
+                    temp_s4 = (temp_fp * 0x3C) + (u8 *)D_80063940;
                     temp_v1 = ((u32) M2C_FIELD(temp_s4, u32 *, 8) >> 0xC) & 3;
                     sp30 = temp_v1;
-                    sp28 = (temp_v1 * 8) + D_8006D670;
+                    sp28 = (temp_v1 * 8) + (u8 *)D_8006D670;
                     if ((temp_a2 == 5) || (temp_v0 == 0)) {
-                        func_8001F1A8((s16) (var_s5 - (sp40 - 0x59)), (s16) (var_s3 - (temp_s7 - 0x41)), 0, 1, 0, temp_a0 + D_80091620, 0, 8, (s32) temp_a2);
+                        func_8001F1A8((s16) (var_s5 - (sp40 - 0x59)), (s16) (var_s3 - (temp_s7 - 0x41)), 0, 1, 0, temp_a0 + (u8 *)D_80091620, 0, 8, (s32) temp_a2);
                     }
                     if ((s16) (u16) sp38 == 5) {
                         temp_s0 = var_s5 - (sp40 - 0x59);
                         func_8001F1A8(temp_s0, (s16) (var_s3 - (temp_s7 - 0x55)), 0, 0, 0, temp_s4, 0, 9, (s32) (s16) (u16) sp38);
-                        func_8001F7A4(temp_s0, (s16) (var_s3 - (temp_s7 - 0x64)), 0, 0, ((u32) M2C_FIELD(((temp_fp * 0x3C) + D_80063940), u32 *, 8) >> 8) & 0xF, (s32) (s16) (u16) sp38);
+                        func_8001F7A4(temp_s0, (s16) (var_s3 - (temp_s7 - 0x64)), 0, 0, ((u32) M2C_FIELD(((temp_fp * 0x3C) + (u8 *)D_80063940), u32 *, 8) >> 8) & 0xF, (s32) (s16) (u16) sp38);
                         func_80018EF4((s16) (var_s5 - (sp40 - 0x5E)), (s16) (var_s3 - (temp_s7 - 0x75)), sp30, 1, (s32) (s16) (u16) sp38);
                         if (sp30 == 1) {
                             var_v0 = 4;
@@ -74,7 +74,7 @@ block_12:
                 break;
             case 1:
                 var_s5 = 8;
-                if (M2C_FIELD((((*D_8006AF80) * 0x1A8) + D_80091618), u16 *, 0x8A) == 0xFFFF) {
+                if (M2C_FIELD((((*D_8006AF80) * 0x1A8) + (u8 *)D_80091618), u16 *, 0x8A) == 0xFFFF) {
                     var_s5 = 0;
                     var_s3 = 0;
                 } else {

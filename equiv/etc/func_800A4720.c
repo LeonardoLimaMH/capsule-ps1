@@ -7,7 +7,7 @@ void func_800A4720(void *arg0) {
     s16 var_a2;
     s32 var_v0;
 
-    if (((*D_8008EE44) == 0x18) && ((u32) (*((M2C_FIELD(arg0, s32 *, 0x84) * 2) + D_800B3B38) - 2) < 3U)) {
+    if (((*D_8008EE44) == 0x18) && ((u32) (*(u16 *)((M2C_FIELD(arg0, s32 *, 0x84) * 2) + (u8 *)D_800B3B38) - 2) < 3U)) {
         M2C_FIELD(arg0, s16 *, 0x46) = 0x20;
         var_a2 = -0x60;
         if (M2C_FIELD(D_80085428, u8 *, 0x5D0) == 2) {

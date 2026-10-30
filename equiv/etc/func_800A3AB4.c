@@ -24,12 +24,12 @@ block_4:
             case 1:                                 /* switch 1 */
                 M2C_FIELD(arg0, s32 *, 0x38) = (s32) (M2C_FIELD(arg0, s32 *, 0x38) & ~1);
                 if (M2C_FIELD(arg0, s32 *, 0x84) == temp_a1) {
-                    M2C_FIELD(arg0, s32 *, 0x18) = func_8001A434(M2C_FIELD(arg0, s32 *, 0x7C) + *(M2C_FIELD(arg0, s32 *, 0x80) + D_800B3B88), D_80065390);
+                    M2C_FIELD(arg0, s32 *, 0x18) = func_8001A434(M2C_FIELD(arg0, s32 *, 0x7C) + *(u8 *)(M2C_FIELD(arg0, s32 *, 0x80) + (u8 *)D_800B3B88), D_80065390);
                     return;
                 }
                 return;
             case 2:                                 /* switch 1 */
-                if (M2C_FIELD(((M2C_FIELD(arg0, s32 *, 0x80) * 2) + D_800B3B38), s16 *, 8) != 0) {
+                if (M2C_FIELD(((M2C_FIELD(arg0, s32 *, 0x80) * 2) + (u8 *)D_800B3B38), s16 *, 8) != 0) {
                 case 0:                             /* switch 1 */
                     M2C_FIELD(arg0, s32 *, 0x38) = (s32) (M2C_FIELD(arg0, s32 *, 0x38) & ~1);
                 }

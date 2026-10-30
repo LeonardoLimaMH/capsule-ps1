@@ -14,11 +14,11 @@ void func_800A1F44(s32 arg0, s32 arg1, s32 arg2) {
     void *temp_v1_4;
 
     temp_a0 = (arg0 != 1) * 4;
-    temp_a3 = temp_a0 + D_800FDE08;
+    temp_a3 = temp_a0 + (u8 *)D_800FDE08;
     temp_v1 = *temp_a3;
     temp_a1 = arg1 & 1;
     M2C_FIELD(temp_v1, s32 *, 0x38) = (s32) ((M2C_FIELD(temp_v1, s32 *, 0x38) & ~1) | temp_a1);
-    temp_a0_2 = temp_a0 + D_800FAE10;
+    temp_a0_2 = temp_a0 + (u8 *)D_800FAE10;
     temp_v1_2 = *temp_a0_2;
     M2C_FIELD(temp_v1_2, s32 *, 0x38) = (s32) ((M2C_FIELD(temp_v1_2, s32 *, 0x38) & ~1) | temp_a1);
     temp_v1_3 = *temp_a3;

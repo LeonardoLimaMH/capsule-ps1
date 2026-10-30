@@ -22,7 +22,7 @@ void func_800AC650(void *arg0) {
                 var_v0_2 = M2C_FIELD(arg0, s32 *, 0x38) & ~1;
                 goto block_10;
             }
-        } else if (*((temp_a1 * 6) + D_800B3D38 + temp_a3) != 0) {
+        } else if (*(u8 *)((temp_a1 * 6) + (u8 *)D_800B3D38 + temp_a3) != 0) {
             var_v0_2 = M2C_FIELD(arg0, s32 *, 0x38) & ~1;
             goto block_10;
         }

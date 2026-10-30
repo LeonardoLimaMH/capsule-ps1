@@ -17,7 +17,7 @@ void func_800A4654(void *arg0) {
             M2C_FIELD(arg0, s32 *, 0x38) = (s32) (temp_a1 & ~1);
             return;
         }
-        temp_v1 = *((temp_a2 * 2) + D_800B3B38);
+        temp_v1 = *(s16 *)((temp_a2 * 2) + (u8 *)D_800B3B38);
         if ((temp_v1 == 1) || (var_v0 = -0x40, (temp_v1 == 5))) {
             M2C_FIELD(arg0, s32 *, 0x38) = (s32) (temp_a1 & ~1);
             if (temp_a2 != 0) {

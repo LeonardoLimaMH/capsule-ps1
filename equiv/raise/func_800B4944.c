@@ -16,7 +16,7 @@ void func_800B4944(s32 arg0) {
     void *temp_s2;
 
     var_a1 = arg0;
-    if (M2C_FIELD((((*D_8006AF80) * 0x1A8) + D_80091618), u16 *, 0x8A) == 0xFFFF) {
+    if (M2C_FIELD((((*D_8006AF80) * 0x1A8) + (u8 *)D_80091618), u16 *, 0x8A) == 0xFFFF) {
         var_v0 = var_a1 ^ 1;
         if (var_a1 == 0) {
             var_a1 = 1;
@@ -31,7 +31,7 @@ block_3:
     do {
         temp_s0 = func_800B1260(var_s1) & 0xFFFF;
         if (temp_s0 != 0xFFFF) {
-            temp_s2 = (temp_s0 * 0x79C) + D_80100F38;
+            temp_s2 = (temp_s0 * 0x79C) + (u8 *)D_80100F38;
             if ((*D_800EEB90) == var_s1) {
                 var_v1 = M2C_FIELD(D_800EEB9C, s32 *, 0xC8);
             } else {

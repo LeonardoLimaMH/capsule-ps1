@@ -20,7 +20,7 @@ undefined4 func_800B8700(short param_1,uint param_2,int param_3)
     else if (param_3 == 1) {
       (*D_800EFF4C) = func_80013928
                              (param_2 & 0xffff,
-                              *(undefined2 *)(D_80091618 + (param_2 & 0xffff) * 0x1a8),
+                              *(undefined2 *)((u8 *)D_80091618 + (param_2 & 0xffff) * 0x1a8),
                               (int)(*D_80078C20));
     }
   }
@@ -41,7 +41,7 @@ undefined4 func_800B8700(short param_1,uint param_2,int param_3)
           sVar4 = (short)iVar5;
           uVar1 = func_800B84FC((int)sVar4);
           uVar2 = func_80013928
-                            (uVar1 & 0xffff,*(undefined2 *)(D_80091618 + (uVar1 & 0xffff) * 0x1a8),
+                            (uVar1 & 0xffff,*(undefined2 *)((u8 *)D_80091618 + (uVar1 & 0xffff) * 0x1a8),
                              2);
           iVar5 = iVar5 + -1;
           (D_800EFF4C)[1 - sVar4] = uVar2;

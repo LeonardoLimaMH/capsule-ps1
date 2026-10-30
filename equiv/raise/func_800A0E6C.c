@@ -10,7 +10,7 @@ s32 func_800A0E6C(u8 arg0) {
     u8 *var_v0;
     u8 *var_v0_2;
 
-    temp_a1 = (arg0 & 0xFFFF) + D_800F2D30;
+    temp_a1 = (arg0 & 0xFFFF) + (u8 *)D_800F2D30;
     var_v1 = 0;
     if (*temp_a1 == 0xFF) {
         var_v0 = D_800F2D98;

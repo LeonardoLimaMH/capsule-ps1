@@ -29,17 +29,17 @@ s32 func_800E1E50(void) {
     }
     (*D_800F1F54) = 8;
     (*D_8006AF80) = M2C_FIELD(D_800EEB9C, u16 *, 0x73C);
-    temp_a0 = *(((*D_8006AF80) * 0x1A8) + D_80091618);
-    if (*(temp_a0 + D_800F2D30) == 0xFF) {
+    temp_a0 = *(u16 *)(((*D_8006AF80) * 0x1A8) + (u8 *)D_80091618);
+    if (*(u8 *)(temp_a0 + (u8 *)D_800F2D30) == 0xFF) {
         func_8001A49C(func_800A0E6C(temp_a0, D_800F1F54));
     }
-    func_800E2AA0(M2C_FIELD((((*D_8006AF80) * 0x1A8) + D_80091618), u16 *, 0x10), 1, 0);
+    func_800E2AA0(M2C_FIELD((((*D_8006AF80) * 0x1A8) + (u8 *)D_80091618), u16 *, 0x10), 1, 0);
     func_800CD288(1, 1);
     var_a3 = 8;
     if ((*D_80078C26) == 3) {
         var_a3 = 6;
     }
-    func_80024990(M2C_FIELD((((*D_8006AF80) * 0x1A8) + D_80091618), s32 *, 0x18C), 1, 0x32, var_a3);
+    func_80024990(M2C_FIELD((((*D_8006AF80) * 0x1A8) + (u8 *)D_80091618), s32 *, 0x18C), 1, 0x32, var_a3);
     M2C_FIELD(D_800EEB9C, s32 *, 0xC) = 0;
     func_800B9F50(1);
     SpuInitHot();
@@ -51,7 +51,7 @@ s32 func_800E1E50(void) {
     func_800B6FA0();
     func_800B53D4(1, (*D_8006AF80));
     func_800E11A0(1, (*D_8006AF80));
-    M2C_FIELD((((*D_8006AF80) * 0x79C) + D_80100F38), s16 *, 0x386) = 0;
+    M2C_FIELD((((*D_8006AF80) * 0x79C) + (u8 *)D_80100F38), s16 *, 0x386) = 0;
     if ((*D_80078C34) == 0x7006) {
         func_800282A0((*D_80078C38));
     }

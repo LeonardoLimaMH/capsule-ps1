@@ -28,8 +28,8 @@ s32 _SpuSetAnyVoice(s32 arg0, u16 arg1, s32 arg2, s32 arg3) {
     case 1:
         temp_v1 = arg2 * 2;
         if ((*D_80071584) & 1) {
-            temp_v1_2 = temp_v1 + D_800948A8;
-            temp_a0 = (arg3 * 2) + D_800948A8;
+            temp_v1_2 = temp_v1 + (u8 *)D_800948A8;
+            temp_a0 = (arg3 * 2) + (u8 *)D_800948A8;
             *temp_v1_2 |= arg1;
             *temp_a0 |= (arg1 >> 0x10) & 0xFF;
             (*D_80071550) |= 1 << ((s32) (arg2 - 0xC6) >> 1);
@@ -44,8 +44,8 @@ s32 _SpuSetAnyVoice(s32 arg0, u16 arg1, s32 arg2, s32 arg3) {
     case 0:
         temp_v1_4 = arg2 * 2;
         if ((*D_80071584) & 1) {
-            temp_v1_5 = temp_v1_4 + D_800948A8;
-            temp_a0_3 = (arg3 * 2) + D_800948A8;
+            temp_v1_5 = temp_v1_4 + (u8 *)D_800948A8;
+            temp_a0_3 = (arg3 * 2) + (u8 *)D_800948A8;
             *temp_v1_5 &= ~arg1;
             *temp_a0_3 &= ~((arg1 >> 0x10) & 0xFF);
             (*D_80071550) |= 1 << ((s32) (arg2 - 0xC6) >> 1);
@@ -60,8 +60,8 @@ s32 _SpuSetAnyVoice(s32 arg0, u16 arg1, s32 arg2, s32 arg3) {
     case 8:
         temp_v1_7 = arg3 * 2;
         if ((*D_80071584) & 1) {
-            *((arg2 * 2) + D_800948A8) = arg1;
-            *(temp_v1_7 + D_800948A8) = (arg1 >> 0x10) & 0xFF;
+            *(u16 *)((arg2 * 2) + (u8 *)D_800948A8) = arg1;
+            *(u16 *)(temp_v1_7 + (u8 *)D_800948A8) = (arg1 >> 0x10) & 0xFF;
             (*D_80071550) |= 1 << ((s32) (arg2 - 0xC6) >> 1);
         } else {
             *((arg2 * 2) + (*D_80071598)) = arg1;

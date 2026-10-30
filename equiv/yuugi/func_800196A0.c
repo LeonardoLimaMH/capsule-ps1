@@ -30,7 +30,7 @@ void func_800196A0(void) {
         if (var_v1 != 0) {
             M2C_FIELD(D_8008ED68, s32 *, 0x944) = -1;
             if (M2C_FIELD(D_8008F7E0, u8 *, 3) == 0xFF) {
-                temp_a0 = (M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + D_8008F7E0;
+                temp_a0 = (M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + (u8 *)D_8008F7E0;
                 temp_v1 = M2C_FIELD(temp_a0, u8 *, 4);
                 switch (temp_v1) {                  /* switch 1; irregular */
                 case 0x0:                           /* switch 1 */
@@ -38,8 +38,8 @@ void func_800196A0(void) {
                         M2C_FIELD(D_8008F7E0, s8 *, 0x408) = 0;
                         var_v0 = DsCommand(9, NULL, 0, -1);
 block_30:
-                        M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + D_8008F7E0), s32 *, 0x10) = var_v0;
-                        if (M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + D_8008F7E0), s32 *, 0x10) != 0) {
+                        M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + (u8 *)D_8008F7E0), s32 *, 0x10) = var_v0;
+                        if (M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + (u8 *)D_8008F7E0), s32 *, 0x10) != 0) {
                             M2C_FIELD(D_8008F7E0, u8 *, 3) = 1U;
                         }
                     }
@@ -48,7 +48,7 @@ block_30:
                     if (DsQueueLen(temp_a0) == 0) {
                         M2C_FIELD(D_8008F7E0, u8 *, 2) = 0U;
                         M2C_FIELD(D_8008F7E0, s8 *, 0x408) = 0;
-                        DsIntToPos(M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + D_8008F7E0), s32 *, 0xC), &sp18);
+                        DsIntToPos(M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + (u8 *)D_8008F7E0), s32 *, 0xC), &sp18);
                         var_v0 = DsCommand(2, &sp18, 0, -1);
                         goto block_30;
                     }
@@ -59,18 +59,18 @@ block_30:
                         M2C_FIELD(D_8008F7E0, u8 *, 2) = 0U;
                         M2C_FIELD(D_8008F7E0, s8 *, 0x408) = 0;
                         temp_v1_2 = M2C_FIELD(D_8008F7E0, u8 *, 0) << 5;
-                        temp_v1_3 = temp_v1_2 + D_8008F7E0;
+                        temp_v1_3 = temp_v1_2 + (u8 *)D_8008F7E0;
                         temp_s0 = M2C_FIELD(temp_v1_3, s32 *, 0x18);
-                        temp_a1 = M2C_FIELD((temp_v1_2 + 4 + D_8008F7E0), s32 *, 0x10) & 0xFFFFFF;
+                        temp_a1 = M2C_FIELD((temp_v1_2 + 4 + (u8 *)D_8008F7E0), s32 *, 0x10) & 0xFFFFFF;
                         temp_a0_2 = M2C_FIELD(temp_v1_3, s32 *, 8);
                         if (temp_a0_2 != 0) {
                             temp_v1_4 = temp_a1 + (temp_a0_2 - 0x80000000);
                             M2C_FIELD(D_8008F7E0, s32 **, 0x418) = (s32 *) (temp_v1_4 - 4);
                             M2C_FIELD(temp_v1_4, s32 *, -4) = 0x11111111;
                         }
-                        DsIntToPos(M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + D_8008F7E0), s32 *, 0xC), &sp18, 0x80000000);
-                        M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + D_8008F7E0), s32 *, 0x10) = func_8004749C(&sp18, temp_s0, temp_a1 - 0x80000000, 0x80);
-                        if (M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + D_8008F7E0), s32 *, 0x10) != 0) {
+                        DsIntToPos(M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + (u8 *)D_8008F7E0), s32 *, 0xC), &sp18, 0x80000000);
+                        M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + (u8 *)D_8008F7E0), s32 *, 0x10) = func_8004749C(&sp18, temp_s0, temp_a1 - 0x80000000, 0x80);
+                        if (M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + (u8 *)D_8008F7E0), s32 *, 0x10) != 0) {
                             M2C_FIELD(D_8008F7E0, u8 *, 3) = 1U;
                         }
                     }
@@ -79,7 +79,7 @@ block_30:
                     if (DsQueueLen(temp_a0) == 0) {
                         M2C_FIELD(D_8008F7E0, u8 *, 2) = 0U;
                         M2C_FIELD(D_8008F7E0, s8 *, 0x408) = 0;
-                        DsIntToPos(M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + D_8008F7E0), s32 *, 0xC), &sp18);
+                        DsIntToPos(M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + (u8 *)D_8008F7E0), s32 *, 0xC), &sp18);
                         var_v0 = DsPacket(0, &sp18, 0x15, 0, 3);
                         goto block_30;
                     }
@@ -97,19 +97,19 @@ block_37:
                     break;
                 case 0xFE:                          /* switch 1 */
                     if (DsQueueLen(temp_a0) == 0) {
-                        func_80019E1C(M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + D_8008F7E0), s32 *, 0xC));
+                        func_80019E1C(M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + (u8 *)D_8008F7E0), s32 *, 0xC));
                         goto block_37;
                     }
                     break;
                 }
             } else if (M2C_FIELD(D_8008F7E0, u8 *, 3) == 1) {
-                temp_a1_2 = (M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + D_8008F7E0;
+                temp_a1_2 = (M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + (u8 *)D_8008F7E0;
                 temp_v1_5 = M2C_FIELD(temp_a1_2, u8 *, 4);
                 switch (temp_v1_5) {                /* irregular */
                 case 2:
                 case 21:
                 case 0:
-                    var_s0 = DsSync(M2C_FIELD((D_8008F7E0 + (M2C_FIELD(D_8008F7E0, u8 *, 0) << 5)), s32 *, 0x10), D_8008F7E0 + 0x424);
+                    var_s0 = DsSync(M2C_FIELD(((u8 *)D_8008F7E0 + (M2C_FIELD(D_8008F7E0, u8 *, 0) << 5)), s32 *, 0x10), (u8 *)D_8008F7E0 + 0x424);
                     if (var_s0 == 2) {
                         M2C_FIELD(D_8008F7E0, s8 *, 0x408) = var_s0;
                         M2C_FIELD(D_8008F7E0, u8 *, 3) = 0xFFU;
@@ -124,13 +124,13 @@ block_61:
                     break;
                 case 6:
                     M2C_FIELD(D_8008ED68, s32 *, 0xF8) = (s32) M2C_FIELD(D_8008F7E0, u8 *, 3);
-                    var_s0 = DsSync(M2C_FIELD(temp_a1_2, s32 *, 0x10), D_8008F7E0 + 0x424);
+                    var_s0 = DsSync(M2C_FIELD(temp_a1_2, s32 *, 0x10), (u8 *)D_8008F7E0 + 0x424);
                     if (var_s0 == 2) {
-                        temp_v0 = func_8004784C(D_8008F7E0 + 0x41C);
+                        temp_v0 = func_8004784C((u8 *)D_8008F7E0 + 0x41C);
                         M2C_FIELD(D_8008F7E0, s32 *, 0x410) = temp_v0;
                         if (temp_v0 <= 0) {
                             if (temp_v0 == 0) {
-                                if ((M2C_FIELD(D_8008F7E0, u8 *, 0x40C) != 0) && (M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + D_8008F7E0), s32 *, 8) != 0)) {
+                                if ((M2C_FIELD(D_8008F7E0, u8 *, 0x40C) != 0) && (M2C_FIELD(((M2C_FIELD(D_8008F7E0, u8 *, 0) << 5) + (u8 *)D_8008F7E0), s32 *, 8) != 0)) {
                                     if (*M2C_FIELD(D_8008F7E0, s32 **, 0x418) != 0x2E004152) {
                                         M2C_FIELD(D_8008F7E0, u8 *, 2) = 0U;
                                         temp_v0_2 = M2C_FIELD(D_8008F7E0, u16 *, 0x40E) + 1;

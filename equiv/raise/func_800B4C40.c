@@ -20,10 +20,10 @@ void func_800B4C40(s32 arg0) {
         if (arg0 == (*D_8006AF80)) {
             var_a1 = 1;
             (*D_800EEB90) = 1;
-            (*D_800EEC48) = M2C_FIELD(((arg0 * 0x79C) + D_80100F38), s32 *, 0x190);
+            (*D_800EEC48) = M2C_FIELD(((arg0 * 0x79C) + (u8 *)D_80100F38), s32 *, 0x190);
             var_v0 = arg0 * 0x10;
         }
-        temp_s1 = ((((((var_v0 - arg0) * 4) + arg0) * 8) - arg0) * 4) + D_80100F38;
+        temp_s1 = ((((((var_v0 - arg0) * 4) + arg0) * 8) - arg0) * 4) + (u8 *)D_80100F38;
         if ((*D_800EEB90) == var_a1) {
             var_a3 = (*D_800EEC64);
         } else {
