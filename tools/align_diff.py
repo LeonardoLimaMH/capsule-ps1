@@ -57,10 +57,10 @@ def frame(ins):
     return None
 
 
-def compare(target, func, src, gcc="2.7.2-psx", g0fill=False):
+def compare(target, func, src, gcc="2.7.2-psx", g0fill=False, spfill=None):
     ow, vram = match.original(target, func)
     with contextlib.redirect_stderr(io.StringIO()):
-        cw, masks = match.compiled(match.compile_c(src, gcc, "-O2 -G8", g0fill, target), func)
+        cw, masks = match.compiled(match.compile_c(src, gcc, "-O2 -G8", g0fill, target, spfill), func)
     o, c = decode(ow, vram), decode(cw, vram, masks)
     # o original pode terminar com nops de alinhamento
     while o and o[-1][0] == "nop" and len(o) > len(c):
@@ -122,12 +122,13 @@ def main():
     ap.add_argument("src", nargs="?")
     ap.add_argument("--gcc", default="2.7.2-psx")
     ap.add_argument("--g0fill", action="store_true")
+    ap.add_argument("--spfill", action="store_true")
     ap.add_argument("-v", action="store_true")
     ap.add_argument("--batch", action="store_true")
     ap.add_argument("--limit", type=int, default=0)
     a = ap.parse_args()
     if not a.batch:
-        r = compare(a.target, a.func, a.src, a.gcc, a.g0fill)
+        r = compare(a.target, a.func, a.src, a.gcc, a.g0fill, a.spfill or None)
         print(summary(r))
         if a.v:
             print("\n".join(r["notes"]))

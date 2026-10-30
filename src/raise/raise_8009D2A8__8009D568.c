@@ -6,7 +6,29 @@ void func_8009D568(void) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009D568", func_8009D570);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009D568", func_8009D5E8);
+#include "common.h"
+
+extern char D_80097BF0[];
+extern char D_80097C04[];
+extern char D_80097C24[];
+extern char D_80097C44[];
+extern char D_80097C64[];
+extern char D_80097C78[];
+void func_8009D5E8(void) {
+    extern s32 D_8008EDF0[];
+    extern s32 D_800EBDE4[];
+    extern s32 D_800EBFF0[];
+    extern s32 D_800EBFF4[];
+    if ((*D_8008EDF0) & 0x100) {
+        func_80012508();
+    }
+    func_8001DB8C(D_80097BF0, (*D_800EBDE4));
+    func_8001DB8C(D_80097C04);
+    func_8001DB8C(D_80097C24);
+    func_8001DB8C(D_80097C44);
+    func_8001DB8C(D_80097C64, (*D_800EBFF0));
+    func_8001DB8C(D_80097C78, (*D_800EBFF4));
+}
 
 #include "common.h"
 

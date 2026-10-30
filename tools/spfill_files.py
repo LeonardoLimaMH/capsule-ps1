@@ -4,7 +4,8 @@
 Parte das bibliotecas foi montada por um ASPSX que leva a desalocação do quadro para o delay
 slot do `jr $ra` (tools/aspsx_fill.py --sp, config/spfill.txt). Para cada arquivo-fonte cujo
 assembly original só tem esse padrão de retorno (nenhum `addiu $sp / jr $ra / nop`), testa o C
-de equiv/ das funções ainda em INCLUDE_ASM com cada compilador no perfil -G0 + fill + sp. Um
+de equiv/ das funções ainda em INCLUDE_ASM com cada compilador no perfil -G0 + fill + sp; nos
+arquivos só com o outro padrão (ou sem nenhum), no perfil -G0 + fill sem o sp. Um
 compilador serve para o arquivo se todas as funções já em C nele também casam assim; então o
 arquivo troca de perfil (config/compilers.txt, g0fill.txt, spfill.txt) e os candidatos vão
 para .cache/auto/<alvo> (integrar com autodecomp.py --apply).
@@ -40,9 +41,10 @@ def epilogues(path):
     return nop, fill
 
 
-def matches(target, func, src, gcc):
+def matches(target, func, src, gcc, sp):
     r = subprocess.run([sys.executable, str(ROOT / "tools" / "match.py"), target, func, str(src),
-                        "--gcc", gcc, "--g0fill", "--spfill", "-q"], cwd=ROOT, capture_output=True, text=True)
+                        "--gcc", gcc, "--g0fill", "-q"] + (["--spfill"] if sp else []),
+                       cwd=ROOT, capture_output=True, text=True)
     return r.returncode == 0
 
 
@@ -54,6 +56,7 @@ def main():
     a = ap.parse_args()
     idx = {p.stem: p for p in (ROOT / ".cache" / "fullasm" / a.target / "nonmatchings").rglob("*.s")}
     listed = SPLIST.read_text(encoding="utf-8").splitlines() if SPLIST.exists() else []
+    g0 = set((ROOT / "config" / "g0fill.txt").read_text(encoding="utf-8").split())
     total = 0
     for c in sorted((ROOT / "src" / a.target).rglob("*.c")):
         key = c.relative_to(ROOT).as_posix()
@@ -67,30 +70,33 @@ def main():
             if f in idx:
                 n, k = epilogues(idx[f])
                 nop, fill = nop + n, fill + k
-        if not fill or nop:
-            continue
+        if fill and nop:
+            continue  # padrões misturados: não é um arquivo só
+        sp = bool(fill)
+        if (not sp and key in g0 and key not in listed) or (sp and key in g0 and key in listed):
+            continue  # já está no perfil: os candidatos casados já foram integrados
         cands = [f for f in pending if (ROOT / "equiv" / a.target / f"{f}.c").exists()]
         if not cands:
             continue
         best = None
         for gcc in COMPILERS:
-            hit = [f for f in cands if matches(a.target, f, ROOT / "equiv" / a.target / f"{f}.c", gcc)]
+            hit = [f for f in cands if matches(a.target, f, ROOT / "equiv" / a.target / f"{f}.c", gcc, sp)]
             if hit and (best is None or len(hit) > len(best[1])):
                 best = (gcc, hit)
         if not best:
             print(f"{key}: nenhum dos {len(cands)} candidatos casa", flush=True)
             continue
         gcc, hit = best
-        same = current(key) == gcc + "+g0fill" and key in listed
-        bad = [] if same else [f for f in in_c if not matches(a.target, f, c, gcc)]
+        same = current(key) == gcc + "+g0fill" and (key in listed) == sp
+        bad = [] if same else [f for f in in_c if not matches(a.target, f, c, gcc, sp)]
         if bad:
             print(f"{key}: {len(hit)} casam com {gcc}, mas {len(bad)} já em C não ({', '.join(bad[:3])})", flush=True)
             continue
-        print(f"{key}: {gcc}+g0fill+sp, {len(hit)} casam ({', '.join(hit[:4])})", flush=True)
+        print(f"{key}: {gcc}+g0fill{'+sp' if sp else ''}, {len(hit)} casam ({', '.join(hit[:4])})", flush=True)
         total += len(hit)
         if a.apply:
             set_compiler(a.target, c.stem, gcc + "+g0fill")
-            if key not in listed:
+            if sp and key not in listed:
                 listed.append(key)
                 SPLIST.write_text("\n".join(listed) + "\n", encoding="utf-8", newline="\n")
             auto = ROOT / ".cache" / "auto" / a.target

@@ -1,4 +1,12 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8004F268", _putchar_flash);
+#include "common.h"
+void _putchar_flash(void) {
+    extern s32 D_80078B10;
+    extern u8 D_80096610[];
+    if (D_80078B10 > 0) {
+        func_8004FF2C(1, D_80096610, D_80078B10);
+        D_80078B10 = 0;
+    }
+}

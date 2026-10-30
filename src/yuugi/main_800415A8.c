@@ -1,4 +1,11 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800415A8", SpuSetTransferCallback);
+#include "common.h"
+
+void SpuSetTransferCallback(s32 arg0) {
+    extern s32 D_800715D0;
+    if (arg0 != D_800715D0) {
+        D_800715D0 = arg0;
+    }
+}

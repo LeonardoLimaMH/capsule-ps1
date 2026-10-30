@@ -42,3 +42,5 @@ src/yuugi/main_8003F6E4.c
 src/yuugi/main_80043248.c
 src/yuugi/main_800473C4.c
 src/yuugi/main_8004C380.c
+src/yuugi/main_800415A8.c
+src/yuugi/main_8004F268.c
