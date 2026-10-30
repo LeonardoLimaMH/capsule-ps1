@@ -501,8 +501,11 @@ def apply(target):
             # funções que usam .rodata (jump tables, strings, constantes) ficam para
             # a etapa de migração do .rodata por unidade de tradução
             asm = asm_path(target, m.group(2))
-            refs = [int(x, 16) for x in re.findall(r"\b(?:D|jtbl)_([0-9A-F]{8})\b",
-                                                   asm.read_text(encoding="utf-8"))]
+            # um símbolo do .rodata que o C declara como extern não é gerado pelo C
+            # (tools/rodata_externs.py): só conta o que o compilador produziria
+            refs = [int(x, 16) for k, x in re.findall(r"\b(D|jtbl)_([0-9A-F]{8})\b",
+                                                      asm.read_text(encoding="utf-8"))
+                    if not re.search(rf"\bextern\b[^;]*\b{k}_{x}\b", code)]
             strings = '"' in re.sub(r'^#include\s+"[^"]+"$', "", code, flags=re.M)
             if strings or any(ro_lo <= r < ro_hi for r in refs):
                 rod += 1

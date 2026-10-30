@@ -9,7 +9,14 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", ClearImage2);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", LoadImage);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", StoreImage);
+#include "common.h"
+
+extern char D_800112E4[];
+void StoreImage(s32 arg0, M2C_UNK arg1) {
+    extern void * D_80078914[];
+    func_80049BC0(D_800112E4, arg0);
+    M2C_FIELD((*D_80078914), M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 8)(M2C_FIELD((*D_80078914), s32 *, 0x1C), arg0, 8, arg1);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", MoveImage);
 
@@ -28,7 +35,18 @@ void DrawPrim(void *arg0) {
     M2C_FIELD(D_80078914, M2C_UNK (**)(void *, u8), 0x14)(arg0 + 4, temp_s1);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", DrawOTag);
+#include "common.h"
+
+extern char D_8001132C[];
+void DrawOTag(s32 arg0) {
+    extern void * D_80078914;
+    extern M2C_UNK (*D_80078918)(M2C_UNK *, s32);
+    extern u8 D_8007891E;
+    if ((u8) D_8007891E >= 2U) {
+        D_80078918(D_8001132C, arg0);
+    }
+    M2C_FIELD(D_80078914, M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 8)(M2C_FIELD(D_80078914, s32 *, 0x18), arg0, 0, 0);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", PutDrawEnv);
 
