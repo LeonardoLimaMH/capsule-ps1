@@ -7,7 +7,7 @@ from unicorn import Uc, UC_ARCH_MIPS, UC_MODE_LITTLE_ENDIAN, UC_MODE_MIPS32
 from unicorn.mips_const import (UC_MIPS_REG_A0, UC_MIPS_REG_A1, UC_MIPS_REG_A2,
                                UC_MIPS_REG_A3, UC_MIPS_REG_SP)
 
-from conftest import ROOT
+from conftest import ROOT, unchanged_gte_event
 
 sys.path.insert(0, str(ROOT / 'tools'))
 import difftest
@@ -159,7 +159,7 @@ def test_three_vector_dispatch_reads_all_four_stack_arguments():
                                  [], salt=17, contracts=frozenset({'RotAverage3'}))
     assert error is None
     assert result[0][0] == value
-    assert result[2][0] == [expected]
+    assert result[2][0] == [expected, unchanged_gte_event(regs)]
     for pointer in outputs:
         offset = pointer & 0x1FFFFFFF
         assert result[1][offset:offset + 4] == bytes(uc.mem_read(offset, 4))
@@ -210,4 +210,4 @@ def test_dispatch_reads_all_six_stack_arguments_without_isolation(name):
                                 [], salt=17, contracts={name})
     assert error is None
     assert result[0][0] == value
-    assert result[2][0] == [expected]
+    assert result[2][0] == [expected, unchanged_gte_event(regs)]

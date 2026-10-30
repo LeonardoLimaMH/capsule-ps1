@@ -5,7 +5,7 @@ import pytest
 from unicorn.mips_const import (UC_MIPS_REG_A0, UC_MIPS_REG_A1, UC_MIPS_REG_A2,
                                UC_MIPS_REG_A3, UC_MIPS_REG_SP, UC_MIPS_REG_T1)
 
-from conftest import ROOT
+from conftest import ROOT, unchanged_gte_event
 
 sys.path.insert(0, str(ROOT / 'tools'))
 import difftest
@@ -37,6 +37,7 @@ def test_grouped_dispatch_matches_individual_hooks(duplicate_bios, salt):
     result, error = new
     assert error is None
     calls, strings = result[2]
-    assert [c[0] for c in calls] == ['helper', 'BIOS_A0'] + (['BIOS_A0'] if duplicate_bios else [])
+    assert calls[-1] == unchanged_gte_event(regs)
+    assert [c[0] for c in calls[:-1]] == ['helper', 'BIOS_A0'] + (['BIOS_A0'] if duplicate_bios else [])
     assert calls[0][1:3] == (0x80140000, 8)
     assert strings[0][0] == b'probe'

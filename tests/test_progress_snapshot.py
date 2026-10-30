@@ -63,11 +63,11 @@ def test_functional_table_distinguishes_bytes_function_counts_and_original_assem
         (equiv / (name + '.c')).write_text('/* accepted C */')
     counts = progress.collect('chess')
     assert counts['game']['asm_funcs'] == 1
-    assert counts['game']['pending_funcs'] == 2
+    assert counts['game']['pending_funcs'] == 1
     table = '\n'.join(progress.functional_table({'chess': counts}, counts))
     assert '27.27% (1 fn)' in table  # 12 equivalent bytes of 44
-    assert '**36.36%**' in table     # 16 functional bytes of 44
-    assert '2 / 4 (50.00%) | **2**' in table
+    assert '**44.44%**' in table     # 16 functional bytes of 36 convertible
+    assert '2 / 3 (66.67%) | 1 | **1**' in table
 
 
 def test_index_batch_uses_byte_lengths_and_immutable_hashes(tmp_path, monkeypatch):

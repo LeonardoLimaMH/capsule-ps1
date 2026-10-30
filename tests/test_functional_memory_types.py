@@ -2,7 +2,7 @@
 import sys
 import pytest
 
-from conftest import ROOT
+from conftest import ROOT, unchanged_gte_event
 
 sys.path.insert(0, str(ROOT / 'tools'))
 import functional_ghidra as ghidra
@@ -105,7 +105,8 @@ def test_volatile_pointer_preserves_each_device_read(tmp_path, monkeypatch, comp
     result, error = difftest.run(entry, {UC_MIPS_REG_SP: difftest.STACK_TOP}, bytes(ram),
                                 {}, [(difftest.CAND_BASE, blob)])
     assert error is None
-    assert result[2][0] == [('io:R', 0x1F801100, 1, 0)] * 2
+    assert result[2][0] == [('io:R', 0x1F801100, 1, 0)] * 2 + [
+        unchanged_gte_event({UC_MIPS_REG_SP: difftest.STACK_TOP})]
 
 
 @pytest.mark.parametrize('compiler', ['2.7.2-psx', '2.8.1-psx'])

@@ -22,3 +22,13 @@ def decompiled_functions():
                 if not m.group(1).startswith("__maspsx"):
                     out.append((t, m.group(1)))
     return out
+
+
+def unchanged_gte_event(regs):
+    """Expected final COP2 observation for a program that never touches GTE."""
+    import random
+    import gte
+
+    state = gte.GTE()
+    state.randomize(random.Random(repr(sorted(regs.items()))))
+    return ('io:gte',) + state.state()

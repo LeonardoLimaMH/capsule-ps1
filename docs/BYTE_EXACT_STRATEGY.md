@@ -153,4 +153,13 @@ Executar `tools/twins.py` após cada conjunto relevante de matches permite
 reaproveitar funções repetidas entre executáveis e overlays. As relocações
 precisam ser adaptadas para os símbolos de destino; cada cópia passa pela
 mesma validação de uma candidata nova. A varredura seguinte encontrou três
-candidatas dessa forma, ainda sujeitas à integração e aos testes.
+candidatas dessa forma. `SpuInitMalloc` e `slpm_memchr` foram integradas no lote
+de 30/10; `func_800E79C0` já havia sido integrada pela outra frente.
+
+Na revisão de 30/10, corrigir o tipo dos stores recuperou mais duas funções
+CHESS: `u8` em vez de `s8` fez o compilador carregar `0xFF`, e `s16` em vez de
+`u16` recuperou a carga de `-0x98`. Os bits gravados na memória são iguais,
+mas a extensão da constante nas instruções é diferente. Examinar essas
+diferenças antes de iniciar buscas de permutação. O lote de quatro completou
+4.800 execuções diferenciais e os cinco SHA-1:
+`validation/byte-matching-2026-10-30-audit-next.json`.

@@ -10,6 +10,25 @@ sys.path.insert(0, str(ROOT / 'tools'))
 import difftest
 
 
+def test_changed_gte_state_is_rejected_even_with_equal_cpu_registers_and_ram():
+    ram = bytearray(difftest.RAM_SIZE)
+    patches = []
+    for offset, value in [(0x10000, 1), (0x12000, 2)]:
+        # Write VXY0 through COP2, then clear the temporary CPU register.
+        words = [0x24080000 | value, 0x48880000, 0x24080000, 0x03E00008, 0]
+        blob = b''.join(w.to_bytes(4, 'little') for w in words)
+        ram[offset:offset + len(blob)] = blob
+        patches.append((0x80000000 | offset, blob))
+    regs = {UC_MIPS_REG_SP: difftest.STACK_TOP}
+    guard = tuple((address, address + len(blob)) for address, blob in patches)
+    left, err_left = difftest.run(0x80010000, regs, bytes(ram), {}, patches, guard=guard)
+    right, err_right = difftest.run(0x80012000, regs, bytes(ram), {}, patches, guard=guard)
+    assert err_left is None and err_right is None
+    assert left[:2] == right[:2]
+    assert left[2][0][-1][0] == right[2][0][-1][0] == 'io:gte'
+    assert not difftest.same_calls(left[2], right[2], 0x80180000, 0x80190000, True)[0]
+
+
 @pytest.mark.parametrize('kind', ['value', 'width', 'read-count'])
 def test_io_differences_are_observed_outside_main_ram(kind):
     def program(value=0x1234, store=0xAD090000, reads=2):
