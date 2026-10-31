@@ -1,17 +1,28 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B81C4", func_800B81C4);
+#include "common.h"
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B81C4", func_800B821C);
-
-typedef struct {
-    u8 pad[0x124];
-    u16 values[0x42];
-} MonsterValueRecord;
-u16 func_800B847C(u32 player, s32 index) {
-    extern MonsterValueRecord D_80091618[];
-    u32 base = (u32)D_80091618;
-    u32 offset = (player & 0xFFFF) * 0x1A8;
-    MonsterValueRecord *record = (MonsterValueRecord *)(base + offset);
-    return record->values[index];
+void func_800B81C4(s32 arg0)
+{
+  extern M2C_UNK D_800EEB9C[];
+  M2C_UNK *new_var;
+  int new_var2;
+  new_var2 = arg0 - 1;
+  if ((((new_var2 + 1) <= (3 - 1)) && (arg0 > 0)) && (((struct 
+  {
+    u8 _p[0x24];
+    s32 v;
+  } *) (new_var = D_800EEB9C))->v != 5))
+  {
+    new_var2 = 9 * ((struct 
+    {
+      u8 _p[0x24];
+      s32 v;
+    } *) new_var)->v;
+    *((s16 *) (((s8 *) (*((void **) (((s8 *) (((4 * new_var2) + ((u8 *) new_var)) - (-(((struct 
+    {
+      u8 _p[0xD0];
+      s32 v;
+    } *) new_var)->v * 4)))) + 0xD4)))) - -0x66)) = (s16) (arg0 == 1);
+  }
 }

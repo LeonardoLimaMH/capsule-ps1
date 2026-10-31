@@ -87,7 +87,32 @@ void func_800BC394(s32 arg0, s32 arg1) {
     M2C_FIELD(temp_s0, s32 *, 0x120) = func_800BC8FC(0x19, -0xF0, (s16) ((arg0 * 0x10) + 0x40), 4, M2C_FIELD(D_800EFF58, s32 *, 0x114) == arg0, D_800EE5F0, M2C_FIELD(temp_s0, s32 *, 0x158), 1, 1, arg1, 2, 1, D_800F0604);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BBC28", func_800BC438);
+#include "common.h"
+
+void func_800BC438(s32 arg0)
+{
+  extern u8 D_8008ED68[];
+  s32 new_var;
+  extern u8 D_800EE5F0[];
+  int new_var2;
+  extern u8 D_800EFF58[];
+  void *temp_s0;
+  if (D_800EFF58)
+  {
+  }
+  new_var = (s32) ((struct 
+  {
+    u8 _p[0x108];
+    s32 v;
+  } *) D_8008ED68)->v;
+  temp_s0 = ((arg0 * 2) * 2) + D_800EFF58;
+  new_var2 = 0x30;
+  *((s32 *) (((s8 *) temp_s0) + 0x290)) = func_800BC8FC(0x1B, (s16) ((*((u16 *) (((s8 *) (*((void **) (((s8 *) D_800EFF58) + 0x118)))) + 0x46))) + ((new_var / 2) + new_var2)), (s16) (((*((u16 *) (((s8 *) (*((void **) (((s8 *) D_800EFF58) + 0x118)))) - -0x4A))) + ((((s32) ((struct 
+  {
+    u8 _p[0x10C];
+    s32 v;
+  } *) D_8008ED68)->v) / 2) + new_var2)) + (arg0 * 0x10)), 4, 0, D_800EE5F0, *((s32 *) (((s8 *) temp_s0) + 0x298)), 1, 1, 0, 2, 0, 0);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BBC28", func_800BC50C);
 
@@ -103,4 +128,24 @@ s32 func_800BC5FC(void) {
     return r;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BBC28", func_800BC674);
+/* rand-u16: 0x8006AF80 1 0,1,2,3,5,9 */
+#include "common.h"
+
+extern u8 D_800EE5F0[], D_800EFF58[], D_80091618[];
+extern u16 D_8006AF80[];
+extern s32 func_800BC8FC(s32, s32, s32, s32, s32, void *, s32, s32, s32, s32, s32, s32, s32);
+
+s32 func_800BC674(void)
+{
+  u8 *p = D_800EFF58;
+  s32 *new_var;
+  u8 *new_var4;
+  int new_var3;
+  s32 *new_var2;
+  new_var = (s32 *) (p + 0x318);
+  new_var2 = new_var;
+  new_var3 = (*new_var2) + 3;
+  new_var4 = D_80091618;
+  new_var4 = (new_var4 + ((*D_8006AF80) * 0x1A8)) + 0x12;
+  return *((s32 *) (p + 0x314)) = func_800BC8FC(0x19, -0xD4, 0x1A, 4, 0, D_800EE5F0, new_var3 - (*((u16 *) new_var4)), 1, 0, 0, 2, 0, 0);
+}
