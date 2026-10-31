@@ -31,7 +31,19 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30", func_8009BDD8);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30", func_8009C324);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30", func_8009C970);
+#include "common.h"
+
+extern u8 D_80085428[];
+extern u16 D_8008EE44[];
+extern void (*D_800B2C2C[])(u8 *);
+
+void func_8009C970(void)
+{
+  u8 (*new_var)[];
+  new_var = &D_80085428;
+  rand();
+  D_800B2C2C[*D_8008EE44](*new_var);
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30", func_8009C9C4);
 

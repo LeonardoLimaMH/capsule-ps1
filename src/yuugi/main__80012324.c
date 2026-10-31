@@ -5,7 +5,85 @@ void func_80012324(void) {
 
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_8001232C);
+#include "common.h"
+
+extern u8 D_8008ED68[];
+void func_80012394(void);
+
+u8 *func_8001232C(void)
+{
+  u8 *new_var2;
+  struct 
+  {
+    u8 _p[0xE6];
+    s16 v;
+  } *new_var;
+  new_var2 = (u8 *) func_80012394;
+  func_80013668();
+  new_var = (struct 
+  {
+    u8 _p[0xE6];
+    s16 v;
+  } *) D_8008ED68;
+  *((void **) (D_8008ED68 + 0xCC)) = (void *) new_var2;
+  ((struct 
+  {
+    u8 _p[0xC8];
+    s32 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xDC];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xE0];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xDE];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xE2];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xE4];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  new_var->v = 0;
+  ((struct 
+  {
+    u8 _p[0xE8];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xEA];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xEC];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xEE];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xF8];
+    s32 v;
+  } *) D_8008ED68)->v = 0;
+  return D_8008ED68;
+}
 
 #include "common.h"
 

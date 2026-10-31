@@ -246,7 +246,57 @@ void func_80022700(u8 *o) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800227D4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80022C34);
+#include "common.h"
+
+extern u8 *func_80015B3C();
+extern void func_80015EF8(), func_800227D4(), func_800161C4();
+extern s32 func_80019F30();
+
+#define H(o) (*(s16 *)(obj + (o)))
+#define W(o) (*(u32 *)(obj + (o)))
+
+void func_80022C34(s32 f, s32 a1, s32 a2)
+{
+  u8 *obj;
+  u32 new_var;
+  u32 t;
+  obj = func_80015B3C(func_800227D4, func_800161C4, 4);
+  func_80015EF8(obj);
+  *((u32 *) (obj + 0x18)) = (f != 0) ? (func_80019F30(0x60013, 0xD7)) : (func_80019F30(0x6000E, 0x2B7));
+  *((s16 *) (obj + 0x46)) = -0x58;
+  *((s16 *) (obj + 0x4A)) = -0x1E8;
+  *((s16 *) (obj + 0x6E)) = 6;
+  *((s16 *) (obj + 0x4E)) = 4;
+  *((u32 *) (obj + 0x34)) = ((*((u32 *) (obj + 0x34))) & (~0x7F)) | 1;
+  obj = func_80015B3C(func_800227D4, func_800161C4, 4);
+  func_80015EF8(obj);
+  *((u32 *) (obj + 0x18)) = (f != 0) ? (func_80019F30(0x60013, 0xD8)) : (func_80019F30(0x6000E, 0x2B8));
+  *((s16 *) (obj + 0x46)) = -0x1D8;
+  new_var = *((u32 *) (obj + 0x34));
+  *((s16 *) (obj + 0x6A)) = 6;
+  *((s16 *) (obj + 0x4A)) = -0x30;
+  t = new_var;
+  *((s16 *) (obj + 0x4E)) = 4;
+  *((u32 *) (obj + 0x7C)) = a2;
+  *((u32 *) (obj + 0x34)) = (t & (~0x7F)) | 2;
+  obj = func_80015B3C(func_800227D4, func_800161C4, 4);
+  func_80015EF8(obj);
+  t = *((u32 *) (obj + 0x34));
+  *((s16 *) (obj + 0x46)) = 0x1C0;
+  *((s16 *) (obj + 0x6A)) = -6;
+  *((s16 *) (obj + 0x4A)) = 8;
+  *((s16 *) (obj + 0x4E)) = 4;
+  *((u32 *) (obj + 0x7C)) = a2;
+  *((u32 *) (obj + 0x34)) = t & (~0x7F);
+  obj = func_80015B3C(func_800227D4, func_800161C4, 4);
+  func_80015EF8(obj);
+  *((u32 *) (obj + 0x18)) = (f != 0) ? (func_80019F30(0x60013, 0xD9)) : (func_80019F30(0x6000E, 0x2B9));
+  *((s16 *) (obj + 0x46)) = 0x1A0;
+  *((s16 *) (obj + 0x6A)) = -6;
+  *((s16 *) (obj + 0x4A)) = -0x30;
+  *((s16 *) (obj + 0x4E)) = 4;
+  *((u32 *) (obj + 0x34)) = ((*((u32 *) (obj + 0x34))) & (~0x7F)) | 3;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80022E64);
 

@@ -163,4 +163,32 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80014EE0);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_800152C8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_800154C4);
+#include "common.h"
+
+void func_800154C4(void)
+{
+  M2C_UNK *new_var;
+  extern u8 D_8008ED68[];
+  new_var = (M2C_UNK *) D_8008ED68;
+  func_80012A20(func_80019F30(0x2000E, 0x29), 1, 0, 0);
+  ((struct 
+  {
+    u8 _p[0x29];
+    s8 v;
+  } *) new_var)->v = 1;
+  ((struct 
+  {
+    u8 _p[0x2C];
+    s32 v;
+  } *) new_var)->v = 0;
+  ((struct 
+  {
+    u8 _p[0x2A];
+    s8 v;
+  } *) new_var)->v = 0;
+  ((struct 
+  {
+    u8 _p[0x2B];
+    s8 v;
+  } *) new_var)->v = 1;
+}

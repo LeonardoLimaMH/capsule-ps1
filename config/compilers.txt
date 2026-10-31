@@ -253,7 +253,6 @@ src/raise/raise_800C59F4.c 2.7.2-cdk
 src/raise/raise_800DEA54__800E16EC__800E1780.c 2.7.2-cdk
 src/yuugi/main__arVcount__80019C58.c 2.7.2-cdk
 src/yuugi/main_80033C10__80034C7C.c 2.7.2-cdk
-src/yuugi/main__80012A14__80012E54.c 2.8.1-psx
 src/raise/raise_800DCD44__800DD5B8.c 2.7.2-cdk
 src/yuugi/main_8001A1DC__8001DF7C__8001E180.c 2.7.2-cdk
 src/yuugi/main_8001A1DC__8001DF7C__8001E160.c 2.8.1-psx
@@ -271,3 +270,12 @@ src/raise/raise_800DEA54__800DFB80.c 2.7.2-cdk
 src/raise/raise_800B472C__800B4944.c 2.7.2-cdk
 src/raise/raise_800B9C3C__800BCF98__800BE674.c 2.7.2-cdk
 src/raise/raise_800B9C3C__800BCF98__800BE61C.c 2.8.1-psx
+src/raise/raise_800B61E4__800B81C4.c 2.7.2-cdk
+src/raise/raise_800B61E4__800B8184.c 2.8.1-psx
+src/etc/etc__8009BD30__800A0824__800A2A80.c 2.7.2-cdk
+src/etc/etc__8009BD30__800A0824__800A29D4.c 2.8.1-psx
+src/raise/raise_800DEA54__800DEB28.c 2.7.2-cdk
+src/raise/raise_800DEA54__800DEAE8.c 2.8.1-psx
+src/raise/raise_800DEA54__800DEB28__800DEBA0.c 2.7.2-cdk
+src/raise/raise_800DEA54__800DEB28__800DEB38.c 2.8.1-psx
+src/yuugi/main__80012A14__80012E54.c 2.8.1-psx

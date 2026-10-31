@@ -124,7 +124,40 @@ s32 func_80036DB0(u8 *s)
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_80036E5C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_80037138);
+#include "common.h"
+
+extern u8 D_800922F0[];
+
+void func_80037138(s32 a)
+{
+  struct 
+  {
+    u8 _p[0x1188];
+    s32 v;
+  } *new_var;
+  new_var = (struct 
+  {
+    u8 _p[0x1188];
+    s32 v;
+  } *) D_800922F0;
+  func_800371A4(0);
+  *((u8 **) (D_800922F0 + 0x114C)) = D_800922F0 + 0x14C;
+  *((u8 **) (D_800922F0 + 0x1150)) = D_800922F0 + 0x34C;
+  *((u8 **) (D_800922F0 + 0x1154)) = D_800922F0 + 0x54C;
+  ((struct 
+  {
+    u8 _p[0x146];
+    s16 v;
+  } *) D_800922F0)->v = 0;
+  *((u8 **) (D_800922F0 + 0x1158)) = D_800922F0 + 0x74C;
+  ((struct 
+  {
+    u8 _p[0x1170];
+    s32 v;
+  } *) D_800922F0)->v = 0x801EF990;
+  new_var->v = a;
+  *((s16 *) D_800922F0) = 0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_800371A4);
 

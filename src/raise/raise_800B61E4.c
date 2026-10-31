@@ -28,7 +28,91 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B6D98);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B6FA0);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B70A0);
+#include "common.h"
+
+void func_800B70A0(s32 arg0)
+{
+  extern u8 D_800859F2[];
+  void **new_var;
+  int new_var2;
+  extern M2C_UNK D_800EEB9C[];
+  s32 temp_a0;
+  s32 temp_v1;
+  s32 temp_v1_2;
+  new_var2 = 0x74C;
+  temp_a0 = arg0 << 0x10;
+  if (temp_a0 == 0)
+  {
+    if (func_800D1548() == 0)
+    {
+      *((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + new_var2)))) + 0x38)) = (s32) ((*((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + new_var2)))) + 0x38))) | 1);
+      new_var = (void **) (((s8 *) D_800EEB9C) + 0x754);
+      if ((*D_800859F2) & 8)
+      {
+        *((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + 0x754)))) + 0x38)) = (s32) ((*((s32 *) (((s8 *) (*new_var)) + 0x38))) | 1);
+        *((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + 0x75C)))) + 0x38)) = (s32) ((*((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + 0x75C)))) + 0x38))) | 1);
+      }
+      if (((struct 
+      {
+        u8 _p[0x76C];
+        s32 v;
+      } *) D_800EEB9C)->v == 1)
+      {
+        temp_v1 = *((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + 0x770)))) + 0x38));
+        if ((temp_v1 & 1) != ((struct 
+        {
+          u8 _p[0x76C];
+          s32 v;
+        } *) D_800EEB9C)->v)
+        {
+          *((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + 0x770)))) + 0x38)) = (s32) (temp_v1 | 1);
+        }
+      }
+      if (((struct 
+      {
+        u8 _p[0x774];
+        s32 v;
+      } *) D_800EEB9C)->v == 1)
+      {
+        temp_v1_2 = *((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + 0x778)))) + 0x38));
+        if ((temp_v1_2 & 1) != ((struct 
+        {
+          u8 _p[0x774];
+          s32 v;
+        } *) D_800EEB9C)->v)
+        {
+          *((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + 0x778)))) + 0x38)) = (s32) (temp_v1_2 | 1);
+        }
+      }
+    }
+  }
+  else
+    if (func_800D1548(temp_a0) == 0)
+  {
+    *((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + new_var2)))) + 0x38)) = (s32) ((*((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + new_var2)))) + 0x38))) & (~1));
+    if ((*D_800859F2) & 8)
+    {
+      *((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + 0x754)))) + 0x38)) = (s32) ((*((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + 0x754)))) + 0x38))) & (~1));
+      *((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + 0x75C)))) + 0x38)) = (s32) ((*((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + 0x75C)))) + 0x38))) & (~1));
+    }
+    if (((struct 
+    {
+      u8 _p[0x76C];
+      s32 v;
+    } *) D_800EEB9C)->v == 1)
+    {
+      *((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + 0x770)))) + 0x38)) = (s32) ((*((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + 0x770)))) + 0x38))) & (~1));
+    }
+    if (((struct 
+    {
+      u8 _p[0x774];
+      s32 v;
+    } *) D_800EEB9C)->v == 1)
+    {
+      *((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + 0x778)))) + 0x38)) = (s32) ((*((s32 *) (((s8 *) (*((void **) (((s8 *) D_800EEB9C) + 0x778)))) + 0x38))) & (~1));
+    }
+  }
+}
 
 #include "common.h"
 
@@ -95,21 +179,3 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B7F40);
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B7F74);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B7FA8);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B8184);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B81C4);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B821C);
-
-typedef struct {
-    u8 pad[0x124];
-    u16 values[0x42];
-} MonsterValueRecord;
-u16 func_800B847C(u32 player, s32 index) {
-    extern MonsterValueRecord D_80091618[];
-    u32 base = (u32)D_80091618;
-    u32 offset = (player & 0xFFFF) * 0x1A8;
-    MonsterValueRecord *record = (MonsterValueRecord *)(base + offset);
-    return record->values[index];
-}
