@@ -1,0 +1,9 @@
+RotMatrix
+SquareRoot0
+SquareRoot12
+StopRCnt
+func_80044AF8
+func_80044FFC
+func_8004B8DC
+ratan2
+todigit

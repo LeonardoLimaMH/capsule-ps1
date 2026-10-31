@@ -32,4 +32,10 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__8004B038", func_8004B638);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__8004B038", func_8004B8B8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__8004B038", func_8004B8DC);
+#include "common.h"
+
+extern u8 D_80094CB8[];
+
+u8 func_8004B8DC(s32 i) {
+    return D_80094CB8[i];
+}

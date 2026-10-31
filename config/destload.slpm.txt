@@ -1,0 +1,8 @@
+_SsReadDeltaValue
+_SsSeqPlay
+_SsSndCrescendo
+_SsSndDecrescendo
+_SsVmGetSeqVol
+func_80115994
+func_80118FA0
+slpm_StopRCnt
