@@ -31,31 +31,31 @@ A [revisão de 30/10](docs/reviews/2026-10-30-byte-exact-audit.md) registra a
 auditoria anterior e os 60 testes selecionados das ferramentas.
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `█░░░░░░░░░░░░░░░░░░░` **6.70%**  
-**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **7.38%**  
-**Cobertura (C + funções que já eram assembly no original):** `██░░░░░░░░░░░░░░░░░░` **7.75%**  
+**Código do jogo decompilado em C (byte-matching):** `█░░░░░░░░░░░░░░░░░░░` **6.75%**  
+**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **7.43%**  
+**Cobertura (C + funções que já eram assembly no original):** `██░░░░░░░░░░░░░░░░░░` **7.80%**  
 **Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`; sobre o código convertível em C):** `████████████████████` **99.44%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | executável principal | 8.66% (17,868 / 206,368 B) | 253 / 732 | 16.38% (136 / 303 fn) | **10.20%** |
+| `YUUGI.EXE` | executável principal | 8.77% (18,108 / 206,368 B) | 254 / 732 | 16.38% (136 / 303 fn) | **10.29%** |
 | `SLPM_860.96` | loader / boot | 7.93% (1,644 / 20,744 B) | 35 / 119 | 13.28% (99 / 215 fn) | **11.56%** |
 | `CHESS.BIN` | overlay de batalha (tabuleiro) | 3.65% (15,404 / 421,956 B) | 149 / 867 | 100.00% (2 / 2 fn) | **3.67%** |
-| `RAISE.BIN` | overlay de criação de monstros | 9.32% (30,436 / 326,576 B) | 372 / 940 | 100.00% (2 / 2 fn) | **9.34%** |
-| `ETC.BIN` | overlay de menus/diversos | 6.67% (5,940 / 88,992 B) | 49 / 189 | 0.00% (0 / 0 fn) | **6.67%** |
-| **Total** | | **6.70%** (71,292 / 1,064,636 B) | 858 / 2847 | 15.07% (239 / 522 fn) | **7.38%** |
+| `RAISE.BIN` | overlay de criação de monstros | 9.38% (30,628 / 326,576 B) | 373 / 940 | 100.00% (2 / 2 fn) | **9.40%** |
+| `ETC.BIN` | overlay de menus/diversos | 6.83% (6,076 / 88,992 B) | 50 / 189 | 0.00% (0 / 0 fn) | **6.83%** |
+| **Total** | | **6.75%** (71,860 / 1,064,636 B) | 861 / 2847 | 15.07% (239 / 522 fn) | **7.43%** |
 
 **Equivalentes e pendências por binário (jogo + SDK):**
 
 | Binário | C equivalente (`equiv/`) | Funcional (bytes convertíveis) | Funções em C | Assembly original | Faltam C |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | 87.47% (574 fn) | `██████████` **98.56%** | 963 / 970 (99.28%) | 65 | **7** |
+| `YUUGI.EXE` | 87.38% (573 fn) | `██████████` **98.56%** | 963 / 970 (99.28%) | 65 | **7** |
 | `SLPM_860.96` | 81.17% (165 fn) | `██████████` **95.48%** | 299 / 302 (99.01%) | 32 | **3** |
 | `CHESS.BIN` | 96.33% (718 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | 0 | **0** |
-| `RAISE.BIN` | 90.66% (568 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
-| `ETC.BIN` | 93.33% (140 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | 0 | **0** |
-| **Total** | 91.69% (2,165 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
+| `RAISE.BIN` | 90.60% (567 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
+| `ETC.BIN` | 93.17% (139 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | 0 | **0** |
+| **Total** | 91.65% (2,162 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código convertível: ficam de fora as rotinas que já eram assembly no
