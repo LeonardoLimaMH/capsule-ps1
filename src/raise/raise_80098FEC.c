@@ -18,9 +18,47 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_80098FEC", func_8009A64C);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_80098FEC", func_8009AA50);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_80098FEC", func_8009AEC8);
+#include "common.h"
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_80098FEC", func_8009AF70);
+extern u8 D_8008ED68[];
+extern s32 func_800994FC(u8 *);
+
+s32 func_8009AEC8(u8 *o)
+{
+  u8 *w = D_8008ED68;
+  int new_var;
+  if ((w[0x99A] != 1) && ((*((u16 *) (o + 0x7A))) == 0))
+  {
+    *((s32 *) (o + 0x34)) = ((*((s32 *) (o + 0x34))) & (~0x7F)) | 0x10;
+    *((s16 *) (o + 0x46)) = 0x2C - ((*((s32 *) (w + 0x108))) / 2);
+    new_var = (*((s32 *) (D_8008ED68 + 0x10C))) / 2;
+    *((s16 *) (o + 0x6E)) = -10;
+    *((s16 *) (o + 0x4E)) = 5;
+    *((s16 *) (o + 0x4A)) = 0x268 - new_var;
+  }
+  return func_800994FC(o);
+}
+
+#include "common.h"
+
+extern u8 D_8008ED68[];
+extern s32 func_8009A64C(u8 *);
+
+s32 func_8009AF70(u8 *o)
+{
+  u8 *w = D_8008ED68;
+  int new_var;
+  if ((w[0x99A] != 1) && ((*((u16 *) (o + 0x7A))) == 0))
+  {
+    *((s32 *) (o + 0x34)) = ((*((s32 *) (o + 0x34))) & (~0x7F)) | 0x10;
+    *((s16 *) (o + 0x46)) = 0x2C - ((*((s32 *) (w + 0x108))) / 2);
+    new_var = (*((s32 *) (w + 0x10C))) / 2;
+    *((s16 *) (o + 0x6E)) = -10;
+    *((s16 *) (o + 0x4E)) = 5;
+    *((s16 *) (o + 0x4A)) = 0x268 - new_var;
+  }
+  return func_8009A64C(o);
+}
 
 #include "common.h"
 

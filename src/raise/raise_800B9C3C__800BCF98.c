@@ -66,7 +66,18 @@ s32 func_800BD920(void) {
     return r;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BCF98", func_800BD998);
+#include "common.h"
+
+void func_800BD998(s32 arg0)
+{
+  extern u8 D_800EE5F0[];
+  extern u8 D_800EFF58[];
+  void *temp_s0;
+  s8 *new_var;
+  temp_s0 = (arg0 * 4) + (new_var = D_800EFF58);
+  new_var = (s8 *) temp_s0;
+  *((s32 *) (((s8 *) temp_s0) + 0x5E0)) = func_800BDE30(0x19, 0, 0, 4, 0, D_800EE5F0, *((s32 *) (new_var + 0x5E8)), 0, 1, 0, 2, 0, 0);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BCF98", func_800BDA18);
 

@@ -146,6 +146,29 @@ void func_800B980C(void) {
     }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B8E04", func_800B98AC);
+#include "common.h"
+
+extern u8 D_800900C0[];
+
+s32 func_800B98AC(void)
+{
+  u8 *new_var;
+  u16 i;
+  new_var = D_800900C0;
+  if (((struct 
+  {
+    u8 _p[0x268];
+    s32 v;
+  } *) new_var)->v == (-0x640))
+  {
+    return 1;
+  }
+  for (i = 3; i < 6; i++)
+  {
+    *((s32 *) ((new_var + (i * 0xBC)) + 0x34)) -= 0x14;
+  }
+
+  return 0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B8E04", func_800B9914);

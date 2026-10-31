@@ -34,7 +34,21 @@ void func_8001DAAC(void) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001CDE0", func_8001DADC);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001CDE0", func_8001DB54);
+#include "common.h"
+
+extern u8 D_8008ED68[];
+
+void func_8001DB54(void)
+{
+  u8 *new_var2;
+  u8 *new_var;
+  u8 *new_var4;
+  u8 (*new_var3)[];
+  u8 *new_var5;
+ do { new_var3 = &D_8008ED68; new_var2 = (*new_var3) + 0x538; new_var4 = (*new_var3) - -0x938; ; } while (0);
+  new_var5 = (*((u8 **) new_var4) = new_var2);
+  new_var = new_var5;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001CDE0", func_8001DB68);
 

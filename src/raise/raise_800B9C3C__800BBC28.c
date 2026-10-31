@@ -11,7 +11,55 @@ void func_800BBC28(s32 arg0)
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BBC28", func_800BBC40);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BBC28", func_800BBF3C);
+#include "common.h"
+
+extern s16 D_800ED88E[];
+extern u8 D_800EFF58[];
+
+void func_800BBF3C(void)
+{
+  struct 
+  {
+    u8 _p[0x90];
+    s32 v;
+  } *new_var;
+  s16 *new_var2;
+  ((struct 
+  {
+    u8 _p[0x84];
+    s32 v;
+  } *) D_800EFF58)->v = 0;
+  ((struct 
+  {
+    u8 _p[0x88];
+    s32 v;
+  } *) D_800EFF58)->v = 0x20;
+  ((struct 
+  {
+    u8 _p[0x8C];
+    s32 v;
+  } *) D_800EFF58)->v = 0;
+  if ((*(new_var2 = &(*D_800ED88E))) == 0)
+  {
+    (new_var = (struct 
+    {
+      u8 _p[0x90];
+      s32 v;
+    } *) D_800EFF58)->v = 0;
+    func_8001A998(D_800EFF58 + 0x94, 0x80);
+  }
+  ((struct 
+  {
+    u8 _p[0x32C];
+    s32 v;
+  } *) D_800EFF58)->v = 0;
+  ((struct 
+  {
+    u8 _p[0x330];
+    s32 v;
+  } *) D_800EFF58)->v = 4;
+  return 4;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BBC28", func_800BBF9C);
 

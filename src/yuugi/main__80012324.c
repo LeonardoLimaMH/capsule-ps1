@@ -207,7 +207,48 @@ void func_80012684(s16 value) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012698);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800126F8);
+#include "common.h"
+
+extern u8 D_8008ED50[];
+extern u16 D_800508D0[];
+
+void func_800126F8(void)
+{
+  u16 old = ((struct 
+  {
+    u8 _p[0xE];
+    u16 v;
+  } *) D_8008ED50)->v;
+  ((struct 
+  {
+    u8 _p[0x10];
+    u16 v;
+  } *) D_8008ED50)->v = old;
+  ((struct 
+  {
+    u8 _p[0xE];
+    u16 v;
+  } *) D_8008ED50)->v = ((struct 
+  {
+    u8 _p[0x12];
+    u16 v;
+  } *) D_8008ED50)->v;
+  func_800127AC(D_800508D0[((struct 
+  {
+    u8 _p[0xE];
+    u16 v;
+  } *) D_8008ED50)->v]);
+  ((struct 
+  {
+    u8 _p[0xC];
+    s16 v;
+  } *) D_8008ED50)->v = 0;
+  ((struct 
+  {
+    u8 _p[4];
+    s32 v;
+  } *) D_8008ED50)->v = *(*((s32 **) (D_8008ED50 + 8)));
+}
 
 #include "common.h"
 

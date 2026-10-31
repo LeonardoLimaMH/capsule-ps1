@@ -194,7 +194,40 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4", func_80033100);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4", func_80033318);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4", func_80033450);
+#include "common.h"
+
+void func_80033450(void *arg0)
+{
+  extern u8 D_800859F3[];
+  extern u16 D_8008EE58[];
+  u32 temp_a1;
+  u32 temp_v1;
+  if (((*D_800859F3) != 4) && (((u32) ((*D_8008EE58) - 4)) < 4U))
+  {
+    temp_a1 = *((u32 *) (((s8 *) arg0) + 0x38));
+    if (((temp_a1 >> 3) & 1) == (temp_v1 = 1))
+    {
+      *((u32 *) (((s8 *) arg0) + 0x38)) = (u32) (temp_a1 & (~8));
+    }
+  }
+  else
+  {
+    temp_v1 = *((u32 *) (((s8 *) arg0) + 0x38));
+    if (!((temp_v1 >> 3) & 1))
+    {
+      *((u32 *) (((s8 *) arg0) + 0x38)) = (u32) (temp_v1 | 8);
+    }
+    if (((*((s16 *) (((s8 *) arg0) + 0x46))) + 0x40) < (-0xA0))
+    {
+      *((s16 *) (((s8 *) arg0) + 0x46)) = (s16) (((u16) (*((s16 *) (((s8 *) arg0) + 0x46)))) + 0x180);
+    }
+    if ((*((s16 *) (((s8 *) arg0) + 0x4A))) >= 0x79)
+    {
+      *((s16 *) (((s8 *) arg0) + 0x46)) = (s16) (((u16) (*((s16 *) (((s8 *) arg0) + 0x46)))) - 0x40);
+      *((s16 *) (((s8 *) arg0) + 0x4A)) = (s16) (((u16) (*((s16 *) (((s8 *) arg0) + 0x4A)))) - 0x140);
+    }
+  }
+}
 
 void func_8003350C(void) {
 
