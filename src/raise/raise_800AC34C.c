@@ -56,7 +56,36 @@ void func_800AEA04(void) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AEA0C);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AEB5C);
+#include "common.h"
+
+void func_800AEB5C(s32 arg0)
+{
+  extern M2C_UNK D_800EEB9C[];
+  struct 
+  {
+    u8 _p[0xD0];
+    s32 v;
+  } *new_var;
+  u8 *new_var3;
+  s32 new_var2;
+  func_800B8184();
+  new_var2 = (new_var = (struct 
+  {
+    u8 _p[0xD0];
+    s32 v;
+  } *) D_800EEB9C)->v;
+  new_var3 = (((struct 
+  {
+    u8 _p[0x24];
+    s32 v;
+  } *) D_800EEB9C)->v * 4) + ((u8 *) D_800EEB9C);
+  *((s32 *) (((s8 *) new_var3) + 0x7C)) = (s32) ((struct 
+  {
+    u8 _p[0xD0];
+    s32 v;
+  } *) D_800EEB9C)->v;
+  func_800B81C4(arg0, new_var2);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AEBA8);
 
@@ -133,58 +162,4 @@ s32 func_800AF288(void) {
 
 s32 func_800AF290(void) {
     return 0;
-}
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AF298);
-
-void func_800AF2B0(void) {
-    func_800AF380();
-    func_800AF760();
-    func_800AF98C();
-    if (func_800AFEB8() == 0) {
-        func_800B026C();
-    }
-}
-
-s32 func_800AF2F8(void) {
-    return 0;
-}
-
-void func_800AF300(void) {
-
-}
-
-#include "common.h"
-
-#include "ghidra.h"
-void func_800AF308(undefined4 param_1)
-
-{
-    extern s32 D_8006AF84[];
-  func_800B0A8C(param_1,((*D_8006AF84) % 0x7080) / 0x4b0);
-  return;
-}
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AF380);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AF468);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AF760);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AF98C);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AFAC0);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AFEB8);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800B026C);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800B0440);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800B065C);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800B0740);
-
-void func_800B0A8C(void) {
-
 }

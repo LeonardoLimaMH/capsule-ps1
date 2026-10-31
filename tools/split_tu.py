@@ -55,6 +55,43 @@ def set_compiler(target, name, gcc):
     cfg.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
 
 
+def between_decls(text, as_list=False):
+    """Declarações de nível de arquivo (typedef, extern, #define...) entre as funções
+    de text: as funções movidas podem usá-las, então vão também para o novo arquivo."""
+    pre, rest = [], []
+    for line in text.splitlines(keepends=True):
+        if line.lstrip().startswith("#include"):
+            continue
+        (pre if line.lstrip().startswith("#") and not line.lstrip().startswith("#include") else rest).append(line)
+    text, out, i = "".join(rest), [], 0
+    while i < len(text):
+        ch = text[i]
+        if ch == "{" and re.search(r"\)\s*$", "".join(out[-400:])):
+            depth = 0
+            while i < len(text):
+                depth += {"{": 1, "}": -1}.get(text[i], 0)
+                i += 1
+                if depth == 0:
+                    break
+            out.append(" @@FUNC@@;")
+            continue
+        out.append(ch)
+        i += 1
+    kept, cur, depth = [], [], 0
+    for ch in "".join(out):
+        cur.append(ch)
+        depth += {"{": 1, "}": -1}.get(ch, 0)
+        if ch == ";" and depth == 0:
+            st = "".join(cur).strip()
+            cur = []
+            if st and "@@FUNC@@" not in st and not st.startswith("INCLUDE_ASM"):
+                kept.append(st)
+    body = [l.rstrip("\n") for l in pre] + kept
+    if as_list:
+        return body
+    return ("\n".join(body) + "\n\n") if body else ""
+
+
 def split(target, file, new, first, gcc=None):
     src = ROOT / "src" / target / f"{file}.c"
     text = src.read_text(encoding="utf-8")
@@ -65,9 +102,12 @@ def split(target, file, new, first, gcc=None):
     if pos == starts[0][0]:
         raise SystemExit(f"{first} já é a primeira função de {src}")
     off = func_offset(target, first)
-    header = text[:starts[0][0]]
     moved = text[pos:].replace(f'"asm/{target}/nonmatchings/{file}"',
                                f'"asm/{target}/nonmatchings/{new}"')
+    # typedefs repetidos na parte movida não podem vir duas vezes
+    decls = [d for d in between_decls(text[starts[0][0]:pos], as_list=True)
+             if not (d.startswith("typedef") and d in moved)]
+    header = text[:starts[0][0]] + ("\n".join(decls) + "\n\n" if decls else "")
     dst = ROOT / "src" / target / f"{new}.c"
     if dst.exists():
         raise SystemExit(f"{dst} já existe")
