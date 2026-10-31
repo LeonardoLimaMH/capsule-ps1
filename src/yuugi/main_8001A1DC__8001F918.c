@@ -11,11 +11,51 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_8001FA10);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_8001FAD4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_8001FB18);
+#include "common.h"
+
+typedef struct {
+    s16 x, y, w, h;
+} Rect;
+
+extern Rect D_80078BE8[];
+extern u8 D_8001033C[];
+extern s32 DsControlB();
+
+void func_8001FB18(void) {
+    Rect r = (*D_80078BE8);
+    u8 c[8];
+
+    ResetCallback();
+    ClearImage(&r, 0, 0, 0);
+    DrawSync(0);
+    c[0] = 0x80;
+    while (DsControlB(0xE, c, 0) == 0) {
+    }
+    DsDataCallback(0);
+    DsReadyCallback(0);
+    while (DsControlB(9, 0, 0) == 0) {
+    }
+    StopRCnt(0xF2000000);
+    StopRCnt(0xF2000001);
+    StopRCnt(0xF2000002);
+    StopRCnt(0xF2000003);
+    PadStop();
+    ResetGraph(3);
+    StopCallback();
+    func_8004FDEC();
+    func_8004FDDC(D_8001033C, 0x801FF000, 0);
+    _96_remove();
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_8001FC30);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_8001FD74);
+#include "common.h"
+
+extern void func_8002E4D0();
+
+void func_8001FD74(void) {
+    func_80012200(func_8002E4D0);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_8001FD98);
 
@@ -65,7 +105,19 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020A50);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020CE4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020E50);
+#include "common.h"
+
+extern u8 *func_80015B3C();
+extern void func_80018600();
+
+u8 *func_80020E50(u8 *src, s32 a1) {
+    u8 *obj = func_80015B3C(a1, func_80018600);
+
+    func_8001602C(obj);
+    *(s32 *)(obj + 0xC) = *(s32 *)(src + 0xC);
+    func_8001AA70(obj + 0x18, src + 0x18, 0x34);
+    return obj;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020EB4);
 
@@ -106,7 +158,29 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800220D4);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_8002243C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80022700);
+#include "common.h"
+
+extern u8 D_80085428[];
+
+void func_80022700(u8 *o) {
+    u16 v;
+
+    if (M2C_GFIELD(D_80085428, s32, 0x14) == 0) {
+        func_800185F8(o);
+        return;
+    }
+    if (D_80085428[0x12] != 0) {
+        *(s32 *)(o + 0x38) &= ~1;
+        v = M2C_GFIELD(D_80085428, u16, 0x1C);
+        *(s16 *)(o + 0x4A) = v + 0x26;
+        if (M2C_GFIELD(D_80085428, s32, 0x18) != 0) {
+            func_8001F1A8(0x3F, (s16)(v + 0x5D), 1, 0, 0, M2C_GFIELD(D_80085428, s32, 0x18), 0, 8,
+                          *(s16 *)(o + 0x4E) - 1);
+        }
+    } else {
+        *(s32 *)(o + 0x38) |= 1;
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800227D4);
 
@@ -130,42 +204,11 @@ void func_800238DC(void) {
     func_80020094();
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800238FC);
+#include "common.h"
 
-void func_8002393C(void) {
-    extern s32 D_80078C0C[];
-    (*D_80078C0C) = 0;
-    func_80012508();
+extern s32 (*D_80069AA4[])(void);
+extern u16 D_8008EE44[];
+
+s32 func_800238FC(void) {
+    return D_80069AA4[(*D_8008EE44)]();
 }
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80023964);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80023A90);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80023ABC);
-
-void func_80023B04(void) {
-
-}
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80023B0C);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80023C00);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80023C74);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80023ECC);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80023F68);
-
-void func_80023FD8(void) {
-
-}
-
-void func_80023FE0(void) {
-
-}
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80023FE8);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80024024);

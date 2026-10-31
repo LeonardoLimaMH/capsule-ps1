@@ -38,8 +38,6 @@ s32 func_800282E0(void)
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002835C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002840C);
-
 #include "common.h"
 
 typedef struct {
@@ -52,6 +50,33 @@ typedef struct {
 
 extern s32 ReadTIM();
 extern s32 func_80019F30();
+
+void func_8002840C(s32 a) {
+    u8 *p;
+
+    Tim t;
+    u32 packed;
+
+    p = (u8 *)func_80019F30(a | 0xF0000) + 4;
+    OpenTIM(p);
+    packed = *(u32 *)(p - 4) & 0x100;
+    if (ReadTIM(&t) == 0) {
+        return;
+    }
+    if (t.caddr != 0) {
+        LoadImage(t.crect, t.caddr);
+    }
+    if (t.paddr == 0) {
+        return;
+    }
+    if (packed) {
+        func_8001A8C0(t.paddr, 0x801CC000);
+        LoadImage(t.prect, 0x801CC000);
+        DrawSync(0);
+    } else {
+        LoadImage(t.prect, t.paddr);
+    }
+}
 
 void func_800284C8(s32 a) {
     u8 *p;
@@ -115,7 +140,76 @@ void func_80029A9C(void *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_80029B28);
+#include "common.h"
+
+void func_80029B28(void *arg0) {
+    extern s32 D_80069B28[];
+    extern s32 D_80069EB8[];
+    s32 temp_s2;
+    s32 temp_v1;
+    s32 var_s0;
+    s32 var_s0_2;
+    s32 var_s0_3;
+    s32 var_s0_4;
+    s32 var_s1;
+    s32 var_s1_2;
+    s32 var_s1_3;
+    s32 var_s1_4;
+
+    if (((*D_80069B28) != 0) && ((*D_80069EB8) == 0)) {
+        temp_v1 = M2C_FIELD(arg0, s32 *, 8);
+        temp_s2 = M2C_FIELD(arg0, s32 *, 0xC);
+        switch (temp_v1) {                          /* irregular */
+        case 0:
+            var_s1 = M2C_FIELD(arg0, s32 *, 0xA0);
+            var_s0 = 0;
+            if (temp_s2 > 0) {
+                do {
+                    func_80023C74(arg0, var_s0, var_s1);
+                    var_s0 += 1;
+                    var_s1 += 0x2C;
+                } while (var_s0 < temp_s2);
+                return;
+            }
+            break;
+        case 1:
+            var_s1_2 = M2C_FIELD(arg0, s32 *, 0xA0);
+            var_s0_2 = 0;
+            if (temp_s2 > 0) {
+                do {
+                    func_80023C74(arg0, var_s0_2, var_s1_2);
+                    var_s0_2 += 1;
+                    var_s1_2 += 0x2C;
+                } while (var_s0_2 < temp_s2);
+                return;
+            }
+            break;
+        case 2:
+            var_s1_3 = M2C_FIELD(arg0, s32 *, 0xA0);
+            var_s0_3 = 0;
+            if (temp_s2 > 0) {
+                do {
+                    func_80023C74(arg0, var_s0_3, var_s1_3);
+                    var_s0_3 += 1;
+                    var_s1_3 += 0x50;
+                } while (var_s0_3 < temp_s2);
+                return;
+            }
+            break;
+        case 3:
+            var_s1_4 = M2C_FIELD(arg0, s32 *, 0xA0);
+            var_s0_4 = 0;
+            if (temp_s2 > 0) {
+                do {
+                    func_80023C74(arg0, var_s0_4, var_s1_4);
+                    var_s0_4 += 1;
+                    var_s1_4 += 0x50;
+                } while (var_s0_4 < temp_s2);
+            }
+            break;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_80029C90);
 
@@ -210,39 +304,3 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002C93C);
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002CA80);
 
 #include "common.h"
-
-void func_8002CBDC(void *arg0) {
-    extern M2C_UNK D_80078C5C[];
-    void *temp_s0;
-
-    temp_s0 = M2C_FIELD(arg0, void **, 0x18);
-    RotMatrix(D_80078C5C, temp_s0 + 0x20);
-    M2C_FIELD(temp_s0, s32 *, 0x5C) = 0;
-    M2C_FIELD(temp_s0, s32 *, 0x58) = 0;
-    M2C_FIELD(temp_s0, s32 *, 0x54) = 0;
-    M2C_FIELD(temp_s0, s32 *, 0x10) = 0x1000;
-    M2C_FIELD(temp_s0, s32 *, 0x14) = 0x1000;
-    M2C_FIELD(temp_s0, s32 *, 0x18) = 0x1000;
-}
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002CC2C);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002CC74);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002CD50);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002CEC0);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002D48C);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002DA58);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002E160);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002E2AC);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002E38C);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002E4D0);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002E640);

@@ -47,11 +47,3 @@ void func_8009BA40(void)
     *((s32 *) (((s8 *) D_8008ED68) + 0x2C)) = 0;
   }
 }
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009B150", func_8009BA60);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009B150", func_8009BB30);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009B150", func_8009BE98);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009B150", func_8009C4D4);

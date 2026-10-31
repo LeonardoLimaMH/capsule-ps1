@@ -243,3 +243,10 @@ src/raise/raise_800DC640.c 2.7.2-cdk
 src/raise/raise_800C1C54.c 2.7.2-cdk
 src/yuugi/main_80025764.c 2.7.2-cdk
 src/yuugi/main_8003742C.c 2.7.2-cdk
+src/yuugi/main__arVcount.c 2.7.2-cdk
+src/yuugi/main_8001A1DC__8001F918__80023964.c 2.7.2-cdk
+src/yuugi/main_800282A0__800282D0__8002CC2C.c 2.7.2-cdk
+src/raise/raise_8009B150__8009CFB4__8009CFC4.c 2.7.2-cdk
+src/raise/raise_8009B150__8009BA60.c 2.7.2-cdk
+src/yuugi/main_8001A1DC__8001F918.c 2.7.2-cdk
+src/yuugi/main_800282A0__800282D0.c 2.7.2-cdk

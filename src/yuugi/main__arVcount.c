@@ -5,15 +5,20 @@ void GsClearVcount(void) {
     ResetRCnt(0xF2000001);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013350);
+#include "common.h"
+
+void func_80013350(void) {
+    extern M2C_UNK D_8008ED68[];
+    if (((M2C_GFIELD(D_8008ED68, s32, 0x34) == 0) | (M2C_GFIELD(D_8008ED68, s32, 0x88) == 0x800)) != 0) {
+        M2C_GFIELD(D_8008ED68, s32, 0xC4) = GetRCnt(0xF2000001);
+    }
+}
 
 s32 func_800133A4(void)
 {
   extern u8 D_8008ED68[];
-  s8 *new_var;
-  new_var = (s8 *) D_8008ED68;
- do { } while (0);
-  *((s32 *) (new_var + 0x14)) = (s32) ((*((s32 *) (((s8 *) D_8008ED68) + 0x14))) + 1);
+  s32 *p = (s32 *)D_8008ED68;
+  p[5] = p[5] + 1;
   return 0;
 }
 
@@ -23,7 +28,40 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013440);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_800134BC);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_800135A8);
+#include "common.h"
+
+extern u8 D_8008ED68[];
+extern s32 D_800508E8[];
+
+void func_800135A8(void) {
+    u8 *d = D_8008ED68;
+
+    if (d[0x105] != 0) {
+        if (--d[0x106] != 0) {
+            return;
+        }
+        d[0x105] = 0;
+        d[0x104] = 0;
+        return;
+    }
+    if (*(s32 *)(d + 0x88) == D_800508E8[d[0x104]]) {
+        d[0x104]++;
+        d[0x106] = 0x40;
+        if (d[0x104] >= 10) {
+            d[0x105] = 1;
+            d[0x106] = 0;
+        }
+        return;
+    }
+    if (*(s32 *)(d + 0x88) != 0) {
+        d[0x105] = 0;
+        d[0x104] = 0;
+        return;
+    }
+    if (--d[0x106] == 0) {
+        d[0x104] = 0;
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013668);
 
