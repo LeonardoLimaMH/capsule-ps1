@@ -45,6 +45,8 @@ segments:
     bss_size: 0x1D690
     subsegments:
       - [0x800, rodata]
+      - [0xDC0, .rodata, main_800282A0__800282D0]
+      - [0xDD4, rodata]
       - [0x2020, c, main]
       - [0x2944, c, main__80012144]
       - [0x2B24, c, main__80012324]
