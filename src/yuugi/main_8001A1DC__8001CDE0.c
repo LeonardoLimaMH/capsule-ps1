@@ -52,4 +52,11 @@ void func_8001DB54(void)
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001CDE0", func_8001DB68);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001CDE0", func_8001DB8C);
+#include "common.h"
+
+extern s32 D_8008F6A4[];
+
+void func_8001DB8C(char *fmt, ...) {
+    char *ap = (char *)&fmt + sizeof(fmt);
+    func_8001DC44(-0xA0, (s16)((*D_8008F6A4) * 8 - 0x60), 0, 0, fmt, ap, 1);
+}

@@ -280,3 +280,4 @@ src/raise/raise_800DEA54__800DEB28__800DEBA0.c 2.7.2-cdk
 src/raise/raise_800DEA54__800DEB28__800DEB38.c 2.8.1-psx
 src/yuugi/main__80012A14__80012E54.c 2.8.1-psx
 src/raise/raise_800CF2E4__800D0C3C.c 2.7.2-cdk
+src/yuugi/main_8001A1DC__8001CDE0.c 2.7.2-cdk
