@@ -235,3 +235,5 @@ src/yuugi/main_8001A1DC__8001F8D8.c 2.7.2-cdk
 
 src/chess/chess_800C4ECC__800C94DC.c 2.7.2-cdk
 src/chess/chess__800AECE0.c 2.7.2-psx
+
+src/chess/chess__800AF9D4.c 2.7.2-cdk

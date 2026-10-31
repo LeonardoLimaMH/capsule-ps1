@@ -236,3 +236,33 @@ As seis funções passaram em 2.800 execuções diferenciais sem inconclusivas.
 O teste completo exigiu separar `func_800AECE0` para manter o GCC 2.8 da vizinha;
 os cinco SHA-1 foram então confirmados. Evidências:
 `validation/byte-matching-2026-10-31-chess-loops.json`.
+
+O terceiro lote de 31/10 recuperou quatro funções. `func_800A0AD4` precisava
+de dois movimentos de argumentos que o compilador eliminava por considerá-los
+redundantes. Uma restrição vazia com entradas/saídas ligadas a `arg0` e `arg1`,
+dentro do primeiro ramo, preservou esses movimentos sem valores indefinidos.
+A tabela `D_80065310` tem elementos de quatro bytes: aplicar `*4` novamente
+à aritmética de seu ponteiro escala o índice duas vezes.
+
+Em `func_800CB540`, materializar o ponteiro global antes do teste recuperou a
+ordem das instruções sem asm. Em `func_800AFBDC`, inicializar a base da tabela
+entre os dois contadores, usar `M2C_GFIELD` e gravar `0x84` como `u8` recuperou
+o prólogo e o acesso ao campo. `func_800A4108` casou após trocar tipos locais
+inferidos de loads de byte por inteiros de 32 bits. O lote passou em 2.800
+execuções diferenciais; os cinco binários continuam idênticos.
+
+Revisar também as fixtures: `rand-mem: endereço quantidade limite` usa limite
+**exclusivo**. Para sortear `0` e `1`, usar `2`; usar `1` testa somente zero.
+Foram executados mais 1.200 casos com limites corrigidos para os loops do lote
+anterior. Os testes anteriores continuam válidos para suas entradas reais,
+mas não cobriam todos os ramos descritos. Quando a função compara o retorno de
+um helper com zero, preferir `stub-ret: mixed` ou o helper original: o stub
+padrão retorna ponteiros e pode tornar esse ramo inalcançável.
+
+Resultados negativos também orientam o próximo passo: 895 variantes de
+parâmetros em 91 funções e 152 variantes de loops em 36 funções não produziram
+novos matches. Já a busca de tipos locais e argumentos de chamada em 122
+funções recuperou `func_800A4108`. `index_form.py` recebe apenas entrada e saída;
+não usar a interface de `retype.py` para chamá-lo. Falhas de invocação não são
+resultados de matching. Registro, fixtures e correções de cobertura:
+`validation/byte-matching-2026-10-31-chess-dispatch.json`.

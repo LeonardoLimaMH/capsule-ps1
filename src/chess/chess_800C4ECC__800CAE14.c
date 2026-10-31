@@ -45,4 +45,12 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CB24C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CB400);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CB540);
+void func_800CB540(void *arg0) {
+    extern u8 D_8008ED68[];
+    void *global = (void *)D_8008ED68;
+    if (M2C_FIELD(arg0, u16 *, 0x4E) == 0) {
+        M2C_FIELD(arg0, u16 *, 0x4E) = 1U;
+        return;
+    }
+    func_800CBAA0(0, arg0, global, 0);
+}

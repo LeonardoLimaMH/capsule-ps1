@@ -15,55 +15,25 @@ emulação contra a função original.
 
 ## Progresso
 
-Em 31/10, mais cinco funções byte-exact (quatro CHESS e uma YUUGI) passaram
-em 2.800 execuções diferenciais sem inconclusivas e nos cinco SHA-1 completos.
-A busca agora também testa tipos de parâmetros, reaproveitando o C equivalente.
-[Evidências e limites do lote](docs/validation/byte-matching-2026-10-31-parameters.json).
+Nas rodadas de 31/10, foram integradas **15 funções byte-exact**: 14 CHESS e uma
+YUUGI. Os cinco binários completos preservam os SHA-1 originais. Foram
+executados 9.600 casos diferenciais idênticos, sem inconclusivos, incluindo
+1.200 casos adicionais após corrigir limites de sorteio das fixtures.
 
-A rodada seguinte integrou seis funções CHESS, com outras 2.800 execuções
-diferenciais sem inconclusivas e cinco rebuilds idênticos. Foram resolvidos
-contadores de loop, campos globais e ordem dos cálculos; a validação também
-corrigiu um equivalente antigo que confundia o endereço de uma global com seu
-conteúdo. [Registro do lote](docs/validation/byte-matching-2026-10-31-chess-loops.json).
+- [Tipos de parâmetros e registradores](docs/validation/byte-matching-2026-10-31-parameters.json): cinco funções, 2.800 casos.
+- [Loops e ordem dos cálculos](docs/validation/byte-matching-2026-10-31-chess-loops.json): seis funções, 2.800 casos.
+- [Argumentos, globais e tipos locais](docs/validation/byte-matching-2026-10-31-chess-dispatch.json): quatro funções, 2.800 casos e 1.200 verificações adicionais do lote anterior.
 
-Estado revisado em 30/10: cinco rebuilds byte-idênticos e 60 testes selecionados
-aprovados após corrigir expectativas antigas de progresso e observação GTE.
-Mais quatro funções foram integradas, com 4.800 execuções diferenciais sem
-inconclusivas. Veja a [revisão e seus limites](docs/reviews/2026-10-30-byte-exact-audit.md).
-
-A continuação integrou outras quatro funções CHESS com campos de globais,
-aproveitando o C equivalente: 1.600 execuções diferenciais sem inconclusivas
-e cinco SHA-1 confirmados. [Evidências do lote](docs/validation/byte-matching-2026-10-30-chess-globals.json).
-
-A estratégia atual parte do C de `equiv/`, testa primeiro os perfis de compilador
-e depois trata famílias de diferenças no assembly. O fluxo de busca, os critérios
-de aceitação e o diário de decisões estão em
-[Estratégia de byte-matching](docs/BYTE_EXACT_STRATEGY.md).
-
-O lote CHESS/helper recuperou quatro funções byte-exact e simplificou uma já
-casada: 2.000 execuções diferenciais, dez testes das ferramentas e os cinco
-SHA-1 originais confirmados. Registro:
-[validação do lote](docs/validation/byte-matching-2026-10-29-chess-helper.json).
-
-A varredura seguinte compilou 1.113 equivalentes com o GCC do CDK e integrou
-mais 22 funções: 17 CHESS, quatro ETC e uma do SDK em SLPM. Os cinco SHA-1
-foram confirmados, com 10.000 execuções diferenciais idênticas; casos
-inconclusivos e não suportados estão discriminados no
-[registro de validação](docs/validation/byte-matching-2026-10-29-cdk-equivalents.json).
-Os três candidatos com tabelas de `switch` também foram integrados na rodada
-seguinte: as faixas `.rodata` geradas pelo compilador ocupam seus endereços
-originais. Mais 2.400 execuções diferenciais e os cinco SHA-1 confirmaram
-[esse lote CHESS](docs/validation/byte-matching-2026-10-29-switch-tables.json).
-
-Outra rodada integrou quatro funções CHESS e duas RAISE, combinando alternativas
-de m2c com a recompilação de variantes antigas no CDK. Mais 2.400 execuções
-diferenciais passaram, sem inconclusivas, e os cinco SHA-1 foram preservados:
-[registro dos seis matches](docs/validation/byte-matching-2026-10-29-cdk-records.json).
+A estratégia parte do C de `equiv/`, testa perfis de compilador e depois trata
+famílias de diferenças no assembly. Veja o fluxo reproduzível, os limites dos
+testes e as decisões em [Estratégia de byte-matching](docs/BYTE_EXACT_STRATEGY.md).
+A [revisão de 30/10](docs/reviews/2026-10-30-byte-exact-audit.md) registra a
+auditoria anterior e os 60 testes selecionados das ferramentas.
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `█░░░░░░░░░░░░░░░░░░░` **5.17%**  
-**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **5.96%**  
-**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **6.32%**  
+**Código do jogo decompilado em C (byte-matching):** `█░░░░░░░░░░░░░░░░░░░` **5.26%**  
+**Total incluindo SDK PsyQ:** `█░░░░░░░░░░░░░░░░░░░` **6.04%**  
+**Cobertura (C + funções que já eram assembly no original):** `█░░░░░░░░░░░░░░░░░░░` **6.40%**  
 **Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`; sobre o código convertível em C):** `████████████████████` **99.44%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
@@ -71,10 +41,10 @@ diferenciais passaram, sem inconclusivas, e os cinco SHA-1 foram preservados:
 |---|---|---|---|---|---|
 | `YUUGI.EXE` | executável principal | 5.92% (12,216 / 206,368 B) | 212 / 732 | 15.91% (133 / 303 fn) | **7.91%** |
 | `SLPM_860.96` | loader / boot | 7.83% (1,624 / 20,744 B) | 34 / 119 | 13.19% (98 / 215 fn) | **11.46%** |
-| `CHESS.BIN` | overlay de batalha (tabuleiro) | 3.44% (14,500 / 421,956 B) | 145 / 867 | 100.00% (2 / 2 fn) | **3.45%** |
+| `CHESS.BIN` | overlay de batalha (tabuleiro) | 3.65% (15,404 / 421,956 B) | 149 / 867 | 100.00% (2 / 2 fn) | **3.67%** |
 | `RAISE.BIN` | overlay de criação de monstros | 6.66% (21,744 / 326,576 B) | 319 / 940 | 100.00% (2 / 2 fn) | **6.68%** |
 | `ETC.BIN` | overlay de menus/diversos | 5.62% (5,004 / 88,992 B) | 44 / 189 | 0.00% (0 / 0 fn) | **5.62%** |
-| **Total** | | **5.17%** (55,088 / 1,064,636 B) | 754 / 2847 | 14.77% (235 / 522 fn) | **5.96%** |
+| **Total** | | **5.26%** (55,992 / 1,064,636 B) | 758 / 2847 | 14.77% (235 / 522 fn) | **6.04%** |
 
 **Equivalentes e pendências por binário (jogo + SDK):**
 
@@ -82,10 +52,10 @@ diferenciais passaram, sem inconclusivas, e os cinco SHA-1 foram preservados:
 |---|---|---|---|---|---|
 | `YUUGI.EXE` | 89.76% (618 fn) | `██████████` **98.56%** | 963 / 970 (99.28%) | 65 | **7** |
 | `SLPM_860.96` | 81.26% (167 fn) | `██████████` **95.48%** | 299 / 302 (99.01%) | 32 | **3** |
-| `CHESS.BIN` | 96.55% (722 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | 0 | **0** |
+| `CHESS.BIN` | 96.33% (718 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | 0 | **0** |
 | `RAISE.BIN` | 93.32% (621 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
 | `ETC.BIN` | 94.38% (145 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | 0 | **0** |
-| **Total** | 93.12% (2,273 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
+| **Total** | 93.04% (2,269 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código convertível: ficam de fora as rotinas que já eram assembly no
