@@ -1,7 +1,7 @@
 # Compilador de cada arquivo-fonte (padrão: 2.7.2-psx). Ver docs/NOTES.md.
 # arquivo                     compilador
 src/yuugi/main_80019F30.c 2.8.1-psx
-src/yuugi/main_8002E75C.c 2.8.1-psx
+src/yuugi/main_8002E75C.c 2.7.2-cdk
 src/yuugi/main_80033AC8.c 2.8.1-psx
 src/yuugi/sdk_libmath_adddf3.c 2.8.1-psx
 src/yuugi/sdk_libmath_addmant.c 2.8.1-psx
@@ -237,3 +237,9 @@ src/chess/chess_800C4ECC__800C94DC.c 2.7.2-cdk
 src/chess/chess__800AECE0.c 2.7.2-psx
 
 src/chess/chess__800AF9D4.c 2.7.2-cdk
+src/raise/raise_800C3334.c 2.7.2-cdk
+src/raise/raise_800B9C3C__800BC728.c 2.7.2-cdk
+src/raise/raise_800DC640.c 2.7.2-cdk
+src/raise/raise_800C1C54.c 2.7.2-cdk
+src/yuugi/main_80025764.c 2.7.2-cdk
+src/yuugi/main_8003742C.c 2.7.2-cdk

@@ -47,7 +47,19 @@ void func_800389E8(void) {
 
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_800389F0);
+#include "common.h"
+
+extern u8 D_80093790[];
+extern s32 D_8007142C[];
+
+void func_800389F0(s32 n, u8 *p) {
+    M2C_GFIELD(D_80093790, s32, 4) = 0x60100;
+    *(s32 *)D_80093790 = D_8007142C[n];
+    M2C_GFIELD(D_80093790, u16, 0x3A) = *(u16 *)(p + 0x40);
+    M2C_GFIELD(D_80093790, u16, 0x3C) = *(u16 *)(p + 0x42);
+    M2C_GFIELD(D_80093790, s32, 0x24) = *(u16 *)(p + 0x44);
+    SpuSetVoiceAttr(D_80093790);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80038A60);
 

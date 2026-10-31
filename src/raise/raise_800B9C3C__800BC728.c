@@ -32,14 +32,44 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BCB58);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BCC98);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BCD9C);
+#include "common.h"
+
+extern u8 D_800EE5F0[];
+extern u8 D_800EFF58[];
+
+s32 func_800BCD9C(void) {
+    s32 r = func_800BD2E0(0x1A, -0xC0, 0x28, 5, 0, D_800EE5F0, M2C_GFIELD(D_800EFF58, s32, 0x350), 1, 0, 0, 2, 0, 0);
+
+    M2C_GFIELD(D_800EFF58, s32, 0x34C) = r;
+    return r;
+}
 
 void func_800BCE14(void) {
 
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BCE1C);
+#include "common.h"
+
+extern u8 D_800EE5F0[];
+extern u8 D_800EFF58[];
+
+s32 func_800BCE1C(void) {
+    s32 r = func_800BD2E0(0x1A, 0x1C0, 0x48, 5, 0, D_800EE5F0, M2C_GFIELD(D_800EFF58, s32, 0x358), 1, 0, 0, 2, 0, 0);
+
+    M2C_GFIELD(D_800EFF58, s32, 0x354) = r;
+    return r;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BCE94);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BCF20);
+#include "common.h"
+
+extern u8 D_800EE5F0[];
+extern u8 D_800EFF58[];
+
+s32 func_800BCF20(void) {
+    s32 r = func_800BD2E0(0x1A, 0x38, 0x118, 5, 0, D_800EE5F0, M2C_GFIELD(D_800EFF58, s32, 0x41C), 1, 0, 0, 2, 0, 0);
+
+    M2C_GFIELD(D_800EFF58, s32, 0x418) = r;
+    return r;
+}
