@@ -250,3 +250,5 @@ src/raise/raise_8009B150__8009CFB4__8009CFC4.c 2.7.2-cdk
 src/raise/raise_8009B150__8009BA60.c 2.7.2-cdk
 src/yuugi/main_8001A1DC__8001F918.c 2.7.2-cdk
 src/yuugi/main_800282A0__800282D0.c 2.7.2-cdk
+src/raise/raise_800C59F4.c 2.7.2-cdk
+src/raise/raise_800DEA54__800E16EC__800E1780.c 2.7.2-cdk
