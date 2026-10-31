@@ -22,7 +22,26 @@ TYPES = ["s8", "u8", "s16", "u16", "s32", "u32"]
 DECL = re.compile(r"^(\s+)(s8|u8|s16|u16|s32|u32) (\w+);$", re.M)
 
 
-def variants(code):
+def parameter_variants(code, func):
+    """Change one scalar integer parameter in the named definition only.
+
+    This is a codegen search, not a proof that narrowing an ABI type is safe.
+    Keep body casts intact; accept a result only after the full byte comparison.
+    Pointer, array and callback parameters are deliberately excluded.
+    """
+    signature = re.search(r"\b" + re.escape(func) + r"\s*\(([^()]*)\)\s*\{", code)
+    if not signature:
+        return
+    for param in re.finditer(r"(?:^|,)\s*(s8|u8|s16|u16|s32|u32)\s+\w+\s*(?=,|$)",
+                             signature.group(1)):
+        start = signature.start(1) + param.start(1)
+        end = signature.start(1) + param.end(1)
+        for new in TYPES:
+            if new != param.group(1):
+                yield code[:start] + new + code[end:]
+
+
+def variants(code, func=None):
     for m in DECL.finditer(code):
         indent, old, name = m.groups()
         for new in TYPES:
@@ -30,6 +49,8 @@ def variants(code):
                 continue
             body = code[:m.start()] + f"{indent}{new} {name};" + code[m.end():]
             yield re.sub(rf"\({new}\) {name}\b", name, body)
+    if func is not None:
+        yield from parameter_variants(code, func)
 
 
 def main():
@@ -41,6 +62,8 @@ def main():
     ap.add_argument("--gcc", default="2.7.2-psx")
     ap.add_argument("--g0fill", action="store_true")
     ap.add_argument("--spfill", action="store_true")
+    ap.add_argument("--parameters", action="store_true",
+                    help="also search scalar integer parameter types (requires ABI review)")
     a = ap.parse_args()
     code = pathlib.Path(a.src).read_text(encoding="utf-8")
     best = score(a.target, a.func, code, a)
@@ -51,7 +74,7 @@ def main():
         if not best:
             break
         found = None
-        for cand in variants(code):
+        for cand in variants(code, a.func if a.parameters else None):
             s = score(a.target, a.func, cand, a)
             if s is not None and s < best and (found is None or s < found[0]):
                 found = (s, cand)

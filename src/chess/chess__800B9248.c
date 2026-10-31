@@ -52,4 +52,19 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248", func_800BB344);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248", func_800BB670);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248", func_800BB880);
+s32 func_800BB880(s32 unused_arg0, s32 unused_arg1, void *arg2) {
+    s32 var_a0;
+
+    var_a0 = 0;
+    if (M2C_FIELD(M2C_FIELD(arg2, void **, 0x70), s16 *, 0x24) < 0) {
+        var_a0 = 1;
+        {
+            /* Preserve the initialized copy through v0; emits no asm instruction. */
+            register s32 byte_value __asm__("$2") = var_a0;
+            __asm__ volatile("" : "=r"(byte_value) : "0"(byte_value));
+            M2C_FIELD(arg2, s8 *, 0x17) = byte_value;
+        }
+        M2C_FIELD(arg2, s32 *, 0x18) = (s32) (M2C_FIELD(arg2, s32 *, 0x18) ^ 0x08000000);
+    }
+    return var_a0;
+}

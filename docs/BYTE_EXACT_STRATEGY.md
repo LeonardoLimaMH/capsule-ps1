@@ -178,3 +178,33 @@ em 1.600 execuções diferenciais sem inconclusivas, incluindo sentinelas,
 negação de halfwords, overflow do contador de 16 bits e o helper original
 `func_800CAE6C`, além dos cinco SHA-1. Registro:
 `validation/byte-matching-2026-10-30-chess-globals.json`.
+
+Em 31/10, retestar 107 equivalentes alterados desde a rodada anterior recuperou
+`YUUGI:func_8001F8D8` no CDK. A correção prévia da escala de um acesso à tabela
+de callbacks foi decisiva. O cache de buscas deve identificar o conteúdo da
+fonte, além de função e compilador; resultados anteriores à edição não bastam.
+
+Diferenças no prólogo também podem vir dos tipos dos parâmetros. Nas funções
+CHESS `func_800D72CC` e `func_800D7328`, usar `u8` no primeiro parâmetro recuperou
+a ordem original dos registradores salvos. Em `func_800DDBC8`, ampliar o quarto
+parâmetro de `s8` para `s32` eliminou extensões extras. Uma busca de 195 variantes
+em 21 funções próximas confirmou esse terceiro caso. `tools/retype.py` agora
+aceita `--parameters` para procurar também tipos inteiros dos parâmetros:
+
+```sh
+python tools/retype.py chess func_800DDBC8 equiv/chess/func_800DDBC8.c /tmp/candidate.c --gcc 2.7.2-cdk --parameters
+python tools/match.py chess func_800DDBC8 /tmp/candidate.c --gcc 2.7.2-cdk
+```
+
+Essa busca gera hipóteses: estreitar um parâmetro pode mudar sua faixa válida
+e a ABI. Conferir os usos, preservar casts do corpo e exigir o rebuild completo.
+A ferramenta não altera parâmetros ponteiro, array ou callback. O modo padrão
+continua procurando somente tipos de variáveis locais.
+
+`func_800BB880` exigiu uma temporária inicializada vinculada a `v0`, com uma
+restrição vazia de entrada/saída, para preservar a cópia antes do store de byte.
+Isso orienta a alocação de registradores sem inserir instruções de assembly e
+sem ler valores não inicializados. As cinco funções passaram em 2.800 execuções
+diferenciais sem inconclusivas e nos cinco SHA-1 completos. Os testes isolam
+helpers com stubs e não substituem testes de gameplay. Evidências e fixtures:
+`validation/byte-matching-2026-10-31-parameters.json`.
