@@ -6,7 +6,24 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018", func_800D10A8);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018", func_800D1134);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018", func_800D11CC);
+#include "common.h"
+
+extern u8 D_80085428[];
+extern void func_800A5E54();
+
+void func_800D11CC(void)
+{
+  D_80085428[0xF] = 0;
+  D_80085428[0xE] = 0;
+  ((struct 
+  {
+    u8 _p[0xA];
+    s16 v;
+  } *) D_80085428)->v = 0;
+  func_80012200(func_800A5E54);
+  D_80085428[0xBE8] = 1;
+  return 1;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018", func_800D1214);
 

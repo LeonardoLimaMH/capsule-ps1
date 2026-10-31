@@ -24,7 +24,59 @@ s32 func_800133A4(void)
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_800133C4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013440);
+#include "common.h"
+
+void func_80013440(int arg0)
+{
+  extern M2C_UNK D_8008ED68[];
+  u16 temp_v0;
+  if (((struct 
+  {
+    u8 _p[0xFE];
+    u16 v;
+  } *) D_8008ED68)->v != arg0)
+  {
+    ((struct 
+    {
+      u8 _p[0xFE];
+      u16 v;
+    } *) D_8008ED68)->v = arg0;
+    ((struct 
+    {
+      u8 _p[0xFC];
+      u16 v;
+    } *) D_8008ED68)->v = 0U;
+  }
+  temp_v0 = ((struct 
+  {
+    u8 _p[0xFC];
+    u16 v;
+  } *) D_8008ED68)->v + 1;
+  ((struct 
+  {
+    u8 _p[0xFC];
+    u16 v;
+  } *) D_8008ED68)->v = temp_v0;
+  if (((u32) (temp_v0 & 0xFFFF)) >= 0x41U)
+  {
+    ((struct 
+    {
+      u8 _p[0xF4];
+      s32 v;
+    } *) D_8008ED68)->v = 1;
+    ResetRCnt(0xF2000003);
+    ((struct 
+    {
+      u8 _p[0xFC];
+      u16 v;
+    } *) D_8008ED68)->v = 0U;
+    ((struct 
+    {
+      u8 _p[0xFE];
+      u16 v;
+    } *) D_8008ED68)->v = 0xFFU;
+  }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_800134BC);
 
