@@ -56,6 +56,7 @@ segments:
       - [0x10BE0, c, chess__800A83E0]
       - [0x10C44, c, chess__800A8444]
       - [0x174C4, c, chess__800AECC4]
+      - [0x174E0, c, chess__800AECE0]
       - [0x17534, c, chess__800AED34]
       - [0x17550, c, chess__800AED50]
       - [0x181D4, c, chess__800AF9D4]

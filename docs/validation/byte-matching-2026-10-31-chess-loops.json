@@ -1,0 +1,530 @@
+{
+  "baseline_commit": "b4e050d12be73ac355ff079ce83b895b50aa91af",
+  "strategy": "Refine nearby candidates: correct load widths and pointer strides, preserve signed ascending counters with initialized empty tied constraints, use global field addressing, split arithmetic stages and simplify conditional returns. Isolate AECE0 to preserve the neighboring GCC 2.8 function.",
+  "functions": [
+    {
+      "target": "chess",
+      "func": "func_800A461C",
+      "gcc": "2.7.2-cdk",
+      "integrated_source": "src/chess/chess__8009ECF8.c",
+      "candidate_source": ".cache/loops-692/func_800A461C-0-before.c",
+      "equivalent_source": "equiv/chess/func_800A461C.c",
+      "source_sha256": "33e41a88675287001bf4255abb1d1e7cd3415cfee405f07028a9bb1327288aac",
+      "masked_instruction_match": true
+    },
+    {
+      "target": "chess",
+      "func": "func_800AECE0",
+      "gcc": "2.7.2-psx",
+      "integrated_source": "src/chess/chess__800AECE0.c",
+      "candidate_source": ".cache/loops-692/func_800AECE0-0-before.c",
+      "equivalent_source": "equiv/chess/func_800AECE0.c",
+      "source_sha256": "afbe88a4291da713556255356e1a9cad456d25297a01874fdd823a903b977e09",
+      "masked_instruction_match": true
+    },
+    {
+      "target": "chess",
+      "func": "func_800B5BE0",
+      "gcc": "2.7.2-cdk",
+      "integrated_source": "src/chess/chess__800B38B0.c",
+      "candidate_source": ".cache/refine-692/func_800B5BE0-gfield.c",
+      "equivalent_source": "equiv/chess/func_800B5BE0.c",
+      "source_sha256": "2e778d11b45a84fa317b3d88073c001b2aa3da4bbebd42fbfd0f66349111b661",
+      "masked_instruction_match": true
+    },
+    {
+      "target": "chess",
+      "func": "func_800D3408",
+      "gcc": "2.7.2-cdk",
+      "integrated_source": "src/chess/chess_800C4ECC__800CB844.c",
+      "candidate_source": ".cache/near-more-692/func_800D3408-3.c",
+      "equivalent_source": "equiv/chess/func_800D3408.c",
+      "source_sha256": "773acb037dd7f57f397897328bc8879f84e3514c8a8b44f2922514f69f03d98e",
+      "masked_instruction_match": true
+    },
+    {
+      "target": "chess",
+      "func": "func_800C94DC",
+      "gcc": "2.7.2-cdk",
+      "integrated_source": "src/chess/chess_800C4ECC__800C94DC.c",
+      "candidate_source": ".cache/near-more-692/func_800C94DC-18.c",
+      "equivalent_source": "equiv/chess/func_800C94DC.c",
+      "source_sha256": "fb357125736b00ed98c1d681fa198f571551d65885fd3c1927f3f9dd646890da",
+      "masked_instruction_match": true
+    },
+    {
+      "target": "chess",
+      "func": "func_800CA664",
+      "gcc": "2.7.2-cdk",
+      "integrated_source": "src/chess/chess_800C4ECC__800C94DC.c",
+      "candidate_source": ".cache/near-more-692/func_800CA664-36.c",
+      "equivalent_source": "equiv/chess/func_800CA664.c",
+      "source_sha256": "fb357125736b00ed98c1d681fa198f571551d65885fd3c1927f3f9dd646890da",
+      "masked_instruction_match": true
+    }
+  ],
+  "validation": [
+    {
+      "target": "chess",
+      "func": "func_800A461C",
+      "source": ".cache/round-loops/profiles/func_800A461C.c",
+      "seed": 1,
+      "profile_sha256": "415288a751a9243aaac241f55e1ba91eb983c18fcf61eee5a5a147f7d606db22",
+      "fixture_directives": [
+        "/* arg0: 0x80140000 */",
+        "/* rand-mem: 0x801405D9 1 15 */",
+        "/* rand-u32-strided: 0x801010B0 16 52 0x80150000 */"
+      ],
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800A461C",
+        "--src",
+        ".cache/round-loops/profiles/func_800A461C.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800A461C \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800A461C",
+      "source": ".cache/round-loops/profiles/func_800A461C.c",
+      "seed": 2,
+      "profile_sha256": "415288a751a9243aaac241f55e1ba91eb983c18fcf61eee5a5a147f7d606db22",
+      "fixture_directives": [
+        "/* arg0: 0x80140000 */",
+        "/* rand-mem: 0x801405D9 1 15 */",
+        "/* rand-u32-strided: 0x801010B0 16 52 0x80150000 */"
+      ],
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800A461C",
+        "--src",
+        ".cache/round-loops/profiles/func_800A461C.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800A461C \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800AECE0",
+      "source": ".cache/round-loops/profiles/func_800AECE0.c",
+      "seed": 1,
+      "profile_sha256": "591199bbc0729b56ed63ba0acb2457e511220539c856188d1b73ef32c2539033",
+      "fixture_directives": [
+        "/* arg0: 0x80140000 */",
+        "/* arg1: 0x80150000 */",
+        "/* arg2: small */",
+        "/* rand-mem: 0x801505E0 16 1 */"
+      ],
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800AECE0",
+        "--src",
+        ".cache/round-loops/profiles/func_800AECE0.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800AECE0 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800AECE0",
+      "source": ".cache/round-loops/profiles/func_800AECE0.c",
+      "seed": 2,
+      "profile_sha256": "591199bbc0729b56ed63ba0acb2457e511220539c856188d1b73ef32c2539033",
+      "fixture_directives": [
+        "/* arg0: 0x80140000 */",
+        "/* arg1: 0x80150000 */",
+        "/* arg2: small */",
+        "/* rand-mem: 0x801505E0 16 1 */"
+      ],
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800AECE0",
+        "--src",
+        ".cache/round-loops/profiles/func_800AECE0.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800AECE0 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800B5BE0",
+      "source": ".cache/round-loops/profiles/func_800B5BE0.c",
+      "seed": 1,
+      "profile_sha256": "3aa7e4ae9fca5bee05fd962f87c169f9670bb568818d6aeed40ad1e0a58605c4",
+      "fixture_directives": [
+        "/* arg0: 0x80140000 */",
+        "/* rand-u16: 0x8008619F 1 0,1,254,255 */",
+        "/* rand-u32-strided: 0x80140034 1 4 0,1,127,128,255,4294967295 */"
+      ],
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800B5BE0",
+        "--src",
+        ".cache/round-loops/profiles/func_800B5BE0.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800B5BE0 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800B5BE0",
+      "source": ".cache/round-loops/profiles/func_800B5BE0.c",
+      "seed": 2,
+      "profile_sha256": "3aa7e4ae9fca5bee05fd962f87c169f9670bb568818d6aeed40ad1e0a58605c4",
+      "fixture_directives": [
+        "/* arg0: 0x80140000 */",
+        "/* rand-u16: 0x8008619F 1 0,1,254,255 */",
+        "/* rand-u32-strided: 0x80140034 1 4 0,1,127,128,255,4294967295 */"
+      ],
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800B5BE0",
+        "--src",
+        ".cache/round-loops/profiles/func_800B5BE0.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800B5BE0 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800D3408",
+      "source": ".cache/round-loops/profiles/func_800D3408.c",
+      "seed": 1,
+      "profile_sha256": "fe8bc775b50e279924e9e3f1d124e70a893a6f23302bcf242c686ac067c0e269",
+      "fixture_directives": [
+        "/* arg0: small */",
+        "/* rand-u16: 0x80118C24 1 0,1,5,6,7,127,128,129,255 */",
+        "/* rand-mem: 0x80118C22 1 1 */"
+      ],
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800D3408",
+        "--src",
+        ".cache/round-loops/profiles/func_800D3408.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800D3408 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800D3408",
+      "source": ".cache/round-loops/profiles/func_800D3408.c",
+      "seed": 2,
+      "profile_sha256": "fe8bc775b50e279924e9e3f1d124e70a893a6f23302bcf242c686ac067c0e269",
+      "fixture_directives": [
+        "/* arg0: small */",
+        "/* rand-u16: 0x80118C24 1 0,1,5,6,7,127,128,129,255 */",
+        "/* rand-mem: 0x80118C22 1 1 */"
+      ],
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800D3408",
+        "--src",
+        ".cache/round-loops/profiles/func_800D3408.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800D3408 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800C94DC",
+      "source": ".cache/round-loops/profiles/func_800C94DC.c",
+      "seed": 1,
+      "profile_sha256": "e7a8efc00ddf88fd2142d34a53f9365d11fa480c70a20cf504e112fb129a0595",
+      "fixture_directives": [
+        "/* arg1: small */",
+        "/* rand-u16: 0x80069BBE 1 0,1,255,256,4095,4096,32767,32768,65535 */"
+      ],
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800C94DC",
+        "--src",
+        ".cache/round-loops/profiles/func_800C94DC.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800C94DC \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800C94DC",
+      "source": ".cache/round-loops/profiles/func_800C94DC.c",
+      "seed": 2,
+      "profile_sha256": "e7a8efc00ddf88fd2142d34a53f9365d11fa480c70a20cf504e112fb129a0595",
+      "fixture_directives": [
+        "/* arg1: small */",
+        "/* rand-u16: 0x80069BBE 1 0,1,255,256,4095,4096,32767,32768,65535 */"
+      ],
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800C94DC",
+        "--src",
+        ".cache/round-loops/profiles/func_800C94DC.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800C94DC \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800CA664",
+      "source": ".cache/round-loops/profiles/func_800CA664.c",
+      "seed": 1,
+      "profile_sha256": "d59c7c0d6f08b5f0ba8834984d0ce3fd73c255a9b6fa01d70eb56b11cf8d89ff",
+      "fixture_directives": [],
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800CA664",
+        "--src",
+        ".cache/round-loops/profiles/func_800CA664.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800CA664 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800CA664",
+      "source": ".cache/round-loops/profiles/func_800CA664.c",
+      "seed": 2,
+      "profile_sha256": "d59c7c0d6f08b5f0ba8834984d0ce3fd73c255a9b6fa01d70eb56b11cf8d89ff",
+      "fixture_directives": [],
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800CA664",
+        "--src",
+        ".cache/round-loops/profiles/func_800CA664.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "200",
+        "--seed",
+        "2"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800CA664 \u2014 200 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800CA664",
+      "source": ".cache/round-loops/profiles/func_800CA664-0x0.c",
+      "seed": 1,
+      "profile_sha256": "858dbb41ab72268ea7555072a5fcffe9e4810b5ac05d155346e57fc4fc93da88",
+      "fixture_directives": [
+        "/* arg0: 0x0 */"
+      ],
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800CA664",
+        "--src",
+        ".cache/round-loops/profiles/func_800CA664-0x0.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "100",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800CA664 \u2014 100 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800CA664",
+      "source": ".cache/round-loops/profiles/func_800CA664-0xFFFF.c",
+      "seed": 1,
+      "profile_sha256": "9339fab07a8c6f7cdd97613fcc3a60c1465b4c2d6e5a45ff1a8c5785857ba792",
+      "fixture_directives": [
+        "/* arg0: 0xFFFF */"
+      ],
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800CA664",
+        "--src",
+        ".cache/round-loops/profiles/func_800CA664-0xFFFF.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "100",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800CA664 \u2014 100 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800CA664",
+      "source": ".cache/round-loops/profiles/func_800CA664-0xFFFE.c",
+      "seed": 1,
+      "profile_sha256": "a598897079dbaec49db3a5a300f29d9be4dc9a844f7a63c397b8eb271366c201",
+      "fixture_directives": [
+        "/* arg0: 0xFFFE */"
+      ],
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800CA664",
+        "--src",
+        ".cache/round-loops/profiles/func_800CA664-0xFFFE.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "100",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800CA664 \u2014 100 tentativas id\u00eanticas\n",
+      "stderr": ""
+    },
+    {
+      "target": "chess",
+      "func": "func_800CA664",
+      "source": ".cache/round-loops/profiles/func_800CA664-0x10001.c",
+      "seed": 1,
+      "profile_sha256": "f8b2638322b46b666313480911bac872131117fce14cf4c70446f08789933a51",
+      "fixture_directives": [
+        "/* arg0: 0x10001 */"
+      ],
+      "command": [
+        "/opt/venv/bin/python3",
+        "tools/difftest.py",
+        "chess",
+        "func_800CA664",
+        "--src",
+        ".cache/round-loops/profiles/func_800CA664-0x10001.c",
+        "--abi",
+        "--isolate",
+        "--trials",
+        "100",
+        "--seed",
+        "1"
+      ],
+      "exit": 0,
+      "stdout": "[EQUIVALENTE] chess:func_800CA664 \u2014 100 tentativas id\u00eanticas\n",
+      "stderr": ""
+    }
+  ],
+  "identical_trials": 2800,
+  "inconclusive_trials": 0,
+  "validation_limits": "ABI-normalized isolated differential execution compares observable CPU, RAM and helper calls; fixtures cover loop bounds, zero/nonzero flags, byte sentinel 0xFF, signed halfwords and special return cases. Helpers are stubs, not full gameplay. Full linked SHA-1 comparison has no relocation masking.",
+  "equivalent_review": "The former B5BE0 equivalent compared the address D_8008619F to -1 and dereferenced the first word of D_80085428 for an argument. The recovered implementation reads the byte at +0xD77 and passes the base pointer, as proven by original instructions and full rebuild. A461C pointer-load width was already correct in equiv; the stale m2c alternative needed that correction.",
+  "rebuild": {
+    "command": [
+      "make",
+      "-j4",
+      "check"
+    ],
+    "exit": 0,
+    "stdout": "[OK]    build/yuugi.exe  sha1=ded3d5e61d5906077d0171396fea4ca3959ecf23\n[OK]    build/slpm.exe  sha1=a4d3c7f4750acc79a29f2f941449f73950497e5e\n[OK]    build/chess.exe  sha1=a6a63cc46a633968573c23b5681bb178070dba25\n[OK]    build/raise.exe  sha1=92ccafd66ecb0030f9bfff109c855c09dbb4cf8b\n[OK]    build/etc.exe  sha1=f14bbffbbee2ec2013b481a2f814997b3984ce74\n",
+    "stderr": ""
+  }
+}

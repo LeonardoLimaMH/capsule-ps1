@@ -208,3 +208,31 @@ sem ler valores não inicializados. As cinco funções passaram em 2.800 execuç
 diferenciais sem inconclusivas e nos cinco SHA-1 completos. Os testes isolam
 helpers com stubs e não substituem testes de gameplay. Evidências e fixtures:
 `validation/byte-matching-2026-10-31-parameters.json`.
+
+Na rodada seguinte, `retype.py` aproximou dois loops, mas a troca para contador
+sem sinal produzia `sltiu` onde o original usava `slti`. Voltar a `s32` fazia o
+GCC transformar a contagem crescente em decrescente. Uma restrição vazia ligada
+ao contador **já inicializado**, dentro do loop, preservou a contagem original
+em `func_800A461C` e `func_800AECE0`. Nenhuma instrução foi inserida pelo asm.
+Antes disso, foi necessário recuperar um load de ponteiro com 32 bits e corrigir
+um decremento de ponteiro: `s32 *p; p -= 4` avança 16 bytes, não quatro. O C de
+`equiv/` já tinha esses acessos corretos; a alternativa antiga de m2c não tinha.
+
+Combinar redução de argumentos inventados com `M2C_GFIELD` recuperou
+`func_800B5BE0`. O equivalente anterior dessa função comparava o **endereço**
+de `D_8008619F` com `-1`, em vez de ler seu byte, e passava um conteúdo onde
+o original passava o ponteiro da global. A contagem funcional é um inventário
+dos resultados registrados, não uma prova universal de todos os caminhos.
+Revalidar acessos suspeitos e adicionar fixtures que alcancem seus ramos.
+
+Separar etapas aritméticas recuperou `func_800D3408` e `func_800C94DC`: a primeira
+precisa do intermediário em `a0`; na segunda, somar oito ao argumento antes
+dos cálculos evita uma reassociação que muda o scheduling. Os shifts à esquerda
+de valores possivelmente negativos usam conversão para `u32`. Simplificar
+os retornos condicionais recuperou `func_800CA664` no CDK, com casos dirigidos
+para `0`, `-1`, `-2` e truncamento a 16 bits.
+
+As seis funções passaram em 2.800 execuções diferenciais sem inconclusivas.
+O teste completo exigiu separar `func_800AECE0` para manter o GCC 2.8 da vizinha;
+os cinco SHA-1 foram então confirmados. Evidências:
+`validation/byte-matching-2026-10-31-chess-loops.json`.

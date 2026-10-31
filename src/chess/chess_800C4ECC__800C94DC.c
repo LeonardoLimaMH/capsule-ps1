@@ -1,7 +1,32 @@
 #include "common.h"
 #include "ghidra.h"
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C94DC);
+s32 func_800C94DC(s32 unused_arg0, s32 arg1) {
+    extern s16 D_80069BBE[];
+    s32 temp_a1;
+    s32 temp_v1;
+    s32 var_v0;
+    s32 var_v0_2;
+    s32 var_v0_3;
+
+    arg1 += 8;
+
+    temp_v1 = (*D_80069BBE) + 0x100;
+    var_v0_2 = temp_v1;
+    if (temp_v1 < 0) {
+        var_v0_2 = (*D_80069BBE) + 0x10FF;
+    }
+    var_v0_3 = temp_v1 - (s32) ((u32) (var_v0_2 >> 0xC) << 0xC);
+    if (var_v0_3 < 0) {
+        var_v0_3 += 0x1FF;
+    }
+    temp_a1 = arg1 - (var_v0_3 >> 9);
+    var_v0 = temp_a1;
+    if (temp_a1 < 0) {
+        var_v0 = temp_a1 + 7;
+    }
+    return temp_a1 - ((var_v0 >> 3) * 8);
+}
 
 void func_800C9534(s32 unused,u8 *o,s32 v) {
      s32 s = (v << 12) / *(s16 *)(o + 0x4E);
@@ -116,7 +141,12 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA4CC);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA574);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA664);
+s32 func_800CA664(s16 arg0) {
+    if (arg0 == 0) return 1;
+    if (arg0 == -2) return 0;
+    if (arg0 == -1) return 2;
+    return 1;
+}
 
 u32 func_800CA69C(void *arg0) {
     return (u32) (M2C_FIELD(arg0, u8 *, 0xBE1) & 6) >> 1;

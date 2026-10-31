@@ -76,7 +76,17 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B5780);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B58EC);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B5BE0);
+void func_800B5BE0(void *arg0) {
+    extern u8 D_80085428[];
+    M2C_FIELD(arg0, s32 *, 0x38) = (s32) (M2C_FIELD(arg0, s32 *, 0x38) & ~1);
+    if (M2C_GFIELD(D_80085428, u8, 0xD77) == 0xFF) {
+        func_800185F8();
+        return;
+    }
+    if (M2C_FIELD(arg0, s32 *, 0x34) & 0x7F) {
+        func_800B4400(D_80085428);
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B5C4C);
 

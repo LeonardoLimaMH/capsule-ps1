@@ -9,5 +9,3 @@ void func_800AECC4(s32 a,s32 i) {
      *(s32 *)(p+i*16+0x88)=0x20;
 
 }
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800AECC4", func_800AECE0);
