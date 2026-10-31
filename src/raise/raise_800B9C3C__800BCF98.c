@@ -101,7 +101,3 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BCF98", func_800BE1F0);
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BCF98", func_800BE290);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BCF98", func_800BE434);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BCF98", func_800BE61C);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BCF98", func_800BE674);

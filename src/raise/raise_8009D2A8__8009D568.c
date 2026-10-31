@@ -75,4 +75,53 @@ void func_8009DEF0(void) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009D568", func_8009DEF8);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009D568", func_8009DFAC);
+#include "common.h"
+
+s32 func_8009DFAC(void)
+{
+  extern M2C_UNK D_800EFF58[];
+  if (((struct 
+  {
+    u8 _p[4];
+    s32 v;
+  } *) D_800EFF58)->v <= 0)
+  {
+    if (((struct 
+    {
+      u8 _p[0];
+      s32 v;
+    } *) D_800EFF58)->v)
+    {
+      ((struct 
+      {
+        u8 _p[0];
+        s32 v;
+      } *) D_800EFF58)->v = 0;
+      return -1;
+    }
+    else
+    {
+      ((struct 
+      {
+        u8 _p[0];
+        s32 v;
+      } *) D_800EFF58)->v = 0;
+      return -1;
+    }
+  }
+  ((struct 
+  {
+    u8 _p[4];
+    s32 v;
+  } *) D_800EFF58)->v = (s32) (((struct 
+  {
+    u8 _p[4];
+    s32 v;
+  } *) D_800EFF58)->v - 1);
+  func_800BAD90(((struct 
+  {
+    u8 _p[0];
+    s32 v;
+  } *) D_800EFF58)->v);
+  return 0;
+}

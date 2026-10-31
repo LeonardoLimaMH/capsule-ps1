@@ -42,7 +42,33 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800ACB08);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800ACC64);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800ACDE0);
+#include "common.h"
+
+s32 func_800ACDE0(void)
+{
+  extern u8 D_80100F38[];
+  int new_var;
+  unsigned int temp_v1;
+  s32 var_s0;
+  s32 var_s1;
+  void *temp_v0;
+  var_s0 = 0;
+  var_s1 = 1;
+  do
+  {
+    temp_v1 = func_800B1260(var_s1) & 0xFFFF;
+    if (temp_v1 != 0xFFFF)
+    {
+      new_var = temp_v1 * 0x79C;
+      temp_v0 = new_var + D_80100F38;
+      var_s0 = var_s0 | (*((s16 *) (((s8 *) temp_v0) + 0x228)));
+      var_s0 = var_s0 | (((((u32) (*((u32 *) (((s8 *) temp_v0) + 0x798)))) >> 2) >> 3) & 1);
+    }
+    var_s1 -= 1;
+  }
+  while (var_s1 >= 0);
+  return var_s0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800ACE80);
 
