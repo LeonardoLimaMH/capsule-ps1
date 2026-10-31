@@ -258,3 +258,7 @@ src/raise/raise_800DCD44__800DD5B8.c 2.7.2-cdk
 src/yuugi/main_8001A1DC__8001DF7C__8001E180.c 2.7.2-cdk
 src/yuugi/main_8001A1DC__8001DF7C__8001E160.c 2.8.1-psx
 src/raise/raise_8009D2A8__800A6DBC__800A8CB4.c 2.8.1-psx
+src/raise/raise_800DEA54__800E16EC.c 2.7.2-cdk
+src/raise/raise_800D1018__800D1B98__800D2864.c 2.8.1-psx
+src/etc/etc__80099B18.c 2.7.2-cdk
+src/etc/etc__80099AE4.c 2.8.1-psx

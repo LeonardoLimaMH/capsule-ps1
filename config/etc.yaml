@@ -42,6 +42,8 @@ segments:
     subsegments:
       - [0x0, rodata]
       - [0x1BC, c, etc]
+      - [0x22E4, c, etc__80099AE4]
+      - [0x2318, c, etc__80099B18]
       - [0x3F38, c, etc__8009B738]
       - [0x4530, c, etc__8009BD30]
       - [0x8FAC, c, etc__8009BD30__800A07AC]

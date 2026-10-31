@@ -143,6 +143,8 @@ segments:
       - [0x39D40, c, raise_800D1018__800D1540]
       - [0x39D58, c, raise_800D1018__800D1558]
       - [0x3A398, c, raise_800D1018__800D1B98]
+      - [0x3B064, c, raise_800D1018__800D1B98__800D2864]
+      - [0x3B094, c, raise_800D1018__800D1B98__800D2894]
       - [0x44DF8, c, raise_800DC5F8]
       - [0x44E28, c, raise_800DC5F8__800DC628]
       - [0x44E40, c, raise_800DC640]
