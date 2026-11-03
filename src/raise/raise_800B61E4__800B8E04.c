@@ -101,7 +101,30 @@ s32 func_800B8FAC(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B8E04", func_800B91C8);
+s32 func_800B91C8(void) {
+    extern s16 D_800EFF54[];
+
+    switch (*D_800EFF54) {
+    case 0:
+        if (func_800AA60C() == -1) {
+            (*D_800EFF54)++;
+        }
+        break;
+    case 1:
+        func_8009E568();
+        (*D_800EFF54)++;
+        break;
+    case 2:
+        if (func_8009E598() == -1) {
+            (*D_800EFF54)++;
+        }
+        break;
+    case 3:
+        *D_800EFF54 = 0;
+        return 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B8E04", func_800B9284);
 
