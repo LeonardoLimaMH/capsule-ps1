@@ -31,9 +31,10 @@ lote passa nos testes, preparar ou compilar candidatos de outro lote, com um
 limite de processos para evitar competição entre compiladores. Não permitir
 que dois processos integrem alterações no mesmo arquivo ou índice do Git.
 
-O cache atual de `profile_sweep.py` identifica resultados por alvo e função;
-ele **não invalida resultados automaticamente** quando o C ou as ferramentas
-mudam. Usar um arquivo `--results` novo para cada rodada relevante. Registrar
+Desde 2026-11-03, cada linha do `profile_sweep.py` carrega uma impressão digital
+(`fp=`) do C de `equiv/` e do perfil da TU. A função é refeita quando um dos dois
+muda. Mudanças nas **ferramentas** (compilador, `psx_as.py`, flags) ainda não
+invalidam o cache: nesses casos, use um arquivo `--results` novo. Registrar
 commit, hashes dos fontes, perfil, ferramentas, resultado e duração junto ao
 lote. A chave desejável para um cache futuro inclui também headers, flags,
 backend e compilador. Não interpretar um resultado antigo como teste do C atual.
