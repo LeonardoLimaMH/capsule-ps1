@@ -287,3 +287,4 @@ src/yuugi/sdk_libc2_memmove.c 2.7.2-cdk
 src/yuugi/sdk_libgpu_ext.c 2.8.1-psx
 src/yuugi/sdk_libgpu_ext__SetDefDrawEnv.c 2.8.1-psx
 src/raise/raise_800C1360.c 2.7.2-cdk
+src/raise/raise_800DDD70.c 2.7.2-cdk

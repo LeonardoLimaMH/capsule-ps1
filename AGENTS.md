@@ -276,6 +276,32 @@ Detalhes do ambiente, medições e ajustes da máquina: [docs/AMBIENTE.md](docs/
 - **objdiff:** o relatório ignora diferenças só de relocação; os endereços reais
   são provados pelo SHA-1.
 
+### Formas de C que fecharam funções médias (reescrita manual)
+
+Teste estas antes do permuter:
+
+- **Campo de struct na própria instrução:** quando o original tem `lw 0x798(rX)` e o
+  compilado dobra o deslocamento no endereço, declare o global como array de struct
+  e acesse `D[i].campo`. Um cast `((S *)D)[i]` não basta: a declaração tem de ser do
+  tipo struct.
+- **Ponteiro temporário para o elemento:** `q = &D[i]; q->campo`. Muda a alocação de
+  registradores; fechou uma família de três funções de ~460 B.
+- **Campo matriz:** um endereço como `p + 0x48E + i*32 + j*2`, com a base da linha
+  calculada fora do laço, é `p->g[i][j]` com `s16 g[][16]` em `0x48E`.
+- **Fluxo natural em vez de `goto`:** o rascunho do m2c junta ramos com
+  `var = X; goto block`. Reescrito como `if/else` com o comando em cada ramo, o
+  compilador une os ramos sozinho e a ordem das instruções fica como no original.
+- **Argumento faltando:** um global declarado e não usado no rascunho, cujo endereço
+  o original carrega em `$a0` antes de um `jal`, é argumento de uma chamada.
+- **Temporário separado:** `x = n<<1; if (c) t = -x; else t = x;` em vez de
+  `t = n<<1; if (c) t = -t;`.
+- **Tipos naturais do SDK:** parâmetros `short` (`s16`) e tabelas de ponteiros para
+  struct, como em `_ss_score[sep][seq]`.
+- **Um global com vários tipos no mesmo arquivo:** declare uma vez como struct (use
+  `union` se o mesmo campo é lido com larguras diferentes). Nas funções antigas,
+  `(u8 *)D` gera o mesmo código que o `u8[]`. Confira o arquivo inteiro com
+  `.cache/tmp/funccmp2.py` ou com o build.
+
 ## 10. Quando parar uma abordagem
 
 - **Permuter:** pontuação acima de ~500 depois de 120 s quase nunca chega a zero.
