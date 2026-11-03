@@ -95,17 +95,36 @@ O app sobe sozinho quando um agente conecta (`decomp mcp`).
 1. Os agentes trabalham em `/home/decomp/Decomp/capsule-ps1` (branch `decomp-wtf`). Cada
    match é um commit ali.
 2. Os commits voltam para a cópia principal (`~/capsule-ps1` no Ubuntu), onde a prova final
-   é feita:
+   é feita. As duas distribuições não se enxergam, então a ponte é um *bundle* do git numa
+   pasta do Windows:
 
    ```bash
+   # na decomp-wtf
+   cd ~/Decomp/capsule-ps1 && git fetch origin
+   git bundle create /mnt/c/<pasta>/agents.bundle origin/main..decomp-wtf
+   # no Ubuntu
    cd ~/capsule-ps1
-   git fetch //wsl.localhost/decomp-wtf/home/decomp/Decomp/capsule-ps1 decomp-wtf
-   #   ou: git -C /home/decomp/Decomp/capsule-ps1 format-patch ... e git am
-   git cherry-pick <commits>
-   ./run.sh make -j10        # os 5 SHA-1, como sempre
+   git fetch /mnt/c/<pasta>/agents.bundle decomp-wtf:agents
+   git merge --no-ff agents
    ```
 
-   Depois: `progress.py --readme --staged`, commit, push e ByteMatch (AGENTS.md, seção 6).
+3. **Confira cada função dos arquivos alterados**, não só o build:
+
+   ```bash
+   ./run.sh bash .cache/tmp/chk_merge.sh            # funções C que não casam no perfil do arquivo
+   python3 tools/revert_to_asm.py src/<alvo>/<arquivo>.c <função>...   # devolve ao assembly
+   ./run.sh make -j10                               # os 5 SHA-1
+   ```
+
+   O app commita também as mudanças de structs e tipos. Com elas pode ir o C de uma função
+   ainda em andamento, que não casa e quebra o build completo. Na primeira importação
+   (2026-11-03), entraram 12 matches e 5 funções em andamento voltaram ao assembly.
+
+4. Depois: `git rm` dos `equiv/` das funções casadas, `progress.py --readme --staged`,
+   commit, push e ByteMatch (AGENTS.md, seção 6).
+
+5. **Não faça merge do `main` de volta na `decomp-wtf` enquanto um agente estiver numa função
+   devolvida ao assembly:** o merge apagaria o trabalho em andamento dele.
 
 ## Limites que importam neste projeto
 
