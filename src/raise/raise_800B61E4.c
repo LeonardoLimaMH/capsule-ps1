@@ -7,6 +7,8 @@ typedef struct {
     u32 unk38;
 } Obj_800B6624;
 
+void *func_800B6D98();
+
 void func_800B61E4(void) {
     extern u8 D_800EE5D0[];
     extern s32 D_800EF2FC[];
@@ -576,7 +578,98 @@ void func_800B7A8C(void) {
 
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B7A94);
+void func_800B7A94(void) {
+    typedef struct {
+        u8 _p00[0x38];
+        u32 unk38 : 1;
+        u32 _b38 : 31;
+    } S_EEC48;
+    typedef struct {
+        u8 _p00[0x108];
+        s32 unk108;
+        s32 unk10C;
+    } S_8ED68;
+    typedef struct {
+        u16 unk00;
+        u8 _p02[0x6];
+        u8 unk08[0x82];
+        u16 unk8A;
+        u8 _p8C[0x11C];
+    } S_91618;
+    typedef struct {
+        u8 _p00[0x8];
+        u32 unk08;
+        u8 _p0C[0x30];
+    } S_63940;
+    extern S_63940 D_80063940[];
+    extern u16 D_8006AF80[];
+    extern u8 D_8006D670[][8];
+    extern S_8ED68 D_8008ED68[];
+    extern S_91618 D_80091618[];
+    extern s16 D_800EEB90[];
+    extern struct {
+        s16 unk0;
+        s16 unk2;
+    } D_800EEB94[];
+    extern S_EEC48 *D_800EEC48[];
+    s32 s5 = 0;
+    s32 s3 = 0;
+    s32 i;
+    u16 cx;
+    u16 cy;
+    s32 r;
+    u16 id;
+    u16 a2;
+    S_63940 *s4;
+    u16 v1;
+    void *p6D670;
+
+    if (*D_8006AF80 != 0xFFFF && (*D_800EEC48)->unk38 != 1) {
+        i = 0;
+        cx = D_8008ED68->unk108 / 2;
+        cy = D_8008ED68->unk10C / 2;
+        do {
+            r = func_800AECC8((u16)i);
+            if (r != -1) {
+                switch (r) {
+                case 0:
+                    s5 = -8;
+                    s3 = -4;
+                    break;
+                case 1:
+                    s5 = 8;
+                    if (D_80091618[*D_8006AF80].unk8A == 0xFFFF) {
+                        s5 = 0;
+                        s3 = 0;
+                    } else {
+                        s3 = 0xC;
+                    }
+                    break;
+                case 2:
+                    break;
+                }
+                if (r != 2) {
+                    id = D_80091618[(u16)i].unk00;
+                    a2 = D_800EEB94[r != *D_800EEB90].unk2;
+                    s4 = &D_80063940[id];
+                    v1 = (s4->unk08 >> 12) & 3;
+                    p6D670 = D_8006D670[v1];
+                    if ((s16)a2 == 5 || r == 0) {
+                        func_8001F1A8((s16)(s5 - (cx - 0x59)), (s16)(s3 - (cy - 0x41)), 0, 1, 0, D_80091618[(u16)i].unk08, 0, 8, (s16)a2);
+                    }
+                    if ((s16)a2 == 5) {
+                        func_8001F1A8((s16)(s5 - (cx - 0x59)), (s16)(s3 - (cy - 0x55)), 0, 0, 0, s4, 0, 9, (s16)a2);
+                        func_8001F7A4((s16)(s5 - (cx - 0x59)), (s16)(s3 - (cy - 0x64)), 0, 0, (D_80063940[id].unk08 >> 8) & 0xF, (s16)a2);
+                        func_80018EF4((s16)(s5 - (cx - 0x5E)), (s16)(s3 - (cy - 0x75)), v1, 1, (s16)a2);
+                        func_8001F1A8((s16)(s5 - (cx - 0x6E)), (s16)(s3 - (cy - 0x77)), 0, 0, 0, p6D670, 0, v1 == 1 ? 4 : 3, (s16)a2);
+                    }
+                }
+                func_800B55B8(r, (u16)i);
+            }
+            i++;
+        } while ((u16)i < 6);
+    }
+}
 
 void func_800B7E68(void) {
 
