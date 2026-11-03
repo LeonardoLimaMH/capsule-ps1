@@ -3,6 +3,15 @@
 
 #include "common.h"
 
+typedef struct {
+    s16 vx, vy, vz, pad;
+    s16 dx, dx_pad;
+    s16 dz, dz_pad;
+    s16 sx, sy;
+    s32 p;
+    s32 flag;
+} S_800EFCF4_Work;
+
 void func_800DD3D8(s16 arg0, s16 arg1) {
     extern u8 D_80018600[];
     extern int func_800DD2EC();

@@ -1,6 +1,14 @@
 #include "common.h"
 #include "yuugi.h"
 
+typedef struct {
+    s16 x;
+    s16 y;
+    s32 f_4;
+    u8 f_8[0x10];
+} S_800637AC;
+extern S_800637AC D_800637AC[];
+
 void func_8001F918(void) {
     func_80012508();
 }
@@ -10,12 +18,6 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_8001F938);
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_8001FA10);
 
 #include "common.h"
-typedef struct {
-    u8 _p0[0x4];
-    s32 f_4;
-    u8 _p8[0x10];
-} S_800637AC;
-extern S_800637AC D_800637AC[];
 extern s8 D_80085429[];
 s32 func_8001FAD4(s32 i)
 {
