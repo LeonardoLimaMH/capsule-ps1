@@ -13,8 +13,10 @@ amostra de 57 funções e não casaram nenhuma: o jogo usa as flags padrão.
 O primeiro perfil testado é o da unidade de tradução onde a função está hoje: um
 casamento nele entra no build sem separar arquivos (tools/autodecomp.py --apply).
 
-Resultados (retomável: funções já registradas não são refeitas):
-  .cache/sweep/results.tsv          alvo, função, resultado, perfil, perfil da TU, diferença
+Resultados (retomável: funções já registradas não são refeitas, a menos que o C de
+equiv/ ou o perfil da TU tenham mudado desde a linha gravada):
+  .cache/sweep/results.tsv          alvo, função, resultado, perfil, perfil da TU, diferença,
+                                    fp=<sha1 do C + perfil da TU> (linhas sem fp contam como velhas)
   .cache/sweep/<alvo>/<func>.c/.gcc candidatos casados, no formato do autodecomp
 
 Uso (dentro do container):
@@ -24,6 +26,7 @@ Uso (dentro do container):
 """
 import argparse
 import concurrent.futures
+import hashlib
 import pathlib
 import re
 import shutil
@@ -99,6 +102,12 @@ def try_profile(target, func, src, prof):
     return "DIFERENTE", m.group(1)[len("DIFERENTE "):]
 
 
+def fingerprint(target, func, tu):
+    """Identifica a entrada da varredura: o C de equiv/ e o perfil da TU onde a função está."""
+    src = (ROOT / "equiv" / target / f"{func}.c").read_bytes()
+    return "fp=" + hashlib.sha1(src + b"\0" + tu.encode()).hexdigest()[:16]
+
+
 def sweep_one(target, func, tu):
     src = ROOT / "equiv" / target / f"{func}.c"
     best = None
@@ -109,14 +118,15 @@ def sweep_one(target, func, tu):
             d.mkdir(parents=True, exist_ok=True)
             shutil.copy(src, d / f"{func}.c")
             (d / f"{func}.gcc").write_text(prof + "\n", encoding="utf-8")
-            return (target, func, "MATCH", prof, tu, "")
+            return (target, func, "MATCH", prof, tu, "", fingerprint(target, func, tu))
         if res == "DIFERENTE":
             n = int(re.match(r"\((\d+)", info).group(1)) if re.match(r"\((\d+)", info) else 10 ** 6
             if best is None or n < best[0]:
                 best = (n, prof, info)
         elif best is None:
             best = (10 ** 6, prof, info)
-    return (target, func, "DIFERENTE" if best[0] < 10 ** 6 else "ERRO", best[1], tu, best[2])
+    return (target, func, "DIFERENTE" if best[0] < 10 ** 6 else "ERRO", best[1], tu, best[2],
+            fingerprint(target, func, tu))
 
 
 def stage(target, every=False):
@@ -125,9 +135,18 @@ def stage(target, every=False):
     auto = ROOT / ".cache" / "auto" / target
     auto.mkdir(parents=True, exist_ok=True)
     n = 0
+    # última linha de cada função, e só se ainda vale para o C e a TU de agora
+    current = {f: fingerprint(target, f, tu) for f, tu in pending(target)}
+    latest = {}
     for line in RESULTS.read_text(encoding="utf-8").splitlines():
-        t, func, res, prof, tu = line.split("\t")[:5]
-        if t == target and res == "MATCH" and (every or prof == tu):
+        p = line.split("\t")
+        if p[0] == target:
+            latest[p[1]] = p
+    for func, p in latest.items():
+        t, _, res, prof, tu = p[:5]
+        if p[-1] != current.get(func):
+            continue
+        if res == "MATCH" and (every or prof == tu):
             shutil.copy(SWEEP / t / f"{func}.c", auto / f"{func}.c")
             (auto / f"{func}.gcc").write_text(prof + "\n", encoding="utf-8")
             n += 1
@@ -154,13 +173,19 @@ def main():
     if a.stage:
         stage(a.stage, a.all)
         return
-    done = set()
+    # uma linha só vale se o C e o perfil da TU continuam os mesmos (fp na última coluna)
+    seen = {}
     if RESULTS.exists():
-        done = {tuple(l.split("\t")[:2]) for l in RESULTS.read_text(encoding="utf-8").splitlines()}
+        for l in RESULTS.read_text(encoding="utf-8").splitlines():
+            p = l.split("\t")
+            if len(p) >= 7 and p[-1].startswith("fp="):
+                seen[(p[0], p[1])] = p[-1]
+    done = set()
     if a.skip_matched:
-        done |= {tuple(l.split("	")[:2]) for l in (ROOT / a.skip_matched).read_text(encoding="utf-8").splitlines()
-                 if l.split("	")[2] == "MATCH"}
-    work = [(t, f, tu) for t in a.targets for f, tu in pending(t) if (t, f) not in done]
+        done |= {tuple(l.split("\t")[:2]) for l in (ROOT / a.skip_matched).read_text(encoding="utf-8").splitlines()
+                 if l.split("\t")[2] == "MATCH"}
+    work = [(t, f, tu) for t in a.targets for f, tu in pending(t)
+            if (t, f) not in done and seen.get((t, f)) != fingerprint(t, f, tu)]
     total = len(work)
     if a.limit:
         work = work[:a.limit]

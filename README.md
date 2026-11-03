@@ -195,6 +195,10 @@ disco), `asm/` (assembly desmontado), `build/`.
 | `tu_boundaries.py` / `plan_tus.py` | deduzem e aplicam a separação em unidades de tradução |
 | `split_tu.py` | separa um `.c` numa fronteira de função (atualiza YAML, caminhos e compilador) |
 | `permute.py` | prepara e roda o decomp-permuter em funções quase casadas |
+| `trimargs.py` / `retype.py` | buscas gulosas: tiram argumentos inventados pelo m2c / testam outros tipos inteiros nas locais |
+| `bytearith.py` / `index_form.py` / `structidx.py` | reescrevem a aritmética em bytes do m2c como ponteiro `u8*` com largura do assembly / índice de array tipado / array de struct sintetizada |
+| `rodata_migrate.py` | integra funções com jump table dando o trecho do `.rodata` ao objeto C |
+| `profile_sweep.py` | compila o C de `equiv/` em todos os perfis; retomável, com invalidação quando o C ou a TU mudam |
 | `assign_compilers.py` | define o compilador de cada arquivo pela evidência de byte-matching e cria fronteiras de TU onde o compilador troca (`--split`) |
 | `full_asm.py` | gera o assembly de todas as funções (inclusive as já em C) em `.cache/fullasm`, para análise |
 | `handwritten.py` | detecta funções que eram assembly no original (COP0/GTE, código que continua na próxima função, leitura de temporário antes da escrita) → `config/handwritten.<alvo>.txt` |
@@ -656,6 +660,58 @@ não corresponde ao mesmo estado. Em trabalho paralelo, repetir o cálculo se o
 Não copiar percentuais de logs antigos ou da árvore temporária de outra rodada.
 Os ciclos automáticos também recalculam e verificam o README depois de preparar
 os fontes e antes de executar o commit.
+
+#### 7. Alavancas que renderam fora do CHESS (rodada de 2026-10-31: 5,86% → 7,59%)
+
+Em ordem de rendimento, para YUUGI, SLPM, RAISE e ETC (cerca de 150 funções):
+
+1. **Compilador errado no arquivo.** Muitas funções casam em `2.7.2-cdk` ou
+   `2.8.1-psx` dentro de arquivos marcados com outro compilador. Compile cada
+   candidato nos quatro compiladores antes de mexer no C.
+   - Se as funções C já existentes no arquivo compilam igual no outro compilador,
+     troque o perfil do arquivo inteiro em `config/compilers.txt`.
+   - Senão, isole a função com `tools/split_tu.py`. Ele agora também copia os
+     typedefs e externs do meio do arquivo para o novo TU.
+   - Depois de qualquer divisão: `rm -rf asm && make split && make`. A divisão
+     sozinha tem de manter os 5 SHA-1.
+2. **Permuter no melhor compilador de cada função** (`tools/permute.py --gcc <melhor>`).
+   - Nas funções a 4–10 diferenças, cerca de 1 em cada 4 casou com 75 s.
+   - Confira todo zero com `tools/match.py`: a pontuação do permuter ignora o
+     tamanho do quadro de pilha (`volatile pad`), e dois resultados eram falsos.
+3. **Array de struct em vez de aritmética em bytes.** `tools/structidx.py` troca
+   `M2C_FIELD((i * 0x110) + D_X, T *, off)` por `D_X[i].f_off`. O GCC só põe o
+   deslocamento do campo na própria instrução quando o acesso é a um campo tipado.
+4. **Switch com tabela de saltos.** `tools/rodata_migrate.py <alvo> <função> <c>`
+   integra a função e dá o trecho do `.rodata` ao objeto C (`[off, .rodata, arquivo]`
+   no YAML). Exige trecho contíguo e o mesmo número de bytes gerado pelo C.
+5. **Loads do SDK montados pelo registrador de destino.** Parte do SDK expande
+   `lbu $2,sym($4)` pelo destino, como o GNU as, e não por `$at`.
+   - As funções vão em `config/destload.<alvo>.txt` (lido por `tools/psx_as.py`).
+   - Liste só funções cujo original nunca expande por `$at`.
+6. **Ajustes pequenos que fecharam casos:**
+   - `tools/trimargs.py` tira argumentos que o m2c inventa em chamadas.
+   - `tools/retype.py` testa outros tipos inteiros nas variáveis locais.
+   - Tamanho certo dos arrays locais quando só o quadro de pilha difere.
+   - Funções variádicas com `...` e o `va_start` do PsyQ (`ap = (char *)&fmt + sizeof(fmt)`).
+
+**Armadilhas da integração:**
+- Candidatos de arquivos diferentes trazem typedefs repetidos e o mesmo global
+  declarado com tipos diferentes. Unifique, depois confira que todas as funções C
+  do arquivo continuam casando no compilador do arquivo.
+- Listas geradas pelo Python do Windows têm CRLF: remova o `\r` antes de usá-las no bash.
+
+**Retomada segura de varreduras:** `tools/profile_sweep.py` grava em cada linha de
+`.cache/sweep/results.tsv` uma impressão digital (`fp=`) do C de `equiv/` e do perfil
+da TU. Uma função é refeita quando um dos dois muda. Linhas antigas, sem `fp`, contam
+como velhas. O `--stage` usa só a linha mais recente e válida de cada função.
+
+**Coordenação entre as duas IAs:**
+- Cada uma trabalha numa cópia própria (container ou worktree). Antes de começar,
+  confira `git log` e `git status` da pasta compartilhada.
+- Uma função citada como pendente pela outra pode já estar em `src/`: procure
+  `INCLUDE_ASM(..., <função>)` antes de refazer.
+- Faça commit e push a cada lote validado, com os 5 SHA-1, e use
+  `progress.py --readme --staged`.
 
 <!-- BYTE_MATCHING_STRATEGY:END -->
 
