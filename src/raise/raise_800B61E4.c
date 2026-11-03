@@ -7,7 +7,7 @@ typedef struct {
     u32 unk38;
 } Obj_800B6624;
 
-void *func_800B6D98();
+void *func_800B6D98(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u16 arg4, void *arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, u16 arg10, s16 arg11);
 
 void func_800B61E4(void) {
     extern u8 D_800EE5D0[];
