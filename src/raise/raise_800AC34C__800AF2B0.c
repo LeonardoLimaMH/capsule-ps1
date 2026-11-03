@@ -1,5 +1,13 @@
 #include "common.h"
 
+/* entrada de 0x1A8 bytes da tabela D_80091618 */
+typedef struct {
+    u16 unk0;
+    u8 pad2[0xE];
+    u16 unk10;
+    u8 pad12[0x1A8 - 0x12];
+} S_80091618;
+
 void func_800AF2B0(void) {
     func_800AF380();
     func_800AF760();
