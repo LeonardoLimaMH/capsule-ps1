@@ -111,7 +111,6 @@ src/raise/raise_8009D2A8__800A9738.c 2.8.1-psx
 src/raise/raise_800AC34C__800B1150.c 2.8.1-psx
 src/raise/raise_800B9B2C.c 2.8.1-psx
 src/raise/raise_800B9C3C__800BE7A0.c 2.8.1-psx
-src/raise/raise_800B9C3C__800BEBD8.c 2.8.1-psx
 src/raise/raise_800B9C3C__800BF154.c 2.8.1-psx
 src/raise/raise_800BFA3C__800C0020.c 2.8.1-psx
 src/raise/raise_800CF2E4__800D0D40.c 2.8.1-psx
@@ -282,3 +281,4 @@ src/raise/raise_800CF2E4__800D0C3C.c 2.7.2-cdk
 src/yuugi/main_8001A1DC__8001CDE0.c 2.7.2-cdk
 src/raise/raise_800B61E4__800B81C4__800B821C.c 2.7.2-cdk
 src/raise/raise_800B61E4__800B81C4.c 2.8.1-psx
+src/raise/raise_800B9C3C__800BEBD8.c 2.7.2-cdk
