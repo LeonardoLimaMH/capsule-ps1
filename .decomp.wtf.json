@@ -1,0 +1,14 @@
+{
+  "game": {
+    "what": "a imagem do disco SLPM-86096 (o arquivo .bin do dump BIN/CUE)",
+    "path": "orig/SLPM-86096.bin",
+    "sha1": "d97789c648b559769499d161f83d937cc8208299",
+    "help": "O projeto tem 5 executáveis (YUUGI.EXE, SLPM_860.96, CHESS.BIN, RAISE.BIN, ETC.BIN): entregue o .bin do disco inteiro, não um executável. A preparação extrai o disco (tools/extract_disc.py), gera o asm (make split), confere os 5 SHA-1 e gera os objetos do objdiff."
+  },
+  "setup": [
+    ["python", "tools/extract_disc.py", "orig/SLPM-86096.bin", "disc"],
+    ["./run.sh", "make", "split"],
+    ["./run.sh", "make", "-j8"],
+    ["./run.sh", "python3", "tools/objdiff_report.py", "--objects"]
+  ]
+}

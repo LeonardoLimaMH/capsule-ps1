@@ -3,6 +3,7 @@
 .env.*
 disc/
 disc_manifest.json
+orig/
 *.bin
 *.BIN
 *.EXE
