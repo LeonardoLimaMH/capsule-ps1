@@ -91,7 +91,42 @@ s32 func_800ACDE0(void)
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800ACE80);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800ACFFC);
+s32 func_800ACFFC(void) {
+    extern volatile u16 D_8006AF80[];
+    extern u32 D_8008EDF0[];
+    extern s16 D_80078C28[];
+    extern S_800EEB9C D_800EEB9C;
+    S_800EEB9C *p;
+    u32 *temp_a1;
+
+    if (*D_8006AF80 != 0xFFFF) {
+        if (func_800AEEDC(*D_8006AF80) != 0) {
+            return 0;
+        }
+        if (func_800D1548() != 1 && (*D_8008EDF0 & 0x80)) {
+            p = &D_800EEB9C;
+            if (p->unk8 != 0) {
+                return 0;
+            }
+            if (*D_80078C28 != 0) {
+                return 0;
+            }
+            if (p->unk10 != 0) {
+                p->unk24 = 5;
+                if (p->unk18 != 1) {
+                    func_80034AB0(0x48);
+                    p->unk18 = 1;
+                    temp_a1 = (u32 *)p->unk98[p->unk24];
+                    temp_a1[0x38 / 4] &= ~1;
+                    func_800B5BA0(1);
+                    func_800B70A0(0);
+                }
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AD0FC);
 
