@@ -454,15 +454,30 @@ def pending_functions(target):
     return out
 
 
+_COMPILERS = {}
+
+
 def file_compiler(path):
-    """Compilador de um .c, conforme config/compilers.txt (padrão: GCC 2.7.2)."""
+    """Compilador de um .c, conforme config/compilers.txt (padrão: GCC 2.7.2).
+
+    O arquivo é lido uma vez e comparado por caminho relativo: resolver os caminhos a
+    cada linha e a cada .c custava centenas de milhares de acessos ao disco montado
+    no container (o --apply levava mais de 10 minutos)."""
     cfg = ROOT / "config" / "compilers.txt"
-    if cfg.exists():
-        for l in cfg.read_text(encoding="utf-8").splitlines():
-            p = l.split("#")[0].split()
-            if len(p) == 2 and (ROOT / p[0]).resolve() == path.resolve():
-                return p[1]
-    return "2.7.2-psx"
+    stamp = cfg.stat().st_mtime if cfg.exists() else None
+    if _COMPILERS.get("stamp") != stamp:
+        _COMPILERS.clear()
+        _COMPILERS["stamp"] = stamp
+        if cfg.exists():
+            for l in cfg.read_text(encoding="utf-8").splitlines():
+                p = l.split("#")[0].split()
+                if len(p) == 2:
+                    _COMPILERS[pathlib.PurePosixPath(p[0]).as_posix()] = p[1]
+    try:
+        key = pathlib.Path(path).resolve().relative_to(ROOT.resolve()).as_posix()
+    except ValueError:
+        key = pathlib.PurePath(path).as_posix()
+    return _COMPILERS.get(key, "2.7.2-psx")
 
 
 EXTERN_DECL = re.compile(r"extern\s+[^;()]*?\b(\w+)\s*(\[[^\]]*\])?\s*;")

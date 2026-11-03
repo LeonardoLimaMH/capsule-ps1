@@ -12,7 +12,17 @@ s32 func_80023A90(void) {
     return func_80012200(func_8001F8D8);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918__80023964", func_80023ABC);
+#include "common.h"
+
+void func_80023ABC(void)
+{
+  extern M2C_UNK D_80069A5C[];
+  extern s32 D_80078C04;
+  s8 *new_var;
+  new_var = (s8 *) ((D_80078C04 * 0x18) + ((u8 *) D_80069A5C));
+  func_800121B4(*((s32 *) (new_var + 4)));
+  func_800121C4();
+}
 
 void func_80023B04(void) {
 
