@@ -28,7 +28,23 @@ void func_800B1150(void) {
     (*D_800EEB80) = 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C__800B1150", func_800B1198);
+s32 func_800B1198(void)
+{
+  extern u8 D_800EEB58[];
+  extern struct { u8 pad[0x30]; u16 f_30[10]; } D_8006AFCC;
+  s32 r;
+  s32 i;
+
+  r = 0;
+  for (i = 0; i < 10; i++)
+  {
+    if (D_800EEB58[i] != 0 && D_8006AFCC.f_30[i] == 1)
+    {
+      r |= 1;
+    }
+  }
+  return r;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C__800B1150", func_800B11F4);
 
