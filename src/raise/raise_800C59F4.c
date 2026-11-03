@@ -66,7 +66,53 @@ s32 func_800C5C30(s32 unused, s32 i) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C59F4", func_800C5CA0);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C59F4", func_800C5EFC);
+void func_800C5EFC(s32 a0, s32 a1) {
+    typedef struct {
+        u8 _p00[0x30];
+        u32 b30_0 : 3;
+        u32 _b30_3 : 29;
+        u32 _b34_0 : 8;
+        u32 b34_8 : 1;
+        u32 b34_9 : 1;
+        u32 b34_10 : 2;
+        u32 b34_12 : 4;
+        u32 _b34_16 : 16;
+        u32 b38_0 : 1;
+        u32 _b38_1 : 31;
+    } S_Obj;
+    typedef struct {
+        u8 _p00[0x184];
+        S_Obj *unk184;
+        u8 _p188[0x4];
+        S_Obj *unk18C;
+        u8 _p190[0x60C];
+    } S_100F38;
+    extern s16 D_80078C20[];
+    extern s32 D_800EF350[];
+    S_100F38 *p;
+    s32 v;
+
+    p = &((S_100F38 *)D_80100F38)[func_800B1260(a0) & 0xFFFF];
+    switch (a1) {
+    case 1:
+        p->unk184 = (S_Obj *)func_800D4BE4();
+        p->unk184->b38_0 = 1;
+        p->unk184->b34_9 = a0;
+        p->unk184->b34_10 = 0;
+        p->unk184->b34_12 = 0;
+        p->unk18C = (S_Obj *)func_800B6D98(1, 0, 0, 7, 0, D_800EE5D0, *D_800EF350, 0, 1, 0, 2, 0);
+        p->unk18C->b38_0 = 1;
+        p->unk18C->b30_0 = 1;
+        p->unk18C->b34_9 = a0;
+        p->unk18C->b34_10 = 0;
+        break;
+    case 0:
+        v = 1 - *D_80078C20;
+        p->unk184->b34_8 = v;
+        p->unk18C->b34_8 = v;
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C59F4", func_800C60E0);
 
