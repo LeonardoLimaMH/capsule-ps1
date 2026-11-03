@@ -58,10 +58,13 @@ extern s32 func_800B1260(s32);
 extern s32 func_800E1820(u16), func_800E17F8(u16), func_800E16AC(u16), func_800E1674(u16), func_800E14C4(u16);
 extern s32 func_800E1140(u16), func_800E1388(u16), func_800E1594(u16), func_800E1624(u16);
 extern void func_800B0740(u16, u16, u16, u16);
-u16 func_800B0440(s32 a0, u16 a1) {
+u16 func_800B0440(s32 a0, s32 a1) {
+    s32 a = a0;
+    u16 b = a1;
     s32 lo, hi, i, j;
-    u16 k, r;
+    u16 r;
     s32 c;
+    u16 k;
 
     if (func_800D1548(a0, a1) == 1) {
         return 0;
@@ -74,10 +77,11 @@ u16 func_800B0440(s32 a0, u16 a1) {
         hi = 3;
     }
     for (i = 1; i >= 0; i--) {
-        k = func_800B1260(i);
-        if (k == 0xFFFF) {
+        j = (u16)func_800B1260(i);
+        if (j == 0xFFFF) {
             continue;
         }
+        k = j;
         if (D_80091618[k].unk10 == 0xFFFF) {
             c = 1;
         } else {
@@ -86,20 +90,20 @@ u16 func_800B0440(s32 a0, u16 a1) {
         if (c == 1) {
             continue;
         }
-        if (func_800E1820(k) != 0) return 0;
-        if (func_800E17F8(k) == 0) return 0;
-        if (func_800E16AC(k) == 1) return 0;
-        if (func_800E1674(k) == 1) return 0;
-        if (func_800E14C4(k) != 0) return 0;
-        if (func_800E1140(k) == 0) return 0;
-        if (func_800E1388(k) != 1) return 0;
-        if (func_800E1594(k) == 1) return 0;
-        if (func_800E1624(k) == 1) return 0;
+        if (func_800E1820((u16)j) != 0) return 0;
+        if (func_800E17F8((u16)j) == 0) return 0;
+        if (func_800E16AC((u16)j) == 1) return 0;
+        if (func_800E1674((u16)j) == 1) return 0;
+        if (func_800E14C4((u16)j) != 0) return 0;
+        if (func_800E1140((u16)j) == 0) return 0;
+        if (func_800E1388((u16)j) != 1) return 0;
+        if (func_800E1594((u16)j) == 1) return 0;
+        if (func_800E1624((u16)j) == 1) return 0;
     }
     for (j = lo; j <= hi; j++) {
-        r = D_800EEAA8[j](a0, a1);
+        r = D_800EEAA8[j](a, b);
         if (r != 0) {
-            func_800B0740(a0, a1, j, r);
+            func_800B0740(a, b, j, r);
             return j + 1;
         }
     }
