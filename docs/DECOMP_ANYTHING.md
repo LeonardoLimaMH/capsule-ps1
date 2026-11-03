@@ -18,18 +18,26 @@ AGENTS.md, seções 6 e 9).
 
 ## Instalação nesta máquina (2026-11-03)
 
+A instância usada é a **desktop**, instalada pelo usuário, numa distribuição WSL própria:
+
 | O quê | Onde |
 |---|---|
-| código baixado | `C:\Users\leonardo.queiroz\Documents\Projects\RECOMP\decomp.anything` (clone do GitHub) |
-| instalação usada | `~/decomp.anything` no Ubuntu do WSL2: clone do anterior, com `uv sync` |
-| `uv` | `~/.local/bin/uv` (instalador oficial da Astral) |
-| cópia de trabalho dos agentes | `~/Decomp/capsule-ps1`, branch `decomp-wtf`, criada com `decomp fork ~/capsule-ps1` |
-| app | `http://127.0.0.1:6464` (o link com a chave de acesso é impresso por `decomp url`) |
+| distribuição WSL | `decomp-wtf` (Debian 13, usuário `decomp`) |
+| app | `http://127.0.0.1:6465` (o link com a chave de acesso é impresso por `decomp url`) |
+| executável | `/home/decomp/.local/bin/decomp` |
+| cópia de referência do projeto | `/home/decomp/src/capsule-ps1` (clone do GitHub, com `disc/` e `objdiff-cli`) |
+| cópia de trabalho dos agentes | `/home/decomp/Decomp/capsule-ps1`, branch `decomp-wtf`, criada com `decomp fork` |
+| Node | 22.23.4 em `/usr/local`. A atualização do REA exige Node ≥ 22.23.4; o Debian trazia o 20.19 |
+| Docker | integração do Docker Desktop ligada também para a `decomp-wtf` (`IntegratedWslDistros`) |
 
-Ele exige Linux; por isso roda no WSL2, nunca na pasta do Windows.
+Notas:
 
-Na cópia dos agentes também foram colocados `disc/` e `.cache/bin/objdiff-cli`. Depois
-disso, `./run.sh make split` e `make` deram os 5 SHA-1.
+- Nas duas cópias da `decomp-wtf`, `./run.sh make split` e `make` dão os 5 SHA-1, e o
+  relatório dá o mesmo número do ByteMatch.
+- Uma instalação de teste anterior, no Ubuntu (`~/decomp.anything`, porta 6464), está
+  parada e não é usada. O código baixado também está em
+  `C:\Users\leonardo.queiroz\Documents\Projects\RECOMP\decomp.anything`.
+- As distribuições do WSL compartilham a rede: a porta de uma aparece também nas outras.
 
 ### Como o build é chamado
 
@@ -46,24 +54,26 @@ O comando refaz só os objetos que mudaram (2–3 s). O `objdiff.json` é gerado
 
 ```bash
 # Claude Code no Windows (já feito; config em %USERPROFILE%\.claude.json)
-claude mcp add decomp -s user -- wsl.exe -d Ubuntu -- /home/leonardoqueiroz/decomp.anything/.venv/bin/decomp mcp --name claude-code
+claude mcp add decomp -s user -- wsl.exe -d decomp-wtf -- /home/decomp/.local/bin/decomp mcp --name claude-code
 
-# Codex (a outra IA): dentro do WSL
-cd ~/decomp.anything && uv run decomp connect codex
+# Codex (a outra IA): dentro da distribuição decomp-wtf
+wsl -d decomp-wtf
+decomp connect codex
 ```
 
-O app sobe sozinho quando um agente conecta (`decomp mcp`). Para abrir no navegador:
-`cd ~/decomp.anything && uv run decomp url`.
+O app sobe sozinho quando um agente conecta (`decomp mcp`).
 
 ## Fluxo
 
-1. Os agentes trabalham em `~/Decomp/capsule-ps1` (branch `decomp-wtf`). Cada match é um
-   commit ali.
-2. Os commits voltam para a cópia principal, onde a prova final é feita:
+1. Os agentes trabalham em `/home/decomp/Decomp/capsule-ps1` (branch `decomp-wtf`). Cada
+   match é um commit ali.
+2. Os commits voltam para a cópia principal (`~/capsule-ps1` no Ubuntu), onde a prova final
+   é feita:
 
    ```bash
    cd ~/capsule-ps1
-   git fetch ~/Decomp/capsule-ps1 decomp-wtf
+   git fetch //wsl.localhost/decomp-wtf/home/decomp/Decomp/capsule-ps1 decomp-wtf
+   #   ou: git -C /home/decomp/Decomp/capsule-ps1 format-patch ... e git am
    git cherry-pick <commits>
    ./run.sh make -j10        # os 5 SHA-1, como sempre
    ```
