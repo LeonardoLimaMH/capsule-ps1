@@ -59,6 +59,15 @@ cd ~/capsule-ps1
     tarefas longas em segundo plano.
 - **`run.sh` e `tools/*.sh`** agora têm o bit de execução registrado no git. Os clones
   no Linux saem prontos.
+  - Editar um arquivo pelo caminho `\\wsl.localhost\...` do Windows pode tirar o bit
+    de novo; nesse caso, `chmod +x run.sh`.
+- **`run.sh` no Linux** roda o container com o seu usuário (`--user $(id -u):$(id -g)`).
+  - Sem isso, os arquivos gerados (`asm/`, `build/`, `.cache/fullasm`) ficavam com
+    dono root, e o `make split` seguinte falhava com `PermissionError`.
+  - Ele também define `safe.directory=/work` para o git dentro do container, usado
+    pelo `progress.py --staged`.
+  - Arquivos que já tenham ficado com dono root:
+    `docker run --rm -v "$PWD:/work" ygo-decomp-tc chown -R 1000:1000 /work`.
 
 ## Para a outra IA
 
