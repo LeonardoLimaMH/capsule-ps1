@@ -162,7 +162,35 @@ void func_8001FF48(void) {
 
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_8001FF50);
+void func_8001FF50(void) {
+    extern u8 D_80085428[];
+    extern u8 D_8008ED68[];
+    extern u8 D_800A5E54[];
+    extern s32 func_80012508();
+
+    switch (M2C_GFIELD(D_8008ED68, u16, 0xDC)) {
+    case 0:
+        D_80085428[0] = 0;
+        func_80013668();
+        func_80012508();
+        break;
+    case 1:
+        func_8001A480(3, 0x80097800);
+        func_80019F30(0x110003, func_80012508);
+        *(u16 *)(D_80085428 + 0xA) = 0;
+        func_80012508();
+        break;
+    case 2:
+        M2C_GFIELD(D_80085428, u16, 0xA) += (M2C_GFIELD(D_8008ED68, u8, 0x103) < 2) ? 1 : M2C_GFIELD(D_8008ED68, u8, 0x103);
+        func_80018F90(*(u16 *)(D_80085428 + 0xA), 3);
+        break;
+    case 3:
+        M2C_GFIELD(D_80085428, u16, 0xA) += (M2C_GFIELD(D_8008ED68, u8, 0x103) < 2) ? 1 : M2C_GFIELD(D_8008ED68, u8, 0x103);
+        func_80018F90(*(u16 *)(D_80085428 + 0xA), 3);
+        func_80012200(D_800A5E54);
+        break;
+    }
+}
 
 void func_80020094(void) {
 
