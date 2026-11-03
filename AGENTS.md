@@ -118,6 +118,12 @@ versões antigas se corrigem com
 
 Detalhes do ambiente, medições e ajustes da máquina: [docs/AMBIENTE.md](docs/AMBIENTE.md).
 
+**Bancada de agentes (decomp.anything):** uma cópia do projeto em `~/Decomp/capsule-ps1`
+(branch `decomp-wtf`) está ligada ao decomp.anything. Os agentes reservam funções por
+*claims*, as tentativas ficam registradas e cada match vira um commit ali. Os commits
+voltam para `~/capsule-ps1` por cherry-pick, com os 5 SHA-1 conferidos antes. Setup,
+conexão (Claude Code e Codex) e limites: [docs/DECOMP_ANYTHING.md](docs/DECOMP_ANYTHING.md).
+
 ---
 
 ## 4. Mapa do projeto
