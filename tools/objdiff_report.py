@@ -224,15 +224,56 @@ def upload():
         sys.exit(f"ByteMatch respondeu {err.code}: {err.read().decode('utf-8', 'replace')[:500]}")
 
 
+def build_requested(targets):
+    """Refaz só os objetos pedidos (base: o C do arquivo; alvo: o assembly original). Sai com erro
+    se o C não compila, para quem chamou ver a falha."""
+    global INCREMENTAL
+    comp = {}
+    for l in (ROOT / "config" / "compilers.txt").read_text(encoding="utf-8").splitlines():
+        p = l.split("#")[0].split()
+        if len(p) >= 2:
+            comp[p[0]] = p[1]
+    g0 = set((ROOT / "config" / "g0fill.txt").read_text(encoding="utf-8").split())
+    sp = set((ROOT / "config" / "spfill.txt").read_text(encoding="utf-8").split())
+    bad = 0
+    for t in targets:
+        m = re.fullmatch(r"(?:\./)?build/objdiff/(base|target)/(\w+)/(.+)\.o", t)
+        if not m:
+            continue  # alvos que não são deste build (o make do projeto inteiro) não fazem nada aqui
+        kind, target, stem = m.groups()
+        src = ROOT / "src" / target / f"{stem}.c"
+        if not src.exists():
+            print(f"{t}: {src.relative_to(ROOT)} não existe", file=sys.stderr)
+            bad += 1
+            continue
+        key = src.relative_to(ROOT).as_posix()
+        try:
+            if kind == "target":
+                INCREMENTAL = False
+                build_target(target, src, tu_functions(src.read_text(encoding="utf-8")))
+            else:
+                INCREMENTAL = False  # pedido explícito: sempre recompila
+                build_base(target, src, comp.get(key, "2.7.2-psx").split("+")[0], key in g0, key in sp)
+            print(f"ok {t}")
+        except (SystemExit, subprocess.CalledProcessError) as e:
+            print(f"{t}: {e}", file=sys.stderr)
+            bad += 1
+    sys.exit(1 if bad else 0)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--upload", action="store_true", help="só envia o relatório já gerado")
     ap.add_argument("--objects", action="store_true", help="só os objetos e o objdiff.json (incremental)")
     ap.add_argument("-k", action="store_true", help=argparse.SUPPRESS)  # o decomp.anything acrescenta -k
+    # o decomp.anything pede objetos específicos (build/objdiff/base/<alvo>/<arquivo>.o), como faria com make
+    ap.add_argument("targets", nargs="*", help=argparse.SUPPRESS)
     a = ap.parse_args()
     global INCREMENTAL
     if a.upload:
         upload()
+    elif a.targets:
+        build_requested(a.targets)
     elif a.objects:
         INCREMENTAL = True
         generate(objects_only=True)
