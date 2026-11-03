@@ -1,5 +1,8 @@
 # Yu-Gi-Oh! Monster Capsule Breed & Battle — Decompilação (SLPM-86096)
 
+[![Código casado](https://bytematch.dev/LeonardoLimaMH/capsule-ps1.svg?label=c%C3%B3digo%20casado&measure=matched_code_percent)](https://bytematch.dev/LeonardoLimaMH/capsule-ps1)
+[![Funções](https://bytematch.dev/LeonardoLimaMH/capsule-ps1.svg?label=fun%C3%A7%C3%B5es&measure=matched_functions)](https://bytematch.dev/LeonardoLimaMH/capsule-ps1)
+
 Decompilação do jogo de PlayStation **Yu-Gi-Oh! Monster Capsule: Breed & Battle**
 (Konami, 1998, versão japonesa `SLPM-86096`) para código C que, compilado com o
 mesmo compilador da época, gera **binários idênticos byte a byte** aos do disco
@@ -198,6 +201,7 @@ disco), `asm/` (assembly desmontado), `build/`.
 | `trimargs.py` / `retype.py` | buscas gulosas: tiram argumentos inventados pelo m2c / testam outros tipos inteiros nas locais |
 | `bytearith.py` / `index_form.py` / `structidx.py` | reescrevem a aritmética em bytes do m2c como ponteiro `u8*` com largura do assembly / índice de array tipado / array de struct sintetizada |
 | `rodata_migrate.py` | integra funções com jump table dando o trecho do `.rodata` ao objeto C |
+| `objdiff_report.py` | relatório do objdiff para o [ByteMatch](https://bytematch.dev/LeonardoLimaMH/capsule-ps1) (`make report`; envio com `--upload` no host) |
 | `profile_sweep.py` | compila o C de `equiv/` em todos os perfis; retomável, com invalidação quando o C ou a TU mudam |
 | `assign_compilers.py` | define o compilador de cada arquivo pela evidência de byte-matching e cria fronteiras de TU onde o compilador troca (`--split`) |
 | `full_asm.py` | gera o assembly de todas as funções (inclusive as já em C) em `.cache/fullasm`, para análise |
@@ -239,6 +243,33 @@ Saída esperada do `make`:
 
 Os SHA-1 acima são os dos arquivos do disco `SLPM-86096`; se o seu dump for de
 outra revisão, o `make check` vai acusar a diferença.
+
+### Progresso no ByteMatch
+
+O [ByteMatch](https://bytematch.dev/LeonardoLimaMH/capsule-ps1) lê o relatório do
+objdiff, não este README. O relatório é gerado localmente, porque o build depende do
+disco, que não pode ir para o CI. Ele é enviado pela API de upload do site; nenhum
+binário sai da máquina.
+
+```bash
+./run.sh make report                     # build/objdiff/report.json + functional.json
+python tools/objdiff_report.py --upload  # no host; lê SITE e BYTE_MATCH_TOKEN do .env
+```
+
+- **Unidades:** cada arquivo de `src/` vira uma unidade, nas categorias
+  `<binário>`, `<binário>.game` e `<binário>.sdk`.
+- **Alvo:** o assembly original de todas as funções do arquivo.
+- **Base:** o C do arquivo com `INCLUDE_ASM` vazio (`-DOBJDIFF_BASE`), então só
+  conta o que já é C.
+- **Relocações:** diferenças só de relocação são ignoradas; os endereços reais já
+  são provados pelos 5 SHA-1.
+- **`functional.json`:** lista o C equivalente de `equiv/` ainda não byte-exact, a
+  linha de "Functional C" do ByteMatch, que não conta como progresso.
+  - Confiança `high` por padrão.
+  - `medium` para as funções que divergiram no modo estrito do difftest
+    (`--abi --isolate`).
+- **Quando reenviar:** depois de cada lote integrado.
+- **`objdiff-cli`:** release oficial do `encounter/objdiff` em `.cache/bin/objdiff-cli`.
 
 ---
 

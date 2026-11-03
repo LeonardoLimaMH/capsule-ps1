@@ -43,7 +43,7 @@ chess_ORIG  := disc/MASTER/PSF/CHESS.BIN
 raise_ORIG  := disc/MASTER/PSF/RAISE.BIN
 etc_ORIG    := disc/MASTER/PSF/ETC.BIN
 
-.PHONY: all clean split check progress test bench wip catalog
+.PHONY: all clean split check progress report test bench wip catalog
 .SECONDEXPANSION:
 
 all: check
@@ -99,6 +99,11 @@ split:
 
 progress:
 	@$(PYTHON) tools/progress.py
+
+# relatório do objdiff para o ByteMatch (build/objdiff/); o envio é feito no host:
+# python tools/objdiff_report.py --upload
+report:
+	$(PYTHON) tools/objdiff_report.py
 
 test:
 	@$(PYTHON) -m pytest -q tests

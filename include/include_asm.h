@@ -12,7 +12,9 @@
  * na ordem do arquivo e o maspsx descarta tudo dela exceto as linhas marcadas
  * com "# maspsx-keep".
  */
-#if !defined(M2CTX) && !defined(PERMUTER)
+/* OBJDIFF_BASE: objeto "base" do relatório do objdiff (tools/objdiff_report.py), só com
+   as funções já em C */
+#if !defined(M2CTX) && !defined(PERMUTER) && !defined(OBJDIFF_BASE)
 
 #define INCLUDE_ASM(FOLDER, NAME)                                              \
     void __maspsx_include_asm_hack_##NAME(void) {                              \
