@@ -178,19 +178,11 @@ void func_800B4D60(s32 arg0) {
     extern s32 D_800EEC64[];
     extern void func_800B4E08(s32, s16);
     extern void func_800B6D98(s32, s32, s32, s32, s32, void *, s32, s32, s32, s32, s32, s32);
-    s16 *p = D_800EEB94;
-    s32 a = arg0;
-    s32 *d;
-    s32 x;
 
-    func_800B4E08(a, p[1]);
-    d = D_800EE5D0;
-    if (a == *D_8006AF80) {
-        x = *D_800EEC64;
-    } else {
-        x = d[2] - 2;
-    }
-    func_800B6D98(1, 0x2C, 0x38, p[0], 0, d, x, 1, 1, 0, 2, 1);
+    func_800B4E08(arg0, D_800EEB94[1]);
+    func_800B6D98(1, 0x2C, 0x38, D_800EEB94[0], 0, D_800EE5D0,
+        (arg0 == *D_8006AF80) ? *D_800EEC64 : (D_800EE5D0[2] - 2),
+        1, 1, 0, 2, 1);
 }
 
 #include "common.h"
