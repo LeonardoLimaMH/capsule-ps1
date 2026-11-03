@@ -427,7 +427,17 @@ s32 func_800AEC94(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AECC8);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AED5C);
+void func_800AED5C(s32 arg0, s32 arg1) {
+    extern s16 D_800EEAE4[];
+    extern u16 D_800EEB14[];
+    extern u8 D_80069AD4[];
+    u8 *p = D_80069AD4;
+    s32 v = D_800EEB14[arg0] + (arg1 * D_800EEAE4[arg0]) / 1200;
+
+    *(s16 *)(p + 0x7C) = v;
+    *(s16 *)(p + 0x76) = v;
+    *(s16 *)(p + 0x70) = v;
+}
 
 s32 func_800AEDC4(void) {
     typedef struct {
