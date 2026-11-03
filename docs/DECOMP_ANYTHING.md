@@ -23,7 +23,7 @@ A instância usada é a **desktop**, instalada pelo usuário, numa distribuiçã
 | O quê | Onde |
 |---|---|
 | distribuição WSL | `decomp-wtf` (Debian 13, usuário `decomp`) |
-| app | `http://127.0.0.1:6465` (o link com a chave de acesso é impresso por `decomp url`) |
+| app | `http://127.0.0.1:6464`, a porta padrão (o link com a chave de acesso é impresso por `decomp url`) |
 | executável | `/home/decomp/.local/bin/decomp` |
 | cópia de referência do projeto | `/home/decomp/src/capsule-ps1` (clone do GitHub, com `disc/` e `objdiff-cli`) |
 | cópia de trabalho dos agentes | `/home/decomp/Decomp/capsule-ps1`, branch `decomp-wtf`, criada com `decomp fork` |
@@ -38,6 +38,10 @@ Notas:
   parada e não é usada. O código baixado também está em
   `C:\Users\leonardo.queiroz\Documents\Projects\RECOMP\decomp.anything`.
 - As distribuições do WSL compartilham a rede: a porta de uma aparece também nas outras.
+  O app só esteve na 6465 porque a instância de teste ocupava a 6464.
+- **Docker dentro do app:** a integração do Docker põe o usuário `decomp` no grupo
+  `docker`. Um app aberto antes disso não tem o grupo e falha com `permission denied ...
+  docker.sock`. Reinicie o app: `decomp stop` e `decomp url`.
 
 ### Preparação: o manifesto `.decomp.wtf.json`
 
