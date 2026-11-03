@@ -24,6 +24,22 @@ extern s32 RotTransPers(void *, s32 *, s32 *, s32 *);
 extern void func_800DE420(s32, s32, s16 *, s16 *);
 extern s32 func_800DD9F0(s32, s32, s32);
 
+/* registro de 0x1A8 bytes em D_80091618 */
+typedef struct {
+    u8 pad0[0x10];
+    u16 unk10;
+    u8 pad12[0x8A - 0x12];
+    u16 unk8A;
+    u8 pad8C[0x1A8 - 0x8C];
+} S_80091618;
+
+/* registro de 0x1C bytes em D_80069EC4 (26 por linha) */
+typedef struct {
+    u8 pad0[0x10];
+    u8 *unk10;
+    u8 pad14[0x1C - 0x14];
+} S_80069EC4;
+
 s32 func_800DD8E8(s32 a0, s16 *v, u8 **po) {
     struct { s16 sx, sy; s32 p, f; s16 x, y; } t;
     s32 m = func_800E36E4();
@@ -37,7 +53,26 @@ s32 func_800DD8E8(s32 a0, s16 *v, u8 **po) {
     return (s16)func_800DD9F0(a0, t.x, t.y);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44__800DD5B8", func_800DD9F0);
+extern u8 D_80091618[], D_800EF364[], D_80069EC4[];
+extern u16 D_8006AF80, D_80078C20;
+s32 func_800DD9F0(s32 a0, s32 a1, s32 a2) {
+    s32 n = 4;
+    u16 idx, m;
+    u8 b;
+
+    if (a0 == 1) {
+        n = 1;
+    }
+    if (func_800E36E4() == 1) {
+        idx = D_8006AF80;
+        m = D_80078C20;
+    } else {
+        m = 1 - D_80078C20;
+        idx = *(u16 *)(D_80091618 + D_8006AF80 * 0x1A8 + 0x8A);
+    }
+    b = D_800EF364[*(u16 *)(D_80091618 + idx * 0x1A8 + 0x10) * 64 + (s16)a1 * 8 + (s16)a2 - 9];
+    return (s16)(*(u16 *)(*(u8 **)(D_80069EC4 + n * 28 + (s16)m * 0x2D8 + 0x10) + b * 8 + 4) - 4);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44__800DD5B8", func_800DDB60);
 
