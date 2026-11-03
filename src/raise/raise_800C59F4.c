@@ -114,7 +114,48 @@ void func_800C5EFC(s32 a0, s32 a1) {
     }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C59F4", func_800C60E0);
+void func_800C60E0(s32 a0, s32 a1) {
+    typedef struct {
+        u8 _p00[0x30];
+        u32 b30_0 : 3;
+        u32 _b30_3 : 29;
+        u32 _b34_0 : 8;
+        u32 b34_8 : 1;
+        u32 b34_9 : 1;
+        u32 b34_10 : 2;
+        u32 b34_12 : 4;
+        u32 _b34_16 : 16;
+        u32 b38_0 : 1;
+        u32 _b38_1 : 31;
+    } S_Obj;
+    typedef struct {
+        u8 _p00[0x230];
+        S_Obj *unk230[9];
+        u8 _p254[0x548];
+    } S_100F38;
+    extern s16 D_80078C20[];
+    S_100F38 *p;
+    u16 i;
+    s32 v;
+
+    p = &((S_100F38 *)D_80100F38)[func_800B1260(a0) & 0xFFFF];
+    switch (a1) {
+    case 1:
+        for (i = 0; i < 9; i++) {
+            p->unk230[i] = (S_Obj *)func_800B6D98(4, 0, 0, 4, 0, D_800EE5D0, ((S_800EEB9C *)D_800EEB9C)->arr[i], 1, 1, 0, 2, 0);
+            p->unk230[i]->b34_9 = a0;
+            p->unk230[i]->b34_10 = 0;
+            p->unk230[i]->b34_12 = i;
+        }
+        break;
+    case 0:
+        v = 1 - *D_80078C20;
+        for (i = 0; i < 9; i++) {
+            p->unk230[i]->b34_8 = v;
+        }
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C59F4", func_800C62A4);
 
