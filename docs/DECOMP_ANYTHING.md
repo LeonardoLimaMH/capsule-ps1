@@ -23,12 +23,13 @@ A instância usada é a **desktop**, instalada pelo usuário, numa distribuiçã
 | O quê | Onde |
 |---|---|
 | distribuição WSL | `decomp-wtf` (Debian 13, usuário `decomp`) |
-| app | `http://127.0.0.1:6465` (o link com a chave de acesso é impresso por `decomp url`) |
+| app | `http://127.0.0.1:6464`, a porta padrão (o link com a chave de acesso é impresso por `decomp url`) |
 | executável | `/home/decomp/.local/bin/decomp` |
 | cópia de referência do projeto | `/home/decomp/src/capsule-ps1` (clone do GitHub, com `disc/` e `objdiff-cli`) |
 | cópia de trabalho dos agentes | `/home/decomp/Decomp/capsule-ps1`, branch `decomp-wtf`, criada com `decomp fork` |
 | Node | 22.23.4 em `/usr/local`. A atualização do REA exige Node ≥ 22.23.4; o Debian trazia o 20.19 |
 | Docker | integração do Docker Desktop ligada também para a `decomp-wtf` (`IntegratedWslDistros`) |
+| Java | OpenJDK 21 do Debian (`openjdk-21-jdk-headless`), para o Ghidra do app. O JDK instalado no Windows não vale: o app roda no Linux da `decomp-wtf` |
 
 Notas:
 
@@ -38,6 +39,29 @@ Notas:
   parada e não é usada. O código baixado também está em
   `C:\Users\leonardo.queiroz\Documents\Projects\RECOMP\decomp.anything`.
 - As distribuições do WSL compartilham a rede: a porta de uma aparece também nas outras.
+  O app só esteve na 6465 porque a instância de teste ocupava a 6464.
+- **Docker dentro do app:** a integração do Docker põe o usuário `decomp` no grupo
+  `docker`. Um app aberto antes disso não tem o grupo e falha com `permission denied ...
+  docker.sock`. Reinicie o app: `decomp stop` e `decomp url`.
+
+### Preparação: o manifesto `.decomp.wtf.json`
+
+Sem manifesto, o app trata o projeto como splat de um binário só. Ele pega o primeiro YAML
+(`chess.yaml`), pede apenas o `CHESS.BIN` e não o acha na raiz da imagem do disco, porque
+o arquivo fica em `MASTER/PSF/`.
+
+O manifesto na raiz do repositório resolve isso:
+- pede a **imagem `.bin` inteira do disco**, conferida pelo SHA-1 do dump do usuário;
+- guarda o arquivo em `orig/SLPM-86096.bin` (fora do git);
+- roda `tools/extract_disc.py`, `make split`, `make` (que confere os 5 SHA-1) e
+  `objdiff_report.py --objects`.
+
+Para outro dump do mesmo jogo, troque o `sha1` do manifesto.
+
+Para MCP, o modo recomendado é o **stdio** (`wsl.exe ... decomp mcp`): não usa token, sobe
+o app sozinho e não passa pela porta HTTP. O modo HTTP (`/mcp` com token Bearer) só serve
+para clientes que não executam comandos. O token desse modo é uma senha: não vai para o
+git nem para documentos.
 
 ### Como o build é chamado
 
@@ -54,7 +78,7 @@ O comando refaz só os objetos que mudaram (2–3 s). O `objdiff.json` é gerado
 
 ```bash
 # Claude Code no Windows (já feito; config em %USERPROFILE%\.claude.json)
-claude mcp add decomp -s user -- wsl.exe -d decomp-wtf -- /home/decomp/.local/bin/decomp mcp --name claude-code
+claude mcp add decomp -s user -- wsl.exe -d decomp-wtf --cd "~" --exec /usr/local/bin/decomp mcp --name claude-code
 
 # Codex (a outra IA): dentro da distribuição decomp-wtf
 wsl -d decomp-wtf
