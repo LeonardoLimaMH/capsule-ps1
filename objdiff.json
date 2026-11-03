@@ -4988,8 +4988,9 @@
           "slpm",
           "slpm.sdk"
         ],
-        "complete": false
-      }
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libsnd_next.o"
     },
     {
       "name": "slpm/sdk_libsnd_pause",
