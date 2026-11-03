@@ -118,10 +118,11 @@ versões antigas se corrigem com
 
 Detalhes do ambiente, medições e ajustes da máquina: [docs/AMBIENTE.md](docs/AMBIENTE.md).
 
-**Bancada de agentes (decomp.anything):** uma cópia do projeto na distribuição  (, app na porta 6465)`~/Decomp/capsule-ps1`
-(branch `decomp-wtf`) está ligada ao decomp.anything. Os agentes reservam funções por
+**Bancada de agentes (decomp.anything):** uma cópia do projeto na distribuição WSL
+`decomp-wtf` (`/home/decomp/Decomp/capsule-ps1`, branch `decomp-wtf`; app em
+`http://127.0.0.1:6465`) está ligada ao decomp.anything. Os agentes reservam funções por
 *claims*, as tentativas ficam registradas e cada match vira um commit ali. Os commits
-voltam para `~/capsule-ps1` por cherry-pick, com os 5 SHA-1 conferidos antes. Setup,
+voltam para `~/capsule-ps1` (Ubuntu) por cherry-pick, com os 5 SHA-1 conferidos antes. Setup,
 conexão (Claude Code e Codex) e limites: [docs/DECOMP_ANYTHING.md](docs/DECOMP_ANYTHING.md).
 
 ---
