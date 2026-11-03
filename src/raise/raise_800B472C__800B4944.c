@@ -241,6 +241,58 @@ s32 func_800B5CF4(s32 arg0) {
     return ret;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B472C__800B4944", func_800B5DE8);
+s32 func_800B5DE8(s32 arg0, s32 arg1) {
+    typedef struct {
+        u8 _p0[0x60];
+        s32 f_60[7];
+        s32 f_7C[7];
+        u8 _p98[0x138];
+        s32 f_1D0[14][9];
+        s32 f_3C8[14][9];
+    } S_800EEB9C;
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B472C__800B4944", func_800B5F44);
+    extern u8 D_800EE5D0[];
+    extern u8 D_800EEA00[];
+    extern u8 D_800EEB9C[];
+    extern s32 func_800B6D98(s32, s32, s32, s32, s32, void *, s32, s32, s32, s32, s32, s32);
+    s32 ret;
+    s32 x;
+    s32 y;
+
+    if (D_800EEA00[arg0] == 1) {
+        s32 var_a2 = ((S_800EEB9C *)D_800EEB9C)->f_7C[arg0];
+        while (((S_800EEB9C *)D_800EEB9C)->f_3C8[arg0][var_a2] != 1) {
+            var_a2 = (var_a2 + 1) % ((S_800EEB9C *)D_800EEB9C)->f_60[arg0];
+        }
+        ((S_800EEB9C *)D_800EEB9C)->f_7C[arg0] = var_a2;
+    }
+
+    if (arg0 == 5) {
+        ret = 0;
+    } else {
+        x = ((arg0 % 2) * 0x24) + 0x38;
+        y = ((arg0 / 2) * 0xE) + 0x24;
+        ret = func_800B6D98(1, (s16)x, (s16)y, 6, 0, D_800EE5D0, ((S_800EEB9C *)D_800EEB9C)->f_1D0[arg0][arg1], 1, 1, 0, 2, 1);
+    }
+    return ret;
+}
+
+s32 func_800B5F44(s32 arg0, s32 arg1) {
+    typedef struct {
+        u8 _p0[0x5C0];
+        s32 f_5C0[2][9];
+    } S_800EEB9C;
+
+    extern u8 D_800EE5D0[];
+    extern u8 D_800EEB9C[];
+    extern s32 func_800B6D98(s32, s32, s32, s32, s32, void *, s32, s32, s32, s32, s32, s32);
+    s32 x;
+    s32 y;
+
+    if (arg0 < 2) {
+        x = ((arg0 % 2) * 0x24) + 0x38;
+        y = ((arg0 / 2) * 0xE) + 0x24;
+        return func_800B6D98(1, (s16)x, (s16)y, 6, 0, D_800EE5D0, ((S_800EEB9C *)D_800EEB9C)->f_5C0[arg0][arg1], 1, 1, 0, 2, 1);
+    }
+    return 0;
+}
