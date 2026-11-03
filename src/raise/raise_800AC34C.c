@@ -132,7 +132,20 @@ void func_800AEB5C(s32 arg0)
   func_800B81C4(arg0, new_var2);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AEBA8);
+s32 func_800AEBA8(s32 arg0, s32 arg1) {
+    extern S_800EEB9C D_800EEB9C;
+    s32 sum;
+    s32 i;
+
+    i = 0;
+    sum = 0;
+    while (i < arg0) {
+        sum += D_800EEB9C.unk60[i];
+        i++;
+    }
+    sum += arg1;
+    return sum;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AEBDC);
 
