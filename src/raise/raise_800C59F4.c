@@ -203,4 +203,29 @@ void func_800C62A4(s32 a0, s32 a1) {
     }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C59F4", func_800C6424);
+u8 *func_800C6424(s32 a0, s32 a1) {
+    typedef struct {
+        u8 _p00[0x2BC];
+        u8 *unk2BC;
+        u8 _p2C0[0xC];
+        s16 unk2CC;
+        s16 unk2CE[7];
+        u8 *unk2DC[6];
+        u8 *unk2F4[6];
+        u8 _p30C[0x490];
+    } S_100F38;
+    S_100F38 *p;
+
+    p = &((S_100F38 *)D_80100F38)[func_800B1260(a1) & 0xFFFF];
+    p->unk2BC++;
+    p->unk2CE[p->unk2CC] = 1;
+    p->unk2DC[p->unk2CC] = p->unk2BC;
+    while (*p->unk2BC != 0x21) {
+        p->unk2BC++;
+    }
+    p->unk2F4[p->unk2CC] = p->unk2BC;
+    p->unk2BC = p->unk2DC[p->unk2CC];
+    p->unk2CC++;
+    p->unk2DC[p->unk2CC] = p->unk2DC[p->unk2CC - 1];
+    return p->unk2BC;
+}
