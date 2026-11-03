@@ -84,7 +84,6 @@ def main():
         sys.exit("campos com larguras diferentes (" + ", ".join(f"{o:#x}" for o in unions) +
                  "): unifique à mão com union e acessos .tipo")
     s = tdre.sub("", s)
-    s = re.sub(rf"^\s*extern {tname} {sym}\[\];\n", "", s, flags=re.M)
 
     # demais declarações: tipo visto por cada trecho do arquivo
     decl = re.compile(rf"^(\s*)extern ([\w ]+?)\s*(\*?)\s*{sym}\[\];\n", re.M)
@@ -106,9 +105,18 @@ def main():
     file_type = None
     for kind, text in chunks:
         if kind == "top":
-            for m in decl.finditer(text):
-                file_type = (m.group(2) + (" *" if m.group(3) else "")).strip()
-            out.append(decl.sub("", text))
+            # linha a linha: declarações mudam o tipo em vigor; macros que usam o
+            # símbolo (ex.: #define PL(a) (D_X + i * 0x79C)) seguem o tipo em vigor
+            kept = []
+            for line in text.split("\n"):
+                m = decl.match(line + "\n")
+                if m:
+                    file_type = (m.group(2) + (" *" if m.group(3) else "")).strip()
+                    continue
+                if line.lstrip().startswith("#define") and file_type and file_type != tname:
+                    line = re.sub(rf"(?<![\w.>]){sym}\b", f"(({file_type} *){sym})", line)
+                kept.append(line)
+            out.append("\n".join(kept))
             continue
         local = None
         for m in decl.finditer(text):

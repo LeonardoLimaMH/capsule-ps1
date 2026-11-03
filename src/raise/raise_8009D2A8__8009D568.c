@@ -73,7 +73,38 @@ void func_8009DEF0(void) {
 
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009D568", func_8009DEF8);
+#include "common.h"
+typedef struct {
+    u8 _p0[0x10];
+    u16 f_10;
+    u8 _p12[0x196];
+} S_80091618;
+extern S_80091618 D_80091618[];
+extern u16 D_8006AF80[];
+extern s32 func_800A9D6C(s32);
+s32 func_8009DEF8(void)
+{
+  int new_var;
+  new_var = -1;
+  if (D_80091618[*D_8006AF80].f_10 == 0xFFFF)
+  {
+    return new_var;
+  }
+  if (func_800A9D6C(1) == 0)
+  {
+    return 0;
+  }
+  if (new_var)
+  {
+    D_80091618[*D_8006AF80].f_10 = 0xFFFF;
+    return new_var;
+  }
+  else
+  {
+    D_80091618[*D_8006AF80].f_10 = 0xFFFF;
+    return new_var;
+  }
+}
 
 #include "common.h"
 

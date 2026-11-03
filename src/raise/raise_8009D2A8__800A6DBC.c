@@ -85,25 +85,3 @@ void func_800A8C20(void) {
 s32 func_800A8C28(void) {
     return 0;
 }
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A8C30);
-
-void func_800A8C8C(void) {
-
-}
-
-void func_800A8C94(void) {
-
-}
-
-void func_800A8C9C(void) {
-
-}
-
-void func_800A8CA4(void) {
-
-}
-
-void func_800A8CAC(void) {
-
-}

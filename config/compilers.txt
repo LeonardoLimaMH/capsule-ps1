@@ -106,7 +106,6 @@ src/raise/raise_800E20A8.c 2.8.1-psx
 src/raise/raise_8009B150__8009CFB4.c 2.8.1-psx
 src/raise/raise_8009D2A8__8009DFF8.c 2.8.1-psx
 src/raise/raise_8009D2A8__800A9738.c 2.8.1-psx
-src/raise/raise_800AC34C__800B1150.c 2.8.1-psx
 src/raise/raise_800B9B2C.c 2.8.1-psx
 src/raise/raise_800B9C3C__800BE7A0.c 2.8.1-psx
 src/raise/raise_800B9C3C__800BF154.c 2.8.1-psx
@@ -288,3 +287,5 @@ src/yuugi/sdk_libgpu_ext__SetDefDrawEnv.c 2.8.1-psx
 src/raise/raise_800C1360.c 2.7.2-cdk
 src/raise/raise_800DDD70.c 2.7.2-cdk
 src/raise/raise_800DEA54__800E1B30.c 2.7.2-cdk
+src/raise/raise_8009D2A8__800A6DBC__800A8C30.c 2.7.2-cdk
+src/raise/raise_800AC34C__800B1150.c 2.7.2-cdk

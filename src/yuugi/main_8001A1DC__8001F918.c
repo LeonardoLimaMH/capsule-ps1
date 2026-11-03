@@ -9,7 +9,24 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_8001F938);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_8001FA10);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_8001FAD4);
+#include "common.h"
+typedef struct {
+    u8 _p0[0x4];
+    s32 f_4;
+    u8 _p8[0x10];
+} S_800637AC;
+extern S_800637AC D_800637AC[];
+extern s8 D_80085429[];
+s32 func_8001FAD4(s32 i)
+{
+  S_800637AC *new_var2;
+  int new_var;
+  new_var = 0;
+  *D_80085429 = (int) new_var;
+  new_var2 = D_800637AC;
+  new_var2 = new_var2 + i;
+  return func_80012200(new_var2->f_4);
+}
 
 #include "common.h"
 
