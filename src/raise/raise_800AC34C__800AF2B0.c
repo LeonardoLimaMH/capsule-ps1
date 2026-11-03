@@ -110,7 +110,33 @@ u16 func_800B0440(s32 a0, s32 a1) {
     return 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C__800AF2B0", func_800B065C);
+u16 func_800B065C(s32 a0, s32 a1) {
+    s32 j;
+    u16 s;
+
+    s = a0;
+    if (func_800E1820(s) != 0) {
+        return 0;
+    }
+    if (func_800E17F8(s) == 0) {
+        return 0;
+    }
+    s = a1;
+    if (s != 0xFFFF) {
+        if (func_800E1820(s) != 0) {
+            return 0;
+        }
+        if (func_800E17F8(s) == 0) {
+            return 0;
+        }
+    }
+    for (j = 4; j < 15; j++) {
+        if (D_800EEAA8[j](a0, a1) != 0) {
+            return j + 1;
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C__800AF2B0", func_800B0740);
 
