@@ -6856,7 +6856,7 @@
           "raise",
           "raise.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800C0038.o"
     },

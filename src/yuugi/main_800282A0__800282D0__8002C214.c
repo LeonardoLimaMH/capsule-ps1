@@ -1,0 +1,126 @@
+#include "common.h"
+#include "yuugi.h"
+
+typedef struct {
+    u32 mode;
+    void *crect;
+    u32 *caddr;
+    void *prect;
+    u32 *paddr;
+} Tim;
+extern s32 ReadTIM();
+extern s32 func_80019F30();
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002C214", func_8002C214);
+
+#include "ghidra.h"
+uint func_8002C438(undefined2 *param_1,int param_2,undefined4 param_3,uint param_4)
+
+{
+  undefined2 *puVar1;
+  
+  puVar1 = (undefined2 *)((param_4 & 0xffff) * 8 + param_2);
+  *param_1 = *puVar1;
+  param_1[1] = puVar1[1];
+  param_1[2] = puVar1[2];
+  func_8002C4E8(param_1,param_3);
+  return param_4 & 0xffff;
+}
+
+#include "ghidra.h"
+uint func_8002C490(undefined2 *param_1,int param_2,undefined4 param_3,uint param_4)
+
+{
+  undefined2 *puVar1;
+  
+  puVar1 = (undefined2 *)((param_4 & 0xffff) * 8 + param_2);
+  *param_1 = *puVar1;
+  param_1[1] = puVar1[1];
+  param_1[2] = puVar1[2];
+  func_8002C4E8(param_1,param_3);
+  return param_4 & 0xffff;
+}
+
+void func_8002C4E8(void *arg0, void *arg1) {
+    if (arg1 != NULL) {
+        M2C_FIELD(arg0, u16 *, 0) = (u16) (M2C_FIELD(arg0, u16 *, 0) + M2C_FIELD(arg1, u16 *, 0));
+        M2C_FIELD(arg0, u16 *, 2) = (u16) (M2C_FIELD(arg0, u16 *, 2) + M2C_FIELD(arg1, u16 *, 2));
+        M2C_FIELD(arg0, u16 *, 4) = (u16) (M2C_FIELD(arg0, u16 *, 4) + M2C_FIELD(arg1, u16 *, 4));
+    }
+}
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002C214", func_8002C534);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002C214", func_8002C610);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002C214", func_8002C728);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002C214", func_8002C768);
+
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002C214", func_8002C93C);
+
+extern u8 D_8008ED68[];
+extern u8 D_800859F3[];
+extern s32 func_800248E8();
+extern void func_80029784();
+extern void func_8002453C();
+extern void func_800A9744();
+
+void func_8002CA80(u8 *p)
+{
+  u8 *s2 = D_8008ED68;
+  u8 *s1 = *((u8 **) (p + 0x18));
+  int new_var;
+  u8 m = *D_800859F3;
+  if (m == 1)
+  {
+    *((u32 *) (p + 0x50)) |= 1;
+  }
+  else
+    if (m == 3)
+  {
+    *((u32 *) (p + 0x50)) &= ~1;
+  }
+  new_var = (*((u32 *) (p + 0x50))) & 1;
+  if (new_var == 1)
+  {
+    return;
+  }
+  if ((s2[0x99A] == 0) && ((*((u16 *) (p + 0x4E))) != 0))
+  {
+    if (func_800248E8(p) != 0)
+    {
+      return;
+    }
+  }
+  if (s2[0xA66] != 0)
+  {
+    *((u16 *) (p + 0x4E)) = 1;
+  }
+  if ((*((s32 *) (s1 + 4))) == 1)
+  {
+    func_800A9744();
+  }
+  switch (*((u16 *) (p + 0x4E)))
+  {
+    case 1:
+
+    case 2:
+      func_80029784(0, s1, s2, func_8002453C);
+
+    case 0:
+      *((u16 *) (p + 0x4E)) += 1;
+      break;
+
+    case 3:
+      func_80029784(1, s1, s2, 0);
+      break;
+
+    case 4:
+      break;
+
+  }
+
+}
+
+#include "common.h"

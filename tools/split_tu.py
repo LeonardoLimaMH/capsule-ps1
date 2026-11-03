@@ -121,6 +121,15 @@ def split(target, file, new, first, gcc=None):
     if not m:
         raise SystemExit(f"subsegmento c '{file}' não encontrado em {yml}")
     y = y[:m.end()] + f"{m.group(1)}- [0x{off:X}, c, {new}]\n" + y[m.end():]
+    # .rodata do próprio arquivo (tabelas de switch migradas): vai com a parte que tem o switch
+    ro = re.compile(rf"^(\s+- \[0x[0-9A-Fa-f]+, \.rodata, ){re.escape(file)}\]$", re.M)
+    if ro.search(y):
+        moved_sw, kept_sw = "switch" in moved, "switch" in text[:pos]
+        if moved_sw and not kept_sw:
+            y = ro.sub(rf"\g<1>{new}]", y)
+            print(f"o .rodata de {file} passou para {new} (o switch foi junto)")
+        elif moved_sw:
+            print(f"ATENÇÃO: {file} tem .rodata próprio e as duas partes têm switch; confira o dono no YAML")
     yml.write_text(y, encoding="utf-8", newline="\n")
     if gcc:
         set_compiler(target, new, gcc)
