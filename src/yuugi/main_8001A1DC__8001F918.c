@@ -1,6 +1,14 @@
 #include "common.h"
 #include "yuugi.h"
 
+typedef struct {
+    s16 x;
+    s16 y;
+    s32 f_4;
+    u8 f_8[0x10];
+} S_800637AC;
+extern S_800637AC D_800637AC[];
+
 void func_8001F918(void) {
     func_80012508();
 }
