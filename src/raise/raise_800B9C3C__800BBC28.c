@@ -114,7 +114,45 @@ void func_800BC438(s32 arg0)
   } *) D_8008ED68)->v) / 2) + new_var2)) + (arg0 * 0x10)), 4, 0, D_800EE5F0, *((s32 *) (((s8 *) temp_s0) + 0x298)), 1, 1, 0, 2, 0, 0);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BBC28", func_800BC50C);
+void func_800BC50C(s32 arg0, s32 arg1, s32 arg2) {
+    typedef struct {
+        u8 _p00[0x46];
+        u16 unk46;
+        u8 _p48[2];
+        u16 unk4A;
+    } S_BC50C_Sub;
+    typedef struct {
+        u8 _p000[0x290];
+        S_BC50C_Sub *unk290[4];
+        s32 unk2A0[2][3];
+        s32 unk2B8[2][3];
+    } S_EFF58_BC50C;
+    typedef struct {
+        u8 _p000[0x108];
+        s32 unk108;
+        s32 unk10C;
+    } S_8ED68_BC50C;
+    extern S_8ED68_BC50C D_8008ED68[];
+    extern u8 D_800EE5F0[];
+    S_EFF58_BC50C *eff = (S_EFF58_BC50C *)D_800EFF58;
+    S_BC50C_Sub *p = eff->unk290[arg0];
+
+    eff->unk2A0[arg0][arg1] = func_800BC8FC(
+        0x1C,
+        (s16)(p->unk46 + ((u32)(D_8008ED68[0].unk108 / 2 + 8))),
+        (s16)(p->unk4A + ((u32)(D_8008ED68[0].unk10C / 2 + 8))),
+        3,
+        0,
+        D_800EE5F0,
+        eff->unk2B8[arg0][arg1],
+        1,
+        1,
+        arg2,
+        2,
+        0,
+        0
+    );
+}
 
 #include "common.h"
 
