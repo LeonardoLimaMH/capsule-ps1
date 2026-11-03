@@ -178,7 +178,38 @@ void func_800B94B4(void) {
     func_800A8E48();
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B8E04", func_800B94D4);
+s32 func_800B94D4(void) {
+    typedef struct {
+        u8 _p00[0x84];
+        u16 unk84;
+        u8 _p86[0x4];
+        u16 unk8A;
+        u16 unk8C;
+        u8 _p8E[0x11A];
+    } S_91618;
+    extern u16 D_8006AF80[];
+    extern S_91618 D_80091618[];
+    extern u16 D_800EF2D8[];
+    u16 a;
+    u16 b;
+    S_91618 *e;
+    S_91618 *f;
+
+    a = *D_8006AF80;
+    b = *D_800EF2D8;
+    e = &D_80091618[a];
+    e->unk8A = b;
+    e->unk8C = 1;
+    f = &D_80091618[b];
+    f->unk8A = a;
+    f->unk8C = 0;
+    e->unk84++;
+    f->unk84++;
+    if (func_800D1548() == 0) {
+        func_800D1CC4(*D_8006AF80, 0xA, 0, 0);
+    }
+    return 1;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B8E04", func_800B95AC);
 
@@ -210,7 +241,65 @@ s32 func_800B9610(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B8E04", func_800B96C0);
+void func_800B96C0(void) {
+    typedef struct {
+        u8 _p00[0x90];
+        u16 unk90;
+        u8 _p92[0x116];
+    } S_91618;
+    typedef struct {
+        u8 _p00[0x94];
+        u8 unk94[2][8][8];
+    } S_EFF58;
+    typedef struct {
+        u8 _p00[0x32A];
+        u16 unk32A;
+        u16 unk32C;
+        u16 unk32E;
+        u16 unk330;
+        u16 unk332;
+        u16 unk334;
+        u16 unk336;
+        u16 unk338;
+        u8 _p33A[0x462];
+    } S_100F38;
+    extern S_91618 D_80091618[];
+    extern s32 D_800EE9B8[];
+    extern S_EFF58 D_800EFF58[];
+    extern S_100F38 D_80100F38[];
+    s32 i;
+    s32 j;
+    s32 k;
+    S_100F38 *p;
+    s32 a;
+    s32 b;
+    u8 *q;
+
+    for (i = 1, j = 0; i >= 0; i--, j++) {
+        k = func_800B1260(i) & 0xFFFF;
+        if (k != 0xFFFF) {
+            p = &D_80100F38[k];
+            for (a = 0; a < 8; a++) {
+                q = &D_800EFF58->unk94[j][a][7];
+                for (b = 7; b >= 0; b--, q--) {
+                    *q = 1;
+                }
+            }
+            D_800EFF58->unk94[j][1][6] = 0;
+            D_800EFF58->unk94[j][6][1] = 0;
+            p->unk338 = 6;
+            p->unk334 = 6;
+            p->unk330 = 6;
+            p->unk32C = 5;
+            p->unk32A = 5;
+            p->unk336 = 1;
+            p->unk332 = 1;
+            p->unk32E = 1;
+            D_80091618[k].unk90 = 0;
+            D_800EE9B8[j] = 0;
+        }
+    }
+}
 
 #include "common.h"
 
