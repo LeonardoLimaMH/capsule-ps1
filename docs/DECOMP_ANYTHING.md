@@ -29,6 +29,7 @@ A instância usada é a **desktop**, instalada pelo usuário, numa distribuiçã
 | cópia de trabalho dos agentes | `/home/decomp/Decomp/capsule-ps1`, branch `decomp-wtf`, criada com `decomp fork` |
 | Node | 22.23.4 em `/usr/local`. A atualização do REA exige Node ≥ 22.23.4; o Debian trazia o 20.19 |
 | Docker | integração do Docker Desktop ligada também para a `decomp-wtf` (`IntegratedWslDistros`) |
+| Java | OpenJDK 21 do Debian (`openjdk-21-jdk-headless`), para o Ghidra do app. O JDK instalado no Windows não vale: o app roda no Linux da `decomp-wtf` |
 
 Notas:
 
