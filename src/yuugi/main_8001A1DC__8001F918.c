@@ -238,7 +238,12 @@ void func_80020470(s32 x, s32 y, s32 ang, s16 *ox, s16 *oy) {
     *oy = ((s16)x * rsin(t) + (s16)y * rcos(t)) / 4096;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020578);
+void func_80020578(s32 x, s32 y, s32 ang, s16 *ox, s16 *oy) {
+    s16 t = (s16)ang % 4096;
+
+    *ox = ((s16)x * rcos(t) - (s16)y * rsin(t)) / 4096;
+    *oy = ((s16)x * rsin(t) + (s16)y * rcos(t)) / 4096;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020688);
 
