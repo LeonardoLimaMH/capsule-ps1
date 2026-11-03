@@ -217,6 +217,12 @@ disco), `asm/` (assembly desmontado), `build/`.
 
 Pré-requisitos: **Docker** e **Python 3** (no host, apenas para extrair o disco).
 
+> **No Windows, trabalhe dentro do WSL2.** Com o repositório em `C:\`, o Docker lê
+> cada arquivo por uma montagem lenta: o build completo levava 5–10 min e o
+> `make split` ~5 min. Com o clone no Ubuntu (`~/capsule-ps1`), levam 6 s e 20 s.
+> Veja [docs/AMBIENTE.md](docs/AMBIENTE.md): local da cópia de trabalho, ajustes do
+> Docker Desktop e do `.wslconfig`, e como as duas IAs sincronizam.
+
 ```bash
 # 1. Coloque o dump do SEU disco (BIN/CUE) em qualquer pasta e extraia:
 python tools/extract_disc.py "caminho/para/Yu-Gi-Oh! Monster Capsule Breed & Battle (Japan).bin" disc
