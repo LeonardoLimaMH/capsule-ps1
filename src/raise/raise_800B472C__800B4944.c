@@ -10,11 +10,80 @@ typedef struct {
     s32 value;
 } Entry_800EEB9C;
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B472C__800B4944", func_800B4944);
+void func_800B4944(s32 arg0) {
+    typedef struct { u8 _p0[0x8A]; u16 f_8A; u8 _p8C[0x11C]; } S_80091618;
+    typedef struct { u8 _p0[0x190]; s32 *f_190; u8 _p194[0x608]; } S_80100F38;
+    extern S_80091618 D_80091618[];
+    extern s32 D_800EE5D0[];
+    extern s16 D_800EEB90[];
+    extern S_80100F38 D_80100F38[];
+    S_80100F38 *p;
+    s32 i;
+    s32 idx;
+    s32 v;
+    s32 t;
+    s32 *q;
+
+    if (D_80091618[*D_8006AF80].f_8A == 0xFFFF && arg0 == 0) {
+        arg0 = 1;
+    }
+    *D_800EEB90 = arg0 == 1;
+    for (i = 1; i >= 0; i--) {
+        q = (s32 *)D_800EEB9C;
+        idx = func_800B1260(i) & 0xFFFF;
+        if (idx != 0xFFFF) {
+            p = &D_80100F38[idx];
+            if (*D_800EEB90 == i) {
+                v = q[0x32];
+            } else {
+                t = i - 2;
+                v = D_800EE5D0[2] + t;
+            }
+            v = func_80019F30(D_800EE5D0[0] | 0x60000, v + D_800EE5D0[3]);
+            p->f_190[7] = 0;
+            p->f_190[6] = v;
+            func_800B4AAC(idx);
+        }
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B472C__800B4944", func_800B4AAC);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B472C__800B4944", func_800B4C40);
+void func_800B4C40(s32 arg0) {
+    typedef struct { u8 _p0[0x190]; s32 *f_190; u8 _p194[0x608]; } S_80100F38;
+    extern u16 D_8006AF80[];
+    extern s32 D_800EE5D0[];
+    extern s32 D_800EE5D8[];
+    extern s16 D_800EEB90[];
+    extern s32 *D_800EEC48[];
+    extern s32 D_800EEC64[];
+    extern S_80100F38 D_80100F38[];
+    s32 var_a1;
+    s32 var_a3;
+    s32 v;
+    s32 t;
+    S_80100F38 *p;
+
+    var_a1 = 0;
+    if (arg0 != 0xFFFF) {
+        if (arg0 == *D_8006AF80) {
+            var_a1 = 1;
+            *D_800EEB90 = 1;
+            *D_800EEC48 = D_80100F38[arg0].f_190;
+        }
+        p = &D_80100F38[arg0];
+        if (*D_800EEB90 == var_a1) {
+            var_a3 = *D_800EEC64;
+        } else {
+            t = var_a1 - 2;
+            var_a3 = *D_800EE5D8 + t;
+        }
+        v = func_80019F30(D_800EE5D0[0] | 0x60000, var_a3 + D_800EE5D0[3]);
+        p->f_190[7] = 0;
+        p->f_190[6] = v;
+        func_800B4AAC(arg0);
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B472C__800B4944", func_800B4D60);
 
