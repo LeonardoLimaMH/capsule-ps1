@@ -276,7 +276,11 @@ void func_800CEC68(s32 ctx, s32 x, s32 y) {
     func_800D0730(rec + 0x1CC, (s16)(x - 1), (s16)(y - 1), 0);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CE204", func_800CECEC);
+void func_800CECEC(s32 ctx, s32 x, s32 y) {
+    u8 *rec = D_80100F38 + (func_800B1260(ctx) & 0xFFFF) * 0x79C;
+
+    func_800D0730(rec + 0x1EC, (s16)(x - 1), (s16)(y - 1), 0);
+}
 
 void func_800CED70(void) {
 
