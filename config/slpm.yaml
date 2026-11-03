@@ -74,6 +74,8 @@ segments:
       - [0x3890, c, loader_80113090]
       - [0x3A54, c, sdk_libpress_vlc]
       - [0x3DF4, c, sdk_libgpu_ext]
+      - [0x3FA4, c, sdk_libgpu_ext__slpm_SetDefDrawEnv]
+      - [0x4058, c, sdk_libgpu_ext__slpm_SetDefDispEnv]
       - [0x4094, c, sdk_libgpu_sys]
       - [0x4410, c, sdk_libgpu_sys__DrawSync]
       - [0x516C, c, sdk_libgpu_sys__slpm_GetODE]

@@ -7,7 +7,43 @@ void DecDCTReset(s32 arg0) {
     func_80112E84(arg0);
 }
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libpress_libpress", DecDCTGetEnv);
+#include "common.h"
+
+/* DecDCTGetEnv: C do SDK PsyQ importado de https://github.com/sozud/psy-q-decomp (MIT),
+   arquivo src/press/libpress.c; reduzido às declarações de que a função depende
+   (tools/ext_import.py). */
+extern s32 mdec_iq[];
+
+extern s32 mdec_coef[];
+
+typedef struct {
+    u_char iq_y[64];
+    u_char iq_c[64];
+    short dct[64];
+} DECDCTENV;
+
+s32* DecDCTGetEnv(DECDCTENV* arg0) {
+    s32 i;
+    s32 *src1, *dst1;
+    s32 *src2, *dst2;
+    s32 *src3, *dst3;
+    dst1 = &arg0->iq_y;
+    src1 = &mdec_iq[1];
+    for (i = 15; i != -1; i--) {
+        *dst1++ = *src1++;
+    }
+    dst2 = &arg0->iq_c;
+    src2 = &mdec_iq[17];
+    for (i = 15; i != -1; i--) {
+        *dst2++ = *src2++;
+    }
+    dst3 = &arg0->dct;
+    src3 = &mdec_coef[1];
+    for (i = 31; i != -1; i--) {
+        *dst3++ = *src3++;
+    }
+    return arg0;
+}
 
 #include "common.h"
 

@@ -246,6 +246,8 @@ segments:
       - [0x39AAC, c, sdk_libgte_ratan]
       - [0x39C2C, c, sdk_libgte_patchgte]
       - [0x39D0C, c, sdk_libgpu_ext]
+      - [0x39EBC, c, sdk_libgpu_ext__SetDefDrawEnv]
+      - [0x39F70, c, sdk_libgpu_ext__SetDefDispEnv]
       - [0x39FAC, c, main_800497AC]
       - [0x39FDC, c, sdk_libgpu_sys]
       - [0x3A358, c, sdk_libgpu_sys__DrawSync]

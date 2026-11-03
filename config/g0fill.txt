@@ -44,3 +44,15 @@ src/yuugi/main_800473C4.c
 src/yuugi/main_8004C380.c
 src/yuugi/main_800415A8.c
 src/yuugi/main_8004F268.c
+src/slpm/loader_80112D28.c
+src/slpm/sdk_libsnd_ssinit.c
+src/slpm/loader_80116AD0.c
+src/slpm/sdk_libgpu_ext__slpm_SetDefDispEnv.c
+src/slpm/sdk_libgpu_ext__slpm_SetDefDrawEnv.c
+src/slpm/sdk_libapi_counter.c
+src/yuugi/sdk_libapi_counter.c
+src/yuugi/sdk_libspu_s_stsa.c
+src/yuugi/main_800424E4.c
+src/yuugi/sdk_libspu_s_m_util.c
+src/yuugi/sdk_libgpu_ext__SetDefDispEnv.c
+src/yuugi/sdk_libgpu_ext__SetDefDrawEnv.c

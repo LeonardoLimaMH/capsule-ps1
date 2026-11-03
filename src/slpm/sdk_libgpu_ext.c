@@ -33,7 +33,3 @@ u16 slpm_LoadTPage(u32 *pix, s32 tp, s32 abr, s32 x, s32 y, s32 w, s32 h) {
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_ext", slpm_LoadClut);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_ext", slpm_LoadClut2);
-
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_ext", slpm_SetDefDrawEnv);
-
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_ext", slpm_SetDefDispEnv);
