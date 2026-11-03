@@ -13,7 +13,28 @@ void func_8001F918(void) {
     func_80012508();
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_8001F938);
+void func_8001F938(void) {
+    extern s32 D_80078BE0;
+    extern u8 D_8008ED68[];
+    extern s32 D_8008EDF0[];
+    s32 n;
+
+    n = func_8001FA10(D_80078BE0);
+    if (M2C_GFIELD(D_8008ED68, s32, 0x88) & 0x4000) {
+        func_80034AB0(0x84);
+        D_80078BE0 = (u32)(D_80078BE0 + 1) % (u32)n;
+    }
+    if (M2C_GFIELD(D_8008ED68, s32, 0x88) & 0x1000) {
+        func_80034AB0(0x84);
+        if (--D_80078BE0 < 0) {
+            D_80078BE0 = n - 1;
+        }
+    }
+    if (D_8008EDF0[0] & 0x20) {
+        func_80034AB0(0x48);
+        func_8001FAD4(D_80078BE0);
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_8001FA10);
 
@@ -211,7 +232,24 @@ s32 func_8002009C(s32 a) {
     return func_80033E5C(D_8005089C, 1);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800200F4);
+s32 func_800200F4(s32 cur, s32 max, s32 mode) {
+    extern s32 D_8008EDF0[];
+
+    if ((D_8008EDF0[0] & 0x1000) && mode != 1) {
+        cur = (cur > 0) ? (cur - 1) : (max - 1);
+        func_80034AB0(0x84);
+    } else if ((D_8008EDF0[0] & 0x4000) && mode != 1) {
+        cur = (cur < max - 1) ? (cur + 1) : 0;
+        func_80034AB0(0x84);
+    } else if ((D_8008EDF0[0] & 0x8000) && mode != 0) {
+        cur = (cur > 0) ? (cur - 1) : (max - 1);
+        func_80034AB0(0x84);
+    } else if ((D_8008EDF0[0] & 0x2000) && mode != 0) {
+        cur = (cur < max - 1) ? (cur + 1) : 0;
+        func_80034AB0(0x84);
+    }
+    return cur;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800201D8);
 
@@ -249,7 +287,43 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020688);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020844);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020A50);
+void func_80020A50(s32 x, s32 y, s32 w, s32 h, u8 *c0, u8 *c1, u8 *c2, u8 *c3, u8 tp, s32 ot) {
+    extern u8 D_8008ED68[];
+    extern void SetPolyG4(), SetSemiTrans(), AddPrim(), func_80018610();
+    extern u16 GetTPage();
+    u8 *base = *(u8 **)D_8008ED68;
+    u8 *p = *(u8 **)(base + 0x1090);
+    u8 *nx = 0;
+
+    if (p != 0 && !(base + 0x4594 < p + 0x24)) {
+        nx = p + 0x24;
+    }
+    *(u8 **)(base + 0x1090) = nx;
+    SetPolyG4(p);
+    SetSemiTrans(p, 1);
+    p[4] = c0[0];
+    p[5] = c0[1];
+    p[6] = c0[2];
+    p[0xC] = c1[0];
+    p[0xD] = c1[1];
+    p[0xE] = c1[2];
+    p[0x14] = c2[0];
+    p[0x15] = c2[1];
+    p[0x16] = c2[2];
+    p[0x1C] = c3[0];
+    p[0x1D] = c3[1];
+    p[0x1E] = c3[2];
+    *(s16 *)(p + 0x8) = x + *(s32 *)(D_8008ED68 + 0x108) / 2;
+    *(s16 *)(p + 0xA) = y + *(s32 *)(D_8008ED68 + 0x10C) / 2;
+    *(s16 *)(p + 0x10) = w + (x + *(s32 *)(D_8008ED68 + 0x108) / 2);
+    *(s16 *)(p + 0x12) = y + *(s32 *)(D_8008ED68 + 0x10C) / 2;
+    *(s16 *)(p + 0x18) = x + *(s32 *)(D_8008ED68 + 0x108) / 2;
+    *(s16 *)(p + 0x1A) = h + (y + *(s32 *)(D_8008ED68 + 0x10C) / 2);
+    *(s16 *)(p + 0x20) = w + (x + *(s32 *)(D_8008ED68 + 0x108) / 2);
+    *(s16 *)(p + 0x22) = h + (y + *(s32 *)(D_8008ED68 + 0x10C) / 2);
+    AddPrim(*(u8 **)D_8008ED68 + 0x70 + ot * 4, p);
+    func_80018610(GetTPage(0, tp, 0, 0) & 0xFFFF, ot);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020CE4);
 
@@ -285,7 +359,23 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80021870);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80021910);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80021A4C);
+s32 func_80021A4C(s32 arg0, s32 arg1) {
+    s32 var_a2;
+    u16 temp_v1;
+    void *temp_a0;
+
+    var_a2 = 0;
+    temp_a0 = arg0 + 0x10;
+    temp_v1 = M2C_FIELD(temp_a0, u16 *, 0xE);
+    M2C_FIELD(temp_a0, s8 *, 2) = 1;
+    M2C_FIELD(temp_a0, s16 *, 0xC) = (s16) (temp_v1 * 3);
+    if (arg1 == 0) {
+        var_a2 = temp_v1 == 0;
+    } else if ((u16) M2C_FIELD(temp_a0, u16 *, 0xE) >= 0x20U) {
+        var_a2 = 1;
+    }
+    return var_a2;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80021A9C);
 
