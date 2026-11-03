@@ -126,7 +126,30 @@ s32 func_800B91C8(void) {
     return 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B8E04", func_800B9284);
+s32 func_800B9284(void) {
+    typedef struct {
+        u8 _p00[0x88];
+        u16 unk88;
+        u8 _p8A[0x11E];
+    } S_91618;
+    extern u16 D_8006AF80[];
+    extern S_91618 D_80091618[];
+    extern s16 D_800ED88C[];
+    s32 r;
+
+    r = func_8009E72C();
+    if (r == -1) {
+        D_80091618[*D_8006AF80].unk88++;
+        func_800D1CC4(*D_8006AF80, 0xC, 0, 0);
+        return 1;
+    } else if (r == -2) {
+        *D_800ED88C = 1;
+        func_800B8EF0();
+        func_800CD288(1, 1);
+        return 1;
+    }
+    return 0;
+}
 
 #include "common.h"
 
