@@ -143,7 +143,9 @@ def generate(objects_only=False):
             if tobj is None:
                 continue
             gcc = comp.get(key, "2.7.2-psx").split("+")[0]
-            bobj = build_base(t, src, gcc, key in g0, key in sp) if len(pending) < len(funcs) else None
+            # todo arquivo tem objeto base, mesmo sem funções em C ainda: é onde o primeiro C de um
+            # arquivo só em assembly vai ser compilado (o decomp.anything precisa dele para testar)
+            bobj = build_base(t, src, gcc, key in g0, key in sp)
             sdk = sum(f in lib for f in funcs) * 2 > len(funcs)
             unit = {
                 "name": f"{t}/{src.stem}",
