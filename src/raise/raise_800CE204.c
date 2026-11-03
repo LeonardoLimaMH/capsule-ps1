@@ -270,7 +270,11 @@ void func_800CEBD0(s32 unused, s32 ctx) {
     *(s16 *)(*(u8 **)(rec + 0x258) + 0x4E) = v;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CE204", func_800CEC68);
+void func_800CEC68(s32 ctx, s32 x, s32 y) {
+    u8 *rec = D_80100F38 + (func_800B1260(ctx) & 0xFFFF) * 0x79C;
+
+    func_800D0730(rec + 0x1CC, (s16)(x - 1), (s16)(y - 1), 0);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CE204", func_800CECEC);
 
