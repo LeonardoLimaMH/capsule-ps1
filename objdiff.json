@@ -6035,6 +6035,32 @@
       "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC.o"
     },
     {
+      "name": "raise/raise_8009D2A8__800A6DBC__800A8C30",
+      "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A8C30.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009D2A8__800A6DBC__800A8C30.c",
+        "progress_categories": [
+          "raise",
+          "raise.game"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC__800A8C30.o"
+    },
+    {
+      "name": "raise/raise_8009D2A8__800A6DBC__800A8C8C",
+      "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A8C8C.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009D2A8__800A6DBC__800A8C8C.c",
+        "progress_categories": [
+          "raise",
+          "raise.game"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC__800A8C8C.o"
+    },
+    {
       "name": "raise/raise_8009D2A8__800A6DBC__800A8CB4",
       "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A8CB4.o",
       "metadata": {
