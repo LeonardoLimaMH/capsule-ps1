@@ -73,11 +73,15 @@ s32 func_800DD9F0(s32 a0, s32 a1, s32 a2) {
         m = 1 - D_80078C20[0];
         idx = D_80091618[D_8006AF80[0]].unk8A;
     }
-    b = D_800EF364[D_80091618[idx].unk10][(s16)a1 * 8 + (s16)a2 - 9];
+    b = D_800EF364[D_80091618[idx].unk10][(s16)a2 + (s16)a1 * 8 - 9];
     return (s16)(*(u16 *)(D_80069EC4[(s16)m][n].unk10 + b * 8 + 4) - 4);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44__800DD5B8", func_800DDB60);
+void func_800DDB60(s32 ctx, s32 x, s32 y) {
+    u8 *rec = D_80100F38 + (func_800B1260(ctx) & 0xFFFF) * 0x79C;
+
+    func_800D0730(rec + 0x1CC, (s16)(x - 1), (s16)(y - 1), 0);
+}
 
 void func_800DDBE4(void) {
 
