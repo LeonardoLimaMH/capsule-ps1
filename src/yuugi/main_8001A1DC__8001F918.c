@@ -388,7 +388,69 @@ void func_80020A50(s16 x, s16 y, s16 w, s16 h, u8 *c0, u8 *c1, u8 *c2, u8 *c3, u
     func_80018610(GetTPage(0, tp, 0, 0) & 0xFFFF, ot);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020CE4);
+void *func_80020CE4(void *arg0, s32 arg1) {
+    struct S_Obj {
+        u8 pad00[0xC];
+        s32 unk0C;
+        u8 pad10[0x4];
+        u8 unk14[0x8];
+        s32 unk1C;
+        u8 pad20[0x14];
+        u32 f34_0 : 7;
+        u32 f34_7 : 1;
+        u32 f34_8 : 1;
+        u32 f34_9 : 1;
+        u32 f34_10 : 2;
+        u32 f34_12 : 4;
+        u32 f34_16 : 16;
+        u8 pad38[0x8];
+        struct S_Obj *unk40;
+        u8 pad44[0x2];
+        s16 unk46;
+        u8 pad48[0x2];
+        s16 unk4A;
+        u8 pad4C[0x2];
+        s16 unk4E;
+        s16 unk50;
+        s16 unk52;
+        u8 pad54[0x4];
+        u8 unk58;
+        u8 unk59;
+        u8 unk5A;
+        u8 pad5B[0x21];
+        s32 unk7C;
+        s32 unk80;
+    };
+    extern void *func_80015B3C();
+    extern void func_80015EF8(), func_8001AA70(), func_80018600();
+    struct S_Obj *src = arg0;
+    struct S_Obj *d = func_80015B3C(arg1, func_80018600);
+    s32 v;
+
+    func_80015EF8(d);
+    func_8001AA70(d->unk14, src->unk14, 0x20);
+    d->unk1C = 0;
+    v = src->unk0C;
+    d->unk40 = src;
+    d->unk0C = v;
+    d->unk46 = src->unk46;
+    d->unk4A = src->unk4A;
+    d->unk4E = src->unk4E;
+    d->unk50 = src->unk50;
+    d->unk52 = src->unk52;
+    d->unk7C = src->unk7C;
+    d->unk80 = src->unk80;
+    d->f34_0 = src->f34_0;
+    d->f34_7 = src->f34_7;
+    d->f34_8 = src->f34_8;
+    d->f34_9 = src->f34_9;
+    d->f34_10 = src->f34_10;
+    d->f34_12 = src->f34_12;
+    d->unk58 = src->unk58;
+    d->unk59 = src->unk59;
+    d->unk5A = src->unk5A;
+    return d;
+}
 
 #include "common.h"
 
