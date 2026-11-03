@@ -203,7 +203,62 @@ void func_800B7298(s32 arg0) {
     }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B74A4);
+void func_800B74A4(void) {
+    typedef struct {
+        u8 _p00[0x46];
+        s16 unk46;
+        s16 unk48;
+        s16 unk4A;
+    } Obj;
+    typedef struct {
+        u8 _p00[0xDC];
+        u16 unkDC;
+        u8 _pDE[0x8BC];
+        u8 unk99A;
+    } Sys;
+    extern u16 D_8006AF80[];
+    extern Sys D_8008ED68[];
+    extern struct {
+        u8 _p00[0x8A];
+        u16 unk8A;
+        u8 _p8C[0x11C];
+    } D_80091618[];
+    extern struct {
+        u8 _p00[0x73C];
+        s32 unk73C;
+        u8 _p740[0xC];
+        Obj *unk74C;
+    } D_800EEB9C[];
+    extern struct {
+        u8 _p00[0x384];
+        s16 unk384;
+        s16 unk386;
+        u8 _p388[0x414];
+    } D_80100F38[];
+    Sys *sys;
+    s32 i;
+    s32 sel;
+
+    sys = D_8008ED68;
+    i = 0;
+    if ((u32)(sys->unkDC - 0xF) < 0x32) {
+        do {
+            if (i == D_800EEB9C->unk73C && i != *D_8006AF80) {
+                sel = 1;
+            } else {
+                sel = i == D_80091618[*D_8006AF80].unk8A;
+            }
+            if (D_80100F38[i].unk384 == 1
+                && (i == *D_8006AF80 || i == D_80091618[*D_8006AF80].unk8A)
+                && sys->unk99A != D_80100F38[i].unk384
+                && (s16)(D_80100F38[i].unk386 % 32) >= 0x10) {
+            } else {
+                func_8001F35C((s16)(D_800EEB9C->unk74C->unk46 + 0x32 + i * 0xD), (s16)(D_800EEB9C->unk74C->unk4A + 8), sel, 0, i != *D_8006AF80, i + 1, 1, 3);
+            }
+            i++;
+        } while (i < 6);
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B768C);
 
