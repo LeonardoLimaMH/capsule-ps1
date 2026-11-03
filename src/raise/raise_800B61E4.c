@@ -1,5 +1,12 @@
 #include "common.h"
 
+/* Objeto de carta/sprite usado por func_800B6624 (flags em 0x34/0x38). */
+typedef struct {
+    u8 _p00[0x34];
+    u32 unk34;
+    u32 unk38;
+} Obj_800B6624;
+
 void func_800B61E4(void) {
     extern u8 D_800EE5D0[];
     extern s32 D_800EF2FC[];
