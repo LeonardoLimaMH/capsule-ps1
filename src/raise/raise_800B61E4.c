@@ -27,7 +27,152 @@ void func_800B62AC(void) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B6310);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B6624);
+void func_800B6624(Obj_800B6624 *arg0)
+{
+    typedef struct {
+        u8 _p00[0x18C];
+        Obj_800B6624 *unk18C;
+        u8 _p190[0x8C];
+        Obj_800B6624 *unk21C;
+        u8 _p220[0x8];
+        s16 unk228;
+        u8 _p22A[0x572];
+    } Player;
+    typedef struct {
+        u16 unk0;
+        u8 _p02[0x176];
+        s32 unk178;
+        u8 _p17C[0x2C];
+    } Slot;
+    extern s16 D_80078C20[];
+    extern s16 D_80078C28[];
+    extern u16 D_8008EE44[];
+    extern struct {
+        u8 _p00[0x18];
+        u32 unk18;
+        u8 _p1C[0x4];
+        u32 unk20;
+        u8 _p24[0x18];
+    } D_80063940[];
+    extern struct {
+        u8 _p00[0x36];
+        u16 unk36;
+        u16 unk38;
+    } D_8006AFCC;
+    extern Slot D_80091618[];
+    extern Player D_80100F38[];
+    extern s16 D_800F1A68[][3][3];
+    extern struct {
+        u8 _p00[3];
+        u8 unk3;
+        u8 _p04;
+    } D_800F07D4[];
+    u32 flags;
+    s32 r;
+    u16 id;
+    u32 k;
+    u32 v;
+    s16 x;
+    s16 *t;
+    Player *p;
+    Slot *q;
+
+    flags = arg0->unk34;
+    if (((flags >> 8) & 1) != D_80078C20[0]) {
+        p = &D_80100F38[(u16)func_800B1260((flags >> 9) & 1)];
+        func_80013920(arg0);
+        if (arg0 == p->unk18C) {
+            p->unk18C = 0;
+        }
+        return;
+    }
+    if (D_8008EE44[0] > 0x40) {
+        func_80013920(arg0);
+        return;
+    }
+    if (D_80078C28[0] == 1) {
+        if ((arg0->unk38 & 1) == D_80078C28[0]) {
+            return;
+        }
+        r = func_800B1260((flags >> 9) & 1);
+        p = &D_80100F38[(u16)r];
+        q = &D_80091618[(u16)r];
+        id = q->unk0;
+        if (arg0 != p->unk21C) {
+            return;
+        }
+        if (p->unk228 == 1 && func_800E16EC() == 0) {
+            return;
+        }
+        flags = arg0->unk34;
+        switch ((flags >> 10) & 3) {
+        case 0:
+            k = (flags >> 12) & 0xF;
+            if (k - 4 < 2 || k == 8) {
+                v = D_80063940[id].unk18 >> 17;
+            } else {
+                v = D_80063940[id].unk18 >> 14;
+            }
+            v &= 7;
+            if (v == 1) {
+                x = -8;
+            } else if (v == 7) {
+                x = 8;
+            } else {
+                x = 0;
+            }
+            func_800C5850(D_80091618[(u16)r].unk178, arg0, x, 0x10, -5);
+            break;
+        case 1:
+            k = (flags >> 12) & 0xF;
+            if (k - 10 < 3) {
+                t = D_800F1A68[(D_80063940[id].unk20 >> 15) & 0xF][(s16)(k - 10)];
+                func_800C5850(q->unk178, arg0, t[0], t[1], (s16)(t[2] - 5));
+            } else if (k == 0xE) {
+                func_800C5850(q->unk178, arg0, 0, D_800F07D4[(D_80063940[id].unk20 >> 15) & 0xF].unk3, -5);
+            }
+            break;
+        }
+    }
+    if (D_8006AFCC.unk36 == 1 || D_8006AFCC.unk38 == 1) {
+        r = func_800B1260((arg0->unk34 >> 9) & 1);
+        p = &D_80100F38[(u16)r];
+        q = &D_80091618[(u16)r];
+        id = q->unk0;
+        if (arg0 != p->unk21C) {
+            return;
+        }
+        flags = arg0->unk34;
+        switch ((flags >> 10) & 3) {
+        case 0:
+            k = (flags >> 12) & 0xF;
+            if (k - 4 < 2 || k == 8) {
+                v = D_80063940[id].unk18 >> 17;
+            } else {
+                v = D_80063940[id].unk18 >> 14;
+            }
+            v &= 7;
+            if (v == 1) {
+                x = -8;
+            } else if (v == 7) {
+                x = 8;
+            } else {
+                x = 0;
+            }
+            func_800C5850(D_80091618[(u16)r].unk178, arg0, x, 0x10, -5);
+            break;
+        case 1:
+            k = (flags >> 12) & 0xF;
+            if (k - 10 < 3) {
+                t = D_800F1A68[(D_80063940[id].unk20 >> 15) & 0xF][(s16)(k - 10)];
+                func_800C5850(q->unk178, arg0, t[0], t[1], (s16)(t[2] - 5));
+            } else if (k == 0xE) {
+                func_800C5850(q->unk178, arg0, 0, D_800F07D4[(D_80063940[id].unk20 >> 15) & 0xF].unk3, -5);
+            }
+            break;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B6C48);
 
@@ -267,7 +412,52 @@ void func_800B74A4(void) {
     }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B768C);
+void func_800B768C(void) {
+    typedef struct {
+        u8 _p00[0x46];
+        u16 unk46;
+        u16 unk48;
+        u16 unk4A;
+    } Obj;
+    typedef struct {
+        u8 _p00[0x10];
+        u16 unk10;
+        u8 _p12[0x196];
+    } S_91618;
+    typedef struct {
+        u8 _p00[0x73C];
+        s32 unk73C;
+    } S_EEB9C;
+    typedef struct {
+        u8 _p00[0x14];
+        Obj *unk14;
+    } S_EFF58;
+    extern u16 D_8006AF80[];
+    extern S_91618 D_80091618[];
+    extern S_EEB9C D_800EEB9C[];
+    extern S_EFF58 D_800EFF58[];
+    s32 i;
+    s32 c;
+    S_EEB9C *p1;
+    S_91618 *q;
+    S_EFF58 *p2;
+
+    i = 0;
+    p1 = D_800EEB9C;
+    q = D_80091618;
+    p2 = D_800EFF58;
+    do {
+        if (i == p1->unk73C) {
+            c = 1;
+        } else if (i == *D_8006AF80) {
+            c = 3;
+        } else {
+            c = (q[i].unk10 != 0xFFFF) * 2;
+        }
+        func_8001F35C((s16)(p2->unk14->unk46 + i * 0xD + 0x32), (s16)(p2->unk14->unk4A + 8), c, 0, 0, i + 1, 1, 5);
+        i++;
+    } while (i < 6);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B77AC);
 
