@@ -115,6 +115,24 @@ void func_800B70A0(s32 arg0)
 }
 
 #include "common.h"
+typedef struct {
+    u8 _p00[0x8];
+    s32 unk8;
+    u8 _p0C[0x4];
+    s32 unk10;
+    u8 _p14[0x4];
+    s32 unk18;
+    u8 _p1C[0x8];
+    s32 unk24;
+    u8 _p28[0x38];
+    s32 unk60[7];
+    s32 unk7C[7];
+    s32 *unk98[14];
+    s32 unkD0;
+    u8 _pD4[0x2F4];
+    s32 unk3C8[1][9];
+} S_800EEB9C;
+
 
 void func_800B7264(s32 arg0) {
     extern M2C_UNK D_800EEB9C[];
@@ -176,6 +194,9 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B7ED8);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B7F40);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B7F74);
+s32 func_800B7F74(s32 arg0, s32 arg1) {
+    extern S_800EEB9C D_800EEB9C;
+    return D_800EEB9C.unk3C8[arg0][arg1] == 1;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B7FA8);
