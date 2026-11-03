@@ -32,7 +32,13 @@ void func_800CE638(u8 *obj, s32 ctx) {
     *(s16 *)(obj + 0x4E) = v;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CE204", func_800CE6B0);
+void func_800CE6B0(s32 unused, s32 ctx) {
+    u8 *rec = D_80100F38 + (func_800B1260(ctx) & 0xFFFF) * 0x79C;
+    s16 v = func_800E3D18(ctx, rec + 0x1EC, rec + (*(s16 *)(rec + 0x2BA) * 4 + 0x258));
+
+    rec += *(s16 *)(rec + 0x2BA) * 4;
+    *(s16 *)(*(u8 **)(rec + 0x258) + 0x4E) = v;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CE204", func_800CE748);
 
