@@ -19,6 +19,9 @@ Uso:
   ./run.sh python3 tools/objdiff_report.py            gera tudo em build/objdiff/
   python tools/objdiff_report.py --upload             envia ao ByteMatch (no host; lê
                                                       SITE e BYTE_MATCH_TOKEN do .env)
+  ./run.sh python3 tools/objdiff_report.py --objects  só os objetos e o objdiff.json, de forma
+                                                      incremental: é o build que o objdiff e o
+                                                      decomp.anything chamam (custom_make/custom_args)
 O objdiff-cli fica em .cache/bin/objdiff-cli (release oficial do encounter/objdiff).
 """
 import argparse
@@ -54,9 +57,15 @@ def tu_functions(text):
     return [m.group(2) or m.group(3) for m in split_tu.FUNC_START.finditer(text)]
 
 
+INCREMENTAL = False
+
+
 def build_target(t, src, funcs):
     """Objeto com o assembly original das funções do arquivo, na ordem do arquivo."""
     folder = ROOT / ".cache" / "fullasm" / t / "nonmatchings" / src.stem
+    done = OUT / "target" / t / f"{src.stem}.o"
+    if INCREMENTAL and done.exists():
+        return done
     lines = ['.include "include/macro.inc"', ".set noat", ".set noreorder", ".text"]
     n = 0
     for f in funcs:
@@ -77,6 +86,11 @@ def build_target(t, src, funcs):
 def build_base(t, src, comp, g0, sp):
     """Objeto do C do arquivo, com INCLUDE_ASM vazio."""
     import match
+    dst = OUT / "base" / t / f"{src.stem}.o"
+    newest = max(src.stat().st_mtime, *(p.stat().st_mtime for p in (ROOT / "config").glob("*.txt")),
+                 *(p.stat().st_mtime for p in (ROOT / "include").glob("*.h")))
+    if INCREMENTAL and dst.exists() and dst.stat().st_mtime >= newest:
+        return dst
     match.CPP_FLAGS = match.CPP_FLAGS.replace("-DOBJDIFF_BASE", "") + " -DOBJDIFF_BASE"
     obj = match.compile_c(src.relative_to(ROOT).as_posix(), comp, "-O2 -G8", g0, t, sp)
     dst = OUT / "base" / t / f"{src.stem}.o"
@@ -102,7 +116,7 @@ def functional(units_funcs):
     return {"functions": out}
 
 
-def generate():
+def generate(objects_only=False):
     import progress
     comp = {}
     for l in (ROOT / "config" / "compilers.txt").read_text(encoding="utf-8").splitlines():
@@ -113,7 +127,7 @@ def generate():
     sp = set((ROOT / "config" / "spfill.txt").read_text(encoding="utf-8").split())
     include = re.compile(r'^INCLUDE_ASM\("[^"]+",\s*(\w+)\);', re.M)
 
-    if OUT.exists():
+    if OUT.exists() and not objects_only:
         shutil.rmtree(OUT)
     units, pending_all = [], {}
     for t in TARGETS:
@@ -152,7 +166,9 @@ def generate():
                  {"id": f"{t}.sdk", "name": f"{t.upper()}: SDK PsyQ"}]
     cfg = {
         "$schema": "https://raw.githubusercontent.com/encounter/objdiff/main/config.schema.json",
-        "custom_make": "true",
+        # o build que o objdiff (e o decomp.anything) chamam: só refaz os objetos que mudaram
+        "custom_make": "./run.sh",
+        "custom_args": ["python3", "tools/objdiff_report.py", "--objects"],
         "build_target": False,
         "build_base": False,
         "units": units,
@@ -211,9 +227,15 @@ def upload():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--upload", action="store_true", help="só envia o relatório já gerado")
+    ap.add_argument("--objects", action="store_true", help="só os objetos e o objdiff.json (incremental)")
+    ap.add_argument("-k", action="store_true", help=argparse.SUPPRESS)  # o decomp.anything acrescenta -k
     a = ap.parse_args()
+    global INCREMENTAL
     if a.upload:
         upload()
+    elif a.objects:
+        INCREMENTAL = True
+        generate(objects_only=True)
     else:
         generate()
 

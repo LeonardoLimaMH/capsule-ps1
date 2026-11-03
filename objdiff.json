@@ -1,6 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/encounter/objdiff/main/config.schema.json",
-  "custom_make": "true",
+  "custom_make": "./run.sh",
+  "custom_args": [
+    "python3",
+    "tools/objdiff_report.py",
+    "--objects"
+  ],
   "build_target": false,
   "build_base": false,
   "units": [
