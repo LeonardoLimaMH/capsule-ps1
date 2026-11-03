@@ -231,7 +231,12 @@ s32 func_80020464(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x5CA) & 0x10;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020470);
+void func_80020470(s32 x, s32 y, s32 ang, s16 *ox, s16 *oy) {
+    s32 t = ((s16)ang << 12) / 360;
+
+    *ox = ((s16)x * rcos(t) - (s16)y * rsin(t)) / 4096;
+    *oy = ((s16)x * rsin(t) + (s16)y * rcos(t)) / 4096;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020578);
 
