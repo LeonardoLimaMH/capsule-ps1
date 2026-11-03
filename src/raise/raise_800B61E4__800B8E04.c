@@ -12,7 +12,48 @@ s32 func_800B8E2C(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B8E04", func_800B8E34);
+void func_800B8E34(void) {
+    typedef struct {
+        u8 _p00[0x12];
+        u16 unk12;
+        u8 _p14[0x194];
+    } S_91618;
+    typedef struct {
+        s32 a, b, c;
+    } S3;
+    extern u16 D_8006AF80[];
+    extern S_91618 D_80091618[];
+    extern u16 D_80100CD0[];
+    extern u8 D_80100CFC[];
+    extern u8 D_800EFFEC[];
+    register s32 var_t2 asm("t2");
+    register s32 *var_t0 asm("t0");
+    register u16 *var_t1 asm("t1");
+    s32 *var_a2;
+    register u16 *var_a3 asm("a3");
+    u32 base;
+    u16 temp_v0;
+
+    var_t2 = 0;
+    var_t0 = (s32 *)D_80100CD0;
+    var_t1 = (u16 *)var_t0;
+    base = (u32)D_80091618;
+    var_a2 = (s32 *)(base + (*D_8006AF80 * 0x1A8));
+    temp_v0 = ((u16 *)var_a2)[9];
+    var_a3 = (u16 *)var_a2;
+    *D_80100CD0 = temp_v0;
+    do {
+        temp_v0 = var_a3[10];
+        var_a3++;
+        var_t2++;
+        var_t1[1] = temp_v0;
+        *(S3 *)&var_t0[2] = *(S3 *)&var_a2[7];
+        var_a2 += 3;
+        var_t0 += 3;
+        var_t1++;
+    } while (var_t2 < 3);
+    func_8001AA70(D_80100CFC, D_800EFFEC, 0x40);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B8E04", func_800B8EF0);
 
@@ -257,7 +298,26 @@ s32 func_800B94D4(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B8E04", func_800B95AC);
+s32 func_800B95AC(void) {
+    extern u8 D_800900C0[];
+    u8 *p;
+    register u8 *v1 asm("v1");
+    s32 i;
+
+    p = D_800900C0;
+    i = 3;
+    if (*(s32 *)(p + 0x268) == -0x320) {
+        func_800AEDC4(i, p);
+        return 1;
+    }
+    v1 = p + 0x234;
+    do {
+        *(s32 *)(v1 + 0x34) += 0x14;
+        i++;
+        v1 += 0xBC;
+    } while (i < 6);
+    return 0;
+}
 
 #include "common.h"
 
