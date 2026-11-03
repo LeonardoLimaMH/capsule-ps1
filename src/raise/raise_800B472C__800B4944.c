@@ -17,22 +17,25 @@ void func_800B4944(s32 arg0) {
     extern s32 D_800EE5D0[];
     extern s16 D_800EEB90[];
     extern S_80100F38 D_80100F38[];
-    S_80100F38 *p;
     s32 i;
     s32 idx;
     s32 v;
     s32 t;
     s32 *q;
+    u32 base;
+    S_80100F38 *p;
 
     if (D_80091618[*D_8006AF80].f_8A == 0xFFFF && arg0 == 0) {
         arg0 = 1;
     }
     *D_800EEB90 = arg0 == 1;
-    for (i = 1; i >= 0; i--) {
-        q = (s32 *)D_800EEB9C;
+    i = 1;
+    base = (u32)D_80100F38;
+    q = (s32 *)D_800EEB9C;
+    for (; i >= 0; i--) {
         idx = func_800B1260(i) & 0xFFFF;
         if (idx != 0xFFFF) {
-            p = &D_80100F38[idx];
+            p = (S_80100F38 *)((idx * 0x79C) + base);
             if (*D_800EEB90 == i) {
                 v = q[0x32];
             } else {
