@@ -453,19 +453,23 @@ s32 func_800AEDC4(void) {
         u32 unk8;
         u8 _p0C[0x30];
     } Entry_80063940;
-    extern u16 D_8006AF80;
+    extern u16 D_8006AF80[];
     extern Entry_80091618 D_80091618[];
     extern Entry_80063940 D_80063940[];
     extern void func_800A89E0(s32, s32);
 
-    u16 j = D_80091618[D_8006AF80].unk8A;
-    u16 a = D_8006AF80;
+    register u16 *p_af asm("a0") = D_8006AF80;
+    u16 j = D_80091618[*p_af].unk8A;
+    u16 a = *p_af;
     Entry_80091618 *e = &D_80091618[a];
+    Entry_80063940 *pe = &D_80063940[e->unk0];
     Entry_80091618 *f = &D_80091618[j];
-    s16 s = (((D_80063940[e->unk0].unk8 ^ D_80063940[f->unk0].unk8) >> 12) & 3) != 0;
-    s *= 2;
-    e->unk8E = s;
-    f->unk8E = s;
+    s32 v = (((D_80063940[f->unk0].unk8 ^ pe->unk8) >> 12) & 3) != 0;
+    s32 v2 = v * 2;
+    s16 s = v2;
+
+    e->unk8E = v2;
+    f->unk8E = v2;
     func_800A89E0(a, s);
     func_800A89E0(j, s);
     return s;
@@ -516,7 +520,47 @@ s32 func_800AEF38(u32 arg0)
   }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AF018);
+s32 func_800AF018(u16 param_1) {
+    typedef struct {
+        u8 _p00[0x10];
+        u16 unk10;
+        u8 _p12[0x78];
+        u16 unk8A;
+        u8 _p8C[0x11C];
+    } S_91618;
+    typedef struct {
+        u8 _p000[0x378];
+        u16 unk378;
+        u8 _p37A[0x422];
+    } S_100F38;
+    extern u16 D_8006AF80[];
+    extern S_91618 D_80091618[];
+    extern S_100F38 D_80100F38[];
+    S_91618 *p1;
+    s32 i;
+
+    i = 0;
+    p1 = D_80091618;
+    for (; i < 6; i++) {
+        u16 a0 = i;
+        s32 v1;
+
+        if (p1[a0].unk10 == 0xFFFF) {
+            v1 = -1;
+        } else if (a0 == *D_8006AF80) {
+            v1 = 1;
+        } else {
+            v1 = (a0 != p1[*D_8006AF80].unk8A) * 2;
+        }
+
+        if (v1 != -1 && v1 != 2) {
+            if (func_800E14C4((u16)i) != 1) {
+                D_80100F38[i].unk378 = (func_800E680C((u16)i, param_1) != 2);
+            }
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AF148);
 
