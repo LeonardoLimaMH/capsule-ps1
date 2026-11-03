@@ -39,6 +39,25 @@ Notas:
   `C:\Users\leonardo.queiroz\Documents\Projects\RECOMP\decomp.anything`.
 - As distribuições do WSL compartilham a rede: a porta de uma aparece também nas outras.
 
+### Preparação: o manifesto `.decomp.wtf.json`
+
+Sem manifesto, o app trata o projeto como splat de um binário só. Ele pega o primeiro YAML
+(`chess.yaml`), pede apenas o `CHESS.BIN` e não o acha na raiz da imagem do disco, porque
+o arquivo fica em `MASTER/PSF/`.
+
+O manifesto na raiz do repositório resolve isso:
+- pede a **imagem `.bin` inteira do disco**, conferida pelo SHA-1 do dump do usuário;
+- guarda o arquivo em `orig/SLPM-86096.bin` (fora do git);
+- roda `tools/extract_disc.py`, `make split`, `make` (que confere os 5 SHA-1) e
+  `objdiff_report.py --objects`.
+
+Para outro dump do mesmo jogo, troque o `sha1` do manifesto.
+
+Para MCP, o modo recomendado é o **stdio** (`wsl.exe ... decomp mcp`): não usa token, sobe
+o app sozinho e não passa pela porta HTTP. O modo HTTP (`/mcp` com token Bearer) só serve
+para clientes que não executam comandos. O token desse modo é uma senha: não vai para o
+git nem para documentos.
+
 ### Como o build é chamado
 
 O decomp.anything compila pelo `custom_make`/`custom_args` do `objdiff.json`. Aqui isso é:
@@ -54,7 +73,7 @@ O comando refaz só os objetos que mudaram (2–3 s). O `objdiff.json` é gerado
 
 ```bash
 # Claude Code no Windows (já feito; config em %USERPROFILE%\.claude.json)
-claude mcp add decomp -s user -- wsl.exe -d decomp-wtf -- /home/decomp/.local/bin/decomp mcp --name claude-code
+claude mcp add decomp -s user -- wsl.exe -d decomp-wtf --cd "~" --exec /usr/local/bin/decomp mcp --name claude-code
 
 # Codex (a outra IA): dentro da distribuição decomp-wtf
 wsl -d decomp-wtf
