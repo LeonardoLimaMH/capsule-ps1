@@ -147,9 +147,33 @@ s32 func_800AEBA8(s32 arg0, s32 arg1) {
     return sum;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AEBDC);
+s32 func_800AEBDC(s32 arg0) {
+    extern u8 D_800EEA00[];
+    extern S_800EEB9C D_800EEB9C;
+    S_800EEB9C *p;
+    s32 i;
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AEC94);
+    i = 9;
+    if (arg0 != 0xFF && D_800EEA00[arg0] == 1) {
+        p = &D_800EEB9C;
+        p->unk24 = arg0;
+        p->unkD0 = p->unk7C[arg0];
+        do {
+            if (p->unk3C8[arg0][p->unkD0] == 1) {
+                return 1;
+            }
+            i--;
+            p->unkD0 = (p->unkD0 + 1) % p->unk60[arg0];
+        } while (i != 0);
+        return 0;
+    }
+    return 0;
+}
+
+s32 func_800AEC94(s32 arg0, s32 arg1) {
+    extern S_800EEB9C D_800EEB9C;
+    return D_800EEB9C.unk3C8[arg0][arg1] == 1;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AECC8);
 
