@@ -62,7 +62,18 @@ u16 func_800B1260(s32 which)
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C__800B1150", func_800B12D8);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C__800B1150", func_800B1350);
+u16 func_800B1350(s32 which)
+{
+  if ((*D_800EEB70) == 0)
+  {
+    if (which == 1)
+    {
+      return *D_8006AF80;
+    }
+    return D_80091618[*D_8006AF80].f_8A;
+  }
+  return *D_800EF2D8;
+}
 
 #include "common.h"
 extern u16 D_8006AF80[];
