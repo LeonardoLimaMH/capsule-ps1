@@ -2,6 +2,25 @@
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AC34C);
 
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
+typedef struct {
+    u8 _p00[0x8];
+    s32 unk8;
+    u8 _p0C[0x4];
+    s32 unk10;
+    u8 _p14[0x4];
+    s32 unk18;
+    u8 _p1C[0x8];
+    s32 unk24;
+    u8 _p28[0x38];
+    s32 unk60[7];
+    s32 unk7C[7];
+    s32 *unk98[14];
+    s32 unkD0;
+    u8 _pD4[0x2F4];
+    s32 unk3C8[1][9];
+} S_800EEB9C;
+
 void func_800AC9E8(s32 arg0) {
     extern s32 D_800EEBB4[];
     if ((*D_800EEBB4) != arg0) {
