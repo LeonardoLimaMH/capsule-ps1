@@ -3,6 +3,9 @@
 
 #include "common.h"
 
+extern u8 D_800922F0[];
+extern s32 SpuReadDecodedData();
+
 typedef struct {
     u8 cmd;
     u8 arg;
@@ -33,4 +36,21 @@ void func_8003727C(s16 value, s8 arg)
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80037244", func_800372B4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80037244", func_800373A0);
+extern u8 D_800922F0[];
+extern s32 SpuReadDecodedData();
+extern u16 D_800922F0_;
+void func_800373A0(void) {
+    s32 b[4];
+    s32 a[4];
+
+    if (*(u16 *)D_800922F0 & 0xF) {
+        ((u8 *)a)[0] = 0x2A;
+        ((u8 *)a)[1] = 0;
+        a[2] = -0x20;
+        func_80036DB0(a);
+        ((u8 *)b)[0] = 0x26;
+        func_80036DB0(b);
+        ((u8 *)b)[0] = 0x11;
+        func_80036DB0(b);
+    }
+}
