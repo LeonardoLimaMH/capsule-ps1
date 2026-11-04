@@ -224,7 +224,17 @@ void func_800398B4(void) {
 
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_800398BC);
+s32 func_800398BC(u8 *p, u16 sub, u8 prog) {
+    extern u8 D_800944B8[], D_800947E8[];
+    register u8 *bank asm("t0") = D_800947E8;
+    register u8 *seq asm("a3") = D_800944B8;
+    register s32 k asm("v0");
+    s32 data, offset;
+    k = *(s16 *)(seq + (prog >> 4) * 0x2AC + 0x288);
+    data = *(s32 *)(bank + k * 0x1C + 4);
+    offset = (p[0] * 16 + sub) * 32 + 0x820;
+    return data + offset;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_8003992C);
 
