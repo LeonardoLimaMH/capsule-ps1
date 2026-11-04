@@ -437,7 +437,66 @@ s32 func_8003AE48(u8 *s) {
     return ((hi & 0xFF) << 8) | (lo & 0xFF);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AF34);
+s32 func_8003AF34(s32 idx) {
+    extern s32 D_80078C98;
+    Unk_800944B8 *s = &D_800944B8[idx];
+    register Unk_800944B8 *e asm("v0");
+    register u32 a asm("a1");
+
+    D_80078C9C = idx;
+    s->unk_0x2A6[3] = 0;
+    e = &D_800944B8[D_80078C9C];
+    e->unk_0x298 = 0;
+    *(s32 *)e->unk_0x29C = 0;
+    s->unk_0x0[0].unk_0x0 = 8;
+    s->unk_0x2A4 = func_8003AE48(s);
+    s->unk_0x2A2 = 1;
+    s->unk_0x2A0 = 0;
+    s->unk_0x294 = 0x10000;
+    a = (u32)func_8003AC60(s) >> 8;
+    {
+        register u32 num asm("v0") = 60000000;
+        a = num / a;
+    }
+    a = (a * 100) / 115;
+    if (a >= 0x100) {
+        a = 0xFF;
+    }
+    switch (s->unk_0x2A4) {
+    case 0x18:
+    case 0x3C:
+        a >>= 1;
+        break;
+    case 0x1E:
+        a >>= 2;
+        break;
+    }
+    {
+        register u32 v asm("v0") = a & 0xFF;
+        *(s16 *)((u8 *)s + 0x16) = v;
+        *(s16 *)((u8 *)s + 0x14) = v;
+    }
+    {
+        Unk_800944B8 *base = D_800944B8;
+        register u32 n asm("a0");
+        n = s->unk_0x0[0].unk_0x0;
+        n++;
+        s->unk_0x0[0].unk_0x0 = n;
+        if (base[D_80078C9C].unk_0x294 < n) {
+            s->unk_0x0[0].unk_0x20 = 1;
+        }
+        if (base[idx].unk_0x2A4 >= 0x60) {
+            D_80078C98 = base[idx].unk_0x2A4;
+        } else {
+            D_80078C98 = 0;
+        }
+        {
+            register Unk_800944B8 *final_base asm("a0") = D_800944B8;
+            D_80078C98 = final_base[idx].unk_0x2A4;
+        }
+    }
+    return 1;
+}
 
 void func_8003B15C(s32 *arg0, s32 arg1) {
     *arg0 += arg1;
@@ -670,15 +729,21 @@ s32 func_8003C5BC(s32 n) {
 void func_8003C654(void) {
     extern s32 D_80094768[];
     s32 n, i, j;
-    s32 *b, *a;
+    s32 *base;
+    s32 *p;
+    s32 *a;
+    s32 *b;
     volatile s32 temp[2];
+
     for (n = 0; n < 16; n++) {
         if (D_80094768[n * 2] == 0) break;
     }
-    for (i = 0; i < n; i++) {
-        a = &D_80094768[i * 2];
+    base = D_80094768;
+    p = base;
+    for (i = 0; i < n; i++, p += 2) {
+        a = p;
         for (j = n - 1; i < j; j--) {
-            b = &D_80094768[j * 2];
+            b = &base[j * 2];
             if (a[0] > b[0]) {
                 temp[1] = a[1];
                 temp[0] = a[0];
