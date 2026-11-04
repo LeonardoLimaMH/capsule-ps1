@@ -71,20 +71,20 @@ void func_800B8EF0(void) {
     register s32 var_t2 asm("t2");
     register s32 *var_t0 asm("t0");
     register u16 *var_t1 asm("t1");
-    register u16 *var_a1 asm("a1");
-    register u32 base asm("a0");
-    register s32 *var_a2 asm("a2");
+    register u32 var_v0 asm("v0");
+    s32 *var_a2;
     register u16 *var_a3 asm("a3");
-    s32 *temp;
+    u32 base;
+    u16 temp;
 
     var_t2 = 0;
-    var_a1 = D_80100CD0;
-    var_t0 = (s32 *)var_a1;
+    var_t0 = (s32 *)D_80100CD0;
     var_t1 = (u16 *)var_t0;
+    temp = *D_8006AF80;
     base = (u32)D_80091618;
-    temp = (s32 *)(base + (*D_8006AF80 * 0x1A8));
-    var_a2 = temp;
-    ((u16 *)var_a2)[9] = *var_a1;
+    var_v0 = base + (temp * 0x1A8);
+    var_a2 = (s32 *)var_v0;
+    ((u16 *)var_a2)[9] = *D_80100CD0;
     var_a3 = (u16 *)var_a2;
     do {
         u16 temp_v0 = var_t1[1];
