@@ -2,7 +2,27 @@
 #include "yuugi.h"
 
 typedef struct {
-    u8 unk_0x0[0x284];
+    u32 unk_0x0;
+    u32 unk_0x4;
+    u32 unk_0x8;
+    u32 unk_0xC;
+    u32 unk_0x10;
+    u8 unk_0x14[4];
+    u16 unk_0x18;
+    u8 unk_0x1A[2];
+    u16 unk_0x1C;
+    u8 unk_0x1E[2];
+    u8 unk_0x20;
+    u8 unk_0x21[2];
+    u8 unk_0x23;
+    u8 unk_0x24;
+    u8 unk_0x25;
+    u8 unk_0x26[2];
+} Unk_800944B8Stream;
+
+typedef struct {
+    Unk_800944B8Stream unk_0x0[16];
+    u8 unk_0x280[4];
     u8 *unk_0x284;
     u8 unk_0x288[0xC];
     u32 unk_0x294;
@@ -246,28 +266,28 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AC60);
 s32 func_8003AE48(u8 *s) {
     register u8 *stream asm("a2") = s;
     register s32 hi asm("a1");
-    s32 lo;
+    register s32 lo asm("v1");
     {
     register Unk_800944B8 *base asm("a0") = D_800944B8;
     Unk_800944B8 *e = &base[D_80078C9C];
-    u8 *data = e->unk_0x284;
+    u8 *data = *(u8 *volatile *)&e->unk_0x284;
     register u32 pos asm("a0") = *(volatile u32 *)stream;
-    u8 c = data[pos];
+    u32 c = data[pos];
     pos++;
     *(u32 *)stream = pos;
     if (e->unk_0x294 < pos) { stream[0x20] = 1; hi = -1; }
-    else hi = c;
+    else hi = (u8)c;
 }
     {
     register Unk_800944B8 *base asm("a0") = D_800944B8;
     Unk_800944B8 *e = &base[D_80078C9C];
-    u8 *data = e->unk_0x284;
+    u8 *data = *(u8 *volatile *)&e->unk_0x284;
     register u32 pos asm("a0") = *(volatile u32 *)stream;
-    u8 c = data[pos];
+    u32 c = data[pos];
     pos++;
     *(u32 *)stream = pos;
     if (e->unk_0x294 < pos) { stream[0x20] = 1; lo = -1; }
-    else lo = c;
+    else lo = (u8)c;
 }
     return ((hi & 0xFF) << 8) | (lo & 0xFF);
 }
@@ -310,15 +330,87 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003B7B4);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003BC94);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003BFCC);
+s32 func_8003BFCC(u32 *s) {
+    extern u8 D_80078CAC[];
+    u8 *pattern = D_80078CAC;
+    u32 found = -1;
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    Unk_800944B8 *e = &base[D_80078C9C];
+    register u32 pos asm("a3") = *s;
+    u8 *data = e->unk_0x284;
+    u8 *a, *b;
+    s32 n, x, y, diff;
+    do {
+        a = pattern;
+        b = data + pos;
+        n = 3;
+        do {
+            x = *a++;
+            y = *b;
+            if (x != y) goto compare;
+            b++;
+        } while (--n);
+        x = *a;
+        y = *b;
+compare:
+        diff = x - y;
+        if (diff == 0) {
+            found = pos + 4;
+            break;
+        }
+        pos++;
+    } while (pos <= e->unk_0x294);
+    *s = found;
+    if (found != -1U) {
+        s32 v = func_8003AC60(s);
+        u32 pos;
+        s[2] = v;
+        pos = s[0];
+        s[4] = pos;
+        s[3] = pos + v;
+        return 0;
+    }
+    return 1;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C0C8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C29C);
+s32 func_8003C29C(s32 n) {
+    extern s32 D_80078C98;
+    u8 *base = (u8 *)D_800944B8;
+    s32 offset = n * sizeof(Unk_800944B8);
+    Unk_800944B8 *e = (Unk_800944B8 *)(base + offset);
+    s32 i;
+    D_80078C98 = 0;
+    e->unk_0x2A8 = 0;
+    D_80078C9C = n;
+    func_8003AF34(n);
+    for (i = 0; i < e->unk_0x2A2; i++, base += 0x28) {
+        u8 *t = base + offset;
+        s32 v;
+        *(u32 *)(t + 4) = *(u32 *)t;
+        v = func_8003AAF0(t);
+        t[0x20] = 0;
+        t[0x23] = 0;
+        t[0x25] = 0;
+        t[0x24] = 0;
+        *(s16 *)(t + 0x1C) = v;
+        *(s16 *)(t + 0x18) = 0;
+        if (D_80078C98 != 0) func_8003C0C8(t);
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C390);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C530);
+void func_8003C530(s32 n) {
+    s32 i;
+    for (i = 0; i < D_800944B8[n].unk_0x2A2; i++) {
+        u8 *t = (u8 *)&D_800944B8[n] + i * 0x28;
+        t[0x20] = 1;
+        *(u32 *)t = 0;
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C5BC);
 
