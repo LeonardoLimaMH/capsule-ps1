@@ -1,6 +1,21 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011EF00", slpm__spu_Fr_);
+void slpm__spu_Fr_(s32 addr, u16 a1, s32 size) {
+    extern volatile u16 *D_801333D4;
+    extern volatile s32 *D_801333D8;
+    extern volatile s32 *D_801333DC;
+    extern volatile s32 *D_801333E0;
+    extern s32 D_80133424;
+    D_801333D4[0xD3] = a1;
+    slpm__spu_Fw1ts();
+    D_801333D4[0xD5] |= 0x30;
+    slpm__spu_Fw1ts();
+    func_8011F4B4();
+    *D_801333D8 = addr;
+    *D_801333DC = (size << 16) | 0x10;
+    D_80133424 = 1;
+    *D_801333E0 = 0x01000200;
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011EF00", slpm__spu_t);
 
