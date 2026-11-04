@@ -290,20 +290,4 @@ void func_8003C7C8(void) {
     func_8003C73C();
     SpuInitMalloc(0x10, D_800949A8);
 }
-#include "common.h"
 
-extern s32 D_80078C9C;
-
-static s32 next_byte(u8 *s) {
-    Unk_800944B8 *e = &D_800944B8[D_80078C9C];
-    u32 pos = *(u32 *)s;
-    u8 c = e->unk_0x284[pos];
-
-    pos++;
-    *(u32 *)s = pos;
-    if (e->unk_0x294 < pos) {
-        s[0x20] = 1;
-        return -1;
-    }
-    return c;
-}
