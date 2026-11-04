@@ -1,6 +1,28 @@
 #include "common.h"
 #include "yuugi.h"
 
+#ifndef UNK_800944B8_DEFINED
+#define UNK_800944B8_DEFINED
+typedef struct {
+    struct {
+        s32 unk_0x0;
+        u8 unk_0x4[0x1C];
+        u8 unk_0x20;
+        u8 unk_0x21[7];
+    } unk_0x0[16];
+    u8 unk_0x280[4];
+    u8 *unk_0x284;
+    u8 unk_0x288[0xC];
+    u32 unk_0x294;
+    u8 unk_0x298[0xA];
+    u16 unk_0x2A2;
+    u8 unk_0x2A4[8];
+} Unk_800944B8;
+
+extern Unk_800944B8 D_800944B8[];
+extern s32 D_80078C9C;
+#endif
+
 s32 func_8003A5F8(void) {
     extern s32 D_80078C84;
     extern s32 D_80078C88;
