@@ -46,7 +46,16 @@ u32 slpm__spu_FgetRXXa(s32 param_1, s32 param_2) {
     return val << D_801333FC;
 }
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011EF00", slpm__spu_FsetPCR);
+void slpm__spu_FsetPCR(s32 arg0) {
+    extern u32 *D_801333E4;
+
+    *D_801333E4 &= 0xFFF8FFFF;
+    if (arg0 != 0) {
+        *D_801333E4 |= 0x30000;
+    } else {
+        *D_801333E4 |= 0x50000;
+    }
+}
 
 void func_8011F48C(void) {
     extern s32 * D_801333E8[];
