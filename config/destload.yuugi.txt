@@ -7,3 +7,4 @@ func_80044FFC
 func_8004B8DC
 ratan2
 todigit
+StopRCnt

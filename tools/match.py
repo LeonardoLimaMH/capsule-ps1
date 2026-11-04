@@ -51,7 +51,7 @@ def compile_c(src, gcc, cflags, g0fill=False, target=None, spfill=None):
     tmp = pathlib.Path(tempfile.mkdtemp())
     obj = tmp / "f.o"
     sp = g0fill_profile.sp_enabled(src) if spfill is None else spfill
-    back = g0fill_profile.backend(obj, sp) if g0fill else f"{MASPSX} --target {target} -o {obj}"
+    back = g0fill_profile.backend(obj, sp, target) if g0fill else f"{MASPSX} --target {target} -o {obj}"
     if g0fill:
         cflags = cflags.replace("-G8", "-G0")
     cmd = (f"mips-linux-gnu-cpp {CPP_FLAGS} {src} | /opt/gcc-{gcc}/cc1 {cflags} -quiet "
