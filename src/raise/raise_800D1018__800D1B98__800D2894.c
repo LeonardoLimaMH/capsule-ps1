@@ -114,19 +114,23 @@ s32 func_800D2BB8(s32 arg0) {
     Slot_80091618 *slots = (Slot_80091618 *)D_80091618;
     u32 id;
     register s32 r asm("v0");
-
     if (slots[(u16)k].unk_90 != 0) k = func_800B12D8(arg0);
     {
         register u32 index asm("v0") = (u16)k;
         if (slots[index].unk_10 != 0) return 0;
     }
-    id = (u16)func_800B1260(arg0);
-    if (id == 0xFFFF || (id = *(u16 *)((u8 *)slots + id * 0x1A8)) == 0xFFFF) {
+    {
+        u32 index = (u16)func_800B1260(arg0);
         r = 0;
-    } else {
-        u8 *base = D_80063940;
-        u8 *q = id * 0x3C + base;
-        r = (*(u32 *)(q + 0x18) & 3) == 2;
+        if (index != 0xFFFF) {
+            u32 mon = *(u16 *)&slots[index];
+            r = 0;
+            if (mon != 0xFFFF) {
+                u8 *base = D_80063940;
+                u8 *q = mon * 0x3C + base;
+                r = (*(u32 *)(q + 0x18) & 3) == 2;
+            }
+        }
     }
     if (r) return 1;
     id = (u16)func_800B1260(arg0);
@@ -277,7 +281,27 @@ s32 func_800D3940(void) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D3948);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D3BD8);
+s32 func_800D3BD8(s32 arg0) {
+    extern u8 D_80091618[];
+    register Slot_80091618 *slots asm("a0");
+    Slot_80091618 *slot;
+    s32 k = func_800B1260(arg0);
+
+    slots = (Slot_80091618 *)D_80091618;
+    slot = &slots[(u16)k];
+    if (slot->unk_90 != 0) {
+        register s32 new_k asm("a0") = func_800B12D8(arg0);
+        if ((u16)new_k == 0xFFFF) {
+            slot->unk_90 = 0;
+        } else {
+            k = new_k;
+        }
+    }
+    {
+        register Slot_80091618 *s asm("a0") = (Slot_80091618 *)D_80091618;
+        return s[(u16)k].unk_10 == 0;
+    }
+}
 
 s32 func_800D3CB0(s32 arg0) {
     extern s32 D_8008ED80[];
