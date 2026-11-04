@@ -15,4 +15,18 @@ s32 func_80111F28(void) {
     return 0;
 }
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80111F28", func_80111F90);
+s32 func_80111F90(void) {
+    extern s32 *D_801208BC[];
+    register s32 *p asm("v1") = D_801208BC[0];
+    register s32 r asm("v0");
+
+    r = p[1] & 1;
+    if (r != 0) {
+        r = p[0] & 1;
+        if (r != 0) {
+            return 1;
+        }
+        return 0;
+    }
+    return 0;
+}
