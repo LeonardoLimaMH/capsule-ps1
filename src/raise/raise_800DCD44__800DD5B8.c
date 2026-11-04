@@ -1,6 +1,21 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44__800DD5B8", func_800DD5B8);
+s32 func_800DD5B8(s32 a0, s32 a1) {
+    extern u8 D_80100F38[];
+    extern s32 func_800B1260(s32);
+    s32 res = 0;
+    s32 i;
+    u8 *p;
+    s16 *ptr;
+
+    p = D_80100F38 + (func_800B1260(a0) & 0xFFFF) * 0x79C;
+    ptr = (s16 *)((s16)a1 * 32 + (s32)p + 0x48E);
+    for (i = 0; i < 15; i++) {
+        res |= ptr[i];
+    }
+
+    return (s16)res;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44__800DD5B8", func_800DD64C);
 
