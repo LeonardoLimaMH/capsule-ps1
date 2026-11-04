@@ -22,7 +22,9 @@ import sys
 STORE = re.compile(r"^\s*(sw|sh|sb)\s+(\$\w+),\s*([A-Za-z_.$][\w.$]*(?:[+-]\d+)?)(?:\((\$\w+)\))?\s*$")
 SPADJ = re.compile(r"^\s*addu\s+\$sp,\$sp,\d+\s*$")
 JR = re.compile(r"^\s*j\s+\$31\s*$")
-JAL = re.compile(r"^\s*jal\s+[A-Za-z_.$][\w.$]*\s*$")
+# qualquer salto ou desvio cujo delay slot ficou com nop (o store não escreve registrador,
+# então não muda a condição do desvio)
+JAL = re.compile(r"^\s*(jal|j|b|beq|bne|beqz|bnez|bgez|bgtz|blez|bltz)\s+[^#]*$")
 NOP = re.compile(r"^\s*nop\b")
 INSN = re.compile(r"^\s*[a-z][a-z0-9.]*(\s|$)")
 
