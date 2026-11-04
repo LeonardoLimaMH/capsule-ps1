@@ -32,7 +32,14 @@ void func_8001DAAC(void) {
     func_8001DB54();
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001CDE0", func_8001DADC);
+int func_8001DADC(u8 *p, s32 i) {
+    extern u8 D_8008ED68[];
+    extern int func_80012FB8(), func_80012FF0();
+    u8 *b = D_8008ED68;
+    *(u8 **)(b + i * 4 + 0x518) = p;
+    func_80012FB8(*(s32 *)(p + 8), *(s16 *)(p + 0xC), *(s16 *)(p + 0xE), *(s16 *)(p + 0x10), *(s16 *)(p + 0x12));
+    func_80012FF0(*(s32 *)(p + 0x18), *(s16 *)(p + 0x1C), *(s16 *)(p + 0x1E), *(s16 *)(p + 0x20), *(s16 *)(p + 0x22));
+}
 
 #include "common.h"
 
