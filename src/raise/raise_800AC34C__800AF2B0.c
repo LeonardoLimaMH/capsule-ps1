@@ -5,7 +5,9 @@ typedef struct {
     u16 unk0;
     u8 pad2[0xE];
     u16 unk10;
-    u8 pad12[0x1A8 - 0x12];
+    u8 pad12[0x78];
+    u16 unk8A;
+    u8 pad8C[0x11C];
 } S_80091618;
 extern S_80091618 D_80091618[];
 
