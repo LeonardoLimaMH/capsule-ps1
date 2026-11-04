@@ -9,12 +9,14 @@ extern s32 func_80044A4C(s32, s32);
 
 s32 func_800437FC(void) {
     S_DsEnt *e;
-    s32 r = 0;
+
     if (func_80044AF8(0) == 1) {
         e = &((S_DsEnt *)((u8 *)D_80094B6C - 0xc4))[D_80094B6C[0]];
         if (e->f_0 != 0) {
-            r = func_80044A4C(e->f_4, e->f_c) != 0;
+            goto call;
         }
     }
-    return r;
+    return 0;
+call:
+    return func_80044A4C(e->f_4, e->f_c) != 0;
 }
