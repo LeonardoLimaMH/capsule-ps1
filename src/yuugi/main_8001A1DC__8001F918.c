@@ -591,7 +591,32 @@ void func_80021064(void *arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800212AC);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800214B0);
+void func_800214B0(void *arg0) {
+    extern u8 D_80085438[];
+    extern void func_80021870();
+    extern s32 func_80021910();
+    u8 *s1 = D_80085438;
+    s32 temp_a1 = M2C_FIELD(arg0, s32 *, 0x7C);
+    s32 temp_v1 = M2C_FIELD(arg0, s32 *, 0x80);
+    s32 temp_t0 = M2C_FIELD(arg0, s32 *, 0x84);
+
+    if (M2C_FIELD(s1, u8 *, 2) != 0) {
+        if (temp_v1 == 0) {
+            func_80021870(arg0, temp_a1, M2C_FIELD(s1, s32 *, 0x10), M2C_FIELD(s1, u8 *, -0x10), temp_t0);
+            M2C_FIELD(arg0, s32 *, 0x38) &= ~1;
+        } else if (func_80021910(arg0, temp_a1, M2C_FIELD(s1, s32 *, 0x10), M2C_FIELD(s1, u8 *, -0x10), temp_t0) != 0) {
+            M2C_FIELD(arg0, s32 *, 0x38) &= ~1;
+        } else {
+            M2C_FIELD(arg0, s32 *, 0x38) |= 1;
+        }
+    } else {
+        M2C_FIELD(arg0, s32 *, 0x38) |= 1;
+    }
+    M2C_FIELD(arg0, s16 *, 0x4A) = (s16) (M2C_FIELD(s1, u16 *, 0xC) + 0x78);
+    if (M2C_FIELD(s1, u8 *, 0) == 5) {
+        func_800185F8(arg0);
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80021584);
 
