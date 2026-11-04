@@ -123,8 +123,7 @@ s32 func_800D2BB8(s32 arg0) {
         u32 index = (u16)func_800B1260(arg0);
         r = 0;
         if (index != 0xFFFF) {
-            u32 mon = *(u16 *)&slots[index];
-            r = 0;
+            u32 mon = *(u16 *)((u8 *)slots + index * 0x1A8);
             if (mon != 0xFFFF) {
                 u8 *base = D_80063940;
                 u8 *q = mon * 0x3C + base;
@@ -647,7 +646,22 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_80
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D613C);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D6848);
+s32 func_800D6848(s32 arg0) {
+    extern s32 D_800F1D1C[][2];
+    s32 val;
+    s32 a0 = arg0 & 0x3F;
+
+    if ((u32)a0 <= 0x10) {
+        val = D_800F1D1C[a0][1];
+    } else if (a0 <= 0x20) {
+        val = D_800F1D1C[0x20 - a0][1];
+    } else if (a0 <= 0x30) {
+        val = -D_800F1D1C[a0 - 0x20][1];
+    } else {
+        val = -D_800F1D1C[0x40 - a0][1];
+    }
+    return (s16)val;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D68D4);
 
