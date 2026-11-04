@@ -4,7 +4,7 @@ extern volatile u32 *D_801332B4[];
 extern void (*D_801332B8[])(void);
 extern u8 *D_801332D8[];
 extern char D_80110B48[], D_80110B64[];
-extern s32 slpm_printf(const char *, ...);
+extern s32 slpm_printf();
 void func_8011B770(void) {
     u32 m;
     s32 i;
@@ -25,6 +25,7 @@ void func_8011B770(void) {
             slpm_printf(D_80110B64, i, *(s32 *)(D_801332D8[0] + i * 16));
         }
     }
+    return;
 }
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011B770", func_8011B8F0);
