@@ -1,8 +1,6 @@
 #include "common.h"
 #include "yuugi.h"
 
-#include "common.h"
-
 extern u16 *D_80071598[];
 extern volatile s32 *D_8007159C[];
 extern volatile s32 *D_800715A0[];
@@ -23,8 +21,6 @@ void _spu_Fr_(s32 addr, s16 tsa, s32 size) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_t);
 
-#include "common.h"
-
 extern u16 D_800715B0[];
 extern s32 D_800715B4[];
 extern s32 D_800715C0[];
@@ -39,8 +35,6 @@ s32 _spu_Fw(s32 addr, s32 size) {
     }
     return size;
 }
-
-#include "common.h"
 
 s32 _spu_Fr(s32 arg0, s32 arg1) {
     extern u16 D_800715B0[];
@@ -68,11 +62,6 @@ void _spu_FsetRXX(int param_1, uint param_2, int param_3)
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_FsetRXXa);
 
-#include "common.h"
-
-extern u16 *D_80071598[];
-extern s32 D_800715C0[];
-
 s32 _spu_FgetRXXa(s32 offset, s32 mode) {
     u16 v = D_80071598[0][offset];
 
@@ -82,7 +71,16 @@ s32 _spu_FgetRXXa(s32 offset, s32 mode) {
     return v << D_800715C0[0];
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_FsetPCR);
+void _spu_FsetPCR(s32 arg0) {
+    extern u32 *D_800715A8;
+
+    *D_800715A8 &= 0xFFF8FFFF;
+    if (arg0 != 0) {
+        *D_800715A8 |= 0x30000;
+    } else {
+        *D_800715A8 |= 0x50000;
+    }
+}
 
 void func_8003FC70(void) {
     extern s32 * D_800715AC[];

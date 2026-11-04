@@ -22,13 +22,86 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B6310);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B6624);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B6C48);
+/* Objeto de carta/sprite usado por func_800B6624 (flags em 0x34/0x38). */
+typedef struct {
+    u8 _p00[0x34];
+    u32 unk34;
+    u32 unk38;
+} Obj_800B6624;
+
+void *func_800B6D98(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u16 arg4, void *arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, u16 arg10, s16 arg11);
+
+void func_800B6C48(void *arg0) {
+    typedef struct {
+        u8 _p00[0x14];
+        u8 unk14[0x1C];
+        u32 unk30;
+        u32 unk34;
+        u32 unk38 : 1;
+        u32 _b38 : 31;
+        s32 unk3C;
+        u8 _p40[0x40];
+        s32 unk80;
+        u8 _p84[0x8];
+        s32 unk8C;
+    } S_Obj;
+    typedef struct {
+        u8 _p00[0x13];
+        u8 unk13;
+        u8 _p14[0x28];
+    } S_63940;
+    typedef struct {
+        u8 _p00[0x178];
+        s32 unk178;
+        u8 _p17C[0x2C];
+    } S_91618;
+    extern S_63940 D_80063940[];
+    extern s16 D_80078C28[];
+    extern S_91618 D_80091618[];
+    S_Obj *o = arg0;
+
+    if (*D_80078C28 == 1) {
+        if (o->unk38 == 1) {
+            return;
+        }
+        func_800C5850(D_80091618[(o->unk34 >> 12) & 0xF].unk178, o, 0, -(D_80063940[o->unk8C].unk13 & 0x3F), -1);
+    }
+    if (o->unk38 == 0 && func_80015E60(o) == 1) {
+        o->unk38 = 1;
+    }
+    if (o->unk3C == 0x4B0) {
+        if (o->unk38 == 1) {
+            o->unk38 = 0;
+            func_80015CD0(o->unk14, o->unk80, 3);
+            o->unk30 = (o->unk30 & ~7) | 3;
+        }
+        o->unk3C = 0;
+    } else {
+        o->unk3C++;
+    }
+}
+
+typedef struct {
+    u8 _p00[0x8];
+    s32 unk8;
+    u8 _p0C[0x4];
+    s32 unk10;
+    u8 _p14[0x4];
+    s32 unk18;
+    u8 _p1C[0x8];
+    s32 unk24;
+    u8 _p28[0x38];
+    s32 unk60[7];
+    s32 unk7C[7];
+    s32 *unk98[14];
+    s32 unkD0;
+    u8 _pD4[0x2F4];
+    s32 unk3C8[1][9];
+} S_800EEB9C;
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B6D98);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B6FA0);
-
-#include "common.h"
 
 void func_800B70A0(s32 arg0)
 {
@@ -113,26 +186,6 @@ void func_800B70A0(s32 arg0)
     }
   }
 }
-
-#include "common.h"
-typedef struct {
-    u8 _p00[0x8];
-    s32 unk8;
-    u8 _p0C[0x4];
-    s32 unk10;
-    u8 _p14[0x4];
-    s32 unk18;
-    u8 _p1C[0x8];
-    s32 unk24;
-    u8 _p28[0x38];
-    s32 unk60[7];
-    s32 unk7C[7];
-    s32 *unk98[14];
-    s32 unkD0;
-    u8 _pD4[0x2F4];
-    s32 unk3C8[1][9];
-} S_800EEB9C;
-
 
 void func_800B7264(s32 arg0) {
     extern M2C_UNK D_800EEB9C[];
@@ -262,9 +315,52 @@ void func_800B74A4(void) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B768C);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B77AC);
+/* Objeto de carta/sprite usado por func_800B6624 (flags em 0x34/0x38). */
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B786C);
+void *func_800B6D98(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u16 arg4, void *arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, u16 arg10, s16 arg11);
+
+void func_800B77AC(s32 a0, s32 a1) {
+    typedef struct {
+        u8 _p00[0x38];
+        u32 unk38;
+        u8 _p3C[0x18];
+        s16 unk54;
+        u8 _p56[0x22];
+        s16 unk78;
+    } Obj;
+    extern struct {
+        u8 _p00[0x754];
+        Obj *unk754;
+    } D_800EEB9C[];
+
+    D_800EEB9C->unk754->unk38 &= ~8;
+    D_800EEB9C->unk754->unk54 = ((a0 % 12) << 12) / 12;
+    D_800EEB9C->unk754->unk54 += (a1 * 0x155) / 60;
+    D_800EEB9C->unk754->unk78 = 0;
+}
+
+/* Objeto de carta/sprite usado por func_800B6624 (flags em 0x34/0x38). */
+
+void *func_800B6D98(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u16 arg4, void *arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, u16 arg10, s16 arg11);
+
+void func_800B786C(s32 a0) {
+    typedef struct {
+        u8 _p00[0x38];
+        u32 unk38;
+        u8 _p3C[0x18];
+        s16 unk54;
+        u8 _p56[0x22];
+        s16 unk78;
+    } Obj;
+    extern struct {
+        u8 _p00[0x75C];
+        Obj *unk75C;
+    } D_800EEB9C[];
+
+    D_800EEB9C->unk75C->unk38 &= ~8;
+    D_800EEB9C->unk75C->unk54 = (a0 << 12) / 60;
+    D_800EEB9C->unk75C->unk78 = 0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B78C4);
 

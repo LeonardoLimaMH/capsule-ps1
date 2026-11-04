@@ -12,8 +12,6 @@ void func_800118BC(void) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800118FC);
 
-#include "common.h"
-
 extern void func_80011AFC();
 
 void func_80011A60(s32 mode) {
@@ -25,7 +23,16 @@ void func_80011A60(s32 mode) {
     VSyncCallback(func_80011AFC);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80011AA4);
+void func_80011AA4(void) {
+    struct { s16 m[3][3]; s32 t[3]; } m;
+    extern void SetColorMatrix(), SetBackColor();
+
+    m.m[2][0] = m.m[1][0] = m.m[0][0] = 0xFF0;
+    m.m[2][1] = m.m[1][1] = m.m[0][1] = 0xFF0;
+    m.m[2][2] = m.m[1][2] = m.m[0][2] = 0xFF0;
+    SetColorMatrix(&m);
+    SetBackColor(0x80, 0x80, 0x80);
+}
 
 void func_80011AFC(void) {
     func_800337FC();
@@ -45,8 +52,6 @@ void func_80011ED4(void) {
     func_80012578();
 }
 
-#include "common.h"
-
 void func_80011F14(void) {
     extern M2C_UNK D_80065390[];
     s32 var_s0;
@@ -59,8 +64,6 @@ void func_80011F14(void) {
     func_80012E54(func_80019F30(0x50001, 2));
     func_8001A49C(D_80065390);
 }
-
-#include "common.h"
 
 void func_80011F84(void) {
     func_80012A20(func_80019F30(0x50001, 3), 1, 0, 0);

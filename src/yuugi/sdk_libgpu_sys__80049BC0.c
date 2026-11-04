@@ -3,8 +3,6 @@
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", func_80049BC0);
 
-#include "common.h"
-
 extern char D_800112C0[];
 
 s32 ClearImage(s32 *rect, u8 r, u8 g, u8 b) {
@@ -15,16 +13,12 @@ s32 ClearImage(s32 *rect, u8 r, u8 g, u8 b) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", ClearImage2);
 
-#include "common.h"
-
 extern char D_800112D8[];
 void LoadImage(s32 arg0, M2C_UNK arg1) {
     extern void * D_80078914[];
     func_80049BC0(D_800112D8, arg0);
     M2C_FIELD((*D_80078914), M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 8)(M2C_FIELD((*D_80078914), s32 *, 0x20), arg0, 8, arg1);
 }
-
-#include "common.h"
 
 extern char D_800112E4[];
 void StoreImage(s32 arg0, M2C_UNK arg1) {
@@ -36,8 +30,6 @@ void StoreImage(s32 arg0, M2C_UNK arg1) {
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", MoveImage);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", ClearOTag);
-
-#include "common.h"
 
 extern char D_80011314[];
 
@@ -56,8 +48,6 @@ s32 *ClearOTagR(s32 *arg0, M2C_UNK arg1) {
     return arg0;
 }
 
-#include "common.h"
-
 void DrawPrim(void *arg0) {
     extern void * D_80078914;
     u8 temp_s1;
@@ -66,8 +56,6 @@ void DrawPrim(void *arg0) {
     M2C_FIELD(D_80078914, M2C_UNK (**)(M2C_UNK), 0x3C)(0);
     M2C_FIELD(D_80078914, M2C_UNK (**)(void *, u8), 0x14)(arg0 + 4, temp_s1);
 }
-
-#include "common.h"
 
 extern char D_8001132C[];
 void DrawOTag(s32 arg0) {
@@ -84,11 +72,21 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", PutDrawEnv);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", DrawOTagEnv);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", GetDrawEnv);
+void *GetDrawEnv(void *param_1) {
+    extern u8 D_8007892C[];
+    extern void *memcpy(void *, void *, s32);
+    memcpy(param_1, D_8007892C, 0x5C);
+    return param_1;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", PutDispEnv);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", GetDispEnv);
+void *GetDispEnv(void *env) {
+    extern u8 D_80078988[];
+    extern void *memcpy(void *, void *, s32);
+    memcpy(env, D_80078988, 0x14);
+    return env;
+}
 
 u32 GetODE(void) {
     extern void * D_80078914[];

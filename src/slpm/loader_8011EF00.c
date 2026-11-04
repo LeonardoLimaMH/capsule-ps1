@@ -1,7 +1,5 @@
 #include "common.h"
 
-#include "common.h"
-
 extern u16 *D_801333D4[];
 extern volatile s32 *D_801333D8[];
 extern volatile s32 *D_801333DC[];
@@ -22,8 +20,6 @@ void slpm__spu_Fr_(s32 addr, s16 tsa, s32 size) {
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011EF00", slpm__spu_t);
 
-#include "common.h"
-
 extern u16 D_801333EC[];
 extern s32 D_801333F0[];
 extern s32 D_801333FC[];
@@ -38,8 +34,6 @@ s32 slpm__spu_Fw(s32 addr, s32 size) {
     }
     return size;
 }
-
-#include "common.h"
 
 s32 slpm__spu_Fr(s32 arg0, s32 arg1) {
     extern u16 D_801333EC[];
@@ -67,11 +61,6 @@ void slpm__spu_FsetRXX(int param_1, uint param_2, int param_3)
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011EF00", slpm__spu_FsetRXXa);
 
-#include "common.h"
-
-extern u16 *D_801333D4[];
-extern s32 D_801333FC[];
-
 s32 slpm__spu_FgetRXXa(s32 offset, s32 mode) {
     u16 v = D_801333D4[0][offset];
 
@@ -81,7 +70,16 @@ s32 slpm__spu_FgetRXXa(s32 offset, s32 mode) {
     return v << D_801333FC[0];
 }
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011EF00", slpm__spu_FsetPCR);
+void slpm__spu_FsetPCR(s32 arg0) {
+    extern u32 *D_801333E4;
+
+    *D_801333E4 &= 0xFFF8FFFF;
+    if (arg0 != 0) {
+        *D_801333E4 |= 0x30000;
+    } else {
+        *D_801333E4 |= 0x50000;
+    }
+}
 
 void func_8011F48C(void) {
     extern s32 * D_801333E8[];

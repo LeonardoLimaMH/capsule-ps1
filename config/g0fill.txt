@@ -74,3 +74,6 @@ src/slpm/loader_8011BF60.c
 src/yuugi/sdk_libspu_s_rrwa.c
 src/slpm/loader_8011705C.c
 src/yuugi/main_8004C7FC.c
+src/raise/raise_8009D2A8__800A9738.c
+src/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9610.c
+src/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9334.c

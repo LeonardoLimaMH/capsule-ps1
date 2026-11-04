@@ -6492,7 +6492,7 @@
           "raise",
           "raise.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800B472C.o"
     },
@@ -6648,9 +6648,126 @@
           "raise",
           "raise.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800B61E4__800B8E04.o"
+    },
+    {
+      "name": "raise/raise_800B61E4__800B8E04__800B8E34",
+      "target_path": "build/objdiff/target/raise/raise_800B61E4__800B8E04__800B8E34.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B61E4__800B8E04__800B8E34.c",
+        "progress_categories": [
+          "raise",
+          "raise.game"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B61E4__800B8E04__800B8E34.o"
+    },
+    {
+      "name": "raise/raise_800B61E4__800B8E04__800B8EF0",
+      "target_path": "build/objdiff/target/raise/raise_800B61E4__800B8E04__800B8EF0.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B61E4__800B8E04__800B8EF0.c",
+        "progress_categories": [
+          "raise",
+          "raise.game"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B61E4__800B8E04__800B8EF0.o"
+    },
+    {
+      "name": "raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC",
+      "target_path": "build/objdiff/target/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC.c",
+        "progress_categories": [
+          "raise",
+          "raise.game"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC.o"
+    },
+    {
+      "name": "raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B91C8",
+      "target_path": "build/objdiff/target/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B91C8.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B91C8.c",
+        "progress_categories": [
+          "raise",
+          "raise.game"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B91C8.o"
+    },
+    {
+      "name": "raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284",
+      "target_path": "build/objdiff/target/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284.c",
+        "progress_categories": [
+          "raise",
+          "raise.game"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284.o"
+    },
+    {
+      "name": "raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9334",
+      "target_path": "build/objdiff/target/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9334.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9334.c",
+        "progress_categories": [
+          "raise",
+          "raise.game"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9334.o"
+    },
+    {
+      "name": "raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B95AC",
+      "target_path": "build/objdiff/target/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B95AC.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B95AC.c",
+        "progress_categories": [
+          "raise",
+          "raise.game"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B95AC.o"
+    },
+    {
+      "name": "raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9610",
+      "target_path": "build/objdiff/target/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9610.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9610.c",
+        "progress_categories": [
+          "raise",
+          "raise.game"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9610.o"
+    },
+    {
+      "name": "raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9610__800B9914",
+      "target_path": "build/objdiff/target/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9610__800B9914.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9610__800B9914.c",
+        "progress_categories": [
+          "raise",
+          "raise.game"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9610__800B9914.o"
     },
     {
       "name": "raise/raise_800B9B2C",
@@ -7168,7 +7285,7 @@
           "raise",
           "raise.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800C652C.o"
     },
@@ -7207,7 +7324,7 @@
           "raise",
           "raise.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800C6B34.o"
     },

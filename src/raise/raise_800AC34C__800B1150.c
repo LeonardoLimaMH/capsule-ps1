@@ -8,7 +8,6 @@ typedef struct {
 } S_80091618;
 extern S_80091618 D_80091618[];
 
-
 void func_800B1150(void) {
     extern s32 D_800EEB64[];
     extern s32 D_800EEB68[];
@@ -28,14 +27,30 @@ void func_800B1150(void) {
     (*D_800EEB80) = 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C__800B1150", func_800B1198);
+s32 func_800B1198(void)
+{
+  extern u8 D_800EEB58[];
+  extern struct { u8 pad[0x30]; u16 f_30[10]; } D_8006AFCC;
+  s32 r;
+  s32 i;
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C__800B1150", func_800B11F4);
+  r = 0;
+  for (i = 0; i < 10; i++)
+  {
+    if (D_800EEB58[i] != 0 && D_8006AFCC.f_30[i] == 1)
+    {
+      r |= 1;
+    }
+  }
+  return r;
+}
 
-#include "common.h"
 extern u16 D_8006AF80[];
 extern s32 D_800EEB70[];
 extern u16 D_800EF2D8[];
+
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C__800B1150", func_800B11F4);
+
 u16 func_800B1260(s32 which)
 {
   if ((*D_800EEB70) == 0)
@@ -62,12 +77,19 @@ u16 func_800B1260(s32 which)
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C__800B1150", func_800B12D8);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C__800B1150", func_800B1350);
+u16 func_800B1350(s32 which)
+{
+  if ((*D_800EEB70) == 0)
+  {
+    if (which == 1)
+    {
+      return *D_8006AF80;
+    }
+    return D_80091618[*D_8006AF80].f_8A;
+  }
+  return *D_800EF2D8;
+}
 
-#include "common.h"
-extern u16 D_8006AF80[];
-extern s32 D_800EEB70[];
-extern u16 D_800EF2D8[];
 u16 func_800B13C4(s32 which)
 {
   if ((*D_800EEB70) == 0)
@@ -92,7 +114,6 @@ u16 func_800B13C4(s32 which)
   return *D_800EF2D8;
 }
 
-#include "common.h"
 void func_800B143C(s32 arg0, s32 arg1)
 {
   int new_var2;

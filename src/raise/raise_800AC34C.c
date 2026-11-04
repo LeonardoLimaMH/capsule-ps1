@@ -28,8 +28,6 @@ void func_800AC9E8(s32 arg0) {
     }
 }
 
-#include "common.h"
-
 void func_800ACA14(s16 arg0) {
     extern s16 D_800EEA80[];
     extern M2C_UNK D_800EEB9C[];
@@ -61,8 +59,6 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800ACB08);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800ACC64);
 
-#include "common.h"
-
 s32 func_800ACDE0(void)
 {
   extern u8 D_80100F38[];
@@ -89,9 +85,113 @@ s32 func_800ACDE0(void)
   return var_s0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800ACE80);
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800ACFFC);
+s32 func_800ACE80(void) {
+    typedef struct {
+        u8 _p00[0x8A];
+        u16 unk8A;
+        u8 _p8C[0x11C];
+    } S_80091618;
+    typedef struct {
+        u8 _p00[0x228];
+        s16 unk228;
+        u8 _p22A[0x56E];
+        u32 unk798;
+    } S_80100F38;
+    typedef struct {
+        u8 _p00[0x14];
+        s32 unk14;
+        s32 unk18;
+    } S_800EEB9C_local;
+    extern u16 D_8006AF80[];
+    extern S_80091618 D_80091618[];
+    extern u32 D_8008EDF0[];
+    extern s16 D_80078C28[];
+    extern S_800EEB9C_local D_800EEB9C;
+    extern S_80100F38 D_80100F38[];
+    s32 s0;
+    s32 s1;
+    s32 arg;
+    u32 temp_v1;
+
+    if (*D_8006AF80 == 0xFFFF) {
+        return 0;
+    }
+    if (D_80091618[*D_8006AF80].unk8A == 0xFFFF) {
+        return 0;
+    }
+    if (func_800D1548() == 1 || !(*D_8008EDF0 & 3)) {
+        return 0;
+    }
+    if (*D_80078C28 != 0 || D_800EEB9C.unk14 == 1) {
+        return 0;
+    }
+    if (D_800EEB9C.unk18 == 1) {
+        return 0;
+    }
+
+    s1 = 0;
+    s0 = 1;
+    do {
+        temp_v1 = func_800B1260(s0) & 0xFFFF;
+        if (temp_v1 != 0xFFFF) {
+            s1 |= D_80100F38[temp_v1].unk228;
+            s1 |= (D_80100F38[temp_v1].unk798 >> 5) & 1;
+        }
+        s0--;
+    } while (s0 >= 0);
+
+    if (s1 != 1) {
+        arg = 1;
+        if (*D_8008EDF0 & 2) {
+            arg = -1;
+        }
+        func_800B8AD0(arg);
+        return 1;
+    }
+
+    return 0;
+}
+
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
+
+s32 func_800ACFFC(void) {
+    extern volatile u16 D_8006AF80[];
+    extern u32 D_8008EDF0[];
+    extern s16 D_80078C28[];
+    extern S_800EEB9C D_800EEB9C;
+    S_800EEB9C *p;
+    u32 *temp_a1;
+
+    if (*D_8006AF80 != 0xFFFF) {
+        if (func_800AEEDC(*D_8006AF80) != 0) {
+            return 0;
+        }
+        if (func_800D1548() != 1 && (*D_8008EDF0 & 0x80)) {
+            p = &D_800EEB9C;
+            if (p->unk8 != 0) {
+                return 0;
+            }
+            if (*D_80078C28 != 0) {
+                return 0;
+            }
+            if (p->unk10 != 0) {
+                p->unk24 = 5;
+                if (p->unk18 != 1) {
+                    func_80034AB0(0x48);
+                    p->unk18 = 1;
+                    temp_a1 = (u32 *)p->unk98[p->unk24];
+                    temp_a1[0x38 / 4] &= ~1;
+                    func_800B5BA0(1);
+                    func_800B70A0(0);
+                }
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AD0FC);
 
@@ -100,8 +200,6 @@ void func_800AEA04(void) {
 }
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AEA0C);
-
-#include "common.h"
 
 void func_800AEB5C(s32 arg0)
 {
@@ -154,15 +252,55 @@ s32 func_800AEC94(s32 arg0, s32 arg1) {
     return D_800EEB9C.unk3C8[arg0][arg1] == 1;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AECC8);
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AED5C);
+s32 func_800AECC8(u16 arg0) {
+    typedef struct {
+        u8 _p00[0x10];
+        u16 unk10;
+        u8 _p12[0x78];
+        u16 unk8A;
+        u8 _p8C[0x11C];
+    } S_91618;
+    extern u16 D_8006AF80[];
+    extern S_91618 D_80091618[];
+
+    if (D_80091618[arg0].unk10 == 0xFFFF) {
+        return -1;
+    }
+    if (arg0 != *D_8006AF80) {
+        return (arg0 != D_80091618[*D_8006AF80].unk8A) * 2;
+    }
+    return 1;
+}
+
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
+
+void func_800AED5C(s32 arg0, s32 arg1) {
+    extern s16 D_800EEAE4[];
+    extern u16 D_800EEB14[];
+    extern u8 D_80069AD4[];
+    u8 *p = D_80069AD4;
+    s32 v = D_800EEB14[arg0] + (arg1 * D_800EEAE4[arg0]) / 1200;
+
+    *(s16 *)(p + 0x7C) = v;
+    *(s16 *)(p + 0x76) = v;
+    *(s16 *)(p + 0x70) = v;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AEDC4);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AEEDC);
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
 
-#include "common.h"
+s32 func_800AEEDC(s32 idx) {
+    extern u8 D_80091618[];
+    u8 *base = D_80091618;
+    u8 *rec = base + (idx & 0xFFFF) * 0x1A8;
+    if (*(u16 *)(rec + 0x10) == 0xFFFF) {
+        return 1;
+    }
+    return *(u16 *)rec == 0xFFFF;
+}
 
 s32 func_800AEF38(u32 arg0)
 {
@@ -205,9 +343,94 @@ s32 func_800AEF38(u32 arg0)
   }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AF018);
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AF148);
+s32 func_800AF018(u16 param_1) {
+    typedef struct {
+        u8 _p00[0x10];
+        u16 unk10;
+        u8 _p12[0x78];
+        u16 unk8A;
+        u8 _p8C[0x11C];
+    } S_91618;
+    typedef struct {
+        u8 _p000[0x378];
+        u16 unk378;
+        u8 _p37A[0x422];
+    } S_100F38;
+    extern u16 D_8006AF80[];
+    extern S_91618 D_80091618[];
+    extern S_100F38 D_80100F38[];
+    S_91618 *p1;
+    s32 i;
+
+    i = 0;
+    p1 = D_80091618;
+    for (; i < 6; i++) {
+        u16 a0 = i;
+        s32 v1;
+
+        if (p1[a0].unk10 == 0xFFFF) {
+            v1 = -1;
+        } else if (a0 == *D_8006AF80) {
+            v1 = 1;
+        } else {
+            v1 = (a0 != p1[*D_8006AF80].unk8A) * 2;
+        }
+
+        if (v1 != -1 && v1 != 2) {
+            if (func_800E14C4((u16)i) != 1) {
+                D_80100F38[i].unk378 = (func_800E680C((u16)i, param_1) != 2);
+            }
+        }
+    }
+    return 0;
+}
+
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
+
+s32 func_800AF148(u16 param_1) {
+    typedef struct {
+        u8 _p00[0x10];
+        u16 unk10;
+        u8 _p12[0x78];
+        u16 unk8A;
+        u8 _p8C[0x11C];
+    } S_91618;
+    typedef struct {
+        u8 _p000[0x378];
+        u16 unk378;
+        u8 _p37A[0x422];
+    } S_100F38;
+    extern u16 D_8006AF80[];
+    extern S_91618 D_80091618[];
+    extern S_100F38 D_80100F38[];
+    extern s16 func_800E6BD8(u16, u16);
+    S_91618 *p1;
+    s32 i;
+
+    i = 0;
+    p1 = D_80091618;
+    for (; i < 6; i++) {
+        u16 a0 = i;
+        s32 v1;
+
+        if (p1[a0].unk10 == 0xFFFF) {
+            v1 = -1;
+        } else if (a0 == *D_8006AF80) {
+            v1 = 1;
+        } else {
+            v1 = (a0 != p1[*D_8006AF80].unk8A) * 2;
+        }
+
+        if (v1 != -1 && v1 != 2) {
+            if (func_800E14C4((u16)i) != 1) {
+                D_80100F38[i].unk378 = (func_800E6BD8((u16)i, param_1) == 0);
+            }
+        }
+    }
+    return 0;
+}
 
 s32 func_800AF278(void) {
     return 0;

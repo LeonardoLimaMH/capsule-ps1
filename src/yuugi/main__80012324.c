@@ -5,8 +5,6 @@ void func_80012324(void) {
 
 }
 
-#include "common.h"
-
 extern u8 D_8008ED68[];
 void func_80012394(void);
 
@@ -85,8 +83,6 @@ u8 *func_8001232C(void)
   return D_8008ED68;
 }
 
-#include "common.h"
-
 #include "ghidra.h"
 void func_80012394(void)
 
@@ -115,8 +111,6 @@ void func_80012430(void) {
 
 }
 
-#include "common.h"
-
 void func_80012438(void) {
     extern u16 D_8008EE4C[];
     switch ((*D_8008EE4C)) {                           /* irregular */
@@ -132,11 +126,93 @@ void func_80012438(void) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800124A0);
+void func_80012394(void);
 
-#include "common.h"
+extern u8 D_80099C08[];
+void func_80013668(void);
+u8 *func_800124A0(void)
+{
+  u8 *new_var2;
+  struct 
+  {
+    u8 _p[0xE6];
+    s16 v;
+  } *new_var;
+  new_var2 = (u8 *) D_80099C08;
+  func_80013668();
+  new_var = (struct 
+  {
+    u8 _p[0xE6];
+    s16 v;
+  } *) D_8008ED68;
+  *((void **) (D_8008ED68 + 0xCC)) = (void *) new_var2;
+  ((struct 
+  {
+    u8 _p[0xC8];
+    s32 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xDC];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xE0];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xDE];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xE2];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xE4];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  new_var->v = 0;
+  ((struct 
+  {
+    u8 _p[0xE8];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xEA];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xEC];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xEE];
+    s16 v;
+  } *) D_8008ED68)->v = 0;
+  ((struct 
+  {
+    u8 _p[0xF8];
+    s32 v;
+  } *) D_8008ED68)->v = 0;
+  return D_8008ED68;
+}
 
-extern u8 D_8008ED68[];
+typedef struct {
+    u8 pad[0xEC];
+    s16 a;
+    s16 b;
+} Rec_8008ED68;
+
+extern u8 D_8008ED50[];
+extern u16 D_800508D0[];
 
 u8 *func_80012508(void) {
     u16 v = M2C_GFIELD(D_8008ED68, u16, 0xDC);
@@ -154,10 +230,6 @@ u8 *func_80012508(void) {
     return D_8008ED68;
 }
 
-#include "common.h"
-
-extern u8 D_8008ED68[];
-
 u8 *func_80012544(s16 value) {
     M2C_GFIELD(D_8008ED68, s16, 0xDC) = value;
     M2C_GFIELD(D_8008ED68, s16, 0xE0) = 0;
@@ -171,10 +243,6 @@ u8 *func_80012544(s16 value) {
     M2C_GFIELD(D_8008ED68, s16, 0xEE) = 0;
     return D_8008ED68;
 }
-
-#include "common.h"
-
-extern u8 D_8008ED68[];
 
 u8 *func_80012578(void) {
     u16 v = M2C_GFIELD(D_8008ED68, u16, 0xE0);
@@ -190,10 +258,6 @@ u8 *func_80012578(void) {
     return D_8008ED68;
 }
 
-#include "common.h"
-
-extern u8 D_8008ED68[];
-
 u8 *func_800125AC(s16 value) {
     M2C_GFIELD(D_8008ED68, s16, 0xE0) = value;
     M2C_GFIELD(D_8008ED68, s16, 0xE2) = 0;
@@ -205,10 +269,6 @@ u8 *func_800125AC(s16 value) {
     M2C_GFIELD(D_8008ED68, s16, 0xEE) = 0;
     return D_8008ED68;
 }
-
-#include "common.h"
-
-extern u8 D_8008ED68[];
 
 u8 *func_800125D8(void) {
     u16 v = M2C_GFIELD(D_8008ED68, u16, 0xE4);
@@ -222,10 +282,6 @@ u8 *func_800125D8(void) {
     return D_8008ED68;
 }
 
-#include "common.h"
-
-extern u8 D_8008ED68[];
-
 void func_80012604(s16 value) {
     M2C_GFIELD(D_8008ED68, s16, 0xE4) = value;
     M2C_GFIELD(D_8008ED68, s16, 0xE6) = 0;
@@ -234,10 +290,6 @@ void func_80012604(s16 value) {
     M2C_GFIELD(D_8008ED68, s16, 0xEC) = 0;
     M2C_GFIELD(D_8008ED68, s16, 0xEE) = 0;
 }
-
-#include "common.h"
-
-extern u8 D_8008ED68[];
 
 u8 *func_80012628(void) {
     u16 v = M2C_GFIELD(D_8008ED68, u16, 0xE8);
@@ -249,10 +301,6 @@ u8 *func_80012628(void) {
     return D_8008ED68;
 }
 
-#include "common.h"
-
-extern u8 D_8008ED68[];
-
 void func_8001264C(s16 value) {
     M2C_GFIELD(D_8008ED68, s16, 0xE8) = value;
     M2C_GFIELD(D_8008ED68, s16, 0xEA) = 0;
@@ -260,21 +308,11 @@ void func_8001264C(s16 value) {
     M2C_GFIELD(D_8008ED68, s16, 0xEE) = 0;
 }
 
-#include "common.h"
-
 void func_80012668(void) {
     extern u8 D_8008ED68[];
     M2C_GFIELD(D_8008ED68, s16, 0xEE) = 0;
     M2C_GFIELD(D_8008ED68, u16, 0xEC) = (u16) (M2C_GFIELD(D_8008ED68, u16, 0xEC) + 1);
 }
-
-#include "common.h"
-
-typedef struct {
-    u8 pad[0xEC];
-    s16 a;
-    s16 b;
-} Rec_8008ED68;
 
 void func_80012684(s16 value) {
     extern u8 D_8008ED68[];
@@ -284,11 +322,6 @@ void func_80012684(s16 value) {
 }
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012698);
-
-#include "common.h"
-
-extern u8 D_8008ED50[];
-extern u16 D_800508D0[];
 
 void func_800126F8(void)
 {
@@ -328,19 +361,11 @@ void func_800126F8(void)
   } *) D_8008ED50)->v = *(*((s32 **) (D_8008ED50 + 8)));
 }
 
-#include "common.h"
-
-extern u8 D_8008ED50[];
-
 u8 *func_80012764(void) {
     M2C_GFIELD(D_8008ED50, s32, 4) = 0;
     M2C_GFIELD(D_8008ED50, s16, 0xC) = 0;
     return D_8008ED50;
 }
-
-#include "common.h"
-
-extern u8 D_8008ED50[];
 
 s32 func_80012778(void) {
     s32 v;
