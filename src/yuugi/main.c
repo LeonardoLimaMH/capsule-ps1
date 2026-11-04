@@ -1,6 +1,13 @@
 #include "common.h"
 #include "yuugi.h"
 
+typedef struct {
+    u16 unk0;
+    u16 unk2;
+    void (*callback)();
+    u8 unk8[0x10];
+} MainState;
+
 void main(void) {
     extern u8 D_8008ED50[];
     register u8 *p asm("s0");
