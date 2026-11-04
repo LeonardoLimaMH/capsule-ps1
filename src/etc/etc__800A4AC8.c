@@ -64,7 +64,7 @@ void func_800A7680(u16 *arg0) {
             x = 0;
             y += 0x10;
         } else {
-            func_8001EA24(left + *(s32 *)(p+0x108)/2 + x,
+            func_8001EA24(*(s32 *)(p+0x108) / 2 + left + x,
                          y + *(s32 *)(p+0x10C)/2, 0, c, 0, 3);
             x += 0xE;
         }
@@ -91,7 +91,7 @@ void func_800A7754(u16 *arg0, u8 arg1) {
         }
         s++;
         i++;
-        func_8001EA24(left + *(s32 *)(p + 0x108) / 2 + x,
+        func_8001EA24(*(s32 *)(p + 0x108) / 2 + left + x,
                      y + *(s32 *)(p + 0x10C) / 2, 3, c, 0, 3);
     }
 }
@@ -122,6 +122,65 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A790C);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A7984);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A7D2C);
+void func_800A7D2C(void) {
+    extern u8 D_80085428[];
+    extern s32 D_800B3C20[];
+    s32 i = D_800B3C20[0];
+    u8 *base = D_80085428;
+    s32 next;
+    s32 j;
+    u8 *src;
+    u8 *dst;
+    if (i != 0x31 && (i != 0 || base[2] != 1)) {
+        next = i + 1;
+        if (next < base[2]) {
+            src = base + next * 14;
+            dst = base + i * 14;
+            do {
+                {
+                    register u8 *d asm("a2");
+                    register u8 *s asm("a1");
+                    j = 0;
+                    d = dst;
+                    dst[0x50] = src[0x50];
+                    s = src;
+                    do {
+                        *(d + j + 0x51) = *(s + j + 0x51);
+                        j++;
+                    } while (j < 8);
+                }
+                {
+                    register u8 *d asm("a2");
+                    register u8 *s asm("a1");
+                    j = 0;
+                    d = dst;
+                    s = src;
+                    do {
+                        u8 *v = d + j;
+                        u8 value = *(s + j + 0x59);
+                        j++;
+                        v[0x59] = value;
+                    } while (j < 5);
+                }
+                dst += 14;
+                i++;
+                src += 14;
+            } while (base[2] > ++next);
+        }
+    }
+    {
+        u8 *p = base + i * 14;
+        p[0x50] = 0;
+        j = 7;
+        p += 7;
+        for (; j >= 0; j--) { p[0x51] = 0; p--; }
+        j = 4;
+        p = base + i * 14 + 4;
+        for (; j >= 0; j--) { p[0x59] = 0; p--; }
+    }
+    base[2]--;
+    if (base[2] == 0) D_800B3C20[0] = 0;
+    else if (D_800B3C20[0] >= base[2]) D_800B3C20[0] = base[2] - 1;
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A7EB0);
