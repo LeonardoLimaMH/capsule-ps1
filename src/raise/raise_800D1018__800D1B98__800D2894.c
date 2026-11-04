@@ -523,7 +523,60 @@ s32 func_800D8440(void) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D8558);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D865C);
+s32 func_800D865C(void) {
+    extern s32 D_80069B28[];
+    extern u8 D_80091618[];
+    extern u8 D_800EF524[];
+    extern u8 D_800900C0[];
+    s32 i;
+    u8 *slots;
+    u8 *grid;
+    s32 minus_one;
+
+    if (D_80069B28[0] != 0) {
+        func_800D8A20();
+        return 0;
+    }
+
+    i = 1;
+    slots = D_80091618;
+    grid = D_800EF524;
+    minus_one = -1;
+
+    do {
+        u16 k = func_800B1260(i);
+        if (k != 0xFFFF) {
+            register s32 j asm("a2") = 0;
+            register u32 off asm("a1") = 0x234;
+            u8 *base;
+            register u8 *p0 asm("a0");
+            u32 unk = *(u16 *)(slots + k * 0x1A8 + 0x10);
+            u32 q_off;
+
+            base = D_800900C0;
+            p0 = base;
+            q_off = unk * 0x9C;
+
+            do {
+                if (*(s32 *)((u8 *)q_off + (u32)grid) != minus_one) {
+                    register s32 one asm("v0") = 1;
+                    if (i == one) {
+                        *(s32 *)p0 = minus_one;
+                    } else {
+                        *(s32 *)(off + (u32)base) = minus_one;
+                    }
+                }
+                off += 0xBC;
+                p0 += 0xBC;
+                j++;
+                q_off += 0x34;
+            } while (j < 3);
+        }
+        i--;
+    } while (i >= 0);
+
+    return 1;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D8774);
 
