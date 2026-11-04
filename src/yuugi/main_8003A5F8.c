@@ -266,7 +266,54 @@ s32 func_8003AA78(u8 *s) {
 
 extern u8 D_800949A8[];
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AAF0);
+s32 func_8003AAF0(u8 *s) {
+    register u8 *stream asm("a2") = s;
+    register s32 byte asm("a0");
+    u32 value;
+    register u32 result asm("v0");
+    {
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    Unk_800944B8 *e = &base[D_80078C9C];
+    u8 *data = *(u8 *volatile *)&e->unk_0x284;
+    register u32 pos asm("a0") = *(volatile u32 *)stream;
+    register u8 c asm("v1") = data[pos];
+    pos++;
+    *(u32 *)stream = pos;
+    if (e->unk_0x294 < pos) { stream[0x20] = 1; byte = -1; }
+    else byte = c;
+}
+    result = 0;
+    if (byte != 0) {
+        register s32 end asm("v0") = 0xFF;
+        if (byte == end) {
+            register s32 flag asm("v0") = 1;
+            stream[0x20] = flag;
+            result = 0;
+        } else {
+            value = byte;
+            if (value & 0x80) {
+                register u32 test asm("v0");
+                value &= 0x7F;
+                do {
+                    Unk_800944B8 *e = &D_800944B8[D_80078C9C];
+                    u32 pos = *(u32 *)stream;
+                    register u8 c asm("v1") = e->unk_0x284[pos];
+                    *(u32 *)stream = ++pos;
+                    if (e->unk_0x294 < pos) { stream[0x20] = 1; byte = -1; }
+                    else byte = c;
+                    {
+                        register u32 high asm("v0") = value << 7;
+                        register u32 low asm("v1") = byte & 0x7F;
+                        value = high + low;
+                    }
+                    test = byte & 0x80;
+                } while (test);
+            }
+            result = value;
+        }
+    }
+    return result;
+}
 
 s32 func_8003AC20(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return ((((((arg0 & 0xFF) << 8) + (arg1 & 0xFF)) << 8) + (arg2 & 0xFF)) << 8) | (arg3 & 0xFF);
@@ -426,9 +473,44 @@ void func_8003C530(s32 n) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C5BC);
+s32 func_8003C5BC(s32 n) {
+    s32 i = 0;
+    s32 offset;
+    u8 *base = (u8 *)D_800944B8;
+    if (D_800944B8[n].unk_0x2A2 != 0) {
+        u8 *p = base;
+        offset = i;
+        do {
+            register u16 count asm("v0");
+            if (((Unk_800944B8 *)(p + offset))[n].unk_0x0[0].unk_0x20 != 1)
+                return 1;
+            count = *(volatile u16 *)&((Unk_800944B8 *)p)[n].unk_0x2A2;
+            i++;
+            offset += 0x28;
+            if (i >= count) break;
+        } while (1);
+    }
+    return 3;
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C654);
+void func_8003C654(void) {
+    typedef struct { s32 key, value; } Pair;
+    extern Pair D_80094768[];
+    s32 n, i, j;
+    volatile Pair temp;
+    for (n = 0; n < 16; n++) {
+        if (D_80094768[n].key == 0) break;
+    }
+    for (i = 0; i < n; i++) {
+        for (j = n - 1; i < j; j--) {
+            if (D_80094768[j].key < D_80094768[i].key) {
+                temp = D_80094768[i];
+                D_80094768[i] = D_80094768[j];
+                D_80094768[j] = temp;
+            }
+        }
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C73C);
 
