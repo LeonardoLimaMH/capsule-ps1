@@ -702,22 +702,30 @@ void func_800214B0(void *arg0) {
 }
 
 s32 func_80021584(void) {
-    extern u8 *func_80015B3C();
-    extern s32 func_80019F30();
+    struct S_Flags {
+        u8 pad00[0x30];
+        u32 b30_0 : 4;
+        u32 b30_4 : 2;
+        u32 b30_6 : 26;
+        u32 unk34;
+        u32 unk38;
+        u8 pad3C[0xA];
+        s16 unk46;
+        u8 pad48[6];
+        s16 unk4E;
+    };
     extern void func_80022700();
     extern void func_800161C4();
-    u8 *o = func_80015B3C(func_80022700, func_800161C4, 2);
-    s32 f38, f30;
+    struct S_Flags *o = (void *)func_80015B3C(func_80022700, func_800161C4, 2);
+    s32 f38;
     func_80015EF8(o);
-    *(s32 *)(o + 0x18) = func_80019F30(0x6000E, 0x7E);
-    *(s16 *)(o + 0x46) = 0x98;
-    *(s16 *)(o + 0x4E) = 4;
-    f30 = *(s32 *)(o + 0x30);
-    f38 = *(s32 *)(o + 0x38) | 1;
-    *(s32 *)(o + 0x38) = f38;
-    *(s32 *)(o + 0x30) = (f30 & ~0x30) | 0x20;
-    f38 = (f38 | 0x40) & ~0x30;
-    *(s32 *)(o + 0x38) = f38;
+    *(s32 *)((u8 *)o + 0x18) = func_80019F30(0x6000E, 0x7E);
+    o->unk46 = 0x98;
+    o->unk4E = 4;
+    o->unk38 |= 1;
+    o->b30_4 = 2;
+    f38 = (o->unk38 | 0x40) & ~0x30;
+    o->unk38 = f38;
     return f38;
 }
 
@@ -1042,7 +1050,34 @@ void func_80022C34(s32 f, s32 a1, s32 a2)
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80022E64);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80022F80);
+void func_80022F80(u8 *o, s32 b) {
+    extern u16 D_80065164[][6];
+    extern u16 D_80065264[];
+    extern u16 D_80063900[];
+    extern s32 func_8001F8B0();
+    u16 *dst = D_80065264;
+    s32 done = 0;
+    s32 i = 0;
+    u16 *src = D_80065164[b];
+    s32 next;
+    s32 k;
+    u16 v;
+    do {
+        v = src[i];
+        if (v == 0x219) done = 1;
+        if (done) break;
+        next = i + 1;
+        dst[next] = v;
+        i = next;
+    } while (i < 5);
+    k = 0;
+    i++;
+    do {
+        dst[i + k] = D_80063900[k];
+        k++;
+    } while (k < 20);
+    *(s32 *)(o + 0x14) = func_8001F8B0(0x1B, 1);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80023050);
 
