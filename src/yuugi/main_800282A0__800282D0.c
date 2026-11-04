@@ -117,7 +117,96 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_800294AC);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_800296C0);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_80029784);
+extern s16 D_80078C28, D_80078C2C;
+extern s32 D_80069B28[];
+extern u8 D_80091618[];
+typedef struct { u8 pad[0x10]; u16 f10; u8 pad2[0x1A8 - 0x12]; } S_1A8;
+extern void PushMatrix(), PopMatrix(), func_8002CEC0(), func_80029A9C(), func_80029B28();
+extern void func_80029C90(), func_80029E90(), func_8002A090(), func_8002A290(), func_8002A490();
+extern void func_8002A734(), func_8002A934(), func_8002AB68(), func_8002AD68();
+extern void func_8002AF9C(), func_8002B138(), func_8002B334(), func_8002B4D0(), func_8002B66C();
+extern void func_8002B7E8();
+extern s32 func_800B1260();
+
+void func_80029784(s32 a0, s32 *p, s32 a2) {
+    s32 v, s1, t;
+    u16 id;
+
+    PushMatrix();
+    func_8002CEC0(p);
+    v = p[0];
+    s1 = p[1];
+    if (v == 1) {
+        if (D_80078C28 != 0 && D_80078C2C < 0xE) {
+            func_80029A9C(p);
+            p[0] = 0;
+        } else {
+            func_80029B28(p);
+            p[0] = 0;
+        }
+    }
+    if (p[0] == 0 && D_80069B28[0] != 0) {
+        switch (p[2]) {
+        case 0:
+            func_80029C90(p, a2);
+            break;
+        case 1:
+            func_80029E90(p, a2);
+            break;
+        case 2:
+            func_8002A090(p, a2);
+            break;
+        case 3:
+            func_8002A290(p, a2);
+            break;
+        }
+    } else if (s1 == 1 || s1 == 4) {
+        t = s1 == 1;
+        id = func_800B1260(t);
+        if (id != 0xFFFF) {
+            if (((S_1A8 *)D_80091618)[id].f10 == 0 && D_80078C28 == 0) {
+                func_8002A490(p, a2, t);
+            } else {
+                switch (p[2]) {
+                case 0:
+                    func_8002A734(p, a2, t);
+                    break;
+                case 1:
+                    func_8002A934(p, a2, t);
+                    break;
+                case 2:
+                    func_8002AB68(p, a2, t);
+                    break;
+                case 3:
+                    func_8002AD68(p, a2, t);
+                    break;
+                }
+            }
+        }
+    } else {
+        switch (p[2]) {
+        case 0:
+            func_8002AF9C(p, a2);
+            break;
+        case 1:
+            func_8002B138(p, a2);
+            break;
+        case 2:
+            func_8002B334(p, a2);
+            break;
+        case 3:
+            func_8002B4D0(p, a2);
+            break;
+        case 4:
+            func_8002B66C(p, a2);
+            break;
+        case 5:
+            func_8002B7E8(p, a2);
+            break;
+        }
+    }
+    PopMatrix();
+}
 
 void func_80029A9C(void *arg0) {
     extern s32 D_80069B28[];
@@ -250,119 +339,3 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002BD94);
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002BE20);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002BEAC);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002C000);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002C214);
-
-#include "ghidra.h"
-uint func_8002C438(undefined2 *param_1,int param_2,undefined4 param_3,uint param_4)
-
-{
-  undefined2 *puVar1;
-  
-  puVar1 = (undefined2 *)((param_4 & 0xffff) * 8 + param_2);
-  *param_1 = *puVar1;
-  param_1[1] = puVar1[1];
-  param_1[2] = puVar1[2];
-  func_8002C4E8(param_1,param_3);
-  return param_4 & 0xffff;
-}
-
-#include "ghidra.h"
-uint func_8002C490(undefined2 *param_1,int param_2,undefined4 param_3,uint param_4)
-
-{
-  undefined2 *puVar1;
-  
-  puVar1 = (undefined2 *)((param_4 & 0xffff) * 8 + param_2);
-  *param_1 = *puVar1;
-  param_1[1] = puVar1[1];
-  param_1[2] = puVar1[2];
-  func_8002C4E8(param_1,param_3);
-  return param_4 & 0xffff;
-}
-
-void func_8002C4E8(void *arg0, void *arg1) {
-    if (arg1 != NULL) {
-        M2C_FIELD(arg0, u16 *, 0) = (u16) (M2C_FIELD(arg0, u16 *, 0) + M2C_FIELD(arg1, u16 *, 0));
-        M2C_FIELD(arg0, u16 *, 2) = (u16) (M2C_FIELD(arg0, u16 *, 2) + M2C_FIELD(arg1, u16 *, 2));
-        M2C_FIELD(arg0, u16 *, 4) = (u16) (M2C_FIELD(arg0, u16 *, 4) + M2C_FIELD(arg1, u16 *, 4));
-    }
-}
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002C534);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002C610);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002C728);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002C768);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002C93C);
-
-extern u8 D_8008ED68[];
-extern u8 D_800859F3[];
-extern s32 func_800248E8();
-extern void func_80029784();
-extern void func_8002453C();
-extern void func_800A9744();
-
-void func_8002CA80(u8 *p)
-{
-  u8 *s2 = D_8008ED68;
-  u8 *s1 = *((u8 **) (p + 0x18));
-  int new_var;
-  u8 m = *D_800859F3;
-  if (m == 1)
-  {
-    *((u32 *) (p + 0x50)) |= 1;
-  }
-  else
-    if (m == 3)
-  {
-    *((u32 *) (p + 0x50)) &= ~1;
-  }
-  new_var = (*((u32 *) (p + 0x50))) & 1;
-  if (new_var == 1)
-  {
-    return;
-  }
-  if ((s2[0x99A] == 0) && ((*((u16 *) (p + 0x4E))) != 0))
-  {
-    if (func_800248E8(p) != 0)
-    {
-      return;
-    }
-  }
-  if (s2[0xA66] != 0)
-  {
-    *((u16 *) (p + 0x4E)) = 1;
-  }
-  if ((*((s32 *) (s1 + 4))) == 1)
-  {
-    func_800A9744();
-  }
-  switch (*((u16 *) (p + 0x4E)))
-  {
-    case 1:
-
-    case 2:
-      func_80029784(0, s1, s2, func_8002453C);
-
-    case 0:
-      *((u16 *) (p + 0x4E)) += 1;
-      break;
-
-    case 3:
-      func_80029784(1, s1, s2, 0);
-      break;
-
-    case 4:
-      break;
-
-  }
-
-}
-
-#include "common.h"

@@ -16,6 +16,13 @@ s32 func_80050680(void) {
     return 0;
 }
 
+    D_80078B60[0]->unkA = 0;
+    i[0] = 10;
+    while (--i[0] != -1) {
+    }
+    return 0;
+}
+
 s32 func_800506E8(void) {
     extern s32 *D_80078B64[];
     register s32 *p asm("v1") = D_80078B64[0];

@@ -82,105 +82,82 @@ void func_800B6624(Obj_800B6624 *arg0)
     s16 *t;
     Player *p;
 
-    flags = obj->unk34;
-    if (((flags >> 8) & 1) != D_80078C20[0]) {
-        p = &D_80100F38[(u16)func_800B1260((flags >> 9) & 1)];
-        func_80013920(obj);
-        if (obj == p->unk18C) {
-            p->unk18C = 0;
+/* Objeto de carta/sprite usado por func_800B6624 (flags em 0x34/0x38). */
+typedef struct {
+    u8 _p00[0x34];
+    u32 unk34;
+    u32 unk38;
+} Obj_800B6624;
+
+void *func_800B6D98(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u16 arg4, void *arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, u16 arg10, s16 arg11);
+
+void func_800B6C48(void *arg0) {
+    typedef struct {
+        u8 _p00[0x14];
+        u8 unk14[0x1C];
+        u32 unk30;
+        u32 unk34;
+        u32 unk38 : 1;
+        u32 _b38 : 31;
+        s32 unk3C;
+        u8 _p40[0x40];
+        s32 unk80;
+        u8 _p84[0x8];
+        s32 unk8C;
+    } S_Obj;
+    typedef struct {
+        u8 _p00[0x13];
+        u8 unk13;
+        u8 _p14[0x28];
+    } S_63940;
+    typedef struct {
+        u8 _p00[0x178];
+        s32 unk178;
+        u8 _p17C[0x2C];
+    } S_91618;
+    extern S_63940 D_80063940[];
+    extern s16 D_80078C28[];
+    extern S_91618 D_80091618[];
+    S_Obj *o = arg0;
+
+    if (*D_80078C28 == 1) {
+        if (o->unk38 == 1) {
+            return;
         }
-        return;
+        func_800C5850(D_80091618[(o->unk34 >> 12) & 0xF].unk178, o, 0, -(D_80063940[o->unk8C].unk13 & 0x3F), -1);
     }
-    if (D_8008EE44[0] > 0x40) {
-        func_80013920(obj);
-        return;
+    if (o->unk38 == 0 && func_80015E60(o) == 1) {
+        o->unk38 = 1;
     }
-    if (D_80078C28[0] == 1) {
-        register Slot *q asm("s4");
-        if ((obj->unk38 & 1) == D_80078C28[0]) {
-            return;
+    if (o->unk3C == 0x4B0) {
+        if (o->unk38 == 1) {
+            o->unk38 = 0;
+            func_80015CD0(o->unk14, o->unk80, 3);
+            o->unk30 = (o->unk30 & ~7) | 3;
         }
-        r = func_800B1260((flags >> 9) & 1);
-        p = &D_80100F38[(u16)r];
-        q = D_80091618;
-        q += (u16)r;
-        id = q->unk0;
-        if (obj != p->unk21C) {
-            return;
-        }
-        if (p->unk228 == 1 && func_800E16EC() == 0) {
-            return;
-        }
-        flags1 = obj->unk34;
-        switch ((flags1 >> 10) & 3) {
-        case 0:
-            k = (flags1 >> 12) & 0xF;
-            if (k - 4 < 2 || k == 8) {
-                raw = D_80063940[id].unk18 >> 17;
-            } else {
-                raw = D_80063940[id].unk18 >> 14;
-            }
-            v = raw & 7;
-            switch (v) {
-            case 1: x = -8; break;
-            case 7: x = 8; break;
-            default: x = 0; break;
-            }
-            func_800C5850(D_80091618[(u16)r].unk178, obj, x, 0x10, -5);
-            break;
-        case 1: {
-            register u32 kind asm("a0");
-            kind = (flags1 >> 12) & 0xF;
-            if (kind - 10 < 3) {
-                t = D_800F1A68[(D_80063940[id].unk20 >> 15) & 0xF][(s16)(kind - 10)];
-                func_800C5850(q->unk178, obj, t[0], t[1], (s16)(t[2] - 5));
-            } else if (kind == 0xE) {
-                func_800C5850(q->unk178, obj, 0, D_800F07D4[(D_80063940[id].unk20 >> 15) & 0xF].unk3, -5);
-            }
-            break;
-        }
-        }
-    }
-    if (D_8006AFCC.unk36 == 1 || D_8006AFCC.unk38 == 1) {
-        Slot *q2;
-        r = func_800B1260((obj->unk34 >> 9) & 1);
-        p = &D_80100F38[(u16)r];
-        q2 = &D_80091618[(u16)r];
-        id = q2->unk0;
-        if (obj != p->unk21C) {
-            return;
-        }
-        flags2 = obj->unk34;
-        switch ((flags2 >> 10) & 3) {
-        case 0:
-            k = (flags2 >> 12) & 0xF;
-            if (k - 4 < 2 || k == 8) {
-                raw = D_80063940[id].unk18 >> 17;
-            } else {
-                raw = D_80063940[id].unk18 >> 14;
-            }
-            v = raw & 7;
-            switch (v) {
-            case 1: x = -8; break;
-            case 7: x = 8; break;
-            default: x = 0; break;
-            }
-            func_800C5850(D_80091618[(u16)r].unk178, obj, x, 0x10, -5);
-            break;
-        case 1: {
-            register u32 kind asm("a0");
-            kind = (flags2 >> 12) & 0xF;
-            if (kind - 10 < 3) {
-                t = D_800F1A68[(D_80063940[id].unk20 >> 15) & 0xF][(s16)(kind - 10)];
-                func_800C5850(q2->unk178, obj, t[0], t[1], (s16)(t[2] - 5));
-            } else if (kind == 0xE) {
-                func_800C5850(q2->unk178, obj, 0, D_800F07D4[(D_80063940[id].unk20 >> 15) & 0xF].unk3, -5);
-            }
-            break;
-        }
-        }
+        o->unk3C = 0;
+    } else {
+        o->unk3C++;
     }
 }
+
+typedef struct {
+    u8 _p00[0x8];
+    s32 unk8;
+    u8 _p0C[0x4];
+    s32 unk10;
+    u8 _p14[0x4];
+    s32 unk18;
+    u8 _p1C[0x8];
+    s32 unk24;
+    u8 _p28[0x38];
+    s32 unk60[7];
+    s32 unk7C[7];
+    s32 *unk98[14];
+    s32 unkD0;
+    u8 _pD4[0x2F4];
+    s32 unk3C8[1][9];
+} S_800EEB9C;
 
 void func_800B6C48(void *arg0) {
     typedef struct {
@@ -329,8 +306,6 @@ void *func_800B6D98(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u16 arg4, void *arg5
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B6FA0);
 
-#include "common.h"
-
 void func_800B70A0(s32 arg0)
 {
   extern u8 D_800859F2[];
@@ -414,26 +389,6 @@ void func_800B70A0(s32 arg0)
     }
   }
 }
-
-#include "common.h"
-typedef struct {
-    u8 _p00[0x8];
-    s32 unk8;
-    u8 _p0C[0x4];
-    s32 unk10;
-    u8 _p14[0x4];
-    s32 unk18;
-    u8 _p1C[0x8];
-    s32 unk24;
-    u8 _p28[0x38];
-    s32 unk60[7];
-    s32 unk7C[7];
-    s32 *unk98[14];
-    s32 unkD0;
-    u8 _pD4[0x2F4];
-    s32 unk3C8[1][9];
-} S_800EEB9C;
-
 
 void func_800B7264(s32 arg0) {
     extern M2C_UNK D_800EEB9C[];
@@ -561,6 +516,10 @@ void func_800B74A4(void) {
     }
 }
 
+/* Objeto de carta/sprite usado por func_800B6624 (flags em 0x34/0x38). */
+
+void *func_800B6D98(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u16 arg4, void *arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, u16 arg10, s16 arg11);
+
 void func_800B768C(void) {
     typedef struct {
         u8 _p00[0x46];
@@ -608,6 +567,10 @@ void func_800B768C(void) {
     } while (i < 6);
 }
 
+/* Objeto de carta/sprite usado por func_800B6624 (flags em 0x34/0x38). */
+
+void *func_800B6D98(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u16 arg4, void *arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, u16 arg10, s16 arg11);
+
 void func_800B77AC(s32 a0, s32 a1) {
     typedef struct {
         u8 _p00[0x38];
@@ -627,6 +590,10 @@ void func_800B77AC(s32 a0, s32 a1) {
     D_800EEB9C->unk754->unk54 += (a1 * 0x155) / 60;
     D_800EEB9C->unk754->unk78 = 0;
 }
+
+/* Objeto de carta/sprite usado por func_800B6624 (flags em 0x34/0x38). */
+
+void *func_800B6D98(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u16 arg4, void *arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, u16 arg10, s16 arg11);
 
 void func_800B786C(s32 a0) {
     typedef struct {

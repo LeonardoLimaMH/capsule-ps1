@@ -131,6 +131,23 @@ s32 func_80036DB0(u8 *s)
   }
 }
 
+#include "yuugi.h"
+
+typedef struct {
+    u32 code : 8;
+    u32 arg : 8;
+    u32 unk02 : 16;
+    u32 unk04;
+    u32 unk08;
+    u32 unk0C;
+} S_AudioCmd;
+
+
+extern u8 D_800922F0[];
+
+/* fila de comandos de 16 bytes; o índice é relido a cada campo, como no original */
+#define SLOT (D_800922F0 + M2C_GFIELD(D_800922F0, s16, 0x110) * 16)
+
 extern u8 D_800922F0[], D_8009376C[];
 extern s16 D_80093738[];
 extern u8 D_80078D51, D_80078D50;
@@ -246,6 +263,9 @@ comando_fim:
         }
     }
 }
+
+
+extern u8 D_800922F0[];
 
 #include "common.h"
 

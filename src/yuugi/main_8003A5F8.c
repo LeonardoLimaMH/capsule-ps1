@@ -239,6 +239,27 @@ compare:
     return -1;
 }
 
+#include "yuugi.h"
+
+typedef struct {
+    u8 unk_0x0[0x284];
+    u8 *unk_0x284;
+    u8 unk_0x288[0xC];
+    u32 unk_0x294;
+    u8 unk_0x298[0x14];
+} Unk_800944B8;
+
+extern Unk_800944B8 D_800944B8[];
+extern s32 D_80078C9C;
+
+
+extern s32 D_80078C94;
+extern s32 D_80078D5C;
+extern s32 D_80078C84;
+extern s32 func_8003A5F8();
+extern s32 func_8004FE3C();
+
+
 s32 func_8003AA78(u8 *s) {
     register Unk_800944B8 *base asm("a0") = D_800944B8;
     Unk_800944B8 *e = &base[D_80078C9C];
@@ -250,6 +271,9 @@ s32 func_8003AA78(u8 *s) {
     if (e->unk_0x294 < pos) { s[0x20] = 1; return -1; }
     return c;
 }
+
+
+extern u8 D_800949A8[];
 
 s32 func_8003AAF0(u8 *s) {
     register u8 *stream asm("a2") = s;

@@ -6,3 +6,4 @@ _SsVmGetSeqVol
 func_80115994
 func_80118FA0
 slpm_StopRCnt
+slpm_StopRCnt

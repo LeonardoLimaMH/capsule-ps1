@@ -1,0 +1,11 @@
+# Loads simbólicos de .extern pequenos montados sem $gp (lui $r / lw $r,%lo($r)), por função.
+func_80015B3C
+func_80013668
+func_80029784
+func_80029C90
+func_80029E90
+func_8002A090
+func_8002A290
+func_80037A7C
+func_8003CAD8
+func_8003CFBC

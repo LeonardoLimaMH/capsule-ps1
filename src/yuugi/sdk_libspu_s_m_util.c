@@ -39,4 +39,14 @@ inline int _SpuIsInAllocateArea(u_long addr)
     return 0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libspu_s_m_util", _SpuIsInAllocateArea_);
+#include "common.h"
+
+/* _SpuIsInAllocateArea_: C do SDK PsyQ importado de https://github.com/ser-pounce/rood-reverse (CC0-1.0),
+   arquivo src/SLUS_010.40/libspu/S_M_UTIL.c; reduzido às declarações de que a função depende
+   (tools/ext_import.py). */
+extern int D_800715C0;
+
+int _SpuIsInAllocateArea_(u_long addr)
+{
+    return _SpuIsInAllocateArea(addr << D_800715C0);
+}

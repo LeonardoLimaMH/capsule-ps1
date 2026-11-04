@@ -20,50 +20,42 @@ void func_800A99AC(s32 arg0, s32 arg1) {
     s32 var_t1;
     s32 var_v0;
 
-    M2C_FIELD(D_800EE914, s32 *, 0) = 0;
-    if ((*D_80078C22) != 0) {
-        if ((*D_80078C22) != 1) {
-            var_t1 = 9;
-        } else {
-            var_v0 = 4;
-            goto block_5;
-        }
-    } else {
-        var_v0 = 1;
-block_5:
-        var_t1 = var_v0;
+s32 func_800A9A74(void)
+{
+  extern struct {
+    s32 f0;
+    s32 f4;
+  } D_800EEB9C;
+  if (D_800EEB9C.f4 <= 0)
+  {
+    if (D_800EEB9C.f0)
+    {
+      D_800EEB9C.f0 = 0;
+      return -1;
     }
-    var_a3 = 0;
-    if (var_t1 != 0) {
-        var_a2 = D_800EE914;
-        temp_t0 = (*D_80078C22) + 1;
-        do {
-            temp_v1 = var_a3 / temp_t0;
-            temp_v0 = var_a3 % temp_t0;
-            var_a3 += 1;
-            temp_v1_2 = ((arg0 - temp_v1) * 8) + (arg1 - temp_v0);
-            M2C_FIELD(var_a2, s32 *, 0x70) = temp_v1_2;
-            M2C_FIELD(var_a2, s32 *, 4) = (s32) (M2C_FIELD(D_800900C0, s32 *, 0x15C) + (temp_v1_2 * 0x2C));
-            var_a2 += 4;
-        } while (var_a3 < var_t1);
+    else
+    {
+      D_800EEB9C.f0 = 0;
+      return -1;
     }
-    M2C_FIELD(D_800EE914, s32 *, 0x94) = 0x40;
-    M2C_FIELD(D_800EE914, s32 *, 0) = 1;
+  }
+  D_800EEB9C.f4 = (s32) (D_800EEB9C.f4 - 1);
+  func_800B7298(D_800EEB9C.f0);
+  return 0;
 }
 
-s32 func_800A9A74(void) {
-    extern s32 D_800EEB9C[];
-    s32 val;
-
-    val = D_800EEB9C[1];
-    if (val > 0) {
-        D_800EEB9C[1] = val - 1;
-        func_800B7298(D_800EEB9C[0]);
-        return 0;
-    }
-    D_800EEB9C[0] = 0;
-    return -1;
-}
+typedef struct {
+    u8 pad[0x38];
+    u32 flags;
+} WorkSlotRecordTask;
+typedef struct {
+    u8 pad[0x18C];
+    WorkSlotRecordTask *task;
+    u8 middle[0x21F];
+    u8 slots[32];
+    u8 tail[0x3C9];
+    u32 state;
+} WorkSlotRecord;
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A9738", func_800A9AC0);
 
@@ -96,18 +88,6 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A9738", func_800AA60C);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A9738", func_800AA77C);
 
-typedef struct {
-    u8 pad[0x38];
-    u32 flags;
-} WorkSlotRecordTask;
-typedef struct {
-    u8 pad[0x18C];
-    WorkSlotRecordTask *task;
-    u8 middle[0x21F];
-    u8 slots[32];
-    u8 tail[0x3C9];
-    u32 state;
-} WorkSlotRecord;
 void func_800AA8D0(u32 player) {
     extern WorkSlotRecord D_80100F38[];
     WorkSlotRecord *record = &D_80100F38[player & 0xFFFF];

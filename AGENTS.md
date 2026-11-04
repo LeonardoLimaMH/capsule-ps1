@@ -308,6 +308,35 @@ Teste estas antes do permuter:
   `union` se o mesmo campo é lido com larguras diferentes). Nas funções antigas,
   `(u8 *)D` gera o mesmo código que o `u8[]`. Confira o arquivo inteiro com
   `.cache/tmp/funccmp2.py` ou com o build.
+- **Base do global carregada antes do `if`:** quando o original faz `lui/addiu` do
+  endereço antes do desvio (no slot de atraso), declare `u8 *p = D_X;` no topo da
+  função e acesse `p[off]`, de preferência no 2.7.2-cdk.
+- **Endereço de função como argumento:** `extern void func_X();` e `f(func_X)`, nunca
+  `extern M2C_UNK func_X[]` com `(*func_X)`.
+- **`div`/`divu` sem `break 7` no original:** a função vai em
+  `config/rawdiv.<alvo>.txt` (já listadas todas as pendentes de yuugi/etc/raise). O
+  `tools/psx_as.py` emite a divisão crua com as regras de nop do maspsx.
+- **Nop depois de `mflo`/`mfhi` antes de um store `$gp`:** o ASPSX trata símbolos
+  `.extern` pequenos como `$gp`; o `psx_as.py` já reproduz isso (o maspsx sozinho só
+  conhecia `.comm`/`.sdata`).
+- **Retorno sem `else`:** `if (x != 0) return A; if (x == 0) return 0;` põe o bloco
+  do zero depois do principal, como em `func_800202A4`.
+- **Perfil PsyQ (g0fill/spfill) também em código do jogo:** se o original põe a segunda
+  metade de um store em símbolo (`lui $at` / `sw ..,%lo(S)($at)`) no delay slot de um
+  salto, desvio ou `jal`, o arquivo é do perfil `config/g0fill.txt`. Se o `addiu $sp`
+  vai no delay slot do `jr $ra`, também `config/spfill.txt`. Teste sempre os três
+  perfis (nenhum, g0fill, g0fill+spfill): a detecção do spfill é pelo arquivo de
+  destino, não pelo caminho do candidato (`align_diff.py --g0fill --spfill`).
+- **Registradores de hardware (SPU, GPU, CD):** stores fora do delay slot no original
+  pedem `volatile` no ponteiro (o gcc não põe acesso volatile em delay slot).
+- **`lui $r,%hi(S)` / `lw $r,%lo(S)($r)` em símbolo que é `$gp` em outro lugar:** declare
+  `S` escalar e ponha a função em `config/nogp.<alvo>.txt` (o `psx_as.py` monta o load
+  sem `$gp`, como o ASPSX fazia).
+- **SDK repetido nos dois executáveis:** o mesmo C do yuugi (`X`) serve no slpm
+  (`slpm_X`) e vice-versa; `.cache/tmp/port_twin.py` porta e renomeia os símbolos pelo
+  pareamento das relocações. Confira os nomes no resultado: a comparação mascara
+  relocações, só o link acusa um nome do outro executável.
+- **libc do SDK (strcmp, strcpy, memset):** compilada com `char` com sinal; use `s8`.
 
 ## 10. Quando parar uma abordagem
 

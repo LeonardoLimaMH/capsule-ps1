@@ -3,7 +3,21 @@
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015540);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800158C4);
+#include "common.h"
+
+void func_800158C4(unsigned int arg0)
+{
+  extern M2C_UNK D_8008ED68[];
+  func_80020844((s16) ((((s32) ((struct 
+  {
+    u8 _p[0x108];
+    s32 v;
+  } *) D_8008ED68)->v) / 2) * (-1)), (s16) ((arg0 + 0xAC) - (((s32) ((struct 
+  {
+    u8 _p[0x10C];
+    s32 v;
+  } *) D_8008ED68)->v) / 2)), 0x140, 0x44, 0, 0, 0, 0, 4);
+}
 
 #include "common.h"
 
@@ -41,7 +55,13 @@ void func_80015B00(int param_1)
   return;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015B3C);
+#include "common.h"
+
+extern u8 *D_80078B7C;
+
+void func_80015B3C(s32 arg0, s32 arg1, s32 arg2) {
+    func_800136C8(arg0, arg1, *(s32 *)(D_80078B7C + 0xC57C), arg2);
+}
 
 void func_80015B74(void *arg0) {
     s32 temp_a0;

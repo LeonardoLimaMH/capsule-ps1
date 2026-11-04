@@ -1,7 +1,6 @@
 #include "common.h"
 
 /* arg2: small */
-#include "common.h"
 
 extern u8 D_80100F38[], D_80091618[], D_8008ED68[];
 extern s32 func_800B1260(s32);
@@ -35,6 +34,10 @@ s32 func_800C59F4(s32 a0, s32 a1, s32 a2)
   return *((s32 *) ((*((u8 **) ((p + 0x230) + (a2 * 4)))) + 0x38)) |= 1;
 }
 
+/* arg2: small */
+
+extern s32 func_800B1260(s32);
+
 void func_800C5B30(s32 a0, s32 a1, s32 a2) {
     u16 k = func_800B1260(a0);
     u8 *p = D_80100F38 + (k * 0x79C);
@@ -54,17 +57,23 @@ void func_800C5B30(s32 a0, s32 a1, s32 a2) {
     *((s32 *)((*((u8 **)((p + 0x278) + (a2 * 4)))) + 0x38)) |= 1;
 }
 
-#include "common.h"
-
 extern u8 D_800EE5D0[];
 extern u8 D_800EEB9C[];
 typedef struct { u8 pad[0x6E0]; s32 arr[1]; } S_800EEB9C;
 
+typedef struct { u8 pad[0x6E0]; s32 arr[1]; } S_800EEB9C_2;
+
 s32 func_800C5C30(s32 unused, s32 i) {
-    return func_800B6D98(4, 0, 0, 4, 0, D_800EE5D0, ((S_800EEB9C *)D_800EEB9C)->arr[i], 1, 1, 0, 2, 0);
+    return func_800B6D98(4, 0, 0, 4, 0, D_800EE5D0, ((S_800EEB9C_2 *)D_800EEB9C)->arr[i], 1, 1, 0, 2, 0);
 }
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C59F4", func_800C5CA0);
+
+/* arg2: small */
+
+extern s32 func_800B1260(s32);
+
+typedef struct { u8 pad[0x6E0]; s32 arr[1]; } S_800EEB9C_3;
 
 void func_800C5EFC(s32 a0, s32 a1) {
     typedef struct {
@@ -114,6 +123,12 @@ void func_800C5EFC(s32 a0, s32 a1) {
     }
 }
 
+/* arg2: small */
+
+extern s32 func_800B1260(s32);
+
+typedef struct { u8 pad[0x6E0]; s32 arr[1]; } S_800EEB9C_4;
+
 void func_800C60E0(s32 a0, s32 a1) {
     typedef struct {
         u8 _p00[0x30];
@@ -142,7 +157,7 @@ void func_800C60E0(s32 a0, s32 a1) {
     switch (a1) {
     case 1:
         for (i = 0; i < 9; i++) {
-            p->unk230[i] = (S_Obj *)func_800B6D98(4, 0, 0, 4, 0, D_800EE5D0, ((S_800EEB9C *)D_800EEB9C)->arr[i], 1, 1, 0, 2, 0);
+            p->unk230[i] = (S_Obj *)func_800B6D98(4, 0, 0, 4, 0, D_800EE5D0, ((S_800EEB9C_4 *)D_800EEB9C)->arr[i], 1, 1, 0, 2, 0);
             p->unk230[i]->b34_9 = a0;
             p->unk230[i]->b34_10 = 0;
             p->unk230[i]->b34_12 = i;
@@ -156,6 +171,12 @@ void func_800C60E0(s32 a0, s32 a1) {
         break;
     }
 }
+
+/* arg2: small */
+
+extern s32 func_800B1260(s32);
+
+typedef struct { u8 pad[0x6E0]; s32 arr[1]; } S_800EEB9C_5;
 
 void func_800C62A4(s32 a0, s32 a1) {
     typedef struct {
@@ -202,6 +223,12 @@ void func_800C62A4(s32 a0, s32 a1) {
         break;
     }
 }
+
+/* arg2: small */
+
+extern s32 func_800B1260(s32);
+
+typedef struct { u8 pad[0x6E0]; s32 arr[1]; } S_800EEB9C_6;
 
 u8 *func_800C6424(s32 a0, s32 a1) {
     typedef struct {

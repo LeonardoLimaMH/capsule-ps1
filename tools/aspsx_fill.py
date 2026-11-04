@@ -19,9 +19,12 @@ Uso: maspsx ... | aspsx_fill.py [--sp] | as ...
 import re
 import sys
 
-STORE = re.compile(r"^\s*(sw|sh|sb)\s+(\$\w+),\s*([A-Za-z_.$][\w.$]*(?:[+-]\d+)?)\s*$")
+STORE = re.compile(r"^\s*(sw|sh|sb)\s+(\$\w+),\s*([A-Za-z_.$][\w.$]*(?:[+-]\d+)?)(?:\((\$\w+)\))?\s*$")
 SPADJ = re.compile(r"^\s*addu\s+\$sp,\$sp,\d+\s*$")
 JR = re.compile(r"^\s*j\s+\$31\s*$")
+# qualquer salto ou desvio cujo delay slot ficou com nop (o store não escreve registrador,
+# então não muda a condição do desvio)
+JAL = re.compile(r"^\s*(jal|j|b|beq|bne|beqz|bnez|bgez|bgtz|blez|bltz)\s+[^#]*$")
 NOP = re.compile(r"^\s*nop\b")
 INSN = re.compile(r"^\s*[a-z][a-z0-9.]*(\s|$)")
 
@@ -50,9 +53,14 @@ def fill(lines, sp=False):
                 lm = re.match(r"^\s*(\$L\w+):", out[j])
                 label |= bool(lm) and lm.group(1) in referenced
                 j += 1
-            if not label and j + 1 < len(out) and JR.match(out[j]) and NOP.match(out[j + 1]):
-                op, reg, sym = m.groups()
+            # o mesmo vale para o `jal` seguinte e para o store com registrador-base
+            # (`sb $r,SIM($b)` -> lui $at / addu $at,$at,$b / ... / sb $r,%lo(SIM)($at))
+            if (not label and j + 1 < len(out) and (JR.match(out[j]) or JAL.match(out[j]))
+                    and NOP.match(out[j + 1])):
+                op, reg, sym, base = m.groups()
                 out[i] = f"\t.set\tnoat\n\tlui\t$at,%hi({sym})"
+                if base:
+                    out[i] += f"\n\taddu\t$at,$at,{base}"
                 out[j + 1] = f"\t{op}\t{reg},%lo({sym})($at)\n\t.set\tat"
                 i = j + 2
                 continue

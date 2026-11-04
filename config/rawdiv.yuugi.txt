@@ -1,0 +1,21 @@
+# Raw div/divu without break checks in the original YUUGI code.
+func_8001F938
+func_80013668
+func_80014EE0
+func_8001AB74
+func_8001ABD4
+func_8001E044
+func_8001E4A4
+func_8001EA24
+func_8001EC74
+func_8001F35C
+func_8001F524
+func_800202A4
+func_80020304
+func_80024A7C
+func_80025764
+func_800294AC
+func_80038CA8
+func_80039E60
+func_8003AF34
+func_8003B178

@@ -32,8 +32,8 @@ mips-linux-gnu-cpp {cpp_flags} -DPERMUTER "$INPUT" \\
 """
 
 
-def compile_script(target, gcc, use_g0fill=False):
-    backend = (g0fill.backend('"$OUTPUT"') if use_g0fill else
+def compile_script(target, gcc, use_g0fill=False, spfill=False):
+    backend = (g0fill.backend('"$OUTPUT"', spfill, target) if use_g0fill else
                f'{match.MASPSX} --target {target} -o "$OUTPUT"')
     return COMPILE_SH.format(root=shlex.quote(str(ROOT)), cpp_flags=match.CPP_FLAGS,
                              gcc=gcc, cflags='-O2 -G0' if use_g0fill else '-O2 -G8',
@@ -76,6 +76,7 @@ def main():
     ap.add_argument("--jobs", type=int, default=8)
     ap.add_argument("--gcc", default="2.7.2-psx")
     ap.add_argument("--g0fill", action="store_true", help="perfil das bibliotecas PsyQ")
+    ap.add_argument("--spfill", action="store_true", help="com o addu $sp no delay slot do retorno")
     a = ap.parse_args()
     asm = next((ROOT / "asm" / a.target / "nonmatchings").rglob(f"{a.func}.s"))
     d = ROOT / ".cache" / "permuter" / a.func
@@ -93,7 +94,7 @@ def main():
                          capture_output=True, text=True, check=True).stdout
     pre = declare_implicit_calls(pre)
     (d / "base.c").write_text(pre, encoding="utf-8")
-    (d / "compile.sh").write_text(compile_script(a.target, a.gcc, a.g0fill), encoding="utf-8")
+    (d / "compile.sh").write_text(compile_script(a.target, a.gcc, a.g0fill, a.spfill), encoding="utf-8")
     (d / "compile.sh").chmod(0o755)
     (d / "settings.toml").write_text(f'func_name = "{a.func}"\ncompiler_type = "gcc"\n', encoding="utf-8")
     cmd = ["timeout", str(a.seconds), "python3", "/opt/decomp-permuter/permuter.py", str(d),

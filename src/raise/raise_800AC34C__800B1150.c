@@ -8,7 +8,6 @@ typedef struct {
 } S_80091618;
 extern S_80091618 D_80091618[];
 
-
 void func_800B1150(void) {
     extern s32 D_800EEB64[];
     extern s32 D_800EEB68[];
@@ -46,12 +45,12 @@ s32 func_800B1198(void)
   return r;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C__800B1150", func_800B11F4);
-
-#include "common.h"
 extern u16 D_8006AF80[];
 extern s32 D_800EEB70[];
 extern u16 D_800EF2D8[];
+
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C__800B1150", func_800B11F4);
+
 u16 func_800B1260(s32 which)
 {
   if ((*D_800EEB70) == 0)
@@ -91,10 +90,6 @@ u16 func_800B1350(s32 which)
   return *D_800EF2D8;
 }
 
-#include "common.h"
-extern u16 D_8006AF80[];
-extern s32 D_800EEB70[];
-extern u16 D_800EF2D8[];
 u16 func_800B13C4(s32 which)
 {
   if ((*D_800EEB70) == 0)
@@ -119,7 +114,6 @@ u16 func_800B13C4(s32 which)
   return *D_800EF2D8;
 }
 
-#include "common.h"
 void func_800B143C(s32 arg0, s32 arg1)
 {
   int new_var2;

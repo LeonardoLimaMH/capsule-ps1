@@ -19,9 +19,9 @@ void func_80043134(void) {
     } while (i < 8);
 }
 
-#include "common.h"
-
 extern s32 D_80072E2C[];
+
+#include "ghidra.h"
 
 s32 func_800431A0(s32 i, s32 value) {
     s32 old = D_80072E2C[i];
@@ -32,7 +32,6 @@ s32 func_800431A0(s32 i, s32 value) {
     return old;
 }
 
-#include "ghidra.h"
 void func_800431CC(undefined4 *param_1,int param_2)
 
 {

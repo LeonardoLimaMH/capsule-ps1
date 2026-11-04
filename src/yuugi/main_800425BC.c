@@ -1,6 +1,8 @@
 #include "common.h"
 #include "yuugi.h"
 
+#include "yuugi.h"
+
 s32 func_800425BC(s32 arg0, s32 arg1, u32 arg2) {
     extern s32 _SN_read(s32, s32, u32, s32);
     register s32 total asm("s2") = 0;
@@ -20,6 +22,8 @@ s32 func_800425BC(s32 arg0, s32 arg1, u32 arg2) {
 }
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800425BC", _SN_read);
+
+#include "yuugi.h"
 
 s32 func_80042694(s32 arg0, s32 arg1, u32 arg2) {
     extern s32 _SN_write(s32, s32, u32, s32);

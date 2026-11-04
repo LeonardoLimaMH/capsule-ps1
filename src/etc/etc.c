@@ -15,6 +15,10 @@ s32 func_800979BC(s32 arg0) {
     return a + b;
 }
 
+
+extern u8 D_8008ED68[];
+extern void (*D_800AEF98[])(void);
+
 void func_800979FC(void) {
     extern u8 D_80085428[];
     register u8 *p asm("a1") = D_80085428;
@@ -51,6 +55,10 @@ void func_800979FC(void) {
         s0++;
     } while (s0 < 2);
 }
+
+
+extern u8 D_8008ED68[];
+extern void (*D_800AEF98[])(void);
 
 s32 func_80097AF0(s32 arg0, s32 arg1, s32 arg2)
 {

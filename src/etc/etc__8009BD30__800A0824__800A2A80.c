@@ -215,7 +215,26 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A4
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A4720);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A4820);
+#include "common.h"
+
+extern u8 D_80085428[];
+extern u16 D_8008EE44[];
+
+void func_800A4820(void *arg0) {
+    u8 *p = D_80085428;
+    s16 var_a1;
+
+    if ((u32) (D_8008EE44[0] - 0x19) < 2U) {
+        M2C_FIELD(arg0, s32 *, 0x38) &= ~1;
+        var_a1 = -0x70;
+        if (p[0x5D0] == 2) {
+            var_a1 = -0x10;
+        }
+        M2C_FIELD(arg0, s16 *, 0x4A) = var_a1;
+    } else {
+        M2C_FIELD(arg0, s32 *, 0x38) |= 1;
+    }
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A4884);
 

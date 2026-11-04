@@ -4,10 +4,11 @@
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", func_80049BC0);
 
 extern char D_800112C0[];
-void ClearImage(s32 rect, u8 r, u8 g, u8 b) {
+
+s32 ClearImage(s32 *rect, u8 r, u8 g, u8 b) {
     extern void * D_80078914[];
     func_80049BC0(D_800112C0, rect);
-    M2C_FIELD((*D_80078914), M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 8)(M2C_FIELD((*D_80078914), s32 *, 0xC), rect, 8, (b << 16) | (g << 8) | r);
+    return M2C_FIELD((*D_80078914), s32 (**)(s32, s32 *, s32, s32), 8)(M2C_FIELD((*D_80078914), s32 *, 0xC), rect, 8, (b << 0x10) | (g << 8) | r);
 }
 
 extern char D_800112CC[];
@@ -20,11 +21,23 @@ void ClearImage2(s32 rect, u8 r, u8 g, u8 b) {
     M2C_FIELD((*D_80078914), M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 8)(M2C_FIELD((*D_80078914), s32 *, 0xC), rect, 8, (u | t) | r);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", LoadImage);
-
-#include "common.h"
-
 extern char D_800112E4[];
+
+extern char D_800112F0[];
+
+extern char D_80011314[];
+
+extern char D_8001132C[];
+
+extern char D_80011340[];
+
+extern char D_800112D8[];
+void LoadImage(s32 arg0, M2C_UNK arg1) {
+    extern void * D_80078914[];
+    func_80049BC0(D_800112D8, arg0);
+    M2C_FIELD((*D_80078914), M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 8)(M2C_FIELD((*D_80078914), s32 *, 0x20), arg0, 8, arg1);
+}
+
 void StoreImage(s32 arg0, M2C_UNK arg1) {
     extern void * D_80078914[];
     func_80049BC0(D_800112E4, arg0);
@@ -50,10 +63,6 @@ s32 MoveImage(s32 *rect, s32 x, s32 y) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", ClearOTag);
 
-#include "common.h"
-
-extern char D_80011314[];
-
 s32 *ClearOTagR(s32 *arg0, M2C_UNK arg1) {
     extern void * D_80078914[];
     extern M2C_UNK (*D_80078918)(M2C_UNK *, s32 *, M2C_UNK);
@@ -69,8 +78,6 @@ s32 *ClearOTagR(s32 *arg0, M2C_UNK arg1) {
     return arg0;
 }
 
-#include "common.h"
-
 void DrawPrim(void *arg0) {
     extern void * D_80078914;
     u8 temp_s1;
@@ -80,9 +87,6 @@ void DrawPrim(void *arg0) {
     M2C_FIELD(D_80078914, M2C_UNK (**)(void *, u8), 0x14)(arg0 + 4, temp_s1);
 }
 
-#include "common.h"
-
-extern char D_8001132C[];
 void DrawOTag(s32 arg0) {
     extern void * D_80078914;
     extern M2C_UNK (*D_80078918)(M2C_UNK *, s32);

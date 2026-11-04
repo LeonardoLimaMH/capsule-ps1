@@ -14,9 +14,6 @@ extern u8 D_80063940[];
 extern s16 D_800F0780[], D_800F0788[];
 extern void func_80034AB0(s32), func_800C5670(s32);
 
-
-#include "common.h"
-
 /* stub-ret: mixed */
 extern s32 func_800B1260(s32);
 
@@ -49,6 +46,22 @@ s32 func_800C6B34(s32 a0, s32 a1) {
     }
     return P32(0x2BC);
 }
+
+struct S_80091618;
+extern struct S_80091618 D_80091618[];
+extern u8 D_80063940[];
+extern s16 D_800F0780[], D_800F0788[];
+extern void func_80034AB0(s32), func_800C5670(s32);
+
+/* stub-ret: mixed */
+extern s32 func_800B1260(s32);
+
+#define PL(a) (((u8 *)D_80100F38) + (func_800B1260(a) & 0xFFFF) * 0x79C)
+#define P32(o) (*(s32 *)(p + (o)))
+#define P16(o) (*(u16 *)(p + (o)))
+#define PS16(o) (*(s16 *)(p + (o)))
+extern s32 func_80015E60(s32);
+extern void func_800CE4B8(s32, s32, s32, s32);
 
 s32 func_800C6C48(u8 *o, s32 a1)
 {
@@ -118,14 +131,23 @@ s32 func_800C6C48(u8 *o, s32 a1)
   return p->f_2BC;
 }
 
-#include "common.h"
 typedef struct S_80091618 {
     u16 f_0;
     u8 _p2[0x1A6];
 } S_80091618;
 extern S_80091618 D_80091618[];
-extern u8 D_80063940[];
 extern s16 D_800F0788[];
+extern s32 func_800B1260(s32), func_80015E60(s32);
+extern void func_800CE4B8(s32, s32, s32, s32), func_80034AB0(s32), func_800C5670(s32);
+
+extern s32 D_80103CE0[];
+extern s32 func_800202A4(s32);
+extern void func_800CB438(s32, s32, s32, s32);
+
+typedef struct {
+    u16 f_0;
+    u8 _p2[0x1A6];
+} S_80091618_2;
 extern s32 func_800B1260(s32), func_80015E60(s32);
 extern void func_800CE4B8(s32, s32, s32, s32), func_80034AB0(s32), func_800C5670(s32);
 s32 func_800C6E5C(u8 *o, s32 a1)
@@ -191,6 +213,26 @@ s32 func_800C6E5C(u8 *o, s32 a1)
   return p->f_2BC;
 }
 
+struct S_80091618_2;
+extern void func_80034AB0(s32), func_800C5670(s32);
+
+/* stub-ret: mixed */
+extern s32 func_800B1260(s32);
+
+#define PL(a) (((u8 *)D_80100F38) + (func_800B1260(a) & 0xFFFF) * 0x79C)
+#define P32(o) (*(s32 *)(p + (o)))
+#define P16(o) (*(u16 *)(p + (o)))
+#define PS16(o) (*(s16 *)(p + (o)))
+extern s32 func_80015E60(s32);
+extern void func_800CE4B8(s32, s32, s32, s32);
+
+typedef struct S_80091618_3 {
+    u16 f_0;
+    u8 _p2[0x1A6];
+} S_80091618_3;
+extern s32 func_800B1260(s32), func_80015E60(s32);
+extern void func_800CE4B8(s32, s32, s32, s32), func_80034AB0(s32), func_800C5670(s32);
+
 void func_800C7070(u8 *a0, s32 a1) {
     S_80100F38 *p = &D_80100F38[func_800B1260(a1) & 0xFFFF];
     if ((u32)(*(u16 *)((u8 *)p + 0x2BA) - 4) >= 2) {
@@ -200,7 +242,29 @@ void func_800C7070(u8 *a0, s32 a1) {
     }
 }
 
-extern s32 D_80103CE0[];
+extern s32 func_800202A4(s32);
+extern void func_800CB438(s32, s32, s32, s32);
+
+struct S_80091618_3;
+extern void func_80034AB0(s32), func_800C5670(s32);
+
+/* stub-ret: mixed */
+extern s32 func_800B1260(s32);
+
+#define PL(a) (((u8 *)D_80100F38) + (func_800B1260(a) & 0xFFFF) * 0x79C)
+#define P32(o) (*(s32 *)(p + (o)))
+#define P16(o) (*(u16 *)(p + (o)))
+#define PS16(o) (*(s16 *)(p + (o)))
+extern s32 func_80015E60(s32);
+extern void func_800CE4B8(s32, s32, s32, s32);
+
+typedef struct S_80091618_4 {
+    u16 f_0;
+    u8 _p2[0x1A6];
+} S_80091618_4;
+extern s32 func_800B1260(s32), func_80015E60(s32);
+extern void func_800CE4B8(s32, s32, s32, s32), func_80034AB0(s32), func_800C5670(s32);
+
 extern s32 func_800202A4(s32);
 extern void func_800CB438(s32, s32, s32, s32);
 s32 func_800C7104(s32 a0, s32 a1) {
@@ -235,6 +299,29 @@ s32 func_800C7104(s32 a0, s32 a1) {
     }
     return p->f_2BC;
 }
+
+struct S_80091618_4;
+extern void func_80034AB0(s32), func_800C5670(s32);
+
+/* stub-ret: mixed */
+extern s32 func_800B1260(s32);
+
+#define PL(a) (((u8 *)D_80100F38) + (func_800B1260(a) & 0xFFFF) * 0x79C)
+#define P32(o) (*(s32 *)(p + (o)))
+#define P16(o) (*(u16 *)(p + (o)))
+#define PS16(o) (*(s16 *)(p + (o)))
+extern s32 func_80015E60(s32);
+extern void func_800CE4B8(s32, s32, s32, s32);
+
+typedef struct S_80091618_5 {
+    u16 f_0;
+    u8 _p2[0x1A6];
+} S_80091618_5;
+extern s32 func_800B1260(s32), func_80015E60(s32);
+extern void func_800CE4B8(s32, s32, s32, s32), func_80034AB0(s32), func_800C5670(s32);
+
+extern s32 func_800202A4(s32);
+extern void func_800CB438(s32, s32, s32, s32);
 
 void func_800C72BC(s32 a0, s32 a1) {
     typedef struct {

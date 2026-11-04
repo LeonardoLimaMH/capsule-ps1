@@ -73,12 +73,13 @@ bool StartRCnt(long param_1)
   return (param_1 & 0xffff) < 3;
 }
 
-bool StopRCnt(long param_1)
-{
-    extern void *D_80078B3C[];
-    extern u8 D_80078B44[];
-    u32 *p = (u32 *)(D_80078B44 + (param_1 & 0xffff) * 4);
-    *((uint *)((*D_80078B3C) + 4)) &= ~*p;
+#include "common.h"
+
+extern s32 *D_80078B3C;
+extern s32 D_80078B44[];
+
+s32 StopRCnt(u16 spec) {
+    D_80078B3C[1] &= ~D_80078B44[spec];
     return 1;
 }
 

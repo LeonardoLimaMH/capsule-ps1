@@ -1,7 +1,5 @@
 #include "common.h"
 
-#include "common.h"
-
 extern u16 D_8006AF80[];
 extern u8 D_800EEB9C[];
 
@@ -50,88 +48,29 @@ void func_800B4944(s32 arg0) {
     }
 }
 
-void func_800B4AAC(s32 arg0) {
-    typedef struct { u8 _p0[0x8A]; u16 f_8A; u8 _p8C[0x11C]; } S_80091618;
-    typedef struct {
-        u8 _p0[0x46];
-        s16 f_46;
-        u8 _p48[2];
-        s16 f_4A;
-        u8 _p4C[2];
-        u16 f_4E;
-    } SubEntry;
-    typedef struct {
-        u8 _p0[0x190];
-        SubEntry *f_190;
-        SubEntry *f_194[6];
-        u8 _p1AC[0x5F0];
-    } S_80100F38;
-    typedef struct {
-        u8 _p0[0x108];
-        s32 f_108;
-        s32 f_10C;
-    } S_8008ED68;
-    typedef struct {
-        u16 unk0;
-        u16 unk2;
-    } S_EEB94;
-
-    extern u16 D_8006AF80[];
-    extern S_8008ED68 D_8008ED68;
-    extern S_80091618 D_80091618[];
-    extern s16 D_800EEB90[];
-    extern S_EEB94 D_800EEB94[];
-    extern S_80100F38 D_80100F38[];
-
-    s32 var_t1;
-    s32 var_t0;
-    s32 var_t4;
-    S_80100F38 *temp_t2;
-    S_EEB94 *temp_v1;
-    SubEntry **var_a1;
-    s32 var_a3;
-    s32 var_a2;
-    S_8008ED68 *ed;
-    s32 hx, hy;
-    u32 diff;
-
-    temp_t2 = &D_80100F38[arg0];
-    if (arg0 == *D_8006AF80) {
-        var_t4 = 1;
-        if (D_80091618[arg0].f_8A == 0xFFFF) {
-            var_t1 = 0;
-            var_t0 = 0;
-        } else {
-            var_t1 = 8;
-            var_t0 = 12;
-        }
-    } else {
-        var_t4 = 0;
-        var_t1 = -8;
-        var_t0 = -4;
+    if (D_80091618[*D_8006AF80].f_8A == 0xFFFF && arg0 == 0) {
+        arg0 = 1;
     }
-
-    var_a1 = temp_t2->f_194;
-    var_a3 = 0;
-    ed = &D_8008ED68;
-    var_a2 = 0x10;
-
-    hx = ed->f_108 / 2 - 0x2C;
-    temp_t2->f_190->f_46 = var_t1 - hx;
-    hy = ed->f_10C / 2 - 0x38;
-    temp_t2->f_190->f_4A = var_t0 - hy;
-    diff = (var_t4 ^ *D_800EEB90) != 0;
-    temp_v1 = (S_EEB94 *)((u8 *)D_800EEB94 + diff * 4);
-    temp_t2->f_190->f_4E = temp_v1->unk0;
-
-    do {
-        (*var_a1)->f_46 = (var_t1 - ed->f_108 / 2) + 0x104;
-        var_a3++;
-        (*var_a1)->f_4A = (var_t0 - (ed->f_10C / 2 - 0x38)) + var_a2;
-        var_a2 += 0x12;
-        (*var_a1)->f_4E = temp_v1->unk2;
-        var_a1++;
-    } while (var_a3 < 6);
+    *D_800EEB90 = arg0 == 1;
+    i = 1;
+    base = (u32)D_80100F38;
+    q = (s32 *)D_800EEB9C;
+    for (; i >= 0; i--) {
+        idx = func_800B1260(i) & 0xFFFF;
+        if (idx != 0xFFFF) {
+            p = (S_80100F38 *)((idx * 0x79C) + base);
+            if (*D_800EEB90 == i) {
+                v = q[0x32];
+            } else {
+                t = i - 2;
+                v = D_800EE5D0[2] + t;
+            }
+            v = func_80019F30(D_800EE5D0[0] | 0x60000, v + D_800EE5D0[3]);
+            p->f_190[7] = 0;
+            p->f_190[6] = v;
+            func_800B4AAC(idx);
+        }
+    }
 }
 
 void func_800B4C40(s32 arg0) {
@@ -183,8 +122,6 @@ void func_800B4D60(s32 arg0) {
         (arg0 == *D_8006AF80) ? *D_800EEC64 : (D_800EE5D0[2] - 2),
         1, 1, 0, 2, 1);
 }
-
-#include "common.h"
 
 void func_800B4E08(s32 arg0, s16 arg1) {
     extern u8 D_800EE5D0[];
@@ -364,41 +301,17 @@ s32 func_800B5CF4(s32 arg0) {
     return ret;
 }
 
-s32 func_800B5DE8(s32 arg0, s32 arg1) {
+void func_800B5BA0(s32 arg0) {
     typedef struct {
-        u8 _p0[0x60];
-        s32 f_60[7];
-        s32 f_7C[7];
-        u8 _p98[0x138];
-        s32 f_1D0[14][9];
-        s32 f_3C8[14][9];
-    } S_800EEB9C;
-
-    extern u8 D_800EE5D0[];
-    extern u8 D_800EEA00[];
-    extern u8 D_800EEB9C[];
-    extern s32 func_800B6D98(s32, s32, s32, s32, s32, void *, s32, s32, s32, s32, s32, s32);
-    s32 ret;
-    s32 x;
-    s32 y;
-
-    if (D_800EEA00[arg0] == 1) {
-        s32 var_a2 = ((S_800EEB9C *)D_800EEB9C)->f_7C[arg0];
-        while (((S_800EEB9C *)D_800EEB9C)->f_3C8[arg0][var_a2] != 1) {
-            var_a2 = (var_a2 + 1) % ((S_800EEB9C *)D_800EEB9C)->f_60[arg0];
-        }
-        ((S_800EEB9C *)D_800EEB9C)->f_7C[arg0] = var_a2;
-    }
-
-    if (arg0 == 5) {
-        ret = 0;
-    } else {
-        x = ((arg0 % 2) * 0x24) + 0x38;
-        y = ((arg0 / 2) * 0xE) + 0x24;
-        ret = func_800B6D98(1, (s16)x, (s16)y, 6, 0, D_800EE5D0, ((S_800EEB9C *)D_800EEB9C)->f_1D0[arg0][arg1], 1, 1, 0, 2, 1);
-    }
-    return ret;
-}
+        u8 _p0[0x38];
+        u32 b38_0 : 1;
+    } SubEntry;
+    typedef struct {
+        u8 _p0[0x190];
+        SubEntry *f_190;
+        SubEntry *f_194[6];
+        u8 _p1AC[0x5F0];
+    } S_80100F38;
 
 s32 func_800B5F44(s32 arg0, s32 arg1) {
     typedef struct {

@@ -51,7 +51,7 @@ def compile_c(src, gcc, cflags, g0fill=False, target=None, spfill=None):
     tmp = pathlib.Path(tempfile.mkdtemp())
     obj = tmp / "f.o"
     sp = g0fill_profile.sp_enabled(src) if spfill is None else spfill
-    back = g0fill_profile.backend(obj, sp) if g0fill else f"{MASPSX} --target {target} -o {obj}"
+    back = g0fill_profile.backend(obj, sp, target) if g0fill else f"{MASPSX} --target {target} -o {obj}"
     if g0fill:
         cflags = cflags.replace("-G8", "-G0")
     cmd = (f"mips-linux-gnu-cpp {CPP_FLAGS} {src} | /opt/gcc-{gcc}/cc1 {cflags} -quiet "
@@ -67,6 +67,15 @@ def sh(cmd):
     return subprocess.run(cmd, shell=True, capture_output=True, text=True, check=True).stdout
 
 
+# rótulos locais do cc1 (L5, LM6, LBB2, Lscope0) e do splat (L80049CE8), não funções
+# como LoadImage
+LOCAL_LABEL = re.compile(r"\$|L(?:[A-Z]*\d+|[0-9A-F]{8}|scope\d*|text\d*|etext\d*)$")
+
+
+def is_label(name):
+    return bool(LOCAL_LABEL.match(name))
+
+
 def compiled(obj, func):
     text = (pathlib.Path(obj).parent / "t.bin")
     sh(f"mips-linux-gnu-objcopy -O binary --only-section=.text {obj} {text}")
@@ -74,7 +83,7 @@ def compiled(obj, func):
     syms = []
     for l in sh(f"mips-linux-gnu-nm -n {obj}").splitlines():
         p = l.split()
-        if len(p) == 3 and p[1] in "Tt" and not p[2].startswith(("L", "$")):
+        if len(p) == 3 and p[1] in "Tt" and not is_label(p[2]):
             syms.append((int(p[0], 16), p[2]))
     start = next((a for a, n in syms if n == func), None)
     if start is None:

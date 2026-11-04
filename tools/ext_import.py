@@ -134,7 +134,7 @@ def reloc_names(obj, func):
     syms = [l.split() for l in match.sh(f"mips-linux-gnu-nm -n {obj}").splitlines()]
     # como em match.compiled: rótulos locais (L..., $...) não delimitam funções
     funcs = {s[2]: int(s[0], 16) for s in syms
-             if len(s) == 3 and s[1] in "Tt" and not s[2].startswith(("L", "$"))}
+             if len(s) == 3 and s[1] in "Tt" and not match.is_label(s[2])}
     start = funcs[func]
     nxt = sorted(a for a in funcs.values() if a > start)
     end = nxt[0] if nxt else 1 << 30
@@ -184,6 +184,7 @@ def main():
     ap.add_argument("origin", help="arquivo de origem, relativo a .cache/ext")
     ap.add_argument("--gcc", default="2.7.2-psx")
     ap.add_argument("--g0fill", action="store_true")
+    ap.add_argument("--spfill", action="store_true")
     ap.add_argument("-I", dest="incs", action="append", default=[])
     ap.add_argument("-o", dest="out", required=True)
     a = ap.parse_args()
@@ -202,14 +203,15 @@ def main():
     out = pathlib.Path(a.out)
     out.write_text(code, encoding="utf-8", newline="\n")
     try:
-        obj = match.compile_c(str(out), a.gcc, "-O2 -G8", a.g0fill, a.target)
+        obj = match.compile_c(str(out), a.gcc, "-O2 -G8", a.g0fill, a.target, a.spfill)
         code, info = rename(code, a.target, a.func, obj)
         out.write_text(code, encoding="utf-8", newline="\n")
         print("nomes:", info, file=sys.stderr)
     except SystemExit:
         pass
     r = subprocess.run([sys.executable, "tools/match.py", a.target, a.func, str(out), "--gcc", a.gcc, "-q"]
-                       + (["--g0fill"] if a.g0fill else []), cwd=match.ROOT, capture_output=True, text=True)
+                       + (["--g0fill"] if a.g0fill else []) + (["--spfill"] if a.spfill else []),
+                       cwd=match.ROOT, capture_output=True, text=True)
     errs = [l for l in r.stderr.splitlines() if "warning" not in l and l.strip()]
     print(r.stdout.strip().splitlines()[-1] if r.stdout.strip() else " | ".join(errs[-3:])[-300:])
     sys.exit(r.returncode)

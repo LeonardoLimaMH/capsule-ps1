@@ -28,8 +28,6 @@ void func_800AC9E8(s32 arg0) {
     }
 }
 
-#include "common.h"
-
 void func_800ACA14(s16 arg0) {
     extern s16 D_800EEA80[];
     extern M2C_UNK D_800EEB9C[];
@@ -56,6 +54,8 @@ block_6:
         }
     }
 }
+
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
 
 void func_800ACB08(s16 arg0) {
     extern struct {
@@ -97,6 +97,8 @@ block_6:
         }
     }
 }
+
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
 
 void func_800ACC64(s16 arg0) {
     extern S_800EEB9C D_800EEB9C;
@@ -151,8 +153,6 @@ done:
     }
 }
 
-#include "common.h"
-
 s32 func_800ACDE0(void)
 {
   extern u8 D_80100F38[];
@@ -178,6 +178,8 @@ s32 func_800ACDE0(void)
   while (var_s1 >= 0);
   return var_s0;
 }
+
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
 
 s32 func_800ACE80(void) {
     typedef struct {
@@ -246,6 +248,8 @@ s32 func_800ACE80(void) {
     return 0;
 }
 
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
+
 s32 func_800ACFFC(void) {
     extern volatile u16 D_8006AF80[];
     extern u32 D_8008EDF0[];
@@ -288,6 +292,8 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AD0FC);
 void func_800AEA04(void) {
 
 }
+
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
 
 s32 func_800AEA0C(void) {
     typedef struct {
@@ -348,8 +354,6 @@ s32 func_800AEA0C(void) {
     return func_800B7264(1);
 }
 
-#include "common.h"
-
 void func_800AEB5C(s32 arg0)
 {
   extern M2C_UNK D_800EEB9C[];
@@ -394,33 +398,14 @@ s32 func_800AEBA8(s32 arg0, s32 arg1) {
     return sum;
 }
 
-s32 func_800AEBDC(s32 arg0) {
-    extern u8 D_800EEA00[];
-    extern S_800EEB9C D_800EEB9C;
-    S_800EEB9C *p;
-    s32 i;
-
-    i = 9;
-    if (arg0 != 0xFF && D_800EEA00[arg0] == 1) {
-        p = &D_800EEB9C;
-        p->unk24 = arg0;
-        p->unkD0 = p->unk7C[arg0];
-        do {
-            if (p->unk3C8[arg0][p->unkD0] == 1) {
-                return 1;
-            }
-            i--;
-            p->unkD0 = (p->unkD0 + 1) % p->unk60[arg0];
-        } while (i != 0);
-        return 0;
-    }
-    return 0;
-}
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AEBDC);
 
 s32 func_800AEC94(s32 arg0, s32 arg1) {
     extern S_800EEB9C D_800EEB9C;
     return D_800EEB9C.unk3C8[arg0][arg1] == 1;
 }
+
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
 
 s32 func_800AECC8(u16 arg0) {
     typedef struct {
@@ -442,6 +427,8 @@ s32 func_800AECC8(u16 arg0) {
     return 1;
 }
 
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
+
 void func_800AED5C(s32 arg0, s32 arg1) {
     extern s16 D_800EEAE4[];
     extern u16 D_800EEB14[];
@@ -454,41 +441,14 @@ void func_800AED5C(s32 arg0, s32 arg1) {
     *(s16 *)(p + 0x70) = v;
 }
 
-s32 func_800AEDC4(void) {
-    typedef struct {
-        u16 unk0;
-        u8 _p02[0x88];
-        u16 unk8A;
-        u8 _p8C[0x2];
-        s16 unk8E;
-        u8 _p90[0x118];
-    } Entry_80091618;
-    typedef struct {
-        u8 _p00[0x8];
-        u32 unk8;
-        u8 _p0C[0x30];
-    } Entry_80063940;
-    extern u16 D_8006AF80[];
-    extern Entry_80091618 D_80091618[];
-    extern Entry_80063940 D_80063940[];
-    extern void func_800A89E0(s32, s32);
+void func_800AED5C(s32 arg0, s32 arg1) {
+    extern s16 D_800EEAE4[];
+    extern u16 D_800EEB14[];
+    extern u8 D_80069AD4[];
+    u8 *p = D_80069AD4;
+    s32 v = D_800EEB14[arg0] + (arg1 * D_800EEAE4[arg0]) / 1200;
 
-    register u16 *p_af asm("a0") = D_8006AF80;
-    u16 j = D_80091618[*p_af].unk8A;
-    u16 a = *p_af;
-    Entry_80091618 *e = &D_80091618[a];
-    Entry_80063940 *pe = &D_80063940[e->unk0];
-    Entry_80091618 *f = &D_80091618[j];
-    s32 v = (((D_80063940[f->unk0].unk8 ^ pe->unk8) >> 12) & 3) != 0;
-    s32 v2 = v * 2;
-    s16 s = v2;
-
-    e->unk8E = v2;
-    f->unk8E = v2;
-    func_800A89E0(a, s);
-    func_800A89E0(j, s);
-    return s;
-}
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
 
 s32 func_800AEEDC(s32 idx) {
     extern u8 D_80091618[];
@@ -499,8 +459,6 @@ s32 func_800AEEDC(s32 idx) {
     }
     return *(u16 *)rec == 0xFFFF;
 }
-
-#include "common.h"
 
 s32 func_800AEF38(u32 arg0)
 {
@@ -543,6 +501,8 @@ s32 func_800AEF38(u32 arg0)
   }
 }
 
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
+
 s32 func_800AF018(u16 param_1) {
     typedef struct {
         u8 _p00[0x10];
@@ -584,6 +544,8 @@ s32 func_800AF018(u16 param_1) {
     }
     return 0;
 }
+
+/* Estado do modo raise em D_800EEB9C (layout parcial). */
 
 s32 func_800AF148(u16 param_1) {
     typedef struct {

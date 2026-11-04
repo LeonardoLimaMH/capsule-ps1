@@ -39,6 +39,11 @@ def sp_enabled(src):
     return lst.exists() and p.as_posix() in {l.split("#")[0].strip() for l in lst.read_text(encoding="utf-8").splitlines()}
 
 
-def backend(obj, sp=False):
-    """Parte do pipeline depois do cc1 (que deve receber -G0)."""
-    return f"{MASPSX_NOAS} | python3 tools/aspsx_fill.py{' --sp' if sp else ''} | {AS} -o {obj}"
+def backend(obj, sp=False, target=None):
+    """Parte do pipeline depois do cc1 (que deve receber -G0).
+
+    Com o alvo, passa pelo tools/psx_as.py como o Makefile (rawdiv/destload por função)."""
+    masp = MASPSX_NOAS
+    if target:
+        masp = masp.replace("/opt/maspsx/maspsx.py", f"tools/psx_as.py --target {target}")
+    return f"{masp} | python3 tools/aspsx_fill.py{' --sp' if sp else ''} | {AS} -o {obj}"

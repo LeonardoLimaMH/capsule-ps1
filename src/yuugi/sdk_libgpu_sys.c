@@ -55,14 +55,6 @@ s32 DrawSyncCallback(s32 arg0) {
     GpuSys *s = D_8007891E;
     s32 old;
 
-    if (s->level >= 2) {
-        (*D_80078918)(D_80011258, arg0);
-    }
-    old = s->cb;
-    s->cb = arg0;
-    return old;
-}
-
 s32 SetDispMask(s32 mask) {
     extern u8 D_8007891E[];
     extern void (*D_80078918[])();

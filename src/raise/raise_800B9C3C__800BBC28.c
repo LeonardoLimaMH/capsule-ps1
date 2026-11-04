@@ -90,10 +90,16 @@ void func_800BBC40(s32 arg0) {
     }
 }
 
-#include "common.h"
-
 extern s16 D_800ED88E[];
 extern u8 D_800EFF58[];
+
+extern u8 D_800EE5F0[];
+
+/* rand-u16: 0x8006AF80 1 0,1,2,3,5,9 */
+
+extern u8 D_800EE5F0[], D_800EFF58[], D_80091618[];
+extern u16 D_8006AF80[];
+extern s32 func_800BC8FC(s32, s32, s32, s32, s32, void *, s32, s32, s32, s32, s32, s32, s32);
 
 void func_800BBF3C(void)
 {
@@ -142,19 +148,12 @@ void func_800BBF3C(void)
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BBC28", func_800BBF9C);
 
-#include "common.h"
-
-extern u8 D_800EE5F0[];
-extern u8 D_800EFF58[];
-
 s32 func_800BC31C(void) {
     s32 r = func_800BC8FC(0x1A, -0xF8, 0x10, 5, 0, D_800EE5F0, M2C_GFIELD(D_800EFF58, s32, 0x11C), 1, 0, 0, 2, 0, 0);
 
     M2C_GFIELD(D_800EFF58, s32, 0x118) = r;
     return r;
 }
-
-#include "common.h"
 
 void func_800BC394(s32 arg0, s32 arg1) {
     extern u8 D_800EE5F0[];
@@ -165,8 +164,6 @@ void func_800BC394(s32 arg0, s32 arg1) {
     temp_s0 = (arg0 * 4) + D_800EFF58;
     M2C_FIELD(temp_s0, s32 *, 0x120) = func_800BC8FC(0x19, -0xF0, (s16) ((arg0 * 0x10) + 0x40), 4, M2C_FIELD(D_800EFF58, s32 *, 0x114) == arg0, D_800EE5F0, M2C_FIELD(temp_s0, s32 *, 0x158), 1, 1, arg1, 2, 1, D_800F0604);
 }
-
-#include "common.h"
 
 void func_800BC438(s32 arg0)
 {
@@ -233,10 +230,9 @@ void func_800BC50C(s32 arg0, s32 arg1, s32 arg2) {
     );
 }
 
-#include "common.h"
+/* rand-u16: 0x8006AF80 1 0,1,2,3,5,9 */
 
-extern u8 D_800EE5F0[];
-extern u8 D_800EFF58[];
+extern s32 func_800BC8FC(s32, s32, s32, s32, s32, void *, s32, s32, s32, s32, s32, s32, s32);
 
 s32 func_800BC5FC(void) {
     s32 r = func_800BC8FC(0x1A, 0x38, 0x118, 5, 0, D_800EE5F0, M2C_GFIELD(D_800EFF58, s32, 0x310), 1, 0, 0, 2, 0, 0);
@@ -246,10 +242,7 @@ s32 func_800BC5FC(void) {
 }
 
 /* rand-u16: 0x8006AF80 1 0,1,2,3,5,9 */
-#include "common.h"
 
-extern u8 D_800EE5F0[], D_800EFF58[], D_80091618[];
-extern u16 D_8006AF80[];
 extern s32 func_800BC8FC(s32, s32, s32, s32, s32, void *, s32, s32, s32, s32, s32, s32, s32);
 
 s32 func_800BC674(void)
