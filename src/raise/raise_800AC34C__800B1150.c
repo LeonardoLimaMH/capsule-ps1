@@ -4,8 +4,14 @@ typedef struct {
     u16 f_0;
     u8 _p2[0x88];
     u16 f_8A;
-    u8 _p8C[0x11C];
+    u8 _p8C[0x2A];
+    s16 f_B6;
+    s16 f_B8;
+    s16 f_BA;
+    s16 f_BC;
+    u8 _pBE[0xEA];
 } S_80091618;
+extern s32 func_800202A4(s32);
 extern S_80091618 D_80091618[];
 
 void func_800B1150(void) {
