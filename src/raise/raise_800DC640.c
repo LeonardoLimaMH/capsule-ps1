@@ -216,7 +216,6 @@ void func_800DC9E4(s32 arg0, s32 arg1) {
     register s32 var_a2 asm("a2");
     s32 temp_a0;
     s32 temp_a1;
-    S_80091618 *elem;
 
     var_a2 = D_8006AF84[0];
     temp_a1 = arg1 & 0xFFFF;
@@ -263,10 +262,8 @@ void func_800DC9E4(s32 arg0, s32 arg1) {
         break;
     }
     case 19: {
-        register s32 cmd asm("a0");
-        register u8 *p asm("v0");
-        cmd = 0x8001;
-        p = D_8006AFCC;
+        s32 cmd = 0x8001;
+        u8 *p = D_8006AFCC;
         *(s16 *)(p + 0x36) = 1;
         *(s32 *)(p + 0x54) = var_a2;
         func_80034AB0(cmd);
@@ -275,10 +272,8 @@ void func_800DC9E4(s32 arg0, s32 arg1) {
         break;
     }
     case 20: {
-        register s32 cmd asm("a0");
-        register u8 *p asm("v0");
-        cmd = 0x8002;
-        p = D_8006AFCC;
+        s32 cmd = 0x8002;
+        u8 *p = D_8006AFCC;
         *(s16 *)(p + 0x38) = 1;
         *(s32 *)(p + 0x58) = var_a2;
         func_80034AB0(cmd);
@@ -331,9 +326,5 @@ void func_800DC9E4(s32 arg0, s32 arg1) {
     }
 
     temp_a0 = arg0 & 0xFFFF;
-    {
-        register S_80091618 *base asm("v1") = D_80091618;
-        elem = base + temp_a0;
-        func_800B0740(temp_a0, elem->unk8A, var_a2, 1);
-    }
+    func_800B0740(temp_a0, D_80091618[temp_a0].unk8A, var_a2, 1);
 }
