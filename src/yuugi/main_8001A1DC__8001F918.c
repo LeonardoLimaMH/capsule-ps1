@@ -268,14 +268,16 @@ s32 func_800200F4(s32 cur, s32 max, s32 mode) {
 u8 func_800201D8(s32 n) {
     extern u8 D_8008ED68[];
     u32 tmp[2];
-    register u32 r asm("a3") = 0;
-    register u32 *t asm("t0") = &tmp[n];
+    register u8 r asm("a3") = 0;
     register s32 i asm("a1") = 0;
+    register u32 q asm("v0") = (n << 2) + (u32)tmp;
+    register u32 *t asm("t0") = (u32 *)q;
     register u32 one asm("t1") = 1;
     register u32 *e asm("a2");
-    u8 *p;
+    register u8 *base asm("v1") = D_8008ED68;
+    register u8 *p asm("v0");
 
-    p = D_8008ED68 + n * 16;
+    p = n * 16 + base;
     *t = *(u32 *)(p + 0x88);
     e = (u32 *)(p + 0xA4);
     for (; i < 4; i++, e++) {
@@ -283,28 +285,48 @@ u8 func_800201D8(s32 n) {
             *t |= one << (i + 12);
         }
     }
-    if (tmp[n] & 0x1000) {
-        r |= 1;
-    }
-    if (tmp[n] & 0x8000) {
-        r |= 4;
-    }
-    if (tmp[n] & 0x4000) {
-        r |= 0x10;
-    }
-    if (tmp[n] & 0x2000) {
-        r |= 0x40;
-    }
+    if (tmp[n] & 0x1000) r |= 1;
+    if (tmp[n] & 0x8000) r |= 4;
+    if (tmp[n] & 0x4000) r |= 0x10;
+    if (tmp[n] & 0x2000) r |= 0x40;
     return r;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800202A4);
+u32 func_800202A4(u32 arg0) {
+    extern u8 D_8008ED68[];
+    u8 *p = D_8008ED68;
+    u32 ret;
+    if (arg0 != 0) {
+        ret = (u32)(rand() + *(s32 *)(p + 0xC4)) % arg0;
+    } else {
+        ret = 0;
+    }
+    return ret;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020304);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020364);
+u32 func_80020364(u8 n) {
+    extern u8 D_80085428[];
+    u32 ret;
+    if (D_80085428[0] != 1) {
+        ret = (D_80063940[n].unk0C >> 6) & 7;
+    } else {
+        ret = (D_80063940[n].unk0C >> 9) & 3;
+    }
+    return ret;
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800203DC);
+s32 func_800203DC(u8 n) {
+    s32 ret;
+    switch ((D_80063940[n].unk0C >> 4) & 3) {
+    case 0: ret = 0x7D; break;
+    case 1: ret = 0x8C; break;
+    case 2: ret = 0x1C; break;
+    default: ret = 0x8C; break;
+    }
+    return ret;
+}
 
 s32 func_80020458(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x5C9) & 1;
@@ -741,10 +763,10 @@ void func_80021BB4(void *p, s32 a1, s32 idx, s32 mode) {
     extern void func_80015EF8(), func_800214B0(), func_800161C4(), func_8003422C(), func_800374E8();
     extern s32 func_80019F30();
     void *v0 = p + 0x10;
-    register u16 *s2 = M2C_FIELD(v0, u16 **, 4);
+    u16 *s2 = M2C_FIELD(v0, u16 **, 4);
     s32 cnt = 0;
     s32 k, r, m;
-    u8 s3_1, s3_2;
+    s32 s3_1, s3_2;
     u8 *o;
 
     M2C_FIELD(v0, s16 *, 0xE) = 0x20;
