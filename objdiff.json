@@ -3632,7 +3632,7 @@
           "slpm",
           "slpm.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/slpm/loader.o"
     },
