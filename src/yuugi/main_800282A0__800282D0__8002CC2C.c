@@ -13,7 +13,16 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002CC2C", func_800
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002CC2C", func_8002DA58);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002CC2C", func_8002E160);
+u32 func_8002E160(u8 *arg0) {
+    s32 n;
+    u32 result;
+    n = (s32)((((arg0[9] - 115) * 0.5 + (arg0[10] - 60) + (arg0[11] - 30) + (arg0[12] - 3) * 10.0 + 25.0) / 18.0) + 1.0);
+    if (n > 0) {
+        if (n < 6) result = n;
+        else result = 5;
+    } else result = 1;
+    return result & 0xFF;
+}
 
 #include "common.h"
 
