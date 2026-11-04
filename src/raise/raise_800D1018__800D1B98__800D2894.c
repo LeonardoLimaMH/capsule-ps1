@@ -1112,7 +1112,10 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_80
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D8E90);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D8FB0);
+void func_800D8FB0(u32 id) {
+    extern S_80100F38 D_800F0D40;
+    D_80100F38[(u16)id] = D_800F0D40;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D9030);
 
