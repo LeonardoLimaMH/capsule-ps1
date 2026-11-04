@@ -1393,14 +1393,14 @@ s32 func_800DA500(s32 unused, s32 arg1) {
     if ((u32)(((*(u32 *)(data + c * 0x3C + 0xC) >> 11) & 0x1F) - 0x19) < 6) {
         u8 *pc = (u8 *)p->unk_2BC;
         if (*pc != 1) {
-            u8 v;
+            register u8 *n asm("v0");
+            register u8 *old asm("v1");
             do {
-                u8 *n = pc + 1;
-                register u8 *old asm("v1") = pc;
+                n = pc + 1;
+                old = pc;
                 p->unk_2BC = (s32)n;
-                v = old[1];
                 pc = n;
-            } while (v != 1);
+            } while (old[1] != 1);
         }
     } else {
         p->unk_2BC++;
