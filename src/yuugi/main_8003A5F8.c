@@ -272,7 +272,7 @@ s32 func_8003AE48(u8 *s) {
     Unk_800944B8 *e = &base[D_80078C9C];
     u8 *data = *(u8 *volatile *)&e->unk_0x284;
     register u32 pos asm("a0") = *(volatile u32 *)stream;
-    u32 c = data[pos];
+    register u8 c asm("v1") = data[pos];
     pos++;
     *(u32 *)stream = pos;
     if (e->unk_0x294 < pos) { stream[0x20] = 1; hi = -1; }
@@ -283,7 +283,7 @@ s32 func_8003AE48(u8 *s) {
     Unk_800944B8 *e = &base[D_80078C9C];
     u8 *data = *(u8 *volatile *)&e->unk_0x284;
     register u32 pos asm("a0") = *(volatile u32 *)stream;
-    u32 c = data[pos];
+    register u8 c asm("v1") = data[pos];
     pos++;
     *(u32 *)stream = pos;
     if (e->unk_0x294 < pos) { stream[0x20] = 1; lo = -1; }
