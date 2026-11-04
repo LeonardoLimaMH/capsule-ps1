@@ -55,32 +55,33 @@ extern u16 D_8006AF80[];
 extern s32 D_800EEB70[];
 extern u16 D_800EF2D8[];
 
-void func_800B11F4(void)
-{
-  u8 *b = (u8 *) D_80091618;
-  s32 p = (s32) b;
-  s32 end = p + 0x9f0;
-  s32 off = 0;
-  s32 j;
-  do
-  {
-    s32 q = p;
-    s32 o = off;
-    *(u16 *) (p + 0x12) = 0;
-    j = 0;
-    do
-    {
-      *(u16 *) (q + 0x14) = 0xFFFF;
-      j++;
-      *(s32 *) (b + o + 0x1c) = -1;
-      *(s32 *) (b + o + 0x20) = -1;
-      *(s32 *) (b + o + 0x24) = -1;
-      q += 2;
-      o += 0xC;
-    } while (j < 3);
-    p += 0x1a8;
-    off += 0x1a8;
-  } while (p < end);
+void func_800B11F4(void) {
+    register s32 value16 asm("t2") = 0xFFFF;
+    register s32 value32 asm("t0") = -1;
+    u8 *b = (u8 *)D_80091618;
+    register s32 p asm("a2") = (s32)b;
+    s32 off = 0;
+    s32 end = p + 0x9F0;
+    s32 j;
+    s32 q;
+    s32 o;
+    do {
+        *(s16 *)(p + 0x12) = 0;
+        j = 0;
+        o = off;
+        q = p;
+        do {
+            u8 *x = (u8 *)(o + (s32)b);
+            o += 0xC;
+            *(u16 *)(q + 0x14) = value16;
+            *(s32 *)(x + 0x1C) = value32;
+            *(s32 *)(x + 0x20) = value32;
+            *(s32 *)(x + 0x24) = value32;
+            q += 2;
+        } while (++j < 3);
+        p += 0x1A8;
+        off += 0x1A8;
+    } while (p < end);
 }
 
 u16 func_800B1260(s32 which)
