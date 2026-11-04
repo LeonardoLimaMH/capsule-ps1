@@ -80,7 +80,20 @@ s16 func_800A88C4(s16 a) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A88E8);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8954);
+s32 func_800A8954(s32 arg0) {
+    register s32 a asm("v0");
+    register s32 b asm("v1");
+
+    if (arg0 >= 10) {
+        a = 0x80124000;
+        arg0 -= 10;
+        b = arg0 * 0xE000;
+    } else {
+        a = arg0 * 0xE000;
+        b = 0x80140000;
+    }
+    return a + b;
+}
 
 s32 func_800A8994(s32 arg0, s32 arg1, s32 arg2)
 {
