@@ -16,4 +16,29 @@ s32 func_800C652C(s32 a0, s32 a1) {
     return P32(0x2BC) += 1;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C652C", func_800C6598);
+extern u8 D_80091618[];
+s32 func_800C6598(s32 a0) {
+    typedef struct {
+        u8 _p00[0xE4];
+        s16 unkE4;
+        u8 _pE6[0xC2];
+    } S_91618;
+    s16 v;
+    s32 ret;
+
+    v = ((S_91618 *)D_80091618)[func_800B1260(a0) & 0xFFFF].unkE4;
+    if (v < 0x1A) {
+        ret = 2;
+    } else if (v < 0x34) {
+        ret = 3;
+    } else if (v < 0x67) {
+        ret = 4;
+    } else if (v < 0x9A) {
+        ret = 5;
+    } else if (v < 0xCD) {
+        ret = 6;
+    } else {
+        ret = 7;
+    }
+    return ret;
+}
