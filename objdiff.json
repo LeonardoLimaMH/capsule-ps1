@@ -322,6 +322,32 @@
       "base_path": "build/objdiff/base/yuugi/main_800282A0__800282D0.o"
     },
     {
+      "name": "yuugi/main_800282A0__800282D0__8002C000",
+      "target_path": "build/objdiff/target/yuugi/main_800282A0__800282D0__8002C000.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_800282A0__800282D0__8002C000.c",
+        "progress_categories": [
+          "yuugi",
+          "yuugi.game"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/main_800282A0__800282D0__8002C000.o"
+    },
+    {
+      "name": "yuugi/main_800282A0__800282D0__8002C214",
+      "target_path": "build/objdiff/target/yuugi/main_800282A0__800282D0__8002C214.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_800282A0__800282D0__8002C214.c",
+        "progress_categories": [
+          "yuugi",
+          "yuugi.game"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/yuugi/main_800282A0__800282D0__8002C214.o"
+    },
+    {
       "name": "yuugi/main_800282A0__800282D0__8002CBDC",
       "target_path": "build/objdiff/target/yuugi/main_800282A0__800282D0__8002CBDC.o",
       "metadata": {
