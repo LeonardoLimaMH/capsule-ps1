@@ -1,6 +1,19 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800979BC);
+s32 func_800979BC(s32 arg0) {
+    register s32 a asm("v0");
+    register s32 b asm("v1");
+
+    if (arg0 >= 10) {
+        a = 0x80124000;
+        arg0 -= 10;
+        b = arg0 * 0xE000;
+    } else {
+        a = arg0 * 0xE000;
+        b = 0x80140000;
+    }
+    return a + b;
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800979FC);
 
