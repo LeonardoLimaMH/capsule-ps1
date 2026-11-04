@@ -2839,7 +2839,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": true
+        "complete": false
       },
       "base_path": "build/objdiff/base/yuugi/sdk_libgte_geo_01.o"
     },

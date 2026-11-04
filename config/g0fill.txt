@@ -88,3 +88,5 @@ src/yuugi/sdk_libspu_s_itc.c
 src/yuugi/sdk_libc2_printf.c
 src/yuugi/sdk_libgte_geo_01.c
 src/slpm/sdk_libc2_printf.c
+src/yuugi/sdk_libspu_s_q.c
+src/slpm/sdk_libspu_s_q.c
