@@ -14,6 +14,13 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E2AA0);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E2D7C);
 
+typedef struct {
+    u8 pad0[0x30];
+    struct { u32 unk0:3, unk3:1, unk4:2, unk6:3, unk9:23; } f30;
+    struct { u32 unk0:8, unk8:1, unk9:1, unk10:2, unk12:20; } f34;
+    struct { u32 unk0:1, unk1:2, unk3:1, unk4:2, unk6:1, unk7:25; } f38;
+} Flags_800E3090;
+
 void *func_800E3090(s32 arg0) {
     extern u16 D_80078C20[];
     extern u8 D_80091618[];
@@ -232,34 +239,29 @@ s32 func_800E36E4(s32 a0) {
     s32 s = t0 != 1;
     register S_80091618 *base asm("a0") = D_80091618;
     S_80091618 *e = &base[D_8006AF80[0]];
-    register u16 v asm("v0");
-    register s32 ret asm("v1");
+    u16 v;
 
     if (e->unk8A == 0xFFFF) {
         return 1;
     }
     if (t0 == 1) {
         if (D_800EE9B8[s] != 0) {
-            ret = 4;
             v = e->unk90;
             goto ret_4_1;
         } else {
             v = e->unk90;
-            ret = 1;
             goto ret_1_4;
         }
     }
     if (D_800EE9B8[s] != 0) {
         v = base[e->unk8A].unk90;
-        ret = 1;
 ret_1_4:
-        if (v == 0) return ret;
+        if (v == 0) return 1;
         return 4;
     }
     v = base[e->unk8A].unk90;
-    ret = 4;
 ret_4_1:
-    if (v == 0) return ret;
+    if (v == 0) return 4;
     return 1;
 }
 
@@ -278,53 +280,60 @@ s32 func_800E3810(s32 a0) {
     extern s32 func_800B12D8(s32);
     register s32 s1 asm("s1") = a0;
     register s32 s2 asm("s2");
-    register s32 s0 asm("s0");
-    register s32 s asm("a0");
-    s32 i3_var;
+    register u32 s0 asm("s0");
+    register S_80091618 *base asm("a0");
+    s32 res;
+    s32 k;
+    s32 s;
+    s32 v;
 
-    func_800B1260(s1);
-    s2 = func_800B12D8(s1);
-    s0 = (u16)s2;
+    res = func_800B1260(s1);
+    k = func_800B12D8(s1);
+    s2 = res;
+    s0 = s2 & 0xFFFF;
     s = s1 != 1;
-    if (s1 != 0 && s1 == 1) {
-        if ((s16)s2 == -1) {
-            return 1;
-        }
-        if (D_800EE9B8[s] != 0) {
-            if (D_800EE9B8[s] < 1) {
-                if (D_800EE9B8[s] == -1) {
-                    return 1;
-                }
-            } else if (D_800EE9B8[s] == 1) {
-                if (D_80091618[s0].unk90 != 0) {
-                    return 1;
-                }
-                return 4;
-            }
-        }
-        if (D_80091618[s0].unk90 != 0) {
-            return 4;
-        }
-        return 1;
-    }
-    i3_var = D_800EE9B8[s];
-    if (i3_var != 0) {
-        if (i3_var < 1) {
-            if (i3_var == -1) {
-                s0 = D_80091618[D_8006AF80[0]].unk8A;
-                if (D_80091618[s0].unk90 != 0) {
-                    return 4;
-                }
+    if (s1 != 0) {
+        if (s1 == 1) {
+            if ((u16)k == 0xFFFF) {
                 return 1;
             }
-        } else if (i3_var == 1) {
-            return 4;
+            v = D_800EE9B8[s];
+            if (v == 0) {
+                base = D_80091618;
+                goto ret_s2;
+            }
+            if (v < 1) {
+                if (v == -1) return 1;
+                base = D_80091618;
+                goto ret_s2;
+            }
+            if (v == s1) {
+                return (D_80091618[s0].unk90 != 0) ? 1 : 4;
+            }
+            base = D_80091618;
+            goto ret_s2;
         }
     }
-    if (D_80091618[s0].unk90 != 0) {
-        return 1;
+    v = D_800EE9B8[s];
+    if (v == 0) {
+        base = D_80091618;
+        goto ret_s2;
     }
-    return 4;
+    if (v < 1) {
+        if (v == -1) goto do_8006af80;
+        base = D_80091618;
+        goto ret_s2;
+    }
+    if (v == 1) return 4;
+    base = D_80091618;
+    goto ret_s2;
+
+do_8006af80:
+    s0 = D_80091618[D_8006AF80[0]].unk8A;
+    return (D_80091618[s0].unk90 != 0) ? 1 : 4;
+
+ret_s2:
+    return (base[(u16)s2].unk90 != 0) ? 1 : 4;
 }
 
 extern u8 D_800900C0[], D_8008ED68[];
