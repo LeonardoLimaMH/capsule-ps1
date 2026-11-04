@@ -144,7 +144,42 @@ void func_800A8D38(void) {
     func_80012508();
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A8D68);
+void func_800A8D68(void) {
+    extern M2C_UNK D_8008ED68[];
+    extern u8 D_800859F0[];
+    extern s32 D_800B3D08[], D_800B3C48[];
+    u8 *p = (u8 *)D_8008ED68;
+    if (*(u16 *)(p + 0xDC) == 6) {
+        D_800B3D08[0]++;
+        func_80020844(-0xA0, -0x78, 0x140, 0xF0, 0, 0, 0, 0, 4);
+    }
+    switch ((s32)*(u16 *)(p + 0xE0)) {
+    case 0:
+        D_800B3C48[0] = 0;
+        if (D_800859F0[0] & 4) func_80012578();
+        else func_80012508();
+        break;
+    case 1:
+        if (func_80019654()) func_80012578();
+        break;
+    case 2:
+        if (*(u16 *)(p + 0xDC) == 2) func_800338DC(0x7021);
+        else func_800338DC(0x8000);
+        func_80012578();
+        break;
+    case 3:
+        if (D_800859F0[0] & 4) {
+            if (*(u16 *)(p + 0xDC) == 2) {
+                if (func_800337EC() & 0x80) func_80012508();
+            } else {
+                if (func_800337EC() & 4) func_80012508();
+            }
+        } else {
+            func_80012508();
+        }
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A8EC8);
 

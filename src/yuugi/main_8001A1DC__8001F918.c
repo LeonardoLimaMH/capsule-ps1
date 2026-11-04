@@ -793,7 +793,58 @@ s32 func_80021A4C(s32 arg0, s32 arg1) {
 
 extern s32 (*D_80069AA4[])(void);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80021A9C);
+s32 func_80021A9C(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    struct Pad { u8 pad[0x88]; s32 btn; };
+    extern u8 D_8008ED68[];
+    s32 input;
+    u32 test;
+    register s32 ret asm("v0");
+    register void *p asm("t0") = arg0 + 0x5D0;
+    if (((arg3 < 2) || (arg3 == 5)) &&
+        M2C_FIELD(p, u8 *, 0x10) && M2C_FIELD(p, u8 *, 0x11)) {
+        return M2C_FIELD(arg0, u16 *, 0x1E) >= 31U;
+    }
+    if (M2C_FIELD(arg0, u8 *, 1)) {
+        test = *(volatile u16 *)(arg0 + 0x1E) < 31U;
+        goto invert;
+    }
+    if (arg1) {
+        if (arg3 == 4) {
+            struct Pad *base = (struct Pad *)D_8008ED68;
+            ret = base->btn & 0x60;
+            if (ret) goto one;
+            ret = ((struct Pad *)((u8 *)base + 0x10))->btn & 0x60;
+            if (ret) goto one;
+            ret = 0;
+            goto done;
+one:
+            ret = 1;
+            goto done;
+        }
+        if (M2C_FIELD(p, u8 *, 0x11)) {
+            arg2 = 0;
+            goto input;
+        }
+    } else {
+        arg2 = 0;
+        goto input;
+    }
+    if (M2C_FIELD(p, u8 *, 0x10)) arg2 = 1;
+input:
+    {
+        register u8 *base asm("v0") = D_8008ED68;
+        register s32 bits asm("v1") = ((struct Pad *)(base + arg2 * 0x10))->btn;
+        ret = bits & 0x20;
+        if (ret) goto one;
+        ret = bits & 0x40;
+        if (ret) goto one;
+    }
+    test = M2C_FIELD(arg0, u16 *, 0x1E) < 181U;
+invert:
+    ret = test ^ 1;
+done:
+    return ret;
+}
 
 void func_80021BB4(void *p, s32 a1, s32 idx, s32 mode) {
     struct S_P {
@@ -980,7 +1031,38 @@ void func_80022C34(s32 f, s32 a1, s32 a2)
   *((u32 *) (obj + 0x34)) = ((*((u32 *) (obj + 0x34))) & (~0x7F)) | 3;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80022E64);
+void func_80022E64(u16 *dst, s32 b, s32 off, s32 mode) {
+    extern u16 D_80065164[][6];
+    extern u16 D_800638E4[], D_80063900[], D_80063928[];
+    register s32 orig asm("t1") = off;
+    register s32 done asm("t0") = 0;
+    u16 *src = D_80065164[0];
+    s32 k;
+    register s32 base asm("a2");
+    u16 v;
+    off = done;
+    b = (s32)src + b * 12;
+    do {
+        v = ((u16 *)b)[off];
+        if (v == 0x219) done = 1;
+        if (done) break;
+        dst[orig + off] = v;
+        off++;
+    } while (off < 5);
+    if (mode == 0) {
+        k = 0;
+        base = orig + off;
+        do { dst[base + k] = D_800638E4[k]; k++; } while (k < 13);
+    } else if (mode == 1) {
+        k = 0;
+        base = orig + off;
+        do { dst[base + k] = D_80063900[k]; k++; } while (k < 20);
+    } else {
+        k = 0;
+        base = orig + off;
+        do { dst[base + k] = D_80063928[k]; k++; } while (k < 11);
+    }
+}
 
 #define H(o) (*(s16 *)(obj + (o)))
 #define W(o) (*(u32 *)(obj + (o)))
