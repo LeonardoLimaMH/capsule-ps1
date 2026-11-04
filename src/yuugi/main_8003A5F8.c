@@ -287,7 +287,59 @@ s32 func_8003AA78(u8 *s) {
     return c;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AAF0);
+#ifndef UNK_800944B8_DEFINED
+#define UNK_800944B8_DEFINED
+
+#endif
+
+s32 func_8003AAF0(u8 *s) {
+    register u8 *stream asm("a2") = s;
+    register s32 byte asm("a0");
+    u32 value;
+    register u32 result asm("v0");
+    {
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    Unk_800944B8 *e = &base[D_80078C9C];
+    u8 *data = *(u8 *volatile *)&e->unk_0x284;
+    register u32 pos asm("a0") = *(volatile u32 *)stream;
+    register u8 c asm("v1") = data[pos];
+    pos++;
+    *(u32 *)stream = pos;
+    if (e->unk_0x294 < pos) { stream[0x20] = 1; byte = -1; }
+    else byte = c;
+}
+    result = 0;
+    if (byte != 0) {
+        register s32 end asm("v0") = 0xFF;
+        if (byte == end) {
+            register s32 flag asm("v0") = 1;
+            stream[0x20] = flag;
+            result = 0;
+        } else {
+            value = byte;
+            if (value & 0x80) {
+                register u32 test asm("v0");
+                value &= 0x7F;
+                do {
+                    Unk_800944B8 *e = &D_800944B8[D_80078C9C];
+                    u32 pos = *(u32 *)stream;
+                    register u8 c asm("v1") = e->unk_0x284[pos];
+                    *(u32 *)stream = ++pos;
+                    if (e->unk_0x294 < pos) { stream[0x20] = 1; byte = -1; }
+                    else byte = c;
+                    {
+                        register u32 high asm("v0") = value << 7;
+                        register u32 low asm("v1") = byte & 0x7F;
+                        value = high + low;
+                    }
+                    test = byte & 0x80;
+                } while (test);
+            }
+            result = value;
+        }
+    }
+    return result;
+}
 
 s32 func_8003AC20(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return ((((((arg0 & 0xFF) << 8) + (arg1 & 0xFF)) << 8) + (arg2 & 0xFF)) << 8) | (arg3 & 0xFF);
