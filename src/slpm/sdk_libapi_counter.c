@@ -1,7 +1,5 @@
 #include "common.h"
 
-#include "common.h"
-
 /* slpm_SetRCnt: C do SDK PsyQ importado de https://github.com/sozud/psy-q-decomp (MIT),
    arquivo src/api/counter.c; reduzido às declarações de que a função depende
    (tools/ext_import.py). */
@@ -43,10 +41,7 @@ s32 slpm_SetRCnt(s32 spec, s16 target, s32 flags) {
     return 1;
 }
 
-#include "common.h"
 #include "ghidra.h"
-
-
 
 undefined2 slpm_GetRCnt(uint param_1)
 {
@@ -65,11 +60,6 @@ undefined2 slpm_GetRCnt(uint param_1)
   return uVar1;
 }
 
-#include "common.h"
-#include "ghidra.h"
-
-
-
 bool slpm_StartRCnt(long param_1)
 {
   extern void *D_80120894[];
@@ -80,9 +70,19 @@ bool slpm_StartRCnt(long param_1)
   return (param_1 & 0xffff) < 3;
 }
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libapi_counter", slpm_StopRCnt);
 
-#include "common.h"
+extern s32 *D_80120894;
+extern s32 D_8012089C[];
+
+s32 slpm_StopRCnt(u16 spec) {
+    D_80120894[1] &= ~D_8012089C[spec];
+    return 1;
+}
+
+/* ResetRCnt: C do SDK PsyQ importado de https://github.com/ser-pounce/rood-reverse (CC0-1.0),
+   arquivo src/SLUS_010.40/libapi/COUNTER.c; reduzido às declarações de que a função depende
+   (tools/ext_import.py). */
+extern long ResetRCnt(unsigned long);
 
 /* slpm_ResetRCnt: C do SDK PsyQ importado de https://github.com/ser-pounce/rood-reverse (CC0-1.0),
    arquivo src/SLUS_010.40/libapi/COUNTER.c; reduzido às declarações de que a função depende
@@ -96,7 +96,6 @@ typedef struct {
     short : 16;
     int : 32;
 } RootCounter;
-
 
 long slpm_ResetRCnt(u_long spec)
 {

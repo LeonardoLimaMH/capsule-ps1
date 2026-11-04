@@ -291,3 +291,4 @@ src/yuugi/main_80033AC8.c 2.7.2-cdk
 src/yuugi/sdk_libc2_strcpy.c 2.7.2-cdk
 src/yuugi/main_8004E8CC.c 2.7.2-cdk
 src/yuugi/sdk_libc2_strcmp.c 2.7.2-cdk
+src/slpm/sdk_libc2_strcmp.c 2.7.2-cdk
