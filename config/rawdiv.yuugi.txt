@@ -1,0 +1,2 @@
+# Raw div/divu without break checks in the original YUUGI code.
+func_8001F938

@@ -17,6 +17,7 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 ENTER = re.compile(r"\s*\.ent\s+(\w+)")
 LEAVE = re.compile(r"\s*\.end(?:\s|$)")
+EXTERN = re.compile(r"\s*\.extern\s+(\w+),\s*(\d+)")
 
 
 LOADS = {'lb', 'lbu', 'lh', 'lhu', 'lw', 'lwl', 'lwr'}
@@ -64,8 +65,24 @@ def main():
             super().__init__(*args, **kwargs)
             self.checked_division = self.expand_div
             self.dest_expand = False
+            self.extern_small = set()
+
+        def _uses_gp(self, line):
+            # ASPSX also addresses small .extern symbols through $gp; maspsx only
+            # knows .comm/.sdata, and misses the nop before a store of mflo/mfhi
+            if super()._uses_gp(line):
+                return True
+            if not self.sdata_limit or not self.gp_allow or not maspsx.uses_at(line):
+                return False
+            op, *rest = maspsx.strip_comments(line).split('\t')
+            if op not in maspsx.load_mnemonics and op not in maspsx.store_mnemonics:
+                return False
+            return maspsx.parse_load_or_store(' '.join(rest))[2] in self.extern_small
 
         def process_line(self, line):
+            ext = EXTERN.match(line)
+            if ext and int(ext.group(2)) <= self.sdata_limit:
+                self.extern_small.add(ext.group(1))
             entry = ENTER.match(line)
             if entry:
                 self.expand_div = self.checked_division and entry.group(1) not in unchecked

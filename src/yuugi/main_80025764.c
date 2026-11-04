@@ -37,7 +37,39 @@ void func_80025DA8(void) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80025E54);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80025EF8);
+typedef struct {
+    u8 pad0[0x324];
+    u16 f324, f326, f328, f32A, f32C, f32E, f330, f332, f334, f336, f338;
+    u8 pad1[0x79C - 0x33A];
+} S_80100F38;
+
+void func_80025EF8(s32 arg0) {
+    extern M2C_UNK D_80069E4C[];
+    extern u8 D_80085428[];
+    extern M2C_UNK D_80100F38[];
+    S_80100F38 *p;
+    u16 a;
+    u16 b;
+
+    switch (D_80085428[0]) {
+    case 0:
+        p = &((S_80100F38 *)D_80100F38)[func_800B1260(arg0) & 0xFFFF];
+        p->f324 = p->f326;
+        a = p->f336;
+        b = p->f338;
+        p->f332 = a;
+        p->f32E = a;
+        p->f334 = b;
+        p->f330 = b;
+        func_800DCC94(arg0, b);
+        p->f32A = p->f32C;
+        return;
+    case 1:
+        M2C_GFIELD(D_80069E4C, u8, 0x19) = M2C_GFIELD(D_80069E4C, u8, 0x1C);
+        M2C_GFIELD(D_80069E4C, u8, 0x1A) = M2C_GFIELD(D_80069E4C, u8, 0x1D);
+        return;
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80025FC0);
 
