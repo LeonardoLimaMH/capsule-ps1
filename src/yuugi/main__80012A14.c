@@ -79,4 +79,34 @@ s32 func_80012C38(void)
   return var_a1;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14", func_80012C7C);
+void func_80012C7C(u32 *p)
+{
+  Rect r;
+  u32 *q;
+  if (p[0] & 0x400)
+  {
+    return;
+  }
+  r.x = *((u16 *) (p + 1));
+  r.y = *((u16 *) (((u8 *) p) + 6));
+  q = p;
+  if (!(q[0] & 0x200))
+  {
+    r.w = (*((s16 *) (p + 2))) / 4;
+  }
+  else
+  {
+    r.w = (*((s16 *) (q + 2))) / 2;
+  }
+  r.h = *((u16 *) (((u8 *) q) + 0xA));
+  if (!(q[0] & 0x100))
+  {
+    LoadImage(&r, p + 3);
+  }
+  else
+  {
+    func_8001A8C0(p + 3, 0x801CC000);
+    LoadImage(&r, 0x801CC000);
+    DrawSync(0);
+  }
+}
