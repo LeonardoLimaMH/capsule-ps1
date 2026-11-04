@@ -382,7 +382,34 @@ s32 func_8003AC60(u8 *s) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AE48);
+s32 func_8003AE48(u8 *s) {
+    register u8 *stream asm("a2") = s;
+    register s32 hi asm("a1");
+    register s32 lo asm("v1");
+    {
+        register Unk_800944B8 *base asm("a0") = D_800944B8;
+        Unk_800944B8 *e = &base[D_80078C9C];
+        u8 *data = *(u8 *volatile *)&e->unk_0x284;
+        register u32 pos asm("a0") = *(volatile u32 *)stream;
+        register u8 c asm("v1") = data[pos];
+        pos++;
+        *(u32 *)stream = pos;
+        if (e->unk_0x294 < pos) { stream[0x20] = 1; hi = -1; }
+        else hi = (u8)c;
+    }
+    {
+        register Unk_800944B8 *base asm("a0") = D_800944B8;
+        Unk_800944B8 *e = &base[D_80078C9C];
+        u8 *data = *(u8 *volatile *)&e->unk_0x284;
+        register u32 pos asm("a0") = *(volatile u32 *)stream;
+        register u8 c asm("v1") = data[pos];
+        pos++;
+        *(u32 *)stream = pos;
+        if (e->unk_0x294 < pos) { stream[0x20] = 1; lo = -1; }
+        else lo = (u8)c;
+    }
+    return ((hi & 0xFF) << 8) | (lo & 0xFF);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AF34);
 
@@ -494,19 +521,24 @@ s32 func_8003C5BC(s32 n) {
 }
 
 void func_8003C654(void) {
-    typedef struct { s32 key, value; } Pair;
-    extern Pair D_80094768[];
+    extern s32 D_80094768[];
     s32 n, i, j;
-    volatile Pair temp;
+    s32 *a, *b;
+    volatile s32 temp[2];
     for (n = 0; n < 16; n++) {
-        if (D_80094768[n].key == 0) break;
+        if (D_80094768[n * 2] == 0) break;
     }
     for (i = 0; i < n; i++) {
+        a = &D_80094768[i * 2];
         for (j = n - 1; i < j; j--) {
-            if (D_80094768[j].key < D_80094768[i].key) {
-                temp = D_80094768[i];
-                D_80094768[i] = D_80094768[j];
-                D_80094768[j] = temp;
+            b = &D_80094768[j * 2];
+            if (b[0] < a[0]) {
+                temp[1] = a[1];
+                temp[0] = a[0];
+                a[1] = b[1];
+                a[0] = b[0];
+                b[1] = temp[1];
+                b[0] = temp[0];
             }
         }
     }
