@@ -106,53 +106,48 @@ void func_800ACC64(s16 arg0) {
     s32 temp_s3;
     s32 var_s1;
     s32 a1;
-    s32 v0;
-
+    register s32 v0 asm("v0");
     p = &D_800EEB9C;
     temp_s3 = p->unkD0;
     var_s1 = 9;
-
     if (p->unk24 == 5) {
         if (p->unk18 == 1 && arg0 < 2 && arg0 >= 0) {
             func_800B4944(arg0);
         }
     } else if (arg0 >= 2) {
         func_800AEB5C(2, 0);
-        q = p;
         if (arg0 == 3) {
-            var_s1--;
+            q = p;
             do {
+                var_s1--;
                 if (q->unkD0 < q->unk60[q->unk24] - 1) {
                     a1 = q->unkD0 + 1;
                 } else {
                     a1 = 0;
                 }
                 q->unkD0 = a1;
-                if (func_800AEC94(q->unk24, a1) != 0) {
-                    goto done;
-                }
-            } while (var_s1--);
+                if (func_800AEC94(q->unk24, a1) != 0) goto done;
+            } while (var_s1 != 0);
             q->unkD0 = temp_s3;
         } else {
+            q = p;
             do {
                 v0 = q->unkD0;
                 var_s1--;
-                if (v0 <= 0) {
+                if (v0 > 0) {
+                    a1 = v0 - 1;
+                } else {
                     v0 = q->unk60[q->unk24];
+                    a1 = v0 - 1;
                 }
-                a1 = v0 - 1;
                 q->unkD0 = a1;
-                if (func_800AEC94(q->unk24, a1) != 0) {
-                    goto done;
-                }
+                if (func_800AEC94(q->unk24, a1) != 0) goto done;
             } while (var_s1 != 0);
             q->unkD0 = temp_s3;
         }
 done:
         func_800AEB5C(1, 0);
-        if (temp_s3 != *D_800EEC6C) {
-            func_80034AB0(0x84);
-        }
+        if (temp_s3 != *D_800EEC6C) func_80034AB0(0x84);
     }
 }
 
