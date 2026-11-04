@@ -510,7 +510,47 @@ fail:
     return 1;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C0C8);
+void func_8003C0C8(Unk_800944B8Stream *s) {
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    Unk_800944B8 *e = &base[D_80078C9C];
+
+    switch ((s32)e->unk_0x2A4) {
+    case 0x30:
+        s->unk_0x1C *= 10;
+        s->unk_0x1C += s->unk_0x18;
+        s->unk_0x18 = s->unk_0x1C & 3;
+        s->unk_0x1C >>= 2;
+        break;
+    case 0x60:
+        s->unk_0x1C *= 5;
+        s->unk_0x1C += s->unk_0x18;
+        s->unk_0x18 = s->unk_0x1C & 3;
+        s->unk_0x1C >>= 2;
+        break;
+    case 0xC0:
+    case 0xF0:
+        s->unk_0x1C += s->unk_0x18;
+        s->unk_0x18 = s->unk_0x1C & 1;
+        s->unk_0x1C >>= 1;
+        break;
+    case 0x120:
+    case 0x168:
+        s->unk_0x1C /= 3;
+        break;
+    case 0x180:
+    case 0x1E0:
+        s->unk_0x1C += s->unk_0x18;
+        s->unk_0x18 = s->unk_0x1C & 3;
+        s->unk_0x1C >>= 2;
+        break;
+    case 0x300:
+    case 0x3C0:
+        s->unk_0x1C += s->unk_0x18;
+        s->unk_0x18 = s->unk_0x1C & 7;
+        s->unk_0x1C >>= 3;
+        break;
+    }
+}
 
 s32 func_8003C29C(s32 n) {
     extern s32 D_80078C98;
