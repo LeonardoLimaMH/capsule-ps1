@@ -8,6 +8,11 @@ typedef struct {
     u8 _p346[0x456];
 } S_80100F38;
 extern S_80100F38 D_80100F38[];
+struct S_80091618;
+extern struct S_80091618 D_80091618[];
+extern u8 D_80063940[];
+extern s16 D_800F0780[], D_800F0788[];
+extern void func_80034AB0(s32), func_800C5670(s32);
 
 
 #include "common.h"
