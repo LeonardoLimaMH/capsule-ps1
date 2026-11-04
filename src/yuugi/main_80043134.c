@@ -1,11 +1,27 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80043134", func_80043134);
+void func_80043134(void) {
+    extern s32 D_80072E4C;
+    extern s32 D_80072E2C[];
+    u32 *p;
+    s32 i;
 
-#include "common.h"
+    i = 0;
+    p = (u32 *)D_80072E2C;
+    D_80072E4C = D_80072E4C + 1;
+    do {
+        if ((s32 (*)())*p != 0) {
+            ((s32 (*)())*p)();
+        }
+        i++;
+        p++;
+    } while (i < 8);
+}
 
 extern s32 D_80072E2C[];
+
+#include "ghidra.h"
 
 s32 func_800431A0(s32 i, s32 value) {
     s32 old = D_80072E2C[i];
@@ -16,7 +32,6 @@ s32 func_800431A0(s32 i, s32 value) {
     return old;
 }
 
-#include "ghidra.h"
 void func_800431CC(undefined4 *param_1,int param_2)
 
 {

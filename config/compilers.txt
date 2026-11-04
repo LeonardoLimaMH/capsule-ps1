@@ -271,7 +271,6 @@ src/raise/raise_800B61E4__800B81C4.c 2.8.1-psx
 src/raise/raise_800B9C3C__800BEBD8.c 2.7.2-cdk
 src/raise/raise_8009D2A8__800A6DBC__800A8CD0.c 2.7.2-cdk
 src/yuugi/main__80012A14.c 2.7.2-cdk
-src/yuugi/main__80012A14__80012E54.c 2.8.1-psx
 src/slpm/loader_80116AD0.c 2.8.1-psx
 src/slpm/sdk_libgpu_ext__slpm_SetDefDrawEnv.c 2.8.1-psx
 src/yuugi/sdk_libc2_memmove.c 2.7.2-cdk
@@ -302,3 +301,4 @@ src/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B95AC.c 2.7
 src/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9334.c 2.7.2-cdk
 src/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284.c 2.7.2-cdk
 src/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9610__800B9914.c 2.7.2-cdk
+src/yuugi/main__80012A14__80012E54.c 2.7.2-cdk

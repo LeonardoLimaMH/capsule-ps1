@@ -6661,7 +6661,7 @@
           "raise",
           "raise.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800B61E4__800B8E04__800B8E34.o"
     },
@@ -6674,7 +6674,7 @@
           "raise",
           "raise.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800B61E4__800B8E04__800B8EF0.o"
     },
@@ -6739,7 +6739,7 @@
           "raise",
           "raise.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B95AC.o"
     },

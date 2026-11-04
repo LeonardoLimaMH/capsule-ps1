@@ -26,4 +26,30 @@ s32 CD_vol(void *arg0) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libcd_bios", CD_flush);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libcd_bios", CD_initvol);
+s32 CD_initvol(void) {
+    extern u8 * D_8007334C;
+    extern u8 * D_80073350;
+    extern u8 * D_80073354;
+    extern u8 * D_80073358;
+    extern u8 * D_80073360;
+    u8 v[4];
+    if (*(u16 *)(D_80073360 + 0x1B8) == 0 && *(u16 *)(D_80073360 + 0x1BA) == 0) {
+        *(u16 *)(D_80073360 + 0x180) = 0x3FFF;
+        *(u16 *)(D_80073360 + 0x182) = 0x3FFF;
+    }
+    *(u16 *)(D_80073360 + 0x1B0) = 0x3FFF;
+    *(u16 *)(D_80073360 + 0x1B2) = 0x3FFF;
+    *(u16 *)(D_80073360 + 0x1AA) = 0xC001;
+    v[2] = 0x80;
+    v[0] = 0x80;
+    v[3] = 0;
+    v[1] = 0;
+    *D_8007334C = 2;
+    *D_80073354 = v[0];
+    *D_80073358 = v[1];
+    *D_8007334C = 3;
+    *D_80073350 = v[2];
+    *D_80073354 = v[3];
+    *D_80073358 = 0x20;
+    return 0;
+}

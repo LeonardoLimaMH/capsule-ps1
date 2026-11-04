@@ -13,8 +13,6 @@ void slpm_DrawSync(s32 arg0) {
 
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__DrawSync", func_80113C78);
 
-#include "common.h"
-
 extern char D_801104C8[];
 
 s32 slpm_ClearImage(s32 *rect, u8 r, u8 g, u8 b) {
@@ -23,20 +21,32 @@ s32 slpm_ClearImage(s32 *rect, u8 r, u8 g, u8 b) {
     return M2C_FIELD((*D_80131B2C), s32 (**)(s32, s32 *, s32, s32), 8)(M2C_FIELD((*D_80131B2C), s32 *, 0xC), rect, 8, (b << 0x10) | (g << 8) | r);
 }
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__DrawSync", slpm_ClearImage2);
-
-#include "common.h"
+extern char D_801104D4[];
+void slpm_ClearImage2(s32 rect, u8 r, u8 g, u8 b) {
+    extern void * D_80131B2C[];
+    s32 t, u;
+    func_80113C78(D_801104D4, rect);
+    u = b << 16;
+    t = (g << 8) | 0x80000000;
+    M2C_FIELD((*D_80131B2C), M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 8)(M2C_FIELD((*D_80131B2C), s32 *, 0xC), rect, 8, (u | t) | r);
+}
 
 extern char D_801104E0[];
+
+extern char D_801104EC[];
+
+extern char D_8011051C[];
+
+extern char D_80110534[];
+
+#include "ghidra.h"
+
 void slpm_LoadImage(s32 arg0, M2C_UNK arg1) {
     extern void * D_80131B2C[];
     func_80113C78(D_801104E0, arg0);
     M2C_FIELD((*D_80131B2C), M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 8)(M2C_FIELD((*D_80131B2C), s32 *, 0x20), arg0, 8, arg1);
 }
 
-#include "common.h"
-
-extern char D_801104EC[];
 void slpm_StoreImage(s32 arg0, M2C_UNK arg1) {
     extern void * D_80131B2C[];
     func_80113C78(D_801104EC, arg0);
@@ -47,9 +57,6 @@ INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__DrawSync", slpm_MoveImage);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__DrawSync", slpm_ClearOTag);
 
-#include "common.h"
-
-extern char D_8011051C[];
 s32 *slpm_ClearOTagR(s32 *arg0, M2C_UNK arg1) {
     extern void * D_80131B2C[];
     extern M2C_UNK (*D_80131B30)(M2C_UNK *, s32 *, M2C_UNK);
@@ -65,8 +72,6 @@ s32 *slpm_ClearOTagR(s32 *arg0, M2C_UNK arg1) {
     return arg0;
 }
 
-#include "common.h"
-
 void slpm_DrawPrim(void *arg0) {
     extern void * D_80131B2C;
     u8 temp_s1;
@@ -76,9 +81,6 @@ void slpm_DrawPrim(void *arg0) {
     M2C_FIELD(D_80131B2C, M2C_UNK (**)(void *, u8), 0x14)(arg0 + 4, temp_s1);
 }
 
-#include "common.h"
-
-extern char D_80110534[];
 void slpm_DrawOTag(s32 arg0) {
     extern void * D_80131B2C;
     extern M2C_UNK (*D_80131B30)(M2C_UNK *, s32);
@@ -93,9 +95,6 @@ INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__DrawSync", slpm_PutDrawEnv);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__DrawSync", slpm_DrawOTagEnv);
 
-#include "common.h"
-
-#include "ghidra.h"
 undefined4 slpm_GetDrawEnv(undefined4 param_1)
 
 {
@@ -106,9 +105,6 @@ undefined4 slpm_GetDrawEnv(undefined4 param_1)
 
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__DrawSync", slpm_PutDispEnv);
 
-#include "common.h"
-
-#include "ghidra.h"
 undefined4 slpm_GetDispEnv(undefined4 param_1)
 
 {
