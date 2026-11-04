@@ -1,7 +1,6 @@
 # Yu-Gi-Oh! Monster Capsule Breed & Battle — Decompilação (SLPM-86096)
 
-[![Código do jogo](https://bytematch.dev/LeonardoLimaMH/capsule-ps1.svg?label=c%C3%B3digo%20do%20jogo&measure=matched_code_percent&category=game)](https://bytematch.dev/LeonardoLimaMH/capsule-ps1)
-[![Total com SDK](https://bytematch.dev/LeonardoLimaMH/capsule-ps1.svg?label=total%20com%20SDK&measure=matched_code_percent)](https://bytematch.dev/LeonardoLimaMH/capsule-ps1)
+[![Código do jogo](https://bytematch.dev/LeonardoLimaMH/capsule-ps1.svg?label=c%C3%B3digo%20do%20jogo&measure=matched_code_percent)](https://bytematch.dev/LeonardoLimaMH/capsule-ps1)
 [![Funções](https://bytematch.dev/LeonardoLimaMH/capsule-ps1.svg?label=fun%C3%A7%C3%B5es&measure=matched_functions)](https://bytematch.dev/LeonardoLimaMH/capsule-ps1)
 
 Decompilação do jogo de PlayStation **Yu-Gi-Oh! Monster Capsule: Breed & Battle**
@@ -80,9 +79,8 @@ dentro dos executáveis, é contado à parte (`tools/progress.py`).
 [ygofm-decomp](https://github.com/MaChInEgUn3/ygofm-decomp), sotn-decomp e mgs_reversing. É
 código genérico da Sony (8% dos bytes, igual em centenas de jogos), sem lógica do jogo, e num
 port é substituído por uma reimplementação. As funções do SDK continuam em assembly; só entra C
-de SDK quando sai de graça (porte entre YUUGI e SLPM, C público que já casa). No relatório do
-objdiff as unidades do SDK têm `auto_generated` e o número principal é a categoria
-**Código do jogo (sem SDK)**.
+de SDK quando sai de graça (porte entre YUUGI e SLPM, C público que já casa). O relatório do
+objdiff (ByteMatch e decomp.anything) não inclui o SDK: os percentuais medem só o código do jogo.
 
 ### O que "100% das funcionalidades" significa aqui
 
