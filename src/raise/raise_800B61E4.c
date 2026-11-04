@@ -313,7 +313,56 @@ void func_800B74A4(void) {
     }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B768C);
+/* Objeto de carta/sprite usado por func_800B6624 (flags em 0x34/0x38). */
+
+void *func_800B6D98(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u16 arg4, void *arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, u16 arg10, s16 arg11);
+
+void func_800B768C(void) {
+    typedef struct {
+        u8 _p00[0x46];
+        u16 unk46;
+        u16 unk48;
+        u16 unk4A;
+    } Obj;
+    typedef struct {
+        u8 _p00[0x10];
+        u16 unk10;
+        u8 _p12[0x196];
+    } S_91618;
+    typedef struct {
+        u8 _p00[0x73C];
+        s32 unk73C;
+    } S_EEB9C;
+    typedef struct {
+        u8 _p00[0x14];
+        Obj *unk14;
+    } S_EFF58;
+    extern u16 D_8006AF80[];
+    extern S_91618 D_80091618[];
+    extern S_EEB9C D_800EEB9C[];
+    extern S_EFF58 D_800EFF58[];
+    s32 i;
+    s32 c;
+    S_EEB9C *p1;
+    S_91618 *q;
+    S_EFF58 *p2;
+
+    i = 0;
+    p1 = D_800EEB9C;
+    q = D_80091618;
+    p2 = D_800EFF58;
+    do {
+        if (i == p1->unk73C) {
+            c = 1;
+        } else if (i == *D_8006AF80) {
+            c = 3;
+        } else {
+            c = (q[i].unk10 != 0xFFFF) * 2;
+        }
+        func_8001F35C((s16)(p2->unk14->unk46 + i * 0xD + 0x32), (s16)(p2->unk14->unk4A + 8), c, 0, 0, i + 1, 1, 5);
+        i++;
+    } while (i < 6);
+}
 
 /* Objeto de carta/sprite usado por func_800B6624 (flags em 0x34/0x38). */
 

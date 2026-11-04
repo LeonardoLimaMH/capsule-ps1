@@ -28,5 +28,26 @@ extern u16 D_800EF2D8;
 extern s32 func_800D1548(void);
 extern void func_800D1CC4(s32, s32, s32, s32);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B95AC", func_800B95AC);
+s32 func_800B95AC(void) {
+    extern u8 D_800900C0[];
+    u8 *p;
+    register u8 *v1 asm("v1");
+    s32 i;
+
+    p = D_800900C0;
+    i = 3;
+    if (*(s32 *)(p + 0x268) == -0x320) {
+        func_800AEDC4(i, p);
+        return 1;
+    }
+    v1 = p + 0x234;
+    do {
+        *(s32 *)(v1 + 0x34) += 0x14;
+        i++;
+        v1 += 0xBC;
+    } while (i < 6);
+    return 0;
+}
+
+extern u8 D_800900C0[];
 

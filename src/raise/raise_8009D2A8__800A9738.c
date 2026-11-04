@@ -54,7 +54,22 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A9738", func_800A9F84);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A9738", func_800AA0E4);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A9738", func_800AA45C);
+s32 func_800AA45C(void) {
+    typedef struct {
+        u8 pad[0xA68];
+        s32 unkA68;
+    } S_8ED68;
+    extern S_8ED68 D_8008ED68[];
+    extern s32 D_800ED8DC[];
+    S_8ED68 *p = D_8008ED68;
+
+    if (*D_800ED8DC == 1) {
+        if (p->unkA68 != 0) {
+            return 0;
+        }
+    }
+    return -1;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A9738", func_800AA494);
 
@@ -69,4 +84,25 @@ void func_800AA8D0(u32 player) {
     record->task->flags |= 1;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A9738", func_800AA930);
+void func_800AA930(s32 idx) {
+    typedef struct {
+        u8 pad[0x38];
+        u32 flags;
+    } Obj_800AA930;
+    typedef struct {
+        u8 pad[0x21C];
+        Obj_800AA930 *obj;
+        u8 pad2[0x189];
+        u8 slots[32];
+        u8 pad3[0x3CD];
+        u32 state;
+    } Player_800AA930;
+    extern Player_800AA930 D_80100F38[];
+    Player_800AA930 *rec = &D_80100F38[idx & 0xFFFF];
+    u32 w;
+
+    rec->obj->flags |= 1;
+    w = rec->state;
+    rec->obj = 0;
+    rec->slots[(w >> 26) & 0x1F] = 0;
+}
