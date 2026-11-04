@@ -226,7 +226,7 @@ s32 func_800E45A8(s32 a0, s32 a1, s32 a2, s32 a3) {
     extern u8 D_800EF364[][8][8];
     extern S_80069EC4 D_80069EC4[][26];
     extern u16 D_8006AF80[], D_80078C20[];
-    extern s32 func_800E36E4(void);
+    extern s32 func_800E36E4();
     s32 n = 4;
     u16 idx, m;
     u8 b;
