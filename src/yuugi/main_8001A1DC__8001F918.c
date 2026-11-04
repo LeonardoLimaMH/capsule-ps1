@@ -1031,7 +1031,38 @@ void func_80022C34(s32 f, s32 a1, s32 a2)
   *((u32 *) (obj + 0x34)) = ((*((u32 *) (obj + 0x34))) & (~0x7F)) | 3;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80022E64);
+void func_80022E64(u16 *dst, s32 b, s32 off, s32 mode) {
+    extern u16 D_80065164[][6];
+    extern u16 D_800638E4[], D_80063900[], D_80063928[];
+    register s32 orig asm("t1") = off;
+    register s32 done asm("t0") = 0;
+    u16 *src = D_80065164[0];
+    s32 k;
+    register s32 base asm("a2");
+    u16 v;
+    off = done;
+    b = (s32)src + b * 12;
+    do {
+        v = ((u16 *)b)[off];
+        if (v == 0x219) done = 1;
+        if (done) break;
+        dst[orig + off] = v;
+        off++;
+    } while (off < 5);
+    if (mode == 0) {
+        k = 0;
+        base = orig + off;
+        do { dst[base + k] = D_800638E4[k]; k++; } while (k < 13);
+    } else if (mode == 1) {
+        k = 0;
+        base = orig + off;
+        do { dst[base + k] = D_80063900[k]; k++; } while (k < 20);
+    } else {
+        k = 0;
+        base = orig + off;
+        do { dst[base + k] = D_80063928[k]; k++; } while (k < 11);
+    }
+}
 
 #define H(o) (*(s16 *)(obj + (o)))
 #define W(o) (*(u32 *)(obj + (o)))
