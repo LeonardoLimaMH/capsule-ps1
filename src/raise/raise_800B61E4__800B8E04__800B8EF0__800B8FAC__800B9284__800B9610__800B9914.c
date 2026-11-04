@@ -1,11 +1,15 @@
 #include "common.h"
 
 typedef struct {
-    u8 _p0[0xA4];
+    u8 _p0[0x8A];
+    u16 f_8A;
+    u8 _p8C[0x18];
     u16 f_A4;
     u8 _pA6[0x2];
     u16 f_A8;
-    u8 _pAA[0xE2];
+    u8 _pAA[0x66];
+    s16 f_110;
+    u8 _p112[0x7A];
     s32 f_18C;
     u8 _p190[0x18];
 } S_80091618;
