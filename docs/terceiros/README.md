@@ -11,6 +11,7 @@ consultados, mas nenhum código deles foi copiado.
 | [Fancy2209/psyz](https://github.com/Fancy2209/psyz) | MIT | `72fb5e7` | [Fancy2209_psyz.LICENSE.txt](Fancy2209_psyz.LICENSE.txt) |
 | [ser-pounce/rood-reverse](https://github.com/ser-pounce/rood-reverse) | CC0-1.0 | `8bd7908` | [ser-pounce_rood-reverse.LICENSE.txt](ser-pounce_rood-reverse.LICENSE.txt) |
 | [celophi/lom-decomp](https://github.com/celophi/lom-decomp) | MIT | `071ac1b` | [celophi_lom-decomp.LICENSE.txt](celophi_lom-decomp.LICENSE.txt) |
+| [afsenovilla/Tombi-Decomp](https://github.com/afsenovilla/Tombi-Decomp) | MIT | `3e73b71` | [afsenovilla_Tombi-Decomp.LICENSE.txt](afsenovilla_Tombi-Decomp.LICENSE.txt) |
 | [gonzaloberteri/ygofm-decomp](https://github.com/gonzaloberteri/ygofm-decomp) | MIT | `18bcb58` | [gonzaloberteri_ygofm-decomp.LICENSE.txt](gonzaloberteri_ygofm-decomp.LICENSE.txt) |
 
 Cada função importada tem, no próprio `src/`, um comentário com o projeto, a licença e
@@ -59,3 +60,9 @@ algum desses projetos; 18 casaram de primeira; 15 foram integradas.
 - As outras ~80 diferem pela versão: o jogo usa PsyQ 4.0–4.3, e os projetos usam 3.5
   (psy-q-decomp) e 4.4–4.7.
 - Elas são bons pontos de partida para o permuter.
+
+Tombi-Decomp: o C do SDK vem dos arquivos `src/<Função>.c` marcados `MATCHING`, que o próprio
+projeto atribui a psx_tomba, eternal-silver-sssc-decomp e aos arquivos MIT de sotn-decomp (ver o
+`THIRD_PARTY_NOTICES.md` dele). Os headers PsyQ da Sony que esse C usa ficam só no cache local
+(`.cache/ext_hdr/`, buscados de psx_tomba como o Tombi faz) e não entram no repositório: cada função
+é reduzida às próprias declarações por `tools/ext_import.py --inc-first`.

@@ -2241,7 +2241,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/sdk_libc2_printf.o"
     },
@@ -2839,7 +2839,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/sdk_libgte_geo_01.o"
     },
@@ -3372,7 +3372,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_itc.o"
     },
@@ -4555,7 +4555,7 @@
           "slpm",
           "slpm.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/slpm/sdk_libc2_printf.o"
     },

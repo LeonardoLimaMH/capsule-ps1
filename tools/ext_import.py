@@ -27,6 +27,7 @@ LICENSES = {
     "ser-pounce_rood-reverse": ("https://github.com/ser-pounce/rood-reverse", "CC0-1.0"),
     "celophi_lom-decomp": ("https://github.com/celophi/lom-decomp", "MIT"),
     "gonzaloberteri_ygofm-decomp": ("https://github.com/gonzaloberteri/ygofm-decomp", "MIT"),
+    "afsenovilla_Tombi-Decomp": ("https://github.com/afsenovilla/Tombi-Decomp", "MIT"),
 }
 IDENT = re.compile(r"\b[A-Za-z_]\w*\b")
 KEYWORDS = set("""auto break case char const continue default do double else enum extern float for goto
@@ -107,7 +108,8 @@ def reduce(text, func):
         for i in keep:
             used |= set(IDENT.findall(sts[i][0]))
         for i, (s, f) in enumerate(sts):
-            if i in keep or f:
+            # funções só entram se forem auxiliares inline usadas pela pedida (não geram código próprio)
+            if i in keep or (f and not re.match(r"\s*(static|inline|extern inline)", s)):
                 continue
             if decl[i] & used:
                 keep.add(i)
@@ -186,9 +188,12 @@ def main():
     ap.add_argument("--g0fill", action="store_true")
     ap.add_argument("--spfill", action="store_true")
     ap.add_argument("-I", dest="incs", action="append", default=[])
+    ap.add_argument("--inc-first", action="store_true", help="headers do projeto de origem antes dos nossos")
     ap.add_argument("-o", dest="out", required=True)
     a = ap.parse_args()
     flags = match.CPP_FLAGS + " " + " ".join(f"-I{d}" for d in a.incs)
+    if a.inc_first:
+        flags = match.CPP_FLAGS.replace("-Iinclude", " ".join(f"-I{d}" for d in a.incs) + " -Iinclude")
     pre = subprocess.run(f"mips-linux-gnu-cpp {flags} -P {a.cand}", shell=True, capture_output=True,
                          text=True, cwd=match.ROOT)
     if pre.returncode:
