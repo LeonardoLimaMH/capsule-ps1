@@ -29,7 +29,13 @@ void func_80044AEC(s32 arg0) {
     D_80094C14 = arg0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80044A0C", func_80044AF8);
+#include "common.h"
+
+extern s32 D_80072F44[];
+
+s32 func_80044AF8(s32 i) {
+    return D_80072F44[i];
+}
 
 u8 func_80044B10(void) {
     extern u8 D_80072F50;

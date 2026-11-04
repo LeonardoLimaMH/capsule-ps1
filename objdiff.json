@@ -4451,7 +4451,7 @@
           "slpm",
           "slpm.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/slpm/sdk_libapi_counter.o"
     },
@@ -4594,7 +4594,7 @@
           "slpm",
           "slpm.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/slpm/sdk_libc2_strcmp.o"
     },
