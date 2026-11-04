@@ -191,7 +191,14 @@ s32 func_800C6E5C(u8 *o, s32 a1)
   return p->f_2BC;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C6B34", func_800C7070);
+void func_800C7070(u8 *a0, s32 a1) {
+    S_80100F38 *p = &D_80100F38[func_800B1260(a1) & 0xFFFF];
+    if ((u32)(*(u16 *)((u8 *)p + 0x2BA) - 4) >= 2) {
+        func_800C6C48(a0, a1);
+    } else {
+        func_800C6E5C(a0, a1);
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C6B34", func_800C7104);
 
