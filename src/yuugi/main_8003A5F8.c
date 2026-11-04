@@ -1,6 +1,22 @@
 #include "common.h"
 #include "yuugi.h"
 
+typedef struct {
+    s32 unk_0x0;
+    s32 unk_0x4;
+    u8 unk_0x8[0x10];
+    s16 unk_0x18;
+    u8 unk_0x1A[2];
+    s16 unk_0x1C;
+    u8 unk_0x1E[2];
+    u8 unk_0x20;
+    u8 unk_0x21[2];
+    u8 unk_0x23;
+    u8 unk_0x24;
+    u8 unk_0x25;
+    u8 unk_0x26[2];
+} Unk_800944B8Stream;
+
 #ifndef UNK_800944B8_DEFINED
 #define UNK_800944B8_DEFINED
 typedef struct {
