@@ -11,7 +11,23 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__DrawMode", SetDrawEnv);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__DrawMode", func_8004AC78);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__DrawMode", func_8004AEE8);
+#include "yuugi.h"
+
+u32 func_8004AEE8(s32 dfe, s32 dtd, s32 tpage) {
+    register u32 v1 asm("v1");
+    register u32 v0 asm("v0");
+
+    if (dtd) {
+        v1 = 0xE1000200;
+    } else {
+        v1 = 0xE1000000;
+    }
+    v0 = tpage & 0x9FF;
+    if (dfe) {
+        v0 |= 0x400;
+    }
+    return v1 | v0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__DrawMode", func_8004AF08);
 

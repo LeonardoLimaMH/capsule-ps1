@@ -1,8 +1,64 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800979BC);
+s32 func_800979BC(s32 arg0) {
+    register s32 a asm("v0");
+    register s32 b asm("v1");
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800979FC);
+    if (arg0 >= 10) {
+        a = 0x80124000;
+        arg0 -= 10;
+        b = arg0 * 0xE000;
+    } else {
+        a = arg0 * 0xE000;
+        b = 0x80140000;
+    }
+    return a + b;
+}
+
+
+extern u8 D_8008ED68[];
+extern void (*D_800AEF98[])(void);
+
+void func_800979FC(void) {
+    extern u8 D_80085428[];
+    register u8 *p asm("a1") = D_80085428;
+    register s32 v1 asm("v1");
+    register s32 s0 asm("s0");
+    register s32 s1 asm("s1");
+    s32 off1;
+    s32 off2;
+    s32 a0;
+
+    off1 = p[0xD78] * 0x7C;
+    off2 = p[0xD77] * 0x2E8;
+    off1 += off2;
+    off1 += (s32)p;
+    a0 = *(u8 *)(off1 + 0x612);
+
+    v1 = a0;
+    if (a0 < 10) {
+        s32 t = a0 * 0xE000;
+        a0 = t + (s32)0x80140000;
+    } else {
+        a0 = 0x80124000;
+        a0 = (v1 - 10) * 0xE000 + a0;
+    }
+
+    s0 = 0;
+    func_8001A49C(a0, p);
+    s1 = 0x03C00000;
+    do {
+        register s32 step asm("v0");
+        func_80012A20(func_80019F30(0x20174, s0), 3, (s16)(s1 >> 16), 0x180);
+        step = 0x00200000;
+        s1 += step;
+        s0++;
+    } while (s0 < 2);
+}
+
+
+extern u8 D_8008ED68[];
+extern void (*D_800AEF98[])(void);
 
 s32 func_80097AF0(s32 arg0, s32 arg1, s32 arg2)
 {

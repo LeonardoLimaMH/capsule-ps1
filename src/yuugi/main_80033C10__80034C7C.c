@@ -122,7 +122,141 @@ s32 func_80036DB0(u8 *s)
   }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_80036E5C);
+#include "yuugi.h"
+
+typedef struct {
+    u32 code : 8;
+    u32 arg : 8;
+    u32 unk02 : 16;
+    u32 unk04;
+    u32 unk08;
+    u32 unk0C;
+} S_AudioCmd;
+
+
+extern u8 D_800922F0[];
+
+/* fila de comandos de 16 bytes; o índice é relido a cada campo, como no original */
+#define SLOT (D_800922F0 + M2C_GFIELD(D_800922F0, s16, 0x110) * 16)
+
+extern u8 D_800922F0[], D_8009376C[];
+extern s16 D_80093738[];
+extern u8 D_80078D51, D_80078D50;
+extern void SpuGetAllKeysStatus(), SpuSetKey(), func_8003CD70(), func_80035894();
+extern void DsSyncCallback(), DsControlF(), func_80035680();
+extern s32 func_8003D518();
+void func_80036E5C(void) {
+    u8 *g;
+    register u8 *s0 asm("s0");
+    u8 *d;
+    register s32 i asm("a0");
+    register s32 mask asm("a1");
+    register s32 c asm("v1");
+    u8 a1;
+
+    register u8 *status asm("s0") = D_8009376C;
+    SpuGetAllKeysStatus(status);
+    mask = 0;
+    i = 0;
+    status -= 0x5C;
+    for (; i < 4; i++) {
+        if (status[i + 0x70] == 3) {
+            mask |= 1 << (i + 0x14);
+        }
+    }
+    if (mask != 0) {
+        SpuSetKey(0, mask);
+    }
+    if (*(u16 *)D_800922F0 & 0x80) {
+        u8 *p = D_800922F0;
+        if (*(s16 *)(p + 0x1192) != -1 && (s16)func_8003D518(*(s16 *)(p + 0x1192)) != 1) {
+            func_8003CD70(*(s16 *)(p + 0x1192));
+            *(u16 *)D_800922F0 &= 0xFF7F;
+        }
+    }
+    g = D_800922F0;
+    if (g[0x112] != 0) {
+        func_80035894();
+        return;
+    }
+    s0 = g + 0x10;
+    if (*(s16 *)(g + 0x110) != 0) {
+        register u8 head asm("v0") = g[0x10];
+        g[0x112] = head;
+        c = ((S_AudioCmd *)s0)->code;
+        g[0x113] = 0;
+        *(u16 *)(g + 0x116) = *(u16 *)(s0 + 2);
+        *(s32 *)(g + 0x118) = *(s32 *)(s0 + 4);
+        *(s32 *)(g + 0x11C) = *(s32 *)(s0 + 8);
+        *(s32 *)(g + 0x120) = *(s32 *)(s0 + 0xC);
+        a1 = s0[1];
+        g[0x114] = a1;
+        if (c == 0x44) goto comando_alto;
+        if (c < 0x45) {
+            if (c == 0x29) goto comando_baixo;
+            if (c == 0x2A) goto comando_baixo;
+            goto comando_fim;
+        }
+        if (c != 0x45) goto comando_fim;
+comando_alto:
+        if (*(s16 *)(g + 0x1196) == 0) {
+            u16 value = *(u16 *)(s0 + 8);
+            g[9] = a1;
+            *(u16 *)(g + 0x1196) = value;
+        }
+        goto comando_fim;
+comando_baixo:
+        if (*(s16 *)(g + 0x146) == 0) {
+            u16 value = *(u16 *)(s0 + 8);
+            g[8] = a1;
+            *(u16 *)(g + 0x146) = value;
+        }
+comando_fim:
+        D_80093738[0] = 8;
+        D_80078D51 = 0;
+        D_80078D50 = 0;
+        func_80035894();
+        s0 += 0x10;
+        {
+            register u8 *queue asm("v1") = D_800922F0;
+            *(u16 *)(queue + 0x110) -= 1;
+        }
+    }
+    d = D_800922F0;
+    i = 0;
+    if (*(s16 *)(d + 0x110) > 0) {
+        register u8 *end asm("a1") = s0 + 0xC;
+        register u8 *dest asm("v1") = d;
+        register u8 *count asm("a2") = d;
+        do {
+            dest[0x10] = s0[0];
+            dest[0x11] = end[-0xB];
+            *(u16 *)(dest + 0x12) = *(u16 *)(end - 0xA);
+            *(s32 *)(dest + 0x14) = *(s32 *)(end - 8);
+            i++;
+            *(s32 *)(dest + 0x18) = *(s32 *)(end - 4);
+            s0 += 0x10;
+            *(s32 *)(dest + 0x1C) = *(s32 *)end;
+            end += 0x10;
+            dest += 0x10;
+        } while (i < *(s16 *)(count + 0x110));
+    }
+    if (*(u16 *)D_800922F0 & 4) {
+        register u8 *tail asm("v1") = D_800922F0;
+        register u32 step asm("a0") = tail[0x124];
+        if (step & 2) {
+            tail[0x124] = 0;
+            DsSyncCallback(func_80035680);
+            DsControlF(0x10, 0);
+        } else {
+            register u32 next asm("v0") = step + 1;
+            tail[0x124] = next;
+        }
+    }
+}
+
+
+extern u8 D_800922F0[];
 
 #include "common.h"
 
