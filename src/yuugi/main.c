@@ -2,6 +2,7 @@
 #include "yuugi.h"
 
 void main(void) {
+    __main();
     func_800118BC();
     func_80011A60(0);
     func_80011ED4();
@@ -29,7 +30,16 @@ void func_80011A60(s32 mode) {
     VSyncCallback(func_80011AFC);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80011AA4);
+void func_80011AA4(void) {
+    struct { s16 m[3][3]; s32 t[3]; } m;
+    extern void SetColorMatrix(), SetBackColor();
+
+    m.m[2][0] = m.m[1][0] = m.m[0][0] = 0xFF0;
+    m.m[2][1] = m.m[1][1] = m.m[0][1] = 0xFF0;
+    m.m[2][2] = m.m[1][2] = m.m[0][2] = 0xFF0;
+    SetColorMatrix(&m);
+    SetBackColor(0x80, 0x80, 0x80);
+}
 
 void func_80011AFC(void) {
     func_800337FC();
