@@ -1552,7 +1552,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main_8004C7FC.o"
     },
@@ -3398,7 +3398,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_m_util.o"
     },
@@ -3996,7 +3996,7 @@
           "slpm",
           "slpm.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/slpm/loader_8011705C.o"
     },

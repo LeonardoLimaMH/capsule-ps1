@@ -321,6 +321,22 @@ Teste estas antes do permuter:
   conhecia `.comm`/`.sdata`).
 - **Retorno sem `else`:** `if (x != 0) return A; if (x == 0) return 0;` põe o bloco
   do zero depois do principal, como em `func_800202A4`.
+- **Perfil PsyQ (g0fill/spfill) também em código do jogo:** se o original põe a segunda
+  metade de um store em símbolo (`lui $at` / `sw ..,%lo(S)($at)`) no delay slot de um
+  salto, desvio ou `jal`, o arquivo é do perfil `config/g0fill.txt`. Se o `addiu $sp`
+  vai no delay slot do `jr $ra`, também `config/spfill.txt`. Teste sempre os três
+  perfis (nenhum, g0fill, g0fill+spfill): a detecção do spfill é pelo arquivo de
+  destino, não pelo caminho do candidato (`align_diff.py --g0fill --spfill`).
+- **Registradores de hardware (SPU, GPU, CD):** stores fora do delay slot no original
+  pedem `volatile` no ponteiro (o gcc não põe acesso volatile em delay slot).
+- **`lui $r,%hi(S)` / `lw $r,%lo(S)($r)` em símbolo que é `$gp` em outro lugar:** declare
+  `S` escalar e ponha a função em `config/nogp.<alvo>.txt` (o `psx_as.py` monta o load
+  sem `$gp`, como o ASPSX fazia).
+- **SDK repetido nos dois executáveis:** o mesmo C do yuugi (`X`) serve no slpm
+  (`slpm_X`) e vice-versa; `.cache/tmp/port_twin.py` porta e renomeia os símbolos pelo
+  pareamento das relocações. Confira os nomes no resultado: a comparação mascara
+  relocações, só o link acusa um nome do outro executável.
+- **libc do SDK (strcmp, strcpy, memset):** compilada com `char` com sinal; use `s8`.
 
 ## 10. Quando parar uma abordagem
 
