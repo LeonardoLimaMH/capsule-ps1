@@ -236,7 +236,53 @@ end:
     *D_80069BB4 = *D_80069EB0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918__80023964", func_80023ECC);
+void func_80023ECC(Struct_80023C74 *arg0, s32 arg1) {
+    extern u8 D_8008F702[];
+
+    if (*D_8008F702 != 1) {
+        register u16 *a2 asm("a2");
+        register u16 *a3 asm("a3");
+        register u16 *a1 asm("a1");
+        register s32 t0 asm("t0");
+        register s32 v1 asm("v1");
+        register s32 v0 asm("v0");
+        register s32 offset asm("v0");
+
+        offset = arg1 << 5;
+        t0 = 0;
+        a2 = (u16 *)arg0->unkB4;
+        arg0 = (Struct_80023C74 *)arg0->unkB8;
+        a2 = (u16 *)((u8 *)a2 + offset);
+        arg0 = (Struct_80023C74 *)((u8 *)arg0 + offset);
+        a3 = (u16 *)arg0 + 2;
+        a1 = a2 + 2;
+
+        do {
+            t0++;
+            v1 = *(u16 *)arg0;
+            arg0 = (Struct_80023C74 *)((u16 *)arg0 + 4);
+            v0 = *a2;
+            v1 = (s16)v1 >> 7;
+            v0 = v0 + v1;
+            *a2 = v0;
+            a2 += 4;
+
+            v1 = a3[-1];
+            v0 = a1[-1];
+            v1 = (s16)v1 >> 7;
+            v0 = v0 + v1;
+            a1[-1] = v0;
+
+            v1 = *a3;
+            a3 += 4;
+            v0 = *a1;
+            v1 = (s16)v1 >> 7;
+            v0 = v0 + v1;
+            *a1 = v0;
+            a1 += 4;
+        } while (t0 < 4);
+    }
+}
 
 #include "common.h"
 
