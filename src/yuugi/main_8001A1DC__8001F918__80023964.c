@@ -37,29 +37,26 @@ typedef struct {
 
 extern void func_8001DBF4(s32, s32, s32, s32, void *, void *);
 extern u8 D_80078C08[];
-void func_80023B0C(s32 arg0, s32 arg1, s32 arg2, void *arg3) {
-    s32 i;
-    u8 *p;
-
+void func_80023B0C(s32 arg0, s32 arg1, s32 arg2, Entry_80023B0C *arg3) {
     if (arg0 != 0) {
-        if (arg0 >= 0 && arg0 < 3) {
-            goto call_block;
-        }
-        return;
+        if (arg0 < 0) return;
+        if (arg0 >= 3) return;
+        goto single;
     }
-
     if (arg0 < arg1) {
-        p = (u8 *)arg3;
-        for (i = 0; i < arg1; i++) {
-            func_8001DBF4(*(s16 *)p, *(s16 *)(p + 2), 0, i == arg2, D_80078C08, p + 8);
-            p += 0x18;
-        }
+        s32 i = 0;
+        do {
+            func_8001DBF4(arg3[i].x, arg3[i].y, 0, i == arg2, D_80078C08, arg3[i].unk8);
+            i++;
+        } while (i < arg1);
     }
     return;
 
-call_block:
-    p = (u8 *)arg3 + arg2 * 0x18;
-    func_8001DBF4(*(s16 *)p, *(s16 *)(p + 2), 0, arg0 == 1, D_80078C08, p + 8);
+single:
+    {
+        Entry_80023B0C *p = arg3 + arg2;
+        func_8001DBF4(p->x, p->y, 0, arg0 == 1, D_80078C08, p->unk8);
+    }
 }
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918__80023964", func_80023C00);
