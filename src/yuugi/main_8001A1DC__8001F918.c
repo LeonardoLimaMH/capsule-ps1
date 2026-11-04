@@ -825,9 +825,10 @@ void func_80021BB4(void *p, s32 a1, s32 idx, s32 mode) {
     extern void func_80015EF8(), func_800214B0(), func_800161C4(), func_8003422C(), func_800374E8();
     extern s32 func_80019F30();
     void *v0 = p + 0x10;
-    u16 *s2 = M2C_FIELD(v0, u16 **, 4);
+    register u16 *s2 asm("s2") = M2C_FIELD(v0, u16 **, 4);
     s32 cnt = 0;
     s32 k, r, m;
+    u32 m1;
     s32 s3_1, s3_2;
     u8 *o;
 
@@ -854,13 +855,13 @@ void func_80021BB4(void *p, s32 a1, s32 idx, s32 mode) {
     *(s32 *)(o + 0x18) = r;
     if (mode == 0) {
         if (s3_1 == 6) {
-            m = 7;
+            m1 = 7;
         } else if (s3_1 == 7) {
-            m = 6;
+            m1 = 6;
         } else {
-            m = s3_1;
+            m1 = s3_1;
         }
-        *(s16 *)(o + 0x28) = (u32)(idx * 64 + 0xC0) - m * 32;
+        *(s16 *)(o + 0x28) = (u32)(idx * 64 + 0xC0) - m1 * 32;
     }
     *(s32 *)(o + 0x80) = 1;
     *(s32 *)(o + 0x7C) = s3_1;
