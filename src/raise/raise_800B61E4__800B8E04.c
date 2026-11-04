@@ -14,15 +14,10 @@ s32 func_800B8E2C(void) {
 
 void func_800B8E34(void) {
     typedef struct {
-        u8 _p00[0x12];
-        u16 unk12;
-        u8 _p14[0x194];
-    } S_91618;
-    typedef struct {
         s32 a, b, c;
     } S3;
     extern u16 D_8006AF80[];
-    extern S_91618 D_80091618[];
+    extern void *D_80091618[];
     extern u16 D_80100CD0[];
     extern u8 D_80100CFC[];
     extern u8 D_800EFFEC[];
@@ -32,13 +27,17 @@ void func_800B8E34(void) {
     s32 *var_a2;
     register u16 *var_a3 asm("a3");
     u32 base;
+    register s32 *var_v0 asm("v0");
+    u16 idx;
     u16 temp_v0;
 
     var_t2 = 0;
     var_t0 = (s32 *)D_80100CD0;
     var_t1 = (u16 *)var_t0;
+    idx = *D_8006AF80;
     base = (u32)D_80091618;
-    var_a2 = (s32 *)(base + (*D_8006AF80 * 0x1A8));
+    var_v0 = (s32 *)(base + idx * 0x1A8);
+    var_a2 = var_v0;
     temp_v0 = ((u16 *)var_a2)[9];
     var_a3 = (u16 *)var_a2;
     *D_80100CD0 = temp_v0;
@@ -55,7 +54,50 @@ void func_800B8E34(void) {
     func_8001AA70(D_80100CFC, D_800EFFEC, 0x40);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B8E04", func_800B8EF0);
+void func_800B8EF0(void) {
+    typedef struct {
+        u8 _p00[0x12];
+        u16 unk12;
+        u8 _p14[0x194];
+    } S_91618;
+    typedef struct {
+        s32 a, b, c;
+    } S3;
+    extern u16 D_8006AF80[];
+    extern S_91618 D_80091618[];
+    extern u16 D_80100CD0[];
+    extern u8 D_80100CFC[];
+    extern u8 D_800EFFEC[];
+    register s32 var_t2 asm("t2");
+    register s32 *var_t0 asm("t0");
+    register u16 *var_t1 asm("t1");
+    register u16 *var_a1 asm("a1");
+    register u32 base asm("a0");
+    register s32 *var_a2 asm("a2");
+    register u16 *var_a3 asm("a3");
+    s32 *temp;
+
+    var_t2 = 0;
+    var_a1 = D_80100CD0;
+    var_t0 = (s32 *)var_a1;
+    var_t1 = (u16 *)var_t0;
+    base = (u32)D_80091618;
+    temp = (s32 *)(base + (*D_8006AF80 * 0x1A8));
+    var_a2 = temp;
+    ((u16 *)var_a2)[9] = *var_a1;
+    var_a3 = (u16 *)var_a2;
+    do {
+        u16 temp_v0 = var_t1[1];
+        var_t1++;
+        var_t2++;
+        var_a3[10] = temp_v0;
+        *(S3 *)&var_a2[7] = *(S3 *)&var_t0[2];
+        var_t0 += 3;
+        var_a2 += 3;
+        var_a3++;
+    } while (var_t2 < 3);
+    func_8001AA70(D_800EFFEC, D_80100CFC, 0x40);
+}
 
 s32 func_800B8FAC(void) {
     typedef struct {
