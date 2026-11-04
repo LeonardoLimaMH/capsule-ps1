@@ -5,7 +5,147 @@ void func_800A9738(s32 arg0) {
     (*D_800EE914) = arg0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A9738", func_800A9744);
+static inline s32 func_800A9658_inline(s16 arg0) {
+    register s32 r asm("v0");
+    r = 1;
+    if (arg0 != 0) {
+        if (arg0 == r) {
+            r = 4;
+        } else {
+            r = 9;
+        }
+    }
+    return r;
+}
+
+
+void func_800A9744(void) {
+    typedef struct {
+        s32 state;
+        void *cells[27];
+        s32 indices[9];
+        s32 unk94;
+        u8 r;
+        u8 g;
+        u8 b;
+        u8 pad;
+    } Result_800EE914;
+    extern Result_800EE914 D_800EE914;
+    extern s16 D_80078C22;
+    extern u8 D_8008ED68[];
+    extern u8 D_8009017C[];
+    extern s32 D_800EE910;
+    extern s32 rcos(s32);
+    extern void PushMatrix(void);
+    extern void PopMatrix(void);
+    extern void func_8002CEC0(void *);
+    extern void SetPolyF4(u8 *);
+    extern void SetSemiTrans(u8 *, s32);
+    extern s32 RotTransPers4(void *, void *, void *, void *, s32 *, s32 *, s32 *, s32 *, s32 *, s32 *);
+    extern void AddPrim(void *, void *);
+
+    s32 xy[6];
+    u8 *work_base = D_8008ED68;
+    Result_800EE914 *res;
+    register s32 s asm("s3");
+    s32 count;
+    s32 i;
+
+    if (D_800EE914.state == 0) {
+        return;
+    }
+
+    {
+        register s32 r asm("v0");
+        r = 1;
+        if (D_80078C22 != 0) {
+            if (D_80078C22 != r) {
+                r = 9;
+            } else {
+                r = 4;
+            }
+        }
+        count = r;
+    }
+
+    if (work_base[0x99A] != 1) {
+        if (D_800EE914.unk94 != 0) {
+            D_800EE914.unk94--;
+        } else {
+            D_800EE914.unk94 = 0x40;
+        }
+    }
+
+    res = &D_800EE914;
+    {
+        s32 r = rcos((res->unk94 / 4) << 8);
+        if (r < 0) {
+            r += 127;
+        }
+        s = (u32)r >> 7;
+    }
+    PushMatrix();
+    func_8002CEC0(D_8009017C);
+
+    i = 0;
+    if (count != 0) {
+        register Result_800EE914 *res_loop asm("s2") = res;
+        do {
+            register u8 *w asm("v0") = *(u8 **)work_base;
+            register u8 *next asm("a2") = NULL;
+            register u8 *p asm("s0") = *(u8 **)(w + 0x1090);
+            register u8 *w_reg asm("a1") = w;
+            u8 *v;
+            s32 rot_ret;
+            register s32 z asm("a0");
+            register u32 c0 asm("v1");
+            register u32 c1 asm("a0");
+            register u32 c2 asm("a1");
+            register s32 d_800ee910 asm("a2");
+
+            if (p != NULL) {
+                u8 *next_p = p + 0x18;
+                if (!(w_reg + 0x4594 < next_p)) {
+                    next = next_p;
+                }
+            }
+            *(u8 **)(w_reg + 0x1090) = next;
+            SetPolyF4(p);
+            SetSemiTrans(p, 0);
+
+            v = (u8 *)res_loop->cells[i];
+            rot_ret = RotTransPers4(v + 8, v + 0x10, v + 0x18, v + 0x20, &xy[0], &xy[1], &xy[2], &xy[3], &xy[4], &xy[5]);
+
+            d_800ee910 = D_800EE910;
+            c0 = res_loop->r;
+            c1 = res_loop->g;
+            c2 = res_loop->b;
+            c0 += s;
+            c1 += s;
+            c2 += s;
+            p[4] = c0;
+            p[5] = c1;
+            p[6] = c2;
+
+            *(u16 *)(p + 0x8) = ((u16 *)xy)[0];
+            *(u16 *)(p + 0xA) = ((u16 *)xy)[1];
+            *(u16 *)(p + 0xC) = ((u16 *)xy)[2];
+            *(u16 *)(p + 0xE) = ((u16 *)xy)[3];
+            *(u16 *)(p + 0x10) = ((u16 *)xy)[4];
+            *(u16 *)(p + 0x12) = ((u16 *)xy)[5];
+            *(u16 *)(p + 0x14) = ((u16 *)xy)[6];
+            *(u16 *)(p + 0x16) = ((u16 *)xy)[7];
+
+            z = rot_ret + d_800ee910;
+            if ((u32)(z - 1) < 0x3FF) {
+                u8 *prim = p;
+                AddPrim(*(u8 **)work_base + (z * 4 + 0x70), prim);
+            }
+            i++;
+        } while (i < count);
+    }
+    PopMatrix();
+}
 
 void func_800A99AC(s32 arg0, s32 arg1) {
     typedef struct {
