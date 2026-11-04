@@ -43,7 +43,22 @@ void func_8001F938(void) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_8001FA10);
+s32 func_8001FA10(s32 sel) {
+    extern u8 D_80078BE4[];
+    S_800637AC *p = D_800637AC;
+    s32 i = 0;
+
+    while (p->f_4 != 0) {
+        if (sel == i) {
+            func_8001DBF4(p->x, p->y, 0, 6, D_80078BE4, p->f_8);
+        } else {
+            func_8001DBF4(p->x, p->y, 0, 3, D_80078BE4, p->f_8);
+        }
+        i++;
+        p++;
+    }
+    return i;
+}
 
 #include "common.h"
 extern s8 D_80085429[];
@@ -270,8 +285,7 @@ u8 func_800201D8(s32 n) {
     u32 tmp[2];
     register u8 r asm("a3") = 0;
     register s32 i asm("a1") = 0;
-    register u32 q asm("v0") = (n << 2) + (u32)tmp;
-    register u32 *t asm("t0") = (u32 *)q;
+    register u32 *t asm("t0") = (u32 *)((u32)tmp + (u32)(n << 2));
     register u32 one asm("t1") = 1;
     register u32 *e asm("a2");
     register u8 *base asm("v1") = D_8008ED68;
@@ -751,7 +765,55 @@ s32 func_80021A4C(s32 arg0, s32 arg1) {
     return var_a2;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80021A9C);
+s32 func_80021A9C(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    struct Pad { u8 pad[0x88]; s32 btn; };
+    extern u8 D_8008ED68[];
+    s32 temp_v1;
+    s32 var_v0_2;
+    register s32 ret asm("v0");
+    s32 var_a2 = arg2;
+    void *temp_t0 = arg0 + 0x5D0;
+
+    if (((arg3 < 2) || (arg3 == 5)) && M2C_FIELD(temp_t0, u8 *, 0x10) != 0 && M2C_FIELD(temp_t0, u8 *, 0x11) != 0) {
+        var_v0_2 = M2C_FIELD(arg0, u16 *, 0x1E) < 0x1FU;
+        goto invert;
+    }
+    if (M2C_FIELD(arg0, u8 *, 1) != 0) {
+        var_v0_2 = M2C_FIELD(arg0, u16 *, 0x1E) < 0x1FU;
+        goto invert;
+    }
+    if (arg1 != 0) {
+        if (arg3 == 4) {
+            ret = 1;
+            if (!(((struct Pad *)D_8008ED68)->btn & 0x60)) {
+                ret = 1;
+                if (!(((struct Pad *)(D_8008ED68 + 0x10))->btn & 0x60)) return 0;
+            }
+            return ret;
+        }
+        if (M2C_FIELD(temp_t0, u8 *, 0x11) != 0) {
+            goto zero;
+        }
+        if (M2C_FIELD(temp_t0, u8 *, 0x10) != 0) {
+            var_a2 = 1;
+        }
+        goto input;
+    }
+zero:
+    var_a2 = 0;
+input:
+    temp_v1 = ((struct Pad *)(D_8008ED68 + var_a2 * 0x10))->btn;
+    ret = 1;
+    if (!(temp_v1 & 0x20)) {
+        ret = 1;
+        if (!(temp_v1 & 0x40)) {
+            var_v0_2 = M2C_FIELD(arg0, u16 *, 0x1E) < 0xB5U;
+invert:
+            ret = var_v0_2 ^ 1;
+        }
+    }
+    return ret;
+}
 
 void func_80021BB4(void *p, s32 a1, s32 idx, s32 mode) {
     struct S_P {
