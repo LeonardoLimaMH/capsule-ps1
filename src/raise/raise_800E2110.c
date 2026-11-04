@@ -112,7 +112,23 @@ void func_800E32D0(s32 arg0, s16 *arg1, s16 *arg2) {
     func_80025E54(arg0, *arg1, *arg2);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E334C);
+void func_800E334C(s32 arg0, s16 *arg1, s16 *arg2) {
+    extern s16 D_800F1EE0[];
+    extern void func_800A4984(s32, s16 *, s16 *);
+    extern void func_80025CEC(s32, s32, s32, s32);
+    extern void func_80025E54(s32, s32, s32);
+
+loop:
+    (*D_800F1EE0) = 1;
+    func_800A4984(arg0, arg1, arg2);
+    (*D_800F1EE0) = 0;
+    if (*arg1 + *arg2 < 10) {
+        goto loop;
+    }
+
+    func_80025CEC(arg0, *arg1, *arg2, 1);
+    func_80025E54(arg0, *arg1, *arg2);
+}
 
 #include "common.h"
 
@@ -216,30 +232,35 @@ s32 func_800E36E4(s32 a0) {
     s32 s = t0 != 1;
     register S_80091618 *base asm("a0") = D_80091618;
     S_80091618 *e = &base[D_8006AF80[0]];
-    u16 v;
-    s32 ret;
+    register u16 v asm("v0");
+    register s32 ret asm("v1");
 
     if (e->unk8A == 0xFFFF) {
         return 1;
     }
     if (t0 == 1) {
         if (D_800EE9B8[s] != 0) {
+            ret = 4;
             v = e->unk90;
-            ret = v == 0 ? 4 : 1;
+            goto ret_4_1;
         } else {
             v = e->unk90;
-            ret = v == 0 ? 1 : 4;
-        }
-    } else {
-        if (D_800EE9B8[s] != 0) {
-            v = base[e->unk8A].unk90;
-            ret = v == 0 ? 1 : 4;
-        } else {
-            v = base[e->unk8A].unk90;
-            ret = v == 0 ? 4 : 1;
+            ret = 1;
+            goto ret_1_4;
         }
     }
-    return ret;
+    if (D_800EE9B8[s] != 0) {
+        v = base[e->unk8A].unk90;
+        ret = 1;
+ret_1_4:
+        if (v == 0) return ret;
+        return 4;
+    }
+    v = base[e->unk8A].unk90;
+    ret = 4;
+ret_4_1:
+    if (v == 0) return ret;
+    return 1;
 }
 
 s32 func_800E3810(s32 a0) {
