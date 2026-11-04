@@ -8,7 +8,30 @@ void CdDataSync(void) {
     slpm_CD_datasync();
 }
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011705C", CdIntToPos);
+#include "common.h"
+
+/* CdIntToPos: C do SDK PsyQ importado de https://github.com/ser-pounce/rood-reverse (CC0-1.0),
+   arquivo src/SLUS_010.40/libcd/C_011.c; reduzido às declarações de que a função depende
+   (tools/ext_import.py). */
+typedef struct {
+ u_char minute;
+ u_char second;
+ u_char sector;
+ u_char track;
+} CdlLOC;
+
+CdlLOC *CdIntToPos(int i, CdlLOC *p) ;
+
+static inline int ENCODE_BCD(int n) { return ((n / 10) << 4) + (n % 10); }
+
+CdlLOC* CdIntToPos(int i, CdlLOC* p)
+{
+    i += 150;
+    p->sector = ENCODE_BCD(i % 75);
+    p->second = ENCODE_BCD(i / 75 % 60);
+    p->minute = ENCODE_BCD(i / 75 / 60);
+    return p;
+}
 
 s32 CdPosToInt(void *arg0) {
     u8 temp_a1;

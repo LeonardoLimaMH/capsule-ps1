@@ -30,3 +30,4 @@ src/slpm/sdk_libgpu_sys__DrawSync.c
 src/yuugi/sdk_libgpu_ext.c
 src/slpm/loader_80116438.c
 src/yuugi/sdk_libds_dsready.c
+src/yuugi/main_8004C7FC.c

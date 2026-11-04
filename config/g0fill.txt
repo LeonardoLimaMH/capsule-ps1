@@ -72,3 +72,5 @@ src/slpm/sdk_libspu_s_it.c
 src/slpm/sdk_libcd_c_004.c
 src/slpm/loader_8011BF60.c
 src/yuugi/sdk_libspu_s_rrwa.c
+src/slpm/loader_8011705C.c
+src/yuugi/main_8004C7FC.c

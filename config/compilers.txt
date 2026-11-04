@@ -36,7 +36,6 @@ src/yuugi/main_80047344.c 2.8.1-psx
 src/yuugi/main_8004749C.c 2.8.1-psx
 src/yuugi/main_80047EC4.c 2.8.1-psx
 src/yuugi/main_8004B9CC.c 2.8.1-psx
-src/yuugi/main_8004C7FC.c 2.8.1-psx
 src/yuugi/main_8004C8A0.c 2.8.1-psx
 src/yuugi/sdk_libcard_card.c 2.8.1-psx
 src/yuugi/sdk_libcard_init.c 2.8.1-psx
