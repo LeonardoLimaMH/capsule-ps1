@@ -47,6 +47,19 @@ def through_dest(lines):
     return lines[:i] + out + lines[j:]
 
 
+SYMLOAD = re.compile(r"^(\s*)(lw|lh|lhu|lb|lbu)(\s+)(\$\w+),\s*([A-Za-z_]\w*)\s*$")
+
+
+def nogp_load(line, small):
+    """Load simbólico de um .extern pequeno, montado sem $gp como o GNU as -G0 faz:
+    lui $r,%hi(sym) / lw $r,%lo(sym)($r)."""
+    m = SYMLOAD.match(line)
+    if not m or m.group(5) not in small:
+        return line
+    ind, op, sp, reg, sym = m.groups()
+    return f"{ind}lui{sp}{reg},%hi({sym})\n{ind}{op}{sp}{reg},%lo({sym})({reg})"
+
+
 def main():
     target = None
     if '--target' in sys.argv:
@@ -55,6 +68,7 @@ def main():
         del sys.argv[i:i + 2]
     unchecked = names(target) if target else set()
     destload = names(target, 'destload') if target else set()
+    nogp = names(target, 'nogp') if target else set()
     sys.path.insert(0, '/opt/maspsx')
     import maspsx
 
@@ -65,6 +79,7 @@ def main():
             super().__init__(*args, **kwargs)
             self.checked_division = self.expand_div
             self.dest_expand = False
+            self.no_gp = False
             self.extern_small = set()
 
         def _uses_gp(self, line):
@@ -87,12 +102,16 @@ def main():
             if entry:
                 self.expand_div = self.checked_division and entry.group(1) not in unchecked
                 self.dest_expand = entry.group(1) in destload
+                self.no_gp = entry.group(1) in nogp
             result = super().process_line(line)
             if LEAVE.match(line):
                 self.expand_div = self.checked_division
                 self.dest_expand = False
+                self.no_gp = False
             if self.dest_expand and '# EXPAND_AT START' in result:
                 result = through_dest(result)
+            if self.no_gp:
+                result = [nogp_load(l, self.extern_small) for l in result]
             return result
 
     maspsx.MaspsxProcessor = ProfiledProcessor

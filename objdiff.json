@@ -3450,7 +3450,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_rrwa.o"
     },
@@ -4269,7 +4269,7 @@
           "slpm",
           "slpm.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/slpm/loader_8011BF60.o"
     },
@@ -4698,7 +4698,7 @@
           "slpm",
           "slpm.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/slpm/sdk_libcd_c_004.o"
     },
@@ -5426,7 +5426,7 @@
           "slpm",
           "slpm.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/slpm/sdk_libspu_s_it.o"
     },

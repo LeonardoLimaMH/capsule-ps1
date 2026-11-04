@@ -55,7 +55,13 @@ void func_80015B00(int param_1)
   return;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015B3C);
+#include "common.h"
+
+extern u8 *D_80078B7C;
+
+void func_80015B3C(s32 arg0, s32 arg1, s32 arg2) {
+    func_800136C8(arg0, arg1, *(s32 *)(D_80078B7C + 0xC57C), arg2);
+}
 
 void func_80015B74(void *arg0) {
     s32 temp_a0;
