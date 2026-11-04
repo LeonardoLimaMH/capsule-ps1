@@ -35,30 +35,30 @@ auditoria anterior e os 60 testes selecionados das ferramentas.
 
 <!-- PROGRESS:START -->
 **Código do jogo decompilado em C (byte-matching):** `██░░░░░░░░░░░░░░░░░░` **10.45%**  
-**Total incluindo SDK PsyQ:** `██░░░░░░░░░░░░░░░░░░` **11.47%**  
-**Cobertura (C + funções que já eram assembly no original):** `██░░░░░░░░░░░░░░░░░░` **11.83%**  
-**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`; sobre o código convertível em C):** `████████████████████` **99.44%**  
+**Total incluindo SDK PsyQ:** `██░░░░░░░░░░░░░░░░░░` **11.61%**  
+**Cobertura (C + funções que já eram assembly no original):** `██░░░░░░░░░░░░░░░░░░` **11.98%**  
+**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`; sobre o código convertível em C):** `████████████████████` **99.48%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | executável principal | 14.57% (30,060 / 206,368 B) | 311 / 732 | 23.46% (168 / 303 fn) | **16.34%** |
-| `SLPM_860.96` | loader / boot | 11.17% (2,316 / 20,732 B) | 42 / 119 | 22.11% (127 / 215 fn) | **18.59%** |
+| `YUUGI.EXE` | executável principal | 14.57% (30,060 / 206,368 B) | 311 / 732 | 25.92% (173 / 303 fn) | **16.83%** |
+| `SLPM_860.96` | loader / boot | 11.17% (2,316 / 20,732 B) | 42 / 119 | 23.07% (130 / 215 fn) | **19.23%** |
 | `CHESS.BIN` | overlay de batalha (tabuleiro) | 3.65% (15,404 / 421,956 B) | 149 / 867 | 100.00% (2 / 2 fn) | **3.67%** |
 | `RAISE.BIN` | overlay de criação de monstros | 17.00% (55,532 / 326,576 B) | 467 / 940 | 100.00% (2 / 2 fn) | **17.02%** |
 | `ETC.BIN` | overlay de menus/diversos | 8.87% (7,896 / 88,992 B) | 58 / 189 | 0.00% (0 / 0 fn) | **8.87%** |
-| **Total** | | **10.45%** (111,208 / 1,064,624 B) | 1027 / 2847 | 22.95% (299 / 522 fn) | **11.47%** |
+| **Total** | | **10.45%** (111,208 / 1,064,624 B) | 1027 / 2847 | 24.71% (307 / 522 fn) | **11.61%** |
 
 **Equivalentes e pendências por binário (jogo + SDK):**
 
 | Binário | C equivalente (`equiv/`) | Funcional (bytes convertíveis) | Funções em C | Assembly original | Faltam C |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | 81.33% (484 fn) | `██████████` **98.56%** | 963 / 970 (99.28%) | 65 | **7** |
-| `SLPM_860.96` | 74.13% (130 fn) | `██████████` **95.48%** | 299 / 302 (99.01%) | 32 | **3** |
+| `YUUGI.EXE` | 80.93% (480 fn) | `██████████` **98.66%** | 964 / 970 (99.38%) | 65 | **6** |
+| `SLPM_860.96` | 73.85% (128 fn) | `██████████` **95.85%** | 300 / 302 (99.34%) | 32 | **2** |
 | `CHESS.BIN` | 96.33% (718 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | 0 | **0** |
 | `RAISE.BIN` | 82.98% (473 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
 | `ETC.BIN` | 91.13% (131 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | 0 | **0** |
-| **Total** | 87.61% (1,936 fn) | `██████████` **99.44%** | 3,262 / 3,272 (99.69%) | 97 | **10** |
+| **Total** | 87.50% (1,930 fn) | `██████████` **99.48%** | 3,264 / 3,272 (99.76%) | 97 | **8** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código convertível: ficam de fora as rotinas que já eram assembly no
@@ -74,6 +74,14 @@ O percentual é medido em **bytes de código**: uma função conta como decompil
 quando o seu `INCLUDE_ASM` foi substituído por C e o build completo continua
 batendo o SHA-1 do original. O código do SDK oficial da Sony (PsyQ), linkado
 dentro dos executáveis, é contado à parte (`tools/progress.py`).
+
+**Decisão (2026-11-04): o SDK PsyQ fica fora do escopo da decompilação**, como em
+[ygofm-decomp](https://github.com/MaChInEgUn3/ygofm-decomp), sotn-decomp e mgs_reversing. É
+código genérico da Sony (8% dos bytes, igual em centenas de jogos), sem lógica do jogo, e num
+port é substituído por uma reimplementação. As funções do SDK continuam em assembly; só entra C
+de SDK quando sai de graça (porte entre YUUGI e SLPM, C público que já casa). No relatório do
+objdiff as unidades do SDK têm `auto_generated` e o número principal é a categoria
+**Código do jogo (sem SDK)**.
 
 ### O que "100% das funcionalidades" significa aqui
 

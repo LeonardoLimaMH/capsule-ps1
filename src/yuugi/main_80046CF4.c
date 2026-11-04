@@ -22,6 +22,9 @@ s32 CD_getsector(u32 arg0, u32 arg1) {
     return 0;
 }
 
+extern volatile u8 *D_8007334C, *D_80073358;
+extern volatile u32 *D_8007335C, *D_80073380, *D_80073384, *D_80073388, *D_8007338C, *D_80073390;
+
 s32 CD_getsector2(u32 arg0, u32 arg1) {
     volatile u32 status;
     *D_8007334C = 0;

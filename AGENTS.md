@@ -236,7 +236,9 @@ conexão (Claude Code e Codex) e limites: [docs/DECOMP_ANYTHING.md](docs/DECOMP_
 - **Divisão de áreas** (proposta, a confirmar na seção 11):
   - **Codex:** CHESS.
   - **Claude:** YUUGI, SLPM, RAISE e ETC.
-  - **SDK PsyQ:** de quem chegar primeiro, avisando no commit.
+  - **SDK PsyQ: fora do escopo (decisão do usuário, 2026-11-04).** Não gaste tempo em funções
+    do SDK (`config/symbols.<alvo>.psyq.txt`): ficam em assembly. Só vale C de SDK que sai de
+    graça (porte YUUGI↔SLPM ou C público que já casa). O foco é o código do jogo.
 - **Antes de começar:** `git pull --rebase`. Se uma função citada como pendente já
   está em C, não refaça.
 - **Commits pequenos e frequentes**, cada um com seus 5 SHA-1. Não acumule horas de

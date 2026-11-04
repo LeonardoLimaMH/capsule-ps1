@@ -80,3 +80,13 @@ src/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9334.c
 src/yuugi/sdk_libetc_pad.c
 src/yuugi/sdk_libgpu_sys.c
 src/yuugi/main_80043134.c
+src/yuugi/sdk_libgte_msc00.c
+src/yuugi/sdk_libgte_smp_00.c
+src/yuugi/main_8004C8A0.c
+src/slpm/sdk_libgpu_sys.c
+src/yuugi/sdk_libspu_s_itc.c
+src/yuugi/sdk_libc2_printf.c
+src/yuugi/sdk_libgte_geo_01.c
+src/slpm/sdk_libc2_printf.c
+src/yuugi/sdk_libspu_s_q.c
+src/slpm/sdk_libspu_s_q.c
