@@ -1080,7 +1080,35 @@ void func_80022F80(u8 *o, s32 b) {
     *(s32 *)(o + 0x14) = func_8001F8B0(0x1B, 1);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80023050);
+void func_80023050(u8 *o, s32 b) {
+    extern u16 D_80065164[][6];
+    extern u16 D_80065298[];
+    extern u16 D_80063928[];
+    extern s32 func_8001F8B0();
+    u16 *dst = D_80065298;
+    s32 done = 0;
+    s32 i = 0;
+    u16 *src = D_80065164[0];
+    s32 next;
+    s32 k;
+    u16 v;
+    b = (s32)src + b * 12;
+    do {
+        v = ((u16 *)b)[i];
+        if (v == 0x219) done = 1;
+        if (done) break;
+        next = i + 1;
+        dst[next] = v;
+        i = next;
+    } while (i < 5);
+    k = 0;
+    i++;
+    do {
+        dst[i + k] = D_80063928[k];
+        k++;
+    } while (k < 11);
+    *(s32 *)(o + 0x14) = func_8001F8B0(0x1B, 2);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80023120);
 
