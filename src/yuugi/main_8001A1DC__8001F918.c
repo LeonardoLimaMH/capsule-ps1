@@ -185,9 +185,37 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800200F4);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800201D8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800202A4);
+#include "common.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020304);
+extern u8 D_8008ED68[];
+s32 rand(void);
+
+u32 func_800202A4(u32 arg0) {
+    u8 *p = D_8008ED68;
+
+    if (arg0 != 0) {
+        return (u32) (rand() + *(s32 *) (p + 0xC4)) % arg0;
+    }
+    if (arg0 == 0) {
+        return 0;
+    }
+}
+
+#include "common.h"
+
+extern u8 D_8008ED68[];
+s32 rand(void);
+
+u32 func_80020304(u32 arg0) {
+    u8 *p = D_8008ED68;
+
+    if (arg0 != 0) {
+        return (u32) (rand() + *(s32 *) (p + 0x18)) % arg0;
+    }
+    if (arg0 == 0) {
+        return 0;
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020364);
 

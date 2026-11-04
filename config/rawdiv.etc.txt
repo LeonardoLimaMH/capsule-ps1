@@ -1,0 +1,7 @@
+# Raw div/divu without break checks in the original ETC code.
+func_8009BDD8
+func_800A1798
+func_800A4BCC
+func_800A5654
+func_800A7984
+func_800A9C0C
