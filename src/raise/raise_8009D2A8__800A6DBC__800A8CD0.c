@@ -23,6 +23,7 @@ s16 func_800A8CD0(s16 arg0, s32 arg1) {
 s16 func_800A8DB8(s16 arg0, u16 *arg1) {
     s32 sum;
     s16 i;
+    s32 t;
 
     sum = 0;
     i = 0;
@@ -32,7 +33,8 @@ s16 func_800A8DB8(s16 arg0, u16 *arg1) {
             i++;
         } while (i < arg0);
     }
-    return arg1[i] + (sum - 1);
+    t = sum - 1;
+    return arg1[i] + t;
 }
 
 s32 func_800A8E1C(u16 arg0) {
@@ -48,7 +50,12 @@ void func_800A8E48(void) {
     func_800B7F40(0);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A8CD0", func_800A8E78);
+void func_800A8E78(u32 *arg0) {
+    u32 a = arg0[0x34 / 4];
+    u32 b = arg0[0x38 / 4];
+    arg0[0x38 / 4] = b | 1;
+    arg0[0x34 / 4] = (a & ~0x100) | ((~(a >> 8) & 1) << 8);
+}
 
 #include "common.h"
 
