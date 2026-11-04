@@ -333,7 +333,7 @@ u32 func_80020364(u8 n) {
 
 s32 func_800203DC(u8 n) {
     s32 ret;
-    switch ((D_80063940[n].unk0C >> 4) & 3) {
+    switch ((s32)((D_80063940[n].unk0C >> 4) & 3)) {
     case 0: ret = 0x7D; break;
     case 1: ret = 0x8C; break;
     case 2: ret = 0x1C; break;
