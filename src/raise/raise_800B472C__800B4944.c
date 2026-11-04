@@ -204,7 +204,52 @@ void func_800B4E08(s32 arg0, s16 arg1) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B472C__800B4944", func_800B5034);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B472C__800B4944", func_800B53D4);
+void func_800B53D4(s32 a0, s32 a1) {
+    typedef struct {
+        u8 pad[0x79C];
+    } S_80100F38;
+    extern S_80100F38 D_80100F38[];
+    extern u8 D_800EEB9C[];
+    extern s32 D_800EE5D0[];
+    extern s32 func_800B5034(s32, s32, s32);
+    extern s32 func_80019F30(s32, s32);
+    extern void func_80015CD0(void *, s32, s32);
+
+    u8 *p = (u8 *)&D_80100F38[a1];
+    s16 *s2 = (s16 *)(p + 0x356);
+    u8 **s1 = (u8 **)(p + 0x194);
+    u8 *s6 = D_800EEB9C;
+    s16 i;
+
+    for (i = 0; i < 8; i++, s2++) {
+        switch (i) {
+        case 6: {
+            s32 v = func_800B5034(a0, a1, 6);
+            v = (s16)v <= 0 ? 1 : ((s16)v < 100 ? v : 99);
+            *s2 = v;
+            break;
+        }
+        case 7:
+            *s2 = func_800B5034(a0, a1, 7);
+            break;
+        default: {
+            s32 r = func_800B5034(a0, a1, i);
+            s16 v = r;
+            if (*s2 != v) {
+                s32 *t = D_800EE5D0;
+                *s2 = r;
+                func_80015CD0(*s1 + 0x14, func_80019F30(D_800EE5D0[0] | 0x70000, t[6] + *(s32 *)(s6 + 0x780) + v), 0);
+                *(u16 *)(*s1 + 0x66) = 0;
+                *(s32 *)(*s1 + 0x30) &= ~0x1C0;
+                *(s32 *)(*s1 + 0x30) = (*(s32 *)(*s1 + 0x30) & ~0x30) | 0x20;
+                *(s32 *)(*s1 + 0x7C) = *(s32 *)(s6 + 0x780) + v;
+            }
+            s1++;
+            break;
+        }
+        }
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B472C__800B4944", func_800B55B8);
 
@@ -212,6 +257,7 @@ void func_800B5A78(s32 arg0, s32 arg1) {
     typedef struct {
         u8 _p0[0x38];
         u32 b38_0 : 1;
+        u32 _b38_1 : 31;
     } SubEntry;
     typedef struct {
         u8 _p0[0x190];
@@ -222,20 +268,21 @@ void func_800B5A78(s32 arg0, s32 arg1) {
 
     extern S_80100F38 D_80100F38[];
     extern u16 func_800B1260(s32);
+    u8 val;
     u16 id;
     S_80100F38 *p;
 
-    arg1 = (arg1 != 1);
+    val = (arg1 != 1);
     id = func_800B1260(arg0);
     if (id != 0xFFFF) {
         p = &D_80100F38[id];
-        p->f_190->b38_0 = arg1;
-        p->f_194[0]->b38_0 = arg1;
-        p->f_194[1]->b38_0 = arg1;
-        p->f_194[2]->b38_0 = arg1;
-        p->f_194[3]->b38_0 = arg1;
-        p->f_194[4]->b38_0 = arg1;
-        p->f_194[5]->b38_0 = arg1;
+        p->f_190->b38_0 = val;
+        p->f_194[0]->b38_0 = val;
+        p->f_194[1]->b38_0 = val;
+        p->f_194[2]->b38_0 = val;
+        p->f_194[3]->b38_0 = val;
+        p->f_194[4]->b38_0 = val;
+        p->f_194[5]->b38_0 = val;
     }
 }
 
