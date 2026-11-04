@@ -180,8 +180,8 @@ void func_800264BC(void *arg0)
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80026514);
 
-extern u8 D_8008F703;
-extern s32 D_80078C38;
+extern u8 D_8008F703[];
+extern s32 D_80078C38[];
 extern u8 D_8006AF80[], D_8006AF90[], D_8006AFCC[];
 extern void func_80026514(s32);
 void func_800267F0(void) {
@@ -193,8 +193,8 @@ void func_800267F0(void) {
     s32 i;
     s32 j;
 
-    D_8008F703 = 0;
-    D_80078C38 = 0x701B;
+    *D_8008F703 = 0;
+    *D_80078C38 = 0x701B;
     *(u16 *)D_8006AF80 = 0xFFFF;
     *(s32 *)(D_8006AF80 + 4) = 0x20D0;
 
@@ -203,17 +203,17 @@ void func_800267F0(void) {
         j = off;
         i = 0;
         do {
-            *(s16 *)(a1 + 2 + i * 2) = -1;
-            *(s16 *)(base + j + 8) = -1;
-            *(s16 *)(base + j + 10) = -1;
+            *(s16 *)(a1 + 2 + i * 2) = neg1;
+            *(s16 *)(base + j + 8) = neg1;
+            *(s16 *)(base + j + 10) = neg1;
             j += 4;
         } while (++i < 3);
 
         *(s16 *)(a1 + 0x14) = 0;
         i = 0;
         do {
-            *(s16 *)(a1 + 0x16 + i * 2) = -1;
-            *(s16 *)(a1 + 0x1A + i * 2) = -1;
+            *(s16 *)(a1 + 0x16 + i * 2) = neg1;
+            *(s16 *)(a1 + 0x1A + i * 2) = neg1;
         } while (++i < 2);
 
         a1 += 0x1E;
@@ -221,11 +221,11 @@ void func_800267F0(void) {
     } while ((s32)a1 < (s32)t1);
 
     {
+        register s32 a0 asm("a0") = -1;
         register u8 *v1 asm("v1") = D_8006AFCC;
-        register s32 neg1 asm("a0") = -1;
         i = 0;
         do {
-            *(s32 *)(v1 + 8) = neg1;
+            *(s32 *)(v1 + 8) = a0;
             *(s32 *)(v1 + 0x1C) = 0;
             v1 += 4;
         } while (++i < 5);
