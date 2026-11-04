@@ -5,6 +5,7 @@ typedef struct {
     u16 unk8A;
     u8 pad8C[0x100];
     s32 f_18C;
+    u8 pad190[0x18];
 } S_80091618;
 
 void func_800DC640(void) {
@@ -210,12 +211,12 @@ void func_800DC9C4(void) {
 void func_800DC9E4(s32 arg0, s32 arg1) {
     extern s32 D_8006AF84[];
     extern u8 D_8006AFCC[];
-    extern u8 D_80091618[];
+    extern S_80091618 D_80091618[];
     extern u8 D_80105990[];
     register s32 var_a2 asm("a2");
     s32 temp_a0;
     s32 temp_a1;
-    u8 *elem;
+    S_80091618 *elem;
 
     var_a2 = D_8006AF84[0];
     temp_a1 = arg1 & 0xFFFF;
@@ -264,38 +265,24 @@ void func_800DC9E4(s32 arg0, s32 arg1) {
     case 19: {
         register s32 cmd asm("a0");
         register u8 *p asm("v0");
-        register s32 a1_val asm("a1");
-        register s32 a2_val asm("a2");
-        register u8 *base asm("a0");
         cmd = 0x8001;
         p = D_8006AFCC;
         *(s16 *)(p + 0x36) = 1;
         *(s32 *)(p + 0x54) = var_a2;
         func_80034AB0(cmd);
-        a1_val = 2;
-        a2_val = 4;
-        base = D_80091618;
-        elem = base + (arg0 & 0xFFFF) * 0x1A8;
-        func_80024990(*(s32 *)(elem + 0x18C), a1_val, a2_val, 0xF);
+        func_80024990(D_80091618[arg0 & 0xFFFF].f_18C, 2, 4, 0xF);
         var_a2 = 7;
         break;
     }
     case 20: {
         register s32 cmd asm("a0");
         register u8 *p asm("v0");
-        register s32 a1_val asm("a1");
-        register s32 a2_val asm("a2");
-        register u8 *base asm("a0");
         cmd = 0x8002;
         p = D_8006AFCC;
         *(s16 *)(p + 0x38) = 1;
         *(s32 *)(p + 0x58) = var_a2;
         func_80034AB0(cmd);
-        a1_val = 2;
-        a2_val = 3;
-        base = D_80091618;
-        elem = base + (arg0 & 0xFFFF) * 0x1A8;
-        func_80024990(*(s32 *)(elem + 0x18C), a1_val, a2_val, 0xE);
+        func_80024990(D_80091618[arg0 & 0xFFFF].f_18C, 2, 3, 0xE);
         var_a2 = 8;
         break;
     }
@@ -343,10 +330,10 @@ void func_800DC9E4(s32 arg0, s32 arg1) {
         return;
     }
 
+    temp_a0 = arg0 & 0xFFFF;
     {
-        register u8 *base asm("v1") = D_80091618;
-        temp_a0 = arg0 & 0xFFFF;
-        elem = base + temp_a0 * 0x1A8;
-        func_800B0740(temp_a0, *(u16 *)(elem + 0x8A), var_a2, 1);
+        register S_80091618 *base asm("v1") = D_80091618;
+        elem = base + temp_a0;
+        func_800B0740(temp_a0, elem->unk8A, var_a2, 1);
     }
 }
