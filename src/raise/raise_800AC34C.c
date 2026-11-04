@@ -62,7 +62,7 @@ void func_800ACB08(s32 arg0) {
         u8 _p0[0xA4];
         s32 unkA4[1];
     } D_8008ED68;
-    register void *ed asm("t0") = &D_8008ED68;
+    void *ed = &D_8008ED68;
     extern M2C_UNK D_800EEB9C[];
     void *p = D_800EEB9C;
     extern s16 D_800EEA78[];
@@ -84,12 +84,13 @@ void func_800ACB08(s32 arg0) {
     } else {
 block_6:
         if (M2C_GFIELD(D_800EEB9C, s32, 0x14) == 1) {
-            temp_v0 = ((typeof(D_8008ED68) *)ed)->unkA4[D_800EEA78[(s16)arg0]];
+            s32 temp_s2 = (arg0 << 16) >> 15;
+            temp_v0 = ((typeof(D_8008ED68) *)ed)->unkA4[*(s16 *)((u8 *)D_800EEA78 + temp_s2)];
             if (temp_v0 != 7 && (temp_v0 = temp_v0 & 7) == 7) {
                 *D_800F2DAE = temp_v0;
                 *D_800F2DAC = (u16) M2C_GFIELD(D_800EEB9C, s32, 0x24);
-                func_800AEB5C(2, 0);
-                *D_800F2DAC = func_800AC1A4((s16)*D_800F2DAC, *D_800F2DAE, D_800EEA80[(s16)arg0]);
+                func_800AEB5C(2, 0, arg0, D_800EEB9C);
+                *D_800F2DAC = func_800AC1A4((s16)*D_800F2DAC, *D_800F2DAE, *(s16 *)((u8 *)D_800EEA80 + temp_s2));
                 func_800AEB5C(1, 0);
             }
         }
@@ -425,7 +426,25 @@ s32 func_800AEC94(s32 arg0, s32 arg1) {
     return D_800EEB9C.unk3C8[arg0][arg1] == 1;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AECC8);
+s32 func_800AECC8(u16 arg0) {
+    typedef struct {
+        u8 _p00[0x10];
+        u16 unk10;
+        u8 _p12[0x78];
+        u16 unk8A;
+        u8 _p8C[0x11C];
+    } S_91618;
+    extern u16 D_8006AF80[];
+    extern S_91618 D_80091618[];
+
+    if (D_80091618[arg0].unk10 == 0xFFFF) {
+        return -1;
+    }
+    if (arg0 != *D_8006AF80) {
+        return (arg0 != D_80091618[*D_8006AF80].unk8A) * 2;
+    }
+    return 1;
+}
 
 void func_800AED5C(s32 arg0, s32 arg1) {
     extern s16 D_800EEAE4[];
