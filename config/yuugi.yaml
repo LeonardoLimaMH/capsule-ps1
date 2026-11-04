@@ -47,6 +47,8 @@ segments:
       - [0x800, rodata]
       - [0x810, .rodata, main_8001A1DC__8001B0E0__8001BB18]
       - [0x860, rodata]
+      - [0xD78, .rodata, main_800282A0__800282D0]
+      - [0xD90, rodata]
       - [0xDC0, .rodata, main_800282A0__800282D0__8002C214]
       - [0xDD4, rodata]
       - [0xF98, .rodata, main_8002E7A4]
