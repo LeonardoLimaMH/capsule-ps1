@@ -138,18 +138,20 @@ extern void SpuGetAllKeysStatus(), SpuSetKey(), func_8003CD70(), func_80035894()
 extern void DsSyncCallback(), DsControlF(), func_80035680();
 extern s32 func_8003D518();
 void func_80036E5C(void) {
-    register u8 *g asm("a0");
+    u8 *g;
     register u8 *s0 asm("s0");
     u8 *d;
     register s32 i asm("a0");
     register s32 mask asm("a1");
-    u8 c, a1;
+    register s32 c asm("v1");
+    u8 a1;
 
     register u8 *status asm("s0") = D_8009376C;
     SpuGetAllKeysStatus(status);
     mask = 0;
+    i = 0;
     status -= 0x5C;
-    for (i = 0; i < 4; i++) {
+    for (; i < 4; i++) {
         if (status[i + 0x70] == 3) {
             mask |= 1 << (i + 0x14);
         }
@@ -171,56 +173,76 @@ void func_80036E5C(void) {
     }
     s0 = g + 0x10;
     if (*(s16 *)(g + 0x110) != 0) {
-        c = g[0x10];
+        register u8 head asm("v0") = g[0x10];
+        g[0x112] = head;
+        c = ((S_AudioCmd *)s0)->code;
         g[0x113] = 0;
-        g[0x112] = g[0x10];
         *(u16 *)(g + 0x116) = *(u16 *)(s0 + 2);
         *(s32 *)(g + 0x118) = *(s32 *)(s0 + 4);
         *(s32 *)(g + 0x11C) = *(s32 *)(s0 + 8);
         *(s32 *)(g + 0x120) = *(s32 *)(s0 + 0xC);
         a1 = s0[1];
         g[0x114] = a1;
-        switch (c) {
-        case 0x44:
-        case 0x45:
-            if (*(s16 *)(g + 0x1196) == 0) {
-                g[9] = a1;
-                *(u16 *)(g + 0x1196) = *(u16 *)(s0 + 8);
-            }
-            break;
-        case 0x29:
-        case 0x2A:
-            if (*(s16 *)(g + 0x146) == 0) {
-                g[8] = a1;
-                *(u16 *)(g + 0x146) = *(u16 *)(s0 + 8);
-            }
-            break;
+        if (c == 0x44) goto comando_alto;
+        if (c < 0x45) {
+            if (c == 0x29) goto comando_baixo;
+            if (c == 0x2A) goto comando_baixo;
+            goto comando_fim;
         }
+        if (c != 0x45) goto comando_fim;
+comando_alto:
+        if (*(s16 *)(g + 0x1196) == 0) {
+            u16 value = *(u16 *)(s0 + 8);
+            g[9] = a1;
+            *(u16 *)(g + 0x1196) = value;
+        }
+        goto comando_fim;
+comando_baixo:
+        if (*(s16 *)(g + 0x146) == 0) {
+            u16 value = *(u16 *)(s0 + 8);
+            g[8] = a1;
+            *(u16 *)(g + 0x146) = value;
+        }
+comando_fim:
         D_80093738[0] = 8;
         D_80078D51 = 0;
         D_80078D50 = 0;
         func_80035894();
         s0 += 0x10;
-        *(u16 *)(D_800922F0 + 0x110) -= 1;
+        {
+            register u8 *queue asm("v1") = D_800922F0;
+            *(u16 *)(queue + 0x110) -= 1;
+        }
     }
-    for (i = 0; i < *(s16 *)(D_800922F0 + 0x110); i++) {
-        d = D_800922F0 + i * 16;
-        d[0x10] = s0[0];
-        d[0x11] = s0[1];
-        *(u16 *)(d + 0x12) = *(u16 *)(s0 + 2);
-        *(s32 *)(d + 0x14) = *(s32 *)(s0 + 4);
-        *(s32 *)(d + 0x18) = *(s32 *)(s0 + 8);
-        *(s32 *)(d + 0x1C) = *(s32 *)(s0 + 0xC);
-        s0 += 0x10;
+    d = D_800922F0;
+    i = 0;
+    if (*(s16 *)(d + 0x110) > 0) {
+        register u8 *end asm("a1") = s0 + 0xC;
+        register u8 *dest asm("v1") = d;
+        register u8 *count asm("a2") = d;
+        do {
+            dest[0x10] = s0[0];
+            dest[0x11] = end[-0xB];
+            *(u16 *)(dest + 0x12) = *(u16 *)(end - 0xA);
+            *(s32 *)(dest + 0x14) = *(s32 *)(end - 8);
+            i++;
+            *(s32 *)(dest + 0x18) = *(s32 *)(end - 4);
+            s0 += 0x10;
+            *(s32 *)(dest + 0x1C) = *(s32 *)end;
+            end += 0x10;
+            dest += 0x10;
+        } while (i < *(s16 *)(count + 0x110));
     }
     if (*(u16 *)D_800922F0 & 4) {
-        c = D_800922F0[0x124];
-        if (c & 2) {
-            D_800922F0[0x124] = 0;
+        register u8 *tail asm("v1") = D_800922F0;
+        register u32 step asm("a0") = tail[0x124];
+        if (step & 2) {
+            tail[0x124] = 0;
             DsSyncCallback(func_80035680);
             DsControlF(0x10, 0);
         } else {
-            D_800922F0[0x124] = c + 1;
+            register u32 next asm("v0") = step + 1;
+            tail[0x124] = next;
         }
     }
 }
