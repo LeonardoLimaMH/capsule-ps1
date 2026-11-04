@@ -1091,33 +1091,30 @@ void func_800D8A20(void) {
 
 s32 func_800DBB3C(s16 id);
 void func_800D8AF8(u8 *arg0, s32 arg1) {
-    extern u8 D_8008F702[];
-    extern u8 D_80069E4C[];
-    s32 i;
-    s16 *a;
-    s16 *b;
-    u8 *p;
-
-    if (D_8008F702[0] != 1) {
-        p = D_80069E4C;
-        i = 0;
-        a = (s16 *)(*(u8 **)(arg0 + 0xB4) + arg1 * 32);
-        b = (s16 *)(*(u8 **)(arg0 + 0xB8) + arg1 * 32);
-        do {
-            if (*(s32 *)(p + 0x70) >= 9) {
-                a[0] += b[0] >> 7;
-                a[1] += b[1] >> 7;
-                a[2] += b[2] >> 7;
-            } else {
-                a[0] -= b[0] >> 7;
-                a[1] -= b[1] >> 7;
-                a[2] -= b[2] >> 7;
-            }
-            i++;
-            a += 4;
-            b += 4;
-        } while (i < 4);
-    }
+ extern u8 D_8008F702[];
+ extern u8 D_80069E4C[];
+ register s32 i asm("t0");
+ register s16 *a asm("a2");
+ register s16 *b asm("a0");
+ register s16 *bp asm("a3");
+ register s16 *ap asm("a1");
+ u8 *p;
+ if(D_8008F702[0]!=1) {
+ i=0;
+ p=D_80069E4C;
+ a=(s16 *)(*(u8 **)(arg0+0xB4)+arg1*32);
+ b=(s16 *)(*(u8 **)(arg0+0xB8)+arg1*32);
+ bp=b+2;
+ ap=a+2;
+ do {
+ if(*(s32 *)(p+0x70)>=9) {
+ a[0]+=b[0]>>7; ap[-1]+=bp[-1]>>7; ap[0]+=bp[0]>>7;
+ } else {
+ a[0]-=b[0]>>7; ap[-1]-=bp[-1]>>7; ap[0]-=bp[0]>>7;
+ }
+ i++; ap+=4; a+=4; bp+=4; b+=4;
+ } while(i<4);
+ }
 }
 
 s32 func_800D8BF8(void) {
@@ -1385,16 +1382,25 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_80
 
 s32 func_800DA500(s32 unused, s32 arg1) {
     extern u8 D_80091618[], D_80063940[];
-    u32 k = (u16)func_800B1260(arg1);
-    u16 *sl = (u16 *)(D_80091618 + k * 0x1A8);
-    u32 off = k * 0x79C;
-    u32 f = *(u32 *)(D_80063940 + *sl * 0x3C + 0xC);
-    S_80100F38 *p = (S_80100F38 *)((u8 *)D_80100F38 + off);
-    if (((f >> 11) & 0x1F) - 0x19 < 6) {
-        u8 *q = (u8 *)p->unk_2BC;
-        while (*q != 1) {
-            p->unk_2BC = (s32)++q;
-            q = (u8 *)p->unk_2BC;
+    s32 raw = func_800B1260(arg1);
+    register u8 *base asm("a0") = D_80091618;
+    u16 k = raw;
+    u16 *slot = (u16 *)(base + k * 0x1A8);
+    S_80100F38 *p = &D_80100F38[k];
+    register u8 *data asm("a1") = D_80063940;
+    u16 c = *slot;
+
+    if ((u32)(((*(u32 *)(data + c * 0x3C + 0xC) >> 11) & 0x1F) - 0x19) < 6) {
+        u8 *pc = (u8 *)p->unk_2BC;
+        if (*pc != 1) {
+            u8 v;
+            do {
+                u8 *n = pc + 1;
+                register u8 *old asm("v1") = pc;
+                p->unk_2BC = (s32)n;
+                v = old[1];
+                pc = n;
+            } while (v != 1);
         }
     } else {
         p->unk_2BC++;
