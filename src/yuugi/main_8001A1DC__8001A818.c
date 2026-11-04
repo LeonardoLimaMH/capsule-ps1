@@ -76,5 +76,3 @@ copy:
     }
     return dst;
 }
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001A818", func_8001A998);
