@@ -78,7 +78,12 @@ void *GetDrawEnv(void *param_1) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", PutDispEnv);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", GetDispEnv);
+void *GetDispEnv(void *env) {
+    extern u8 D_80078988[];
+    extern void *memcpy(void *, void *, s32);
+    memcpy(env, D_80078988, 0x14);
+    return env;
+}
 
 u32 GetODE(void) {
     extern void * D_80078914[];
