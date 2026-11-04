@@ -338,9 +338,11 @@ s32 func_8003BFCC(u32 *s) {
     Unk_800944B8 *e = &base[D_80078C9C];
     register u32 pos asm("a3") = *s;
     u8 *data = e->unk_0x284;
-    u8 *a, *b;
-    s32 n, x, y, diff;
-loop:
+    register u8 *a asm("a1");
+    register u8 *b asm("a2");
+    register s32 n asm("a0");
+    s32 x, y, diff;
+    do {
         a = pattern;
         b = data + pos;
         n = 3;
@@ -354,15 +356,18 @@ loop:
         y = *b;
 compare:
         diff = x - y;
-        if (diff != 0) {
-            pos++;
-            if (pos <= e->unk_0x294) goto loop;
-        } else found = pos + 4;
+        if (diff == 0) goto found;
+        pos++;
+    } while (pos <= e->unk_0x294);
+done:
     *s = found;
-    if (found != -1U) {
-        register s32 v asm("a1") = func_8003AC60(s);
+    if (found == -1U) goto fail;
+    {
+        register s32 value asm("v0") = func_8003AC60(s);
+        register s32 v asm("a1");
         u32 pos;
-        s[2] = v;
+        s[2] = value;
+        v = value;
         pos = s[0];
         s[4] = pos;
         {
@@ -372,6 +377,10 @@ compare:
         }
         return 0;
     }
+found:
+    found = pos + 4;
+    goto done;
+fail:
     return 1;
 }
 
@@ -380,7 +389,7 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C0C8);
 s32 func_8003C29C(s32 n) {
     extern s32 D_80078C98;
     u8 *base = (u8 *)D_800944B8;
-    register s32 offset asm("s2") = n * sizeof(Unk_800944B8);
+    s32 offset = n * sizeof(Unk_800944B8);
     Unk_800944B8 *e = (Unk_800944B8 *)(base + offset);
     register s32 i asm("s1") = 0;
     D_80078C98 = 0;
@@ -394,7 +403,7 @@ s32 func_8003C29C(s32 n) {
         do {
             Unk_800944B8Stream *t = (Unk_800944B8Stream *)(bank + (u32)p);
             s32 v, state;
-            u16 count;
+            register u16 count asm("v0");
             t->unk_0x4 = t->unk_0x0;
             v = func_8003AAF0(t);
             t->unk_0x20 = 0;
@@ -405,7 +414,7 @@ s32 func_8003C29C(s32 n) {
             t->unk_0x1C = v;
             t->unk_0x18 = 0;
             if (state != 0) func_8003C0C8(t);
-            count = bankptr->unk_0x2A2;
+            count = *(volatile u16 *)&bankptr->unk_0x2A2;
             i++;
             p += 0x28;
             if (i >= count) break;
