@@ -2540,7 +2540,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/sdk_libgpu_ext.o"
     },
@@ -4906,7 +4906,7 @@
           "slpm",
           "slpm.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/slpm/sdk_libgpu_ext.o"
     },
