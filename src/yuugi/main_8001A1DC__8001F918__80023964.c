@@ -331,7 +331,7 @@ s32 func_80023FE8(void) {
     return (s32)D_80069E4C;
 }
 
-typedef struct { s16 a[4]; } S_80078C20;
+typedef struct { s16 a[8]; } S_80078C20;
 extern S_80078C20 D_80078C20;
 extern u8 D_80069AD4[], D_80078C18[], D_80069B84[];
 extern void func_8001A998(), SetBackColor(), SetColorMatrix(), RotMatrix();
@@ -405,11 +405,13 @@ void func_80024024(void) {
     b32[2] = 0x740;
     b16 = (s16 *)(b + 0x38);
     *(s16 *)(b + 0x38) = 0x1C0;
-    s = b - 0xB0;
     b16[1] = 0x200;
     b16[2] = 0;
-    *(s32 *)(s + 0x130) = 0;
-    *(s32 *)(s + 0x134) = 0x20;
-    *(s32 *)(s + 0x178) = 0;
-    *(s32 *)(s + 0x17C) = 0;
+    {
+        u8 *t = b - 0xB0;
+        *(s32 *)(t + 0x130) = 0;
+        *(s32 *)(t + 0x134) = 0x20;
+        *(s32 *)(t + 0x178) = 0;
+        *(s32 *)(t + 0x17C) = 0;
+    }
 }
