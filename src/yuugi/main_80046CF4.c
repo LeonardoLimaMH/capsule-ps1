@@ -23,6 +23,7 @@ s32 CD_getsector(u32 arg0, u32 arg1) {
 }
 
 s32 CD_getsector2(u32 arg0, u32 arg1) {
+    volatile u32 status;
     *D_8007334C = 0;
     *D_80073358 = 0x80;
     *D_80073380 = 0x21020843;
@@ -33,6 +34,7 @@ s32 CD_getsector2(u32 arg0, u32 arg1) {
     while (!(*D_8007334C & 0x40)) {
     }
     *D_80073390 = 0x11400100;
+    status = *D_80073390;
     return 0;
 }
 
