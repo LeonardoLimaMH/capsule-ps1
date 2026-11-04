@@ -203,7 +203,13 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C29C);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C390);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C530);
+void func_8003C530(s32 n) {
+    s32 i;
+    for (i = 0; i < D_800944B8[n].unk_0x2A2; i++) {
+        D_800944B8[n].unk_0x0[i].unk_0x20 = 1;
+        D_800944B8[n].unk_0x0[i].unk_0x0 = 0;
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C5BC);
 
