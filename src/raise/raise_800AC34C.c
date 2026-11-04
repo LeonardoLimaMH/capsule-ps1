@@ -398,11 +398,6 @@ s32 func_800AEBA8(s32 arg0, s32 arg1) {
     return sum;
 }
 
-static inline S_800EEB9C *get_state(void) {
-    extern S_800EEB9C D_800EEB9C;
-    return &D_800EEB9C;
-}
-
 s32 func_800AEBDC(s32 arg0) {
     extern u8 D_800EEA00[];
     extern S_800EEB9C D_800EEB9C;
