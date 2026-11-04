@@ -340,7 +340,7 @@ s32 func_8003BFCC(u32 *s) {
     u8 *data = e->unk_0x284;
     u8 *a, *b;
     s32 n, x, y, diff;
-    do {
+loop:
         a = pattern;
         b = data + pos;
         n = 3;
@@ -354,20 +354,22 @@ s32 func_8003BFCC(u32 *s) {
         y = *b;
 compare:
         diff = x - y;
-        if (diff == 0) {
-            found = pos + 4;
-            break;
-        }
-        pos++;
-    } while (pos <= e->unk_0x294);
+        if (diff != 0) {
+            pos++;
+            if (pos <= e->unk_0x294) goto loop;
+        } else found = pos + 4;
     *s = found;
     if (found != -1U) {
-        s32 v = func_8003AC60(s);
+        register s32 v asm("a1") = func_8003AC60(s);
         u32 pos;
         s[2] = v;
         pos = s[0];
         s[4] = pos;
-        s[3] = pos + v;
+        {
+            register u32 end asm("a0") = pos;
+            end += v;
+            s[3] = end;
+        }
         return 0;
     }
     return 1;
@@ -378,25 +380,36 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C0C8);
 s32 func_8003C29C(s32 n) {
     extern s32 D_80078C98;
     u8 *base = (u8 *)D_800944B8;
-    s32 offset = n * sizeof(Unk_800944B8);
+    register s32 offset asm("s2") = n * sizeof(Unk_800944B8);
     Unk_800944B8 *e = (Unk_800944B8 *)(base + offset);
-    s32 i;
+    register s32 i asm("s1") = 0;
     D_80078C98 = 0;
     e->unk_0x2A8 = 0;
     D_80078C9C = n;
     func_8003AF34(n);
-    for (i = 0; i < e->unk_0x2A2; i++, base += 0x28) {
-        u8 *t = base + offset;
-        s32 v;
-        *(u32 *)(t + 4) = *(u32 *)t;
-        v = func_8003AAF0(t);
-        t[0x20] = 0;
-        t[0x23] = 0;
-        t[0x25] = 0;
-        t[0x24] = 0;
-        *(s16 *)(t + 0x1C) = v;
-        *(s16 *)(t + 0x18) = 0;
-        if (D_80078C98 != 0) func_8003C0C8(t);
+    if (e->unk_0x2A2 != 0) {
+        s32 bank = offset;
+        Unk_800944B8 *bankptr = e;
+        u8 *p = base;
+        do {
+            Unk_800944B8Stream *t = (Unk_800944B8Stream *)(bank + (u32)p);
+            s32 v, state;
+            u16 count;
+            t->unk_0x4 = t->unk_0x0;
+            v = func_8003AAF0(t);
+            t->unk_0x20 = 0;
+            t->unk_0x23 = 0;
+            t->unk_0x25 = 0;
+            t->unk_0x24 = 0;
+            state = D_80078C98;
+            t->unk_0x1C = v;
+            t->unk_0x18 = 0;
+            if (state != 0) func_8003C0C8(t);
+            count = bankptr->unk_0x2A2;
+            i++;
+            p += 0x28;
+            if (i >= count) break;
+        } while (1);
     }
     return 0;
 }
@@ -406,9 +419,8 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C390);
 void func_8003C530(s32 n) {
     s32 i;
     for (i = 0; i < D_800944B8[n].unk_0x2A2; i++) {
-        u8 *t = (u8 *)&D_800944B8[n] + i * 0x28;
-        t[0x20] = 1;
-        *(u32 *)t = 0;
+        D_800944B8[n].unk_0x0[i].unk_0x20 = 1;
+        D_800944B8[n].unk_0x0[i].unk_0x0 = 0;
     }
 }
 
