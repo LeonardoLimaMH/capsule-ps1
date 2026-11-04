@@ -1,2 +1,3 @@
-#include "spu.h"
-#include "audio.h"
+#include "yuugi.h"
+#include "../include/spu.h"
+#include "../include/audio.h"
