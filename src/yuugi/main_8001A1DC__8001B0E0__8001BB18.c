@@ -1,4 +1,5 @@
 #include "common.h"
+#include "yuugi.h"
 
 typedef struct {
     u8 b[6];

@@ -51,7 +51,6 @@ extern char D_8001132C[];
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader_80116438", slpm_MoveImage2);
 
-extern void func_80049BC0();
 
 extern u8 D_800112E4[];
 

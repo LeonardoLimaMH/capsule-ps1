@@ -45,6 +45,8 @@ segments:
     bss_size: 0x1D690
     subsegments:
       - [0x800, rodata]
+      - [0x810, .rodata, main_8001A1DC__8001B0E0__8001BB18]
+      - [0x860, rodata]
       - [0xDC0, .rodata, main_800282A0__800282D0__8002C214]
       - [0xDD4, rodata]
       - [0xF98, .rodata, main_8002E7A4]
@@ -68,6 +70,8 @@ segments:
       - [0xB018, c, main_8001A1DC__8001A818]
       - [0xB244, c, main_8001A1DC__8001AA44]
       - [0xB8E0, c, main_8001A1DC__8001B0E0]
+      - [0xC318, c, main_8001A1DC__8001B0E0__8001BB18]
+      - [0xC4E4, c, main_8001A1DC__8001B0E0__8001BCE4]
       - [0xD378, c, main_8001A1DC__8001CB78]
       - [0xD388, c, main_8001A1DC__8001CB88]
       - [0xD5E0, c, main_8001A1DC__8001CDE0]
