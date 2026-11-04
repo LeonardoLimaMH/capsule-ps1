@@ -5,19 +5,6 @@ void func_800A9738(s32 arg0) {
     (*D_800EE914) = arg0;
 }
 
-static inline s32 func_800A9658_inline(s16 arg0) {
-    register s32 r asm("v0");
-    r = 1;
-    if (arg0 != 0) {
-        if (arg0 == r) {
-            r = 4;
-        } else {
-            r = 9;
-        }
-    }
-    return r;
-}
-
 
 void func_800A9744(void) {
     typedef struct {
@@ -49,24 +36,25 @@ void func_800A9744(void) {
     Result_800EE914 *res;
     register s32 s asm("s3");
     s32 count;
+    register s32 temp asm("v0");
     s32 i;
 
     if (D_800EE914.state == 0) {
         return;
     }
 
-    {
-        register s32 r asm("v0");
-        r = 1;
-        if (D_80078C22 != 0) {
-            if (D_80078C22 != r) {
-                r = 9;
-            } else {
-                r = 4;
-            }
-        }
-        count = r;
+    switch (D_80078C22) {
+    default:
+        temp = 9;
+        break;
+    case 0:
+        temp = 1;
+        break;
+    case 1:
+        temp = 4;
+        break;
     }
+    count = temp;
 
     if (work_base[0x99A] != 1) {
         if (D_800EE914.unk94 != 0) {
@@ -89,7 +77,7 @@ void func_800A9744(void) {
 
     i = 0;
     if (count != 0) {
-        register Result_800EE914 *res_loop asm("s2") = res;
+        register Result_800EE914 *r2 asm("s2") = res;
         do {
             register u8 *w asm("v0") = *(u8 **)work_base;
             register u8 *next asm("a2") = NULL;
@@ -113,13 +101,13 @@ void func_800A9744(void) {
             SetPolyF4(p);
             SetSemiTrans(p, 0);
 
-            v = (u8 *)res_loop->cells[i];
+            v = (u8 *)r2->cells[i];
             rot_ret = RotTransPers4(v + 8, v + 0x10, v + 0x18, v + 0x20, &xy[0], &xy[1], &xy[2], &xy[3], &xy[4], &xy[5]);
 
             d_800ee910 = D_800EE910;
-            c0 = res_loop->r;
-            c1 = res_loop->g;
-            c2 = res_loop->b;
+            c0 = r2->r;
+            c1 = r2->g;
+            c2 = r2->b;
             c0 += s;
             c1 += s;
             c2 += s;
