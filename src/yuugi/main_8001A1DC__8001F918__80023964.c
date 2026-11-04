@@ -59,7 +59,48 @@ single:
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918__80023964", func_80023C00);
+void func_80023C00(s32 mode, s32 a1, s32 a2) {
+    extern u8 D_80069E4C[];
+    extern s32 D_80069B28[];
+
+    if (mode == 1) {
+        goto case_1;
+    }
+    if (mode < 2) {
+        goto set_b28;
+    }
+    if (mode == 2) {
+        goto case_2;
+    }
+    *D_80069B28 = mode;
+    goto end;
+
+case_1:
+    {
+        u8 *p = D_80069E4C;
+        *(s32 *)(p + 0x64) = a1;
+        *(s32 *)(p + 0x68) = *(s32 *)(p + 0x60);
+    }
+    goto set_b28;
+
+case_2:
+    {
+        u8 *p = D_80069E4C;
+        *(s32 *)(p + 0x64) = a1;
+        *(s32 *)(p + 0x68) = a2;
+        *(s32 *)(p + 0x60) = a1;
+    }
+
+set_b28:
+    *D_80069B28 = mode;
+
+end:
+    {
+        u8 *p = D_80069E4C;
+        *(s32 *)(p + 0x6C) = 0;
+        *(s32 *)(p + 0x70) = 0x40;
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918__80023964", func_80023C74);
 
