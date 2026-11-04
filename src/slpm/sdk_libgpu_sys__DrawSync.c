@@ -20,7 +20,15 @@ void slpm_ClearImage(s32 rect, u8 r, u8 g, u8 b) {
     M2C_FIELD((*D_80131B2C), M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 8)(M2C_FIELD((*D_80131B2C), s32 *, 0xC), rect, 8, (b << 16) | (g << 8) | r);
 }
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__DrawSync", slpm_ClearImage2);
+extern char D_801104D4[];
+void slpm_ClearImage2(s32 rect, u8 r, u8 g, u8 b) {
+    extern void * D_80131B2C[];
+    s32 t, u;
+    func_80113C78(D_801104D4, rect);
+    u = b << 16;
+    t = (g << 8) | 0x80000000;
+    M2C_FIELD((*D_80131B2C), M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 8)(M2C_FIELD((*D_80131B2C), s32 *, 0xC), rect, 8, (u | t) | r);
+}
 
 #include "common.h"
 
