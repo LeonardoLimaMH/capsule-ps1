@@ -617,7 +617,7 @@
         "progress_categories": [
           "yuugi"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main_80042984.o"
     },
@@ -653,7 +653,7 @@
         "progress_categories": [
           "yuugi"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main_80043248.o"
     },
@@ -1061,7 +1061,7 @@
         "progress_categories": [
           "yuugi"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main_800505D0.o"
     },
@@ -2093,7 +2093,7 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise.o"
     },
