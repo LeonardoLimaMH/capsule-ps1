@@ -1,5 +1,13 @@
 #include "common.h"
 
+typedef struct {
+    s32 state;
+    s32 cells[27];
+    s32 indices[9];
+    s32 unk94;
+    u8 col[4];
+} Result_800EE914;
+
 s16 func_800A8CD0(s16 arg0, s32 arg1) {
     extern s16 D_800F2D20[];
     extern s32 D_800F2D24[];
@@ -51,10 +59,8 @@ void func_800A8E48(void) {
 }
 
 void func_800A8E78(u32 *arg0) {
-    u32 a = arg0[0x34 / 4];
-    u32 b = arg0[0x38 / 4];
-    arg0[0x38 / 4] = b | 1;
-    arg0[0x34 / 4] = (a & ~0x100) | ((~(a >> 8) & 1) << 8);
+    arg0[0x34 / 4] = (arg0[0x34 / 4] & ~0x100) | ((~(arg0[0x34 / 4] >> 8) & 1) << 8);
+    arg0[0x38 / 4] |= 1;
 }
 
 #include "common.h"
