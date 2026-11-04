@@ -1,10 +1,46 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A8CD0", func_800A8CD0);
+s16 func_800A8CD0(s16 arg0, s32 arg1) {
+    extern s16 D_800F2D20[];
+    extern s32 D_800F2D24[];
+    extern s16 D_800F2D28[];
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A8CD0", func_800A8DB8);
+    *D_800F2D24 = func_800202A4(100);
+    *D_800F2D20 = 0;
+    if (arg0 > 0) {
+        do {
+            *D_800F2D28 = func_800A8DB8(*D_800F2D20, arg1);
+            if (*D_800F2D28 >= *D_800F2D24) {
+                return *D_800F2D20;
+            }
+            (*D_800F2D20)++;
+        } while (*D_800F2D20 < arg0);
+    }
+    *D_800F2D20 = arg0 - 1;
+    return *D_800F2D20;
+}
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A8CD0", func_800A8E1C);
+s16 func_800A8DB8(s16 arg0, u16 *arg1) {
+    s32 sum;
+    s16 i;
+
+    sum = 0;
+    i = 0;
+    if (arg0 > 0) {
+        do {
+            sum += arg1[i];
+            i++;
+        } while (i < arg0);
+    }
+    return arg1[i] + (sum - 1);
+}
+
+s32 func_800A8E1C(u16 arg0) {
+    if (arg0 == 1 || arg0 == 5 || arg0 == 3) {
+        return 3;
+    }
+    return 2;
+}
 
 void func_800A8E48(void) {
     func_800B7FA8(0);
