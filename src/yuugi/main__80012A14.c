@@ -22,10 +22,12 @@ void func_80012A14(void) {
 
 s32 func_80012A20(u8 *a0, u16 a1, u16 a2, u16 a3)
 {
-  extern Ent12A20 D_8008ED68[];
+  extern u8 D_8008ED68[];
+  u8 *b;
   Ent12A20 *e;
   s32 i;
-  e = (Ent12A20 *) (((u8 *) D_8008ED68) + 0x158);
+  b = D_8008ED68;
+  e = (Ent12A20 *) (b + 0x158);
   for (i = 0; i < 0x50; i++, e++)
   {
     if (e->t == 0)
