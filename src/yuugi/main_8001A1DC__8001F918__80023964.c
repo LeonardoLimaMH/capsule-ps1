@@ -1,7 +1,46 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918__80023964", func_80023964);
+void func_80023B0C();
+s32 func_80012508();
+s32 func_80023964(void) {
+    extern u8 D_80069A5C[];
+    extern s32 D_80078C04;
+    extern u8 D_8008ED68[];
+    extern s32 D_8008EDF0[];
+    u8 *s0 = D_80069A5C;
+    u8 *s1 = D_8008ED68;
+    s32 var_v0;
+    s32 pad;
+    s32 b100;
+
+    func_80023B0C(0, 2, D_80078C04, s0);
+    if (*(s32 *)(s1 + 0x88) & 0xF000) {
+        func_80023B0C(2, 2, D_80078C04, s0);
+        if (*(s32 *)(s1 + 0x88) & 0x6000) {
+            var_v0 = 0;
+            if (D_80078C04 <= 0) {
+                var_v0 = D_80078C04 + 1;
+            }
+            D_80078C04 = var_v0;
+        }
+        if (*D_8008EDF0 & 0x9000) {
+            var_v0 = 1;
+            if (D_80078C04 > 0) {
+                var_v0 = D_80078C04 - 1;
+            }
+            D_80078C04 = var_v0;
+        }
+        func_80023B0C(1, 2, D_80078C04, D_80069A5C);
+    }
+    pad = *D_8008EDF0;
+    b100 = pad & 0x100;
+    if (pad & 0x20) {
+        func_80012508();
+    } else if (b100 || *(u16 *)(s1 + 0xDE) == 1) {
+        func_80012508();
+    }
+}
 
 #include "common.h"
 
