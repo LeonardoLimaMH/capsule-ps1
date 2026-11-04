@@ -7,18 +7,7 @@ void func_800A9738(s32 arg0) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A9738", func_800A9744);
 
-void func_800A99AC(s32 arg0, s32 arg1) {
-    extern s16 D_80078C22[];
-    extern u8 D_800900C0[];
-    extern u8 D_800EE914[];
-    u8 *var_a2;
-    u32 temp_t0;
-    u32 temp_v0;
-    u32 temp_v1;
-    u32 temp_v1_2;
-    s32 var_a3;
-    s32 var_t1;
-    s32 var_v0;
+INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A9738", func_800A99AC);
 
 s32 func_800A9A74(void)
 {

@@ -7,24 +7,31 @@ u32 _spu_2pitch(s32 arg0, u32 arg1) {
     register s32 product asm("t1");
     register s32 base asm("t0");
     register u32 groups asm("a3");
-    register u32 factor;
+    u32 factor;
+    s32 previous;
+    register u32 step asm("v0");
+    register s32 loaded asm("t1");
     factor = 0x103B;
     base = arg0 << 12;
-    groups = arg1 >> 5;
     i = 0;
+    groups = arg1 >> 5;
     arg1 &= 31;
-    product = arg0 * (s32)factor;
+    product = (s32)((s64)arg0 * (s32)factor);
     sp0 = product;
     if (groups) {
+        previous = arg0 * factor;
         do {
-            base = arg0 * factor;
-            factor = (factor * 0x103B) >> 12;
-            product = arg0 * factor;
+            base = previous;
+            factor *= 0x103B;
+            factor >>= 12;
+            previous = arg0 * factor;
             i++;
-            sp0 = product;
+            sp0 = previous;
         } while (i < (s32)groups);
     }
-    product = ((u32)(*(volatile s32 *)&sp0 - base) >> 5) * arg1;
+    loaded = *(volatile s32 *)&sp0;
+    step = (u32)(loaded - base) >> 5;
+    product = step * arg1;
     return (u32)(base + product) >> 12;
 }
 

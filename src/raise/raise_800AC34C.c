@@ -441,12 +441,7 @@ void func_800AED5C(s32 arg0, s32 arg1) {
     *(s16 *)(p + 0x70) = v;
 }
 
-void func_800AED5C(s32 arg0, s32 arg1) {
-    extern s16 D_800EEAE4[];
-    extern u16 D_800EEB14[];
-    extern u8 D_80069AD4[];
-    u8 *p = D_80069AD4;
-    s32 v = D_800EEB14[arg0] + (arg1 * D_800EEAE4[arg0]) / 1200;
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AEDC4);
 
 /* Estado do modo raise em D_800EEB9C (layout parcial). */
 

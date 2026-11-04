@@ -1,15 +1,6 @@
 #include "common.h"
 #include "yuugi.h"
 
-typedef struct {
-    u32 code : 8;
-    u32 arg : 8;
-    u32 unk02 : 16;
-    u32 unk04;
-    u32 unk08;
-    u32 unk0C;
-} S_AudioCmd;
-
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_80034C7C);
 
 void func_80034D78(s16 arg0) {

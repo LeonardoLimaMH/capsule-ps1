@@ -20,22 +20,6 @@ extern s32 RotTransPers(void *, s32 *, s32 *, s32 *);
 extern void func_800DE420(s32, s32, s16 *, s16 *);
 extern s32 func_800DD9F0(s32, s32, s32);
 
-/* registro de 0x1A8 bytes em D_80091618 */
-typedef struct {
-    u8 pad0[0x10];
-    u16 unk10;
-    u8 pad12[0x8A - 0x12];
-    u16 unk8A;
-    u8 pad8C[0x1A8 - 0x8C];
-} S_80091618;
-
-/* registro de 0x1C bytes em D_80069EC4 (26 por linha) */
-typedef struct {
-    u8 pad0[0x10];
-    u8 *unk10;
-    u8 pad14[0x1C - 0x14];
-} S_80069EC4;
-
 s32 func_800DD8E8(s32 a0, s16 *v, u8 **po) {
     struct { s16 sx, sy; s32 p, f; s16 x, y; } t;
     s32 m = func_800E36E4();

@@ -60,33 +60,7 @@ void _spu_FsetRXX(int param_1, uint param_2, int param_3)
   return;
 }
 
-u32 _spu_FsetRXXa(s32 reg, u32 addr) {
-    extern s32 D_800715BC;
-    extern u32 D_800715C4;
-    extern u32 D_800715C8;
-    extern s32 D_800715C0;
-    extern u16 *D_80071598;
-    register u32 c4 asm("a0");
-    u32 s;
-    s32 ret;
-    if (D_800715BC != 0) {
-        c4 = D_800715C4;
-        if (addr % c4 != 0) {
-            addr += c4;
-            addr &= ~D_800715C8;
-        }
-    }
-    s = addr >> D_800715C0;
-    if (reg == -2) {
-        ret = (s32)addr;
-    } else if (reg == -1) {
-        ret = (u16)s;
-    } else {
-        D_80071598[reg] = s;
-        ret = addr;
-    }
-    return ret;
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_FsetRXXa);
 
 s32 _spu_FgetRXXa(s32 offset, s32 mode) {
     u16 v = D_80071598[0][offset];
@@ -118,14 +92,4 @@ void func_8003FC98(void) {
     *(*D_800715AC) = (*(*D_800715AC) & 0xF0FFFFFF) | 0x22000000;
 }
 
-void _spu_Fw1ts(void) {
-    volatile s32 i;
-    volatile s32 x;
-
-    x = 13;
-    i = 0;
-    while (i < 60) {
-        x *= 13;
-        i = i + 1;
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_Fw1ts);

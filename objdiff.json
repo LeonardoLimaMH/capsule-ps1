@@ -668,7 +668,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main_8003F170.o"
     },
@@ -681,7 +681,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main_8003F628.o"
     },
@@ -889,7 +889,7 @@
           "yuugi",
           "yuugi.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main_80042984.o"
     },
@@ -915,7 +915,7 @@
           "yuugi",
           "yuugi.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main_80043134.o"
     },
@@ -928,7 +928,7 @@
           "yuugi",
           "yuugi.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main_80043248.o"
     },
@@ -1903,7 +1903,7 @@
           "yuugi",
           "yuugi.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main_800505D0.o"
     },
@@ -2267,7 +2267,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/sdk_libc2_putchar.o"
     },
@@ -2540,7 +2540,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/sdk_libetc_pad.o"
     },
@@ -3359,7 +3359,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_ini.o"
     },
@@ -3424,7 +3424,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_q.o"
     },
@@ -6011,7 +6011,7 @@
           "raise",
           "raise.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise.o"
     },

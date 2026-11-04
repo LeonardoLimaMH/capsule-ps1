@@ -2,13 +2,6 @@
 #include "yuugi.h"
 
 typedef struct {
-    u8 pad00[0xC];
-    u32 unk0C;
-    u8 pad10[0x2C];
-} S_80063940;
-extern S_80063940 D_80063940[];
-
-typedef struct {
     s16 x;
     s16 y;
     s32 f_4;
@@ -314,21 +307,7 @@ s32 func_800200F4(s32 cur, s32 max, s32 mode) {
 
 extern s32 (*D_80069AA4[])(void);
 
-    if ((D_8008EDF0[0] & 0x1000) && mode != 1) {
-        cur = (cur > 0) ? (cur - 1) : (max - 1);
-        func_80034AB0(0x84);
-    } else if ((D_8008EDF0[0] & 0x4000) && mode != 1) {
-        cur = (cur < max - 1) ? (cur + 1) : 0;
-        func_80034AB0(0x84);
-    } else if ((D_8008EDF0[0] & 0x8000) && mode != 0) {
-        cur = (cur > 0) ? (cur - 1) : (max - 1);
-        func_80034AB0(0x84);
-    } else if ((D_8008EDF0[0] & 0x2000) && mode != 0) {
-        cur = (cur < max - 1) ? (cur + 1) : 0;
-        func_80034AB0(0x84);
-    }
-    return cur;
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800201D8);
 
 extern u8 D_8008ED68[];
 s32 rand(void);
@@ -423,46 +402,9 @@ extern s32 (*D_80069AA4[])(void);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020688);
 
-void func_80020844(s16 x, s16 y, s16 w, s16 h, u8 r, u8 g, u8 b, u8 tp, s32 ot) {
-    struct PolyF4 {
-        u32 tag;
-        u8 r0, g0, b0, code;
-        s16 x0, y0;
-        s16 x1, y1;
-        s16 x2, y2;
-        s16 x3, y3;
-    };
-    struct S_ED68 {
-        u8 *base;
-        u8 pad[0x104];
-        s32 hx;
-        s32 hy;
-    };
-    extern struct S_ED68 D_8008ED68;
-    extern void SetPolyF4(), SetSemiTrans(), AddPrim(), func_80018610();
-    extern u16 GetTPage();
-    struct PolyF4 *p = *(struct PolyF4 **)(D_8008ED68.base + 0x1090);
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020844);
 
-    *(struct PolyF4 **)(D_8008ED68.base + 0x1090) =
-        (p != 0 && (u8 *)p + 0x18 <= D_8008ED68.base + 0x4594)
-            ? (struct PolyF4 *)((u8 *)p + 0x18)
-            : 0;
-    SetPolyF4(p);
-    SetSemiTrans(p, 1);
-    p->r0 = r;
-    p->g0 = g;
-    p->b0 = b;
-    p->x0 = x + D_8008ED68.hx / 2;
-    p->y0 = y + D_8008ED68.hy / 2;
-    p->x1 = w + (x + D_8008ED68.hx / 2);
-    p->y1 = y + D_8008ED68.hy / 2;
-    p->x2 = x + D_8008ED68.hx / 2;
-    p->y2 = h + (y + D_8008ED68.hy / 2);
-    p->x3 = w + (x + D_8008ED68.hx / 2);
-    p->y3 = h + (y + D_8008ED68.hy / 2);
-    AddPrim(D_8008ED68.base + 0x70 + ot * 4, p);
-    func_80018610(GetTPage(0, tp, 0, 0) & 0xFFFF, ot);
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80020A50);
 
 void *func_80020CE4(void *arg0, s32 arg1) {
     struct S_Obj {
@@ -851,10 +793,7 @@ s32 func_80021A4C(s32 arg0, s32 arg1) {
 
 extern s32 (*D_80069AA4[])(void);
 
-s32 func_80021A4C(s32 arg0, s32 arg1) {
-    s32 var_a2;
-    s32 temp_v1;
-    void *temp_a0;
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80021A9C);
 
 void func_80021BB4(void *p, s32 a1, s32 idx, s32 mode) {
     struct S_P {

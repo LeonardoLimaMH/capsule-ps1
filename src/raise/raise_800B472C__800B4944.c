@@ -48,30 +48,7 @@ void func_800B4944(s32 arg0) {
     }
 }
 
-    if (D_80091618[*D_8006AF80].f_8A == 0xFFFF && arg0 == 0) {
-        arg0 = 1;
-    }
-    *D_800EEB90 = arg0 == 1;
-    i = 1;
-    base = (u32)D_80100F38;
-    q = (s32 *)D_800EEB9C;
-    for (; i >= 0; i--) {
-        idx = func_800B1260(i) & 0xFFFF;
-        if (idx != 0xFFFF) {
-            p = (S_80100F38 *)((idx * 0x79C) + base);
-            if (*D_800EEB90 == i) {
-                v = q[0x32];
-            } else {
-                t = i - 2;
-                v = D_800EE5D0[2] + t;
-            }
-            v = func_80019F30(D_800EE5D0[0] | 0x60000, v + D_800EE5D0[3]);
-            p->f_190[7] = 0;
-            p->f_190[6] = v;
-            func_800B4AAC(idx);
-        }
-    }
-}
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800B472C__800B4944", func_800B4AAC);
 
 void func_800B4C40(s32 arg0) {
     typedef struct { u8 _p0[0x190]; s32 *f_190; u8 _p194[0x608]; } S_80100F38;
@@ -301,17 +278,7 @@ s32 func_800B5CF4(s32 arg0) {
     return ret;
 }
 
-void func_800B5BA0(s32 arg0) {
-    typedef struct {
-        u8 _p0[0x38];
-        u32 b38_0 : 1;
-    } SubEntry;
-    typedef struct {
-        u8 _p0[0x190];
-        SubEntry *f_190;
-        SubEntry *f_194[6];
-        u8 _p1AC[0x5F0];
-    } S_80100F38;
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800B472C__800B4944", func_800B5DE8);
 
 s32 func_800B5F44(s32 arg0, s32 arg1) {
     typedef struct {

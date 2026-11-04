@@ -37,78 +37,15 @@ void func_80110E70(s16 arg0, s16 arg1)
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80110E90);
 
-void func_80110F10(LdrMovie *m, s16 x0, s16 y0, s16 x1, s16 y1)
-{
-  extern u8 *D_801334A0;
-  extern s32 D_8013348C;
-
-  m->buf[0] = D_801334A0 + 0x12D44;
-  m->buf[1] = D_801334A0 + 0x3AD44;
-  m->cur = 0;
-  m->ring = D_801334A0 + 0x10044;
-  m->sel = 0;
-  m->done = 0;
-  if (D_8013348C & 1) {
-    m->r[0].x = x0;
-    m->r[0].y = y0;
-    m->r[0].w = 480;
-    m->r[0].h = 240;
-    m->r[1].x = x1;
-    m->r[1].y = y1;
-    m->r[1].w = 480;
-    m->r[1].h = 240;
-    m->x = x0;
-    m->y = y0;
-    m->w = 24;
-  } else {
-    m->r[0].x = x0;
-    m->r[0].y = y0;
-    m->r[0].w = 320;
-    m->r[0].h = 240;
-    m->r[1].x = x1;
-    m->r[1].y = y1;
-    m->r[1].w = 320;
-    m->r[1].h = 240;
-    m->x = x0;
-    m->y = y0;
-    m->w = 16;
-  }
-  m->h = 240;
-}
+INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80110F10);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80110FDC);
 
-extern s32 D_8013348C;
-extern char D_80133490[];
-extern char D_801100D0[];
-extern u32 *func_80111268(LdrMovie *m);
-extern void DecDCTvlc();
-extern void StFreeRing();
-extern void slpm_printf();
-s32 func_801111D4(LdrMovie *m)
-{
-  u32 *p;
-  s32 i = 0x800000;
-
-  do {
-    p = func_80111268(m);
-    i--;
-    if (p != 0) {
-      m->cur = m->cur == 0;
-      DecDCTvlc(p, m->buf[m->cur]);
-      StFreeRing(p);
-      return 0;
-    }
-  } while (i != 0);
-  slpm_printf(D_80133490);
-  return 0xFFFF;
-}
+INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_801111D4);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80111268);
 
-void func_80111464(LdrMovie *m)
-{
-  volatile s32 cnt = 0x800000;
+INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80111464);
 
 #include "common.h"
 
@@ -135,18 +72,7 @@ void func_80111538(s32 arg0)
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80111584);
 
-s32 func_801119E4(s32 arg0, s32 arg1)
-{
-    extern u8 D_801334A8[];
-    u8 *p;
-    u8 *base = D_801334A8;
-
-    p = base + arg0 * 0x22;
-    if (((p[1] >> 4) == 4) && (arg1 == 0)) {
-        return p[3] | (p[2] << 8);
-    }
-    return 0xFFFF;
-}
+INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_801119E4);
 
 void func_80111A40(void) {
 
