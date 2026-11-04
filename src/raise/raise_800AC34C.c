@@ -406,22 +406,18 @@ static inline S_800EEB9C *get_state(void) {
 s32 func_800AEBDC(s32 arg0) {
     extern u8 D_800EEA00[];
     extern S_800EEB9C D_800EEB9C;
-    S_800EEB9C *p;
     s32 i;
 
     i = 9;
     if (arg0 != 0xFF && D_800EEA00[arg0] == 1) {
-        register u32 base asm("v0");
-        base = (u32)&D_800EEB9C;
-        p = (S_800EEB9C *)base;
-        p->unk24 = arg0;
-        p->unkD0 = p->unk7C[arg0];
+        D_800EEB9C.unk24 = arg0;
+        D_800EEB9C.unkD0 = D_800EEB9C.unk7C[arg0];
         do {
             i--;
-            if (p->unk3C8[arg0][p->unkD0] == 1) {
+            if (D_800EEB9C.unk3C8[arg0][D_800EEB9C.unkD0] == 1) {
                 return 1;
             }
-            p->unkD0 = (p->unkD0 + 1) % p->unk60[arg0];
+            D_800EEB9C.unkD0 = (D_800EEB9C.unkD0 + 1) % D_800EEB9C.unk60[arg0];
         } while (i != 0);
         return 0;
     }
