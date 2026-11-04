@@ -152,8 +152,11 @@ def generate(objects_only=False):
                 "target_path": tobj.relative_to(ROOT).as_posix(),
                 "metadata": {
                     "source_path": key,
-                    "progress_categories": [t, f"{t}.{'sdk' if sdk else 'game'}"],
+                    "progress_categories": [t, f"{t}.{'sdk' if sdk else 'game'}"] + ([] if sdk else ["game"]),
                     "complete": not pending,
+                    # SDK PsyQ é biblioteca (código da Sony, igual em centenas de jogos): fica fora do
+                    # progresso principal, como em ygofm-decomp/sotn-decomp; a categoria .sdk ainda mostra
+                    "auto_generated": sdk,
                 },
             }
             if bobj is not None:
@@ -161,7 +164,7 @@ def generate(objects_only=False):
             units.append(unit)
         print(f"{t}: {sum(u['name'].startswith(t + '/') for u in units)} unidades", flush=True)
 
-    cats = []
+    cats = [{"id": "game", "name": "Código do jogo (sem SDK)"}]
     for t, label in TARGETS.items():
         cats += [{"id": t, "name": label},
                  {"id": f"{t}.game", "name": f"{t.upper()}: código do jogo"},
