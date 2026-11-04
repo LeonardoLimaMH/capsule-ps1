@@ -208,9 +208,73 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B472C__800B4944", func_800B53D4);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B472C__800B4944", func_800B55B8);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B472C__800B4944", func_800B5A78);
+void func_800B5A78(s32 arg0, s32 arg1) {
+    typedef struct {
+        u8 _p0[0x38];
+        u32 b38_0 : 1;
+    } SubEntry;
+    typedef struct {
+        u8 _p0[0x190];
+        SubEntry *f_190;
+        SubEntry *f_194[6];
+        u8 _p1AC[0x5F0];
+    } S_80100F38;
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B472C__800B4944", func_800B5BA0);
+    extern S_80100F38 D_80100F38[];
+    extern u16 func_800B1260(s32);
+    u16 id;
+    S_80100F38 *p;
+
+    arg1 = (arg1 != 1);
+    id = func_800B1260(arg0);
+    if (id != 0xFFFF) {
+        p = &D_80100F38[id];
+        p->f_190->b38_0 = arg1;
+        p->f_194[0]->b38_0 = arg1;
+        p->f_194[1]->b38_0 = arg1;
+        p->f_194[2]->b38_0 = arg1;
+        p->f_194[3]->b38_0 = arg1;
+        p->f_194[4]->b38_0 = arg1;
+        p->f_194[5]->b38_0 = arg1;
+    }
+}
+
+void func_800B5BA0(s32 arg0) {
+    typedef struct {
+        u8 _p0[0x38];
+        u32 b38_0 : 1;
+    } SubEntry;
+    typedef struct {
+        u8 _p0[0x190];
+        SubEntry *f_190;
+        SubEntry *f_194[6];
+        u8 _p1AC[0x5F0];
+    } S_80100F38;
+
+    extern S_80100F38 D_80100F38[];
+    extern u16 func_800B1260(s32);
+    s32 i;
+    u32 val;
+    u16 id;
+    S_80100F38 *p;
+
+    val = (arg0 != 1);
+    i = 1;
+    do {
+        id = func_800B1260(i);
+        if (id != 0xFFFF) {
+            p = &D_80100F38[id];
+            p->f_190->b38_0 = val;
+            p->f_194[0]->b38_0 = val;
+            p->f_194[1]->b38_0 = val;
+            p->f_194[2]->b38_0 = val;
+            p->f_194[3]->b38_0 = val;
+            p->f_194[4]->b38_0 = val;
+            p->f_194[5]->b38_0 = val;
+        }
+        i--;
+    } while (i >= 0);
+}
 
 s32 func_800B5CF4(s32 arg0) {
     typedef struct {
