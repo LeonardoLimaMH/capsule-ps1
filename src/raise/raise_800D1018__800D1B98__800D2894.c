@@ -95,7 +95,18 @@ s32 func_800D2AA4(void) {
     return 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D2B34);
+s32 func_800D2B34(void) {
+    u32 id = func_800B1260() & 0xFFFF;
+
+    if (id != 0xFFFF) {
+        u8 *p = (u8 *)&D_80100F38[id];
+        s32 res = func_800CE128(*(s16 *)(p + 0x326));
+        if (res == 2 || res == 6) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 s32 func_800D2BB8(s32 arg0) {
     extern u8 D_80063940[], D_80091618[];
