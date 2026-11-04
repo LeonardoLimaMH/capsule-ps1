@@ -64,8 +64,6 @@ def build_target(t, src, funcs):
     """Objeto com o assembly original das funções do arquivo, na ordem do arquivo."""
     folder = ROOT / ".cache" / "fullasm" / t / "nonmatchings" / src.stem
     done = OUT / "target" / t / f"{src.stem}.o"
-    if INCREMENTAL and done.exists():
-        return done
     lines = ['.include "include/macro.inc"', ".set noat", ".set noreorder", ".text"]
     n = 0
     for f in funcs:
@@ -76,6 +74,10 @@ def build_target(t, src, funcs):
     if not n:
         return None
     asm = OUT / "target" / t / f"{src.stem}.s"
+    # só reaproveita se a lista de funções do arquivo não mudou (um split de TU deixava o
+    # objeto antigo com funções que foram para o arquivo novo, contadas duas vezes)
+    if INCREMENTAL and done.exists() and asm.exists() and asm.read_text(encoding="utf-8") == "\n".join(lines) + "\n":
+        return done
     asm.parent.mkdir(parents=True, exist_ok=True)
     asm.write_text("\n".join(lines) + "\n", encoding="utf-8")
     obj = asm.with_suffix(".o")
