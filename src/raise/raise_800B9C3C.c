@@ -40,7 +40,21 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C", func_800BA4A0);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C", func_800BA534);
 
-extern u8 D_80100F38[], D_80091618[], D_80063940[];
+typedef struct {
+    u8 _p0[0x8A];
+    u16 f_8A;
+    u8 _p8C[0x11C];
+} S_80091618;
+typedef struct {
+    u8 _p0[0x388];
+    s16 f_388;
+    s16 f_38A;
+    u8 _p38C[0x40C];
+    s32 f_798;
+} S_80100F38;
+extern S_80100F38 D_80100F38[];
+extern S_80091618 D_80091618[];
+extern u8 D_80063940[];
 extern s32 D_800EEB70[], D_800ED890[];
 extern s16 D_80078C24[], D_80078C28[], D_80078C20[];
 extern u16 D_8008EE44[], D_8006AF80[];
