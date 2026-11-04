@@ -1058,12 +1058,13 @@ void func_80022F80(u8 *o, s32 b) {
     u16 *dst = D_80065264;
     s32 done = 0;
     s32 i = 0;
-    u16 *src = D_80065164[b];
+    u16 *src = D_80065164[0];
     s32 next;
     s32 k;
     u16 v;
+    b = (s32)src + b * 12;
     do {
-        v = src[i];
+        v = ((u16 *)b)[i];
         if (v == 0x219) done = 1;
         if (done) break;
         next = i + 1;
