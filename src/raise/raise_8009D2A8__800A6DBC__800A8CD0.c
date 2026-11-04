@@ -100,8 +100,87 @@ void func_800A95CC(void) {
 
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A8CD0", func_800A95D4);
+void func_800A95D4(void) {
+    extern Result_800EE914 D_800EE914;
+    s32 off;
+    s32 j;
+    u8 *q;
+    s32 *p;
+    s32 *end;
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A8CD0", func_800A9658);
+    D_800EE914.state = 0;
+    D_800EE914.col[0] = 0x40;
+    D_800EE914.col[1] = 0x74;
+    D_800EE914.col[2] = 0xb8;
+    D_800EE914.unk94 = 0;
+    D_800EE914.col[3] = 0x2c;
+    off = 0;
+    p = (s32 *)&D_800EE914;
+    end = p + 9;
+    do {
+        j = 0;
+        q = (u8 *)&D_800EE914;
+        p[1] = 0;
+        p[28] = -1;
+        do {
+            *(s32 *)(q + off + 0x28) = 0;
+            j++;
+            q += 0x24;
+        } while (j < 2);
+        p++;
+        off += 4;
+    } while (p < end);
+}
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A8CD0", func_800A967C);
+s32 func_800A9658(s16 arg0) {
+    s32 ret = 1;
+    if (arg0 != 0) {
+        ret = 9;
+        if (arg0 == 1) {
+            ret = 4;
+        }
+    }
+    return ret;
+}
+
+void func_800A967C(s32 arg0, s32 arg1) {
+    extern s16 D_80078C22[];
+    extern s32 D_800900C0[];
+    extern Result_800EE914 D_800EE914;
+    extern s32 D_800EE9A8[];
+    Result_800EE914 *res;
+    s32 i;
+    s32 count;
+    s32 step;
+    s32 temp;
+
+    D_800EE914.state = 0;
+    switch (D_80078C22[0]) {
+    case 0:
+        temp = 1;
+        break;
+    case 1:
+        temp = 4;
+        break;
+    default:
+        temp = 9;
+        break;
+    }
+    count = temp;
+
+    i = 0;
+    if (count != 0) {
+        step = D_80078C22[0] + 1;
+        res = &D_800EE914;
+        do {
+            s32 y = i / step;
+            s32 x = i % step;
+            s32 val = (arg0 - y) * 8 + (arg1 - x);
+            res->indices[i] = val;
+            res->cells[i] = D_800900C0[0x15C / 4] + val * 0x2C;
+            i++;
+        } while (i < count);
+    }
+
+    D_800EE9A8[0] = 0x40;
+}
