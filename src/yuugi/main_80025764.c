@@ -180,50 +180,60 @@ void func_800264BC(void *arg0)
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80026514);
 
-extern u8 D_8008F703[];
-extern s32 D_80078C38[];
+extern u8 D_8008F703;
+extern s32 D_80078C38;
 extern u8 D_8006AF80[], D_8006AF90[], D_8006AFCC[];
 extern void func_80026514(s32);
 void func_800267F0(void) {
     register s32 neg1 asm("a2") = -1;
-    register u8 *base asm("t0") = D_8006AF90;
+    u8 *base = D_8006AF90;
     register u8 *a1 asm("a1") = base;
     register s32 off asm("a3") = 0;
     register u8 *t1 asm("t1") = a1 + 0x3C;
     s32 i;
-    s32 j;
 
-    *D_8008F703 = 0;
-    *D_80078C38 = 0x701B;
+    D_8008F703 = 0;
+    D_80078C38 = 0x701B;
     *(u16 *)D_8006AF80 = 0xFFFF;
     *(s32 *)(D_8006AF80 + 4) = 0x20D0;
 
     do {
         *(s16 *)a1 = 0;
-        j = off;
         i = 0;
-        do {
-            *(s16 *)(a1 + 2 + i * 2) = neg1;
-            *(s16 *)(base + j + 8) = neg1;
-            *(s16 *)(base + j + 10) = neg1;
-            j += 4;
-        } while (++i < 3);
+        {
+            register s32 a0 asm("a0") = off;
+            register u8 *v1 asm("v1") = a1;
+            do {
+                u8 *v0 = (u8 *)((u32)a0 + (u32)base);
+                a0 += 4;
+                *(s16 *)(v1 + 2) = neg1;
+                *(s16 *)(v0 + 8) = neg1;
+                *(s16 *)(v0 + 10) = neg1;
+                v1 += 2;
+            } while (++i < 3);
+        }
 
         *(s16 *)(a1 + 0x14) = 0;
         i = 0;
-        do {
-            *(s16 *)(a1 + 0x16 + i * 2) = neg1;
-            *(s16 *)(a1 + 0x1A + i * 2) = neg1;
-        } while (++i < 2);
+        {
+            register u8 *v1 asm("v1") = a1;
+            do {
+                *(s16 *)(v1 + 0x16) = neg1;
+                *(s16 *)(v1 + 0x1A) = neg1;
+                v1 += 2;
+            } while (++i < 2);
+        }
 
         a1 += 0x1E;
         off += 0x1E;
     } while ((s32)a1 < (s32)t1);
 
+    i = 0;
     {
         register s32 a0 asm("a0") = -1;
-        register u8 *v1 asm("v1") = D_8006AFCC;
-        i = 0;
+        register u8 *v1 asm("v1");
+        u8 *ptr = D_8006AFCC;
+        v1 = ptr;
         do {
             *(s32 *)(v1 + 8) = a0;
             *(s32 *)(v1 + 0x1C) = 0;
@@ -231,10 +241,10 @@ void func_800267F0(void) {
         } while (++i < 5);
     }
 
+    i = 0;
     {
         register u8 *a0 asm("a0") = D_8006AFCC;
         register u8 *v1 asm("v1") = a0;
-        i = 0;
         do {
             *(s16 *)(v1 + 0x30) = 0;
             *(s32 *)(a0 + 0x48) = 0;
@@ -264,7 +274,7 @@ void func_800278C8(s32 a, s32 b) {
     register u8 *af90 asm("t4");
     register s32 c_ffff asm("t2") = 0xFFFF;
     register s32 c_neg1 asm("t1") = -1;
-    register u32 dst_off asm("a3");
+    u32 dst_off;
     u8 *p;
     register u8 *v1 asm("v1");
     register u8 *src asm("a2");
