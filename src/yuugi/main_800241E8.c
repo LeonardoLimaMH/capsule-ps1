@@ -1,6 +1,14 @@
 #include "common.h"
 #include "yuugi.h"
 
+typedef struct {
+    s32 unk0, unk4, unk8;
+    u8 padC[4];
+    u8 unk10, unk11, unk12, pad13, unk14, unk15;
+    u8 pad16[5];
+    u8 unk1B;
+} Unk80069E4C;
+
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_800241E8);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_8002453C);
@@ -49,4 +57,25 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_800254A0);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_80025514);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_800255FC);
+void func_800255FC(s32 arg0) {
+    extern u8 D_80069E4C[], D_80085428[], D_80100F38[];
+    u8 *q;
+    u8 *p;
+    if (arg0 != 0) {
+        switch (*D_80085428) {
+        case 0:
+            q = D_80100F38 + (func_800B1260() & 0xFFFF) * 0x79C;
+            p = D_80069E4C;
+            *(s32 *)p = (*(s16 *)(q + 0x33E) - p[0x11]) * 100;
+            *(s32 *)(p + 4) = (*(s16 *)(q + 0x340) - p[0x10]) * 100;
+            *(s32 *)(p + 8) = (*(s16 *)(q + 0x33C) - p[0x12]) * 50;
+            return;
+        case 1:
+            p = D_80069E4C;
+            *(s32 *)p = (p[0x14] - p[0x11]) * 100;
+            *(s32 *)(p + 4) = (p[0x15] - p[0x10]) * 100;
+            *(s32 *)(p + 8) = (p[0x1B] - p[0x12]) * 50;
+            break;
+        }
+    }
+}
