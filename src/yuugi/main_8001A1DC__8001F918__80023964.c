@@ -102,6 +102,21 @@ end:
     }
 }
 
+typedef struct {
+    u16 x;
+    u16 y;
+    u16 z;
+    u16 pad;
+} Vec3s_80023C74;
+
+typedef struct {
+    u8 pad0[8];
+    s32 unk8;
+    u8 padC[0xB4 - 0xC];
+    Vec3s_80023C74 *unkB4;
+    Vec3s_80023C74 *unkB8;
+} Struct_80023C74;
+
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918__80023964", func_80023C74);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918__80023964", func_80023ECC);
