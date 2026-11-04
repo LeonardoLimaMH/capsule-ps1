@@ -413,7 +413,39 @@ s32 func_8003AC60(u8 *s) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AE48);
+#ifndef UNK_800944B8_DEFINED
+#define UNK_800944B8_DEFINED
+
+#endif
+
+s32 func_8003AE48(u8 *s) {
+    register u8 *stream asm("a2") = s;
+    register s32 hi asm("a1");
+    register s32 lo asm("v1");
+    {
+        register Unk_800944B8 *base asm("a0") = D_800944B8;
+        Unk_800944B8 *e = &base[D_80078C9C];
+        u8 *data = *(u8 *volatile *)&e->unk_0x284;
+        register u32 pos asm("a0") = *(volatile u32 *)stream;
+        register u8 c asm("v1") = data[pos];
+        pos++;
+        *(u32 *)stream = pos;
+        if (e->unk_0x294 < pos) { stream[0x20] = 1; hi = -1; }
+        else hi = (u8)c;
+    }
+    {
+        register Unk_800944B8 *base asm("a0") = D_800944B8;
+        Unk_800944B8 *e = &base[D_80078C9C];
+        u8 *data = *(u8 *volatile *)&e->unk_0x284;
+        register u32 pos asm("a0") = *(volatile u32 *)stream;
+        register u8 c asm("v1") = data[pos];
+        pos++;
+        *(u32 *)stream = pos;
+        if (e->unk_0x294 < pos) { stream[0x20] = 1; lo = -1; }
+        else lo = (u8)c;
+    }
+    return ((hi & 0xFF) << 8) | (lo & 0xFF);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AF34);
 
