@@ -285,7 +285,7 @@ u8 func_800201D8(s32 n) {
     u32 tmp[2];
     register u8 r asm("a3") = 0;
     register s32 i asm("a1") = 0;
-    register u32 *t asm("t0") = (u32 *)((u32)tmp + (u32)(n << 2));
+    register u32 *t asm("t0") = ({ u32 *p = tmp + n; p; });
     register u32 one asm("t1") = 1;
     register u32 *e asm("a2");
     register u8 *base asm("v1") = D_8008ED68;

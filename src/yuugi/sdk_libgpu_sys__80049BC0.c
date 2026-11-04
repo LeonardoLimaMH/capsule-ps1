@@ -35,19 +35,17 @@ extern char D_800112F0[];
 s32 MoveImage(s32 *rect, s32 x, s32 y) {
     extern void * D_80078914[];
     extern s32 D_800789BC[];
-    s32 *q;
     func_80049BC0(D_800112F0, rect);
-    if (((s16 *)rect)[2] != 0) {
-        if (((s16 *)rect)[3] == 0) {
-            return -1;
-        }
-        q = D_800789BC;
-        q[1] = (y << 16) | (x & 0xFFFF);
-        q[0] = rect[0];
-        q[2] = rect[1];
-        return M2C_FIELD((*D_80078914), s32 (**)(s32, s32 *, s32, s32), 8)(M2C_FIELD((*D_80078914), s32 *, 0x18), q - 2, 0x14, 0);
+    if (((s16 *)rect)[2] == 0) {
+        return -1;
     }
-    return -1;
+    if (((s16 *)rect)[3] == 0) {
+        return -1;
+    }
+    D_800789BC[1] = (y << 16) | (x & 0xFFFF);
+    D_800789BC[0] = rect[0];
+    D_800789BC[2] = rect[1];
+    return M2C_FIELD((*D_80078914), s32 (**)(s32, s32 *, s32, s32), 8)(M2C_FIELD((*D_80078914), s32 *, 0x18), &D_800789BC[-2], 0x14, 0);
 }
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", ClearOTag);
@@ -95,7 +93,26 @@ void DrawOTag(s32 arg0) {
     M2C_FIELD(D_80078914, M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 8)(M2C_FIELD(D_80078914, s32 *, 0x18), arg0, 0, 0);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", PutDrawEnv);
+extern char D_80011340[];
+void *PutDrawEnv(void *env) {
+    extern void *D_80078914[];
+    extern M2C_UNK (*D_80078918)(M2C_UNK *, void *);
+    extern u8 D_8007891E[];
+    extern void func_8004AC78(void *, void *);
+    extern void *memcpy(void *, void *, s32);
+    u8 *p = D_8007891E;
+    void *tag;
+
+    if (*p >= 2) {
+        D_80078918(D_80011340, env);
+    }
+    tag = (u8 *)env + 0x1C;
+    func_8004AC78(tag, env);
+    *(u32 *)tag |= 0xFFFFFF;
+    M2C_FIELD((*D_80078914), s32 (**)(s32, void *, s32, s32), 8)(M2C_FIELD((*D_80078914), s32 *, 0x18), tag, 0x40, 0);
+    memcpy(p + 0xE, env, 0x5C);
+    return env;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", DrawOTagEnv);
 

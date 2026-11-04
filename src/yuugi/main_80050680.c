@@ -17,19 +17,11 @@ s32 func_80050680(void) {
 }
 
 s32 func_800506E8(void) {
-    typedef struct {
-        s32 field0;
-        s32 field4;
-    } S_80078B64;
-    extern S_80078B64 *D_80078B64;
-    s32 var_v0;
-
-    var_v0 = 0;
-    if (D_80078B64->field4 & 1) {
-        var_v0 = 1;
-        if (!(D_80078B64->field0 & 1)) {
-            var_v0 = 0;
-        }
+    extern s32 *D_80078B64[];
+    register s32 *p asm("v1") = D_80078B64[0];
+    if (p[1] & 1) {
+        if (p[0] & 1) return 1;
+        return 0;
     }
-    return var_v0;
+    return 0;
 }

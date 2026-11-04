@@ -24,8 +24,7 @@ extern void *func_80015B3C();
 extern void func_80015EF8(void *), func_8001AA70(void *, void *, s32);
 extern void func_80099370(void), func_800161C4(void);
 u8 *func_80098EAC(u8 *s) {
-    u16 pri = *(u16 *)(s + 2) + 1;
-    u8 *o = func_80015B3C(func_80099370, func_800161C4, pri);
+    u8 *o = func_80015B3C(func_80099370, func_800161C4, *(u16 *)(s + 2) + 1);
     func_80015EF8(o);
     func_8001AA70(o + 0x14, s + 0x14, 0x20);
     *(u8 **)(o + 0x40) = s;

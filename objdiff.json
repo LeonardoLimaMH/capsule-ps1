@@ -32,7 +32,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_80019F30.o"
     },
     {
       "name": "yuugi/main_8001A1DC",
@@ -447,7 +448,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_80033AC8.o"
     },
     {
       "name": "yuugi/main_80033C10",
@@ -615,7 +617,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8003F170.o"
     },
     {
       "name": "yuugi/main_8003F628",
@@ -627,7 +630,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8003F628.o"
     },
     {
       "name": "yuugi/main_8003F6E4",
@@ -704,7 +708,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_80040D28___SpuGetAnyVoice.o"
     },
     {
       "name": "yuugi/main_800411E8",
@@ -768,7 +773,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_800423A8__PCopen.o"
     },
     {
       "name": "yuugi/main_800424E4",
@@ -780,7 +786,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_800424E4.o"
     },
     {
       "name": "yuugi/main_800425BC",
@@ -792,7 +799,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_800425BC.o"
     },
     {
       "name": "yuugi/main_800427B8",
@@ -830,7 +838,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_80042984.o"
     },
     {
       "name": "yuugi/main_80042BB0",
@@ -881,7 +890,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_800437FC.o"
     },
     {
       "name": "yuugi/main_8004386C",
@@ -893,7 +903,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8004386C.o"
     },
     {
       "name": "yuugi/main_80043D6C",
@@ -918,7 +929,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_80043D8C.o"
     },
     {
       "name": "yuugi/main_800445A4",
@@ -930,7 +942,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_800445A4.o"
     },
     {
       "name": "yuugi/main_80044634",
@@ -1007,7 +1020,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8004489C.o"
     },
     {
       "name": "yuugi/main_80044934",
@@ -1019,7 +1033,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_80044934.o"
     },
     {
       "name": "yuugi/main_80044A0C",
@@ -1070,7 +1085,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_80044C04.o"
     },
     {
       "name": "yuugi/main_80045128",
@@ -1082,7 +1098,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_80045128.o"
     },
     {
       "name": "yuugi/main_8004530C",
@@ -1094,7 +1111,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8004530C.o"
     },
     {
       "name": "yuugi/main_80045594",
@@ -1106,7 +1124,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_80045594.o"
     },
     {
       "name": "yuugi/main_80045680",
@@ -1118,7 +1137,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_80045680.o"
     },
     {
       "name": "yuugi/main_80045714",
@@ -1130,7 +1150,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_80045714.o"
     },
     {
       "name": "yuugi/main_800457C4",
@@ -1168,7 +1189,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_80046AC8.o"
     },
     {
       "name": "yuugi/main_80046CF4",
@@ -1206,7 +1228,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_80047344.o"
     },
     {
       "name": "yuugi/main_800473C4",
@@ -1231,7 +1254,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8004749C.o"
     },
     {
       "name": "yuugi/main_800475CC",
@@ -1295,7 +1319,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_80047EC4.o"
     },
     {
       "name": "yuugi/main_80047F58",
@@ -1320,7 +1345,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_800487CC.o"
     },
     {
       "name": "yuugi/main_8004893C",
@@ -1423,7 +1449,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8004B9CC.o"
     },
     {
       "name": "yuugi/main_8004C168",
@@ -1474,7 +1501,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8004C7FC.o"
     },
     {
       "name": "yuugi/main_8004C860",
@@ -1499,7 +1527,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8004C8A0.o"
     },
     {
       "name": "yuugi/main_8004E0AC",
@@ -1537,7 +1566,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8004E10C__8004E2AC.o"
     },
     {
       "name": "yuugi/main_8004E10C__SetLineF2",
@@ -1692,7 +1722,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8004E31C.o"
     },
     {
       "name": "yuugi/main_8004E3A8",
@@ -1717,7 +1748,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8004E40C.o"
     },
     {
       "name": "yuugi/main_8004E7B8",
@@ -1742,7 +1774,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8004E8CC.o"
     },
     {
       "name": "yuugi/main_8004F268",
@@ -1767,7 +1800,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8004F2A4.o"
     },
     {
       "name": "yuugi/main_8004FD9C",
@@ -1779,7 +1813,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8004FD9C.o"
     },
     {
       "name": "yuugi/main_8005041C",
@@ -1791,7 +1826,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8005041C.o"
     },
     {
       "name": "yuugi/main_80050598",
@@ -1816,7 +1852,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_800505D0.o"
     },
     {
       "name": "yuugi/main_800505D0__80050648",
@@ -1840,8 +1877,9 @@
           "yuugi",
           "yuugi.game"
         ],
-        "complete": false
-      }
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/main_80050680.o"
     },
     {
       "name": "yuugi/main_8005072C",
@@ -1853,7 +1891,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8005072C.o"
     },
     {
       "name": "yuugi/main__80012144",
@@ -1917,7 +1956,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/main__80012A14__80012E54.o"
     },
     {
       "name": "yuugi/main__80013028",
@@ -2007,7 +2047,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libapi_chclrpad.o"
     },
     {
       "name": "yuugi/sdk_libapi_counter",
@@ -2018,7 +2059,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/sdk_libapi_counter.o"
     },
@@ -2032,7 +2073,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libapi_first.o"
     },
     {
       "name": "yuugi/sdk_libapi_pad",
@@ -2057,7 +2099,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libapi_patch.o"
     },
     {
       "name": "yuugi/sdk_libc2_atoi",
@@ -2069,7 +2112,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libc2_atoi.o"
     },
     {
       "name": "yuugi/sdk_libc2_bcopy",
@@ -2146,7 +2190,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libc2_printf.o"
     },
     {
       "name": "yuugi/sdk_libc2_prnt",
@@ -2158,7 +2203,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libc2_prnt.o"
     },
     {
       "name": "yuugi/sdk_libc2_putchar",
@@ -2170,7 +2216,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libc2_putchar.o"
     },
     {
       "name": "yuugi/sdk_libc2_puts",
@@ -2182,7 +2229,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libc2_puts.o"
     },
     {
       "name": "yuugi/sdk_libc2_rand",
@@ -2207,7 +2255,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libc2_setjmp.o"
     },
     {
       "name": "yuugi/sdk_libc2_sprintf",
@@ -2219,7 +2268,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libc2_sprintf.o"
     },
     {
       "name": "yuugi/sdk_libc2_strcmp",
@@ -2230,8 +2280,9 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
-      }
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libc2_strcmp.o"
     },
     {
       "name": "yuugi/sdk_libc2_strcpy",
@@ -2243,7 +2294,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libc2_strcpy.o"
     },
     {
       "name": "yuugi/sdk_libc2_strlen",
@@ -2255,7 +2307,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libc2_strlen.o"
     },
     {
       "name": "yuugi/sdk_libc2_todigit",
@@ -2293,7 +2346,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libcard_end.o"
     },
     {
       "name": "yuugi/sdk_libcard_init",
@@ -2434,8 +2488,9 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
-      }
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libetc_pad.o"
     },
     {
       "name": "yuugi/sdk_libetc_vsync",
@@ -2447,7 +2502,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libetc_vsync.o"
     },
     {
       "name": "yuugi/sdk_libgpu_ext",
@@ -2458,8 +2514,9 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
-      }
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libgpu_ext.o"
     },
     {
       "name": "yuugi/sdk_libgpu_ext__SetDefDispEnv",
@@ -2666,7 +2723,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libgte_cmb_00.o"
     },
     {
       "name": "yuugi/sdk_libgte_cmb_01",
@@ -2678,7 +2736,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libgte_cmb_01.o"
     },
     {
       "name": "yuugi/sdk_libgte_cmb_02",
@@ -2690,7 +2749,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libgte_cmb_02.o"
     },
     {
       "name": "yuugi/sdk_libgte_fgo_01",
@@ -2702,7 +2762,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libgte_fgo_01.o"
     },
     {
       "name": "yuugi/sdk_libgte_geo_00",
@@ -2727,7 +2788,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libgte_geo_01.o"
     },
     {
       "name": "yuugi/sdk_libgte_msc00",
@@ -2739,7 +2801,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libgte_msc00.o"
     },
     {
       "name": "yuugi/sdk_libgte_msc01",
@@ -2751,7 +2814,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libgte_msc01.o"
     },
     {
       "name": "yuugi/sdk_libgte_msc09",
@@ -2763,7 +2827,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libgte_msc09.o"
     },
     {
       "name": "yuugi/sdk_libgte_mtx_000",
@@ -2775,7 +2840,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libgte_mtx_000.o"
     },
     {
       "name": "yuugi/sdk_libgte_mtx_003",
@@ -2787,7 +2853,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libgte_mtx_003.o"
     },
     {
       "name": "yuugi/sdk_libgte_mtx_006",
@@ -2799,7 +2866,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libgte_mtx_006.o"
     },
     {
       "name": "yuugi/sdk_libgte_mtx_009",
@@ -2811,7 +2879,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libgte_mtx_009.o"
     },
     {
       "name": "yuugi/sdk_libgte_mtx_03",
@@ -2823,7 +2892,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libgte_mtx_03.o"
     },
     {
       "name": "yuugi/sdk_libgte_mtx_08",
@@ -2835,7 +2905,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libgte_mtx_08.o"
     },
     {
       "name": "yuugi/sdk_libgte_patchgte",
@@ -2847,7 +2918,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libgte_patchgte.o"
     },
     {
       "name": "yuugi/sdk_libgte_ratan",
@@ -2859,7 +2931,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libgte_ratan.o"
     },
     {
       "name": "yuugi/sdk_libgte_smp",
@@ -2910,7 +2983,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_adddf3.o"
     },
     {
       "name": "yuugi/sdk_libmath_addmant",
@@ -2922,7 +2996,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_addmant.o"
     },
     {
       "name": "yuugi/sdk_libmath_addsf3",
@@ -2934,7 +3009,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_addsf3.o"
     },
     {
       "name": "yuugi/sdk_libmath_dbshift",
@@ -2946,7 +3022,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_dbshift.o"
     },
     {
       "name": "yuugi/sdk_libmath_dbshiftu",
@@ -2958,7 +3035,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_dbshiftu.o"
     },
     {
       "name": "yuugi/sdk_libmath_divdf3",
@@ -2983,7 +3061,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_divsf3.o"
     },
     {
       "name": "yuugi/sdk_libmath_ferr",
@@ -2995,7 +3074,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_ferr.o"
     },
     {
       "name": "yuugi/sdk_libmath_fixdfsi",
@@ -3007,7 +3087,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_fixdfsi.o"
     },
     {
       "name": "yuugi/sdk_libmath_fixudfsi",
@@ -3019,7 +3100,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_fixudfsi.o"
     },
     {
       "name": "yuugi/sdk_libmath_fltsidf",
@@ -3031,7 +3113,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_fltsidf.o"
     },
     {
       "name": "yuugi/sdk_libmath_fltsisf",
@@ -3043,7 +3126,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_fltsisf.o"
     },
     {
       "name": "yuugi/sdk_libmath_gtdf2",
@@ -3055,7 +3139,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_gtdf2.o"
     },
     {
       "name": "yuugi/sdk_libmath_ltdf2",
@@ -3067,7 +3152,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_ltdf2.o"
     },
     {
       "name": "yuugi/sdk_libmath_ltsf2",
@@ -3079,7 +3165,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_ltsf2.o"
     },
     {
       "name": "yuugi/sdk_libmath_mainasu",
@@ -3091,7 +3178,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_mainasu.o"
     },
     {
       "name": "yuugi/sdk_libmath_muldf3",
@@ -3116,7 +3204,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_mulsf3.o"
     },
     {
       "name": "yuugi/sdk_libmath_nedf2",
@@ -3128,7 +3217,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_nedf2.o"
     },
     {
       "name": "yuugi/sdk_libmath_negdf2",
@@ -3140,7 +3230,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_negdf2.o"
     },
     {
       "name": "yuugi/sdk_libmath_sqrt",
@@ -3152,7 +3243,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_sqrt.o"
     },
     {
       "name": "yuugi/sdk_libmath_subdf3",
@@ -3164,7 +3256,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libmath_subdf3.o"
     },
     {
       "name": "yuugi/sdk_libsn_snmain",
@@ -3176,7 +3269,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libsn_snmain.o"
     },
     {
       "name": "yuugi/sdk_libspu_s_crwa",
@@ -3188,7 +3282,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_crwa.o"
     },
     {
       "name": "yuugi/sdk_libspu_s_gks",
@@ -3200,7 +3295,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_gks.o"
     },
     {
       "name": "yuugi/sdk_libspu_s_ini",
@@ -3212,7 +3308,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_ini.o"
     },
     {
       "name": "yuugi/sdk_libspu_s_itc",
@@ -3224,7 +3321,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_itc.o"
     },
     {
       "name": "yuugi/sdk_libspu_s_m_init",
@@ -3262,7 +3360,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_n2p.o"
     },
     {
       "name": "yuugi/sdk_libspu_s_q",
@@ -3274,7 +3373,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_q.o"
     },
     {
       "name": "yuugi/sdk_libspu_s_rdd",
@@ -3286,7 +3386,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_rdd.o"
     },
     {
       "name": "yuugi/sdk_libspu_s_rrwa",
@@ -3298,7 +3399,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_rrwa.o"
     },
     {
       "name": "yuugi/sdk_libspu_s_sav",
@@ -3310,7 +3412,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_sav.o"
     },
     {
       "name": "yuugi/sdk_libspu_s_sca",
@@ -3322,7 +3425,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_sca.o"
     },
     {
       "name": "yuugi/sdk_libspu_s_sk",
@@ -3334,7 +3438,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_sk.o"
     },
     {
       "name": "yuugi/sdk_libspu_s_sr",
@@ -3346,7 +3451,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_sr.o"
     },
     {
       "name": "yuugi/sdk_libspu_s_sra",
@@ -3371,7 +3477,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_srmp.o"
     },
     {
       "name": "yuugi/sdk_libspu_s_stsa",
@@ -3396,7 +3503,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_sva.o"
     },
     {
       "name": "yuugi/sdk_libspu_s_w",
@@ -3421,7 +3529,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_w0.o"
     },
     {
       "name": "yuugi/sdk_libspu_s_wp",
@@ -3446,7 +3555,8 @@
           "yuugi.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libspu_spu.o"
     },
     {
       "name": "yuugi/sdk_libspu_sr_gaks",
@@ -3458,7 +3568,8 @@
           "yuugi.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/yuugi/sdk_libspu_sr_gaks.o"
     },
     {
       "name": "slpm/loader",
@@ -3470,7 +3581,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader.o"
     },
     {
       "name": "slpm/loader_80110D1C",
@@ -3521,7 +3633,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_80111E78.o"
     },
     {
       "name": "slpm/loader_80111E78__80111EF0",
@@ -3546,7 +3659,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_80111F28.o"
     },
     {
       "name": "slpm/loader_80111FD4",
@@ -3558,7 +3672,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_80111FD4.o"
     },
     {
       "name": "slpm/loader_801120F4",
@@ -3570,7 +3685,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_801120F4.o"
     },
     {
       "name": "slpm/loader_80112A10",
@@ -3582,7 +3698,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_80112A10.o"
     },
     {
       "name": "slpm/loader_80112A4C",
@@ -3594,7 +3711,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_80112A4C.o"
     },
     {
       "name": "slpm/loader_80112B74",
@@ -3606,7 +3724,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_80112B74.o"
     },
     {
       "name": "slpm/loader_80112D28",
@@ -3670,7 +3789,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_80115A84.o"
     },
     {
       "name": "slpm/loader_80116220",
@@ -3695,7 +3815,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_80116438.o"
     },
     {
       "name": "slpm/loader_80116850",
@@ -3720,7 +3841,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_801168A4.o"
     },
     {
       "name": "slpm/loader_80116934",
@@ -3745,7 +3867,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_80116934__StSetRing.o"
     },
     {
       "name": "slpm/loader_80116A08",
@@ -3770,7 +3893,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_80116A84.o"
     },
     {
       "name": "slpm/loader_80116AD0",
@@ -3834,7 +3958,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_80118320.o"
     },
     {
       "name": "slpm/loader_8011854C",
@@ -3898,7 +4023,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_8011AA1C.o"
     },
     {
       "name": "slpm/loader_8011AC10",
@@ -3936,7 +4062,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_8011AC64.o"
     },
     {
       "name": "slpm/loader_8011ADEC",
@@ -3948,7 +4075,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_8011ADEC.o"
     },
     {
       "name": "slpm/loader_8011AE84",
@@ -3960,7 +4088,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_8011AE84.o"
     },
     {
       "name": "slpm/loader_8011B028",
@@ -3985,7 +4114,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_8011B554.o"
     },
     {
       "name": "slpm/loader_8011B65C",
@@ -4075,7 +4205,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_8011BF14.o"
     },
     {
       "name": "slpm/loader_8011BF60",
@@ -4087,7 +4218,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_8011BF60.o"
     },
     {
       "name": "slpm/loader_8011C974",
@@ -4151,7 +4283,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_8011E96C.o"
     },
     {
       "name": "slpm/loader_8011E9E4",
@@ -4163,7 +4296,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_8011E9E4.o"
     },
     {
       "name": "slpm/loader_8011EE44",
@@ -4175,7 +4309,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_8011EE44.o"
     },
     {
       "name": "slpm/loader_8011EF00",
@@ -4213,7 +4348,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/loader_8011F5F4.o"
     },
     {
       "name": "slpm/loader_8011F674",
@@ -4277,7 +4413,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libapi_chclrpad.o"
     },
     {
       "name": "slpm/sdk_libapi_counter",
@@ -4315,7 +4452,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libapi_patch.o"
     },
     {
       "name": "slpm/sdk_libc2_ctype",
@@ -4366,7 +4504,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libc2_printf.o"
     },
     {
       "name": "slpm/sdk_libc2_prnt",
@@ -4378,7 +4517,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libc2_prnt.o"
     },
     {
       "name": "slpm/sdk_libc2_putchar",
@@ -4390,7 +4530,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libc2_putchar.o"
     },
     {
       "name": "slpm/sdk_libc2_puts",
@@ -4402,7 +4543,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libc2_puts.o"
     },
     {
       "name": "slpm/sdk_libc2_setjmp",
@@ -4414,7 +4556,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libc2_setjmp.o"
     },
     {
       "name": "slpm/sdk_libc2_strcmp",
@@ -4426,7 +4569,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libc2_strcmp.o"
     },
     {
       "name": "slpm/sdk_libc2_strlen",
@@ -4438,7 +4582,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libc2_strlen.o"
     },
     {
       "name": "slpm/sdk_libc2_strncmp",
@@ -4450,7 +4595,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libc2_strncmp.o"
     },
     {
       "name": "slpm/sdk_libcd_bios",
@@ -4488,7 +4634,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libcd_c_003.o"
     },
     {
       "name": "slpm/sdk_libcd_c_004",
@@ -4500,7 +4647,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libcd_c_004.o"
     },
     {
       "name": "slpm/sdk_libcd_c_005",
@@ -4525,7 +4673,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libcd_c_007.o"
     },
     {
       "name": "slpm/sdk_libcd_c_008",
@@ -4537,7 +4686,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libcd_c_008.o"
     },
     {
       "name": "slpm/sdk_libcd_c_009",
@@ -4549,7 +4699,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libcd_c_009.o"
     },
     {
       "name": "slpm/sdk_libcd_c_011",
@@ -4587,7 +4738,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libcd_cdread2.o"
     },
     {
       "name": "slpm/sdk_libcd_event",
@@ -4599,7 +4751,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libcd_event.o"
     },
     {
       "name": "slpm/sdk_libcd_iso9660",
@@ -4702,7 +4855,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libetc_pad.o"
     },
     {
       "name": "slpm/sdk_libetc_vsync",
@@ -4714,7 +4868,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libetc_vsync.o"
     },
     {
       "name": "slpm/sdk_libgpu_ext",
@@ -4934,7 +5089,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libpress_vlc.o"
     },
     {
       "name": "slpm/sdk_libsnd_cres",
@@ -4946,7 +5102,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libsnd_cres.o"
     },
     {
       "name": "slpm/sdk_libsnd_decres",
@@ -4958,7 +5115,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libsnd_decres.o"
     },
     {
       "name": "slpm/sdk_libsnd_midiread",
@@ -4970,7 +5128,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libsnd_midiread.o"
     },
     {
       "name": "slpm/sdk_libsnd_miditime",
@@ -4982,7 +5141,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libsnd_miditime.o"
     },
     {
       "name": "slpm/sdk_libsnd_next",
@@ -5007,7 +5167,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libsnd_pause.o"
     },
     {
       "name": "slpm/sdk_libsnd_replay",
@@ -5032,7 +5193,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libsnd_sscall.o"
     },
     {
       "name": "slpm/sdk_libsnd_ssend",
@@ -5044,7 +5206,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libsnd_ssend.o"
     },
     {
       "name": "slpm/sdk_libsnd_ssinit",
@@ -5082,7 +5245,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libsnd_ssstart.o"
     },
     {
       "name": "slpm/sdk_libsnd_ssstop",
@@ -5094,7 +5258,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libsnd_ssstop.o"
     },
     {
       "name": "slpm/sdk_libsnd_sssv",
@@ -5119,7 +5284,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libsnd_tempo.o"
     },
     {
       "name": "slpm/sdk_libsnd_vm_f",
@@ -5131,7 +5297,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libsnd_vm_f.o"
     },
     {
       "name": "slpm/sdk_libsnd_vm_init",
@@ -5143,7 +5310,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libsnd_vm_init.o"
     },
     {
       "name": "slpm/sdk_libsnd_vm_nowof",
@@ -5155,7 +5323,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libsnd_vm_nowof.o"
     },
     {
       "name": "slpm/sdk_libsnd_vm_seq",
@@ -5167,7 +5336,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libsnd_vm_seq.o"
     },
     {
       "name": "slpm/sdk_libsnd_vm_vsu",
@@ -5179,7 +5349,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libsnd_vm_vsu.o"
     },
     {
       "name": "slpm/sdk_libspu_s_ini",
@@ -5191,7 +5362,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libspu_s_ini.o"
     },
     {
       "name": "slpm/sdk_libspu_s_it",
@@ -5229,7 +5401,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libspu_s_n2p.o"
     },
     {
       "name": "slpm/sdk_libspu_s_q",
@@ -5241,7 +5414,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libspu_s_q.o"
     },
     {
       "name": "slpm/sdk_libspu_s_sav",
@@ -5253,7 +5427,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libspu_s_sav.o"
     },
     {
       "name": "slpm/sdk_libspu_s_sca",
@@ -5265,7 +5440,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libspu_s_sca.o"
     },
     {
       "name": "slpm/sdk_libspu_s_sk",
@@ -5277,7 +5453,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libspu_s_sk.o"
     },
     {
       "name": "slpm/sdk_libspu_s_sva",
@@ -5289,7 +5466,8 @@
           "slpm.sdk"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libspu_s_sva.o"
     },
     {
       "name": "slpm/sdk_libspu_spu",
@@ -5301,7 +5479,8 @@
           "slpm.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/slpm/sdk_libspu_spu.o"
     },
     {
       "name": "chess/chess",
@@ -5326,7 +5505,8 @@
           "chess.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/chess/chess_800BB8BC.o"
     },
     {
       "name": "chess/chess_800BB910",
@@ -5507,7 +5687,8 @@
           "chess.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCE78.o"
     },
     {
       "name": "chess/chess_800DCF3C",
@@ -5571,7 +5752,8 @@
           "chess.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/chess/chess_800FFE6C.o"
     },
     {
       "name": "chess/chess_801002CC",
@@ -5777,8 +5959,9 @@
           "raise",
           "raise.game"
         ],
-        "complete": false
-      }
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise.o"
     },
     {
       "name": "raise/raise_80098FB4",
@@ -5816,7 +5999,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009B088.o"
     },
     {
       "name": "raise/raise_8009B150",
@@ -6192,7 +6376,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800AC34C__800B0B0C.o"
     },
     {
       "name": "raise/raise_800AC34C__800B1150",
@@ -6255,7 +6440,7 @@
           "raise",
           "raise.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800B472C.o"
     },
@@ -6295,7 +6480,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B6014.o"
     },
     {
       "name": "raise/raise_800B60F8",
@@ -6410,7 +6596,7 @@
           "raise",
           "raise.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800B61E4__800B8E04.o"
     },
@@ -6528,7 +6714,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B9C3C__800BCF98__800BE674.o"
     },
     {
       "name": "raise/raise_800B9C3C__800BE7A0",
@@ -6669,7 +6856,7 @@
           "raise",
           "raise.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800C0038.o"
     },
@@ -6761,7 +6948,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C14D4.o"
     },
     {
       "name": "raise/raise_800C17D8",
@@ -6773,7 +6961,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C17D8.o"
     },
     {
       "name": "raise/raise_800C18C0",
@@ -6785,7 +6974,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C18C0.o"
     },
     {
       "name": "raise/raise_800C1BFC",
@@ -6836,7 +7026,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C1E1C.o"
     },
     {
       "name": "raise/raise_800C2CE0",
@@ -6874,7 +7065,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C4964.o"
     },
     {
       "name": "raise/raise_800C49CC",
@@ -6899,7 +7091,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C5888.o"
     },
     {
       "name": "raise/raise_800C59F4",
@@ -6923,7 +7116,7 @@
           "raise",
           "raise.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800C652C.o"
     },
@@ -6937,7 +7130,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C662C.o"
     },
     {
       "name": "raise/raise_800C6ACC",
@@ -6949,7 +7143,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C6ACC.o"
     },
     {
       "name": "raise/raise_800C6B34",
@@ -6960,7 +7155,7 @@
           "raise",
           "raise.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800C6B34.o"
     },
@@ -7000,7 +7195,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C8C44.o"
     },
     {
       "name": "raise/raise_800C8CAC",
@@ -7025,7 +7221,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800CB438.o"
     },
     {
       "name": "raise/raise_800CC1FC",
@@ -7050,7 +7247,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800CE164.o"
     },
     {
       "name": "raise/raise_800CE204",
@@ -7075,7 +7273,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800CF13C.o"
     },
     {
       "name": "raise/raise_800CF1B4",
@@ -7087,7 +7286,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800CF1B4.o"
     },
     {
       "name": "raise/raise_800CF290",
@@ -7099,7 +7299,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800CF290.o"
     },
     {
       "name": "raise/raise_800CF2E4",
@@ -7293,7 +7494,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800DCC94.o"
     },
     {
       "name": "raise/raise_800DCD44",
@@ -7383,7 +7585,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800DEA54.o"
     },
     {
       "name": "raise/raise_800DEA54__800DEAE8",
@@ -7486,7 +7689,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800DEA54__800E13C8.o"
     },
     {
       "name": "raise/raise_800DEA54__800E1554",
@@ -7550,7 +7754,8 @@
           "raise.game"
         ],
         "complete": false
-      }
+      },
+      "base_path": "build/objdiff/base/raise/raise_800DEA54__800E1624.o"
     },
     {
       "name": "raise/raise_800DEA54__800E1674",

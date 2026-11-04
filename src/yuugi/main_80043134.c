@@ -1,7 +1,23 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80043134", func_80043134);
+void func_80043134(void) {
+    extern s32 D_80072E4C;
+    extern s32 D_80072E2C[];
+    u32 *p;
+    s32 i;
+
+    i = 0;
+    p = (u32 *)D_80072E2C;
+    D_80072E4C = D_80072E4C + 1;
+    do {
+        if ((s32 (*)())*p != 0) {
+            ((s32 (*)())*p)();
+        }
+        i++;
+        p++;
+    } while (i < 8);
+}
 
 #include "common.h"
 

@@ -69,109 +69,115 @@ void func_800B6624(Obj_800B6624 *arg0)
         u8 unk3;
         u8 _p04;
     } D_800F07D4[];
-    u32 flags;
+    register Obj_800B6624 *obj asm("s5") = arg0;
+    register u32 flags asm("a0");
+    u32 flags1;
+    u32 flags2;
     s32 r;
     u16 id;
     u32 k;
     u32 v;
+    u32 raw;
     s16 x;
     s16 *t;
     Player *p;
-    Slot *q;
 
-    flags = arg0->unk34;
+    flags = obj->unk34;
     if (((flags >> 8) & 1) != D_80078C20[0]) {
         p = &D_80100F38[(u16)func_800B1260((flags >> 9) & 1)];
-        func_80013920(arg0);
-        if (arg0 == p->unk18C) {
+        func_80013920(obj);
+        if (obj == p->unk18C) {
             p->unk18C = 0;
         }
         return;
     }
     if (D_8008EE44[0] > 0x40) {
-        func_80013920(arg0);
+        func_80013920(obj);
         return;
     }
     if (D_80078C28[0] == 1) {
-        if ((arg0->unk38 & 1) == D_80078C28[0]) {
+        register Slot *q asm("s4");
+        if ((obj->unk38 & 1) == D_80078C28[0]) {
             return;
         }
         r = func_800B1260((flags >> 9) & 1);
         p = &D_80100F38[(u16)r];
-        q = &D_80091618[(u16)r];
+        q = D_80091618;
+        q += (u16)r;
         id = q->unk0;
-        if (arg0 != p->unk21C) {
+        if (obj != p->unk21C) {
             return;
         }
         if (p->unk228 == 1 && func_800E16EC() == 0) {
             return;
         }
-        flags = arg0->unk34;
-        switch ((flags >> 10) & 3) {
+        flags1 = obj->unk34;
+        switch ((flags1 >> 10) & 3) {
         case 0:
-            k = (flags >> 12) & 0xF;
+            k = (flags1 >> 12) & 0xF;
             if (k - 4 < 2 || k == 8) {
-                v = D_80063940[id].unk18 >> 17;
+                raw = D_80063940[id].unk18 >> 17;
             } else {
-                v = D_80063940[id].unk18 >> 14;
+                raw = D_80063940[id].unk18 >> 14;
             }
-            v &= 7;
-            if (v == 1) {
-                x = -8;
-            } else if (v == 7) {
-                x = 8;
-            } else {
-                x = 0;
+            v = raw & 7;
+            switch (v) {
+            case 1: x = -8; break;
+            case 7: x = 8; break;
+            default: x = 0; break;
             }
-            func_800C5850(D_80091618[(u16)r].unk178, arg0, x, 0x10, -5);
+            func_800C5850(D_80091618[(u16)r].unk178, obj, x, 0x10, -5);
             break;
-        case 1:
-            k = (flags >> 12) & 0xF;
-            if (k - 10 < 3) {
-                t = D_800F1A68[(D_80063940[id].unk20 >> 15) & 0xF][(s16)(k - 10)];
-                func_800C5850(q->unk178, arg0, t[0], t[1], (s16)(t[2] - 5));
-            } else if (k == 0xE) {
-                func_800C5850(q->unk178, arg0, 0, D_800F07D4[(D_80063940[id].unk20 >> 15) & 0xF].unk3, -5);
+        case 1: {
+            register u32 kind asm("a0");
+            kind = (flags1 >> 12) & 0xF;
+            if (kind - 10 < 3) {
+                t = D_800F1A68[(D_80063940[id].unk20 >> 15) & 0xF][(s16)(kind - 10)];
+                func_800C5850(q->unk178, obj, t[0], t[1], (s16)(t[2] - 5));
+            } else if (kind == 0xE) {
+                func_800C5850(q->unk178, obj, 0, D_800F07D4[(D_80063940[id].unk20 >> 15) & 0xF].unk3, -5);
             }
             break;
+        }
         }
     }
     if (D_8006AFCC.unk36 == 1 || D_8006AFCC.unk38 == 1) {
-        r = func_800B1260((arg0->unk34 >> 9) & 1);
+        Slot *q2;
+        r = func_800B1260((obj->unk34 >> 9) & 1);
         p = &D_80100F38[(u16)r];
-        q = &D_80091618[(u16)r];
-        id = q->unk0;
-        if (arg0 != p->unk21C) {
+        q2 = &D_80091618[(u16)r];
+        id = q2->unk0;
+        if (obj != p->unk21C) {
             return;
         }
-        flags = arg0->unk34;
-        switch ((flags >> 10) & 3) {
+        flags2 = obj->unk34;
+        switch ((flags2 >> 10) & 3) {
         case 0:
-            k = (flags >> 12) & 0xF;
+            k = (flags2 >> 12) & 0xF;
             if (k - 4 < 2 || k == 8) {
-                v = D_80063940[id].unk18 >> 17;
+                raw = D_80063940[id].unk18 >> 17;
             } else {
-                v = D_80063940[id].unk18 >> 14;
+                raw = D_80063940[id].unk18 >> 14;
             }
-            v &= 7;
-            if (v == 1) {
-                x = -8;
-            } else if (v == 7) {
-                x = 8;
-            } else {
-                x = 0;
+            v = raw & 7;
+            switch (v) {
+            case 1: x = -8; break;
+            case 7: x = 8; break;
+            default: x = 0; break;
             }
-            func_800C5850(D_80091618[(u16)r].unk178, arg0, x, 0x10, -5);
+            func_800C5850(D_80091618[(u16)r].unk178, obj, x, 0x10, -5);
             break;
-        case 1:
-            k = (flags >> 12) & 0xF;
-            if (k - 10 < 3) {
-                t = D_800F1A68[(D_80063940[id].unk20 >> 15) & 0xF][(s16)(k - 10)];
-                func_800C5850(q->unk178, arg0, t[0], t[1], (s16)(t[2] - 5));
-            } else if (k == 0xE) {
-                func_800C5850(q->unk178, arg0, 0, D_800F07D4[(D_80063940[id].unk20 >> 15) & 0xF].unk3, -5);
+        case 1: {
+            register u32 kind asm("a0");
+            kind = (flags2 >> 12) & 0xF;
+            if (kind - 10 < 3) {
+                t = D_800F1A68[(D_80063940[id].unk20 >> 15) & 0xF][(s16)(kind - 10)];
+                func_800C5850(q2->unk178, obj, t[0], t[1], (s16)(t[2] - 5));
+            } else if (kind == 0xE) {
+                func_800C5850(q2->unk178, obj, 0, D_800F07D4[(D_80063940[id].unk20 >> 15) & 0xF].unk3, -5);
             }
             break;
+        }
         }
     }
 }
@@ -226,7 +232,100 @@ void func_800B6C48(void *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B6D98);
+void *func_800B6D98(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u16 arg4, void *arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, u16 arg10, s16 arg11) {
+    typedef struct ObjRes {
+        s32 unk0;
+        s32 unk4[2];
+        s32 unkC;
+        s32 unk10[2];
+        s32 unk18;
+    } ObjRes;
+    typedef struct Obj {
+        u8 pad0[0x14];
+        s32 unk14;
+        s32 unk18;
+        s32 unk1C;
+        u8 pad20[0x10];
+        u32 f30_0 : 3;
+        u32 f30_3 : 1;
+        u32 f30_4 : 2;
+        u32 f30_6 : 3;
+        u32 f30_9 : 23;
+        u32 f34_0 : 8;
+        u32 f34_8 : 1;
+        u32 f34_9 : 23;
+        u32 f38_0 : 1;
+        u32 f38_1 : 3;
+        u32 f38_4 : 2;
+        u32 f38_6 : 1;
+        u32 f38_7 : 25;
+        u8 pad3C[0xA];
+        s16 unk46;
+        s16 unk48;
+        s16 unk4A;
+        s16 unk4C;
+        s16 unk4E;
+        u8 pad50[0x16];
+        u16 unk66;
+        u8 pad68[0x14];
+        s32 unk7C;
+        s32 unk80;
+    } Obj;
+    typedef struct ScreenInfo {
+        u8 pad[0x108];
+        s32 width;
+        s32 height;
+    } ScreenInfo;
+    extern s16 D_80078C20[];
+    extern ScreenInfo D_8008ED68;
+    extern int func_800161C4();
+    extern void func_800B6310();
+    void *var_a0;
+    s32 tmp;
+    s32 tmp2;
+    Obj *obj;
+#define res ((ObjRes *)arg5)
+
+    if (arg11 != 0) {
+        if (arg11 != 2) {
+            var_a0 = func_800B6310;
+        } else {
+            var_a0 = func_800B6C48;
+        }
+    } else {
+        var_a0 = func_800B6624;
+    }
+
+    obj = (Obj *)func_80015B3C(var_a0, func_800161C4, arg0);
+    if (obj != NULL) {
+        func_80015EF8(obj);
+        if (arg7 == 0) {
+            tmp = res->unk18 + arg6;
+            tmp2 = func_80019F30(res->unk0 | 0x70000, tmp);
+            func_80015CD0(&obj->unk14, tmp2, 0);
+            obj->unk1C = tmp2;
+            obj->unk7C = tmp;
+            obj->unk80 = tmp2;
+        } else {
+            tmp = func_80019F30(res->unk0 | 0x60000, res->unkC + arg6);
+            obj->unk1C = 0;
+            obj->unk18 = tmp;
+        }
+        obj->unk66 = arg4;
+        obj->f30_6 = 0;
+        obj->f30_4 = arg10;
+        obj->f30_3 = 0;
+        obj->f38_0 = arg8;
+        obj->f38_4 = 0;
+        obj->f38_6 = arg9;
+        obj->unk4E = arg3;
+        obj->unk46 = arg1 - D_8008ED68.width / 2;
+        obj->f34_8 = *D_80078C20;
+        obj->unk4A = arg2 - D_8008ED68.height / 2;
+    }
+#undef res
+    return obj;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B6FA0);
 
@@ -619,7 +718,7 @@ void func_800B7A94(void) {
     u16 cy;
     s32 r;
     u16 id;
-    u16 a2;
+    s16 a2;
     S_63940 *s4;
     u16 v1;
     void *p6D670;
@@ -654,14 +753,15 @@ void func_800B7A94(void) {
                     s4 = &D_80063940[id];
                     v1 = (s4->unk08 >> 12) & 3;
                     p6D670 = D_8006D670[v1];
-                    if ((s16)a2 == 5 || r == 0) {
-                        func_8001F1A8((s16)(s5 - (cx - 0x59)), (s16)(s3 - (cy - 0x41)), 0, 1, 0, D_80091618[(u16)i].unk08, 0, 8, (s16)a2);
+                    if (a2 == 5 || r == 0) {
+                        func_8001F1A8((s16)(s5 - (cx - 0x59)), (s16)(s3 - (cy - 0x41)), 0, 1, 0, D_80091618[(u16)i].unk08, 0, 8, a2);
                     }
-                    if ((s16)a2 == 5) {
-                        func_8001F1A8((s16)(s5 - (cx - 0x59)), (s16)(s3 - (cy - 0x55)), 0, 0, 0, s4, 0, 9, (s16)a2);
-                        func_8001F7A4((s16)(s5 - (cx - 0x59)), (s16)(s3 - (cy - 0x64)), 0, 0, (D_80063940[id].unk08 >> 8) & 0xF, (s16)a2);
-                        func_80018EF4((s16)(s5 - (cx - 0x5E)), (s16)(s3 - (cy - 0x75)), v1, 1, (s16)a2);
-                        func_8001F1A8((s16)(s5 - (cx - 0x6E)), (s16)(s3 - (cy - 0x77)), 0, 0, 0, p6D670, 0, v1 == 1 ? 4 : 3, (s16)a2);
+                    if (a2 == 5) {
+                        s16 x = s5 - (cx - 0x59);
+                        func_8001F1A8(x, (s16)(s3 - (cy - 0x55)), 0, 0, 0, s4, 0, 9, a2);
+                        func_8001F7A4(x, (s16)(s3 - (cy - 0x64)), 0, 0, (D_80063940[id].unk08 >> 8) & 0xF, a2);
+                        func_80018EF4((s16)(s5 - (cx - 0x5E)), (s16)(s3 - (cy - 0x75)), v1, 1, a2);
+                        func_8001F1A8((s16)(s5 - (cx - 0x6E)), (s16)(s3 - (cy - 0x77)), 0, 0, 0, p6D670, 0, v1 == 1 ? 4 : 3, a2);
                     }
                 }
                 func_800B55B8(r, (u16)i);

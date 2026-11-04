@@ -68,7 +68,6 @@ void func_800CE380(s32 arg0, void *arg1) {
     typedef struct {
         u8 _p00[0x326];
         s16 unk326;
-        u8 _p328[0x474];
     } S_100F38;
     typedef struct {
         u8 _p00[0x14];
@@ -80,7 +79,7 @@ void func_800CE380(s32 arg0, void *arg1) {
     extern s16 D_80069BBE[];
     extern S_91618 D_80091618[];
     extern S_ED8F0 D_800ED8F0[];
-    extern S_100F38 D_80100F38[];
+    extern u8 D_80100F38[];
     s32 k;
     s32 c;
     s32 n;
@@ -91,7 +90,7 @@ void func_800CE380(s32 arg0, void *arg1) {
 
     k = func_800B1260(arg0) & 0xFFFF;
     c = D_80091618[k].unk00;
-    n = ((D_80100F38[k].unk326 + (*D_80069BBE) / 512) % 8) + 9;
+    n = ((((S_100F38 *)((k * 0x79C) + D_80100F38))->unk326 + (*D_80069BBE) / 512) % 8) + 9;
     t = func_800A8CB4(c);
     arg2 = D_800ED8F0[c].unk18 + n;
     r = func_80019F30(t | 0x70000, arg2);

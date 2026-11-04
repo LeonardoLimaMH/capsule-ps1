@@ -2,10 +2,26 @@
 #include "yuugi.h"
 
 void main(void) {
-    __main();
+    extern u8 D_8008ED50[];
+    register u8 *p asm("s0");
+    void (*callback)();
+
     func_800118BC();
-    func_80011A60(0);
-    func_80011ED4();
+    p = D_8008ED50;
+    while (1) {
+        func_800118FC();
+        func_80012698();
+        if (*(u16 *)D_8008ED50 != 0) {
+            do {
+                callback = *(void (**)())(p + 4);
+                if (callback == 0) {
+                    func_800126F8();
+                } else {
+                    callback();
+                }
+            } while (*(u16 *)D_8008ED50 != 0);
+        }
+    }
 }
 
 void func_800118BC(void) {

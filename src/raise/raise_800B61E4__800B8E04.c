@@ -413,7 +413,7 @@ void func_800B96C0(void) {
     } S_100F38;
     extern S_91618 D_80091618[];
     extern s32 D_800EE9B8[];
-    extern S_EFF58 D_800EFF58[];
+    extern u8 D_800EFF58[];
     extern S_100F38 D_80100F38[];
     s32 i;
     s32 j;
@@ -422,19 +422,21 @@ void func_800B96C0(void) {
     s32 a;
     s32 b;
     u8 *q;
+    s32 offset;
 
     for (i = 1, j = 0; i >= 0; i--, j++) {
         k = func_800B1260(i) & 0xFFFF;
         if (k != 0xFFFF) {
             p = &D_80100F38[k];
+            offset = j * 64;
             for (a = 0; a < 8; a++) {
-                q = &D_800EFF58->unk94[j][a][7];
-                for (b = 7; b >= 0; b--, q--) {
-                    *q = 1;
+                q = &D_800EFF58[offset + a * 8 + 0x9B];
+                for (b = 7; b >= 0; b--) {
+                    *q-- = 1;
                 }
             }
-            D_800EFF58->unk94[j][1][6] = 0;
-            D_800EFF58->unk94[j][6][1] = 0;
+            D_800EFF58[offset + 0xA2] = 0;
+            D_800EFF58[offset + 0xC5] = 0;
             p->unk338 = 6;
             p->unk334 = 6;
             p->unk330 = 6;

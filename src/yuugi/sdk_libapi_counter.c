@@ -73,7 +73,14 @@ bool StartRCnt(long param_1)
   return (param_1 & 0xffff) < 3;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libapi_counter", StopRCnt);
+bool StopRCnt(long param_1)
+{
+    extern void *D_80078B3C[];
+    extern u8 D_80078B44[];
+    u32 *p = (u32 *)(D_80078B44 + (param_1 & 0xffff) * 4);
+    *((uint *)((*D_80078B3C) + 4)) &= ~*p;
+    return 1;
+}
 
 #include "common.h"
 

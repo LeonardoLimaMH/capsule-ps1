@@ -51,28 +51,18 @@ block_5:
     M2C_FIELD(D_800EE914, s32 *, 0) = 1;
 }
 
-s32 func_800A9A74(void)
-{
-  extern struct {
-    s32 f0;
-    s32 f4;
-  } D_800EEB9C;
-  if (D_800EEB9C.f4 <= 0)
-  {
-    if (D_800EEB9C.f0)
-    {
-      D_800EEB9C.f0 = 0;
-      return -1;
+s32 func_800A9A74(void) {
+    extern s32 D_800EEB9C[];
+    s32 val;
+
+    val = D_800EEB9C[1];
+    if (val > 0) {
+        D_800EEB9C[1] = val - 1;
+        func_800B7298(D_800EEB9C[0]);
+        return 0;
     }
-    else
-    {
-      D_800EEB9C.f0 = 0;
-      return -1;
-    }
-  }
-  D_800EEB9C.f4 = (s32) (D_800EEB9C.f4 - 1);
-  func_800B7298(D_800EEB9C.f0);
-  return 0;
+    D_800EEB9C[0] = 0;
+    return -1;
 }
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A9738", func_800A9AC0);
