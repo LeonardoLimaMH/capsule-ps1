@@ -90,4 +90,8 @@ u8 *func_8009D11C(void) {
     return p;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009B150__8009CFB4__8009CFC4", func_8009D21C);
+void func_8009D21C(void) {
+    u8 *base = D_8008ED68;
+    func_80012A20(func_80019F30(0x2000E, 0x2C), 1, 0, 0);
+    *(u8 **)(base + 0x9B8) = func_8009D11C();
+}
