@@ -767,7 +767,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false,
+        "complete": true,
         "auto_generated": true
       },
       "base_path": "build/objdiff/base/yuugi/main_8003F170.o"
@@ -781,7 +781,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false,
+        "complete": true,
         "auto_generated": true
       },
       "base_path": "build/objdiff/base/yuugi/main_8003F628.o"
@@ -1007,7 +1007,7 @@
           "yuugi.game",
           "game"
         ],
-        "complete": false,
+        "complete": true,
         "auto_generated": false
       },
       "base_path": "build/objdiff/base/yuugi/main_80042984.o"
@@ -1052,7 +1052,7 @@
           "yuugi.game",
           "game"
         ],
-        "complete": false,
+        "complete": true,
         "auto_generated": false
       },
       "base_path": "build/objdiff/base/yuugi/main_80043248.o"
@@ -2136,7 +2136,7 @@
           "yuugi.game",
           "game"
         ],
-        "complete": false,
+        "complete": true,
         "auto_generated": false
       },
       "base_path": "build/objdiff/base/yuugi/main_800505D0.o"
@@ -2543,7 +2543,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false,
+        "complete": true,
         "auto_generated": true
       },
       "base_path": "build/objdiff/base/yuugi/sdk_libc2_putchar.o"
@@ -3727,7 +3727,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false,
+        "complete": true,
         "auto_generated": true
       },
       "base_path": "build/objdiff/base/yuugi/sdk_libspu_s_ini.o"
@@ -6665,7 +6665,7 @@
           "raise.game",
           "game"
         ],
-        "complete": false,
+        "complete": true,
         "auto_generated": false
       },
       "base_path": "build/objdiff/base/raise/raise.o"
