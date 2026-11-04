@@ -284,7 +284,7 @@ s32 func_8003B6F4(u8 *s) {
     u32 i = 0;
     u32 n = func_8003AAF0(s);
     s32 result;
-    s32 more;
+    register s32 more asm("v0");
     do {
         Unk_800944B8 *e = &D_800944B8[D_80078C9C];
         u32 pos = *(u32 *)s;
@@ -293,8 +293,12 @@ s32 func_8003B6F4(u8 *s) {
         i++;
         if (e->unk_0x294 < pos) { s[0x20] = 1; result = -1; }
         else result = c;
+        if ((u8)result == 0xF7) {
+            more = i < n;
+            break;
+        }
         more = i < n;
-    } while ((u8)result != 0xF7 && more);
+    } while (more);
     return more;
 }
 
