@@ -16,6 +16,15 @@ extern void func_800CE4B8(s32, s32, s32, s32), func_800CE164(s32), func_800CE204
 #define P16(o) (*(u16 *)(p + (o)))
 #define PS16(o) (*(s16 *)(p + (o)))
 
+typedef struct {
+    u32 unk_0 : 6;
+    u32 unk_6 : 2;
+    u32 unk_8 : 2;
+    u32 unk_A : 2;
+    u32 unk_C : 2;
+    u32 unk_E : 18;
+} Flags_800C8210;
+
 s32 func_800C79E0(s32 a0, s32 a1) {
     u16 k = func_800B1260(a1);
     u8 *p = D_80100F38 + k * 0x79C;
@@ -63,7 +72,25 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800C75C0", func_800C7BD8);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C75C0", func_800C7FC0);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C75C0", func_800C8210);
+extern void func_800D4B7C(s32, s32);
+s32 func_800C8210(s32 a0, s32 a1) {
+    extern u8 D_80100F38[], D_80091618[];
+    u16 k = func_800B1260(a1);
+    u8 *p, *e;
+    if (k == 0xFFFF) return 0;
+    p = D_80100F38 + k * 0x79C;
+    func_800D4B7C(a1, k);
+    *(s32 *)(p + 0x798) = *(s32 *)(p + 0x798) & ~0xC0 & ~0x300 & ~0xC00 & ~0x3000;
+    e = D_80091618 + k * 0x1A8;
+    if (*(u16 *)(e + 0x62) == 1) {
+        *(u16 *)(e + 0x62) = 0;
+        *(u16 *)(e + 0x64) = 0;
+    } else if (*(u16 *)(e + 0x66) == 1) {
+        *(u16 *)(e + 0x66) = 0;
+        *(u16 *)(e + 0x68) = 0;
+    }
+    return *(s32 *)(p + 0x2BC) += 1;
+}
 
 #include "ghidra.h"
 void func_800C8320(undefined4 param_1,undefined4 param_2,short param_3)
