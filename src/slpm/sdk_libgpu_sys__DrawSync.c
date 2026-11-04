@@ -13,7 +13,12 @@ void slpm_DrawSync(s32 arg0) {
 
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__DrawSync", func_80113C78);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__DrawSync", slpm_ClearImage);
+extern char D_801104C8[];
+void slpm_ClearImage(s32 rect, u8 r, u8 g, u8 b) {
+    extern void * D_80131B2C[];
+    func_80113C78(D_801104C8, rect);
+    M2C_FIELD((*D_80131B2C), M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 8)(M2C_FIELD((*D_80131B2C), s32 *, 0xC), rect, 8, (b << 16) | (g << 8) | r);
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__DrawSync", slpm_ClearImage2);
 
