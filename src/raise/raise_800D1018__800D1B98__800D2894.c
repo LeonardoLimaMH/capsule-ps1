@@ -80,7 +80,20 @@ s32 func_800D2A10(void) {
     return 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D2AA4);
+s32 func_800D2AA4(void) {
+    extern u8 D_80063940[], D_80091618[];
+    u32 id = (u16)func_800B1260();
+
+    if (id != 0xFFFF) {
+        id = *(u16 *)(D_80091618 + id * 0x1A8);
+        if (id != 0xFFFF) {
+            u8 *base = D_80063940;
+            u8 *q = id * 0x3C + base;
+            return (*(u32 *)(q + 0x18) & 3) == 0;
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D2B34);
 
