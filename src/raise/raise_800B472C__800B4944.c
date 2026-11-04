@@ -83,23 +83,22 @@ void func_800B4AAC(s32 arg0) {
     extern S_EEB94 D_800EEB94[];
     extern S_80100F38 D_80100F38[];
 
-    s32 a1 = arg0;
-    S_80100F38 *temp_t2;
-    s32 var_t4;
     s32 var_t1;
     s32 var_t0;
+    s32 var_t4;
+    S_80100F38 *temp_t2;
+    S_EEB94 *temp_v1;
     SubEntry **var_a1;
     s32 var_a3;
-    S_8008ED68 *ed;
     s32 var_a2;
+    S_8008ED68 *ed;
     s32 hx, hy;
     u32 diff;
-    S_EEB94 *temp_v1;
 
-    temp_t2 = &D_80100F38[a1];
-    if (a1 == *D_8006AF80) {
+    temp_t2 = &D_80100F38[arg0];
+    if (arg0 == *D_8006AF80) {
         var_t4 = 1;
-        if (D_80091618[a1].f_8A == 0xFFFF) {
+        if (D_80091618[arg0].f_8A == 0xFFFF) {
             var_t1 = 0;
             var_t0 = 0;
         } else {
@@ -115,9 +114,9 @@ void func_800B4AAC(s32 arg0) {
     var_a1 = temp_t2->f_194;
     var_a3 = 0;
     ed = &D_8008ED68;
-    hx = ed->f_108 / 2 - 0x2C;
     var_a2 = 0x10;
 
+    hx = ed->f_108 / 2 - 0x2C;
     temp_t2->f_190->f_46 = var_t1 - hx;
     hy = ed->f_10C / 2 - 0x38;
     temp_t2->f_190->f_4A = var_t0 - hy;
@@ -209,6 +208,7 @@ void func_800B53D4(s32 a0, s32 a1) {
         u8 pad[0x79C];
     } S_80100F38;
     extern S_80100F38 D_80100F38[];
+    typedef struct { u8 pad[0x780]; s32 unk780; } S_EEB9C;
     extern u8 D_800EEB9C[];
     extern s32 D_800EE5D0[];
     extern s32 func_800B5034(s32, s32, s32);
@@ -218,31 +218,43 @@ void func_800B53D4(s32 a0, s32 a1) {
     u8 *p = (u8 *)&D_80100F38[a1];
     s16 *s2 = (s16 *)(p + 0x356);
     u8 **s1 = (u8 **)(p + 0x194);
-    u8 *s6 = D_800EEB9C;
     s16 i;
+    s32 r;
 
     for (i = 0; i < 8; i++, s2++) {
         switch (i) {
         case 6: {
-            s32 v = func_800B5034(a0, a1, 6);
-            v = (s16)v <= 0 ? 1 : ((s16)v < 100 ? v : 99);
-            *s2 = v;
+            s32 v1;
+            r = func_800B5034(a0, a1, 6);
+            if ((s16)r > 0) {
+                if ((s16)r >= 100) {
+                    v1 = 99;
+                } else {
+                    v1 = r;
+                }
+            } else {
+                v1 = 1;
+            }
+            *s2 = v1;
             break;
         }
         case 7:
             *s2 = func_800B5034(a0, a1, 7);
             break;
         default: {
-            s32 r = func_800B5034(a0, a1, i);
-            s16 v = r;
+            s16 v;
+            r = func_800B5034(a0, a1, i);
+            v = r;
             if (*s2 != v) {
                 s32 *t = D_800EE5D0;
+                s32 val;
                 *s2 = r;
-                func_80015CD0(*s1 + 0x14, func_80019F30(D_800EE5D0[0] | 0x70000, t[6] + *(s32 *)(s6 + 0x780) + v), 0);
+                val = t[6];
+                func_80015CD0(*s1 + 0x14, func_80019F30(D_800EE5D0[0] | 0x70000, val + ((S_EEB9C *)D_800EEB9C)->unk780 + v), 0);
                 *(u16 *)(*s1 + 0x66) = 0;
                 *(s32 *)(*s1 + 0x30) &= ~0x1C0;
                 *(s32 *)(*s1 + 0x30) = (*(s32 *)(*s1 + 0x30) & ~0x30) | 0x20;
-                *(s32 *)(*s1 + 0x7C) = *(s32 *)(s6 + 0x780) + v;
+                *(s32 *)(*s1 + 0x7C) = ((S_EEB9C *)D_800EEB9C)->unk780 + v;
             }
             s1++;
             break;
