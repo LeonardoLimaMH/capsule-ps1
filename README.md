@@ -1,6 +1,7 @@
 # Yu-Gi-Oh! Monster Capsule Breed & Battle — Decompilação (SLPM-86096)
 
-[![Código casado](https://bytematch.dev/LeonardoLimaMH/capsule-ps1.svg?label=c%C3%B3digo%20casado&measure=matched_code_percent)](https://bytematch.dev/LeonardoLimaMH/capsule-ps1)
+[![Código do jogo](https://bytematch.dev/LeonardoLimaMH/capsule-ps1.svg?label=c%C3%B3digo%20do%20jogo&measure=matched_code_percent&category=game)](https://bytematch.dev/LeonardoLimaMH/capsule-ps1)
+[![Total com SDK](https://bytematch.dev/LeonardoLimaMH/capsule-ps1.svg?label=total%20com%20SDK&measure=matched_code_percent)](https://bytematch.dev/LeonardoLimaMH/capsule-ps1)
 [![Funções](https://bytematch.dev/LeonardoLimaMH/capsule-ps1.svg?label=fun%C3%A7%C3%B5es&measure=matched_functions)](https://bytematch.dev/LeonardoLimaMH/capsule-ps1)
 
 Decompilação do jogo de PlayStation **Yu-Gi-Oh! Monster Capsule: Breed & Battle**
