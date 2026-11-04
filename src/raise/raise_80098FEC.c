@@ -60,7 +60,25 @@ void func_80099370(void *arg0)
   *((u32 *) (((s8 *) arg0) + 0x3C)) = var_v0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_80098FEC", func_80099480);
+void func_80099480(void *arg0) {
+    extern u8 D_8008ED68[];
+    extern void func_800185F8(void *);
+    u32 n;
+    s32 i;
+
+    n = (D_8008ED68[0x103] < 2) ? 1 : D_8008ED68[0x103];
+    i = 0;
+    if (n != 0) {
+        do {
+            *(u32 *)((u8 *)arg0 + 0x3C) += 1;
+            if (*(u32 *)((u8 *)arg0 + 0x3C) >= 7) {
+                func_800185F8(arg0);
+                return;
+            }
+            i++;
+        } while (i < (s32)n);
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_80098FEC", func_800994FC);
 
