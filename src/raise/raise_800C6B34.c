@@ -48,7 +48,7 @@ s32 func_800C6B34(s32 a0, s32 a1) {
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C6B34", func_800C6C48);
 
 #include "common.h"
-typedef struct {
+typedef struct S_80091618 {
     u16 f_0;
     u8 _p2[0x1A6];
 } S_80091618;
