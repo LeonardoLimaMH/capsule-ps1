@@ -2,6 +2,13 @@
 #include "yuugi.h"
 
 typedef struct {
+    u8 pad00[0xC];
+    u32 unk0C;
+    u8 pad10[0x2C];
+} S_80063940;
+extern S_80063940 D_80063940[];
+
+typedef struct {
     s16 x;
     s16 y;
     s32 f_4;
@@ -258,7 +265,38 @@ s32 func_800200F4(s32 cur, s32 max, s32 mode) {
     return cur;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800201D8);
+u8 func_800201D8(s32 n) {
+    extern u8 D_8008ED68[];
+    u32 tmp[2];
+    register u32 r asm("a3") = 0;
+    register u32 *t asm("t0") = &tmp[n];
+    register s32 i asm("a1") = 0;
+    register u32 one asm("t1") = 1;
+    register u32 *e asm("a2");
+    u8 *p;
+
+    p = D_8008ED68 + n * 16;
+    *t = *(u32 *)(p + 0x88);
+    e = (u32 *)(p + 0xA4);
+    for (; i < 4; i++, e++) {
+        if (*e >= 0x28 && ((*e - 0x28) & 7) == 0) {
+            *t |= one << (i + 12);
+        }
+    }
+    if (tmp[n] & 0x1000) {
+        r |= 1;
+    }
+    if (tmp[n] & 0x8000) {
+        r |= 4;
+    }
+    if (tmp[n] & 0x4000) {
+        r |= 0x10;
+    }
+    if (tmp[n] & 0x2000) {
+        r |= 0x40;
+    }
+    return r;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800202A4);
 
@@ -311,7 +349,6 @@ void func_80020844(s16 x, s16 y, s16 w, s16 h, u8 r, u8 g, u8 b, u8 tp, s32 ot) 
     extern void SetPolyF4(), SetSemiTrans(), AddPrim(), func_80018610();
     extern u16 GetTPage();
     struct PolyF4 *p = *(struct PolyF4 **)(D_8008ED68.base + 0x1090);
-    struct S_ED68 *ed;
 
     *(struct PolyF4 **)(D_8008ED68.base + 0x1090) =
         (p != 0 && (u8 *)p + 0x18 <= D_8008ED68.base + 0x4594)
@@ -330,8 +367,7 @@ void func_80020844(s16 x, s16 y, s16 w, s16 h, u8 r, u8 g, u8 b, u8 tp, s32 ot) 
     p->y2 = h + (y + D_8008ED68.hy / 2);
     p->x3 = w + (x + D_8008ED68.hx / 2);
     p->y3 = h + (y + D_8008ED68.hy / 2);
-    ed = &D_8008ED68;
-    AddPrim(ot * 4 + (ed->base + 0x70), p);
+    AddPrim(D_8008ED68.base + 0x70 + ot * 4, p);
     func_80018610(GetTPage(0, tp, 0, 0) & 0xFFFF, ot);
 }
 
@@ -705,17 +741,17 @@ void func_80021BB4(void *p, s32 a1, s32 idx, s32 mode) {
     extern void func_80015EF8(), func_800214B0(), func_800161C4(), func_8003422C(), func_800374E8();
     extern s32 func_80019F30();
     void *v0 = p + 0x10;
-    register u16 *s2 asm("s2") = M2C_FIELD(v0, u16 **, 4);
+    register u16 *s2 = M2C_FIELD(v0, u16 **, 4);
     s32 cnt = 0;
     s32 k, r, m;
-    register s32 s3 asm("s3");
+    u8 s3_1, s3_2;
     u8 *o;
 
     M2C_FIELD(v0, s16 *, 0xE) = 0x20;
     if (mode != 2) {
         func_8003422C(0x8000);
     }
-    s3 = ((struct S_P *)p)->unk5E4[idx];
+    s3_1 = ((struct S_P *)p)->unk5E4[idx];
     if (a1 >= 2) {
         k = 1;
     } else {
@@ -727,29 +763,28 @@ void func_80021BB4(void *p, s32 a1, s32 idx, s32 mode) {
     *(s16 *)(o + 0x4E) = 3;
     *(u32 *)(o + 0x30) = (*(u32 *)(o + 0x30) & ~0x1C0) | 0x40;
     if (mode != 4) {
-        r = func_80019F30(k != 0 ? 0x60013 : 0x6000E, D_800638B4[k][s3] + 3);
+        r = func_80019F30(k != 0 ? 0x60013 : 0x6000E, D_800638B4[k][s3_1] + 3);
     } else {
         r = func_80019F30(0x6000A, 0xAB);
     }
     *(s32 *)(o + 0x18) = r;
     if (mode == 0) {
-        if (s3 == 6) {
+        if (s3_1 == 6) {
             m = 7;
-        } else {
+        } else if (s3_1 == 7) {
             m = 6;
-            if (s3 != 7) {
-                m = s3;
-            }
+        } else {
+            m = s3_1;
         }
         *(s16 *)(o + 0x28) = (u32)(idx * 64 + 0xC0) - m * 32;
     }
     *(s32 *)(o + 0x80) = 1;
-    *(s32 *)(o + 0x7C) = s3;
+    *(s32 *)(o + 0x7C) = s3_1;
     *(s32 *)(o + 0x84) = mode;
     *(u32 *)(o + 0x38) |= 1;
 
     k = a1;
-    s3 = ((struct S_P *)p)->unk5E4[idx];
+    s3_2 = ((struct S_P *)p)->unk5E4[idx];
     if (k >= 2) {
         k = 1;
     }
@@ -759,38 +794,36 @@ void func_80021BB4(void *p, s32 a1, s32 idx, s32 mode) {
     *(s16 *)(o + 0x4E) = 3;
     *(u32 *)(o + 0x30) = (*(u32 *)(o + 0x30) & ~0x1C0) | 0x40;
     if (mode != 4) {
-        r = func_80019F30(k != 0 ? 0x60013 : 0x6000E, D_80063894[k][s3]);
+        r = func_80019F30(k != 0 ? 0x60013 : 0x6000E, D_80063894[k][s3_2]);
     } else {
         r = func_80019F30(0x6000A, 0xA7);
     }
     *(s32 *)(o + 0x18) = r;
     if (mode == 0) {
-        if (s3 == 6) {
+        if (s3_2 == 6) {
             m = 7;
-        } else {
+        } else if (s3_2 == 7) {
             m = 6;
-            if (s3 != 7) {
-                m = s3;
-            }
+        } else {
+            m = s3_2;
         }
         *(s16 *)(o + 0x28) = (u32)(idx * 64 + 0xC0) - m * 32;
     }
-    *(s32 *)(o + 0x7C) = s3;
+    *(s32 *)(o + 0x7C) = s3_2;
     *(s32 *)(o + 0x80) = 0;
     *(s32 *)(o + 0x84) = mode;
     *(u32 *)(o + 0x38) |= 1;
-    if (s2 != 0 && *s2 != 0xFFEE) {
-        do {
+    if (s2 != 0) {
+        while (*s2 != 0xFFEE) {
             if (*s2 == 0xFFE0) {
                 func_800374E8(s2[1]);
                 return;
             }
-            if (cnt >= 0x51) {
+            if (cnt++ >= 0x51) {
                 break;
             }
-            cnt++;
             s2++;
-        } while (*s2 != 0xFFEE);
+        }
     }
 }
 
