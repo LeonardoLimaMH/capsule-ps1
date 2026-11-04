@@ -59,8 +59,12 @@ void func_800A8E48(void) {
 }
 
 void func_800A8E78(u32 *arg0) {
-    arg0[0x34 / 4] = (arg0[0x34 / 4] & ~0x100) | ((~(arg0[0x34 / 4] >> 8) & 1) << 8);
-    arg0[0x38 / 4] |= 1;
+    u32 v34 = arg0[13];
+    u32 v38 = arg0[14];
+    u32 a = v34 & ~0x100;
+    a |= (~(v34 >> 8) & 1) << 8;
+    arg0[14] = v38 | 1;
+    arg0[13] = a;
 }
 
 #include "common.h"
@@ -101,33 +105,35 @@ void func_800A95CC(void) {
 }
 
 void func_800A95D4(void) {
+    typedef struct {
+        s32 state;
+        s32 cells[9];
+        s32 extra[2][9];
+        s32 indices[9];
+        s32 unk94;
+        u8 col[4];
+    } LocalResult;
     extern Result_800EE914 D_800EE914;
     s32 i;
     s32 j;
-    s32 *p;
-    s32 *end;
-    u8 *q;
+    LocalResult *res;
+    register void *temp_res asm("v0") = &D_800EE914;
+    res = temp_res;
 
-    D_800EE914.state = 0;
-    D_800EE914.col[0] = 0x40;
-    D_800EE914.col[1] = 0x74;
-    D_800EE914.col[2] = 0xb8;
-    D_800EE914.unk94 = 0;
-    D_800EE914.col[3] = 0x2c;
-    i = 0;
-    p = (s32 *)&D_800EE914;
-    end = p + 9;
-    do {
-        p[1] = 0;
-        p[28] = -1;
-        q = (u8 *)&D_800EE914;
+    res->state = 0;
+    res->col[0] = 0x40;
+    res->col[1] = 0x74;
+    res->col[2] = 0xb8;
+    res->unk94 = 0;
+    res->col[3] = 0x2c;
+
+    for (i = 0; i < 9; i++) {
+        res->cells[i] = 0;
+        res->indices[i] = -1;
         for (j = 0; j < 2; j++) {
-            *(s32 *)(q + i) = 0;
-            q += 0x24;
+            res->extra[j][i] = 0;
         }
-        p++;
-        i += 4;
-    } while (p < end);
+    }
 }
 
 s32 func_800A9658(s16 arg0) {
