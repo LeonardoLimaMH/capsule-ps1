@@ -36,7 +36,19 @@ void func_800D2894(s32 unused, s32 player) {
     record->field--;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D28D0);
+s32 func_800D28D0(s32 arg0) {
+    extern u8 D_80091618[];
+    register s32 k asm("a0") = func_800B1260(arg0);
+    Slot_80091618 *slots = (Slot_80091618 *)D_80091618;
+
+    if (slots[(u16)k].unk_90 != 0) {
+        k = func_800B12D8(arg0);
+    }
+    {
+        register u32 index asm("v0") = (u16)k;
+        return slots[index].unk_10 == 0;
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D297C);
 
@@ -410,27 +422,60 @@ extern s32 D_80069B28[];
 extern u8 D_80091618[], D_800EF524[], D_800900C0[];
 extern void func_800D8A20(void);
 s32 func_800D8440(void) {
-    s32 i, j;
+    extern s32 D_80069B28[];
+    extern u8 D_80091618[];
+    extern u8 D_800EF524[];
+    extern u8 D_800900C0[];
+    s32 i;
+    u8 *slots;
+    u8 *grid;
+    s32 minus_one;
+    u8 *p0;
+    u32 off;
+    s32 j;
+    u8 *base;
+
     if (D_80069B28[0] != 0) {
         func_800D8A20();
         return 0;
     }
-    for (i = 1; i >= 0; i--) {
+
+    i = 1;
+    slots = D_80091618;
+    grid = D_800EF524;
+    minus_one = -1;
+
+    do {
         u16 k = func_800B1260(i);
-        u8 *q;
-        u8 *e;
-        s32 *m;
-        if (k == 0xFFFF) continue;
-        e = D_80091618 + k * 0x1A8;
-        q = D_800EF524 + *(u16 *)(e + 0x10) * 0x9C;
-        m = (s32 *)D_800900C0;
-        for (j = 0; j < 3; j++) {
-            if (*(s32 *)(q + j * 0x34) != -1) {
-                if (i == 1) m[j * 0x2F] = -1;
-                else *(s32 *)(D_800900C0 + 0x234 + j * 0xBC) = -1;
-            }
+        if (k != 0xFFFF) {
+            u8 *q;
+            u32 unk;
+
+            j = 0;
+            off = 0x234;
+            unk = *(u16 *)(slots + k * 0x1A8 + 0x10);
+            base = D_800900C0;
+            p0 = base;
+            q = grid + unk * 0x9C;
+
+            do {
+                if (*(s32 *)q != minus_one) {
+                    register s32 one asm("v0") = 1;
+                    if (i == one) {
+                        *(s32 *)p0 = minus_one;
+                    } else {
+                        *(s32 *)(base + off) = minus_one;
+                    }
+                }
+                off += 0xBC;
+                p0 += 0xBC;
+                j++;
+                q += 0x34;
+            } while (j < 3);
         }
-    }
+        i--;
+    } while (i >= 0);
+
     return 1;
 }
 
