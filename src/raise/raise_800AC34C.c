@@ -57,7 +57,7 @@ block_6:
     }
 }
 
-void func_800ACB08(s32 arg0) {
+void func_800ACB08(s16 arg0) {
     extern struct {
         u8 _p0[0xA4];
         s32 unkA4[1];
@@ -73,7 +73,6 @@ void func_800ACB08(s32 arg0) {
 
     if (M2C_GFIELD(p, s32, 0x18) == 1) {
         if (M2C_GFIELD(p, s32, 0x24) == 5) {
-            arg0 = (s16)arg0;
             temp_v0 = ((typeof(D_8008ED68) *)ed)->unkA4[D_800EEA78[arg0]];
             if (temp_v0 != 7 && (temp_v0 & 7) == 7 && arg0 < 2 && arg0 >= 0) {
                 func_800B4944(arg0, p);
@@ -84,13 +83,15 @@ void func_800ACB08(s32 arg0) {
     } else {
 block_6:
         if (M2C_GFIELD(D_800EEB9C, s32, 0x14) == 1) {
-            s32 temp_s2 = (arg0 << 16) >> 15;
-            temp_v0 = ((typeof(D_8008ED68) *)ed)->unkA4[*(s16 *)((u8 *)D_800EEA78 + temp_s2)];
+            s32 temp_v1 = (u16)arg0 << 16;
+            void *t = D_800EEA78;
+            s32 s2 = temp_v1 >> 15;
+            temp_v0 = ((typeof(D_8008ED68) *)ed)->unkA4[*(s16 *)((u8 *)t + s2)];
             if (temp_v0 != 7 && (temp_v0 = temp_v0 & 7) == 7) {
                 *D_800F2DAE = temp_v0;
                 *D_800F2DAC = (u16) M2C_GFIELD(D_800EEB9C, s32, 0x24);
-                func_800AEB5C(2, 0, arg0, D_800EEB9C);
-                *D_800F2DAC = func_800AC1A4((s16)*D_800F2DAC, *D_800F2DAE, *(s16 *)((u8 *)D_800EEA80 + temp_s2));
+                func_800AEB5C(2, 0);
+                *D_800F2DAC = func_800AC1A4((s16)*D_800F2DAC, *D_800F2DAE, *(s16 *)((u8 *)D_800EEA80 + s2));
                 func_800AEB5C(1, 0);
             }
         }
