@@ -50,7 +50,13 @@ void func_8001DB54(void)
   new_var = new_var5;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001CDE0", func_8001DB68);
+extern void func_80012FB8(), func_80012FF0();
+void func_8001DB68(void) {
+    u8 *base = D_8008ED68;
+    s32 pad[4];
+    *(u8 **)(base + 0x938) = base + 0x538;
+    *(s32 *)(base + 0x93C) = 0;
+}
 
 #include "common.h"
 
