@@ -123,16 +123,31 @@ s32 func_800D2FB0(s32 arg0, s32 arg1) {
 
 s32 func_800D30B0(s32 a0, s32 a1, s32 a2) {
     extern u8 D_80091618[], D_800EF364[];
-    s32 k = func_800B1260(a0);
+    register s32 k asm("a3") = func_800B1260(a0);
     u8 *p = (u8 *)D_80100F38 + (u16)k * 0x79C;
+    Slot_80091618 *slots = (Slot_80091618 *)D_80091618;
     u8 *base;
-    s32 r, c;
+    register s32 r asm("t0");
+    register s32 c asm("a2");
+    register s32 x asm("a0");
+    register s32 y asm("a1");
+    s32 d;
     u8 b;
-    if (*(u16 *)(D_80091618 + (u16)k * 0x1A8 + 0x90) != 0) k = func_800B12D8(a0);
-    r = *(u16 *)(p + 0x332) + (a1 - 1);
-    c = *(u16 *)(p + 0x334) + (a2 - 1);
-    base = D_800EF364 + *(u16 *)(D_80091618 + (u16)k * 0x1A8 + 0x10) * 64;
-    if (base[(s16)r * 8 + (s16)c] != 0xFF) return 0xFF;
+    if (slots[(u16)k].unk_90 != 0) k = func_800B12D8(a0);
+    d = a1 - 1;
+    x = *(u16 *)(p + 0x332);
+    y = *(u16 *)(p + 0x334);
+    x += d;
+    r = x;
+    d = a2 - 1;
+    y += d;
+    c = y;
+    {
+        Slot_80091618 *slot = &slots[(u16)k];
+        u8 *grid = D_800EF364;
+        base = slot->unk_10 * 64 + grid;
+    }
+    if (base[(s16)x * 8 + (s16)y] != 0xFF) return 0xFF;
     *(u16 *)(p + 0x382) = 1;
     do {
         r += a1;
@@ -249,7 +264,7 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_80
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D827C);
 
-extern s32 D_80069B28;
+extern s32 D_80069B28[];
 extern u8 D_80091618[], D_800EF524[], D_800900C0[];
 extern void func_800D8A20(void);
 s32 func_800D8440(void) {
