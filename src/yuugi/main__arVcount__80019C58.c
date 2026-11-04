@@ -75,6 +75,18 @@ void func_80019D7C(int param_1,undefined4 param_2,undefined4 param_3)
   return;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80019C58", func_80019DB4);
+extern u8 D_8008ED68[];
+extern u8 D_8008F7E0[];
+void func_80019DB4(s32 arg0, u16 arg1, s32 arg2, s32 arg3) {
+    s32 buf[8];
+    s32 *p = buf;
+    u8 *a = D_8008ED68;
+    u8 *b = D_8008F7E0;
+    p[0] = arg2;
+    p[1] = arg1;
+    func_800190F4(6, arg3, p, arg0);
+    *(s32 *)(a + 0xF8) = 1;
+    b[0x40C] = 1;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80019C58", func_80019E1C);
