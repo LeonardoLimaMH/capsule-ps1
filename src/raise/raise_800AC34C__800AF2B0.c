@@ -11,6 +11,21 @@ typedef struct {
 } S_80091618;
 extern S_80091618 D_80091618[];
 
+typedef struct {
+    u8 _p00[0xC];
+    s32 unkC;
+    u8 _p10[0x14];
+    s32 unk24;
+    u8 _p28[0xA8];
+    s32 unkD0;
+} S_800EEB9C_local;
+
+extern S_800EEB9C_local D_800EEB9C;
+extern u16 func_800B065C(s32, s32);
+extern s32 func_800E0FB8(s32, s32);
+extern s32 func_800E0DF8(void);
+extern u16 func_800B0440(s32, s32);
+
 void func_800AF2B0(void) {
     func_800AF380();
     func_800AF760();
