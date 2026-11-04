@@ -532,7 +532,119 @@ s32 func_8003B6F4(u8 *s) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003B7B4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003BC94);
+s32 func_8003BC94(Unk_800944B8Stream *p) {
+    extern s32 D_800714A0[];
+    extern void func_8003B7B4(Unk_800944B8Stream *, s32, s32, s32);
+    extern void func_8003B178(Unk_800944B8Stream *, s32);
+    extern s32 func_8003AAF0(u8 *);
+
+    register s32 i asm("s0");
+    register s32 a1 asm("a1");
+    register s32 a2 asm("a2");
+    register s32 a3 asm("a3") = 0;
+    register s32 v1 asm("v1");
+    s32 t0;
+    u32 n;
+
+    /* Read 1: into a1 */
+    {
+        register Unk_800944B8 *base asm("a0") = D_800944B8;
+        Unk_800944B8 *e = &base[D_80078C9C];
+        u8 *data = *(u8 *volatile *)&e->unk_0x284;
+        register u32 pos asm("a0") = *(volatile u32 *)&p->unk_0x0;
+        register u8 c asm("v1") = data[pos];
+        pos++;
+        *(u32 *)&p->unk_0x0 = pos;
+        if (e->unk_0x294 < pos) { p->unk_0x20 = 1; a1 = -1; }
+        else a1 = (u8)c;
+    }
+
+    a2 = a1;
+    if (!(a1 & 0x80)) {
+        a1 = p->unk_0x25;
+        p->unk_0x24 = 1;
+    } else {
+        if ((a2 & 0xFF) != 0xFF) {
+            p->unk_0x25 = a1;
+        }
+        p->unk_0x24 = 0;
+    }
+
+    v1 = (u32)a1 >> 2;
+    {
+        register u8 *table asm("v0") = (u8 *)D_800714A0;
+        t0 = *(s32 *)(table + (v1 & 0x3C));
+    }
+    v1 = (u8)a2;
+    if (t0 != 0) {
+        if (p->unk_0x24 == 0) {
+            /* Read 2: into v1 then a2 */
+            register s32 lo asm("v1");
+            register Unk_800944B8 *base asm("a0") = D_800944B8;
+            Unk_800944B8 *e = &base[D_80078C9C];
+            u8 *data = *(u8 *volatile *)&e->unk_0x284;
+            register u32 pos asm("a0") = *(volatile u32 *)&p->unk_0x0;
+            register u8 c asm("v1") = data[pos];
+            pos++;
+            *(u32 *)&p->unk_0x0 = pos;
+            if (e->unk_0x294 < pos) { p->unk_0x20 = 1; lo = -1; }
+            else lo = (u8)c;
+            a2 = lo;
+        }
+        if (t0 == 2) {
+            /* Read 3: into a3 */
+            register Unk_800944B8 *base asm("a0") = D_800944B8;
+            Unk_800944B8 *e = &base[D_80078C9C];
+            u8 *data = *(u8 *volatile *)&e->unk_0x284;
+            register u32 pos asm("a0") = *(volatile u32 *)&p->unk_0x0;
+            register u8 c asm("v1") = data[pos];
+            pos++;
+            *(u32 *)&p->unk_0x0 = pos;
+            if (e->unk_0x294 < pos) { p->unk_0x20 = 1; a3 = -1; }
+            else a3 = (u8)c;
+        }
+        func_8003B7B4(p, a1 & 0xFF, a2 & 0xFF, a3 & 0xFF);
+        return 0;
+    }
+
+    if (v1 == 0xF0) goto do_f0;
+
+    if (v1 == 0xFF) {
+        /* Read 5: into a1 */
+        register Unk_800944B8 *base asm("a0") = D_800944B8;
+        Unk_800944B8 *e = &base[D_80078C9C];
+        u8 *data = *(u8 *volatile *)&e->unk_0x284;
+        register u32 pos asm("a0") = *(volatile u32 *)&p->unk_0x0;
+        register u8 c asm("a1") = data[pos];
+        pos++;
+        *(u32 *)&p->unk_0x0 = pos;
+        if (e->unk_0x294 < pos) { p->unk_0x20 = 1; a1 = -1; }
+        else a1 = (u8)c;
+        func_8003B178(p, a1 & 0xFF);
+    }
+    return 0;
+
+do_f0:
+    i = 0;
+    n = func_8003AAF0((u8 *)p);
+    do {
+        register s32 byte asm("v0");
+        register u32 pos asm("a0") = *(volatile u32 *)&p->unk_0x0;
+        Unk_800944B8 *base = D_800944B8;
+        Unk_800944B8 *e = &base[D_80078C9C];
+        u8 *data = *(u8 *volatile *)&e->unk_0x284;
+        register u8 c asm("v1") = data[pos];
+        pos++;
+        *(u32 *)&p->unk_0x0 = pos;
+        i++;
+        if (e->unk_0x294 < pos) { p->unk_0x20 = 1; byte = -1; }
+        else byte = (u8)c;
+        if ((byte & 0xFF) == 0xF7) {
+            break;
+        }
+    } while (i < n);
+    return 0;
+}
 
 s32 func_8003BFCC(u32 *s) {
     extern u8 D_80078CAC[];
@@ -729,21 +841,15 @@ s32 func_8003C5BC(s32 n) {
 void func_8003C654(void) {
     extern s32 D_80094768[];
     s32 n, i, j;
-    s32 *base;
-    s32 *p;
-    s32 *a;
-    s32 *b;
+    s32 *a, *b;
     volatile s32 temp[2];
-
     for (n = 0; n < 16; n++) {
         if (D_80094768[n * 2] == 0) break;
     }
-    base = D_80094768;
-    p = base;
-    for (i = 0; i < n; i++, p += 2) {
-        a = p;
+    for (i = 0; i < n; i++) {
+        a = &D_80094768[i * 2];
         for (j = n - 1; i < j; j--) {
-            b = &base[j * 2];
+            b = &D_80094768[j * 2];
             if (a[0] > b[0]) {
                 temp[1] = a[1];
                 temp[0] = a[0];
