@@ -70,11 +70,51 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3B14);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3C24);
 
+#include "gte_inline.h"
+
 s32 func_800E3D10(void) {
     return 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3D18);
+extern u8 D_800900C0[], D_8008ED68[], D_80063940[], D_80100F38[];
+extern s16 D_800F1A68[];
+extern void PushMatrix(void), PopMatrix(void), func_8002CEC0(void *);
+s32 func_800E3D18(s32 a0, void *v, u8 **obj) {
+    struct {
+        u16 sx;
+        u16 sy;
+        s32 p;
+        s32 flag;
+        s32 z;
+    } t;
+    u8 *scr;
+    u8 *pl;
+    s32 s;
+    u16 k;
+    s32 g;
+
+    k = func_800B1260(a0);
+    s = func_800E3810(a0);
+    PushMatrix();
+    func_8002CEC0(D_800900C0 + s * 0xBC);
+    gte_ldv0(v);
+    gte_rtps();
+    gte_stsxy(&t);
+    gte_stir0(&t.p);
+    gte_stflg(&t.flag);
+    GTE_MFC2(t.z, 19);
+    t.z >>= 2;
+    scr = D_8008ED68;
+    *(u16 *)(*obj + 0x46) = t.sx - *(s32 *)(scr + 0x108) / 2;
+    *(u16 *)(*obj + 0x4A) = t.sy - *(s32 *)(scr + 0x10C) / 2 + 2;
+    PopMatrix();
+    g = (*(u32 *)(D_80063940 + k * 60 + 0x20) >> 15) & 0xF;
+    pl = D_80100F38 + k * 0x79C;
+    *(u16 *)(*obj + 0x46) += (u16)D_800F1A68[(*(s16 *)(pl + 0x2BA) - 10) * 3 + g * 9];
+    *(u16 *)(*obj + 0x4A) += (u16)D_800F1A68[(*(s16 *)(pl + 0x2BA) - 10) * 3 + g * 9 + 1];
+    t.z += D_800F1A68[(*(s16 *)(pl + 0x2BA) - 10) * 3 + g * 9 + 2];
+    return (s16)((u16)t.z - 5);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3F38);
 
