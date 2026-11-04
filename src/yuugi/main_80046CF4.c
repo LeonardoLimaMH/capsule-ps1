@@ -44,4 +44,30 @@ void CD_set_test_parmnum(s32 arg0) {
     D_80073330 = arg0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80046CF4", func_80047054);
+void func_80047054(void) {
+    extern s32 func_800459CC(void);
+    extern void (*D_80073084)();
+    extern void (*D_80073088)();
+    extern u8 D_80073365;
+    extern s32 D_80094C18;
+    extern s32 D_80094C20;
+    s32 status;
+    u8 saved;
+    u8 *p;
+    u8 *q;
+
+    saved = *D_8007334C & 3;
+    p = &D_80073365;
+    q = p - 1;
+    while ((status = func_800459CC()) != 0) {
+        if (status & 4) {
+            if (D_80073088 != NULL) {
+                D_80073088(*p, &D_80094C20);
+            }
+        }
+        if ((status & 2) && D_80073084 != NULL) {
+            D_80073084(*q, &D_80094C18);
+        }
+    }
+    *D_8007334C = saved;
+}
