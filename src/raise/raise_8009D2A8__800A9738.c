@@ -84,18 +84,20 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A9738", func_800A9F84);
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A9738", func_800AA0E4);
 
 s32 func_800AA45C(void) {
-    extern M2C_UNK D_8008ED68[];
+    typedef struct {
+        u8 pad[0xA68];
+        s32 unkA68;
+    } S_8ED68;
+    extern S_8ED68 D_8008ED68[];
     extern s32 D_800ED8DC[];
-    s32 var_v0;
+    S_8ED68 *p = D_8008ED68;
 
-    var_v0 = -1;
-    if ((*D_800ED8DC) == 1) {
-        var_v0 = 0;
-        if (M2C_FIELD(D_8008ED68, s32 *, 0xA68) == 0) {
-            var_v0 = -1;
+    if (*D_800ED8DC == 1) {
+        if (p->unkA68 != 0) {
+            return 0;
         }
     }
-    return var_v0;
+    return -1;
 }
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A9738", func_800AA494);
