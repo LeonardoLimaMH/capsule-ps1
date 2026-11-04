@@ -43,4 +43,12 @@ void func_80012FB8(u8 *arg0, s16 x, s16 y, s16 w, s16 h) {
     LoadImage(&r, arg0 + 0xC);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14__80012E54", func_80012FF0);
+void func_80012FF0(u8 *arg0, s16 x, s16 y, s16 w, s16 h) {
+    Rect r;
+
+    r.x = x;
+    r.y = y;
+    r.w = w;
+    r.h = h;
+    LoadImage(&r, arg0 + 0xC);
+}
