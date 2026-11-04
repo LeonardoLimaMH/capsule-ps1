@@ -133,7 +133,36 @@ s32 func_8003A854(u8 *a, u8 *b, s32 n) {
     return *a - *b;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A8A4);
+s32 func_8003A8A4(u32 arg0) {
+    extern u8 D_80078CA4[];
+    register u32 pos asm("a3") = arg0;
+    u8 *pattern = D_80078CA4;
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    Unk_800944B8 *e = &base[D_80078C9C];
+    u8 *data = e->unk_0x284;
+    u8 *a;
+    u8 *b;
+    s32 n;
+    s32 x, y, diff;
+    do {
+        a = pattern;
+        b = data + pos;
+        n = 3;
+        do {
+            x = *a++;
+            y = *b;
+            if (x != y) goto compare;
+            b++;
+        } while (--n);
+        x = *a;
+        y = *b;
+compare:
+        diff = x - y;
+        if (diff == 0) return pos + 4;
+        pos++;
+    } while (pos <= e->unk_0x294);
+    return -1;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A940);
 
