@@ -1,7 +1,5 @@
 #include "common.h"
 
-#include "common.h"
-
 typedef struct {
     s16 x, y, w, h;
 } Rect;
@@ -30,6 +28,26 @@ u16 slpm_LoadTPage(u32 *pix, s32 tp, s32 abr, s32 x, s32 y, s32 w, s32 h) {
     return slpm_GetTPage(tp, abr, x, y);
 }
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_ext", slpm_LoadClut);
+extern s32 slpm_GetClut();
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_ext", slpm_LoadClut2);
+u16 slpm_LoadClut(u32 *clut, s32 x, s32 y) {
+    Rect r;
+
+    r.x = x;
+    r.y = y;
+    r.w = 0x100;
+    r.h = 1;
+    slpm_LoadImage(&r, clut);
+    return slpm_GetClut(x, y);
+}
+
+u16 slpm_LoadClut2(u32 *clut, s32 x, s32 y) {
+    Rect r;
+
+    r.x = x;
+    r.y = y;
+    r.w = 0x10;
+    r.h = 1;
+    slpm_LoadImage(&r, clut);
+    return slpm_GetClut(x, y);
+}

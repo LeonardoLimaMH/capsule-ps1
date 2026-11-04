@@ -1,8 +1,6 @@
 #include "common.h"
 #include "yuugi.h"
 
-#include "common.h"
-
 typedef struct {
     s16 x, y, w, h;
 } Rect;
@@ -31,6 +29,26 @@ u16 LoadTPage(u32 *pix, s32 tp, s32 abr, s32 x, s32 y, s32 w, s32 h) {
     return GetTPage(tp, abr, x, y);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_ext", LoadClut);
+extern s32 GetClut();
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_ext", LoadClut2);
+u16 LoadClut(u32 *clut, s32 x, s32 y) {
+    Rect r;
+
+    r.x = x;
+    r.y = y;
+    r.w = 0x100;
+    r.h = 1;
+    LoadImage(&r, clut);
+    return GetClut(x, y);
+}
+
+u16 LoadClut2(u32 *clut, s32 x, s32 y) {
+    Rect r;
+
+    r.x = x;
+    r.y = y;
+    r.w = 0x10;
+    r.h = 1;
+    LoadImage(&r, clut);
+    return GetClut(x, y);
+}

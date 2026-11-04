@@ -54,7 +54,6 @@ src/slpm/sdk_libc2_prnt.c 2.8.1-psx
 src/slpm/sdk_libc2_putchar.c 2.8.1-psx
 src/slpm/loader_80112A4C.c 2.8.1-psx
 src/slpm/loader_80115A84.c 2.8.1-psx
-src/slpm/loader_80116438.c 2.8.1-psx
 src/slpm/sdk_libcd_event.c 2.8.1-psx
 src/slpm/loader_8011854C.c 2.7.2-psx
 src/slpm/sdk_libc2_puts.c 2.8.1-psx

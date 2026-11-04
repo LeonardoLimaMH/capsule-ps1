@@ -57,3 +57,4 @@ src/yuugi/sdk_libspu_s_m_util.c
 src/yuugi/sdk_libgpu_ext__SetDefDispEnv.c
 src/yuugi/sdk_libgpu_ext__SetDefDrawEnv.c
 src/yuugi/sdk_libgpu_ext.c
+src/slpm/loader_80116438.c
