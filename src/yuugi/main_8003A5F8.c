@@ -123,103 +123,69 @@ s32 func_8003A854(u8 *a, u8 *b, s32 n) {
 }
 
 s32 func_8003A8A4(u32 arg0) {
-    extern s32 D_80078C9C;
     extern u8 D_80078CA4[];
-    register s32 var_a0 asm("a0");
-    s32 var_v0;
-    u32 var_a3;
-    register u8 *var_a1 asm("a1");
-    register u8 *var_a2 asm("a2");
-    u8 var_v0_2;
-    u8 var_v1;
-    Unk_800944B8 *temp_t0;
+    register u32 pos asm("a3") = arg0;
     u8 *pattern = D_80078CA4;
     register Unk_800944B8 *base asm("a0") = D_800944B8;
-    u8 *data;
-
-    var_a3 = arg0;
-    temp_t0 = &base[D_80078C9C];
-    data = temp_t0->unk_0x284;
-loop_1:
-    var_a1 = pattern;
-    var_a2 = data + var_a3;
-    var_a0 = 3;
-loop_2:
-    var_v1 = *var_a1;
-    var_v0_2 = *var_a2;
-    var_a1 += 1;
-    if (var_v1 == var_v0_2) {
-        var_a0 -= 1;
-        var_a2 += 1;
-        if (var_a0 == 0) {
-            var_v1 = *var_a1;
-            var_v0_2 = *var_a2;
-        } else {
-            goto loop_2;
-        }
-    }
-    var_v0 = var_a3 + 4;
-    if (var_v1 != var_v0_2) {
-        var_a3 += 1;
-        var_a1 = pattern;
-        if (temp_t0->unk_0x294 < var_a3) {
-            var_v0 = -1;
-        } else {
-            goto loop_1;
-        }
-    }
-    return var_v0;
+    Unk_800944B8 *e = &base[D_80078C9C];
+    u8 *data = e->unk_0x284;
+    u8 *a;
+    u8 *b;
+    s32 n;
+    s32 x, y, diff;
+    do {
+        a = pattern;
+        b = data + pos;
+        n = 3;
+        do {
+            x = *a++;
+            y = *b;
+            if (x != y) goto compare;
+            b++;
+        } while (--n);
+        x = *a;
+        y = *b;
+compare:
+        diff = x - y;
+        if (diff == 0) return pos + 4;
+        pos++;
+    } while (pos <= e->unk_0x294);
+    return -1;
 }
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A940);
 
 s32 func_8003A9DC(u32 arg0) {
-    extern s32 D_80078C9C;
     extern u8 D_80078CB4[];
-    register s32 var_a0 asm("a0");
-    s32 var_v0;
-    u32 var_a3;
-    register u8 *var_a1 asm("a1");
-    register u8 *var_a2 asm("a2");
-    u8 var_v0_2;
-    u8 var_v1;
-    Unk_800944B8 *temp_t0;
+    register u32 pos asm("a3") = arg0;
     register u8 *pattern asm("t2") = D_80078CB4;
     register Unk_800944B8 *base asm("a0") = D_800944B8;
-    u8 *data;
-
-    var_a3 = arg0;
-    temp_t0 = &base[D_80078C9C];
-    data = temp_t0->unk_0x284;
-loop_1:
-    var_a1 = pattern;
-    var_a2 = data + var_a3;
-    var_a0 = 2;
-loop_2:
-    var_v1 = *var_a1;
-    var_v0_2 = *var_a2;
-    var_a1 += 1;
-    if (var_v1 == var_v0_2) {
-        var_a0 -= 1;
-        var_a2 += 1;
-        if (var_a0 == 0) {
-            var_v1 = *var_a1;
-            var_v0_2 = *var_a2;
-        } else {
-            goto loop_2;
+    Unk_800944B8 *e = &base[D_80078C9C];
+    u8 *data = e->unk_0x284;
+    u8 *a;
+    u8 *b;
+    s32 n;
+    s32 x, y;
+    do {
+        a = pattern;
+        b = data + pos;
+        n = 2;
+loop:
+        x = *a;
+        y = *b;
+        a++;
+        if (x == y) {
+            n--;
+            b++;
+            if (n == 0) {
+                x = *a;
+                y = *b;
+            } else goto loop;
         }
-    }
-    var_v0 = var_a3 + 3;
-    if (var_v1 != var_v0_2) {
-        var_a3 += 1;
-        var_a1 = pattern;
-        if (temp_t0->unk_0x294 < var_a3) {
-            var_v0 = -1;
-        } else {
-            goto loop_1;
-        }
-    }
-    return var_v0;
+        if (x == y) return pos + 3;
+        pos++;
+    } while (pos <= e->unk_0x294);
+    return -1;
 }
 
 s32 func_8003AA78(u8 *s) {
@@ -287,7 +253,21 @@ void func_8003B170(void) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003B178);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003B6F4);
+s32 func_8003B6F4(u8 *s) {
+    u32 i = 0;
+    u32 n = func_8003AAF0(s);
+    s32 result;
+    do {
+        Unk_800944B8 *e = &D_800944B8[D_80078C9C];
+        u32 pos = *(u32 *)s;
+        u8 c = e->unk_0x284[pos];
+        *(u32 *)s = ++pos;
+        if (e->unk_0x294 < pos) { s[0x20] = 1; result = -1; }
+        else result = c;
+        i++;
+    } while ((u8)result != 0xF7 && i < n);
+    return i < n;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003B7B4);
 
