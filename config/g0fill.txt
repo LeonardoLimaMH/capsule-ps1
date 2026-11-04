@@ -56,3 +56,4 @@ src/yuugi/main_800424E4.c
 src/yuugi/sdk_libspu_s_m_util.c
 src/yuugi/sdk_libgpu_ext__SetDefDispEnv.c
 src/yuugi/sdk_libgpu_ext__SetDefDrawEnv.c
+src/yuugi/sdk_libgpu_ext.c

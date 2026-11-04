@@ -134,7 +134,7 @@ def reloc_names(obj, func):
     syms = [l.split() for l in match.sh(f"mips-linux-gnu-nm -n {obj}").splitlines()]
     # como em match.compiled: rótulos locais (L..., $...) não delimitam funções
     funcs = {s[2]: int(s[0], 16) for s in syms
-             if len(s) == 3 and s[1] in "Tt" and not s[2].startswith(("L", "$"))}
+             if len(s) == 3 and s[1] in "Tt" and not match.is_label(s[2])}
     start = funcs[func]
     nxt = sorted(a for a in funcs.values() if a > start)
     end = nxt[0] if nxt else 1 << 30

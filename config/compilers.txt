@@ -281,7 +281,6 @@ src/yuugi/main__80012A14__80012E54.c 2.8.1-psx
 src/slpm/loader_80116AD0.c 2.8.1-psx
 src/slpm/sdk_libgpu_ext__slpm_SetDefDrawEnv.c 2.8.1-psx
 src/yuugi/sdk_libc2_memmove.c 2.7.2-cdk
-src/yuugi/sdk_libgpu_ext.c 2.8.1-psx
 src/yuugi/sdk_libgpu_ext__SetDefDrawEnv.c 2.8.1-psx
 src/raise/raise_800C1360.c 2.7.2-cdk
 src/raise/raise_800DDD70.c 2.7.2-cdk

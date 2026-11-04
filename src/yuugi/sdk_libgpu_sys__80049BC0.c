@@ -3,11 +3,26 @@
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", func_80049BC0);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", ClearImage);
+#include "common.h"
+
+extern char D_800112C0[];
+
+s32 ClearImage(s32 *rect, u8 r, u8 g, u8 b) {
+    extern void * D_80078914[];
+    func_80049BC0(D_800112C0, rect);
+    return M2C_FIELD((*D_80078914), s32 (**)(s32, s32 *, s32, s32), 8)(M2C_FIELD((*D_80078914), s32 *, 0xC), rect, 8, (b << 0x10) | (g << 8) | r);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", ClearImage2);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", LoadImage);
+#include "common.h"
+
+extern char D_800112D8[];
+void LoadImage(s32 arg0, M2C_UNK arg1) {
+    extern void * D_80078914[];
+    func_80049BC0(D_800112D8, arg0);
+    M2C_FIELD((*D_80078914), M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 8)(M2C_FIELD((*D_80078914), s32 *, 0x20), arg0, 8, arg1);
+}
 
 #include "common.h"
 
