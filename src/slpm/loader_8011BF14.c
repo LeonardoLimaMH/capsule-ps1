@@ -1,10 +1,12 @@
 #include "common.h"
 
-extern void (*D_80133340[])(void);
+extern s32 D_80133340;
 
 void func_8011BF14(void) {
-    if (D_80133340[0] != 0) {
-        D_80133340[0]();
+    void (**p)(void) = (void (**)(void))&D_80133340;
+
+    if (*p != 0) {
+        (*p)();
     }
-    D_80133340[-1]();
+    (*(p - 1))();
 }
