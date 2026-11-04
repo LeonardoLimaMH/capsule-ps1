@@ -261,7 +261,64 @@ s32 func_8003AC4C(s32 arg0, s32 arg1) {
     return ((arg0 & 0xFF) << 8) | (arg1 & 0xFF);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AC60);
+s32 func_8003AC60(u8 *s) {
+    register u8 *stream asm("a1") = s;
+    s32 cur;
+    register s32 hi asm("t0");
+    s32 mid;
+    register s32 lo asm("a0");
+    {
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    Unk_800944B8 *e = &base[D_80078C9C];
+    u8 *data = *(u8 *volatile *)&e->unk_0x284;
+    register u32 pos asm("a0") = *(volatile u32 *)stream;
+    register u8 c asm("v1") = data[pos];
+    pos++;
+    *(u32 *)stream = pos;
+    if (e->unk_0x294 < pos) { stream[0x20] = 1; cur = -1; }
+    else cur = c;
+}
+    hi = cur;
+    {
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    Unk_800944B8 *e = &base[D_80078C9C];
+    u8 *data = *(u8 *volatile *)&e->unk_0x284;
+    register u32 pos asm("a0") = *(volatile u32 *)stream;
+    register u8 c asm("v1") = data[pos];
+    pos++;
+    *(u32 *)stream = pos;
+    if (e->unk_0x294 < pos) { stream[0x20] = 1; cur = -1; }
+    else cur = c;
+}
+    mid = cur;
+    {
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    Unk_800944B8 *e = &base[D_80078C9C];
+    u8 *data = *(u8 *volatile *)&e->unk_0x284;
+    register u32 pos asm("a0") = *(volatile u32 *)stream;
+    register u8 c asm("v1") = data[pos];
+    pos++;
+    *(u32 *)stream = pos;
+    if (e->unk_0x294 < pos) { stream[0x20] = 1; cur = -1; }
+    else cur = c;
+}
+    {
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    Unk_800944B8 *e = &base[D_80078C9C];
+    u8 *data = *(u8 *volatile *)&e->unk_0x284;
+    register u32 pos asm("a0") = *(volatile u32 *)stream;
+    register u8 c asm("v1") = data[pos];
+    pos++;
+    *(u32 *)stream = pos;
+    if (e->unk_0x294 < pos) { stream[0x20] = 1; lo = -1; }
+    else lo = c;
+}
+    {
+        register s32 acc asm("v1") = (((((hi & 0xFF) << 8) + (mid & 0xFF)) << 8) + (cur & 0xFF)) << 8;
+        register s32 tmp asm("v0") = lo & 0xFF;
+        return acc | tmp;
+    }
+}
 
 s32 func_8003AE48(u8 *s) {
     register u8 *stream asm("a2") = s;
@@ -364,18 +421,19 @@ done:
     if (found == -1U) goto fail;
     {
         register s32 value asm("v0") = func_8003AC60(s);
-        register s32 v asm("a1");
+        register u32 v asm("a1");
         u32 pos;
-        s[2] = value;
+        *(volatile u32 *)&s[2] = value;
         v = value;
-        pos = s[0];
+        pos = *(volatile u32 *)&s[0];
+        value = 0;
         s[4] = pos;
         {
-            register u32 end asm("a0") = pos;
+            register u8 *end asm("a0") = (u8 *)pos;
             end += v;
-            s[3] = end;
+            s[3] = (u32)end;
         }
-        return 0;
+        return value;
     }
 found:
     found = pos + 4;
