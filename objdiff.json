@@ -915,7 +915,7 @@
           "yuugi",
           "yuugi.game"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main_80043134.o"
     },
@@ -2540,7 +2540,7 @@
           "yuugi",
           "yuugi.sdk"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/sdk_libetc_pad.o"
     },

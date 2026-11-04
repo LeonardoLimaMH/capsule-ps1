@@ -136,3 +136,27 @@ O app sobe sozinho quando um agente conecta (`decomp mcp`).
 - **Prova:** o objdiff dele ignora relocações, do mesmo jeito que o nosso relatório. A prova
   continua sendo o build com os 5 SHA-1, na cópia principal.
 - **Escopo:** as regras do AGENTS.md valem também para os agentes que trabalham por ele.
+
+## Sincronização nos dois sentidos (2026-11-04)
+
+Agentes → main (função por função, nunca `git merge`):
+
+1. `git bundle` do branch `decomp-wtf` (distro decomp-wtf) e `git fetch` como `agents` no Ubuntu.
+2. `git archive agents src` em `.cache/agents_src`; `.cache/tmp/agent_import.py` acha as funções
+   que são C lá e `INCLUDE_ASM` aqui, extrai cada uma e confere byte a byte nos perfis (nenhum,
+   g0fill, g0fill+spfill) e compiladores.
+3. `.cache/tmp/integrate_all.sh lista` integra as que zeram: `int_unify.sh`, depois aplicação
+   manual com `rodata_migrate.py` (jtbl/strings) e correção automática de conflito de tipo
+   (`fix_conflict.py`, `fix_typedef.py`); reverte o que quebrar os 5 SHA-1.
+4. CHESS fica de fora (área da outra IA).
+
+Main → agentes:
+
+1. `stop_agents`; o trabalho em andamento deles vai num commit `WIP` no branch `decomp-wtf`.
+2. `git merge -X theirs main-sync` (a main vence nos trechos em conflito, já conferida).
+3. Arquivos que não compilam por mistura de trechos voltam à versão da main
+   (`git show main-sync:arquivo`); o WIP continua no commit `WIP`.
+4. `make split`, `objdiff_report.py --objects` e `start_agents` com a mesma quantidade.
+
+O link do branch deles costuma falhar (o C em andamento muda tamanhos); os agentes só usam os
+objetos por unidade do objdiff, então basta tudo compilar.
