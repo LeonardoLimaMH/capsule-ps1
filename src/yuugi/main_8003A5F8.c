@@ -166,7 +166,36 @@ compare:
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A940);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A9DC);
+s32 func_8003A9DC(u32 arg0) {
+    extern u8 D_80078CB4[];
+    register u32 pos asm("a3") = arg0;
+    register u8 *pattern asm("t2") = D_80078CB4;
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    Unk_800944B8 *e = &base[D_80078C9C];
+    u8 *data = e->unk_0x284;
+    u8 *a;
+    u8 *b;
+    s32 n;
+    s32 x, y, diff;
+    do {
+        a = pattern;
+        b = data + pos;
+        n = 2;
+        do {
+            x = *a++;
+            y = *b;
+            if (x != y) goto compare;
+            b++;
+        } while (--n);
+        x = *a;
+        y = *b;
+compare:
+        diff = x - y;
+        if (diff == 0) return pos + 3;
+        pos++;
+    } while (pos <= e->unk_0x294);
+    return -1;
+}
 
 #include "yuugi.h"
 
