@@ -25,15 +25,17 @@ typedef struct {
     u16 unk_0x14;
     u16 unk_0x16;
     u16 unk_0x18;
-    u8 unk_0x1A[2];
+    u16 unk_0x1A;
     u16 unk_0x1C;
-    u8 unk_0x1E[2];
+    u16 unk_0x1E;
     u8 unk_0x20;
-    u8 unk_0x21[2];
+    u8 unk_0x21;
+    u8 unk_0x22;
     u8 unk_0x23;
     u8 unk_0x24;
     u8 unk_0x25;
-    u8 unk_0x26[2];
+    u8 unk_0x26;
+    u8 unk_0x27;
 } Unk_800944B8Stream;
 
 #ifndef UNK_800944B8_DEFINED
