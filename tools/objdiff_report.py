@@ -141,6 +141,10 @@ def generate(objects_only=False):
             pending = set(include.findall(text))
             pending_all[t] |= pending
             key = src.relative_to(ROOT).as_posix()
+            # SDK PsyQ fora do escopo (decisão de 2026-11-04, como em ygofm-decomp/sotn-decomp):
+            # biblioteca da Sony linkada como está, não entra no relatório nem no progresso
+            if src.stem.startswith("sdk_") or sum(f in lib for f in funcs) * 2 > len(funcs):
+                continue
             tobj = build_target(t, src, funcs)
             if tobj is None:
                 continue
@@ -148,17 +152,13 @@ def generate(objects_only=False):
             # todo arquivo tem objeto base, mesmo sem funções em C ainda: é onde o primeiro C de um
             # arquivo só em assembly vai ser compilado (o decomp.anything precisa dele para testar)
             bobj = build_base(t, src, gcc, key in g0, key in sp)
-            sdk = sum(f in lib for f in funcs) * 2 > len(funcs)
             unit = {
                 "name": f"{t}/{src.stem}",
                 "target_path": tobj.relative_to(ROOT).as_posix(),
                 "metadata": {
                     "source_path": key,
-                    "progress_categories": [t, f"{t}.{'sdk' if sdk else 'game'}"] + ([] if sdk else ["game"]),
+                    "progress_categories": [t],
                     "complete": not pending,
-                    # SDK PsyQ é biblioteca (código da Sony, igual em centenas de jogos): fica fora do
-                    # progresso principal, como em ygofm-decomp/sotn-decomp; a categoria .sdk ainda mostra
-                    "auto_generated": sdk,
                 },
             }
             if bobj is not None:
@@ -166,11 +166,7 @@ def generate(objects_only=False):
             units.append(unit)
         print(f"{t}: {sum(u['name'].startswith(t + '/') for u in units)} unidades", flush=True)
 
-    cats = [{"id": "game", "name": "Código do jogo (sem SDK)"}]
-    for t, label in TARGETS.items():
-        cats += [{"id": t, "name": label},
-                 {"id": f"{t}.game", "name": f"{t.upper()}: código do jogo"},
-                 {"id": f"{t}.sdk", "name": f"{t.upper()}: SDK PsyQ"}]
+    cats = [{"id": t, "name": label} for t, label in TARGETS.items()]
     cfg = {
         "$schema": "https://raw.githubusercontent.com/encounter/objdiff/main/config.schema.json",
         # o build que o objdiff (e o decomp.anything) chamam: só refaz os objetos que mudaram
