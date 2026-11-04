@@ -1,6 +1,14 @@
 #include "common.h"
 #include "yuugi.h"
 
+typedef struct {
+  u8 *p;
+  u16 b;
+  u16 t;
+  u16 x;
+  u16 y;
+} Ent12A20;
+
 void func_80012A14(void) {
     extern s16 D_8008ED50[];
     (*D_8008ED50) = 0;
