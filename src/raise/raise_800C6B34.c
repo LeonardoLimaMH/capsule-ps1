@@ -50,7 +50,73 @@ s32 func_800C6B34(s32 a0, s32 a1) {
     return P32(0x2BC);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C6B34", func_800C6C48);
+s32 func_800C6C48(u8 *o, s32 a1)
+{
+  typedef struct {
+    u16 f_0;
+    u8 _p2[0x1A6];
+  } S_91618_local;
+  s32 k = func_800B1260(a1);
+  u8 *new_var;
+  S_80100F38 *p = &D_80100F38[(u16) k];
+  S_91618_local *q;
+  u8 *d;
+  switch (p->f_344)
+  {
+    case 0:
+      *((u16 *) (&p->f_344)) = 1;
+      break;
+
+    case 1:
+      func_800CE4B8(a1, (s32) o, *D_800F0780, 1);
+      *((u16 *) (&p->f_344)) = 2;
+
+    case 2:
+      if (func_80015E60((s32) o) == 1)
+      {
+        *((u16 *) (&p->f_344)) = 3;
+        break;
+      }
+      q = (S_91618_local *)D_80091618;
+      d = (new_var = D_80063940) + (q[(u16) k].f_0 * 60);
+      if ((((*((u32 *) (d + 0x28))) >> 13) & 0x1F) == 1)
+      {
+        if ((*((u16 *) (o + 0x24))) != (*((s32 *) ((*((u8 **) ((*((u8 **) (o + 0x1C))) + 4))) + 4))))
+        {
+          break;
+        }
+        if ((*((s32 *) (o + 0x20))) != 0)
+        {
+          break;
+        }
+        func_80034AB0(0x79);
+        func_800C5670(a1);
+      }
+      else
+      {
+        if ((*((u16 *) (o + 0x20))) != ((((*((u32 *) (d + 0x28))) >> 13) & 0x1F) - 2))
+        {
+          break;
+        }
+        if ((*((s16 *) (o + 0x24))) == 1)
+        {
+          func_800C5670(a1);
+        }
+        if (((*((u16 *) (o + 0x20))) == ((((*((u32 *) (d + 0x28))) >> 13) & 0x1F) - 2)) && ((*((s16 *) (o + 0x24))) == 0))
+        {
+          func_80034AB0(0x79);
+        }
+      }
+      break;
+
+    default:
+      *((u16 *) (&p->f_344)) = 0;
+      p->f_2BC += 1;
+      break;
+  }
+
+  return p->f_2BC;
+}
 
 #include "common.h"
 typedef struct S_80091618 {
