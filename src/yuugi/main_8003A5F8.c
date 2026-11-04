@@ -247,7 +247,27 @@ void func_8003B170(void) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003B178);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003B6F4);
+s32 func_8003B6F4(u8 *s) {
+    u32 i = 0;
+    u32 n = func_8003AAF0(s);
+    s32 result;
+    register s32 more asm("v0");
+    do {
+        Unk_800944B8 *e = &D_800944B8[D_80078C9C];
+        u32 pos = *(u32 *)s;
+        u8 c = e->unk_0x284[pos];
+        *(u32 *)s = ++pos;
+        i++;
+        if (e->unk_0x294 < pos) { s[0x20] = 1; result = -1; }
+        else result = c;
+        if ((u8)result == 0xF7) {
+            more = i < n;
+            break;
+        }
+        more = i < n;
+    } while (more);
+    return more;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003B7B4);
 
