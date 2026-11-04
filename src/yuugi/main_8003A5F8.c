@@ -597,7 +597,47 @@ s32 func_8003C29C(s32 n) {
     return 0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C390);
+s32 func_8003C390(void) {
+    extern s32 D_80078C98;
+    s32 saved = D_80078C9C;
+    Unk_800944B8 *base = D_800944B8;
+    s32 i;
+
+    for (D_80078C9C = 0; D_80078C9C < 1; D_80078C9C++) {
+        s32 offset = D_80078C9C * sizeof(Unk_800944B8);
+        Unk_800944B8 *bank = (Unk_800944B8 *)((u32)offset + (u32)base);
+        if (bank->unk_0x28A == 1) {
+            for (i = 0; i < bank->unk_0x2A2; i++) {
+                Unk_800944B8Stream *s = (Unk_800944B8Stream *)&bank->unk_0x0[i];
+                if (s->unk_0x20 == 0) {
+                    s->unk_0x14 += s->unk_0x16;
+                    if (s->unk_0x14 >= 0x100) {
+                        s->unk_0x14 &= 0xFF;
+                        if (i == bank->unk_0x2A0) {
+                            bank->unk_0x298++;
+                        }
+                        if (s->unk_0x1C != 0) {
+                            s->unk_0x1C--;
+                        } else {
+                            do {
+                                func_8003BC94(s);
+                                if (s->unk_0x20 != 0) break;
+                                s->unk_0x1C = func_8003AAF0(s);
+                                if (s->unk_0x1C == 0) continue;
+                                if (D_80078C98 != 0) func_8003C0C8(s);
+                            } while (s->unk_0x1C == 0);
+                            if (s->unk_0x1C != 0) {
+                                s->unk_0x1C--;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    D_80078C9C = saved;
+    return 0;
+}
 
 void func_8003C530(s32 n) {
     s32 i;
