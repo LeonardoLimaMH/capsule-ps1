@@ -21,7 +21,14 @@ INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__801150F0", func_801154B4);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__801150F0", func_801156F0);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys__801150F0", func_80115970);
+#include "common.h"
+
+void func_80115970(u32 arg0) {
+    extern u32 * D_80131C3C[];
+    extern u8 D_80133588[];
+    *(*D_80131C3C) = arg0;
+    *(D_80133588 + (arg0 >> 0x18)) = (s8) arg0;
+}
 
 #include "common.h"
 
