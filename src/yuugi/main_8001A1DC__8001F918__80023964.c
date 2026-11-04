@@ -331,7 +331,7 @@ s32 func_80023FE8(void) {
     return (s32)D_80069E4C;
 }
 
-typedef struct { volatile s16 a, b, c, d; } S_80078C20;
+typedef struct { volatile s16 a; s16 pad[7]; } S_80078C20;
 extern S_80078C20 D_80078C20;
 extern u8 D_80069AD4[], D_80078C18[], D_80069B84[];
 extern void func_8001A998(), SetBackColor(), SetColorMatrix(), RotMatrix();
