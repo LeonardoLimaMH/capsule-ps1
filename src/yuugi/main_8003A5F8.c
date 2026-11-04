@@ -125,20 +125,24 @@ s32 func_8003A854(u8 *a, u8 *b, s32 n) {
 s32 func_8003A8A4(u32 arg0) {
     extern s32 D_80078C9C;
     extern u8 D_80078CA4[];
-    s32 var_a0;
+    register s32 var_a0 asm("a0");
     s32 var_v0;
     u32 var_a3;
-    u8 *var_a1;
-    u8 *var_a2;
+    register u8 *var_a1 asm("a1");
+    register u8 *var_a2 asm("a2");
     u8 var_v0_2;
     u8 var_v1;
     Unk_800944B8 *temp_t0;
+    u8 *pattern = D_80078CA4;
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    u8 *data;
 
     var_a3 = arg0;
-    temp_t0 = &D_800944B8[D_80078C9C];
-    var_a1 = D_80078CA4;
+    temp_t0 = &base[D_80078C9C];
+    data = temp_t0->unk_0x284;
 loop_1:
-    var_a2 = temp_t0->unk_0x284 + var_a3;
+    var_a1 = pattern;
+    var_a2 = data + var_a3;
     var_a0 = 3;
 loop_2:
     var_v1 = *var_a1;
@@ -157,7 +161,7 @@ loop_2:
     var_v0 = var_a3 + 4;
     if (var_v1 != var_v0_2) {
         var_a3 += 1;
-        var_a1 = D_80078CA4;
+        var_a1 = pattern;
         if (temp_t0->unk_0x294 < var_a3) {
             var_v0 = -1;
         } else {
@@ -172,20 +176,24 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A940);
 s32 func_8003A9DC(u32 arg0) {
     extern s32 D_80078C9C;
     extern u8 D_80078CB4[];
-    s32 var_a0;
+    register s32 var_a0 asm("a0");
     s32 var_v0;
     u32 var_a3;
-    u8 *var_a1;
-    u8 *var_a2;
+    register u8 *var_a1 asm("a1");
+    register u8 *var_a2 asm("a2");
     u8 var_v0_2;
     u8 var_v1;
     Unk_800944B8 *temp_t0;
+    register u8 *pattern asm("t2") = D_80078CB4;
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    u8 *data;
 
     var_a3 = arg0;
-    temp_t0 = &D_800944B8[D_80078C9C];
-    var_a1 = D_80078CB4;
+    temp_t0 = &base[D_80078C9C];
+    data = temp_t0->unk_0x284;
 loop_1:
-    var_a2 = temp_t0->unk_0x284 + var_a3;
+    var_a1 = pattern;
+    var_a2 = data + var_a3;
     var_a0 = 2;
 loop_2:
     var_v1 = *var_a1;
@@ -204,7 +212,7 @@ loop_2:
     var_v0 = var_a3 + 3;
     if (var_v1 != var_v0_2) {
         var_a3 += 1;
-        var_a1 = D_80078CB4;
+        var_a1 = pattern;
         if (temp_t0->unk_0x294 < var_a3) {
             var_v0 = -1;
         } else {
@@ -215,16 +223,14 @@ loop_2:
 }
 
 s32 func_8003AA78(u8 *s) {
-    Unk_800944B8 *e = &D_800944B8[D_80078C9C];
-    u32 pos = *(u32 *)s;
-    u8 c = e->unk_0x284[pos];
-
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    Unk_800944B8 *e = &base[D_80078C9C];
+    u8 *data = *(u8 *volatile *)&e->unk_0x284;
+    register u32 pos asm("a0") = *(volatile u32 *)s;
+    u8 c = data[pos];
     pos++;
     *(u32 *)s = pos;
-    if (e->unk_0x294 < pos) {
-        s[0x20] = 1;
-        return -1;
-    }
+    if (e->unk_0x294 < pos) { s[0x20] = 1; return -1; }
     return c;
 }
 
@@ -241,8 +247,31 @@ s32 func_8003AC4C(s32 arg0, s32 arg1) {
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AC60);
 
 s32 func_8003AE48(u8 *s) {
-    s32 hi = next_byte(s);
-    s32 lo = next_byte(s);
+    register u8 *stream asm("a2") = s;
+    register s32 hi asm("a1");
+    s32 lo;
+    {
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    Unk_800944B8 *e = &base[D_80078C9C];
+    u8 *data = e->unk_0x284;
+    register u32 pos asm("a0") = *(volatile u32 *)stream;
+    u8 c = data[pos];
+    pos++;
+    *(u32 *)stream = pos;
+    if (e->unk_0x294 < pos) { stream[0x20] = 1; hi = -1; }
+    else hi = c;
+}
+    {
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    Unk_800944B8 *e = &base[D_80078C9C];
+    u8 *data = e->unk_0x284;
+    register u32 pos asm("a0") = *(volatile u32 *)stream;
+    u8 c = data[pos];
+    pos++;
+    *(u32 *)stream = pos;
+    if (e->unk_0x294 < pos) { stream[0x20] = 1; lo = -1; }
+    else lo = c;
+}
     return ((hi & 0xFF) << 8) | (lo & 0xFF);
 }
 
