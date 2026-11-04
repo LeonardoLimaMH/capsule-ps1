@@ -10,7 +10,15 @@ void ClearImage(s32 rect, u8 r, u8 g, u8 b) {
     M2C_FIELD((*D_80078914), M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 8)(M2C_FIELD((*D_80078914), s32 *, 0xC), rect, 8, (b << 16) | (g << 8) | r);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", ClearImage2);
+extern char D_800112CC[];
+void ClearImage2(s32 rect, u8 r, u8 g, u8 b) {
+    extern void * D_80078914[];
+    s32 t, u;
+    func_80049BC0(D_800112CC, rect);
+    u = b << 16;
+    t = (g << 8) | 0x80000000;
+    M2C_FIELD((*D_80078914), M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 8)(M2C_FIELD((*D_80078914), s32 *, 0xC), rect, 8, (u | t) | r);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", LoadImage);
 
@@ -23,7 +31,24 @@ void StoreImage(s32 arg0, M2C_UNK arg1) {
     M2C_FIELD((*D_80078914), M2C_UNK (**)(s32, s32, M2C_UNK, M2C_UNK), 8)(M2C_FIELD((*D_80078914), s32 *, 0x1C), arg0, 8, arg1);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", MoveImage);
+extern char D_800112F0[];
+s32 MoveImage(s32 *rect, s32 x, s32 y) {
+    extern void * D_80078914[];
+    extern s32 D_800789BC[];
+    s32 *q;
+    func_80049BC0(D_800112F0, rect);
+    if (((s16 *)rect)[2] != 0) {
+        if (((s16 *)rect)[3] == 0) {
+            return -1;
+        }
+        q = D_800789BC;
+        q[1] = (y << 16) | (x & 0xFFFF);
+        q[0] = rect[0];
+        q[2] = rect[1];
+        return M2C_FIELD((*D_80078914), s32 (**)(s32, s32 *, s32, s32), 8)(M2C_FIELD((*D_80078914), s32 *, 0x18), q - 2, 0x14, 0);
+    }
+    return -1;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", ClearOTag);
 
