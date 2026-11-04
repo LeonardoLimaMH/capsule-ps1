@@ -39,19 +39,20 @@ void func_8001E228(void) {
 }
 
 s32 *func_8001E284(void) {
+    typedef struct {
+        s32 f0;
+        u8 pad[0x14];
+    } Entry;
     extern u8 D_800861B0[];
-    register u8 *ret asm("v0");
-    register u8 *p asm("v1") = D_800861B0;
-    register s32 i asm("a0") = 0;
-loop:
-    ret = p;
-    if (*(s32 *)p != 0) {
-        i++;
-        p += 0x18;
-        if (i >= 5) ret = 0;
-        else goto loop;
+    Entry *p = (Entry *)D_800861B0;
+    s32 i;
+
+    for (i = 0; i < 5; i++, p++) {
+        if (p->f0 == 0) {
+            return (s32 *)p;
+        }
     }
-    return (s32 *)ret;
+    return NULL;
 }
 
 void func_8001E2BC(void *arg0, s32 arg1, s32 arg2, s32 arg3, volatile s32 arg4, volatile s32 arg5) {
