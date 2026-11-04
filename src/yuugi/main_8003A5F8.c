@@ -615,27 +615,27 @@ void func_8003C654(void) {
 }
 
 void func_8003C73C(void) {
-    extern u8 D_800947E8[];
+    extern Unk_800947E8 D_800947E8[];
     extern s32 D_80094768[];
     extern s32 D_80078D64;
     s32 i;
-    u8 *p = D_800947E8;
-    s32 *q = D_80094768;
-    Unk_800944B8 *e;
-    for (i = 0; i < 16; i++, p += 0x1C, q += 2) {
-        *(s16 *)p = -1;
-        p[0x19] = 0x7F;
-        p[0x1A] = 0x7F;
-        p[0x1B] = 0x40;
-        q[1] = 0;
-        q[0] = 0;
+    for (i = 0; i < 16; i++) {
+        D_800947E8[i].unk_0x0 = -1;
+        D_800947E8[i].unk_0x19 = 0x7F;
+        D_800947E8[i].unk_0x1A = 0x7F;
+        D_800947E8[i].unk_0x1B = 0x40;
+        {
+            s32 *q = &D_80094768[i * 2];
+            q[1] = 0;
+            q[0] = 0;
+        }
     }
-    e = D_800944B8;
-    for (i = 0; i < 1; i++, e++) {
-        *(s16 *)&e->unk_0x288[0] = -1;
-        *(s16 *)&e->unk_0x288[2] = 0;
-        *(s16 *)&e->unk_0x288[6] = 0x7F;
-        *(s16 *)&e->unk_0x288[4] = 0x7F;
+    for (i = 0; i < 1; i++) {
+        Unk_800944B8Init *e = &((Unk_800944B8Init *)D_800944B8)[i];
+        e->unk_0x288 = -1;
+        e->unk_0x28A = 0;
+        e->unk_0x28E = 0x7F;
+        e->unk_0x28C = 0x7F;
     }
     D_80078D64 = 0x1000;
 }
