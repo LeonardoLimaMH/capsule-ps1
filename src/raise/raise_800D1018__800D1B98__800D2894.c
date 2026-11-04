@@ -114,23 +114,19 @@ s32 func_800D2BB8(s32 arg0) {
     Slot_80091618 *slots = (Slot_80091618 *)D_80091618;
     u32 id;
     register s32 r asm("v0");
+
     if (slots[(u16)k].unk_90 != 0) k = func_800B12D8(arg0);
     {
         register u32 index asm("v0") = (u16)k;
         if (slots[index].unk_10 != 0) return 0;
     }
-    {
-        u32 index = (u16)func_800B1260(arg0);
+    id = (u16)func_800B1260(arg0);
+    if (id == 0xFFFF || (id = *(u16 *)((u8 *)slots + id * 0x1A8)) == 0xFFFF) {
         r = 0;
-        if (index != 0xFFFF) {
-            u32 mon = *(u16 *)&slots[index];
-            r = 0;
-            if (mon != 0xFFFF) {
-                u8 *base = D_80063940;
-                u8 *q = mon * 0x3C + base;
-                r = (*(u32 *)(q + 0x18) & 3) == 2;
-            }
-        }
+    } else {
+        u8 *base = D_80063940;
+        u8 *q = id * 0x3C + base;
+        r = (*(u32 *)(q + 0x18) & 3) == 2;
     }
     if (r) return 1;
     id = (u16)func_800B1260(arg0);
@@ -195,26 +191,25 @@ s32 func_800D2E90(s32 arg0) {
 }
 
 s32 func_800D2FB0(s32 arg0, s32 arg1) {
-    s32 r = 0xFF;
+    register s32 r asm("s0") = 0xFF;
     u8 *p = (u8 *)&D_80100F38[(u16)func_800B1260(arg0)];
     switch (arg1) {
     case 1:
-        if (*(s16 *)(p + 0x332) == 8) goto end;
-        if (*(s16 *)(p + 0x334) == 1) goto set_ff;
-        r = func_800D30B0(arg0, 1, -1);
+        if (*(s16 *)(p + 0x332) == 8) break;
+        if (*(s16 *)(p + 0x334) != 1) {
+            r = func_800D30B0(arg0, 1, -1);
+            if ((s16)r < 0) break;
+        }
+        r = 0xFF;
         break;
     case 5:
-        if (*(s16 *)(p + 0x332) == 1 || *(s16 *)(p + 0x334) == 8) goto set_ff;
-        r = func_800D30B0(arg0, -1, 1);
+        if (*(s16 *)(p + 0x332) != 1 && *(s16 *)(p + 0x334) != 8) {
+            r = func_800D30B0(arg0, -1, 1);
+            if ((s16)r < 0) break;
+        }
+        r = 0xFF;
         break;
-    default:
-        goto end;
     }
-    if ((s16)r < 0) goto ret_r;
-set_ff:
-    r = 0xFF;
-end:
-ret_r:
     return (s16)r;
 }
 
@@ -480,10 +475,6 @@ s32 func_800D8440(void) {
     u8 *slots;
     u8 *grid;
     s32 minus_one;
-    u8 *p0;
-    u32 off;
-    s32 j;
-    u8 *base;
 
     if (D_80069B28[0] != 0) {
         func_800D8A20();
@@ -498,29 +489,30 @@ s32 func_800D8440(void) {
     do {
         u16 k = func_800B1260(i);
         if (k != 0xFFFF) {
-            u8 *q;
-            u32 unk;
+            register s32 j asm("a2") = 0;
+            register u32 off asm("a1") = 0x234;
+            u8 *base;
+            register u8 *p0 asm("a0");
+            u32 unk = *(u16 *)(slots + k * 0x1A8 + 0x10);
+            u32 q_off;
 
-            j = 0;
-            off = 0x234;
-            unk = *(u16 *)(slots + k * 0x1A8 + 0x10);
             base = D_800900C0;
             p0 = base;
-            q = grid + unk * 0x9C;
+            q_off = unk * 0x9C;
 
             do {
-                if (*(s32 *)q != minus_one) {
+                if (*(s32 *)((u8 *)q_off + (u32)grid) != minus_one) {
                     register s32 one asm("v0") = 1;
                     if (i == one) {
                         *(s32 *)p0 = minus_one;
                     } else {
-                        *(s32 *)(base + off) = minus_one;
+                        *(s32 *)(off + (u32)base) = minus_one;
                     }
                 }
                 off += 0xBC;
                 p0 += 0xBC;
                 j++;
-                q += 0x34;
+                q_off += 0x34;
             } while (j < 3);
         }
         i--;
