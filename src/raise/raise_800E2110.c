@@ -18,8 +18,6 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3090);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3260);
 
-#include "common.h"
-
 void func_800E32D0(s32 arg0, s16 *arg1, s16 *arg2) {
     extern s16 D_800F1EE0[];
     (*D_800F1EE0) = 1;
@@ -30,8 +28,6 @@ void func_800E32D0(s32 arg0, s16 *arg1, s16 *arg2) {
 }
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E334C);
-
-#include "common.h"
 
 void func_800E33E4(s32 arg0, s16 *arg1, s16 *arg2) {
     extern s16 D_800F1EE0[];
@@ -63,8 +59,6 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3D18);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3F38);
 
-#include "common.h"
-
 extern s32 D_800FAE10[];
 extern s32 D_800FDE08[];
 
@@ -74,7 +68,63 @@ void func_800E4158(s32 side) {
     func_800C5850(D_800FDE08[other], D_800FAE10[other], 0, 1, 4);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E41B0);
+extern u8 D_800900C0[], D_8008ED68[];
+extern s32 func_800E3810(s32);
+extern void PushMatrix(void), PopMatrix(void);
+extern void func_8002CEC0(void *);
+extern s32 RotTransPers(void *, s32 *, s32 *, s32 *);
+
+#include "gte_inline.h"
+
+extern u8 D_800900C0[], D_8008ED68[], D_80063940[], D_80100F38[];
+extern s16 D_800F1A68[];
+extern void PushMatrix(void), PopMatrix(void), func_8002CEC0(void *);
+
+s32 func_800E41B0(s32 a0, s32 a1, s32 a2, s32 a3) {
+    typedef struct {
+        u8 pad0[0x10];
+        u16 unk10;
+        u8 pad12[0x8A - 0x12];
+        u16 unk8A;
+        u8 pad8C[0x1A8 - 0x8C];
+    } S_80091618;
+    typedef struct {
+        u8 pad0[0x10];
+        u8 *unk10;
+        u8 pad14[0x1C - 0x14];
+    } S_80069EC4;
+    extern u8 D_80100F38[];
+    extern S_80091618 D_80091618[];
+    extern u8 D_800EF364[][8][8];
+    extern S_80069EC4 D_80069EC4[][26];
+    extern u16 D_8006AF80[], D_80078C20[];
+    extern s32 D_800EE9B8[];
+    extern s32 func_800B1260(s32), func_800E36E4(s32);
+    u16 k = func_800B1260(a0);
+    s32 n;
+    u8 *p;
+    u16 idx, m;
+    u8 b;
+    if (k == 0xFFFF) return 0;
+    n = func_800E36E4(a0);
+    p = D_80100F38 + k * 0x79C;
+    if (!(*(s16 *)(p + 0x328) < *(s16 *)(p + 0x220) / 2) && D_800EE9B8[1 - a0] != 0) n = n == 1 ? 4 : 1;
+    if (n == 1) {
+        idx = D_8006AF80[0];
+        m = D_80078C20[0];
+    } else {
+        m = 1 - D_80078C20[0];
+        idx = D_80091618[D_8006AF80[0]].unk8A;
+    }
+    b = D_800EF364[D_80091618[idx].unk10][a2][a3 - 9];
+    return (s16)(*(u16 *)(D_80069EC4[(s16)m][n].unk10 + b * 8 + 4) - 4);
+}
+
+typedef struct {
+    u8 pad[0x1A2];
+    u16 timer;
+    u8 tail[4];
+} Record_800E68D8;
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E43AC);
 
@@ -91,8 +141,6 @@ void func_800E4714(void) {
 s32 func_800E471C(void) {
     return 0;
 }
-
-#include "common.h"
 
 void func_800E4724(void) {
     extern u16 D_8008ED80[];
@@ -121,8 +169,6 @@ void func_800E47D8(void) {
     func_800E4AD0();
 }
 
-#include "common.h"
-
 void func_800E47F8(void) {
     extern s16 D_80105990[];
     func_800E4838(1, 1);
@@ -145,11 +191,6 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E66A4);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E680C);
 
-typedef struct {
-    u8 pad[0x1A2];
-    u16 timer;
-    u8 tail[4];
-} Record_800E68D8;
 void func_800E68D8(u32 player) {
     extern Record_800E68D8 D_80091618[];
     u32 base = (u32)D_80091618;
