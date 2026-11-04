@@ -9,12 +9,40 @@ typedef struct {
   u16 y;
 } Ent12A20;
 
+typedef struct {
+  s16 x, y, w, h;
+} Rect;
+
+extern s32 LoadImage();
+
 void func_80012A14(void) {
     extern s16 D_8008ED50[];
     (*D_8008ED50) = 0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14", func_80012A20);
+s32 func_80012A20(u8 *a0, u16 a1, u16 a2, u16 a3)
+{
+  extern Ent12A20 D_8008ED68[];
+  Ent12A20 *e;
+  s32 i;
+  e = (Ent12A20 *) (((u8 *) D_8008ED68) + 0x158);
+  for (i = 0; i < 0x50; i++, e++)
+  {
+    if (e->t == 0)
+    {
+      e->p = a0;
+      e->t = a1;
+      e->b = *a0;
+      if ((u16) (a1 - 2) < 2)
+      {
+        e->x = a2;
+        e->y = a3;
+      }
+      return 1;
+    }
+  }
+  return 0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14", func_80012A98);
 
