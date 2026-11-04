@@ -31,6 +31,21 @@ typedef struct {
     u8 grid[2][8][8];
 } S_800EFF58;
 
+typedef struct {
+    u8 _p0[0x64];
+    s32 f_64;
+    s32 f_68;
+    s32 f_6C;
+    s32 f_70;
+} Struct_80069E4C;
+
+typedef struct {
+    u8 _p0[0x54];
+    s32 f_54;
+    u8 _p58[0xE0 - 0x58];
+    s32 f_E0;
+} Struct_80069AD4;
+
 
 typedef struct { u8 pad[0x386]; s16 field; u8 tail[0x414]; } Record_800D2894;
 
@@ -1054,9 +1069,10 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_80
 void func_800D8A20(void) {
     extern u8 D_80069E4C[];
     extern u8 D_80069AD4[];
-    register u8 *p asm("v1") = D_80069E4C;
+    register u8 *p asm("v1");
     register u8 *q asm("a0");
 
+    p = D_80069E4C;
     if (*(s32 *)(p + 0x6C) == 0) {
         *(s32 *)(p + 0x6C) = 1;
         *(s32 *)(p + 0x70) = 0x10;
