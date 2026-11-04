@@ -22,9 +22,9 @@ typedef struct {
     s32 unk_0x0;
     s32 unk_0x4;
     u8 unk_0x8[0x10];
-    s16 unk_0x18;
+    u16 unk_0x18;
     u8 unk_0x1A[2];
-    s16 unk_0x1C;
+    u16 unk_0x1C;
     u8 unk_0x1E[2];
     u8 unk_0x20;
     u8 unk_0x21[2];
@@ -49,7 +49,8 @@ typedef struct {
     u32 unk_0x294;
     u8 unk_0x298[0xA];
     u16 unk_0x2A2;
-    u8 unk_0x2A4[8];
+    u16 unk_0x2A4;
+    u8 unk_0x2A6[6];
 } Unk_800944B8;
 
 extern Unk_800944B8 D_800944B8[];
@@ -581,7 +582,7 @@ s32 func_8003C5BC(s32 n) {
 void func_8003C654(void) {
     extern s32 D_80094768[];
     s32 n, i, j;
-    s32 *a, *b;
+    s32 *b, *a;
     volatile s32 temp[2];
     for (n = 0; n < 16; n++) {
         if (D_80094768[n * 2] == 0) break;
