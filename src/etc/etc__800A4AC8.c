@@ -48,15 +48,42 @@ void func_800A7654(void) {
     func_80012200(&func_80099394);
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A7680);
-
-void func_800A7754(u16 *s, u8 sel) {
+void func_800A7680(u16 *arg0) {
     extern u8 D_8008ED68[];
     extern void func_8001EA24(s16, s16, s32, s32, s32, s32);
-    u32 i;
-    s32 x = 0, y = 0x40;
-    u16 c;
-    for (i = 0; i < 0x20; x += 0xE) {
+    register s32 left asm("s4") = -0x90;
+    s32 y = 0;
+    u8 *p = D_8008ED68;
+    u16 *s = arg0;
+    s32 x = 0;
+    s32 c;
+    while (1) {
+        c = *s;
+        if (c == 0xFFEE) break;
+        if (c == 0xFFF0) {
+            x = 0;
+            y += 0x10;
+        } else {
+            func_8001EA24(left + *(s32 *)(p+0x108)/2 + x,
+                         y + *(s32 *)(p+0x10C)/2, 0, c, 0, 3);
+            x += 0xE;
+        }
+        s++;
+    }
+}
+
+void func_800A7754(u16 *arg0, u8 arg1) {
+    extern u8 D_8008ED68[];
+    extern void func_8001EA24(s16, s16, s32, s32, s32, s32);
+    u8 sel = arg1;
+    register s32 left asm("s6") = -0x80;
+    s32 y = 0x40;
+    u32 i = 0;
+    u8 *p = D_8008ED68;
+    u16 *s = arg0;
+    s32 x = i;
+    s32 c;
+    for (; i < 0x20; x += 0xE) {
         c = *s;
         if (i == sel) {
             x = 0;
@@ -64,12 +91,32 @@ void func_800A7754(u16 *s, u8 sel) {
         }
         s++;
         i++;
-        func_8001EA24(-0x80 + (*(s32 *)(D_8008ED68 + 0x108)) / 2 + x, y + (*(s32 *)(D_8008ED68 + 0x10C)) / 2, 3, c, 0, 3);
+        func_8001EA24(left + *(s32 *)(p + 0x108) / 2 + x,
+                     y + *(s32 *)(p + 0x10C) / 2, 3, c, 0, 3);
     }
-    
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A7840);
+void func_800A7840(int param_1)
+
+{
+    extern u8 D_80063940[];
+    extern s32 D_800B3C1C[];
+  if (param_1 == 0) {
+    (*D_800B3C1C) = ((*D_800B3C1C) + 1) % 0x67;
+  }
+  else {
+    (*D_800B3C1C) = (*D_800B3C1C) + -1;
+    if ((*D_800B3C1C) < 0) {
+      (*D_800B3C1C) = 0x66;
+    }
+  }
+  { u8 *base = D_80063940;
+  if ((*(u32 *)(base + (*D_800B3C1C) * 0x3c + 0x14) >> 5 & 1) == 0) {
+    func_800A7840(param_1);
+  }
+  }
+  return;
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A790C);
 
