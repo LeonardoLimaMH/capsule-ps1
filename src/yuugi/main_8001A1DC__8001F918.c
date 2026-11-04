@@ -811,50 +811,53 @@ s32 func_80021A4C(s32 arg0, s32 arg1) {
 s32 func_80021A9C(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct Pad { u8 pad[0x88]; s32 btn; };
     extern u8 D_8008ED68[];
-    s32 temp_v1;
-    s32 var_v0_2;
+    s32 input;
+    u32 test;
     register s32 ret asm("v0");
-    s32 var_a2 = arg2;
-    void *temp_t0 = arg0 + 0x5D0;
-
-    if (((arg3 < 2) || (arg3 == 5)) && M2C_FIELD(temp_t0, u8 *, 0x10) != 0 && M2C_FIELD(temp_t0, u8 *, 0x11) != 0) {
-        var_v0_2 = M2C_FIELD(arg0, u16 *, 0x1E) < 0x1FU;
+    register void *p asm("t0") = arg0 + 0x5D0;
+    if (((arg3 < 2) || (arg3 == 5)) &&
+        M2C_FIELD(p, u8 *, 0x10) && M2C_FIELD(p, u8 *, 0x11)) {
+        return M2C_FIELD(arg0, u16 *, 0x1E) >= 31U;
+    }
+    if (M2C_FIELD(arg0, u8 *, 1)) {
+        test = *(volatile u16 *)(arg0 + 0x1E) < 31U;
         goto invert;
     }
-    if (M2C_FIELD(arg0, u8 *, 1) != 0) {
-        var_v0_2 = M2C_FIELD(arg0, u16 *, 0x1E) < 0x1FU;
-        goto invert;
-    }
-    if (arg1 != 0) {
+    if (arg1) {
         if (arg3 == 4) {
+            struct Pad *base = (struct Pad *)D_8008ED68;
+            ret = base->btn & 0x60;
+            if (ret) goto one;
+            ret = ((struct Pad *)((u8 *)base + 0x10))->btn & 0x60;
+            if (ret) goto one;
+            ret = 0;
+            goto done;
+one:
             ret = 1;
-            if (!(((struct Pad *)D_8008ED68)->btn & 0x60)) {
-                ret = 1;
-                if (!(((struct Pad *)(D_8008ED68 + 0x10))->btn & 0x60)) return 0;
-            }
-            return ret;
+            goto done;
         }
-        if (M2C_FIELD(temp_t0, u8 *, 0x11) != 0) {
-            goto zero;
+        if (M2C_FIELD(p, u8 *, 0x11)) {
+            arg2 = 0;
+            goto input;
         }
-        if (M2C_FIELD(temp_t0, u8 *, 0x10) != 0) {
-            var_a2 = 1;
-        }
+    } else {
+        arg2 = 0;
         goto input;
     }
-zero:
-    var_a2 = 0;
+    if (M2C_FIELD(p, u8 *, 0x10)) arg2 = 1;
 input:
-    temp_v1 = ((struct Pad *)(D_8008ED68 + var_a2 * 0x10))->btn;
-    ret = 1;
-    if (!(temp_v1 & 0x20)) {
-        ret = 1;
-        if (!(temp_v1 & 0x40)) {
-            var_v0_2 = M2C_FIELD(arg0, u16 *, 0x1E) < 0xB5U;
-invert:
-            ret = var_v0_2 ^ 1;
-        }
+    {
+        register u8 *base asm("v0") = D_8008ED68;
+        register s32 bits asm("v1") = ((struct Pad *)(base + arg2 * 0x10))->btn;
+        ret = bits & 0x20;
+        if (ret) goto one;
+        ret = bits & 0x40;
+        if (ret) goto one;
     }
+    test = M2C_FIELD(arg0, u16 *, 0x1E) < 181U;
+invert:
+    ret = test ^ 1;
+done:
     return ret;
 }
 
