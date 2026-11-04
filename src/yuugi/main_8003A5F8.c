@@ -21,7 +21,9 @@ typedef struct {
 typedef struct {
     s32 unk_0x0;
     s32 unk_0x4;
-    u8 unk_0x8[0x10];
+    u8 unk_0x8[0xC];
+    u16 unk_0x14;
+    u16 unk_0x16;
     u16 unk_0x18;
     u8 unk_0x1A[2];
     u16 unk_0x1C;
@@ -45,9 +47,15 @@ typedef struct {
     } unk_0x0[16];
     u8 unk_0x280[4];
     u8 *unk_0x284;
-    u8 unk_0x288[0xC];
+    s16 unk_0x288;
+    s16 unk_0x28A;
+    s16 unk_0x28C;
+    s16 unk_0x28E;
+    u8 unk_0x290[4];
     u32 unk_0x294;
-    u8 unk_0x298[0xA];
+    u32 unk_0x298;
+    u8 unk_0x29C[4];
+    u16 unk_0x2A0;
     u16 unk_0x2A2;
     u16 unk_0x2A4;
     u8 unk_0x2A6[6];
