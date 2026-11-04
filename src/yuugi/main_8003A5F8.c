@@ -2,6 +2,23 @@
 #include "yuugi.h"
 
 typedef struct {
+    s16 unk_0x0;
+    u8 unk_0x2[0x17];
+    u8 unk_0x19;
+    u8 unk_0x1A;
+    u8 unk_0x1B;
+} Unk_800947E8;
+
+typedef struct {
+    u8 unk_0x0[0x288];
+    s16 unk_0x288;
+    s16 unk_0x28A;
+    s16 unk_0x28C;
+    s16 unk_0x28E;
+    u8 unk_0x290[0x1C];
+} Unk_800944B8Init;
+
+typedef struct {
     s32 unk_0x0;
     s32 unk_0x4;
     u8 unk_0x8[0x10];
@@ -449,7 +466,60 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003B7B4);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003BC94);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003BFCC);
+s32 func_8003BFCC(u32 *s) {
+    extern u8 D_80078CAC[];
+    u8 *pattern = D_80078CAC;
+    u32 found = -1;
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    Unk_800944B8 *e = &base[D_80078C9C];
+    register u32 pos asm("a3") = *s;
+    register u8 *data = e->unk_0x284;
+    register u8 *a asm("a1");
+    register u8 *b asm("a2");
+    register s32 n asm("a0");
+    s32 x, y, diff;
+    do {
+        a = pattern;
+        b = data + pos;
+        n = 3;
+        do {
+            x = *a++;
+            y = *b;
+            if (x != y) goto compare;
+            b++;
+        } while (--n);
+        x = *a;
+        y = *b;
+compare:
+        diff = x - y;
+        if (diff == 0) goto found;
+        pos++;
+    } while (pos <= e->unk_0x294);
+done:
+    *s = found;
+    if (found == -1U) goto fail;
+    {
+        register s32 value asm("v0") = func_8003AC60(s);
+        register s32 v asm("a1");
+        u32 pos;
+        *(volatile u32 *)&s[2] = value;
+        v = *(volatile u32 *)&s[2];
+        pos = *(volatile u32 *)&*(s + 0);
+        value = 0;
+        *(s + 4) = pos;
+        {
+            register u32 end asm("a0") = pos;
+            end += v;
+            s[3] = end;
+        }
+        return value;
+    }
+found:
+    found = pos + 4;
+    goto done;
+fail:
+    return 1;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C0C8);
 
@@ -544,7 +614,31 @@ void func_8003C654(void) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C73C);
+void func_8003C73C(void) {
+    extern u8 D_800947E8[];
+    extern s32 D_80094768[];
+    extern s32 D_80078D64;
+    s32 i;
+    u8 *p = D_800947E8;
+    s32 *q = D_80094768;
+    Unk_800944B8 *e;
+    for (i = 0; i < 16; i++, p += 0x1C, q += 2) {
+        *(s16 *)p = -1;
+        p[0x19] = 0x7F;
+        p[0x1A] = 0x7F;
+        p[0x1B] = 0x40;
+        q[1] = 0;
+        q[0] = 0;
+    }
+    e = D_800944B8;
+    for (i = 0; i < 1; i++, e++) {
+        *(s16 *)&e->unk_0x288[0] = -1;
+        *(s16 *)&e->unk_0x288[2] = 0;
+        *(s16 *)&e->unk_0x288[6] = 0x7F;
+        *(s16 *)&e->unk_0x288[4] = 0x7F;
+    }
+    D_80078D64 = 0x1000;
+}
 
 #include "common.h"
 
