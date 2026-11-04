@@ -3,6 +3,8 @@
 
 #include "common.h"
 
+typedef void (*DmaCallback)(void);
+
 extern volatile u32 *D_80072E5C;
 extern void (*D_80072E60[])();
 extern u8 *D_80072E80;
@@ -30,7 +32,18 @@ void func_80043248(void) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80043248", func_800433C8);
+s32 func_800433C8(s32 i, s32 v) {
+    s32 old = (s32)D_80072E60[i];
+    if (v == old) return old;
+    if (v != 0) {
+        D_80072E60[i] = (void (*)())v;
+        *D_80072E5C = (*D_80072E5C & 0xFFFFFF) | ((1 << (i + 16)) | 0x800000);
+    } else {
+        D_80072E60[i] = 0;
+        *D_80072E5C = ((*D_80072E5C & 0xFFFFFF) | 0x800000) & ~(1 << (i + 16));
+    }
+    return old;
+}
 
 #include "ghidra.h"
 void func_80043474(undefined4 *param_1,int param_2)
