@@ -165,24 +165,22 @@ s32 func_8003A9DC(u32 arg0) {
     u8 *a;
     u8 *b;
     s32 n;
-    s32 x, y;
+    s32 x, y, diff;
     do {
         a = pattern;
         b = data + pos;
         n = 2;
-loop:
+        do {
+            x = *a++;
+            y = *b;
+            if (x != y) goto compare;
+            b++;
+        } while (--n);
         x = *a;
         y = *b;
-        a++;
-        if (x == y) {
-            n--;
-            b++;
-            if (n == 0) {
-                x = *a;
-                y = *b;
-            } else goto loop;
-        }
-        if (x == y) return pos + 3;
+compare:
+        diff = x - y;
+        if (diff == 0) return pos + 3;
         pos++;
     } while (pos <= e->unk_0x294);
     return -1;
