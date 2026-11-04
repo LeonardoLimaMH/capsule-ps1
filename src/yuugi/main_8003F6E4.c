@@ -1,7 +1,24 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_Fr_);
+void _spu_Fw1ts(void);
+void func_8003FC98(void);
+void _spu_Fr_(s32 addr, u16 a1, s32 size) {
+    extern volatile u16 *D_80071598;
+    extern volatile s32 *D_8007159C;
+    extern volatile s32 *D_800715A0;
+    extern volatile s32 *D_800715A4;
+    extern s32 D_800715E8;
+    D_80071598[0xD3] = a1;
+    _spu_Fw1ts();
+    D_80071598[0xD5] |= 0x30;
+    _spu_Fw1ts();
+    func_8003FC98();
+    *D_8007159C = addr;
+    *D_800715A0 = (size << 16) | 0x10;
+    D_800715E8 = 1;
+    *D_800715A4 = 0x01000200;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_t);
 
