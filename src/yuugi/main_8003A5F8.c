@@ -23,8 +23,6 @@ s32 func_8003A5F8(void) {
     return 0;
 }
 
-#include "common.h"
-
 extern s32 D_80078C94;
 extern s32 D_80078D5C;
 extern s32 D_80078C84;
@@ -95,8 +93,6 @@ void func_8003A84C(void) {
 
 }
 
-#include "common.h"
-
 s32 func_8003A854(u8 *a, u8 *b, s32 n) {
     if (n == 0) {
         return -1;
@@ -111,13 +107,97 @@ s32 func_8003A854(u8 *a, u8 *b, s32 n) {
     return *a - *b;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A8A4);
+typedef struct {
+    s16 unk_0x0;
+    u8 unk_0x2[0x17];
+    u8 unk_0x19;
+    u8 unk_0x1A;
+    u8 unk_0x1B;
+} Unk_800947E8;
+
+typedef struct {
+    u8 unk_0x0[0x288];
+    s16 unk_0x288;
+    s16 unk_0x28A;
+    s16 unk_0x28C;
+    s16 unk_0x28E;
+    u8 unk_0x290[0x1C];
+} Unk_800944B8Init;
+
+typedef struct {
+    s32 unk_0x0;
+    s32 unk_0x4;
+    u8 unk_0x8[0x10];
+    s16 unk_0x18;
+    u8 unk_0x1A[2];
+    s16 unk_0x1C;
+    u8 unk_0x1E[2];
+    u8 unk_0x20;
+    u8 unk_0x21[2];
+    u8 unk_0x23;
+    u8 unk_0x24;
+    u8 unk_0x25;
+    u8 unk_0x26[2];
+} Unk_800944B8Stream;
+
+#ifndef UNK_800944B8_DEFINED
+#define UNK_800944B8_DEFINED
+typedef struct {
+    struct {
+        s32 unk_0x0;
+        u8 unk_0x4[0x1C];
+        u8 unk_0x20;
+        u8 unk_0x21[7];
+    } unk_0x0[16];
+    u8 unk_0x280[4];
+    u8 *unk_0x284;
+    u8 unk_0x288[0xC];
+    u32 unk_0x294;
+    u8 unk_0x298[0xA];
+    u16 unk_0x2A2;
+    u8 unk_0x2A4[8];
+} Unk_800944B8;
+
+extern Unk_800944B8 D_800944B8[];
+extern s32 D_80078C9C;
+#endif
+
+s32 func_8003A8A4(u32 arg0) {
+    extern u8 D_80078CA4[];
+    register u32 pos asm("a3") = arg0;
+    u8 *pattern = D_80078CA4;
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    Unk_800944B8 *e = &base[D_80078C9C];
+    u8 *data = e->unk_0x284;
+    u8 *a;
+    u8 *b;
+    s32 n;
+    s32 x, y, diff;
+    do {
+        a = pattern;
+        b = data + pos;
+        n = 3;
+        do {
+            x = *a++;
+            y = *b;
+            if (x != y) goto compare;
+            b++;
+        } while (--n);
+        x = *a;
+        y = *b;
+compare:
+        diff = x - y;
+        if (diff == 0) return pos + 4;
+        pos++;
+    } while (pos <= e->unk_0x294);
+    return -1;
+}
+
+extern u8 D_800949A8[];
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A940);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A9DC);
-
-#include "yuugi.h"
 
 typedef struct {
     u8 unk_0x0[0x284];
@@ -125,22 +205,11 @@ typedef struct {
     u8 unk_0x288[0xC];
     u32 unk_0x294;
     u8 unk_0x298[0x14];
-} Unk_800944B8;
-
-extern Unk_800944B8 D_800944B8[];
-extern s32 D_80078C9C;
-
-
-extern s32 D_80078C94;
-extern s32 D_80078D5C;
-extern s32 D_80078C84;
-extern s32 func_8003A5F8();
-extern s32 func_8004FE3C();
-
+} Unk_800944B8_2;
 
 s32 func_8003AA78(u8 *s) {
-    register Unk_800944B8 *base asm("a0") = D_800944B8;
-    Unk_800944B8 *e = &base[D_80078C9C];
+    register Unk_800944B8_2 *base asm("a0") = D_800944B8;
+    Unk_800944B8_2 *e = &base[D_80078C9C];
     u8 *data = *(u8 *volatile *)&e->unk_0x284;
     register u32 pos asm("a0") = *(volatile u32 *)s;
     u8 c = data[pos];
@@ -149,9 +218,6 @@ s32 func_8003AA78(u8 *s) {
     if (e->unk_0x294 < pos) { s[0x20] = 1; return -1; }
     return c;
 }
-
-
-extern u8 D_800949A8[];
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AAF0);
 
@@ -193,17 +259,68 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C29C);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C390);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C530);
+#ifndef UNK_800944B8_DEFINED
+#define UNK_800944B8_DEFINED
+typedef struct {
+    struct {
+        s32 unk_0x0;
+        u8 unk_0x4[0x1C];
+        u8 unk_0x20;
+        u8 unk_0x21[7];
+    } unk_0x0[16];
+    u8 unk_0x280[4];
+    u8 *unk_0x284;
+    u8 unk_0x288[0xC];
+    u32 unk_0x294;
+    u8 unk_0x298[0xA];
+    u16 unk_0x2A2;
+    u8 unk_0x2A4[8];
+} Unk_800944B8_2;
+
+#endif
+
+void func_8003C530(s32 n) {
+    s32 i;
+    for (i = 0; i < D_800944B8[n].unk_0x2A2; i++) {
+        D_800944B8[n].unk_0x0[i].unk_0x20 = 1;
+        D_800944B8[n].unk_0x0[i].unk_0x0 = 0;
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C5BC);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C654);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C73C);
+#ifndef UNK_800944B8_DEFINED
+#define UNK_800944B8_DEFINED
 
-#include "common.h"
+#endif
 
-extern u8 D_800949A8[];
+void func_8003C73C(void) {
+    extern Unk_800947E8 D_800947E8[];
+    extern s32 D_80094768[];
+    extern s32 D_80078D64;
+    s32 i;
+    for (i = 0; i < 16; i++) {
+        D_800947E8[i].unk_0x0 = -1;
+        D_800947E8[i].unk_0x19 = 0x7F;
+        D_800947E8[i].unk_0x1A = 0x7F;
+        D_800947E8[i].unk_0x1B = 0x40;
+        {
+            s32 *q = &D_80094768[i * 2];
+            q[1] = 0;
+            q[0] = 0;
+        }
+    }
+    for (i = 0; i < 1; i++) {
+        Unk_800944B8Init *e = &((Unk_800944B8Init *)D_800944B8)[i];
+        e->unk_0x288 = -1;
+        e->unk_0x28A = 0;
+        e->unk_0x28E = 0x7F;
+        e->unk_0x28C = 0x7F;
+    }
+    D_80078D64 = 0x1000;
+}
 
 void func_8003C7C8(void) {
     SpuInit();
