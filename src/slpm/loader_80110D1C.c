@@ -47,7 +47,28 @@ INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80111268);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80111464);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80111538);
+#include "common.h"
+
+void func_80111538(s32 arg0)
+{
+  s32 new_var;
+  if (new_var)
+  {
+    new_var = arg0;
+  }
+  else
+  {
+    new_var = arg0;
+  }
+  do
+  {
+  }
+  while (CdControl(0x15, new_var, 0) == 0);
+  do
+  {
+  }
+  while (CdRead2(0x1C0) == 0);
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80111584);
 

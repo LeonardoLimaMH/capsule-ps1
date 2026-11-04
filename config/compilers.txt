@@ -47,7 +47,6 @@ src/yuugi/sdk_libc2_sprintf.c 2.8.1-psx
 src/yuugi/sdk_libc2_puts.c 2.8.1-psx
 src/yuugi/sdk_libapi_first.c 2.8.1-psx
 src/yuugi/main_800505D0.c 2.8.1-psx
-src/slpm/loader.c 2.8.1-psx
 src/slpm/loader_80111E78.c 2.8.1-psx
 src/slpm/sdk_libc2_prnt.c 2.8.1-psx
 src/slpm/sdk_libc2_putchar.c 2.8.1-psx
@@ -293,3 +292,4 @@ src/yuugi/main_8001A1DC__8001B0E0__8001BCE4.c 2.7.2-cdk
 src/yuugi/main_8001A1DC__8001B0E0__8001BB18.c 2.7.2-cdk
 src/raise/raise_800B61E4__800B8E04.c 2.7.2-cdk
 src/raise/raise_800B9C3C__800BCF98.c 2.7.2-cdk
+src/slpm/loader.c 2.7.2-cdk
