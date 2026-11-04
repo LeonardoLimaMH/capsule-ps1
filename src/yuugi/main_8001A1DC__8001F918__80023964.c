@@ -28,7 +28,25 @@ void func_80023B04(void) {
 
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918__80023964", func_80023B0C);
+extern void func_8001DBF4(s32, s32, s32, s32, void *, void *);
+extern u8 D_80078C08[];
+void func_80023B0C(s32 arg0, s32 arg1, s32 arg2, void *arg3) {
+    s32 i;
+    u8 *p;
+
+    if (arg0 == 0) {
+        if (arg0 < arg1) {
+            p = (u8 *)arg3;
+            for (i = 0; i < arg1; i++) {
+                func_8001DBF4(*(s16 *)p, *(s16 *)(p + 2), 0, i == arg2, D_80078C08, p + 8);
+                p += 0x18;
+            }
+        }
+    } else if (arg0 >= 0 && arg0 < 3) {
+        p = (u8 *)arg3 + arg2 * 0x18;
+        func_8001DBF4(*(s16 *)p, *(s16 *)(p + 2), 0, arg0 == 1, D_80078C08, p + 8);
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918__80023964", func_80023C00);
 
