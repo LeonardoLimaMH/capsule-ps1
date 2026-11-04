@@ -331,7 +331,7 @@ s32 func_80023FE8(void) {
     return (s32)D_80069E4C;
 }
 
-extern volatile s16 D_80078C20 __attribute__((aligned(16)));
+extern s16 D_80078C20;
 extern u8 D_80069AD4[], D_80078C18[], D_80069B84[];
 extern void func_8001A998(), SetBackColor(), SetColorMatrix(), RotMatrix();
 void func_80024024(void) {
