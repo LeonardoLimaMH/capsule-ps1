@@ -117,7 +117,124 @@ typedef struct {
     Vec3s_80023C74 *unkB8;
 } Struct_80023C74;
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918__80023964", func_80023C74);
+void func_80023C74(Struct_80023C74 *arg0, s32 arg1, Vec3s_80023C74 *arg2) {
+    extern s32 D_80069B28[];
+    extern s32 D_80069BB4[];
+    extern s32 D_80069EB0[];
+    register Vec3s_80023C74 *s2 asm("s2");
+    register Vec3s_80023C74 *s1 asm("s1");
+    register Vec3s_80023C74 *s0 asm("s0");
+    register s32 i asm("s3");
+    register Vec3s_80023C74 *t1 asm("t1");
+    register s32 a0_val asm("a0");
+    s32 j;
+
+    a0_val = arg0->unk8;
+    if (a0_val == 1) {
+        goto target_8;
+    }
+    s2 = arg2 + 4;
+    if (a0_val >= 2) {
+        goto after_if;
+    }
+    if (a0_val != 0) {
+        goto after_if;
+    }
+target_8:
+    s2 = arg2 + 1;
+after_if:
+
+    s1 = arg0->unkB4;
+    i = 0;
+    s1 = (Vec3s_80023C74 *)((u8 *)s1 + (arg1 << 5));
+    s0 = s1;
+    for (; i < 4; i++) {
+        s0->x = (rand() % 0x800) - 0x400;
+        s0->y = (rand() % 0x800) - 0x400;
+        s0->z = rand() % 0x400;
+        s0++;
+    }
+
+    t1 = arg0->unkB8;
+    t1 = (Vec3s_80023C74 *)((u8 *)t1 + (arg1 << 5));
+    if (*D_80069B28 == 1) {
+        goto case_1;
+    }
+    if (*D_80069B28 < 2) {
+        goto end;
+    }
+    if (*D_80069B28 == 2) {
+        goto case_2;
+    }
+    goto end;
+
+case_1:
+    {
+        u16 *ps14;
+        u16 *ps13;
+        u16 *ps12;
+        u16 *p_t1 = (u16 *)t1;
+        u16 *p_s1 = (u16 *)s1;
+        u16 *p_s2 = (u16 *)s2;
+
+        j = 0;
+        ps14 = (u16 *)t1 + 2;
+        ps13 = (u16 *)s1 + 2;
+        ps12 = (u16 *)s2 + 2;
+        do {
+            u16 v1, v2;
+            j++;
+            v1 = *p_s2;
+            p_s2 += 4;
+            v2 = *p_s1;
+            p_s1 += 4;
+            *p_t1 = (v1 - v2) * 2;
+            p_t1 += 4;
+            ps14[-1] = (ps12[-1] - ps13[-1]) * 2;
+            v1 = *ps12;
+            ps12 += 4;
+            v2 = *ps13;
+            ps13 += 4;
+            *ps14 = (v1 - v2) * 2;
+            ps14 += 4;
+        } while (j < 4);
+    }
+    goto end;
+
+case_2:
+    {
+        u16 *ps12;
+        u16 *pu16;
+        u16 *pu15;
+        u16 *p_t1 = (u16 *)t1;
+        u16 *p_s1 = (u16 *)s1;
+        u16 *p_s2 = (u16 *)s2;
+
+        j = 0;
+        ps12 = (u16 *)t1 + 2;
+        pu16 = (u16 *)s1 + 2;
+        pu15 = (u16 *)s2 + 2;
+        do {
+            u16 u3, u4;
+            j++;
+            *p_t1 = *p_s1 - *p_s2;
+            p_t1 += 4;
+            ps12[-1] = pu16[-1] - pu15[-1];
+            u3 = *pu15;
+            pu15 += 4;
+            u4 = *pu16;
+            pu16 += 4;
+            *ps12 = u4 - u3;
+            *(Vec3s_80023C74 *)p_s1 = *(Vec3s_80023C74 *)p_s2;
+            p_s2 += 4;
+            p_s1 += 4;
+            ps12 += 4;
+        } while (j < 4);
+    }
+
+end:
+    *D_80069BB4 = *D_80069EB0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918__80023964", func_80023ECC);
 
