@@ -36,7 +36,16 @@ void _spu_FsetRXX(int param_1, uint param_2, int param_3)
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_FsetRXXa);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_FgetRXXa);
+u32 _spu_FgetRXXa(s32 param_1, s32 param_2) {
+    extern u16 *D_80071598;
+    extern s32 D_800715C0;
+    register u32 val asm("a0");
+    val = D_80071598[param_1];
+    if (param_2 == -1) {
+        return val;
+    }
+    return val << D_800715C0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_FsetPCR);
 
