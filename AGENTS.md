@@ -308,6 +308,19 @@ Teste estas antes do permuter:
   `union` se o mesmo campo é lido com larguras diferentes). Nas funções antigas,
   `(u8 *)D` gera o mesmo código que o `u8[]`. Confira o arquivo inteiro com
   `.cache/tmp/funccmp2.py` ou com o build.
+- **Base do global carregada antes do `if`:** quando o original faz `lui/addiu` do
+  endereço antes do desvio (no slot de atraso), declare `u8 *p = D_X;` no topo da
+  função e acesse `p[off]`, de preferência no 2.7.2-cdk.
+- **Endereço de função como argumento:** `extern void func_X();` e `f(func_X)`, nunca
+  `extern M2C_UNK func_X[]` com `(*func_X)`.
+- **`div`/`divu` sem `break 7` no original:** a função vai em
+  `config/rawdiv.<alvo>.txt` (já listadas todas as pendentes de yuugi/etc/raise). O
+  `tools/psx_as.py` emite a divisão crua com as regras de nop do maspsx.
+- **Nop depois de `mflo`/`mfhi` antes de um store `$gp`:** o ASPSX trata símbolos
+  `.extern` pequenos como `$gp`; o `psx_as.py` já reproduz isso (o maspsx sozinho só
+  conhecia `.comm`/`.sdata`).
+- **Retorno sem `else`:** `if (x != 0) return A; if (x == 0) return 0;` põe o bloco
+  do zero depois do principal, como em `func_800202A4`.
 
 ## 10. Quando parar uma abordagem
 
