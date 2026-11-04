@@ -34,7 +34,28 @@ void _spu_FsetRXX(int param_1, uint param_2, int param_3)
   return;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_FsetRXXa);
+u32 _spu_FsetRXXa(s32 reg, u32 addr) {
+    extern s32 D_800715BC;
+    extern u32 D_800715C4;
+    extern u32 D_800715C8;
+    extern s32 D_800715C0;
+    extern u16 *D_80071598;
+    u32 s;
+
+    if (D_800715BC != 0 && addr % D_800715C4 != 0) {
+        addr += D_800715C4;
+        addr &= ~D_800715C8;
+    }
+    s = addr >> D_800715C0;
+    if (reg != -2) {
+        if (reg == -1) {
+            addr = s & 0xFFFF;
+        } else {
+            D_80071598[reg] = s;
+        }
+    }
+    return addr;
+}
 
 u32 _spu_FgetRXXa(s32 param_1, s32 param_2) {
     extern u16 *D_80071598;
@@ -47,7 +68,16 @@ u32 _spu_FgetRXXa(s32 param_1, s32 param_2) {
     return val << D_800715C0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003F6E4", _spu_FsetPCR);
+void _spu_FsetPCR(s32 arg0) {
+    extern u32 *D_800715A8;
+
+    *D_800715A8 &= 0xFFF8FFFF;
+    if (arg0 != 0) {
+        *D_800715A8 |= 0x30000;
+    } else {
+        *D_800715A8 |= 0x50000;
+    }
+}
 
 void func_8003FC70(void) {
     extern s32 * D_800715AC[];
