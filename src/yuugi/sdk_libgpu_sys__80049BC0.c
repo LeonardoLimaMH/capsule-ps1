@@ -69,7 +69,12 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", PutDrawEnv);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", DrawOTagEnv);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", GetDrawEnv);
+void *GetDrawEnv(void *param_1) {
+    extern u8 D_8007892C[];
+    extern void *memcpy(void *, void *, s32);
+    memcpy(param_1, D_8007892C, 0x5C);
+    return param_1;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__80049BC0", PutDispEnv);
 
