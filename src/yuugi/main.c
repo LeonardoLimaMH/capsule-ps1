@@ -1,7 +1,11 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", main);
+void main(void) {
+    func_800118BC();
+    func_80011A60(0);
+    func_80011ED4();
+}
 
 void func_800118BC(void) {
     ResetGraph(0);
