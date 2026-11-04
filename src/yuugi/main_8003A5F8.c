@@ -498,22 +498,10 @@ compare:
 done:
     *s = found;
     if (found == -1U) goto fail;
-    {
-        register s32 value asm("v0") = func_8003AC60(s);
-        register s32 v asm("a1");
-        u32 pos;
-        *(volatile u32 *)&s[2] = value;
-        v = *(volatile u32 *)&s[2];
-        pos = *(volatile u32 *)&*(s + 0);
-        value = 0;
-        *(s + 4) = pos;
-        {
-            register u32 end asm("a0") = pos;
-            end += v;
-            s[3] = end;
-        }
-        return value;
-    }
+    s[2] = func_8003AC60(s);
+    s[4] = s[0];
+    s[3] = s[0] + s[2];
+    return 0;
 found:
     found = pos + 4;
     goto done;
@@ -602,7 +590,7 @@ void func_8003C654(void) {
         a = &D_80094768[i * 2];
         for (j = n - 1; i < j; j--) {
             b = &D_80094768[j * 2];
-            if (b[0] < a[0]) {
+            if (a[0] > b[0]) {
                 temp[1] = a[1];
                 temp[0] = a[0];
                 a[1] = b[1];
