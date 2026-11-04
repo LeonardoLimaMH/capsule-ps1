@@ -177,7 +177,100 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C__800AF2B0", func_800AFAC0);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C__800AF2B0", func_800AFEB8);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C__800AF2B0", func_800B026C);
+s32 func_800B026C(void) {
+    typedef struct {
+        u16 unk0;
+        u8 _p02[0xE];
+        u16 unk10;
+        u8 _p12[0x78];
+        u16 unk8A;
+        u8 _p8C[0x11C];
+    } S_91618;
+    typedef struct {
+        u8 _p00[0xC];
+        s32 unkC;
+        u8 _p10[0x14];
+        s32 unk24;
+        u8 _p28[0xA8];
+        s32 unkD0;
+    } S_800EEB9C_local;
+    extern u16 D_8006AF80[];
+    extern S_91618 D_80091618[];
+    extern S_800EEB9C_local D_800EEB9C;
+    extern u32 D_8008EDF0[];
+    extern s32 D_800EEBA8[];
+    extern s32 D_800F1924[];
+    extern u16 func_800B065C(s32, s32);
+    extern s32 func_800E0FB8(s32, s32);
+    extern s32 func_800E0DF8(void);
+    extern u16 func_800B0440(s32, s32);
+    S_800EEB9C_local *p;
+    u16 a2;
+    u16 a0;
+    s32 c;
+    s32 s1;
+    s32 s0;
+    u32 edf0;
+    s32 ret;
+
+    a2 = *D_8006AF80;
+    a0 = a2;
+    if (a0 == 0xFFFF) {
+        return 0;
+    }
+
+    if (D_80091618[a0].unk10 == 0xFFFF) {
+        c = 1;
+    } else {
+        c = D_80091618[a0].unk0 == 0xFFFF;
+    }
+    if (c == 1) {
+        return 0;
+    }
+
+    p = &D_800EEB9C;
+    if ((u32)(p->unkC - 0x29) < 4) {
+        return 0;
+    }
+
+    edf0 = *D_8008EDF0;
+    if (edf0 & 0xC) {
+        return 0;
+    }
+    if (edf0 & 3) {
+        return 0;
+    }
+    if (edf0 & 0x20) {
+        return 0;
+    }
+
+    if (p->unkC == 3 && p->unk24 == 6 && p->unkD0 == 1) {
+        return 0;
+    }
+
+    if ((u32)(*D_800EEBA8 - 0x24) < 4) {
+        if (*D_800F1924 == 0x1C) {
+            return 0;
+        }
+    }
+
+    s1 = D_80091618[*D_8006AF80].unk8A;
+    if (s1 == 0xFFFF) {
+        return (u16)func_800B065C(a2, 0xFFFF);
+    }
+
+    s0 = a2;
+    if (func_800E0FB8(s0, s1) == 0) {
+        ret = (u16)func_800B065C(s0, s1);
+        if (ret != 0) {
+            return ret;
+        }
+        if (func_800E0DF8() != 0) {
+            return 0;
+        }
+    }
+    return (u16)func_800B0440(s0, s1);
+}
 
 extern S_80091618 D_80091618[];
 extern u16 (*D_800EEAA8[])(u16, u16);
