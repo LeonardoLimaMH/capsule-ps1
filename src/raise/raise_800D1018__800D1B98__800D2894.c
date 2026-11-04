@@ -2,7 +2,15 @@
 
 /* registro de 0x79C bytes; o campo 0x798 é lido como palavra ou como byte */
 typedef struct {
-    u8 _p0[0x798];
+    u8 _p0[0x2BC];
+    s32 unk_2BC;
+    u8 _p2C0[0x64];
+    s16 unk_324;
+    u16 unk_326;
+    s16 unk_328;
+    u8 _p32A[0x1A];
+    s16 unk_344;
+    u8 _p346[0x452];
     union {
         u32 w;
         u8 b;
