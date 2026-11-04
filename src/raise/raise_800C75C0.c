@@ -235,12 +235,13 @@ s32 func_800C87C0(s32 a0, s32 a1) {
     case 1: {
         u8 *base = D_80091618;
         u16 idx = (u16)k;
-        u8 *data = D_80063940;
         u16 mon = *(u16 *)(base + idx * 0x1A8);
+        u8 *data = D_80063940;
         u8 *d = data + mon * 60;
         u32 w18 = *(u32 *)(d + 0x18), w1C = *(u32 *)(d + 0x1C);
         s32 s = 0;
-        if (((w18 >> 29) | ((w1C & 1) << 3)) == 0xF) s = 3;
+        w18 >>= 29;
+        if ((((w1C & 1) << 3) | w18) == 0xF) s = 3;
         else if (((w1C >> 1) & 0xF) != 0xF && !(rand() & 1)) s = 3;
         func_800CE4B8(a1, a0, s + (*D_800F07A8) + PS16(0x372), 1);
         func_800C5B30(a1, 0, PS16(0x2BA) - 8);
