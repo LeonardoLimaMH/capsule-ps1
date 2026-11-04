@@ -48,7 +48,17 @@ s32 func_800BF154(void) {
     return 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BF154", func_800BF220);
+void func_800BF220(u32 idx) {
+    extern u8 D_80091618[], D_80063940[];
+    u8 *b = D_80091618;
+    u8 *k = D_80063940;
+    u8 *p = b + (idx & 0xFFFF) * 0x1A8;
+    u32 t;
+    *(u16 *)(p + 0xD0) -= 1;
+    t = *(u32 *)(p + 0xC8);
+    *(u32 *)(p + 0xCC) = t;
+    *(u16 *)(p + 0xA0) = (*(u32 *)(k + *(u16 *)(p + 4) * 0x3C + 8) >> 12) & 3;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BF154", func_800BF294);
 
