@@ -122,13 +122,111 @@ s32 func_8003A854(u8 *a, u8 *b, s32 n) {
     return *a - *b;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A8A4);
+s32 func_8003A8A4(u32 arg0) {
+    extern s32 D_80078C9C;
+    extern u8 D_80078CA4[];
+    s32 var_a0;
+    s32 var_v0;
+    u32 var_a3;
+    u8 *var_a1;
+    u8 *var_a2;
+    u8 var_v0_2;
+    u8 var_v1;
+    Unk_800944B8 *temp_t0;
+
+    var_a3 = arg0;
+    temp_t0 = &D_800944B8[D_80078C9C];
+    var_a1 = D_80078CA4;
+loop_1:
+    var_a2 = temp_t0->unk_0x284 + var_a3;
+    var_a0 = 3;
+loop_2:
+    var_v1 = *var_a1;
+    var_v0_2 = *var_a2;
+    var_a1 += 1;
+    if (var_v1 == var_v0_2) {
+        var_a0 -= 1;
+        var_a2 += 1;
+        if (var_a0 == 0) {
+            var_v1 = *var_a1;
+            var_v0_2 = *var_a2;
+        } else {
+            goto loop_2;
+        }
+    }
+    var_v0 = var_a3 + 4;
+    if (var_v1 != var_v0_2) {
+        var_a3 += 1;
+        var_a1 = D_80078CA4;
+        if (temp_t0->unk_0x294 < var_a3) {
+            var_v0 = -1;
+        } else {
+            goto loop_1;
+        }
+    }
+    return var_v0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A940);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A9DC);
+s32 func_8003A9DC(u32 arg0) {
+    extern s32 D_80078C9C;
+    extern u8 D_80078CB4[];
+    s32 var_a0;
+    s32 var_v0;
+    u32 var_a3;
+    u8 *var_a1;
+    u8 *var_a2;
+    u8 var_v0_2;
+    u8 var_v1;
+    Unk_800944B8 *temp_t0;
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AA78);
+    var_a3 = arg0;
+    temp_t0 = &D_800944B8[D_80078C9C];
+    var_a1 = D_80078CB4;
+loop_1:
+    var_a2 = temp_t0->unk_0x284 + var_a3;
+    var_a0 = 2;
+loop_2:
+    var_v1 = *var_a1;
+    var_v0_2 = *var_a2;
+    var_a1 += 1;
+    if (var_v1 == var_v0_2) {
+        var_a0 -= 1;
+        var_a2 += 1;
+        if (var_a0 == 0) {
+            var_v1 = *var_a1;
+            var_v0_2 = *var_a2;
+        } else {
+            goto loop_2;
+        }
+    }
+    var_v0 = var_a3 + 3;
+    if (var_v1 != var_v0_2) {
+        var_a3 += 1;
+        var_a1 = D_80078CB4;
+        if (temp_t0->unk_0x294 < var_a3) {
+            var_v0 = -1;
+        } else {
+            goto loop_1;
+        }
+    }
+    return var_v0;
+}
+
+s32 func_8003AA78(u8 *s) {
+    Unk_800944B8 *e = &D_800944B8[D_80078C9C];
+    u32 pos = *(u32 *)s;
+    u8 c = e->unk_0x284[pos];
+
+    pos++;
+    *(u32 *)s = pos;
+    if (e->unk_0x294 < pos) {
+        s[0x20] = 1;
+        return -1;
+    }
+    return c;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AAF0);
 
@@ -142,7 +240,11 @@ s32 func_8003AC4C(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AC60);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AE48);
+s32 func_8003AE48(u8 *s) {
+    s32 hi = next_byte(s);
+    s32 lo = next_byte(s);
+    return ((hi & 0xFF) << 8) | (lo & 0xFF);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003AF34);
 
@@ -187,4 +289,21 @@ void func_8003C7C8(void) {
     func_80038890();
     func_8003C73C();
     SpuInitMalloc(0x10, D_800949A8);
+}
+#include "common.h"
+
+extern s32 D_80078C9C;
+
+static s32 next_byte(u8 *s) {
+    Unk_800944B8 *e = &D_800944B8[D_80078C9C];
+    u32 pos = *(u32 *)s;
+    u8 c = e->unk_0x284[pos];
+
+    pos++;
+    *(u32 *)s = pos;
+    if (e->unk_0x294 < pos) {
+        s[0x20] = 1;
+        return -1;
+    }
+    return c;
 }
