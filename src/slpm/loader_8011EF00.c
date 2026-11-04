@@ -35,7 +35,16 @@ void slpm__spu_FsetRXX(int param_1, uint param_2, int param_3)
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011EF00", slpm__spu_FsetRXXa);
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011EF00", slpm__spu_FgetRXXa);
+u32 slpm__spu_FgetRXXa(s32 param_1, s32 param_2) {
+    extern u16 *D_801333D4;
+    extern s32 D_801333FC;
+    register u32 val asm("a0");
+    val = D_801333D4[param_1];
+    if (param_2 == -1) {
+        return val;
+    }
+    return val << D_801333FC;
+}
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader_8011EF00", slpm__spu_FsetPCR);
 
