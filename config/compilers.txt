@@ -170,10 +170,8 @@ src/raise/raise_800B60F8.c 2.7.2-cdk
 src/raise/raise_800B617C.c 2.7.2-cdk
 src/raise/raise_800B61E4.c 2.7.2-cdk
 src/raise/raise_800B61E4__800B8BCC.c 2.7.2-cdk
-src/raise/raise_800B61E4__800B8E04.c 2.7.2-cdk
 src/raise/raise_800B9C3C__800BAD64.c 2.7.2-cdk
 src/raise/raise_800B9C3C__800BBC28.c 2.7.2-cdk
-src/raise/raise_800B9C3C__800BCF98.c 2.7.2-cdk
 src/raise/raise_800C0124.c 2.7.2-cdk
 src/raise/raise_800C0898.c 2.7.2-cdk
 src/raise/raise_800C2CE0.c 2.7.2-cdk
@@ -294,3 +292,5 @@ src/yuugi/sdk_libc2_strcmp.c 2.7.2-cdk
 src/slpm/sdk_libc2_strcmp.c 2.7.2-cdk
 src/yuugi/main_8001A1DC__8001B0E0__8001BCE4.c 2.7.2-cdk
 src/yuugi/main_8001A1DC__8001B0E0__8001BB18.c 2.7.2-cdk
+src/raise/raise_800B61E4__800B8E04.c 2.7.2-cdk
+src/raise/raise_800B9C3C__800BCF98.c 2.7.2-cdk
