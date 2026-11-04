@@ -119,17 +119,18 @@ s32 func_800D2BB8(s32 arg0) {
         register u32 index asm("v0") = (u16)k;
         if (slots[index].unk_10 != 0) return 0;
     }
-    {
-        u32 index = (u16)func_800B1260(arg0);
-        r = 0;
-        if (index != 0xFFFF) {
-            u32 mon = *(u16 *)((u8 *)slots + index * 0x1A8);
-            if (mon != 0xFFFF) {
-                u8 *base = D_80063940;
-                u8 *q = mon * 0x3C + base;
-                r = (*(u32 *)(q + 0x18) & 3) == 2;
-            }
+    id = (u16)func_800B1260(arg0);
+    if (id != 0xFFFF) {
+        id = *(u16 *)((u8 *)slots + id * 0x1A8);
+        if (id != 0xFFFF) {
+            u8 *base = D_80063940;
+            u8 *q = id * 0x3C + base;
+            r = (*(u32 *)(q + 0x18) & 3) == 2;
+        } else {
+            r = 0;
         }
+    } else {
+        r = 0;
     }
     if (r) return 1;
     id = (u16)func_800B1260(arg0);
@@ -663,7 +664,22 @@ s32 func_800D6848(s32 arg0) {
     return (s16)val;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894", func_800D68D4);
+s32 func_800D68D4(s32 arg0) {
+    extern s32 D_800F1D1C[][2];
+    s32 val;
+    s32 a0 = arg0 & 0x3F;
+
+    if ((u32)a0 <= 0x10) {
+        val = D_800F1D1C[a0][0];
+    } else if (a0 <= 0x20) {
+        val = -D_800F1D1C[0x20 - a0][0];
+    } else if (a0 <= 0x30) {
+        val = -D_800F1D1C[a0 - 0x20][0];
+    } else {
+        val = D_800F1D1C[0x40 - a0][0];
+    }
+    return (s16)val;
+}
 
 void func_800D6960(void *arg0, s8 arg1, s8 arg2, s8 arg3) {
     M2C_FIELD(arg0, s8 *, 0) = arg1;
