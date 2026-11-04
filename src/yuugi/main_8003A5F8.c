@@ -153,7 +153,36 @@ compare:
     return -1;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003A940);
+s32 func_8003A940(u32 arg0) {
+    extern u8 D_80078CAC[];
+    register u32 pos asm("a3") = arg0;
+    u8 *pattern = D_80078CAC;
+    register Unk_800944B8 *base asm("a0") = D_800944B8;
+    Unk_800944B8 *e = &base[D_80078C9C];
+    u8 *data = e->unk_0x284;
+    u8 *a;
+    u8 *b;
+    s32 n;
+    s32 x, y, diff;
+    do {
+        a = pattern;
+        b = data + pos;
+        n = 3;
+        do {
+            x = *a++;
+            y = *b;
+            if (x != y) goto compare;
+            b++;
+        } while (--n);
+        x = *a;
+        y = *b;
+compare:
+        diff = x - y;
+        if (diff == 0) return pos + 4;
+        pos++;
+    } while (pos <= e->unk_0x294);
+    return -1;
+}
 
 s32 func_8003A9DC(u32 arg0) {
     extern u8 D_80078CB4[];
@@ -255,16 +284,18 @@ s32 func_8003B6F4(u8 *s) {
     u32 i = 0;
     u32 n = func_8003AAF0(s);
     s32 result;
+    s32 more;
     do {
         Unk_800944B8 *e = &D_800944B8[D_80078C9C];
         u32 pos = *(u32 *)s;
         u8 c = e->unk_0x284[pos];
         *(u32 *)s = ++pos;
+        i++;
         if (e->unk_0x294 < pos) { s[0x20] = 1; result = -1; }
         else result = c;
-        i++;
-    } while ((u8)result != 0xF7 && i < n);
-    return i < n;
+        more = i < n;
+    } while ((u8)result != 0xF7 && more);
+    return more;
 }
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003B7B4);
