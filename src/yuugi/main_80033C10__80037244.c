@@ -3,15 +3,7 @@
 
 #include "common.h"
 
-typedef struct {
-    u16 flags;
-    u8 pad0[0x146];
-    s32 status;
-    u8 decoded[0x1000];
-    s16 *a0, *a1, *b0, *b1;
-    s32 energyA, energyB;
-} SoundState;
-extern SoundState D_800922F0[];
+extern u8 D_800922F0[];
 extern s32 SpuReadDecodedData();
 
 typedef struct {
