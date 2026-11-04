@@ -102,11 +102,11 @@ void func_800A95CC(void) {
 
 void func_800A95D4(void) {
     extern Result_800EE914 D_800EE914;
-    s32 off;
+    s32 i;
     s32 j;
-    u8 *q;
     s32 *p;
     s32 *end;
+    u8 *q;
 
     D_800EE914.state = 0;
     D_800EE914.col[0] = 0x40;
@@ -114,33 +114,33 @@ void func_800A95D4(void) {
     D_800EE914.col[2] = 0xb8;
     D_800EE914.unk94 = 0;
     D_800EE914.col[3] = 0x2c;
-    off = 0;
+    i = 0;
     p = (s32 *)&D_800EE914;
     end = p + 9;
     do {
-        j = 0;
-        q = (u8 *)&D_800EE914;
         p[1] = 0;
         p[28] = -1;
-        do {
-            *(s32 *)(q + off + 0x28) = 0;
-            j++;
+        q = (u8 *)&D_800EE914;
+        for (j = 0; j < 2; j++) {
+            *(s32 *)(q + i) = 0;
             q += 0x24;
-        } while (j < 2);
+        }
         p++;
-        off += 4;
+        i += 4;
     } while (p < end);
 }
 
 s32 func_800A9658(s16 arg0) {
-    s32 ret = 1;
+    register s32 r asm("v0");
+    r = 1;
     if (arg0 != 0) {
-        ret = 9;
-        if (arg0 == 1) {
-            ret = 4;
+        if (arg0 == r) {
+            r = 4;
+        } else {
+            r = 9;
         }
     }
-    return ret;
+    return r;
 }
 
 void func_800A967C(s32 arg0, s32 arg1) {
