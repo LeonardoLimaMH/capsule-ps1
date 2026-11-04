@@ -6,7 +6,11 @@ typedef struct {
     u8 *unk_0x284;
     u8 unk_0x288[0xC];
     u32 unk_0x294;
-    u8 unk_0x298[0x14];
+    u8 unk_0x298[0xA];
+    u16 unk_0x2A2;
+    u8 unk_0x2A4[4];
+    u8 unk_0x2A8;
+    u8 unk_0x2A9[3];
 } Unk_800944B8;
 
 extern Unk_800944B8 D_800944B8[];
