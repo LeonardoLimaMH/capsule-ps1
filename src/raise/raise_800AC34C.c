@@ -490,7 +490,15 @@ s32 func_800AEDC4(void) {
     return s;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AEEDC);
+s32 func_800AEEDC(s32 idx) {
+    extern u8 D_80091618[];
+    u8 *base = D_80091618;
+    u8 *rec = base + (idx & 0xFFFF) * 0x1A8;
+    if (*(u16 *)(rec + 0x10) == 0xFFFF) {
+        return 1;
+    }
+    return *(u16 *)rec == 0xFFFF;
+}
 
 #include "common.h"
 
