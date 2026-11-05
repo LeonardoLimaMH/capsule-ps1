@@ -272,10 +272,10 @@ void func_800B7790(s32 arg0, s32 arg1, u8 *arg2, u8 *arg3, u8 *arg4) {
     s32 i;
     s32 d;
     for (i = 0; i < 2; i++) {
-        arg4[i] = arg2[0x15 + i];
+        arg4[i] = *(arg2 + i + 0x15);
     }
     for (i = 0; i < 2; i++) {
-        d = arg4[i] - arg3[0x15 + i];
+        d = arg4[i] - *(arg3 + i + 0x15);
         if (d >= 2) {
             arg4[i] = arg4[i] - 1;
         } else if (d < -1) {
