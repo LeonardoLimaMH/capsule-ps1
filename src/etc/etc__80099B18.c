@@ -8,8 +8,8 @@ void func_80099B18(u8 *arg0) {
     u8 *q = D_80085428;
     s32 a2 = *(s32 *)(arg0 + 0x7C);
     if (*D_8008EE44 < 7U && q[0x5CB] == 4) {
-        u32 m = ~1;
-        u32 f = *(u32 *)(arg0 + 0x38);
+        register s32 m asm("a1") = ~1;
+        register u32 f asm("v0") = *(u32 *)(arg0 + 0x38);
         s32 v = *D_800B3ACC;
         s32 w = *(s32 *)(arg0 + 0x80);
         f &= m;
@@ -342,15 +342,16 @@ void func_8009AF80(void) {
         *D_800B3AE4 = *D_800B3AE4 + 1;
         break;
     case 1:
-        if (M2C_GFIELD(d, s32, 0xA68) == 0) {
-            *D_800B3AE8 = 0;
-            *D_800B3ADC = 0;
-            *D_800B3B28 = 0;
-            *D_800B3B24 = 0;
-            func_80012544();
-            func_8001ADA0(8);
-            *D_800B3AE4 = *D_800B3AE4 + 1;
+        if (M2C_GFIELD(d, s32, 0xA68) != 0) {
+            break;
         }
+        *D_800B3AE8 = 0;
+        *D_800B3ADC = 0;
+        *D_800B3B28 = 0;
+        *D_800B3B24 = 0;
+        func_80012544();
+        func_8001ADA0(8);
+        *D_800B3AE4 = *D_800B3AE4 + 1;
         break;
     case 2:
         if (M2C_GFIELD(d, s32, 0xA68) == 0) {
