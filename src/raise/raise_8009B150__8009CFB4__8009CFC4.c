@@ -63,7 +63,32 @@ extern s32 ratan2();
 extern void func_80012A20();
 extern void func_800161C4();
 extern u8 D_8008ED68[];
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009B150__8009CFB4__8009CFC4", func_8009D11C);
+u8 *func_8009D11C(void) {
+    u8 *p;
+    u8 *q;
+    s32 a;
+    s32 b;
+    p = func_80015B3C(func_8009CFC4, func_800161C4, 2);
+    func_80015EF8(p);
+    *(s32 *)(p + 0x38) |= 1;
+    func_80015CD0(p + 0x14, func_80019F30(0x7000E, 0xA9), 0);
+    q = p;
+    if (func_80020304(2) != 0) {
+        *(s16 *)(p + 0x46) = 0xB4;
+        *(s16 *)(p + 0x6A) = -6;
+    } else {
+        *(s16 *)(p + 0x46) = -0xB4;
+        *(s16 *)(p + 0x6A) = 6;
+    }
+    *(s16 *)(q + 0x4A) = func_80020304(100) - 0x32;
+    b = func_80020304(6) - 3;
+    *(s16 *)(q + 0x6E) = b;
+    a = ratan2(*(s16 *)(q + 0x6A), (s16)b);
+    *(s16 *)(q + 0x54) = 0xE00 - a;
+    *(s16 *)(q + 0x4E) = 7;
+    *(s32 *)(q + 0x34) &= ~0x7F;
+    return p;
+}
 
 void func_8009D21C(void) {
     u8 *base = D_8008ED68;
