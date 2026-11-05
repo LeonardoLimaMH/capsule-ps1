@@ -2,8 +2,8 @@
 #include "yuugi.h"
 
 extern volatile s32 D_80094C10[];
-extern volatile s32 D_80094C0C[];
-extern volatile s32 D_80094C08[];
+extern s32 D_80094C0C[];
+extern s32 D_80094C08[];
 extern s32 D_80073084[];
 extern s32 D_80073088[];
 extern s32 D_800730A8[];
