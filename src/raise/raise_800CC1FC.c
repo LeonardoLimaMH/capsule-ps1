@@ -120,9 +120,9 @@ void func_800CC9E4(u8 *obj) {
     if (((w >> 8) & 1) != *D_80078C20) {
         func_80013920();
     } else if (*D_8008EE44 == 0x41) {
-        func_80013920(obj);
+        func_80013920(obj, b9, b10);
     } else {
-        func_800CC5D4(obj);
+        func_800CC5D4(obj, b9, b10);
         v = *(s16 *)(obj + 0x4e);
         if (v > 0) {
             *(s16 *)(obj + 0x52) = 0x16C000 / v;
