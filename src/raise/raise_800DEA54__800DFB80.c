@@ -136,17 +136,16 @@ s32 func_800E0FB8(s32 idx)
   return 0;
 }
 
-extern u16 D_8006AFCC[];
+typedef struct { u8 pad[0x30]; u16 f[11]; } D_8006AFCC_t;
+extern D_8006AFCC_t D_8006AFCC;
 extern s32 func_800E1624(s32);
 s32 func_800E102C(void) {
     s32 i;
-    u16 *p = D_8006AFCC;
 
     for (i = 0; i < 11; i++) {
-        if (p[0x18] == 1) {
+        if (D_8006AFCC.f[i] == 1) {
             return 1;
         }
-        p++;
     }
     return 0;
 }
