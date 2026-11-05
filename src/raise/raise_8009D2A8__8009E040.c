@@ -198,12 +198,23 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_800A021C);
 
 void func_800A0424(void)
 {
-  extern s32 D_800EE5F0[];
-  extern u8 D_800EFF58[];
-  u8 *w = D_800EFF58;
-  s32 t = D_800EE5F0[3] + *((s32 *) (w + 0x318)) + 3;
-  s32 r = func_80019F30(D_800EE5F0[0] | 0x60000, t - *((u16 *) (D_80091618 + (*D_8006AF80) * 0x1A8 + 0x12)));
-  *((s32 *) (*((s32 *) (w + 0x314)) + 0x18)) = r;
+    struct Ent {
+        u8 _0[0x12];
+        u16 f12;
+        u8 _14[0x1A8 - 0x14];
+    };
+    extern s32 D_800EE5F0[];
+    extern u8 D_800EFF58[];
+    extern u8 D_80091618[];
+    extern u16 D_8006AF80[];
+
+    s32 *f = D_800EE5F0;
+    u8 *w = D_800EFF58;
+    struct Ent *arr = (struct Ent *)D_80091618;
+    s32 t = f[3] + *(s32 *)(w + 0x318) + 3;
+    u16 val = arr[*D_8006AF80].f12;
+    s32 r = func_80019F30(D_800EE5F0[0] | 0x60000, t - val);
+    *(s32 *)(*(s32 *)(w + 0x314) + 0x18) = r;
 }
 
 #include "common.h"
