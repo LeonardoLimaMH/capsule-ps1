@@ -3,7 +3,21 @@
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0898", func_800C0898);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0898", func_800C0BC8);
+void func_800C0BC8(s16 a0, s16 a1, s16 a2) {
+    D_80100E60_t *d = &D_80100E60;
+    u16 i = d->idx;
+    s16 c = d->cnt + 1;
+    d->cnt = c;
+    d->cnt = c % 32;
+    d->a[(s16)i] = a0;
+    d->b[(s16)i] = a1;
+    d->c[(s16)i] = a2;
+    if ((s16)i != 31) {
+        d->idx = i + 1;
+    } else {
+        d->idx = 0;
+    }
+}
 
 void func_800C0C40(void) {
     func_800C0C98();
