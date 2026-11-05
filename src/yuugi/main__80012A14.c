@@ -1,12 +1,50 @@
 #include "common.h"
 #include "yuugi.h"
 
+typedef struct {
+  u8 *p;
+  u16 b;
+  u16 t;
+  u16 x;
+  u16 y;
+} Ent12A20;
+
+typedef struct {
+  s16 x, y, w, h;
+} Rect;
+
+extern s32 LoadImage();
+
 void func_80012A14(void) {
     extern s16 D_8008ED50[];
     (*D_8008ED50) = 0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14", func_80012A20);
+s32 func_80012A20(u8 *a0, u16 a1, u16 a2, u16 a3)
+{
+  extern u8 D_8008ED68[];
+  u8 *b;
+  Ent12A20 *e;
+  s32 i;
+  b = D_8008ED68;
+  e = (Ent12A20 *) (b + 0x158);
+  for (i = 0; i < 0x50; i++, e++)
+  {
+    if (e->t == 0)
+    {
+      e->p = a0;
+      e->t = a1;
+      e->b = *a0;
+      if ((u16) (a1 - 2) < 2)
+      {
+        e->x = a2;
+        e->y = a3;
+      }
+      return 1;
+    }
+  }
+  return 0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14", func_80012A98);
 
@@ -41,4 +79,34 @@ s32 func_80012C38(void)
   return var_a1;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14", func_80012C7C);
+void func_80012C7C(u32 *p)
+{
+  Rect r;
+  u32 *q;
+  if (p[0] & 0x400)
+  {
+    return;
+  }
+  r.x = *((u16 *) (p + 1));
+  r.y = *((u16 *) (((u8 *) p) + 6));
+  q = p;
+  if (!(q[0] & 0x200))
+  {
+    r.w = (*((s16 *) (p + 2))) / 4;
+  }
+  else
+  {
+    r.w = (*((s16 *) (q + 2))) / 2;
+  }
+  r.h = *((u16 *) (((u8 *) q) + 0xA));
+  if (!(q[0] & 0x100))
+  {
+    LoadImage(&r, p + 3);
+  }
+  else
+  {
+    func_8001A8C0(p + 3, 0x801CC000);
+    LoadImage(&r, 0x801CC000);
+    DrawSync(0);
+  }
+}
