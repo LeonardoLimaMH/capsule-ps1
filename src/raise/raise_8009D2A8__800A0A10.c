@@ -1,5 +1,12 @@
 #include "common.h"
 
+typedef struct { s32 pad[14]; u32 flags; } Obj_800A1D58;
+typedef struct {
+    u8 pad[0x764];
+    Obj_800A1D58 *a;
+    Obj_800A1D58 *b;
+} Work_800A1D58;
+
 void func_800A0A10(void) {
     func_800A0E20();
 }
@@ -35,7 +42,40 @@ s32 func_800A0A7C(void) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A0ACC);
+void func_800A0ACC(s32 arg0) {
+    extern s16 D_800EEA78[];
+    extern s32 D_8008ED68[];
+    extern s32 D_800EFF58[];
+    s32 *d = D_8008ED68;
+    s32 v = d[D_800EEA78[arg0] + 0x29];
+    s32 n;
+    s32 *w;
+
+    if (v != 7 && (v & 7) == 7) {
+        func_80034AB0(0x84);
+        func_800A0D88(2, 0);
+        switch (arg0) {
+        case 2:
+            w = D_800EFF58;
+            n = w[0xD1];
+            if (n > 0) {
+                n = n - 1;
+            } else {
+                n = w[0xD2];
+            }
+            w[0xD1] = n;
+            break;
+        case 3:
+            n = 0;
+            if (D_800EFF58[0xD1] < D_800EFF58[0xD2]) {
+                n = D_800EFF58[0xD1] + 1;
+            }
+            D_800EFF58[0xD1] = n;
+            break;
+        }
+        func_800A0D88(1, 0);
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A0BB4);
 
@@ -62,9 +102,54 @@ void func_800A0D88(s32 arg0) {
     }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A0E20);
+s32 func_800A0E20(void) {
+    extern u8 D_800EFF58[];
+    u8 *p = D_800EFF58;
+    s32 result;
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A0E6C);
+    if (*(s32 *)(p + 0x340) <= 0) {
+        *(s32 *)(p + 0x33C) = 0;
+        result = -1;
+    } else {
+        *(s32 *)(p + 0x340) -= 1;
+        func_800BCFB0(*(s32 *)(p + 0x33C));
+        result = 0;
+    }
+    return result;
+}
+
+u8 *func_800A0E6C(u32 arg0) {
+    extern u8 D_800F2D30[];
+    extern u8 D_800F2D98[];
+    u8 *p = &D_800F2D30[arg0 & 0xFFFF];
+    s32 i;
+    s32 idx;
+
+    if (*p == 0xFF) {
+        for (i = 0; i < 6; i++) {
+            if (D_800F2D98[i] == (arg0 & 0xFF)) {
+                break;
+            }
+        }
+        if (i == 6) {
+            for (i = 0; i < 6; i++) {
+                if (D_800F2D98[i] == 0xFF) {
+                    break;
+                }
+            }
+            idx = i;
+            if (idx == 6) {
+                idx = 5;
+            }
+            D_800F2D98[idx] = arg0;
+        } else {
+            idx = i;
+        }
+    } else {
+        idx = *p;
+    }
+    return (u8 *)0x80146A18 + idx * 0x15800;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A0F4C);
 
@@ -108,7 +193,14 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A18EC);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A1B18);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A1D58);
+void func_800A1D58(s32 arg0, s32 arg1) {
+    extern Work_800A1D58 D_800EEB9C;
+
+    D_800EEB9C.a->flags = (D_800EEB9C.a->flags & ~1) | (arg0 & 1);
+    D_800EEB9C.b->flags = (D_800EEB9C.b->flags & ~1) | (arg0 & 1);
+    D_800EEB9C.a->flags = (D_800EEB9C.a->flags & ~0x40) | ((arg1 & 1) << 6);
+    D_800EEB9C.b->flags = (D_800EEB9C.b->flags & ~0x40) | ((arg1 & 1) << 6);
+}
 
 #include "common.h"
 
