@@ -95,26 +95,25 @@ void func_800DDA78(void *arg0) {
 
 s32 func_800DDAD4(u8 *arg0, s32 arg1) {
     extern S_800DD_Tab D_80063940[];
-    return (s32)((D_80063940[arg0[0]].a >> 24) & 0x3F) * (s32)((((D_80063940[arg0[0]].b & 3) << 2) | (D_80063940[arg0[0]].a >> 30)) * 8 + 0x100) / arg1;
+    u32 x = D_80063940[arg0[0]].a;
+    u32 lo = x >> 30;
+    s32 m = (((D_80063940[arg0[0]].b & 3) << 2) | lo) * 8 + 0x100;
+    return (s32)((x >> 24) & 0x3F) * m / arg1;
 }
 
-s32 func_800DDB38(u8 *arg0, s32 arg1, s16 arg2) {
+void func_800DDB38(u8 *arg0, s32 arg1, s16 arg2) {
     extern int func_800DDE7C();
     u8 *q;
-    u16 a, b;
 
-    a = *(u16 *)(arg0 + 0x64);
-    b = *(u16 *)(arg0 + 0x66);
     q = func_80020CE4(arg0, &func_800DDE7C, 5);
-    *(u16 *)(q + 0x64) = a;
+    *(u16 *)(q + 0x64) = *(u16 *)(arg0 + 0x64);
     *(s32 *)(q + 0x38) = (*(s32 *)(q + 0x38) | 0x40) & ~0x30 | 0x10;
     q[0x5A] = arg2;
     q[0x59] = arg2;
     q[0x58] = arg2;
     *(s16 *)(q + 0x7A) = arg2;
     *(s32 *)(q + 0x84) = arg1;
-    *(u16 *)(q + 0x66) = b;
-    return 0;
+    *(u16 *)(q + 0x66) = *(u16 *)(arg0 + 0x66);
 }
 
 void func_800DDBC8(void *arg0, void *arg1, s32 arg2, s32 arg3) {
