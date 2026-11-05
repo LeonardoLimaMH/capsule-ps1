@@ -68,12 +68,12 @@ s32 func_800BED10(void) {
     extern s16 D_800F0654[], D_800F0656[];
     s32 n = D_800EE630[6] + 0xF;
     s32 resource = func_80019F30(D_800EE630[0] | 0x70000, n);
-    u8 *base = D_800EEB9C;
-    func_80015CD0(M2C_FIELD(base, void **, 0x764) + 0x14, resource, 1);
+    struct RaiseEstadoBED10 *base = (struct RaiseEstadoBED10 *)D_800EEB9C;
+    func_80015CD0((u8 *)base->unk_0x764 + 0x14, resource, 1);
     D_800F0654[0] = 0;
-    M2C_FIELD(M2C_FIELD(base, void **, 0x764), s32 *, 0x7C) = n;
+    base->unk_0x764->unk_0x7C = n;
     D_800F0656[0] = 0;
-    M2C_FIELD(M2C_FIELD(base, void **, 0x764), s32 *, 0x38) &= ~0x40;
+    base->unk_0x764->unk_0x38 &= ~0x40;
     return 0;
 }
 
