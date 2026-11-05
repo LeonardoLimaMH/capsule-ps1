@@ -19,13 +19,24 @@ extern s32 func_800202A4(s32);
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E6E68", func_800E6E68);
 
 s32 func_800E733C(u16 arg0, s32 arg1) {
-    return 0;
+    s32 ret = 0;
+    s32 i;
+    s16 *p = &D_80091618[arg0].unkD6[1];
+    for (i = 0; i < 8; i++, p++) {
+        if (*p < ((s16 *)((u8 *)D_800F21C0 + D_80091618[arg0].unk92 * 0xA0 + arg1 * 16))[i]) {
+            ret = 1;
+            break;
+        }
+    }
+    return ret;
 }
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E6E68", func_800E73D8);
 
 s32 func_800E7934(u16 arg0) {
-    return 0;
+    s16 t = (s16)D_80091618[arg0].unkEE / 3;
+    s32 v = t + 12;
+    return (func_800202A4(100) < v) * 2;
 }
 
 #include "common.h"
@@ -71,7 +82,7 @@ s32 func_800E7A28(u16 arg0) {
     if (D_80085428[0xD7C + arg0] != 2) {
         return 0;
     }
-    if (D_80091618[arg0].unkD6[0] < 0x97) {
+    if (*(s16 *)((u8 *)&D_80091618[arg0] + 0xD6) < 0x97) {
         D_80085428[0xD7C + arg0] = 0;
         return 0;
     }
@@ -102,13 +113,13 @@ s32 func_800E7AA0(s32 id) {
 
 s32 func_800E7B18(u16 arg0) {
     S_91618 *r = &D_80091618[arg0];
-    if (r->unk1A4 == 0) {
-        r->unk1A4 = 0;
-        D_80085428[0xD7C + arg0] = 0;
-        return 1;
+    if (r->unk1A4 != 0) {
+        r->unk1A4 = r->unk1A4 - 1;
+        return 0;
     }
-    r->unk1A4 = r->unk1A4 - 1;
-    return 0;
+    r->unk1A4 = 0;
+    D_80085428[0xD7C + arg0] = 0;
+    return 1;
 }
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E6E68", func_800E7B80);
