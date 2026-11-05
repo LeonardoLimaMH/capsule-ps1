@@ -341,6 +341,8 @@ ret_s2:
     return (base[(u16)s2].unk90 != 0) ? 1 : 4;
 }
 
+#include "gte_inline.h"
+
 extern u8 D_800900C0[], D_8008ED68[];
 extern s32 func_800E3810(s32);
 extern void PushMatrix(void), PopMatrix(void);
@@ -358,7 +360,30 @@ s32 func_800E3A04(s32 arg0, void *v, u8 **o) {
     return t.z - 4;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3B14);
+s32 func_800E3B14(s32 a0, void *v, u8 **obj) {
+    struct { u16 sx, sy; s32 p, flag, z; } t;
+    s32 s = func_800E36E4(a0);
+    register s32 value asm("t4");
+    register s32 *out asm("v0");
+    u8 *scr;
+    PushMatrix();
+    func_8002CEC0(D_800900C0 + s * 0xBC);
+    gte_ldv0(v);
+    gte_rtps();
+    gte_stsxy(&t);
+    gte_stir0(&t.p);
+    out = &t.flag;
+    GTE_CFC2(value, 31);
+    *out = value;
+    out = &t.z;
+    GTE_MFC2(value, 19);
+    *out = value >> 2;
+    scr = D_8008ED68;
+    *(u16 *)(*obj + 0x46) = t.sx - *(s32 *)(scr + 0x108) / 2;
+    *(u16 *)(*obj + 0x4A) = t.sy - *(s32 *)(scr + 0x10C) / 2 + 2;
+    PopMatrix();
+    return t.z - 4;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3C24);
 
