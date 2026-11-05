@@ -86,7 +86,9 @@ void func_80015B74(void *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015BE8);
+void func_80015BE8(void *arg0) {
+    func_80012A20(M2C_FIELD(M2C_FIELD(arg0, s32 *, 8) + M2C_FIELD(arg0, s32 *, 0) * 0x24 - 0x1c, s32 *, 0), 1, 0, 0);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015C2C);
 
@@ -110,7 +112,20 @@ void func_80015CD0(int param_1,int param_2,uint param_3)
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015D14);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015E60);
+s32 func_80015E60(u8 *arg0) {
+    extern u8 D_8008ED68[];
+    u8 n = D_8008ED68[0x103];
+    s32 h;
+    if (n == 0) {
+        if (*(s16 *)(arg0 + 0x24) > 0) return 0;
+        if (*(s32 *)(arg0 + 0x20) + 1 == **(s32 **)(arg0 + 0x1C)) return 1;
+        return *(s16 *)(arg0 + 0x24) < 0;
+    }
+    if (*(s16 *)(arg0 + 0x24) <= n - 1) {
+        if (*(s32 *)(arg0 + 0x20) + 1 == **(s32 **)(arg0 + 0x1C)) return 1;
+    }
+    return *(s16 *)(arg0 + 0x24) < 0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015EF8);
 
