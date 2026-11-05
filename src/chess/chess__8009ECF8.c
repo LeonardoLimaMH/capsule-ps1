@@ -25,12 +25,13 @@ void func_8009ECF8(void *arg0)
 s32 func_8009ED2C(u8 *arg0) {
     extern u8 D_8008ED68[];
     s32 r = 0;
+    u8 *p = D_8008ED68;
     if (arg0[0x62A] != 0) {
         if (func_8009DD64() != 0) {
             arg0[0x62A] = 0;
             r = 1;
         }
-        D_8008ED68[0xA66] = 1;
+        p[0xA66] = 1;
         func_8002CC74();
         func_8002CD50();
     }
@@ -69,22 +70,27 @@ void func_8009FD78(void *arg0, s32 arg1) {
 }
 
 void func_8009FDAC(u8 *arg0, s32 arg1) {
-    extern u16 *D_80101B88;
-    extern u16 *D_80101B8C;
-    s32 k;
+    extern u16 *D_80101B88[];
+    extern u16 *D_80101B8C[];
     s32 q;
-    if (arg1 == 0) {
-        k = 4;
-    } else if (arg1 < 10) {
-        k = 5;
-        D_80101B88[8] = arg1 + 0xC2;
+    u16 *p;
+    s32 r;
+    if (arg1 != 0) {
+        if (arg1 < 10) {
+            p = D_80101B88[0];
+            p[8] = arg1 + 0xC2;
+            r = func_8001F8B0(0x19, 5);
+        } else {
+            p = D_80101B8C[0];
+            q = arg1 / 10;
+            p[8] = q + 0xC2;
+            p[9] = arg1 - q * 10 + 0xC2;
+            r = func_8001F8B0(0x19, 6);
+        }
     } else {
-        k = 6;
-        q = arg1 / 10;
-        D_80101B8C[8] = q + 0xC2;
-        D_80101B8C[9] = arg1 - q * 10 + 0xC2;
+        r = func_8001F8B0(0x19, 4);
     }
-    *(s32 *) (arg0 + 0x14) = func_8001F8B0(0x19, k);
+    *(s32 *) (arg0 + 0x14) = r;
 }
 
 void func_8009FE5C(void *arg0) {
