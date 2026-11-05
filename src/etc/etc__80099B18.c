@@ -2,13 +2,19 @@
 
 void func_80099B18(u8 *arg0) {
     extern u16 D_8008EE44[];
-    extern M2C_UNK D_80085428[];
+    extern u8 D_80085428[];
     extern s16 D_800B3ACC[];
     extern void func_80015CD0(void *, s32, s32);
+    u8 *q = D_80085428;
     s32 a2 = *(s32 *)(arg0 + 0x7C);
-    if (*D_8008EE44 < 7U && M2C_GFIELD(D_80085428, u8, 0x5CB) == 4) {
-        *(u32 *)(arg0 + 0x38) &= ~1;
-        if (*(s32 *)(arg0 + 0x80) == *D_800B3ACC) {
+    if (*D_8008EE44 < 7U && q[0x5CB] == 4) {
+        u32 m = ~1;
+        u32 f = *(u32 *)(arg0 + 0x38);
+        s32 v = *D_800B3ACC;
+        s32 w = *(s32 *)(arg0 + 0x80);
+        f &= m;
+        *(u32 *)(arg0 + 0x38) = f;
+        if (w == v) {
             arg0[0x5A] = 0x80;
             arg0[0x59] = 0x80;
             arg0[0x58] = 0x80;
@@ -67,32 +73,33 @@ s32 func_80099C78(void) {
 
 void func_80099D34(void) {
     extern M2C_UNK D_8008ED68[];
-    extern u8 D_80086228[];
+    struct E { u8 pad[0x19]; u8 a, b, c; u8 pad2[0x4594 - 0x1C]; };
+    extern struct E D_80086228[];
     extern void func_8001ADA0(s32);
     extern void func_8001AD48(s32);
     extern void func_80012578(void);
-    u8 *p;
+    struct E *p;
     switch (M2C_GFIELD(D_8008ED68, u16, 0xE0)) {
     case 0:
         if (M2C_GFIELD(D_8008ED68, s32, 0xA68) == 0) {
             if (M2C_GFIELD(D_8008ED68, u16, 0xDC) == 3) {
                 p = D_80086228;
-                p[0x19] = 0xE0;
-                p[0x1A] = 0xE0;
-                p[0x1B] = 0xE0;
-                p += 0x4594;
-                p[0x19] = 0xE0;
-                p[0x1A] = 0xE0;
-                p[0x1B] = 0xE0;
+                p->a = 0xE0;
+                p->b = 0xE0;
+                p->c = 0xE0;
+                p++;
+                p->a = 0xE0;
+                p->b = 0xE0;
+                p->c = 0xE0;
             } else {
                 p = D_80086228;
-                p[0x19] = 0;
-                p[0x1A] = 0;
-                p[0x1B] = 0;
-                p += 0x4594;
-                p[0x19] = 0;
-                p[0x1A] = 0;
-                p[0x1B] = 0;
+                p->a = 0;
+                p->b = 0;
+                p->c = 0;
+                p++;
+                p->a = 0;
+                p->b = 0;
+                p->c = 0;
             }
             func_8001ADA0(8);
             func_80012578();
@@ -298,14 +305,18 @@ void func_8009AEB4(void) {
     extern void func_80012200(void *);
     extern void func_80099394();
     void *arg;
+    u8 *p = D_80085428;
     if (M2C_GFIELD(D_8008ED68, s32, 0xA68) == 0) {
         func_80013668();
         func_80011C40();
         *D_800B3AE0 = 0;
         *D_800B3B28 = 0;
         *D_800B3B24 = 0;
-        if (*D_800B3AE8 == 0) {
-            D_80085428[1] = 1;
+        if (*D_800B3AE8 != 0) {
+            M2C_GFIELD(D_8008ED68, s32, 0xA14) = 0;
+            arg = func_80099394;
+        } else {
+            p[1] = 1;
             D_80085428[0] = 1;
             M2C_GFIELD(D_8008ED68, s32, 0xA14) += 1;
             if (M2C_GFIELD(D_8008ED68, s32, 0xA14) & 1) {
@@ -313,15 +324,42 @@ void func_8009AEB4(void) {
             } else {
                 arg = D_8001FDFC;
             }
-        } else {
-            M2C_GFIELD(D_8008ED68, s32, 0xA14) = 0;
-            arg = func_80099394;
         }
         func_80012200(arg);
     }
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__80099B18", func_8009AF80);
+void func_8009AF80(void) {
+    extern u8 D_8008ED68[];
+    extern s32 D_800B3AE4[], D_800B3AE8[], D_800B3ADC[], D_800B3B28[], D_800B3B24[], D_800B3AE0[];
+    extern void func_8001ADCC(s32);
+    extern void func_8001ADA0(s32);
+    extern void func_80012544(void);
+    u8 *d = D_8008ED68;
+    switch (*D_800B3AE4) {
+    case 0:
+        func_8001ADCC(8);
+        *D_800B3AE4 = *D_800B3AE4 + 1;
+        break;
+    case 1:
+        if (M2C_GFIELD(d, s32, 0xA68) == 0) {
+            *D_800B3AE8 = 0;
+            *D_800B3ADC = 0;
+            *D_800B3B28 = 0;
+            *D_800B3B24 = 0;
+            func_80012544();
+            func_8001ADA0(8);
+            *D_800B3AE4 = *D_800B3AE4 + 1;
+        }
+        break;
+    case 2:
+        if (M2C_GFIELD(d, s32, 0xA68) == 0) {
+            *D_800B3AE4 = 0;
+            *D_800B3AE0 = 0;
+        }
+        break;
+    }
+}
 
 #include "common.h"
 
@@ -437,4 +475,19 @@ void func_8009B624(void *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__80099B18", func_8009B6D0);
+void func_8009B6D0(void *arg0) {
+    extern u8 D_8008ED68[];
+    s32 f;
+    s32 g;
+    f = (M2C_FIELD(arg0, s32 *, 0x38) | 1) & ~8;
+    M2C_FIELD(arg0, s32 *, 0x38) = f;
+    if (M2C_GFIELD(D_8008ED68, u16, 0xDC) == 5) {
+        g = f & ~1;
+        M2C_FIELD(arg0, s32 *, 0x38) = g;
+        if (M2C_GFIELD(D_8008ED68, u16, 0xE0) == 3) {
+            M2C_FIELD(arg0, s32 *, 0x38) = g | 8;
+        }
+    } else if (M2C_GFIELD(D_8008ED68, u16, 0xDC) == 6) {
+        M2C_FIELD(arg0, s32 *, 0x38) = f & ~1;
+    }
+}
