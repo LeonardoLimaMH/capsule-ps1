@@ -9,42 +9,34 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B3AE4);
 s32 func_800B3C4C(u8 *arg0, s32 arg1) {
     u32 f;
     u32 g;
-    if (arg1 == 0x4E) {
-        return 11;
-    }
-    f = *(u32 *)(arg0 + 0x10);
-    if ((f & 3) == 0) {
-        if (((f >> 21) & 7) == 0) {
-            return 1;
+    s32 r;
+    r = 11;
+    if (arg1 != 0x4E) {
+        f = *(u32 *)(arg0 + 0x10);
+        if ((f & 3) == 0) {
+            if (((f >> 21) & 7) == 0) {
+                r = 1;
+            } else {
+                r = 3;
+                if (((f >> 2) & 0x1F) != 0x12) {
+                    r = (((f >> 17) & 0xF) == 6) << 1;
+                }
+            }
+        } else {
+            g = (f >> 2) & 0x1F;
+            if (g == 0xC) {
+                r = 10;
+            } else {
+                r = 6;
+                if ((f & 0x1807C) != 0x8024 && (r = 9, g != 0x11) && (r = 6, g != 0xE)
+                    && (r = 7, g != 0x10) && (r = 8, g != 0xD)
+                    && (r = 5, ((f >> 21) & 7) != 0)) {
+                    r = 4;
+                }
+            }
         }
-        if (((f >> 2) & 0x1F) == 0x12) {
-            return 3;
-        }
-        return (((f >> 17) & 0xF) == 6) << 1;
     }
-    g = (f >> 2) & 0x1F;
-    if (g == 0xC) {
-        return 10;
-    }
-    if ((f & 0x1807C) == 0x8024) {
-        return 6;
-    }
-    if (g == 0x11) {
-        return 9;
-    }
-    if (g == 0xE) {
-        return 6;
-    }
-    if (g == 0x10) {
-        return 7;
-    }
-    if (g == 0xD) {
-        return 8;
-    }
-    if (((f >> 21) & 7) == 0) {
-        return 5;
-    }
-    return 4;
+    return r;
 }
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B3D24);
@@ -80,10 +72,10 @@ void func_800B4304(u8 *arg0) {
     }
     v = *(u32 *)(arg0 + 0x34) & 0x7F;
     if (v != 10) {
-        if (v == (s8)p[0xBF5]) {
-            *(u16 *)(arg0 + 0x66) = 2;
-        } else {
+        if (v != (s8)p[0xBF5]) {
             *(u16 *)(arg0 + 0x66) = 0;
+        } else {
+            *(u16 *)(arg0 + 0x66) = 2;
         }
     }
 }
@@ -189,6 +181,7 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B7630);
 
 s32 func_800B7734(s32 arg0, s32 arg1, u8 *arg2, u8 *arg3) {
     s32 d = arg2[0x15] - arg3[0x15];
+    s32 r = 0;
     if (d < 0) {
         d = -d;
     }
@@ -197,11 +190,12 @@ s32 func_800B7734(s32 arg0, s32 arg1, u8 *arg2, u8 *arg3) {
         if (d < 0) {
             d = -d;
         }
-        if (d < 2) {
-            return 1;
+        r = 1;
+        if (d >= 2) {
+            r = 0;
         }
     }
-    return 0;
+    return r;
 }
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B7790);
