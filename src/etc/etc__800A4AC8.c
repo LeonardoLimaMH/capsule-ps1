@@ -52,8 +52,8 @@ void func_800A7654(void) {
 void func_800A7680(u16 *arg0) {
     extern u8 D_8008ED68[];
     extern void func_8001EA24(s16, s16, s32, s32, s32, s32);
-    register s32 left asm("s4") = -0x90;
-    s32 y = 0;
+    s32 left = -0x90;
+    s16 y = 0;
     u8 *p = D_8008ED68;
     u16 *s = arg0;
     s32 x = 0;
@@ -65,8 +65,8 @@ void func_800A7680(u16 *arg0) {
             x = 0;
             y += 0x10;
         } else {
-            func_8001EA24(left + *(s32 *)(p+0x108)/2 + x,
-                         y + *(s32 *)(p+0x10C)/2, 0, c, 0, 3);
+            func_8001EA24(left + *(s32 *)(p + 0x108) / 2 + x,
+                         y + *(s32 *)(p + 0x10C) / 2, 0, c, 0, 3);
             x += 0xE;
         }
         s++;
@@ -77,7 +77,7 @@ void func_800A7754(u16 *arg0, u8 arg1) {
     extern u8 D_8008ED68[];
     extern void func_8001EA24(s16, s16, s32, s32, s32, s32);
     u8 sel = arg1;
-    register s32 left asm("s6") = -0x80;
+    s32 left = -0x80;
     s32 y = 0x40;
     u32 i = 0;
     u8 *p = D_8008ED68;
@@ -85,6 +85,7 @@ void func_800A7754(u16 *arg0, u8 arg1) {
     s32 x = i;
     s32 c;
     for (; i < 0x20; x += 0xE) {
+        s32 w;
         c = *s;
         if (i == sel) {
             x = 0;
@@ -92,8 +93,10 @@ void func_800A7754(u16 *arg0, u8 arg1) {
         }
         s++;
         i++;
-        func_8001EA24(left + *(s32 *)(p + 0x108) / 2 + x,
-                     y + *(s32 *)(p + 0x10C) / 2, 3, c, 0, 3);
+        w = *(s32 *)(p + 0x108) / 2;
+        w = left + w;
+        w += x;
+        func_8001EA24((s16)w, y + *(s32 *)(p + 0x10C) / 2, 3, c, 0, 3);
     }
 }
 
@@ -141,13 +144,17 @@ void func_800A7984(s32 idx) {
     register s32 c2 asm("t1") = 2;
     register s32 c3 asm("t0") = 3;
     register u8 *base asm("v1") = D_80091618;
-    register s32 offset asm("v0") = (s16)idx * 0x1A8;
+    register s32 index asm("a0") = (s16)idx;
+    register s32 offset asm("v0") = index * 0x1A8;
     register u8 *e asm("a2") = offset + base;
     register s16 *base_S asm("a3") = D_800B3C38;
     register s16 *p asm("a0") = base_S;
-    s32 v;
+    register s32 v asm("v1");
+    register s32 cmp2 asm("v0");
 
     for (; k < 4; k++, p++) {
+        register s32 val asm("v1");
+        register s32 cmp asm("v0");
         if (k == c1) goto case1;
         if (k < 2) {
             if (k == 0) goto case0;
@@ -168,13 +175,13 @@ case2:
 case3:
         base_S[3] = *(u16 *)(e + 0xD2);
 converted:;
-        v = *p;
-        if (v < 0x41) *p = 0;
-        else if (v < 0x6B) *p = c1;
-        else if (v < 0x8E || (v < 0x96 && k < 2)) *p = c2;
+        val = *p;
+        if ((cmp = val < 0x41)) *p = 0;
+        else if ((cmp = val < 0x6B)) *p = c1;
+        else if ((cmp = val < 0x8E) || ((cmp = val < 0x96) && k < 2)) *p = c2;
         else {
-            v = *p;
-            if (v < 0xBC || (v < 0xC8 && (u32)(k - 1) < 2)) *p = c3;
+            val = *p;
+            if ((cmp = val < 0xBC) || ((cmp = val < 0xC8) && (u32)(k - 1) < 2)) *p = c3;
             else *p = 4;
         }
     }
@@ -182,33 +189,41 @@ converted:;
         register u8 *b2 asm("a0") = D_80091618;
         u8 *e2 = b2 + (s16)saved * 0x1A8;
         s16 *S = D_800B3C38;
-        S[4] = (((*(s16 *)(e2 + 0xE6)) * 200) / (((*(u16 *)(e2 + 0x9E)) * 3) >> 1));
+        register s32 h asm("a0") = *(s16 *)(e2 + 0xE6);
+        register s32 num asm("v1") = h * 200;
+        register s32 den asm("v0");
+        h = *(u16 *)(e2 + 0x9E);
+        den = (h << 1) + h;
+        den >>= 1;
+        num = num / den;
+        S[4] = num;
         v = S[4];
-        if (v < 0x17) S[4] = 5;
-        else if (v < 0x2D) S[4] = 0;
-        else if (v < 0x43) S[4] = 1;
-        else if (v < 0x64) S[4] = 2;
-        else if (v < 0x85) S[4] = 3;
-        else if (v < 0x9C) S[4] = 4;
+        if ((cmp2 = v < 0x17)) S[4] = 5;
+        else if ((cmp2 = v < 0x2D)) S[4] = 0;
+        else if ((cmp2 = v < 0x43)) S[4] = 1;
+        else if ((cmp2 = v < 0x64)) S[4] = 2;
+        else if ((cmp2 = v < 0x85)) S[4] = 3;
+        else if ((cmp2 = v < 0x9C)) S[4] = 4;
         else S[4] = 6;
     }
     {
+        register s16 *S asm("a1") = D_800B3C38;
         register u8 *b3 asm("a0") = D_80091618;
         u8 *e3 = b3 + (s16)saved * 0x1A8;
-        s16 *S = D_800B3C38;
         S[5] = (*(u16 *)(e3 + 0xD4));
         if (S[5] < (*(s16 *)(e3 + 0xD6))) S[5] = (*(u16 *)(e3 + 0xD6));
         v = S[5];
-        if (v < 0x33) S[5] = 4;
-        else if (v < 0x65) S[5] = 3;
-        else if (v < 0x97) S[5] = 2;
-        else if (v < 0xC8) S[5] = 1;
+        if ((cmp2 = v < 0x33)) S[5] = 4;
+        else if ((cmp2 = v < 0x65)) S[5] = 3;
+        else if ((cmp2 = v < 0x97)) S[5] = 2;
+        else if ((cmp2 = v < 0xC8)) S[5] = 1;
         else S[5] = 0;
     }
     {
         register u8 *b4 asm("a0") = D_80091618;
-        u8 *e4 = b4 + (s16)saved * 0x1A8;
-        s16 *S = D_800B3C38;
+        register s32 i4 asm("v1") = (s16)saved;
+        u8 *e4 = b4 + i4 * 0x1A8;
+        register s16 *S asm("a1") = D_800B3C38;
         S[6] = *(s32 *)(e4 + 0xC4) / 28800 + 1;
         if ((*(s16 *)(e4 + 0x1A0)) == 1) S[7] = 5;
         else if ((*(s16 *)(e4 + 0x19E)) == 1) S[7] = 4;
