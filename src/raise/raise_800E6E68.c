@@ -3,9 +3,10 @@
 typedef struct {
     u8 _p00[0x92];
     u16 unk92;
-    u8 _p94[0x42];
-    s16 unkD6[8];
-    u8 _pE6[8];
+    u8 _p94[0x3E];
+    s16 unkD2[8];
+    s16 unkD6[0];
+    u8 _pE2[0xC];
     u16 unkEE;
     u8 _pF0[0xB4];
     u16 unk1A4;
