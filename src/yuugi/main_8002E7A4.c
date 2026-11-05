@@ -280,7 +280,28 @@ void func_80032A28(u8 *p) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4", func_80032B0C);
+void func_80032B0C(void *arg0) {
+    extern u16 D_8008EE58[];
+    extern s16 D_800922D0[];
+    extern u32 D_800922D8[];
+    if ((u32)(D_8008EE58[0] - 5) < 2U && D_800922D0[0] == 0) {
+        M2C_FIELD(arg0, s32 *, 0x38) &= ~1;
+        if (D_800922D0[2] == M2C_FIELD(arg0, s32 *, 0x80)) {
+            M2C_FIELD(arg0, u8 *, 0x5A) = 0x80;
+            M2C_FIELD(arg0, u8 *, 0x59) = 0x80;
+            M2C_FIELD(arg0, u8 *, 0x58) = 0x80;
+        } else {
+            M2C_FIELD(arg0, u8 *, 0x5A) = 0x30;
+            M2C_FIELD(arg0, u8 *, 0x59) = 0x30;
+            M2C_FIELD(arg0, u8 *, 0x58) = 0x30;
+        }
+    } else {
+        M2C_FIELD(arg0, s32 *, 0x38) |= 1;
+    }
+    if (D_800922D8[0] - 3 < 2U) {
+        func_800185F8(arg0);
+    }
+}
 
 void func_80032BB8(void *arg0) {
     extern u16 D_8008EE58[];
