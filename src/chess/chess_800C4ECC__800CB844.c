@@ -185,29 +185,21 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844", func_800D113C);
 
 u32 func_800D2340(u32 arg0) {
     extern u8 D_80085994[];
-    extern u8 D_80063940[];
-    u8 *p = D_80085994 + (((arg0 & 0xFF) >> 7) * 0x2E8 + (arg0 & 0x7F) * 0x7C);
+    extern D63940_t D_80063940[];
+    u8 *p = D_80085994 + ((arg0 & 0xFF) >> 7) * 0x2E8 + (arg0 & 0x7F) * 0x7C;
     s16 v;
     if (p[0] == 0x63) {
         v = *(s16 *)(*(u8 **)(p + 0x70) + 0x64);
-        if (v == -1) {
-            return 2;
-        }
-        if (v >= 0) {
-            return 1;
-        }
-        if (v == -2) {
-            return 0;
-        }
-        return 1;
+        return v == -1 ? 2 : v >= 0 ? 1 : v == -2 ? 0 : 1;
     }
-    return (*(u32 *)(D_80063940 + p[0] * 0x3C + 8) >> 12) & 3;
+    return (D_80063940[p[0]].unk8 >> 12) & 3;
 }
 
 s16 func_800D23F0(u32 arg0, u32 arg1, u32 arg2) {
-    extern u16 D_800859F4;
-    s32 v = ((arg1 & 0xFF) - (arg2 & 0xFF) + 0x28) / 2 + 10;
-    u32 m = (D_800859F4 & 0x7000) >> 12;
+    extern u16 D_800859F4[];
+    s32 v = ((s32)(arg1 & 0xFF) - (s32)(arg2 & 0xFF) + 0x28) / 2 + 10;
+    u32 m = (D_800859F4[0] & 0x7000) >> 12;
+    s32 r;
     arg0 &= 0xFF;
     if (m == 0) {
         if (arg0 == 0) {
@@ -222,13 +214,14 @@ s16 func_800D23F0(u32 arg0, u32 arg1, u32 arg2) {
             v = v - v / 5;
         }
     }
-    if (v <= 0) {
-        return 1;
+    r = 1;
+    if (v > 0) {
+        r = 0xFF;
+        if (v < 0x100) {
+            r = v;
+        }
     }
-    if (v < 0x100) {
-        return v;
-    }
-    return 0xFF;
+    return r;
 }
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844", func_800D24B4);
@@ -254,14 +247,18 @@ u8 func_800D2CE4(u32 arg0, u32 arg1) {
     extern u8 D_80085428[];
     u8 *a = D_80085428 + (((arg0 & 0x7F) - 1) * 0x7C + ((arg0 & 0xFF) >> 7) * 0x2E8);
     u8 *b = D_80085428 + (((arg1 & 0x7F) - 1) * 0x7C + ((arg1 & 0xFF) >> 7) * 0x2E8);
-    s32 dx = a[0x5FD] - b[0x5FD];
-    s32 dy;
+    s32 ax = a[0x5FD];
+    s32 bx = b[0x5FD];
+    s32 dx = ax - bx;
+    s32 ay, by, dy;
     if (dx < 0) {
-        dx = b[0x5FD] - a[0x5FD];
+        dx = bx - ax;
     }
-    dy = a[0x5FE] - b[0x5FE];
+    ay = a[0x5FE];
+    by = b[0x5FE];
+    dy = ay - by;
     if (dy < 0) {
-        dy = b[0x5FE] - a[0x5FE];
+        dy = by - ay;
     }
     return dx + dy;
 }
@@ -427,8 +424,9 @@ s32 func_800D8490(u8 arg0, u32 arg1) {
 s32 func_800D8508(u8 arg0, u32 arg1) {
     extern u8 D_80085428[];
     extern u32 func_800D7B80();
+    u8 *base = D_80085428;
     s32 i = ((arg1 & 0x7F) - 1) * 0x7C + ((arg1 & 0xFF) >> 7) * 0x2E8;
-    u8 *q = D_80085428 + i;
+    u8 *q = base + i;
     u32 r = func_800D7B80(arg0, q[0x5F8]);
     return (r & 0xFF) - q[0x5F8];
 }
