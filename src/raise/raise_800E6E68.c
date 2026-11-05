@@ -27,16 +27,7 @@ s32 func_800E733C(u16 arg0, s32 arg1) {
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E6E68", func_800E73D8);
 
 s32 func_800E7934(u16 arg0) {
-    typedef struct {
-        u8 _p00[0xEE];
-        u16 unkEE;
-        u8 _pF0[0x2B8];
-    } S;
-    extern S D_80091618[];
-    extern s32 func_800202A4(s32);
-    s16 v = D_80091618[arg0].unkEE;
-    v = v / 3 + 12;
-    return (func_800202A4(100) < v) * 2;
+    return 0;
 }
 
 #include "common.h"
@@ -93,7 +84,7 @@ s32 func_800E7A28(u16 arg0) {
 s32 func_800E7AA0(s32 id) {
     u8 *flags = D_80085428;
     u8 *entry;
-    s32 result;
+    s32 result = 0;
 
     id &= 0xFFFF;
     entry = flags + id;
@@ -107,8 +98,6 @@ s32 func_800E7AA0(s32 id) {
             entry[0xD7C] = 0;
             result = 0;
         }
-    } else {
-        result = 0;
     }
     return result;
 }
