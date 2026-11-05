@@ -321,7 +321,18 @@ void func_80012684(s16 value) {
     p->b = 0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012698);
+void func_80012698(void) {
+    extern u8 D_8008ED50[];
+    extern u16 D_800508D0[];
+    extern void func_80012264(void);
+    u8 *p = D_8008ED50;
+    *(void **)(p + 0x14) = (void *)func_80012264;
+    *(u16 *)(p + 0xE) = 0;
+    *(u16 *)D_8008ED50 = 1;
+    func_800127AC(D_800508D0[0]);
+    *(s16 *)(p + 0xC) = 0;
+    *(s32 *)(p + 4) = **(s32 **)(p + 8);
+}
 
 void func_800126F8(void)
 {
@@ -376,10 +387,40 @@ s32 func_80012778(void) {
     return v;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800127AC);
+extern s32 D_800508D4[];
+void func_800127AC(s32 arg0) {
+    register s32 mode asm("v1") = arg0;
+    s32 i = mode & 0xFFFF;
+    register s32 *table asm("v1");
+    u8 *p;
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800127F4);
+    if (i < 4) {
+        if (i != 0) {
+            p = D_8008ED50;
+            *(s16 *)(p + 2) = mode;
+            table = D_800508D4;
+            *(s32 *)(p + 8) = table[i];
+        }
+    }
+}
+
+void func_800127F4(void) {
+    extern u8 D_80086298[];
+    extern s32 D_8008ED64[];
+    u8 *p = D_8008ED68;
+    VSync(0);
+    func_80012144(D_8008ED64[0]);
+    ClearOTagR(D_80086298, 0x408);
+    ClearOTagR(D_80086298 + 0x4594, 0x408);
+    SetDispMask(1);
+    *(s32 *)(p + 0x130) = 0;
+    func_80012778();
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012868);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800129DC);
+void func_800129DC(void) {
+    u8 *p = D_8008ED68;
+    func_800131C0();
+    VSync(p[0x103]);
+}
