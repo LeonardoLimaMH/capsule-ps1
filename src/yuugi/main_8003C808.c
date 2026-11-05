@@ -131,7 +131,35 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CAD8);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CC00);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CCAC);
+void func_8003CCAC(s16 arg0, s32 arg1, s16 arg2) {
+    extern s32 D_80078C84[4];
+    extern s32 D_80078C8C[];
+    extern s16 D_80078D60;
+    extern SndVoice D_800944B8[16];
+    register s32 one asm("s1");
+    s32 k = (s16)arg0;
+
+    if (k != -1) {
+        SndVoice *base = D_800944B8;
+        SndVoice *p = &base[k];
+        s32 id = p->id;
+        one = 1;
+        D_80078C84[0] = one;
+        if (id != -1) {
+            p->unk284 = p->src;
+            D_80078D60 = arg2;
+            p->unk294 = 0x10000;
+            func_8003C29C(k);
+            if ((arg1 & 0xFF) == 0) {
+                p->state = 4;
+            } else {
+                D_80078C8C[0] = one;
+                p->state = one;
+            }
+        }
+        D_80078C84[0] = 0;
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CD70);
 
