@@ -387,7 +387,22 @@ s32 func_80012778(void) {
     return v;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800127AC);
+extern s32 D_800508D4[];
+void func_800127AC(s32 arg0) {
+    register s32 mode asm("v1") = arg0;
+    s32 i = mode & 0xFFFF;
+    register s32 *table asm("v1");
+    u8 *p;
+
+    if (i < 4) {
+        if (i != 0) {
+            p = D_8008ED50;
+            *(s16 *)(p + 2) = mode;
+            table = D_800508D4;
+            *(s32 *)(p + 8) = table[i];
+        }
+    }
+}
 
 void func_800127F4(void) {
     extern u8 D_80086298[];
