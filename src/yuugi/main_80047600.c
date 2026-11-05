@@ -1,6 +1,19 @@
 #include "common.h"
 #include "yuugi.h"
 
+extern s32 D_800733A0[];
+extern s32 D_800733B4[];
+extern s32 D_800733BC;
+extern s32 D_800733C0;
+extern s32 VSync();
+extern void func_800478D0(void);
+extern void DsFlush();
+extern void ER_clear();
+extern s32 DsDataCallback();
+extern void func_80044BC4();
+extern s32 DsCommand();
+extern u8 DsReady();
+
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80047600", func_80047600);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80047600", func_80047778);
