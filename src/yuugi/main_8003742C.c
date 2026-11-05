@@ -310,7 +310,23 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_800380C8);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80038294);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80038348);
+void func_80038348(OscObj *p) {
+    if (p->f26 != 0) {
+        if (p->f2e != 0) {
+            if (p->f28 + p->f2a < p->f2c) {
+                p->f28 = p->f28 + p->f2a;
+            } else {
+                p->f28 = p->f2c;
+            }
+        } else {
+            if (p->f2a - p->f28 < p->f2c) {
+                p->f28 = p->f28 - p->f2a;
+            } else {
+                p->f28 = -p->f2c;
+            }
+        }
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_800383C8);
 
