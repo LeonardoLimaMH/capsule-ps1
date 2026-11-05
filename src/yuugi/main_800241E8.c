@@ -15,7 +15,7 @@ typedef struct { s32 w[4]; } Blk10;
 typedef struct { u8 b[8]; } Blk8;
 typedef struct { s32 a, b, c; s32 pad; s16 d, e, f; } Z69E6C;
 typedef struct { s32 a, b, c; } Z6AF70;
-typedef struct { u8 pad[0xD8]; Blk10 a; Blk8 b; } S69AD4;
+typedef struct { u8 pad[0x44]; s32 unk44, unk48, unk4C; u8 pad50[0x88]; Blk10 a; Blk8 b; u8 padF0[0x88]; s32 unk178; } S69AD4;
 typedef struct { u8 pad[0x20]; Z69E6C z; Blk10 a; Blk8 b; } S69E4C;
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_800241E8);
@@ -23,27 +23,22 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_800241E8);
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_8002453C);
 
 void func_800246E4(void) {
-    extern s32 D_80069E6C[];
-    extern s16 D_80069E7C[];
-    extern s32 D_8006AF70[];
+    extern Z69E6C D_80069E6C[];
+    extern Z6AF70 D_8006AF70[];
     extern s16 D_80078C24, D_80078C26, D_80078C28, D_80078C2A, D_80078C2C;
     extern s16 D_80078C30[];
     extern s16 D_800EFA4A[], D_800EFA4C[], D_800EFA4E[];
-    s32 *p = D_80069E6C;
-    s16 *q;
-    s32 *r;
-    p[0] = 0;
-    p[1] = 0;
-    p[2] = 0;
-    q = (s16 *)(p + 4);
-    q[0] = 0;
-    q = q + 8;
-    q[1] = 0;
-    q[2] = 0;
-    r = D_8006AF70;
-    r[0] = 0;
-    r[1] = 0;
-    r[2] = 0;
+    Z69E6C *p = D_80069E6C;
+    Z6AF70 *r = D_8006AF70;
+    p->a = 0;
+    p->b = 0;
+    p->c = 0;
+    p->d = 0;
+    p->e = 0;
+    p->f = 0;
+    r->a = 0;
+    r->b = 0;
+    r->c = 0;
     D_80078C24 = 0;
     D_80078C26 = 0;
     D_80078C28 = 0;
@@ -52,7 +47,7 @@ void func_800246E4(void) {
     D_80078C30[0] = 0;
     D_800EFA4A[0] = 0;
     D_800EFA4C[0] = 0;
-    D_800EFA4E[0] = 0x3c;
+    D_800EFA4E[0] = 0x3C;
 }
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_8002475C);
@@ -82,7 +77,31 @@ void func_800248E8(void *arg0) {
     func_8002475C(arg0, 1);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_80024990);
+void func_80024990(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    extern S69AD4 D_80069AD4;
+    extern S69E4C D_80069E4C;
+    extern s32 D_8006AF30[];
+    extern s16 D_80078C28, D_80078C2A, D_80078C2C;
+    register S69AD4 *s asm("v0");
+    register S69E4C *d asm("a0");
+    register s32 *table asm("v1");
+    func_800254A0();
+    M2C_FIELD(arg0, s32 *, 0x54) = 0;
+    M2C_FIELD(arg0, s32 *, 0x50) |= 8;
+    {
+        register s32 *p asm("v1") = (s32 *)&D_80069AD4;
+        p[0x5E] = arg1 == 2 ? 4 : 5;
+    }
+    d = &D_80069E4C;
+    table = D_8006AF30;
+    D_80078C28 = arg1;
+    D_80078C2A = arg2;
+    D_80078C2C = arg3;
+    *(s32 *)((u8 *)d + 0x50) = table[arg3];
+    s = &D_80069AD4;
+    d->a = s->a;
+    d->b = s->b;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_80024A7C);
 
@@ -107,30 +126,74 @@ void func_80025000(void *arg0) {
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_80025050);
 
 void func_80025448(void) {
-    extern u8 D_80069AD4[];
-    extern u8 D_80069E4C[];
-    u8 *d = D_80069AD4;
-    u8 *s = D_80069E4C;
-    *(Blk10 *)(d + 0xD8) = *(Blk10 *)(s + 0x38);
-    *(Blk8 *)(d + 0xE8) = *(Blk8 *)(s + 0x48);
+    extern S69AD4 D_80069AD4;
+    extern S69E4C D_80069E4C;
+    register S69AD4 *d asm("v1") = &D_80069AD4;
+    register S69E4C *s asm("v0") = &D_80069E4C;
+    d->a = s->a;
+    d->b = s->b;
 }
 
-void func_800254A0(void) {
+u8 *func_800254A0(void) {
     extern S69AD4 D_80069AD4;
     extern S69E4C D_80069E4C;
     register S69E4C *d asm("v1") = &D_80069E4C;
     register S69AD4 *s asm("v0") = &D_80069AD4;
+    Z69E6C *z;
+    s16 *h;
     d->a = s->a;
     d->b = s->b;
-    d->z.a = 0;
-    d->z.b = 0;
-    d->z.c = 0;
-    d->z.d = 0;
-    d->z.e = 0;
-    d->z.f = 0;
+    z = &d->z;
+    z->a = 0;
+    z->b = 0;
+    z->c = 0;
+    h = &z->d;
+    h[0] = 0;
+    h[1] = 0;
+    h[2] = 0;
+    return (u8 *)z;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_80025514);
+void func_80025514(u8 *o) {
+    extern S69AD4 D_80069AD4;
+    extern S69E4C D_80069E4C;
+    extern u8 D_80085428[];
+    extern Z6AF70 D_8006AF70[];
+    register S69AD4 *p asm("a2") = &D_80069AD4;
+    register S69E4C *q asm("v0");
+    register Z6AF70 *r asm("v1");
+    s32 x, z;
+    if (*(s32 *)((u8 *)p + 0x178) == 5) {
+        if (D_80085428[0] != 1) {
+            q = &D_80069E4C;
+        } else if (*(s32 *)(o + 0x54) != 0) {
+            q = &D_80069E4C;
+        } else {
+            r = D_8006AF70;
+            if (r->a == 0 && r->c == 0) {
+                q = &D_80069E4C;
+                r->a = 0;
+                r->b = 0;
+                r->c = 0;
+            } else {
+                r = D_8006AF70;
+                x = r->a;
+                z = r->c;
+                r->a = 0;
+                r->b = 0;
+                r->c = 0;
+                {
+                    register S69AD4 *d asm("v1") = &D_80069AD4;
+                    *(s32 *)((u8 *)d + 0x44) += x;
+                    *(s32 *)((u8 *)d + 0x4C) += z;
+                }
+                return;
+            }
+        }
+        *(s32 *)((u8 *)p + 0x44) += q->z.a;
+        *(s32 *)((u8 *)p + 0x4C) += q->z.c;
+    }
+}
 
 void func_800255FC(s32 arg0) {
     extern u8 D_80069E4C[];
