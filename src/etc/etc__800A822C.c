@@ -97,7 +97,7 @@ void func_800A83CC(void *arg0) {
 void func_800A847C(u8 *arg0) {
     extern M2C_UNK D_8008ED68[];
     extern s32 D_800B3C1C[];
-    u8 c;
+    register u8 c asm("v0");
     if ((u32) (M2C_GFIELD(D_8008ED68, u16, 0xDC) - 6) < 2U) {
         *(s32 *)(arg0 + 0x38) &= ~1;
         if (*(s32 *)(arg0 + 0x84) == 0) {
@@ -107,9 +107,10 @@ void func_800A847C(u8 *arg0) {
             }
             *(s32 *)(arg0 + 0x18) = func_80019F30(0x6000C, v);
         }
-        c = 0x30;
-        if (*(s32 *)(arg0 + 0x84) == *D_800B3C1C) {
-            c = 0x80;
+        {
+            register s32 selected asm("v1") = *(s32 *)(arg0 + 0x84);
+            if (selected == *D_800B3C1C) c = 0x80;
+            else c = 0x30;
         }
         arg0[0x5A] = c;
         arg0[0x59] = c;
@@ -216,8 +217,9 @@ void func_800A8810(u8 *arg0) {
     *(u32 *)(arg0 + 0x38) = fl;
     a2 = *(s32 *)(arg0 + 0x84);
     if (*D_8008EE44 == 7 && D_80091618[*D_800B3C20].f10 != 0xFFFF) {
-        u8 c = *D_800B3C2A;
-        *(u32 *)(arg0 + 0x38) = fl & ~1;
+        register u32 mask asm("v0") = ~1;
+        register u8 c asm("v1") = *D_800B3C2A;
+        *(u32 *)(arg0 + 0x38) = fl & mask;
         if (c) {
             func_80015CD0(arg0 + 0x14, func_80019F30(0x7000C, D_800B3C38[a2] + 4), 0);
         }
