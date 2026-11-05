@@ -1,7 +1,15 @@
 #include "common.h"
 #include "yuugi.h"
 
-extern s32 D_800733A0;
+typedef struct {
+    s32 unk_0;
+    s32 unk_4;
+    s32 unk_8;
+    s32 unk_C;
+    s32 unk_10;
+    s32 unk_14;
+} Estado_800733A0;
+extern Estado_800733A0 D_800733A0;
 extern s32 D_800733B4[];
 extern s32 D_800733BC;
 extern s32 D_800733C0;
@@ -17,18 +25,17 @@ extern u8 DsReady();
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80047600", func_80047600);
 
 void func_80047778(void) {
-    register s32 *s asm("s0") = D_800733A0;
-    s32 a = s[-1];
-    s32 b = s[0];
-    s32 c = s[1];
-
-    s[0] = b + a * 4;
-    s[1] = c - 1;
-    if (s[5] + 0x4B0 < VSync(-1)) {
+    s32 *s = &D_800733A0;
+    s32 v;
+    s[0] += s[-1] * 4;
+    s[1]--;
+    v = VSync(-1);
+    if (s[5] + 0x4B0 < v) {
         s[1] = -1;
     }
-    if (s[1] != 0 && !(s[5] + 0x4B0 < VSync(-1))) {
-        return;
+    if (s[1] != 0) {
+        v = VSync(-1);
+        if (!(s[5] + 0x4B0 < v)) return;
     }
     func_800478D0();
     if (D_800733C0 != 0) {
