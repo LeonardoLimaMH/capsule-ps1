@@ -115,7 +115,19 @@ void func_800135A8(void) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013668);
+void func_80013668(void) {
+    extern s32 D_80078B7C;
+    u32 b = 0x90;
+    u32 a = 0xC000;
+    u8 *p;
+    func_80013C14((void *)D_80078B7C, 0xC588);
+    p = (u8 *)D_80078B7C;
+    *(s32 *)(p + 0xC578) = (s32)p;
+    *(s32 *)(p + 0xC57C) = b;
+    *(s32 *)(p + 0xC584) = 0;
+    *(s32 *)(p + 0xC580) = a / b;
+    func_8001611C(0);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_800136C8);
 
@@ -143,7 +155,19 @@ void func_80013C14(undefined4 *param_1,int param_2)
   return;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013C44);
+extern s32 D_8008FC10[];
+extern s32 D_80078B7C;
+void func_80013C44(void) {
+    extern s32 D_8008FC10[];
+    s32 i = 2;
+    s32 *p = D_8008FC10;
+    p += 18;
+    do {
+        *p = 0;
+        i--;
+        p -= 9;
+    } while (i >= 0);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013C6C);
 
