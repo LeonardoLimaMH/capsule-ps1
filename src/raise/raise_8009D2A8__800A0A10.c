@@ -116,14 +116,12 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A18EC);
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A1B18);
 
 void func_800A1D58(s32 arg0, s32 arg1) {
-    extern s32 *D_800EEB9C[];
-    s32 **p = (s32 **)D_800EEB9C;
-    s32 *a = (s32 *)((u8 *)p + 0x764);
+    extern Work_800A1D58 D_800EEB9C;
 
-    ((s32 **)a)[0][0x38 / 4] = (((s32 **)a)[0][0x38 / 4] & ~1) | (arg0 & 1);
-    ((s32 **)a)[1][0x38 / 4] = (((s32 **)a)[1][0x38 / 4] & ~1) | (arg0 & 1);
-    ((s32 **)a)[0][0x38 / 4] = (((s32 **)a)[0][0x38 / 4] & ~0x40) | ((arg1 & 1) << 6);
-    ((s32 **)a)[1][0x38 / 4] = (((s32 **)a)[1][0x38 / 4] & ~0x40) | ((arg1 & 1) << 6);
+    D_800EEB9C.a->flags = (D_800EEB9C.a->flags & ~1) | (arg0 & 1);
+    D_800EEB9C.b->flags = (D_800EEB9C.b->flags & ~1) | (arg0 & 1);
+    D_800EEB9C.a->flags = (D_800EEB9C.a->flags & ~0x40) | ((arg1 & 1) << 6);
+    D_800EEB9C.b->flags = (D_800EEB9C.b->flags & ~0x40) | ((arg1 & 1) << 6);
 }
 
 #include "common.h"
