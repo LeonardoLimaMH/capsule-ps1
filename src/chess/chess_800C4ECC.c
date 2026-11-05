@@ -125,7 +125,19 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800C7864);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800C7B30);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800C7D84);
+extern u16 D_8008EE54[];
+extern u8 D_8008ED68[];
+s32 func_800C7D84(s32 a0, s32 a1, u8 *a2) {
+    s32 r = 0;
+    if (D_8008EE54[0] == 0) {
+        if (a2[0x22] == a2[0x17]) {
+            r = 1;
+            a2[0x17] = r;
+            *(u32 *)(a2 + 0x18) = *(u32 *)(a2 + 0x18) | 0x40040 | 0x1000000;
+        }
+    }
+    return r;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800C7DD8);
 
