@@ -10,29 +10,38 @@ s32 func_800B3C4C(u8 *arg0, s32 arg1) {
     u32 f;
     u32 g;
     s32 r;
-    r = 11;
-    if (arg1 != 0x4E) {
+    if (arg1 == 0x4E) {
+        r = 11;
+    } else {
         f = *(u32 *)(arg0 + 0x10);
         if ((f & 3) == 0) {
-            if (((f >> 21) & 7) == 0) {
-                r = 1;
-            } else {
-                r = 3;
-                if (((f >> 2) & 0x1F) != 0x12) {
+            if (((f >> 21) & 7) != 0) {
+                if (((f >> 2) & 0x1F) == 0x12) {
+                    r = 3;
+                } else {
                     r = (((f >> 17) & 0xF) == 6) << 1;
                 }
+            } else {
+                r = 1;
             }
         } else {
             g = (f >> 2) & 0x1F;
             if (g == 0xC) {
                 r = 10;
-            } else {
+            } else if ((f & 0x1807C) == 0x8024) {
                 r = 6;
-                if ((f & 0x1807C) != 0x8024 && (r = 9, g != 0x11) && (r = 6, g != 0xE)
-                    && (r = 7, g != 0x10) && (r = 8, g != 0xD)
-                    && (r = 5, ((f >> 21) & 7) != 0)) {
-                    r = 4;
-                }
+            } else if (g == 0x11) {
+                r = 9;
+            } else if (g == 0xE) {
+                r = 6;
+            } else if (g == 0x10) {
+                r = 7;
+            } else if (g == 0xD) {
+                r = 8;
+            } else if (((f >> 21) & 7) != 0) {
+                r = 4;
+            } else {
+                r = 5;
             }
         }
     }
@@ -181,21 +190,15 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B7630);
 
 s32 func_800B7734(s32 arg0, s32 arg1, u8 *arg2, u8 *arg3) {
     s32 d = arg2[0x15] - arg3[0x15];
-    s32 r = 0;
-    if (d < 0) {
-        d = -d;
-    }
+    d = d < 0 ? -d : d;
     if (d < 2) {
         d = arg2[0x16] - arg3[0x16];
-        if (d < 0) {
-            d = -d;
-        }
-        r = 1;
-        if (d >= 2) {
-            r = 0;
+        d = d < 0 ? -d : d;
+        if (d < 2) {
+            return 1;
         }
     }
-    return r;
+    return 0;
 }
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B7790);
