@@ -5,9 +5,14 @@ void func_8009D324(void) {
     (*D_8006AFFE) = 0;
 }
 
-#include "common.h"
-
 #include "ghidra.h"
+
+void func_8009D460(void);
+void func_8009D568(void);
+void func_8009D570(void);
+void func_8009D5E8(void);
+void func_8009D678(void);
+
 void func_8009D330(int param_1)
 
 {
