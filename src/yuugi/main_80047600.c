@@ -39,12 +39,12 @@ void func_80047778(void) {
 s32 func_8004784C(s32 arg0) {
     s32 r;
     s32 v;
-    register s32 *p asm("a0");
+    s32 *p;
 
     v = VSync(-1);
     p = D_800733B4;
     if (p[0] + 0x4B0 < v) {
-        func_800478D0();
+        func_800478D0(p);
         r = -1;
     } else {
         r = p[-4];
@@ -62,7 +62,6 @@ s32 func_800478BC(s32 arg0) {
     return temp_v0;
 }
 
-extern s32 D_800733A0[];
 extern s32 D_800733B4[];
 extern s32 D_800733BC;
 extern s32 D_800733C0;
@@ -77,7 +76,6 @@ extern u8 DsReady();
 
 void func_800478D0(void) {
     s32 *d = &D_800733BC;
-
     if (*d == 1) {
         DsFlush();
         ER_clear();
@@ -86,6 +84,6 @@ void func_800478D0(void) {
         }
         func_80044BC4(1, 0);
         DsCommand(9, 0, 0, -1);
-        D_800733BC = 0;
     }
+    D_800733BC = 0;
 }
