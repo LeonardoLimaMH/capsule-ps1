@@ -239,7 +239,34 @@ void func_800A88DC(u8 *arg0) {
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A8988);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A8B74);
+void func_800A8B74(u8 *arg0) {
+    extern u16 D_8008EE44[];
+    extern s32 D_800B3C1C[];
+    u32 fl = *(u32 *)(arg0 + 0x38) | 1;
+    s32 mode = *(s32 *)(arg0 + 0x84);
+    s32 n = *D_800B3C1C + 1;
+    s32 digit;
+    *(u32 *)(arg0 + 0x38) = fl;
+    if (*D_8008EE44 == 9) {
+        switch (mode) {
+        case 0:
+            if (n >= 100) *(u32 *)(arg0 + 0x38) = fl & ~1;
+            break;
+        case 1:
+            if (n >= 10) {
+                *(u32 *)(arg0 + 0x38) = fl & ~1;
+                if (n < 100) digit = n / 10 + 0x72;
+                else digit = 0x72;
+                *(s32 *)(arg0 + 0x18) = func_80019F30(0x6000C, digit);
+            }
+            break;
+        case 2:
+            *(u32 *)(arg0 + 0x38) = fl & ~1;
+            *(s32 *)(arg0 + 0x18) = func_80019F30(0x6000C, n % 10 + 0x72);
+            break;
+        }
+    }
+}
 
 #include "ghidra.h"
 void func_800A8CAC(void)
