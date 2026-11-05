@@ -70,7 +70,18 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800E0A90);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800E0C08);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800E0D84);
+s32 func_800E0D84(void) {
+    s32 i;
+    s32 k;
+
+    for (i = 1; i >= 0; i--) {
+        k = func_800B1260(i) & 0xFFFF;
+        if (k != 0xFFFF && func_800E1624(k) == 1) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 #include "common.h"
 
@@ -125,7 +136,20 @@ s32 func_800E0FB8(s32 idx)
   return 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800E102C);
+extern u16 D_8006AFCC[];
+extern s32 func_800E1624(s32);
+s32 func_800E102C(void) {
+    s32 i;
+    u16 *p = D_8006AFCC;
+
+    for (i = 0; i < 11; i++) {
+        if (p[0x18] == 1) {
+            return 1;
+        }
+        p++;
+    }
+    return 0;
+}
 
 void func_800E1068(s32 arg0) {
     s32 var_s0;
