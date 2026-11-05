@@ -43,7 +43,24 @@ void func_800DD4A8(void *arg0) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800DD4D8);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800DD824);
+void func_800DD824(u8 *arg0, s32 arg1, s32 arg2, s16 arg3, s16 arg4) {
+    extern u8 D_80018600[];
+    extern u8 D_80063940[];
+    extern int func_800DD4D8();
+    u8 *v;
+    s32 t;
+
+    v = func_80015B3C(&func_800DD4D8, D_80018600, 1);
+    *(u8 **)(v + 0x14) = arg0;
+    *(s16 *)(v + 0x1A) = arg3;
+    *(s16 *)(v + 0x18) = arg4;
+    func_800FE188(arg0, v + 0x2C);
+    func_800FE21C(arg1, arg2, v + 0x34);
+    t = -(D_80063940[arg0[0] * 0x3C + 0x13] & 0x3F) / 2;
+    *(s8 *)(*(u8 **)(arg0 + 0x74) + 0x57) = t;
+    *(s8 *)(*(u8 **)(arg0 + 0x70) + 0x57) = t;
+    *(s32 *)(arg0 + 0x18) |= 0x90000000;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800DD920);
 
@@ -58,7 +75,11 @@ void func_800DDA78(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = (s32) (M2C_FIELD(arg0, s32 *, 0x18) | 0x80000000);
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800DDAD4);
+s32 func_800DDAD4(u8 *arg0, s32 arg1) {
+    extern u32 D_80063940[];
+    u32 *p = &D_80063940[arg0[0] * 15];
+    return ((p[4] >> 24) & 0x3F) * ((((p[5] & 3) << 2) | (p[4] >> 30)) * 8 + 0x100) / arg1;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800DDB38);
 
@@ -108,12 +129,12 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800DDD34);
 void func_800DDE7C(u8 *arg0) {
     extern u8 D_8008ED68[];
     u8 *ed = D_8008ED68;
-    s32 v;
+    s32 v = *(s32 *)(arg0 + 0x3C);
 
-    if (ed[0x103] < 2U) {
-        v = *(s32 *)(arg0 + 0x3C) + 1;
+    if (ed[0x103] >= 2U) {
+        v += ed[0x103];
     } else {
-        v = *(s32 *)(arg0 + 0x3C) + ed[0x103];
+        v += 1;
     }
     *(s32 *)(arg0 + 0x3C) = v;
     if (*(u32 *)(arg0 + 0x84) < v) {
