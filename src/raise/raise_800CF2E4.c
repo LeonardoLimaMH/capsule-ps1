@@ -8,17 +8,19 @@ void func_800CF2E4(void) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CF2E4", func_800CF304);
 
+extern s32 func_800B1260(void);
+extern s16 func_800CFF9C(s32, s32, s32);
 s32 func_800CF418(s32 arg0, s32 arg1) {
+    register s32 b asm("s1") = arg1;
+    u8 *rec = D_80100F38 + (func_800B1260() & 0xFFFF) * 0x79C;
+    s32 val = 0xFF;
     s32 i;
-    u8 *rec;
-    s16 *arr;
-    rec = D_80100F38 + (func_800B1260() & 0xFFFF) * 0x79C;
-    arr = (s16 *)(rec + 0x346);
+
     for (i = 7; i >= 0; i--) {
-        arr[i] = 0xFF;
+        ((s16 *)(rec + 0x346))[i] = val;
     }
-    arr[arg1] = func_800CFF9C(arg0, arg1, 0);
-    return arg1;
+    ((s16 *)(rec + 0x346))[b] = func_800CFF9C(arg0, b, 0);
+    return b;
 }
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CF2E4", func_800CF4BC);
@@ -31,14 +33,13 @@ s32 func_800D06D4(s32 a, s32 b) {
     if (a == b) {
         return 0;
     }
+    d = b - a;
     if (a < b) {
-        d = b - a;
         if (d >= 5) {
             t = a + 8;
             d = b - t;
         }
     } else {
-        d = b - a;
         if (a - b >= 5) {
             d = 8 - a;
             d += b;
