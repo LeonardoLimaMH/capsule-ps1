@@ -253,7 +253,47 @@ void func_8009AB30(void) {
     func_80012578();
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__80099B18", func_8009ABE4);
+void func_8009ABE4(void) {
+    extern u16 D_8008EE48[];
+    extern s32 D_800B3ADC[];
+    extern s32 D_800B3AE8[];
+    extern s32 D_800B3B28[];
+    extern void func_8009C324(s32, s32, s32);
+    extern void func_80034AB0(s32);
+    extern void func_80012578(void);
+    extern int func_80012508();
+
+    func_8009C324(0, -0x18, 5);
+    switch (*D_8008EE48) {
+    case 0:
+        *D_800B3ADC = *D_800B3ADC - 1;
+        if (*D_800B3ADC > 0) return;
+        func_80034AB0(0x75);
+        *D_800B3ADC = 0x1E;
+        func_80012578();
+        break;
+    case 1:
+        *D_800B3ADC = *D_800B3ADC - 1;
+        if (*D_800B3ADC > 0) return;
+        *D_800B3ADC = 0xA;
+        func_80012578();
+        break;
+    case 2:
+        *D_800B3ADC = *D_800B3ADC - 1;
+        if (*D_800B3ADC > 0) return;
+        *D_800B3ADC = 0x30;
+        func_80012578();
+        break;
+    case 3:
+        *D_800B3ADC = *D_800B3ADC - 1;
+        if (*D_800B3ADC > 0) return;
+        *D_800B3AE8 = 0;
+        *D_800B3ADC = 0;
+        *D_800B3B28 = 0;
+        func_80012508();
+        return;
+    }
+}
 
 #include "common.h"
 
