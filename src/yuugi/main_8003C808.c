@@ -165,7 +165,16 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CD70);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CE14);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CE88);
+void func_8003CE88(s16 arg0, u16 arg1, u16 arg2) {
+    extern SndVoice D_800944B8[];
+    SndVoice *base = D_800944B8;
+    SndVoice *p = &base[arg0];
+    p->volL = arg1 & 0x7F;
+    p->volR = arg2 & 0x7F;
+    if (p->state != 2) {
+        func_80037E40();
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CEF8);
 
