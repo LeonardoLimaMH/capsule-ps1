@@ -38,7 +38,24 @@ s32 func_8009E068(void)
   return func_800E1B30();
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009E12C);
+extern s16 D_800ED880[];
+extern void func_800E2AA0(s32, s32, s32);
+s32 func_8009E12C(void)
+{
+  if (*D_800ED880 > 0)
+  {
+    if (*D_800ED880 == 8)
+    {
+      u8 (*new_var)[];
+      new_var = &D_80091618;
+      func_800E2AA0(*((u16 *) (((*new_var) + (*D_8006AF80) * 0x1A8) + 0x10)), 1, 0);
+    }
+    *D_800ED880 = *D_800ED880 - 1;
+    return 0;
+  }
+  *D_800ED880 = 0x10;
+  return 1;
+}
 
 #include "common.h"
 
@@ -65,7 +82,17 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009E23C);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009E3A8);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009E508);
+void func_8009E508(s32 a)
+{
+  extern s16 D_800EEA78[];
+  extern s32 D_8008ED68[];
+  s32 *d = D_8008ED68;
+  s32 v = d[D_800EEA78[a] + 0x29];
+  if (v != 7 && (v & 7) == 7)
+  {
+    func_8009E3A8(a);
+  }
+}
 
 void func_8009E568(void) {
     extern s16 D_800ED88C[];
@@ -86,7 +113,23 @@ void func_8009ED34(void) {
     func_8009ED54();
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009ED54);
+s32 func_8009ED54(void)
+{
+  typedef struct {
+    u8 pad[0x84];
+    s32 f84;
+    s32 f88;
+  } T_ED54;
+  T_ED54 *d = (T_ED54 *) D_800EFF58;
+  if (d->f88 > 0)
+  {
+    d->f88 = d->f88 - 1;
+    func_800BBC40(d->f84);
+    return 0;
+  }
+  d->f84 = 0;
+  return -1;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009EDA0);
 
@@ -153,7 +196,26 @@ void func_800A0214(void) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_800A021C);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_800A0424);
+void func_800A0424(void)
+{
+    struct Ent {
+        u8 _0[0x12];
+        u16 f12;
+        u8 _14[0x1A8 - 0x14];
+    };
+    extern s32 D_800EE5F0[];
+    extern u8 D_800EFF58[];
+    extern u8 D_80091618[];
+    extern u16 D_8006AF80[];
+
+    s32 *f = D_800EE5F0;
+    u8 *w = D_800EFF58;
+    struct Ent *arr = (struct Ent *)D_80091618;
+    s32 t = f[3] + *(s32 *)(w + 0x318) + 3;
+    u16 val = arr[*D_8006AF80].f12;
+    s32 r = func_80019F30(D_800EE5F0[0] | 0x60000, t - val);
+    *(s32 *)(*(s32 *)(w + 0x314) + 0x18) = r;
+}
 
 #include "common.h"
 
