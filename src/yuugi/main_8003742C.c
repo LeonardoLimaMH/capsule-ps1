@@ -318,7 +318,7 @@ void func_80038294(OscObj *p) {
                 p->f1e = p->f20;
             }
         } else {
-            if (-p->f20 < p->f1e - p->f1c) {
+            if (p->f1e - p->f1c > -p->f20) {
                 p->f1e = p->f1e - p->f1c;
             } else {
                 p->f14 = 1;
