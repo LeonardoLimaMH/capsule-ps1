@@ -389,7 +389,18 @@ s32 func_80012778(void) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800127AC);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800127F4);
+void func_800127F4(void) {
+    extern u8 D_80086298[];
+    extern s32 D_8008ED64[];
+    u8 *p = D_8008ED68;
+    VSync(0);
+    func_80012144(D_8008ED64[0]);
+    ClearOTagR(D_80086298, 0x408);
+    ClearOTagR(D_80086298 + 0x4594, 0x408);
+    SetDispMask(1);
+    *(s32 *)(p + 0x130) = 0;
+    func_80012778();
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012868);
 
