@@ -141,9 +141,10 @@ s32 func_800B3D44(s32 arg0, s32 arg1) {
     extern void func_800DC718(), func_800DC8C8(), func_8003422C(), func_800DC640();
     s32 t = D_8006AF84[0];
     u8 *s = D_8006AFCC;
-    if (*(u16 *)(s + 0x34) != 1) {
-        if (*(u16 *)(s + 0x34) < 2) {
-            if (*(u16 *)(s + 0x34) != 0) {
+    s32 st = *(u16 *)(s + 0x34);
+    if (st != 1) {
+        if (st < 2) {
+            if (st != 0) {
                 return 0;
             }
             if (*(u16 *)(s + 0x32) != 1) {
