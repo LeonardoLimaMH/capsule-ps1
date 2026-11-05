@@ -408,7 +408,7 @@ void func_800B8DA0(void *arg0) {
 void func_800B8EC0(void *arg0) {
     extern u32 D_8008ED84[];
     extern u8 D_80086012[];
-    if (((D_8008ED84[0] / 20) & 1) == 0) {
+    if ((D_8008ED84[0] / 20) & 1) {
         M2C_FIELD(arg0, s32 *, 0x38) = M2C_FIELD(arg0, s32 *, 0x38) & ~1;
     } else {
         M2C_FIELD(arg0, s32 *, 0x38) = M2C_FIELD(arg0, s32 *, 0x38) | 1;
