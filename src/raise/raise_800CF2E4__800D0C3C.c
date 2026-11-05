@@ -29,4 +29,15 @@ s32 func_800D0CFC(s32 arg0) {
     return arg0 == (*D_80103D38);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CF2E4__800D0C3C", func_800D0D14);
+s32 func_800D0D14(void) {
+    s16 *p = D_80103D38;
+    register s32 t asm("v0") = p[3];
+    register s32 r asm("v0");
+    if (t != 0) {
+        r = 0;
+    } else {
+        p[0xC4] = 1;
+        r = 1;
+    }
+    return r;
+}
