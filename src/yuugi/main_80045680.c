@@ -2,7 +2,7 @@
 #include "yuugi.h"
 
 extern u8 D_80072F3C[];
-extern void (*volatile D_80094C10[1])();
+extern void (*volatile D_80094C10[])();
 void func_80045680(s32 a, s32 b) {
     a &= 0xFF;
     func_80045714(a);
@@ -10,7 +10,7 @@ void func_80045680(s32 a, s32 b) {
         *(s32 *)(D_80072F3C + 8) = 2;
         *(s32 *)(D_80072F3C + 0xC) = 0xC;
     }
-    if (*(volatile s32 *)D_80094C10 != 0 && *(s32 *)(D_80072F3C - 0x18) != 0) {
-        ((void (*)())*(volatile s32 *)D_80094C10)(a, b);
+    if (D_80094C10[0] != 0 && *(s32 *)(D_80072F3C - 0x18) != 0) {
+        D_80094C10[0](a, b);
     }
 }
