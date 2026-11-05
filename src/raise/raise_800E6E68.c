@@ -3,25 +3,7 @@
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E6E68", func_800E6E68);
 
 s32 func_800E733C(u16 arg0, s32 arg1) {
-    typedef struct {
-        u8 _p00[0x92];
-        u16 unk92;
-        u8 _p94[0x42];
-        s16 unkD6[8];
-        u8 _pE6[0x1BE];
-    } S;
-    extern S D_80091618[];
-    extern s16 D_800F21C0[];
-    s32 ret = 0;
-    s32 i;
-    s16 *p = &D_80091618[arg0].unkD6[1];
-    for (i = 0; i < 8; i++, p++) {
-        if (*p < ((s16 *)((u8 *)D_800F21C0 + D_80091618[arg0].unk92 * 0xA0 + arg1 * 16))[i]) {
-            ret = 1;
-            break;
-        }
-    }
-    return ret;
+    return 0;
 }
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E6E68", func_800E73D8);
