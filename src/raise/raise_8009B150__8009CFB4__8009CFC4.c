@@ -54,6 +54,19 @@ void func_8009CFC4(void *arg0, u32 arg2) {
     }
 }
 
+extern u8 *func_80015B3C();
+extern void func_80015EF8();
+extern s32 func_80019F30();
+extern void func_80015CD0();
+extern s32 func_80020304();
+extern s32 ratan2();
+extern void func_80012A20();
+extern void func_800161C4();
+extern u8 D_8008ED68[];
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009B150__8009CFB4__8009CFC4", func_8009D11C);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009B150__8009CFB4__8009CFC4", func_8009D21C);
+void func_8009D21C(void) {
+    u8 *base = D_8008ED68;
+    func_80012A20(func_80019F30(0x2000E, 0x2C), 1, 0, 0);
+    *(u8 **)(base + 0x9B8) = func_8009D11C();
+}
