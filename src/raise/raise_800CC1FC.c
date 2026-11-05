@@ -30,7 +30,16 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CC46C);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CC5D4);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CC808);
+void func_800CC808(u8 *obj) {
+    s16 v;
+    func_800CC5D4();
+    v = *(s16 *)(obj + 0x4e);
+    if (v > 0) {
+        *(s16 *)(obj + 0x52) = 0x16C000 / v;
+        *(s16 *)(obj + 0x50) = *(s16 *)(obj + 0x52) & 0xFFF0;
+        *(s16 *)(obj + 0x52) = *(s16 *)(obj + 0x52) & 0xFFF0;
+    }
+}
 
 #include "common.h"
 
