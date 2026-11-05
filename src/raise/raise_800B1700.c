@@ -407,4 +407,33 @@ s32 func_800B44B8(s32 arg0) {
     return 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B4588);
+s32 func_800B4588(s32 arg0) {
+    extern s32 D_8006AF84[];
+    extern u8 D_8006AFCC[];
+    register s32 id asm("s1") = arg0;
+    register s32 t asm("a0") = D_8006AF84[0];
+    u8 *s = D_8006AFCC;
+    register s32 r asm("v0");
+    register u32 hour asm("v1");
+    if (*(u16 *)(s + 0x42) != 0) return 0;
+    if (*(u16 *)(s + 0x30) != 0) return 0;
+    {
+        r = t % 28800;
+        hour = r / 1200 - 18;
+        if (hour >= 5) goto done;
+        if (t != (t / 1200) * 1200) {
+            if (t == (t / 600) * 600) {
+                if (func_800202A4(0x12) == 9) {
+                    *(u16 *)(s + 0x42) = 2;
+                    func_800DC820((u16)id, 0x19);
+                    return 1;
+                }
+                goto done;
+            }
+            return 0;
+        }
+done:
+        return 0;
+    }
+    return 0;
+}
