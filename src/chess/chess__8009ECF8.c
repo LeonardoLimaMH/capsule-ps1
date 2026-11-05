@@ -163,10 +163,10 @@ void func_800A03C4(s32 arg0, s32 arg1) {
 s32 func_800A03F0(u32 arg0, s32 arg1, s32 arg2) {
     extern s32 D_80065310[];
     s32 off;
-    if (arg0 < 8U) {
-        off = arg2 * 0x980 - 0x5580;
-    } else {
+    if (arg0 >= 8U) {
         off = 0;
+    } else {
+        off = arg2 * 0x980 - 0x5580;
     }
     return *(s32 *) (arg1 * 4 + (D_80065310[arg0] + off)) + off;
 }
