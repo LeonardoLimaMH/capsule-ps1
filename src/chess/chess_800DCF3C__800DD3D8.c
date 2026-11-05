@@ -21,6 +21,12 @@ typedef struct {
     u8 pad18[0x24];
 } S_800DD_Tab;
 
+typedef struct {
+    u8 pad0[0x13];
+    u8 f13;
+    u8 pad14[0x28];
+} S_800DD_Tab8;
+
 void func_800DD3D8(s16 arg0, s16 arg1) {
     extern u8 D_80018600[];
     extern int func_800DD2EC();
@@ -256,13 +262,12 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800E0E2C);
 
 void func_800E1180(u8 *arg0) {
     s32 n = *(s32 *)(arg0 + 0x18) + 1;
-    s32 t = n * 127;
     s32 v;
 
     *(s32 *)(arg0 + 0x18) = n;
     *(u16 *)(arg0 + 0x3A) += 14;
     *(u16 *)(arg0 + 0x3C) += 14;
-    v = 0x7F - t / 30;
+    v = 0x7F - 127 * n / 30;
     arg0[0x32] = v;
     arg0[0x31] = v;
     arg0[0x30] = v;
