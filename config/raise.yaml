@@ -45,6 +45,8 @@ segments:
       - [0x3F0, rodata]
       - [0x9B4, .rodata, raise_800B9C3C__800BCF98]
       - [0x9CC, rodata]
+      - [0x1450, .rodata, raise_800DC640]
+      - [0x149C, rodata]
       - [0x16AC, c, raise]
       - [0x17B4, c, raise_80098FB4]
       - [0x17EC, c, raise_80098FEC]

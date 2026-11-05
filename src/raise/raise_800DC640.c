@@ -202,4 +202,131 @@ void func_800DC9C4(void) {
     func_8009D27C();
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DC640", func_800DC9E4);
+typedef struct {
+    u8 pad0[0x8A];
+    u16 unk8A;
+    u8 pad8C[0x100];
+    s32 f_18C;
+    u8 pad190[0x18];
+} S_80091618;
+
+void func_800DC9E4(s32 arg0, s32 arg1) {
+    extern s32 D_8006AF84[];
+    extern u8 D_8006AFCC[];
+    extern S_80091618 D_80091618[];
+    extern u8 D_80105990[];
+    register s32 var_a2 asm("a2");
+    s32 temp_a0;
+    s32 temp_a1;
+
+    var_a2 = D_8006AF84[0];
+    temp_a1 = arg1 & 0xFFFF;
+    switch (temp_a1) {
+    case 15: {
+        register u8 *p asm("v0") = D_8006AFCC;
+        *(s16 *)(p + 0x30) = 1;
+        *(s32 *)(p + 0x48) = var_a2;
+        *(s16 *)(D_80105990 + 0) = 0;
+        func_800E4724();
+        func_80034AB0(1);
+        var_a2 = 4;
+        break;
+    }
+    case 33: {
+        register u8 *p asm("v0") = D_8006AFCC;
+        *(s16 *)(p + 0x30) = 1;
+        *(s32 *)(p + 0x48) = var_a2;
+        *(s16 *)(D_80105990 + 0) = 1;
+        func_800E4724();
+        var_a2 = 4;
+        break;
+    }
+    case 17: {
+        register u8 *p asm("v0") = D_8006AFCC;
+        *(s16 *)(p + 0x32) = 1;
+        *(s32 *)(p + 0x4C) = var_a2;
+        func_8009D2A8();
+        var_a2 = 5;
+        break;
+    }
+    case 18: {
+        register u8 *p asm("v1") = D_8006AFCC;
+        u8 *q;
+        *(s16 *)(p + 0x30) = 2;
+        q = D_80105990;
+        *(s16 *)(q + 0xA) = 0;
+        *(s16 *)(p + 0x34) = 1;
+        *(s32 *)(p + 0x50) = var_a2;
+        *(s16 *)D_80105990 = 2;
+        func_800E4724();
+        func_80034AB0(0x1F);
+        var_a2 = 6;
+        break;
+    }
+    case 19: {
+        s32 cmd = 0x8001;
+        u8 *p = D_8006AFCC;
+        *(s16 *)(p + 0x36) = 1;
+        *(s32 *)(p + 0x54) = var_a2;
+        func_80034AB0(cmd);
+        func_80024990(D_80091618[arg0 & 0xFFFF].f_18C, 2, 4, 0xF);
+        var_a2 = 7;
+        break;
+    }
+    case 20: {
+        s32 cmd = 0x8002;
+        u8 *p = D_8006AFCC;
+        *(s16 *)(p + 0x38) = 1;
+        *(s32 *)(p + 0x58) = var_a2;
+        func_80034AB0(cmd);
+        func_80024990(D_80091618[arg0 & 0xFFFF].f_18C, 2, 3, 0xE);
+        var_a2 = 8;
+        break;
+    }
+    case 21: {
+        register u8 *p asm("v0") = D_8006AFCC;
+        *(s16 *)(p + 0x3A) = 1;
+        *(s32 *)(p + 0x5C) = var_a2;
+        func_8009D21C();
+        var_a2 = 9;
+        break;
+    }
+    case 22: {
+        register u8 *p asm("v0") = D_8006AFCC;
+        *(s16 *)(p + 0x3C) = 1;
+        *(s32 *)(p + 0x60) = var_a2;
+        func_8009CDE4();
+        var_a2 = 0xA;
+        break;
+    }
+    case 23: {
+        register u8 *p asm("v0") = D_8006AFCC;
+        *(s16 *)(p + 0x3E) = 1;
+        *(s32 *)(p + 0x64) = var_a2;
+        func_8009C4D4();
+        var_a2 = 0xB;
+        break;
+    }
+    case 24: {
+        register u8 *p asm("v0") = D_8006AFCC;
+        *(s16 *)(p + 0x40) = 1;
+        *(s32 *)(p + 0x68) = var_a2;
+        func_8009CCEC();
+        var_a2 = 0xC;
+        break;
+    }
+    case 25: {
+        register u8 *p asm("v0") = D_8006AFCC;
+        *(s16 *)(p + 0x42) = 1;
+        *(s32 *)(p + 0x6C) = var_a2;
+        func_8009CA78();
+        var_a2 = 0xD;
+        break;
+    }
+    default:
+        return;
+    }
+
+    temp_a0 = arg0 & 0xFFFF;
+    func_800B0740(temp_a0, D_80091618[temp_a0].unk8A, var_a2, 1);
+}
