@@ -72,11 +72,12 @@ u8 func_8003C894(u8 arg0) {
     extern u32 D_80078C78[];
     if (arg0 < 0x19) {
         if (arg0 == 0) {
-            return 0xFF;
+            goto err;
         }
         D_80078C78[0] = arg0;
         return arg0;
     }
+err:
     return 0xFF;
 }
 
@@ -197,29 +198,33 @@ s32 func_8003CC00(s32 *arg0, s16 arg1) {
     return -1;
 }
 
-void func_8003CCAC(s16 arg0, u8 arg1, s16 arg2) {
-    extern s32 D_80078C84;
-    extern s32 D_80078C8C;
+void func_8003CCAC(s16 arg0, s32 arg1, s16 arg2) {
+    extern s32 D_80078C84[4];
+    extern s32 D_80078C8C[];
     extern s16 D_80078D60;
-    extern SndVoice D_800944B8[];
-    SndVoice *p;
+    extern SndVoice D_800944B8[16];
+    register s32 one asm("s1");
+    s32 k = (s16)arg0;
 
-    if (arg0 != -1) {
-        p = &D_800944B8[arg0];
-        D_80078C84 = 1;
-        if (p->id != -1) {
+    if (k != -1) {
+        SndVoice *base = D_800944B8;
+        SndVoice *p = &base[k];
+        s32 id = p->id;
+        one = 1;
+        D_80078C84[0] = one;
+        if (id != -1) {
             p->unk284 = p->src;
             D_80078D60 = arg2;
             p->unk294 = 0x10000;
-            func_8003C29C(arg0);
-            if (arg1 == 0) {
+            func_8003C29C(k);
+            if ((arg1 & 0xFF) == 0) {
                 p->state = 4;
             } else {
-                D_80078C8C = 1;
-                p->state = 1;
+                D_80078C8C[0] = one;
+                p->state = one;
             }
         }
-        D_80078C84 = 0;
+        D_80078C84[0] = 0;
     }
 }
 
@@ -227,13 +232,18 @@ void func_8003CD70(s16 arg0) {
     extern s32 D_80078C84;
     extern SndVoice D_800944B8[];
     SndVoice *p;
+    SndVoice *base;
+    s16 id;
 
     if (arg0 != -1) {
-        p = &D_800944B8[arg0];
-        if (p->id != -1) {
+        base = D_800944B8;
+        p = &base[arg0];
+        id = p->id;
+        if (id != -1) {
+            s16 a = arg0;
             D_80078C84 = 1;
-            func_8003C530(arg0);
-            func_8003860C(arg0);
+            func_8003C530(a);
+            func_8003860C(a);
             p->volR = 0x7F;
             p->volL = 0x7F;
             p->state = 2;
@@ -297,17 +307,17 @@ void func_8003CF90(void) {
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CFBC);
 
 s32 func_8003D518(s16 arg0) {
-    extern SndChan D_800944B8[16];
-    SndChan *base = D_800944B8;
-    SndChan *c = &base[arg0];
-    SndChan *d;
+    extern SndVoice D_800944B8[];
+    SndVoice *base = D_800944B8;
+    SndVoice *c = &base[arg0];
     s16 r;
+
     if (c->state == 1) {
         r = func_8003C5BC();
         if (r == 3) {
             c->state = r;
         }
     }
-    d = D_800944B8;
-    return d[arg0].state;
+    base = D_800944B8;
+    return base[arg0].state;
 }
