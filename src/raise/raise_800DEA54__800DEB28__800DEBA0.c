@@ -1,5 +1,21 @@
 #include "common.h"
 
+/* Entrada de 0x44 bytes de D_80092008: campos em bits + 32 slots u16. */
+typedef struct {
+    u32 f0 : 1;
+    u32 f1 : 1;
+    u32 f2 : 3;
+    u32 f3 : 6;
+    u32 idx : 6;
+    u32 cnt : 6;
+    u32 pad : 9;
+    u16 slots[32];
+} RaiseEnt;
+
+extern u8 D_80092008[];
+extern u8 D_80091618[];
+extern u8 D_800EF364[], D_800EFF58[];
+
 void func_800DEBA0(s16 arg0, s16 arg1) {
     extern M2C_UNK D_800F1EB4[];
     void *temp_v0;
@@ -11,7 +27,34 @@ void func_800DEBA0(s16 arg0, s16 arg1) {
     M2C_GFIELD(D_800F1EB4, s16, 2) = (s16) ((M2C_GFIELD(D_800F1EB4, s16, 2) + 1) % 5);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_800DEC04);
+extern u8 D_800EF364[], D_800EFF58[];
+extern u8 D_80091618[];
+s32 func_800DEC04(s32 unused, s32 a1, s32 a2, s32 a3, s32 a4) {
+    register s32 y asm("a0") = a4;
+    register s32 b asm("a0");
+    register s32 x asm("a3");
+    register s32 yy asm("a1");
+    register u32 row asm("v0");
+    register u8 *p asm("v1");
+    register s32 temp asm("v1");
+    if ((u16)(a3 - 1) >= 8 || (u16)(y - 1) >= 8) return 0;
+    row = (u16)a1;
+    p = D_800EF364;
+    row = (row << 6) + (u32)p;
+    temp = (u32)a3 << 16;
+    x = temp >> 13;
+    row = x + row;
+    temp = (u32)y << 16;
+    yy = temp >> 16;
+    b = *(u8 *)(row + yy - 9);
+    if (b != 0xFF) {
+        p = D_800EFF58;
+        row = (u16)a2;
+        row = (row << 6) + (u32)p;
+        if (*(u8 *)(row + x + yy + 0x8B) == 1) b = 0xFF;
+    }
+    return b != 0xFF;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_800DECA8);
 
@@ -49,7 +92,21 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_80
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_800DF67C);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_800DF734);
+void func_800DF734(s32 unused, u16 idx, u32 kind, s32 x, s32 y) {
+    register u32 bits asm("a0") = 0xFFFE07FF;
+    register u32 upper asm("a1") = 0xFF81FFFF;
+    register u32 *e asm("t0");
+    u8 *slot;
+    u8 pad[8];
+    e = (u32 *)(D_80092008 + idx * 0x44);
+    slot = (u8 *)e + ((e[0] >> 10) & 0x7E);
+    kind &= 7;
+    *(u16 *)(slot + 4) =
+        (((x - 1) & 0x3F) << 3) | kind | (((y - 1) & 0x3F) << 9);
+    bits = (e[0] & bits) | (((((e[0] >> 11) & 0x3F) + 1) & 0x3F) << 11);
+    upper = (bits & upper) | (((((bits >> 17) & 0x3F) + 1) & 0x3F) << 17);
+    e[0] = upper;
+}
 
 
 extern u8 D_80092008[];
@@ -61,6 +118,25 @@ void func_800DF7EC(s32 unused, s32 idx) {
     *(u16 *)(slot + 4) |= 0x8000;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_800DF838);
+void func_800DF838(s32 unused, u16 idx, s32 x, s32 y) {
+    extern u8 D_80100F38[];
+    register u32 bits asm("a0") = 0xFFFE07FF;
+    register u32 upper asm("t2") = 0xFF81FFFF;
+    register u8 *base asm("t1") = D_80100F38;
+    register u32 *e asm("t0");
+    u8 *p;
+    register u8 *slot asm("v0");
+    register u32 kind asm("v1");
+    u8 pad[8];
+    p = base + idx * 0x79C;
+    e = (u32 *)(D_80092008 + idx * 0x44);
+    slot = (u8 *)e + ((e[0] >> 10) & 0x7E);
+    kind = *(u16 *)(p + 0x326);
+    *(u16 *)(slot + 4) =
+        (((x - 1) & 0x3F) << 3) | (kind & 7) | (((y - 1) & 0x3F) << 9);
+    bits = (e[0] & bits) | (((((e[0] >> 11) & 0x3F) + 1) & 0x3F) << 11);
+    upper = (bits & upper) | (((((bits >> 17) & 0x3F) + 1) & 0x3F) << 17);
+    e[0] = upper;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_800DF914);
