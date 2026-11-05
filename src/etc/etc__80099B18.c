@@ -78,14 +78,17 @@ void func_80099D34(void) {
     extern void func_8001AD48(s32);
     extern void func_80012578(void);
     extern s32 func_80012508(void);
-    register u8 *d asm("a0") = D_8008ED68;
+    u8 *d = D_8008ED68;
     register u8 *p asm("v0");
     register s32 val asm("v1");
 
     switch (*(u16 *)(d + 0xE0)) {
     case 0:
         if (*(s32 *)(d + 0xA68) == 0) {
-            if (*(u16 *)(d + 0xDC) == 3) {
+            register s32 three asm("v0") = 3;
+            register s32 val_dc asm("v1") = *(u16 *)(d + 0xDC);
+            register s32 arg asm("a0") = 8;
+            if (val_dc == three) {
                 p = D_80086228;
                 val = 0xE0;
                 p[0x19] = val;
@@ -105,7 +108,7 @@ void func_80099D34(void) {
                 p[0x1A] = 0;
                 p[0x1B] = 0;
             }
-            func_8001ADA0(8);
+            func_8001ADA0(arg);
             func_80012578();
         }
         break;
