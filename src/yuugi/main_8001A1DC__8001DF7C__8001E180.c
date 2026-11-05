@@ -71,35 +71,29 @@ void func_8001E2BC(void *arg0, s32 arg1, s32 arg2, s32 arg3, volatile s32 arg4, 
 }
 
 void func_8001E310(void) {
-    extern u8 D_8008ED68[], D_800861B0[];
+    extern u8 D_8008ED68[];
+    extern struct { u8 b[0x18]; } D_800861B0[];
     u8 *b = D_8008ED68;
     u32 i;
-    s32 off;
     *(s32 *)(b + 0x968) = 0;
     func_8001F160();
-    i = 0;
-    off = i;
-    do {
-        func_8001A998(off + D_800861B0, 0x18);
-        i++;
-        off += 0x18;
-    } while (i < 5);
+    for (i = 0; i < 5; i++) {
+        func_8001A998(&D_800861B0[i], 0x18);
+    }
     *(s32 *)(b + 0x990) = 0;
 }
 
 void func_8001E388(void) {
-    extern u8 D_8008ED68[], D_800861B0[];
+    extern u8 D_8008ED68[];
+    extern struct { u8 x[0x18]; } D_800861B0[];
     u8 *b = D_8008ED68;
     u32 i;
-    s32 off;
     *(s32 *)(b + 0x968) = 0;
     func_8001F160();
     i = 0;
-    off = i;
     do {
-        func_8001A998(off + D_800861B0, 0x18);
+        func_8001A998(&D_800861B0[i], 0x18);
         i++;
-        off += 0x18;
     } while (i < 5);
     *(s32 *)(b + 0x990) = 1;
 }
@@ -109,7 +103,26 @@ s32 func_8001E404(void) {
     return (*D_8008F6F8);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C__8001E180", func_8001E414);
+void func_8001E414(void) {
+    extern u8 D_8008ED68[], D_800861B0[];
+    u8 *b = D_8008ED68;
+    s32 i;
+    u8 *p;
+    s32 st = *(s32 *)(b + 0x990);
+    if (st == 1) {
+        *(s32 *)(b + 0x990) = 2;
+    } else if (st != 0) {
+        if (st == 2) {
+            *(s32 *)(b + 0x990) = 3;
+        } else if (st == 3) {
+            p = D_800861B0;
+            for (i = 0; i < 5; i++) {
+                func_8001E4A4(p);
+                p += 0x18;
+            }
+        }
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C__8001E180", func_8001E4A4);
 
@@ -119,7 +132,16 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C__8001E180", func_800
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C__8001E180", func_8001EEC4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C__8001E180", func_8001F160);
+void func_8001F160(void) {
+    extern u8 D_8008ED68[];
+    u8 *b = D_8008ED68;
+    func_8001A998(b + 0x96c, 0x18);
+    *(s32 *)(b + 0x988) = 0;
+    *(s32 *)(b + 0x98c) = 0;
+    *(s16 *)(b + 0x986) = 0;
+    *(s16 *)(b + 0x984) = 0;
+    *(s16 *)(b + 0x994) = 0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C__8001E180", func_8001F1A8);
 
