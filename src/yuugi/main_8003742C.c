@@ -1,9 +1,71 @@
 #include "common.h"
 #include "yuugi.h"
 
+extern u8 D_800922FA[];
+extern u8 D_800922F0[];
+extern void func_80036DB0();
+
+struct VoiceE {
+    u8 _p0[0xC];
+    u16 l;
+    u16 r;
+    u8 _p1[0x2E];
+    s16 cur;
+    u8 _p2[6];
+    s16 last;
+    u8 _p3[0x4E - 0x48];
+};
+
+typedef struct {
+    u8 pad0[2];
+    u8 f2;
+    u8 pad3[0x11];
+    u16 f14;
+    u8 pad16[6];
+    s16 f1c;
+    s16 f1e;
+    s16 f20;
+    u8 pad22[4];
+    s16 f26;
+    s16 f28;
+    s16 f2a;
+    u16 f2c;
+    u16 f2e;
+} OscObj;
+
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_8003742C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_800374E8);
+void func_800374E8(s32 a) {
+    s32 b[4];
+    s32 c[4];
+    register u32 t asm("v1");
+    register u32 m asm("a1");
+    register s32 *pc asm("a0");
+    register s32 value asm("v0");
+
+    if (!(a & 0x8000)) {
+        return;
+    }
+    if (*(u16 *)D_800922F0 & 0xF) {
+        pc = c;
+        value = 0x2A;
+        ((u8 *)c)[0] = value;
+        value = -0x20;
+        pc[2] = value;
+        ((u8 *)c)[1] = 0;
+        func_80036DB0(pc);
+        ((u8 *)b)[0] = 0x26;
+        func_80036DB0(b);
+    }
+    m = 0xFFFFFF;
+    *(u16 *)D_800922F0 |= 1;
+    t = *(u32 *)(*(u8 **)(D_800922F0 + 0x1170) + (a & 0x7FFF) * 8);
+    ((u8 *)b)[0] = 0x21;
+    m = t & m;
+    t = m + *(s32 *)(D_800922F0 + 0x1188);
+    b[2] = t;
+    func_80036DB0(b);
+}
 
 void func_800375B0(void) {
 
@@ -101,6 +163,8 @@ void func_80037704(u8 *v) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_8003793C);
 
+extern u8 D_80078CC8[];
+extern u16 D_80078C7C;
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80037A7C);
 
 #include "common.h"
@@ -147,15 +211,55 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80037D28);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80037E40);
 
+extern u8 D_80093790[];
+extern s32 D_8007142C[];
+extern s32 D_80078C78;
+extern u8 D_80093D68[];
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80037F64);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_8003804C);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_800380C8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80038294);
+void func_80038294(OscObj *p) {
+    if (p->f2 != 0) {
+        if (p->f14 != 0) {
+            if (p->f1e + p->f1c < p->f20) {
+                p->f1e = p->f1e + p->f1c;
+            } else {
+                p->f14 = 0;
+                p->f1e = p->f20;
+            }
+        } else {
+            if (p->f1e - p->f1c > -p->f20) {
+                p->f1e = p->f1e - p->f1c;
+            } else {
+                p->f14 = 1;
+                p->f1e = -p->f20;
+            }
+        }
+    } else {
+        p->f1e = 0;
+    }
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80038348);
+void func_80038348(OscObj *p) {
+    if (p->f26 != 0) {
+        if (p->f2e != 0) {
+            if (p->f28 + p->f2a < p->f2c) {
+                p->f28 = p->f28 + p->f2a;
+            } else {
+                p->f28 = p->f2c;
+            }
+        } else {
+            if (p->f2a - p->f28 < p->f2c) {
+                p->f28 = p->f28 - p->f2a;
+            } else {
+                p->f28 = -p->f2c;
+            }
+        }
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_800383C8);
 
