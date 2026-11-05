@@ -116,7 +116,14 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015EF8);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_8001602C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800160B0);
+u32 func_800160B0(u32 arg0) {
+    extern u32 D_8008ED68[];
+    u8 *base = (u8 *)D_8008ED68;
+    if (arg0 < 0x2001) {
+        *(u32 *)(base + 0xA6C) = arg0;
+    }
+    return *(u32 *)(base + 0xA6C);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800160D4);
 
