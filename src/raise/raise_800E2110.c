@@ -158,21 +158,22 @@ void func_800E3450(s32 arg0, s32 arg1, s32 arg2) {
     extern void func_800D0730(void *, s32, s32, s32);
     extern void func_800CED80(s32, s32, s32);
     extern s32 func_800E3A04(s32, void *, void *);
-    register s32 s3 asm("s3") = arg0;
-    register s32 s1 asm("s1") = arg1;
+    s32 s3 = arg0;
+    s32 s1 = arg1;
     register s32 s5 asm("s5") = arg2;
     s32 s = s3 != 1;
     u8 *temp_s0 = (u8 *)D_80100F38 + ((func_800B1260() & 0xFFFF) * 0x79C);
     register u8 *temp_s4 asm("s4") = temp_s0 + 0x1CC;
-    s16 temp_s1 = s1 - 1;
-    s32 val = (temp_s1 * 8 - 1) + s5;
+    s32 temp_s1 = s1 - 1;
+    s16 val = temp_s1 * 8 - 1;
     u8 **temp_s2;
+    val += s5;
 
     *(s16 *)(temp_s0 + 0x32C) = val;
     *(s16 *)(temp_s0 + 0x32A) = val;
     *(s16 *)(temp_s0 + 0x326) = 0;
     *(s16 *)(temp_s0 + 0x324) = 0;
-    func_800D0730(temp_s4, temp_s1, (s16)(s5 - 1), 0);
+    func_800D0730(temp_s4, (s16)temp_s1, (s16)(s5 - 1), 0);
     func_800CED80(s3, *(s16 *)(temp_s0 + 0x32A), *(s16 *)(temp_s0 + 0x32C));
     temp_s2 = &D_800FDE08[s];
     *(s16 *)(*temp_s2 + 0x4E) = func_800E3A04(s3, temp_s4, temp_s2);
