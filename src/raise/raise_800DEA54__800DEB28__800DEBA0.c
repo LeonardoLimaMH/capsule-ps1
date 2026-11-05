@@ -1,5 +1,9 @@
 #include "common.h"
 
+extern u8 D_80092008[];
+extern u8 D_80091618[];
+extern u8 D_800EF364[], D_800EFF58[];
+
 void func_800DEBA0(s16 arg0, s16 arg1) {
     extern M2C_UNK D_800F1EB4[];
     void *temp_v0;
@@ -11,7 +15,16 @@ void func_800DEBA0(s16 arg0, s16 arg1) {
     M2C_GFIELD(D_800F1EB4, s16, 2) = (s16) ((M2C_GFIELD(D_800F1EB4, s16, 2) + 1) % 5);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_800DEC04);
+extern u8 D_800EF364[], D_800EFF58[];
+extern u8 D_80091618[];
+s32 func_800DEC04(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4) {
+    u8 b;
+    if ((u16)(a3 - 1) >= 8 || (u16)(a4 - 1) >= 8) return 0;
+    b = D_800EF364[(u16)a1 * 64 + (s16)a3 * 8 + (s16)a4 - 9];
+    if (b == 0xFF) return 0;
+    if (D_800EFF58[(u16)a2 * 64 + (s16)a3 * 8 + (s16)a4 + 0x8B] == 1) b = 0xFF;
+    return b != 0xFF;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_800DECA8);
 
@@ -47,9 +60,36 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_80
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_800DF51C);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_800DF67C);
+s32 func_800DF67C(s32 a0, u16 a1, s32 a2, s16 a3, s16 a4) {
+    u8 *e = D_80092008 + a1 * 0x44;
+    u8 n = (*(u32 *)e >> 17) & 0x3F;
+    s16 i;
+    register s32 result asm("t0") = 0;
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_800DF734);
+    if (n) {
+        if (n != 0) {
+            for (i = 0; i < n; i++) {
+                u16 h = *(u16 *)((int)(i * 2) + (int)e + 4);
+                if (((h >> 3) & 0x3F) + 1 == a3 && ((h >> 9) & 0x3F) + 1 == a4) {
+                    result = 1;
+                    break;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+void func_800DF734(s32 param_1, u32 param_2, u16 param_3, s16 param_4, s16 param_5) {
+    u32 uVar1;
+    u32 *p;
+
+    p = (u32 *)(D_80092008 + (param_2 & 0xffff) * 0x44);
+    *(u16 *)((int)p + (*p >> 10 & 0x7e) + 4) =
+        (param_4 - 1U & 0x3f) << 3 | param_3 & 7 | (param_5 - 1U & 0x3f) << 9;
+    uVar1 = *p & 0xfffe07ff | ((*p >> 0xb & 0x3f) + 1 & 0x3f) << 0xb;
+    *p = (uVar1 & 0xff81ffff) | ((uVar1 >> 0x11 & 0x3f) + 1 & 0x3f) << 0x11;
+}
 
 
 extern u8 D_80092008[];
