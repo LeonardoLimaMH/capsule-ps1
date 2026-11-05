@@ -33,7 +33,57 @@ void func_800A4AF0(void) {
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A4BCC);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A5400);
+void func_800A5400(void) {
+    extern struct { u8 pad0[0x88]; u32 f88; u8 pad8c[0xC]; u32 f98; } D_8008ED68[];
+    extern char D_800B2DA8[];
+    extern s32 D_800B3C1C[], D_800B3C24[], D_800B3C20[];
+    extern u8 D_800B3C28[], D_800B3C29[], D_8008542A[];
+    register u32 a asm("a0");
+    u32 b;
+    register u32 mask asm("v0");
+    func_8001F1A8(-0x38, 0x50, 0, 1, 0, D_800B2DA8, 1, 9, 2);
+    a = D_8008ED68[0].f88;
+    if ((a & 0x1000) || (D_8008ED68[0].f98 & 0x1000)) {
+        if (D_800B3C1C[0] >= 2) {
+            func_80034AB0(0x84);
+            D_800B3C1C[0] -= 2;
+        }
+    } else if ((a & 0x4000) || (D_8008ED68[0].f98 & 0x4000)) {
+        if (D_800B3C1C[0] < 2) {
+            func_80034AB0(0x84);
+            D_800B3C1C[0] += 2;
+        }
+    } else if ((a & 0x8000) || (D_8008ED68[0].f98 & 0x8000)) {
+        if (D_800B3C1C[0] & 1) {
+            func_80034AB0(0x84);
+            D_800B3C1C[0]--;
+        }
+    } else if ((mask = a & 0x2000) || (D_8008ED68[0].f98 & 0x2000)) {
+        if (!(D_800B3C1C[0] & 1)) {
+            func_80034AB0(0x84);
+            D_800B3C1C[0]++;
+        }
+    }
+    a = D_8008ED68[0].f88;
+    if ((a & 0x830) || ((b = D_8008ED68[0].f98) & 0x830)) {
+        if (D_800B3C1C[0] == 0 && D_8008542A[0] == 0) {
+            func_80034AB0(0x4C);
+        } else {
+            func_80034AB0(0x48);
+            D_800B3C28[0] = 1;
+            func_80012544((u16)(*(u16 *)D_800B3C1C + 6));
+            D_800B3C24[0] = 0;
+            D_800B3C20[0] = 0;
+            D_800B3C1C[0] = 0;
+            D_800B3C29[0] = 1;
+        }
+    } else if ((mask = a & 0x40) || (b & 0x40)) {
+        func_80034AB0(0x5D);
+        func_80034BD8(-3, 0);
+        func_80033974(0x7017);
+        func_80012544(0xA);
+    }
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A5654);
 
