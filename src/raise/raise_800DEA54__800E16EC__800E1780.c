@@ -10,7 +10,26 @@ typedef struct {
 
 extern S_80105320 D_80105320[];
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800E16EC__800E1780", func_800E1780);
+extern u8 D_800F07E4[];
+extern u8 D_80100F38[];
+void func_800E1780(void) {
+    u16 i;
+    s32 k;
+    u8 *rec;
+
+    for (i = 0; i < 6; i++) {
+        rec = (u8 *)D_80105320 + i * 0x110;
+        *(s16 *)(rec + 0) = 0;
+        *(s16 *)(rec + 2) = 0;
+        *(s16 *)(rec + 4) = 0;
+        *(s16 *)(rec + 6) = 0;
+        for (k = 0; k < 0x20; k++) {
+            *(s16 *)(rec + k * 8 + 0x10) = 0;
+            *(s16 *)(rec + k * 8 + 0x12) = 0;
+            *(u8 **)(rec + 0xC) = D_800F07E4;
+        }
+    }
+}
 
 s32 func_800E17F8(s32 idx) {
     return D_80105320[idx & 0xFFFF].d == 0;
@@ -39,7 +58,28 @@ void func_800E1848(s32 idx)
   }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800E16EC__800E1780", func_800E186C);
+void func_800E186C(s32 unused, s32 idx) {
+    u8 *rec = (u8 *)D_80105320 + (idx & 0xFFFF) * 0x110;
+    u8 *slot = rec + *(s16 *)(rec + 2) * 8;
+    u8 *dst = D_80100F38 + (idx & 0xFFFF) * 0x79C;
+    s32 next = *(s16 *)(rec + 2) + 1;
+    u16 x;
+
+    *(s16 *)(rec + 0) = 1;
+    x = *(u16 *)(slot + 0x10);
+    *(u16 *)(rec + 8) = x;
+    *(u16 *)(rec + 0xA) = *(u16 *)(slot + 0x12);
+    *(u16 *)(rec + 6) -= 1;
+    *(s32 *)(rec + 0xC) = *(s32 *)(slot + 0x14);
+    *(s16 *)(rec + 2) = next % 31;
+    *(u16 *)(dst + 0x2B8) = x;
+    *(u16 *)(dst + 0x2C0) = x;
+    *(u16 *)(dst + 0x2BA) = *(u16 *)(rec + 0xA);
+    *(u16 *)(dst + 0x2C2) = *(u16 *)(rec + 0xA);
+    *(s32 *)(dst + 0x2BC) = *(s32 *)(rec + 0xC);
+    *(s16 *)(dst + 0x2C8) = 0;
+    *(s16 *)(dst + 0x2CA) = 0;
+}
 
 void func_800E194C(s32 unused, s32 idx, s16 x, s16 y, s32 value) {
     u8 *rec = (u8 *)D_80105320 + (idx & 0xFFFF) * 0x110;
