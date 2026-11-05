@@ -1,4 +1,20 @@
 #include "common.h"
+#define S_91618_DEFINED
+typedef struct {
+    u8 _p00[0x92];
+    u16 unk92;
+    u8 _p94[0x42];
+    s16 unkD6[8];
+    u8 _pE6[8];
+    u16 unkEE;
+    u8 _pF0[0xB4];
+    u16 unk1A4;
+    u8 _p1A6[2];
+} S_91618;
+extern S_91618 D_80091618[];
+extern u8 D_80085428[];
+extern s16 D_800F21C0[];
+extern s32 func_800202A4(s32);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E6E68", func_800E6E68);
 
