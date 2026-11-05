@@ -58,7 +58,7 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800DD4D8);
 
 void func_800DD824(u8 *arg0, s32 arg1, s32 arg2, s16 arg3, s16 arg4) {
     extern u8 D_80018600[];
-    extern S_800DD_Tab D_80063940[];
+    extern S_800DD_Tab8 D_80063940[];
     extern int func_800DD4D8();
     u8 *v;
     u8 *a;
@@ -73,7 +73,7 @@ void func_800DD824(u8 *arg0, s32 arg1, s32 arg2, s16 arg3, s16 arg4) {
     func_800FE21C(arg1, arg2, v + 0x34);
     a = *(u8 **)(arg0 + 0x70);
     b = *(u8 **)(arg0 + 0x74);
-    t = -(((u8 *)&D_80063940[arg0[0]].a)[3] & 0x3F) / 2;
+    t = -(D_80063940[arg0[0]].f13 & 0x3F) / 2;
     b[0x57] = t;
     a[0x57] = t;
     *(s32 *)(arg0 + 0x18) |= 0x80000000;
@@ -98,19 +98,22 @@ s32 func_800DDAD4(u8 *arg0, s32 arg1) {
     return (s32)((D_80063940[arg0[0]].a >> 24) & 0x3F) * (s32)((((D_80063940[arg0[0]].b & 3) << 2) | (D_80063940[arg0[0]].a >> 30)) * 8 + 0x100) / arg1;
 }
 
-s32 func_800DDB38(u8 *arg0, s32 arg1, s32 arg2) {
+s32 func_800DDB38(u8 *arg0, s32 arg1, s16 arg2) {
     extern int func_800DDE7C();
     u8 *q;
+    u16 a, b;
 
+    a = *(u16 *)(arg0 + 0x64);
+    b = *(u16 *)(arg0 + 0x66);
     q = func_80020CE4(arg0, &func_800DDE7C, 5);
-    *(u16 *)(q + 0x64) = *(u16 *)(arg0 + 0x64);
+    *(u16 *)(q + 0x64) = a;
     *(s32 *)(q + 0x38) = (*(s32 *)(q + 0x38) | 0x40) & ~0x30 | 0x10;
     q[0x5A] = arg2;
     q[0x59] = arg2;
     q[0x58] = arg2;
     *(s16 *)(q + 0x7A) = arg2;
     *(s32 *)(q + 0x84) = arg1;
-    *(u16 *)(q + 0x66) = *(u16 *)(arg0 + 0x66);
+    *(u16 *)(q + 0x66) = b;
     return 0;
 }
 
