@@ -44,7 +44,12 @@ void func_800A1250(void) {
     func_80012508();
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A1394);
+void func_800A1394(u8 *arg0) {
+    extern u8 D_8008ED68[];
+    u8 *ed = D_8008ED68;
+    *(u16 *)(arg0 + 0xC) += ed[0x103] < 2 ? 1 : ed[0x103];
+    func_80018F90(*(u16 *)(arg0 + 0xC), 4);
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A13E8);
 
