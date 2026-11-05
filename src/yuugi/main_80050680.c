@@ -16,4 +16,18 @@ s32 func_80050680(void) {
     return 0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80050680", func_800506E8);
+s32 func_800506E8(void) {
+    extern s32 *D_80078B64[];
+    register s32 *p asm("v1") = D_80078B64[0];
+    register s32 r asm("v0");
+
+    r = p[1] & 1;
+    if (r != 0) {
+        r = p[0] & 1;
+        if (r != 0) {
+            return 1;
+        }
+        return 0;
+    }
+    return 0;
+}
