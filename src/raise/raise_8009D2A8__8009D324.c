@@ -5,9 +5,14 @@ void func_8009D324(void) {
     (*D_8006AFFE) = 0;
 }
 
-#include "common.h"
-
 #include "ghidra.h"
+
+void func_8009D460(void);
+void func_8009D568(void);
+void func_8009D570(void);
+void func_8009D5E8(void);
+void func_8009D678(void);
+
 void func_8009D330(int param_1)
 
 {
@@ -53,4 +58,32 @@ void func_8009D3D0(void) {
     }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009D324", func_8009D460);
+void func_8009D460(void) {
+    extern s32 D_800EBDE4[];
+    extern s32 *D_800EBDE8[];
+    extern s32 D_800EBFF0[];
+    extern s32 D_800EBFF4[];
+    extern void func_80012508(void);
+    s32 val;
+    s32 arg;
+
+    val = 0;
+    D_800EBFF0[0] = 0;
+    D_800EBFF4[0] = 0;
+    if (D_800EBDE4[0] != 0x80) {
+        val = D_800EBDE4[0] + 1;
+    }
+    D_800EBDE4[0] = val;
+    func_8001A464(0xE, 0x80113000);
+    func_8001A464(0xF, 0x80146A18);
+    func_8001A480(0xF, 0x80113000);
+    if (D_800EBDE4[0] >= 10) {
+        func_80019F30(0x12000F, 0);
+        func_8001A464(*(s32 *)D_800EBDE8[D_800EBDE4[0]], 0x80146A18);
+        arg = *(s32 *)D_800EBDE8[D_800EBDE4[0]];
+    } else {
+        arg = 0x12000F;
+    }
+    func_80019F30(arg, &func_80012508);
+    func_80012508();
+}
