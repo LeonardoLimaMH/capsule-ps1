@@ -6,6 +6,7 @@ void func_800CC34C(void) {
     extern s32 D_800F19C8[2][6][3];
     extern u8 D_80103CE8[8][8];
     s32 i, j, k;
+
     for (i = 0; i < 2; i++) {
         for (j = 0; j < 6; j++) {
             for (k = 2; k >= 0; k--) {
@@ -14,9 +15,10 @@ void func_800CC34C(void) {
         }
     }
     for (i = 0; i < 8; i++) {
-        for (k = 7; k >= 0; k--) {
+        k = 7;
+        do {
             D_80103CE8[i][k] = 0;
-        }
+        } while (--k >= 0);
     }
 }
 
@@ -126,7 +128,13 @@ void func_800CC9E4(u8 *obj) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CCAA8);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CCF2C);
+void func_800CCF2C(s32 a0, s32 a1, s32 a2) {
+    extern struct { u8 *e[3]; } D_800F19C8[];
+    u16 k = func_800B1260(a0);
+    u8 *p;
+    p = D_800F19C8[k].e[a1];
+    *(u32 *)(p + 0x38) = (*(u32 *)(p + 0x38) & ~0x40) | ((a2 & 1) << 6);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CCFA4);
 
