@@ -59,6 +59,33 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A1798);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A225C);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A2588);
+void func_800A2588(s16 arg0) {
+    s32 value;
+    s32 i;
+    s32 x;
+    u32 id;
+    register s32 mask asm("s4");
+    id = arg0 + 0x1EU;
+    i = 0;
+    mask = 0x20000;
+    x = 0x2400000;
+    do {
+        value = func_80019F30(0x2001D, i);
+        func_80012A20(value, 2, x >> 16, 0x100);
+        value = func_80019F30(id | mask, i);
+        func_80012A20(value, 2, x >> 16, 0x100);
+        {
+            register s32 step asm("v0") = 0x400000;
+            x += step;
+        }
+        i++;
+    } while (i < 3);
+    i = 0;
+    do {
+        value = func_80019F30(id | 0x20000, i + 3);
+        func_80012A20(value, 1, 0, 0);
+        i++;
+    } while (i < 2);
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A2678);
