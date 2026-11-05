@@ -12,6 +12,8 @@ typedef struct {
     s32 flag;
 } S_800EFCF4_Work;
 
+typedef struct { u8 b[4]; } U4_800DD;
+
 void func_800DD3D8(s16 arg0, s16 arg1) {
     extern u8 D_80018600[];
     extern int func_800DD2EC();
