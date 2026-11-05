@@ -77,7 +77,24 @@ void func_80025DA8(void) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80025E54);
+void func_80025E54(s32 arg0, u16 arg1, u16 arg2) {
+    extern M2C_UNK D_80069E4C[];
+    extern u8 D_80085428[];
+    extern M2C_UNK D_80100F38[];
+    S_80100F38b *p;
+
+    switch (D_80085428[0]) {
+    case 0:
+        p = &((S_80100F38b *)D_80100F38)[func_800B1260(arg0) & 0xFFFF];
+        p->f336 = arg1;
+        p->f338 = arg2;
+        break;
+    case 1:
+        M2C_GFIELD(D_80069E4C, u8, 0x1C) = arg1;
+        M2C_GFIELD(D_80069E4C, u8, 0x1D) = arg2;
+        break;
+    }
+}
 
 typedef struct {
     u8 pad0[0x324];
