@@ -118,7 +118,38 @@ s32 func_800A0E20(void) {
     return result;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A0E6C);
+u8 *func_800A0E6C(u32 arg0) {
+    extern u8 D_800F2D30[];
+    extern u8 D_800F2D98[];
+    u8 *p = &D_800F2D30[arg0 & 0xFFFF];
+    s32 i;
+    s32 idx;
+
+    if (*p == 0xFF) {
+        for (i = 0; i < 6; i++) {
+            if (D_800F2D98[i] == (arg0 & 0xFF)) {
+                break;
+            }
+        }
+        if (i == 6) {
+            for (i = 0; i < 6; i++) {
+                if (D_800F2D98[i] == 0xFF) {
+                    break;
+                }
+            }
+            idx = i;
+            if (idx == 6) {
+                idx = 5;
+            }
+            D_800F2D98[idx] = arg0;
+        } else {
+            idx = i;
+        }
+    } else {
+        idx = *p;
+    }
+    return (u8 *)0x80146A18 + idx * 0x15800;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A0F4C);
 
