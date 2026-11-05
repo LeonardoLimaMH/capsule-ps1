@@ -1,7 +1,7 @@
 #include "common.h"
 #include "yuugi.h"
 
-extern u8 D_800922FA;
+extern u8 D_800922FA[];
 extern u8 D_800922F0[];
 extern void func_80036DB0();
 
