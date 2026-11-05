@@ -85,7 +85,55 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BCF98", func_800BDB68);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BCF98", func_800BDE30);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BCF98", func_800BE020);
+extern u8 D_800178F8[];
+extern s32 D_8008ED68[];
+extern s32 D_800F0550[];
+extern s32 D_800F0578[];
+extern void func_800BB814();
+extern void func_800BC7B0();
+extern void func_800BD164();
+extern void func_800BDB68();
+extern void func_8009AEC8();
+extern void func_8009AF70();
+extern u8 *func_80015B3C(void *, u8 *, s32);
+extern void func_80015EF8(u8 *);
+void func_800BE020(s32 arg0) {
+    void *fn = 0;
+    s32 s1 = 3;
+    u8 *o;
+    s16 *p;
+    s32 ed10c;
+    s32 temp;
+
+    switch (arg0) {
+    case 0: fn = func_800BB814; break;
+    case 1: fn = func_800BC7B0; break;
+    case 2: fn = func_800BD164; break;
+    case 3: fn = func_800BDB68; s1 = 8; break;
+    case 4: fn = func_8009AEC8; break;
+    case 5: fn = func_8009AF70; break;
+    }
+    o = func_80015B3C(fn, D_800178F8, 0x1A);
+    if (o != 0) {
+        func_80015EF8(o);
+        *(s16 *)(o + 0x46) = 0x2C - D_8008ED68[0x108 / 4] / 2;
+        ed10c = D_8008ED68[0x10C / 4];
+        *(s16 *)(o + 0x4E) = 5;
+        o[0x58] = 0x80;
+        o[0x59] = 0x80;
+        o[0x5A] = 0x80;
+        temp = s1 * 32 + 0xD8;
+        *(s16 *)(o + 0x14) = 0;
+        *(s32 *)(o + 0x38) |= 0x40;
+        *(s16 *)(o + 0x4A) = temp - ed10c / 2;
+        p = (s16 *)(o + 0x14);
+        p[1] = 0;
+        p[2] = 0xF0;
+        p[3] = 0x10;
+        D_800F0550 = o;
+        if (arg0 == 2) D_800F0578 = o;
+    }
+}
 
 #include "common.h"
 
