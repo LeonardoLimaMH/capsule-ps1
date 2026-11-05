@@ -37,7 +37,6 @@ s32 func_8003742C(s32 a, s32 b) {
     s32 x[4];
     s32 y[4];
     u16 v;
-    u8 *py = (u8 *)y;
 
     if (!(D_800922FA[0] & 2)) {
         v = a;
@@ -51,10 +50,10 @@ s32 func_8003742C(s32 a, s32 b) {
     ((u8 *)x)[0] = 0x24;
     ((u16 *)x)[1] = a & 0x7FFF;
     func_80036DB0(x);
-    py[0] = 0x29;
+    ((u8 *)y)[0] = 0x29;
     y[2] = (s16)b;
-    py[1] = 0xFF;
-    func_80036DB0(py);
+    ((u8 *)y)[1] = 0xFF;
+    func_80036DB0(y);
     *(u16 *)D_800922F0 = (*(u16 *)D_800922F0 | 1) & 0xFFFB;
     return 1;
 }
@@ -62,23 +61,32 @@ s32 func_8003742C(s32 a, s32 b) {
 void func_800374E8(s32 a) {
     s32 b[4];
     s32 c[4];
-    u32 t;
+    register u32 t asm("v1");
+    register u32 m asm("a1");
+    register s32 *pc asm("a0");
+    register s32 value asm("v0");
 
     if (!(a & 0x8000)) {
         return;
     }
     if (*(u16 *)D_800922F0 & 0xF) {
-        ((u8 *)c)[0] = 0x2A;
-        c[2] = -0x20;
+        pc = c;
+        value = 0x2A;
+        ((u8 *)c)[0] = value;
+        value = -0x20;
+        pc[2] = value;
         ((u8 *)c)[1] = 0;
-        func_80036DB0(c);
+        func_80036DB0(pc);
         ((u8 *)b)[0] = 0x26;
         func_80036DB0(b);
     }
+    m = 0xFFFFFF;
     *(u16 *)D_800922F0 |= 1;
     t = *(u32 *)(*(u8 **)(D_800922F0 + 0x1170) + (a & 0x7FFF) * 8);
     ((u8 *)b)[0] = 0x21;
-    b[2] = (t & 0xFFFFFF) + *(s32 *)(D_800922F0 + 0x1188);
+    m = t & m;
+    t = m + *(s32 *)(D_800922F0 + 0x1188);
+    b[2] = t;
     func_80036DB0(b);
 }
 
@@ -277,23 +285,23 @@ extern s32 D_8007142C[];
 extern s32 D_80078C78;
 extern u8 D_80093D68[];
 void func_80037F64(void) {
-    u8 *e = D_80093D68;
+    struct VoiceE *e = (struct VoiceE *)D_80093D68;
     s32 *ids = D_8007142C;
     s32 i;
     s16 t;
     s32 x, y;
 
-    for (i = 0; i < D_80078C78; i++, ids++, e += 0x4E) {
-        t = *(s16 *)(e + 0x3E);
-        if (*(s16 *)(e + 0x46) == t) {
+    for (i = 0; i < D_80078C78; i++, ids++, e++) {
+        t = e->cur;
+        if (e->last == t) {
             continue;
         }
-        x = (*(u16 *)(e + 0xC) + t) * D_80078D54;
-        y = (*(u16 *)(e + 0xE) + t) * D_80078D56;
+        x = (e->l + t) * D_80078D54;
+        y = (e->r + t) * D_80078D56;
         M2C_GFIELD(D_80093790, s32, 4) = 0xF;
+        *(s32 *)D_80093790 = *ids;
         M2C_GFIELD(D_80093790, s16, 0xC) = 0;
         M2C_GFIELD(D_80093790, s16, 0xE) = 0;
-        *(s32 *)D_80093790 = *ids;
         M2C_GFIELD(D_80093790, s16, 8) = x >> 7;
         M2C_GFIELD(D_80093790, s16, 0xA) = y >> 7;
         SpuSetVoiceAttr(D_80093790);
@@ -303,7 +311,7 @@ void func_80037F64(void) {
 s32 func_8003804C(u8 *p, u32 a) {
     if (a < 0x40U) {
         if (p[0x1D] != 0) {
-            return -((p[0x1D] * 2) * (0x40 - a));
+            return -(p[0x1D] * 2 * (0x40 - a));
         }
         return 0;
     }
@@ -311,7 +319,7 @@ s32 func_8003804C(u8 *p, u32 a) {
         return 0;
     }
     if (p[0x1C] != 0) {
-        return (s16)((p[0x1C] * 2) * (a - 0x3F));
+        return (s16)(p[0x1C] * 2 * (a - 0x3F));
     }
     return 0;
 }
