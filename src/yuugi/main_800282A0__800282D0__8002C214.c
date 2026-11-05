@@ -49,36 +49,34 @@ void func_8002C4E8(void *arg0, void *arg1) {
     }
 }
 
-void func_8002C534(u8 *dst, u8 *src, int mode)
-{
-    u8 r = src[0];
-    u8 g = src[1];
-    u8 b = src[2];
-    u8 f;
-
-    if (mode == 4) {
-        f = 0x24;
-        if ((r | g | b) == 0) {
+void func_8002C534(u8 *dst, u8 *src, s32 mode) {
+    u8 r = src[0], g = src[1], b = src[2];
+    s32 h;
+    switch (mode) {
+    case 4:
+        if ((b | (r | g)) == 0) r = g = b = 0x80;
+        dst[0] = r;
+        dst[1] = g;
+        dst[2] = b;
+        dst[3] = 0x24;
+        break;
+    case 5:
+        if ((r | g | b) == 0) r = g = b = 0x80;
+        dst[0] = r;
+        dst[1] = g;
+        dst[2] = b;
+        dst[3] = 0x30;
+        break;
+    default:
+        if ((mode == 1 || mode == 3) && (r | g | b) == 0)
             r = g = b = 0x80;
-        }
-    } else if (mode == 5) {
-        f = 0x30;
-        if ((r | g | b) == 0) {
-            r = g = b = 0x80;
-        }
-    } else if (mode == 1 || mode == 3) {
-        if ((r | g | b) != 0) {
-            return;
-        }
-        r = g = b = 0x80;
-        f = (mode / 2) * 16 + 0x28 + (mode - (mode / 2) * 2) * 4;
-    } else {
-        return;
+        h = mode / 2;
+        dst[0] = r;
+        dst[1] = g;
+        dst[2] = b;
+        dst[3] = h * 16 + 0x28 + (mode - h * 2) * 4;
+        break;
     }
-    dst[0] = r;
-    dst[1] = g;
-    dst[2] = b;
-    dst[3] = f;
 }
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002C214", func_8002C610);
