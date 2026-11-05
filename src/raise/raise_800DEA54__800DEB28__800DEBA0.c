@@ -57,21 +57,30 @@ s32 func_800DEC04(s32 unused, s32 a1, s32 a2, s32 a3, s32 a4) {
 }
 
 void func_800DECA8(u32 param_1, u16 param_2) {
+    typedef struct { u8 pad[0x90]; u16 flag; u8 rest[0x116]; } Input;
+    register u32 mask1 asm("t0") = 0xFFFE07FF;
+    register u32 mask2 asm("a3") = 0xFF81FFFF;
+    register s32 i asm("t2") = 0;
+    register u32 addr asm("v0");
+    register u8 *base asm("v1");
     RaiseEnt *p;
-    int i;
-
-    i = 0;
-    p = (RaiseEnt *)(D_80092008 + param_2 * 0x44);
+    register u16 *slot asm("t1");
+    u32 bits;
+    addr = param_2 * 0x44;
+    base = D_80092008;
+    addr = addr + (u32)base;
+    p = (RaiseEnt *)addr;
+    slot = (u16 *)p;
+    p->f0 = ((Input *)D_80091618)[param_2].flag;
+    p->f1 = param_1;
+    p->f2 = param_2;
+    p->f3 = 0;
+    bits = *(u32 *)p & mask1;
+    *(u32 *)p = bits & mask2;
     do {
-        p->f0 = *(u16 *)(D_80091618 + param_2 * 0x1a8 + 0x90);
-        p->f1 = param_1;
-        p->f2 = param_2;
-        p->f3 = 0;
-        p->idx = 0;
-        p->cnt = 0;
-        p->slots[0] = 0;
+        slot[2] = 0;
         i = i + 1;
-        p = (RaiseEnt *)((int)p + 2);
+        slot++;
     } while (i < 0x20);
 }
 
@@ -127,17 +136,20 @@ s32 func_800DF67C(s32 a0, u16 a1, s32 a2, s16 a3, s16 a4) {
     return result;
 }
 
-void func_800DF734(s32 param_1, u32 param_2, u16 param_3, s16 param_4, s16 param_5) {
-    register u32 uVar1 asm("a0");
-    register u32 mask2 asm("a1");
-    u32 *p;
+void func_800DF734(s32 unused, u16 idx, u32 kind, s32 x, s32 y) {
+    register u32 bits asm("a0") = 0xFFFE07FF;
+    register u32 upper asm("a1") = 0xFF81FFFF;
+    register u32 *e asm("t0");
+    u8 *slot;
     u8 pad[8];
-
-    p = (u32 *)(D_80092008 + (param_2 & 0xffff) * 0x44);
-    *(u16 *)((int)p + (*p >> 10 & 0x7e) + 4) =
-        param_3 & 7 | (param_4 - 1U & 0x3f) << 3 | (param_5 - 1U & 0x3f) << 9;
-    uVar1 = *p & 0xfffe07ff | ((*p >> 0xb & 0x3f) + 1 & 0x3f) << 0xb;
-    *p = (uVar1 & 0xff81ffff) | ((uVar1 >> 0x11 & 0x3f) + 1 & 0x3f) << 0x11;
+    e = (u32 *)(D_80092008 + idx * 0x44);
+    slot = (u8 *)e + ((e[0] >> 10) & 0x7E);
+    kind &= 7;
+    *(u16 *)(slot + 4) =
+        (((x - 1) & 0x3F) << 3) | kind | (((y - 1) & 0x3F) << 9);
+    bits = (e[0] & bits) | (((((e[0] >> 11) & 0x3F) + 1) & 0x3F) << 11);
+    upper = (bits & upper) | (((((bits >> 17) & 0x3F) + 1) & 0x3F) << 17);
+    e[0] = upper;
 }
 
 
