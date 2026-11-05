@@ -1,5 +1,10 @@
 #include "common.h"
 
+extern void func_800C63AC();
+extern void func_800C4FC4();
+extern void func_800161C4();
+extern void func_800AADE0();
+
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800C4ECC);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800C4FC4);
