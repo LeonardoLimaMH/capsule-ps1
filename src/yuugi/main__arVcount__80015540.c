@@ -1,6 +1,24 @@
 #include "common.h"
 #include "yuugi.h"
 
+typedef struct {
+    u8 pad[0x103];
+    u8 n;
+} S_8ED68;
+
+typedef struct {
+    u8 pad0[0x14];
+    s32 f14;
+    u8 b18[0x34];
+    u16 f4c;
+    u16 f4e;
+    u32 flags;
+    s32 f54;
+    u8 f58;
+    u8 pad59[3];
+    s32 w5c[10];
+} ArVObj;
+
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015540);
 
 #include "common.h"
@@ -86,9 +104,24 @@ void func_80015B74(void *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015BE8);
+void func_80015BE8(void *arg0) {
+    func_80012A20(M2C_FIELD(M2C_FIELD(arg0, s32 *, 8) + M2C_FIELD(arg0, s32 *, 0) * 0x24 - 0x1c, s32 *, 0), 1, 0, 0);
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015C2C);
+void func_80015C2C(void *arg0) {
+    u32 temp_s1;
+    u32 var_s0;
+
+    func_80012A20(M2C_FIELD(M2C_FIELD(arg0, s32 *, 8) + M2C_FIELD(arg0, s32 *, 0) * 0x24 - 0x1c, s32 *, 0), 1, 0, 0);
+    temp_s1 = M2C_FIELD(arg0, u32 *, 8);
+    var_s0 = (temp_s1 + (M2C_FIELD(arg0, s32 *, 0) * 0x24)) - 0x24;
+    if (var_s0 >= temp_s1) {
+        do {
+            func_80012A20(M2C_FIELD(var_s0, s32 *, 4), 1, 0, 0);
+            var_s0 -= 0x24;
+        } while (var_s0 >= temp_s1);
+    }
+}
 
 #include "ghidra.h"
 void func_80015CD0(int param_1,int param_2,uint param_3)
@@ -114,13 +147,54 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015E60);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015EF8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_8001602C);
+void func_8001602C(ArVObj *p) {
+    s32 i = 0x33;
+    u8 *q = p->b18;
+    p->f4e = 0;
+    p->f54 = 0;
+    p->f58 = 0;
+    p->f4c = 0;
+    p->f14 = 0;
+    p->flags &= ~8;
+    p->flags &= ~1;
+    p->flags &= ~2;
+    p->flags &= ~4;
+    p->flags &= ~0x30;
+    p->flags &= ~0x40;
+    for (; i >= 0; i--) {
+        q[i] = 0;
+    }
+    for (i = 9; i >= 0; i--) {
+        p->w5c[i] = 0;
+    }
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800160B0);
+u32 func_800160B0(u32 arg0) {
+    extern u32 D_8008ED68[];
+    u8 *base = (u8 *)D_8008ED68;
+    if (arg0 < 0x2001) {
+        *(u32 *)(base + 0xA6C) = arg0;
+    }
+    return *(u32 *)(base + 0xA6C);
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800160D4);
+u32 func_800160D4(u32 arg0) {
+    extern u32 D_8008ED68[];
+    u8 *base = (u8 *)D_8008ED68;
+    if (arg0 < 0x2001) {
+        *(u32 *)(base + 0xA70) = arg0;
+    }
+    return *(u32 *)(base + 0xA70);
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800160F8);
+u32 func_800160F8(u32 arg0) {
+    extern u32 D_8008ED68[];
+    u8 *base = (u8 *)D_8008ED68;
+    if (arg0 < 0x2001) {
+        *(u32 *)(base + 0xA74) = arg0;
+    }
+    return *(u32 *)(base + 0xA74);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_8001611C);
 
@@ -168,7 +242,15 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018C00);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018EF4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018F90);
+s32 func_80018F90(u32 arg0, s32 arg1) {
+    extern void func_80020688();
+    func_80020688(-0x9C, 0x34, 0x80, 0x30, 0x3A0, 0, 0x3F0, (arg1 + 0x160) & 0xFFFF, 0x80, 0x80, 0x80, 0, 0, 0);
+    if (!((arg0 / 20) & 1)) {
+        func_80020688(-0x40, -0x18, 0x80, 0x10, 0x3A0, 0x30, 0x3F0, (arg1 + 0x160) & 0xFFFF, 0x80, 0x80, 0x80, 0, 0, 0);
+        return 0;
+    }
+    return 1;
+}
 
 #include "common.h"
 
@@ -188,6 +270,13 @@ void func_80019088(void) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800190F4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80019654);
+s32 func_80019654(void) {
+    extern s32 func_800337EC();
+    extern u32 D_80092400[];
+    if ((func_800337EC() & 0xF) == 0 && (D_80092400[0] & 0xFFFFFF) == 0) {
+        return 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800196A0);
