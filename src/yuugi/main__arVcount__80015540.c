@@ -217,15 +217,17 @@ u32 func_800160F8(u32 arg0) {
 }
 
 void func_8001611C(u32 arg0) {
-    extern struct { u8 pad[0xA6C]; u32 a, b, c; } D_8008ED68;
-    if (arg0 < 0x2001) {
-        D_8008ED68.a = arg0;
+    extern u32 D_8008ED68[];
+    u32 *d = D_8008ED68;
+    s32 ok = arg0 < 0x2001;
+    if (ok) {
+        d[0xA6C / 4] = arg0;
     }
-    if (arg0 < 0x2001) {
-        D_8008ED68.b = arg0;
+    if (ok) {
+        d[0xA70 / 4] = arg0;
     }
-    if (arg0 < 0x2001) {
-        D_8008ED68.c = arg0;
+    if (ok) {
+        d[0xA74 / 4] = arg0;
     }
 }
 
@@ -261,7 +263,20 @@ void func_80018608(void) {
 
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018610);
+void func_80018610(s32 arg0, s32 arg1) {
+    extern void SetDrawMode();
+    extern u8 *D_8008ED68;
+    u32 *p;
+    u32 *q;
+    p = *(u32 **)(D_8008ED68 + 0x1090);
+    q = 0;
+    if (p != 0) {
+        q = p + 3;
+        if (q <= (u32 *)(D_8008ED68 + 0x4594)) {
+            *(u32 **)(D_8008ED68 + 0x1090) = q;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800186E4);
 
@@ -271,9 +286,27 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800188F0);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018C00);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018EF4);
+void func_80018EF4(s16 a, s16 b, s32 c, s32 d, s32 e) {
+    extern u8 D_80078B90[];
+    extern u16 D_80078B88[];
+    extern s32 func_800188F0();
+    extern s32 func_8001F1A8();
+    if (d == 0) {
+        func_800188F0(a, b, D_80078B90[c], 4, e);
+    } else {
+        func_8001F1A8(a, b, 4, 1, 0, &D_80078B88[c], 1, 1, e);
+    }
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018F90);
+s32 func_80018F90(u32 arg0, s16 arg1) {
+    extern void func_80020688();
+    func_80020688(-0x9C, 0x34, 0x80, 0x30, 0x3A0, 0, 0x3F0, (arg1 + 0x160) & 0xFFFF, 0x80, 0x80, 0x80, 0, 0, 0);
+    if ((arg0 / 20) & 1) {
+        return 1;
+    }
+    func_80020688(-0x40, -0x18, 0x80, 0x10, 0x3A0, 0x30, 0x3F0, (arg1 + 0x160) & 0xFFFF, 0x80, 0x80, 0x80, 0, 0, 0);
+    return 0;
+}
 
 #include "common.h"
 
@@ -293,6 +326,13 @@ void func_80019088(void) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800190F4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80019654);
+s32 func_80019654(void) {
+    extern s32 func_800337EC();
+    extern u32 D_80092400[];
+    if ((func_800337EC() & 0xF) == 0 && (D_80092400[0] & 0xFFFFFF) == 0) {
+        return 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800196A0);
