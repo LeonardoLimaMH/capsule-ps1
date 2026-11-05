@@ -36,7 +36,21 @@ void func_80033824(s32 c, s32 a, s32 b) {
     func_80036DB0(&m);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4__800337EC", func_80033878);
+void func_80033878(s32 a) {
+    extern u8 D_800922FA[];
+    unsigned short new_var;
+    new_var = a & 0xFFFF;
+    if ((*D_800922FA) & 1) {
+        if (a & 0x8000) {
+            func_800374E8(new_var);
+        } else {
+            if (new_var >= 0x7000) {
+                a = a - 0x7000;
+            }
+            func_80034C7C((s16) a);
+        }
+    }
+}
 
 void func_800338DC(s32 arg0) {
     func_80033900(arg0 & 0xFFFF, 0x80);
