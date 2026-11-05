@@ -3,27 +3,19 @@
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CC1FC);
 
 void func_800CC34C(void) {
-    extern u8 D_800F19C8[];
-    extern u8 D_80103CE8[];
+    extern s32 D_800F19C8[2][6][3];
+    extern u8 D_80103CE8[8][8];
     s32 i, j, k;
-    s32 a, b;
-    u8 *p;
-    u8 *q;
-    for (i = 0, a = 0; i < 2; i++, a += 0x48) {
-        for (j = 0, b = 0; j < 6; j++, b += 12) {
-            s32 *r = (s32 *)(D_800F19C8 + a + b + 8);
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 6; j++) {
             for (k = 2; k >= 0; k--) {
-                *r = 0;
-                r--;
+                D_800F19C8[i][j][k] = 0;
             }
         }
     }
-    p = D_80103CE8;
-    for (i = 0; i < 8; i++, p += 8) {
-        q = p + 7;
+    for (i = 0; i < 8; i++) {
         for (k = 7; k >= 0; k--) {
-            *q = 0;
-            q--;
+            D_80103CE8[i][k] = 0;
         }
     }
 }
@@ -138,7 +130,31 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CCF2C);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CCFA4);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CD1A0);
+extern u8 D_800F19C8[];
+extern u8 D_800EFF58[];
+extern u8 D_80100F38[];
+extern s32 func_800B1260(s32);
+extern s16 func_800A9658(s16);
+extern void func_800CD6E0(s32, s32);
+void func_800CD1A0(s32 a0, s16 a1, s32 a2, s32 a3) {
+    s16 next_i;
+    s32 limit = func_800A9658(a1) << 16;
+    s16 i = 0;
+    a0 = a0 != 1;
+    if (limit > 0) {
+        u8 *base = D_800EFF58 + (a0 << 6) + 0x94;
+        s32 w = a1 + 1;
+        s16 y = a2;
+        s16 x = a3;
+        do {
+            s16 q = i / w;
+            s16 r = i % w;
+            next_i = i + 1;
+            i = next_i;
+            *(base + (y - (q + 1)) * 8 + (x - (r + 1))) = 0;
+        } while ((next_i << 16) < limit);
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CD288);
 
@@ -146,7 +162,19 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CD418);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CD530);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CD654);
+void func_800CD654(s32 arg0) {
+    extern u8 D_80100F38[];
+    u8 *rec = D_80100F38 + (func_800B1260(arg0) & 0xFFFF) * 0x79C;
+
+    switch (*(s16 *)(rec + 0x2C0)) {
+    case 1:
+        func_800CD6E0(arg0, 0);
+        break;
+    case 2:
+        func_800CD6E0(arg0, 1);
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CD6E0);
 
