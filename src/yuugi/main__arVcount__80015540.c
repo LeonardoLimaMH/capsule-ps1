@@ -167,7 +167,27 @@ check:
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015EF8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_8001602C);
+void func_8001602C(ArVObj *p) {
+    s32 i = 0x33;
+    u8 *q = p->b18;
+    p->f4e = 0;
+    p->f54 = 0;
+    p->f58 = 0;
+    p->f4c = 0;
+    p->f14 = 0;
+    p->flags &= ~8;
+    p->flags &= ~1;
+    p->flags &= ~2;
+    p->flags &= ~4;
+    p->flags &= ~0x30;
+    p->flags &= ~0x40;
+    for (; i >= 0; i--) {
+        q[i] = 0;
+    }
+    for (i = 9; i >= 0; i--) {
+        p->w5c[i] = 0;
+    }
+}
 
 u32 func_800160B0(u32 arg0) {
     extern u32 D_8008ED68[];
@@ -197,16 +217,15 @@ u32 func_800160F8(u32 arg0) {
 }
 
 void func_8001611C(u32 arg0) {
-    extern u32 D_8008ED68[];
-    u8 *base = (u8 *)D_8008ED68;
+    extern struct { u8 pad[0xA6C]; u32 a, b, c; } D_8008ED68;
     if (arg0 < 0x2001) {
-        *(u32 *)(base + 0xA6C) = arg0;
+        D_8008ED68.a = arg0;
     }
     if (arg0 < 0x2001) {
-        *(u32 *)(base + 0xA70) = arg0;
+        D_8008ED68.b = arg0;
     }
     if (arg0 < 0x2001) {
-        *(u32 *)(base + 0xA74) = arg0;
+        D_8008ED68.c = arg0;
     }
 }
 
