@@ -88,7 +88,14 @@ void func_800A2F88(void *arg0) {
     M2C_FIELD(arg0, s16 *, 0x4A) = var_v0;
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A3014);
+void func_800A3014(void *arg0) {
+    extern M2C_UNK D_8008ED68[];
+    if ((M2C_GFIELD(D_8008ED68, u16, 0xDC) == 7) && ((u32) M2C_GFIELD(D_8008ED68, u32, 0xA20) < 2U)) {
+        M2C_FIELD(arg0, s32 *, 0x38) = M2C_FIELD(arg0, s32 *, 0x38) & ~1;
+    } else {
+        M2C_FIELD(arg0, s32 *, 0x38) = M2C_FIELD(arg0, s32 *, 0x38) | 1;
+    }
+}
 
 #include "common.h"
 
