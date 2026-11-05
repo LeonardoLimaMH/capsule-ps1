@@ -174,26 +174,93 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B698C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B6B70);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B6D2C);
+void func_800B6D2C(u8 *arg0, u8 *arg1, s32 arg2) {
+    extern struct { s32 f0; u8 pad[0x30]; } D_801010B0[];
+    extern u8 func_800B7630();
+    extern s32 func_800B6E24();
+    u8 buf[0xA9];
+    struct { u8 *p; s32 q; s32 f8; s32 fc; s32 f10; s32 f14; } s;
+    struct { u8 a; u8 b; u8 c; u8 d; } t;
+    s32 i;
+    func_8001A998(buf, 0xA9);
+    s.p = buf;
+    s.q = D_801010B0[arg0[9]].f0;
+    s.f10 = arg1[0x11];
+    s.f8 = arg1[0x15];
+    s.fc = arg1[0x16];
+    s.f14 = 0;
+    if (func_800B7630(arg0, arg2) == 0) {
+        i = 0;
+        do {
+            t.a = arg1[0x15];
+            t.b = arg1[0x16];
+            t.c = i;
+            t.d = 0;
+            arg0[0x706] = 0;
+            if (func_800B6E24(arg0, &s, &t) != 0) {
+                return;
+            }
+            i++;
+        } while (i < 4);
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B6E24);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B711C);
+void func_800B711C(u8 *arg0, u8 *arg1) {
+    extern struct { s32 f0; u8 pad[0x30]; } D_801010B0[];
+    extern s32 func_800B7200();
+    u8 buf[0xA9];
+    struct { u8 *p; s32 q; s32 f8; s32 fc; s32 f10; s32 f14; } s;
+    struct { u8 a; u8 b; u8 c; u8 d; } t;
+    s32 i;
+    func_8001A998(buf, 0xA9);
+    s.p = buf;
+    s.q = D_801010B0[arg0[9]].f0;
+    s.f10 = arg1[0x11];
+    s.f8 = arg1[0x15];
+    s.fc = arg1[0x16];
+    s.f14 = 0;
+    i = 0;
+    do {
+        t.a = arg1[0x15];
+        t.b = arg1[0x16];
+        t.c = i;
+        t.d = 0;
+        arg0[0x706] = 0;
+        if (func_800B7200(arg0, &s, &t) != 0) {
+            return;
+        }
+        i++;
+    } while (i < 4);
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B7200);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B74BC);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B75C4);
+s32 func_800B75C4(u8 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    (arg0 + arg0[0x26] * 2)[8] = arg2;
+    (arg0 + arg0[0x26] * 2)[9] = arg1;
+    arg0[0x26]++;
+    if (arg0[2] == arg2 && arg0[3] == arg1 && arg0[0x27] == arg3 + arg4) {
+        return 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B7630);
 
 s32 func_800B7734(s32 arg0, s32 arg1, u8 *arg2, u8 *arg3) {
     s32 d = arg2[0x15] - arg3[0x15];
-    d = d < 0 ? -d : d;
+    if (d < 0) {
+        d = -d;
+    }
     if (d < 2) {
         d = arg2[0x16] - arg3[0x16];
-        d = d < 0 ? -d : d;
+        if (d < 0) {
+            d = -d;
+        }
         if (d < 2) {
             return 1;
         }
@@ -201,7 +268,21 @@ s32 func_800B7734(s32 arg0, s32 arg1, u8 *arg2, u8 *arg3) {
     return 0;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B7790);
+void func_800B7790(s32 arg0, s32 arg1, u8 *arg2, u8 *arg3, u8 *arg4) {
+    s32 i;
+    s32 d;
+    for (i = 0; i < 2; i++) {
+        arg4[i] = arg2[0x15 + i];
+    }
+    for (i = 0; i < 2; i++) {
+        d = arg4[i] - arg3[0x15 + i];
+        if (d >= 2) {
+            arg4[i] = arg4[i] - 1;
+        } else if (d < -1) {
+            arg4[i] = arg4[i] + 1;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B780C);
 
