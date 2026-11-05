@@ -183,10 +183,7 @@ s32 func_800A0448(u8 *arg0) {
     u32 t = *(arg0 + i + 0x5E4);
     u32 u;
     s32 off;
-    s32 r;
-    if (t == 0xFF) {
-        r = 0;
-    } else {
+    if (t != 0xFF) {
         u = t;
         if (u >= 8U) {
             off = 0;
@@ -194,9 +191,9 @@ s32 func_800A0448(u8 *arg0) {
             off = i * 0x980 - 0x5580;
         }
         *(s32 *) (arg0 + 0x14) = *(s32 *) (D_80065310[u] + off) + off;
-        r = 1;
+        return 1;
     }
-    return r;
+    return 0;
 }
 
 s32 func_800A04C8(u8 *arg0, s32 arg1) {
@@ -204,10 +201,7 @@ s32 func_800A04C8(u8 *arg0, s32 arg1) {
     u32 t = *(arg0 + arg1 + 0x5E4);
     u32 u;
     s32 off;
-    s32 r;
-    if (t == 0xFF) {
-        r = 0;
-    } else {
+    if (t != 0xFF) {
         u = t;
         if (u >= 8U) {
             off = 0;
@@ -215,14 +209,15 @@ s32 func_800A04C8(u8 *arg0, s32 arg1) {
             off = arg1 * 0x980 - 0x5580;
         }
         *(s32 *) (arg0 + 0x14) = *(s32 *) (D_80065310[u] + off + 4) + off;
-        r = 1;
+        return 1;
     }
-    return r;
+    return 0;
 }
 
 s32 func_800A0540(u8 *arg0, u32 arg1) {
     extern s32 D_80065310[];
     u32 b;
+    u8 c;
     u32 t;
     s32 n;
     s32 off;
@@ -236,10 +231,10 @@ s32 func_800A0540(u8 *arg0, u32 arg1) {
             arg0[0xBEF] = b + 1;
         }
     } else {
-        b = arg0[0xBEF];
-        n = (b & 1) + 9;
-        if (b == 0) {
-            arg0[0xBEF] = b + 1;
+        c = arg0[0xBEF];
+        n = (c & 1) + 9;
+        if (c == 0) {
+            arg0[0xBEF] = c + 1;
         }
     }
     t = *(arg0 + arg1 + 0x5E4);
