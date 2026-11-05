@@ -65,7 +65,78 @@ void func_800B19E0(u16 a0) {
     } while (i < 6);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B1B3C);
+s32 func_800B1B3C(void) {
+    typedef struct { u8 p0[0x10]; u16 f10; u8 p12[0x78]; u16 f8a, f8c; u8 p8e[0x11A]; } Rec1B;
+    typedef struct { u8 p0[0x190]; s32 f190; u8 *f194[6]; u8 p1ac[0x5F0]; } Data1B;
+    extern Rec1B D_80091618[];
+    extern Data1B D_80100F38[];
+    extern s16 D_80103D38[];
+    extern u16 D_8006AF80[];
+    extern s32 D_800EF2D8[], D_800EEB70[];
+    u32 s1;
+    s32 s0;
+    register s32 i asm("a2");
+    u8 **a;
+    u8 **b;
+    register u8 *base asm("a0");
+    register s32 k asm("v1");
+    register s32 offset asm("v0");
+    register u8 **slots asm("v1");
+    if (D_80103D38[0] == 1) {
+        u8 *e = D_800EEB9C;
+        s1 = D_8006AF80[0];
+        s0 = *(s32 *)(e + 0x73C);
+        D_80091618[s1].f10 = 0xFFFF;
+        D_80091618[s0].f8a = 0xFFFF;
+        D_80091618[s0].f8c = 0;
+        D_8006AF80[0] = s0;
+        *(s32 *)(e + 0x73C) = s0;
+        func_80026514(s1);
+        base = (u8 *)D_80100F38;
+        k = s1;
+        offset = k * 0x79C;
+        slots = (u8 **)(base + 0x194);
+        a = (u8 **)((u8 *)slots + offset);
+        D_800F2DBC[0] = *(s32 *)(base + offset + 0x190);
+        i = 0;
+        b = D_800F2DC0;
+        for (; i < 6; i++) {
+            *b++ = *a;
+            *a += 0x90;
+        }
+        func_800D8FB0((u16)s1);
+        func_800B19E0((u16)s1);
+        func_800E2110();
+    } else {
+        s1 = D_8006AF80[0];
+        s0 = D_80091618[s1].f8a;
+        D_80091618[s0].f10 = 0xFFFF;
+        D_80091618[s0].f8a = 0xFFFF;
+        D_80091618[s0].f8c = 0;
+        D_800EF2D8[0] = s1;
+        func_80026514(s0);
+        base = (u8 *)D_80100F38;
+        k = s0;
+        offset = k * 0x79C;
+        slots = (u8 **)(base + 0x194);
+        a = (u8 **)((u8 *)slots + offset);
+        D_800F2DBC[0] = *(s32 *)(base + offset + 0x190);
+        i = 0;
+        b = D_800F2DC0;
+        for (; i < 6; i++) {
+            *b++ = *a;
+            *a += 0x90;
+        }
+        func_800D8FB0((u16)s0);
+        func_800B19E0((u16)s0);
+        D_80091618[D_8006AF80[0]].f8a = 0xFFFF;
+    }
+    D_800EEB70[0] = 2;
+    func_800B1E7C();
+    func_800B4C40(D_8006AF80[0]);
+    func_800B6FA0();
+    return 1;
+}
 
 s32 func_800B1DEC(void) {
     typedef struct { u8 pad[0x66]; u16 f66; u16 f68; u8 pad2[0x1A8 - 0x6A]; } Rec1DEC;
@@ -115,7 +186,24 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B21F0);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B24B8);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B284C);
+s32 func_800B284C(s32 arg0, s32 arg1) {
+    typedef struct { u8 p0[0x6C]; s32 f6c; s32 f70; s32 f74; u8 p78[0x130]; } Rec284C;
+    extern Rec284C D_80091618[];
+    extern s32 D_8006AF84[];
+    register s32 *clock asm("a1") = D_8006AF84;
+    register s32 t asm("a1") = *clock;
+    register s32 v asm("v0");
+    s32 last;
+    v = D_80091618[arg0 & 0xFFFF].f6c;
+    if (v != 0 && t - v <= 28800) return 0;
+    v = D_80091618[arg1 & 0xFFFF].f6c;
+    if (v != 0 && t - v <= 28800) return 0;
+    v = D_80091618[arg0 & 0xFFFF].f74;
+    if (v != 0 && t - v <= 28800) return 0;
+    last = D_80091618[arg1 & 0xFFFF].f74;
+    if (last != 0 && t - last <= 28800) return 0;
+    return 1;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B2984);
 
@@ -387,10 +475,9 @@ s32 func_800B44B8(s32 arg0) {
     extern u8 D_8006AFCC[];
     extern s32 func_800202A4();
     extern void func_800DC84C();
-    u8 *s;
-    s32 t;
-    t = D_8006AF84[0];
-    s = D_8006AFCC;
+    register s32 id asm("s0") = arg0;
+    s32 t = D_8006AF84[0];
+    u8 *s = D_8006AFCC;
     if (*(u16 *)(s + 0x40) != 0) {
         return 0;
     }
@@ -400,7 +487,7 @@ s32 func_800B44B8(s32 arg0) {
         }
         if (func_800202A4(0x4B0) == 600) {
             *(u16 *)(s + 0x40) = 2;
-            func_800DC84C(arg0 & 0xFFFF, 0x18);
+            func_800DC84C(id & 0xFFFF, 0x18);
             return 1;
         }
     }
