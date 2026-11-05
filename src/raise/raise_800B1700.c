@@ -280,7 +280,51 @@ block_8:
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B4064);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B418C);
+s32 func_800B418C(s32 arg0, s32 arg1) {
+    typedef struct { u8 pad[0x10]; u16 kind; u8 rest[0x196]; } Rec418C;
+    extern s32 D_8006AF84[];
+    extern u8 D_8006AFCC[];
+    extern s16 D_8006B008[];
+    extern u8 D_8008ED90[];
+    extern Rec418C D_80091618[];
+    s32 t = D_8006AF84[0];
+    u8 *s = D_8006AFCC;
+    s32 state = *(u16 *)(s + 0x3C);
+    s32 other;
+    s32 dt;
+    u16 kind;
+    if (state != 1) {
+        if (state >= 2) return 0;
+        if (state != 0) return 0;
+        { register u32 id asm("v1") = arg0 & 0xFFFF;
+          kind = D_80091618[id].kind; }
+        if (kind == 6 && ((other = arg1 & 0xFFFF) == 0xFFFF || D_80091618[other].kind == kind)
+            && (u32)((t % 28800) / 1200 - 5) >= 17) {
+            if (t != (t / 1200) * 1200) {
+                if (t == (t / 600) * 600) {
+                    if (func_800202A4(0x24) == 0x12) {
+                        D_8006B008[0] = 2;
+                        func_800DC79C((u16)arg0, 0x16);
+                        return 1;
+                    }
+                    goto done;
+                }
+                return 0;
+            }
+done:
+            return 0;
+        }
+        return 0;
+    }
+    {
+        dt = t - *(s32 *)(s + 0x60);
+        if (dt >= func_800B46EC(2) && D_8008ED90[0] == 0) {
+            *(s32 *)(s + 0x60) = t;
+            func_800DC984((u16)arg0, 0xFFFF);
+        }
+        return 0;
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B4390);
 
