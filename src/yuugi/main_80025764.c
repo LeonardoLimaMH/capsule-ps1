@@ -130,19 +130,7 @@ void func_80025EF8(s32 arg0) {
     }
 }
 
-void func_80025FC0(u8 arg0, u16 arg1, u16 arg2, u16 arg3) {
-    extern u8 D_80085428[];
-
-    *D_80085428 = arg0;
-    switch (arg0) {
-    case 0:
-        func_80026020();
-        break;
-    case 1:
-        func_80026078(arg1, arg2, arg3);
-        break;
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80025FC0);
 
 #include "common.h"
 

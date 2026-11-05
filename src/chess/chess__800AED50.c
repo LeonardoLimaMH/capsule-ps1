@@ -5,10 +5,7 @@ void func_800AED50(s16 arg0) {
     (*D_8008EE50) = arg0;
 }
 
-u8 func_800AED5C(s32 arg0, u8 *arg1, u8 arg2, u8 arg3) {
-    extern u8 D_801010B0[];
-    return (*(u8 *)(*(u8 **)(D_801010B0 + arg1[9] * 0x34) + arg2 * 0x34 + arg3 * 4 + 3)) & 0x7F;
-}
+INCLUDE_ASM("asm/chess/nonmatchings/chess__800AED50", func_800AED5C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800AED50", func_800AEDB8);
 

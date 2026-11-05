@@ -224,24 +224,7 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B21F0);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B24B8);
 
-s32 func_800B284C(s32 arg0, s32 arg1) {
-    typedef struct { u8 p0[0x6C]; s32 f6c; s32 f70; s32 f74; u8 p78[0x130]; } Rec284C;
-    extern Rec284C D_80091618[];
-    extern s32 D_8006AF84[];
-    register s32 *clock asm("a1") = D_8006AF84;
-    register s32 t asm("a1") = *clock;
-    register s32 v asm("v0");
-    s32 last;
-    v = D_80091618[arg0 & 0xFFFF].f6c;
-    if (v != 0 && t - v <= 28800) return 0;
-    v = D_80091618[arg1 & 0xFFFF].f6c;
-    if (v != 0 && t - v <= 28800) return 0;
-    v = D_80091618[arg0 & 0xFFFF].f74;
-    if (v != 0 && t - v <= 28800) return 0;
-    last = D_80091618[arg1 & 0xFFFF].f74;
-    if (last != 0 && t - last <= 28800) return 0;
-    return 1;
-}
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B284C);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B2984);
 

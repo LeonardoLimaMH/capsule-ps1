@@ -123,20 +123,7 @@ void func_800A95CC(void) {
 
 }
 
-void func_800A95D4(void) {
-    typedef struct {
-        s32 state;
-        s32 cells[9];
-        s32 extra[2][9];
-        s32 indices[9];
-        s32 unk94;
-        u8 col[4];
-    } LocalResult;
-    extern Result_800EE914 D_800EE914;
-    register void *temp_res asm("v0") = &D_800EE914;
-    LocalResult *res = temp_res;
-    s32 i;
-    s32 j;
+INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A8CD0", func_800A95D4);
 
 s32 func_800A9658(s16 arg0) {
     register s32 r asm("v0");

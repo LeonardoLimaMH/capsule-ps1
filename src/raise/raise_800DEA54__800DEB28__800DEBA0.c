@@ -56,33 +56,7 @@ s32 func_800DEC04(s32 unused, s32 a1, s32 a2, s32 a3, s32 a4) {
     return b != 0xFF;
 }
 
-void func_800DECA8(u32 param_1, u16 param_2) {
-    typedef struct { u8 pad[0x90]; u16 flag; u8 rest[0x116]; } Input;
-    register u32 mask1 asm("t0") = 0xFFFE07FF;
-    register u32 mask2 asm("a3") = 0xFF81FFFF;
-    register s32 i asm("t2") = 0;
-    register u32 addr asm("v0");
-    register u8 *base asm("v1");
-    RaiseEnt *p;
-    register u16 *slot asm("t1");
-    u32 bits;
-    addr = param_2 * 0x44;
-    base = D_80092008;
-    addr = addr + (u32)base;
-    p = (RaiseEnt *)addr;
-    slot = (u16 *)p;
-    p->f0 = ((Input *)D_80091618)[param_2].flag;
-    p->f1 = param_1;
-    p->f2 = param_2;
-    p->f3 = 0;
-    bits = *(u32 *)p & mask1;
-    *(u32 *)p = bits & mask2;
-    do {
-        slot[2] = 0;
-        i = i + 1;
-        slot++;
-    } while (i < 0x20);
-}
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_800DECA8);
 
 #include "ghidra.h"
 undefined4 func_800DED74(undefined4 param_1,undefined2 param_2,short param_3,short param_4)
@@ -116,11 +90,7 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_80
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_800DF51C);
 
-s32 func_800DF67C(s32 a0, u16 a1, s32 a2, s16 a3, s16 a4) {
-    u8 *e = D_80092008 + a1 * 0x44;
-    u8 n = (*(u32 *)e >> 17) & 0x3F;
-    s16 i;
-    register s32 result asm("t0") = 0;
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_800DF67C);
 
 void func_800DF734(s32 unused, u16 idx, u32 kind, s32 x, s32 y) {
     register u32 bits asm("a0") = 0xFFFE07FF;

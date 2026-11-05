@@ -26,19 +26,7 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BC7B0);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BC8FC);
 
-void func_800BCAEC(void)
-{
-    extern u8 D_800EFF58[];
-    extern s16 D_8006AF90[];
-    s32 i;
-    M2C_GFIELD(D_800EFF58, s32, 0x33C) = 1;
-    M2C_GFIELD(D_800EFF58, s32, 0x340) = 0x20;
-    M2C_GFIELD(D_800EFF58, s32, 0x344) = 0;
-    M2C_GFIELD(D_800EFF58, s32, 0x348) = D_8006AF90[0] + 4;
-    for (i = 0; i < D_8006AF90[0]; i++) {
-        *(s32 *)(D_800EFF58 + 0x3E8 + i * 4) = D_8006AF90[i + 1];
-    }
-}
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BCAEC);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BCB58);
 

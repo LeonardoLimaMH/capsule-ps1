@@ -143,32 +143,7 @@ void func_80032398(void) {
 extern s32 func_8001F1A8(s16, s16, s32, s32, s32, s32, s32, s32, s32);
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4", func_80032474);
 
-void func_80032570(void) {
-    extern u8 D_800922FA[];
-    extern s16 D_800922DE[];
-    extern s16 D_800922DC[];
-    extern u8 D_80078D34;
-    extern u16 D_80085430[];
-    u8 v = D_800922FA[0];
-    if (D_800922DE[0] != 0) {
-        v |= 2;
-    } else {
-        v &= ~2;
-    }
-    if (D_800922DC[0] != 2) {
-        v |= 1;
-    } else {
-        v &= ~1;
-    }
-    func_800337E0(v);
-    if (D_800922DC[0] != 2) {
-        if (D_80078D34 != 1) {
-            func_800338DC(D_80085430[0]);
-            return;
-        }
-    }
-    func_80033974(0);
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4", func_80032570);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4", func_80032610);
 
@@ -305,25 +280,7 @@ void func_80032A28(u8 *p) {
     }
 }
 
-void func_80032B0C(void *arg0) {
-    extern u16 D_8008EE58[];
-    extern s16 D_800922D0[];
-    extern u32 D_800922D8[];
-    u32 a = D_8008EE58[0];
-    if ((a - 5) < 2U && D_800922D0[0] == 0) {
-        M2C_FIELD(arg0, s32 *, 0x38) = M2C_FIELD(arg0, s32 *, 0x38) & ~1;
-        if (D_800922D0[2] == M2C_FIELD(arg0, s32 *, 0x80)) {
-            M2C_FIELD(arg0, u8 *, 0x5A) = 0x80;
-            M2C_FIELD(arg0, u8 *, 0x59) = 0x80;
-            M2C_FIELD(arg0, u8 *, 0x58) = 0x80;
-        }
-    } else {
-        M2C_FIELD(arg0, s32 *, 0x38) = M2C_FIELD(arg0, s32 *, 0x38) | 1;
-    }
-    if ((D_800922D8[0] - 3) < 2U) {
-        func_800185F8(arg0);
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4", func_80032B0C);
 
 void func_80032BB8(void *arg0) {
     extern u16 D_8008EE58[];
@@ -374,54 +331,9 @@ void func_80032CF4(void *arg0) {
     }
 }
 
-u8 *func_80032DB0(s16 x, s16 y, s16 z, s32 a3, s32 a4, void *cb) {
-    extern u8 *func_80015B3C();
-    extern s32 func_80019F30();
-    extern void func_8003350C();
-    extern void func_800161C4();
-    u8 *o;
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4", func_80032DB0);
 
-    if (cb == 0) {
-        cb = (void *)func_8003350C;
-    }
-    o = func_80015B3C(cb, func_800161C4, 1);
-    func_80015EF8(o);
-    func_8001611C(0x1000);
-    *(s16 *)(o + 0x46) = x;
-    *(s16 *)(o + 0x4A) = y;
-    *(s16 *)(o + 0x4E) = z;
-    o[0x5A] = 0x80;
-    o[0x59] = 0x80;
-    o[0x58] = 0x80;
-    *(s32 *)(o + 0x18) = func_80019F30(a3 | 0x60000, a4);
-    *(s32 *)(o + 0x7C) = a4;
-    return o;
-}
-
-u8 *func_80032E78(s16 x, s16 y, s16 z, s32 a3, s32 a4, void *cb) {
-    extern u8 *func_80015B3C();
-    extern s32 func_80019F30();
-    extern void func_8003350C();
-    extern void func_800161C4();
-    u8 *o;
-
-    if (cb == 0) {
-        cb = (void *)func_8003350C;
-    }
-    o = func_80015B3C(cb, func_800161C4, 1);
-    func_80015EF8(o);
-    func_8001611C(0x1000);
-    *(s16 *)(o + 0x46) = x;
-    *(s16 *)(o + 0x4A) = y;
-    *(s16 *)(o + 0x4E) = z;
-    o[0x5A] = 0x80;
-    o[0x59] = 0x80;
-    o[0x58] = 0x80;
-    *(s32 *)(o + 0x18) = 0;
-    func_80015CD0(o + 0x14, func_80019F30(a3 | 0x70000, a4), 0);
-    *(s32 *)(o + 0x7C) = a4;
-    return o;
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4", func_80032E78);
 
 #include "common.h"
 

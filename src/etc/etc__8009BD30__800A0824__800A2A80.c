@@ -40,22 +40,7 @@ void func_800A2B64(u8 *arg0, s16 arg1) {
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A2BB0);
 
-void func_800A2CC8(s32 arg0, s32 arg1) {
-    extern s16 D_800B3B38[];
-    extern s16 D_800B3B70[][6];
-    extern u8 D_800B3B90[][0x32];
-    s32 i, j;
-    for (; arg0 < arg1; arg0++) {
-        for (i = 0; i < 6; i++) {
-            ((s16 *)((u8 *)D_800B3B38 + arg0 * 12 + 0x10))[i] = -1;
-            D_800B3B70[arg0][i] = 0;
-        }
-        for (j = 0x31; j >= 0; j--) {
-            D_800B3B90[arg0][j] = 0;
-        }
-        D_800B3B38[arg0 + 2] = 6;
-    }
-}
+INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A2CC8);
 
 void func_800A2D84(void *arg0)
 {

@@ -99,105 +99,7 @@ typedef struct {
     s32 unk3C8[1][9];
 } S_800EEB9C;
 
-void *func_800B6D98(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u16 arg4, void *arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, u16 arg10, s16 arg11) {
-    typedef struct ObjRes {
-        s32 unk0;
-        s32 unk4[2];
-        s32 unkC;
-        s32 unk10[2];
-        s32 unk18;
-    } ObjRes;
-    typedef struct Obj {
-        u8 pad0[0x14];
-        s32 unk14;
-        s32 unk18;
-        s32 unk1C;
-        u8 pad20[0x10];
-        u32 f30_0 : 3;
-        u32 f30_3 : 1;
-        u32 f30_4 : 2;
-        u32 f30_6 : 3;
-        u32 f30_9 : 23;
-        u32 f34_0 : 8;
-        u32 f34_8 : 1;
-        u32 f34_9 : 23;
-        u32 f38_0 : 1;
-        u32 f38_1 : 3;
-        u32 f38_4 : 2;
-        u32 f38_6 : 1;
-        u32 f38_7 : 25;
-        u8 pad3C[0xA];
-        s16 unk46;
-        s16 unk48;
-        s16 unk4A;
-        s16 unk4C;
-        s16 unk4E;
-        u8 pad50[0x16];
-        u16 unk66;
-        u8 pad68[0x14];
-        s32 unk7C;
-        s32 unk80;
-    } Obj;
-    typedef struct ScreenInfo {
-        u8 pad[0x108];
-        s32 width;
-        s32 height;
-    } ScreenInfo;
-    extern s16 D_80078C20[];
-    extern ScreenInfo D_8008ED68;
-    extern int func_800161C4();
-    extern void func_800B6310();
-    extern void func_800B6624();
-    void *var_a0;
-    s32 tmp;
-    s32 tmp2;
-    Obj *obj;
-    register ScreenInfo *screen asm("a2");
-    u32 x = arg1;
-    u32 z = arg3;
-#define res ((ObjRes *)arg5)
-
-    if (arg11 != 0) {
-        if (arg11 != 2) {
-            var_a0 = func_800B6310;
-        } else {
-            var_a0 = func_800B6C48;
-        }
-    } else {
-        var_a0 = func_800B6624;
-    }
-
-    obj = (Obj *)func_80015B3C(var_a0, func_800161C4, arg0);
-    if (obj != NULL) {
-        func_80015EF8(obj);
-        if (arg7 == 0) {
-            tmp = res->unk18 + arg6;
-            tmp2 = func_80019F30(res->unk0 | 0x70000, tmp);
-            func_80015CD0(&obj->unk14, tmp2, 0);
-            obj->unk1C = tmp2;
-            obj->unk7C = tmp;
-            obj->unk80 = tmp2;
-        } else {
-            tmp = func_80019F30(res->unk0 | 0x60000, res->unkC + arg6);
-            obj->unk1C = 0;
-            obj->unk18 = tmp;
-        }
-        screen = &D_8008ED68;
-        obj->unk66 = arg4;
-        obj->f30_6 = 0;
-        obj->f30_4 = arg10;
-        obj->f30_3 = 0;
-        obj->f38_0 = arg8;
-        obj->f38_4 = 0;
-        obj->f38_6 = arg9;
-        obj->unk4E = z;
-        obj->unk46 = x - screen->width / 2;
-        obj->f34_8 = *D_80078C20;
-        obj->unk4A = arg2 - screen->height / 2;
-    }
-#undef res
-    return obj;
-}
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B6D98);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B6FA0);
 
@@ -545,33 +447,9 @@ void func_800B7E68(void) {
 
 }
 
-s32 func_800B7E70(s32 i) {
-    extern S_800EEB9C D_800EEB9C;
-    S_800EEB9C *p = &D_800EEB9C;
-    register s32 n asm("v0") = p->unk60[i];
-    s32 k;
-    s32 *list;
-    for (k = 0; k < n; k++) {
-        if (p->unk3C8[i][k] == 1) return 1;
-    }
-    return 0;
-}
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B7E70);
 
-void func_800B7ED8(s32 flag) {
-    extern S_800EEB9C D_800EEB9C;
-    s32 k = 0;
-    typedef struct { u8 pad[0x38]; u32 bit:1; u32 rest:31; } Flags;
-    Flags *obj = *(Flags **)((u8 *)&D_800EEB9C + 0x1C);
-    u8 *p = (u8 *)&D_800EEB9C;
-    D_800EEB9C.unk10 = flag;
-    obj->bit = flag;
-    do {
-        Flags *o = *(Flags **)(p + 0x28);
-        o->bit = flag;
-        k++;
-        p += 4;
-    } while (k < 7);
-}
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B7ED8);
 
 void func_800B7F40(s32 mode) {
     typedef struct Obj {

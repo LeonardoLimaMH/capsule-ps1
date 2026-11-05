@@ -241,52 +241,7 @@ void func_8009A294(void) {
     func_80012508();
 }
 
-void func_8009A2C4(void) {
-    extern u8 D_8008ED68[];
-    extern u8 D_800859F0[];
-    extern s32 D_800B3AD8;
-    extern void func_8009C324(s32, s32, s32);
-    extern s32 func_80019654(void);
-    extern void func_80012578(void);
-    extern void func_800338DC(s32);
-    extern s32 func_800337EC(void);
-    extern s32 func_80012508(void);
-    u8 *s0 = D_8008ED68;
-    u16 m;
-
-    if (*(u16 *)(s0 + 0xDC) == 8) {
-        func_8009C324(0, -0x18, 5);
-    }
-    switch (*(u16 *)(s0 + 0xE0)) {
-    case 0:
-        m = *(u16 *)(s0 + 0xDC);
-        D_800B3AD8 = 0;
-        if (m == 2 && *(s32 *)(s0 + 0xA18) == 1) {
-            func_80012508();
-            return;
-        }
-        func_80012578();
-        return;
-    case 1:
-        if (func_80019654() != 0) {
-            func_80012578();
-        }
-        return;
-    case 2:
-        func_800338DC(*(u16 *)(s0 + 0xDC) == 2 ? 0x701D : 0x701E);
-        func_80012578();
-        return;
-    case 3:
-        if (!(*D_800859F0 & 4)) {
-            func_80012508();
-            return;
-        }
-        if (func_800337EC() & 0x80) {
-            func_80012508();
-        }
-        return;
-    }
-}
+INCLUDE_ASM("asm/etc/nonmatchings/etc__80099B18", func_8009A2C4);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__80099B18", func_8009A3E8);
 
@@ -539,20 +494,7 @@ block_11:
     }
 }
 
-void func_8009B1CC(u8 *s1) {
-    extern u8 D_8008ED68[];
-    extern u8 D_800AF000[];
-    extern u16 D_800AF198[];
-    extern s32 D_800B3AF8[];
-    extern s32 D_800B3B20[];
-    extern s32 func_80019F30(s32, s32);
-    extern void func_80015CD0(void *, s32, s32);
-    extern void func_80034AB0(s32);
-    s32 temp;
-    u8 *a2;
-    s16 v1;
-    s32 *s2;
-    u8 *s0;
+INCLUDE_ASM("asm/etc/nonmatchings/etc__80099B18", func_8009B1CC);
 
 void func_8009B500(u8 *arg0) {
     extern u16 D_8008EE44[];

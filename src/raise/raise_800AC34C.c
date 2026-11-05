@@ -460,41 +460,7 @@ void func_800AED5C(s32 arg0, s32 arg1) {
     *(s16 *)(p + 0x70) = v;
 }
 
-s32 func_800AEDC4(void) {
-    typedef struct {
-        u16 unk0;
-        u8 _p02[0x88];
-        u16 unk8A;
-        u8 _p8C[0x2];
-        s16 unk8E;
-        u8 _p90[0x118];
-    } Entry_80091618;
-    typedef struct {
-        u8 _p00[0x8];
-        u32 unk8;
-        u8 _p0C[0x30];
-    } Entry_80063940;
-    extern u16 D_8006AF80[];
-    extern Entry_80091618 D_80091618[];
-    extern Entry_80063940 D_80063940[];
-    extern void func_800A89E0(s32, s32);
-
-    Entry_80091618 *p = &D_80091618[*D_8006AF80];
-    u16 a = *D_8006AF80;
-    Entry_80091618 *e = &D_80091618[a];
-    u16 j = p->unk8A;
-    Entry_80063940 *pe = &D_80063940[e->unk0];
-    Entry_80091618 *f = &D_80091618[j];
-    s16 v = (((D_80063940[f->unk0].unk8 ^ pe->unk8) >> 12) & 3) != 0;
-    register s32 v2 asm("v0") = v * 2;
-    s16 s = (s16)v2;
-
-    e->unk8E = v2;
-    f->unk8E = v2;
-    func_800A89E0(a, s);
-    func_800A89E0(j, s);
-    return s;
-}
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800AC34C", func_800AEDC4);
 
 /* Estado do modo raise em D_800EEB9C (layout parcial). */
 

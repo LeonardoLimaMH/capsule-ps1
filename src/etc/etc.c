@@ -67,54 +67,7 @@ s32 func_80097AF0(s32 arg0, s32 arg1, s32 arg2)
   return (*((u8 *) (new_var + 0x5E8))) + 0x10D;
 }
 
-void func_80097B24(u8 *base, s32 side, s32 slot) {
-    typedef struct {
-        s16 x, y, w, h;
-    } RECT;
-    extern u8 D_800AD55C[];
-    extern s32 func_80019F30(s32, s32);
-    extern void func_80012A20(s32, s32, s32, s32);
-    extern void MoveImage(RECT *, s32, s32);
-
-    register s32 r_slot asm("s2") = slot;
-    register s32 r_side asm("s1");
-    register s32 s0 asm("s0");
-    RECT r;
-    s32 c;
-    s32 off1;
-
-    off1 = r_slot * 124;
-    r_side = side * 3;
-    base += off1 + r_side * 248;
-    c = base[0x5E8];
-
-    if (c != 0x5C) {
-        s32 ret;
-        s0 = 0;
-        ret = func_80019F30((c + 0x10D) | 0x10000, s0);
-        r_slot = (s32)(D_800AD55C + r_slot * 4 + r_side * 8);
-        r_side = ret;
-        do {
-            s32 a = *(s32 *)(r_side + 0xC);
-            r_side += 4;
-            func_80012A20(a, 3, (s16)(*(u16 *)r_slot + (s0++ << 5)), *(s16 *)(r_slot + 2));
-        } while (s0 < 2);
-    } else {
-        s0 = 0;
-        r_slot = (s32)(D_800AD55C + r_slot * 4 + r_side * 8);
-        r_side = 0x3C0;
-        do {
-            register s32 v0 asm("v0");
-            r.x = r_side;
-            r_side += 0x20;
-            v0 = s0++ << 5;
-            r.y = 0x180;
-            r.w = 0x20;
-            r.h = 0x80;
-            MoveImage(&r, *(s16 *)r_slot + v0, *(s16 *)(r_slot + 2));
-        } while (s0 < 2);
-    }
-}
+INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80097B24);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80097C6C);
 

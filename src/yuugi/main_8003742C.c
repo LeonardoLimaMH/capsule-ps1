@@ -217,38 +217,7 @@ extern s32 D_80078C78;
 extern u8 D_80093D68[];
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80037F64);
 
-    for (i = 0; i < D_80078C78; i++, ids++, e++) {
-        t = e->cur;
-        if (e->last == t) {
-            continue;
-        }
-        x = (e->l + t) * D_80078D54;
-        y = (e->r + t) * D_80078D56;
-        M2C_GFIELD(D_80093790, s32, 4) = 0xF;
-        *(s32 *)D_80093790 = *ids;
-        M2C_GFIELD(D_80093790, s16, 0xC) = 0;
-        M2C_GFIELD(D_80093790, s16, 0xE) = 0;
-        M2C_GFIELD(D_80093790, s16, 8) = x >> 7;
-        M2C_GFIELD(D_80093790, s16, 0xA) = y >> 7;
-        SpuSetVoiceAttr(D_80093790);
-    }
-}
-
-s32 func_8003804C(u8 *p, u32 a) {
-    if (a < 0x40U) {
-        if (p[0x1D] != 0) {
-            return -(p[0x1D] * 2 * (0x40 - a));
-        }
-        return 0;
-    }
-    if (a == 0x40) {
-        return 0;
-    }
-    if (p[0x1C] != 0) {
-        return (s16)(p[0x1C] * 2 * (a - 0x3F));
-    }
-    return 0;
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_8003804C);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_800380C8);
 

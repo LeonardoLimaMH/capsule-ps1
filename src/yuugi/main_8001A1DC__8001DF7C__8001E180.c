@@ -1,15 +1,7 @@
 #include "common.h"
 #include "yuugi.h"
 
-void func_8001E180(void) {
-    register s32 i asm("s0") = 0;
-    do {
-        register s32 id asm("a0") = 0x20001;
-        i += 1;
-        func_80012C7C(func_80019F30(id, i));
-    } while (i < 12);
-    func_80012E54(func_80019F30(0x50001, 1));
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C__8001E180", func_8001E180);
 
 #include "common.h"
 
@@ -27,16 +19,7 @@ void func_8001E208(undefined4 param_1)
   return;
 }
 
-void func_8001E228(void) {
-    extern u8 D_800861B0[];
-    u32 i = 0;
-    s32 off = i;
-    do {
-        func_8001A998((void *)(off + (u32)D_800861B0), 0x18);
-        i++;
-        off += 0x18;
-    } while (i < 5);
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C__8001E180", func_8001E228);
 
 s32 *func_8001E284(void) {
     typedef struct {
@@ -70,54 +53,9 @@ void func_8001E2BC(void *arg0, s32 arg1, s32 arg2, s32 arg3, volatile s32 arg4, 
     M2C_FIELD(arg0, s16 *, 0x16) = arg3;
 }
 
-void func_8001E2BC(void *arg0, s32 arg1, s32 arg2, s32 arg3, volatile s32 arg4, volatile s32 arg5) {
-    extern u8 D_8008ED68[];
-    u8 *b = D_8008ED68;
-    s32 a, c, h;
-    M2C_FIELD(arg0, s32 *, 0) = arg1;
-    M2C_FIELD(arg0, s16 *, 0x14) = arg2 + *(s32 *)(b + 0x108) / 2;
-    a = arg4;
-    c = arg5;
-    h = *(s32 *)(b + 0x10C);
-    M2C_FIELD(arg0, s8 *, 8) = a;
-    arg3 += h / 2;
-    M2C_FIELD(arg0, s8 *, 0xD) = c;
-    M2C_FIELD(arg0, s16 *, 0x16) = arg3;
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C__8001E180", func_8001E310);
 
-void func_8001E310(void) {
-    extern u8 D_8008ED68[], D_800861B0[];
-    u8 *b = D_8008ED68;
-    u32 i;
-    s32 off;
-    *(s32 *)(b + 0x968) = 0;
-    func_8001F160();
-    i = 0;
-    off = i;
-    do {
-        func_8001A998(D_800861B0 + off, 0x18);
-        i++;
-        off += 0x18;
-    } while (i < 5);
-    *(s32 *)(b + 0x990) = 0;
-}
-
-void func_8001E388(void) {
-    extern u8 D_8008ED68[], D_800861B0[];
-    u8 *b = D_8008ED68;
-    u32 i;
-    s32 off;
-    *(s32 *)(b + 0x968) = 0;
-    func_8001F160();
-    i = 0;
-    off = i;
-    do {
-        func_8001A998(off + D_800861B0, 0x18);
-        i++;
-        off += 0x18;
-    } while (i < 5);
-    *(s32 *)(b + 0x990) = 1;
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C__8001E180", func_8001E388);
 
 s32 func_8001E404(void) {
     extern s32 D_8008F6F8[];
@@ -162,42 +100,7 @@ void func_8001F160(void) {
     *(s16 *)(b + 0x994) = 0;
 }
 
-void func_8001F1A8(s32 x, s32 y, s32 a2, s32 a3, s32 a4, u8 *str, s16 wide, u32 n, s32 a8) {
-    extern u8 D_8008ED68[];
-    s16 w = wide;
-    u8 *s = str;
-    s32 i = 0;
-    s32 _x = x;
-    s32 _y = y;
-    s32 _a2 = a2;
-    if (n != 0) {
-        u8 *b = D_8008ED68;
-        s32 xa = i;
-        s32 xb = i;
-        u16 *p = (u16 *)s;
-        do {
-            s32 c;
-            if (w != 0) {
-                c = *p;
-            } else {
-                c = s[i];
-            }
-            if (c != 0 && c != 0xFFFF) {
-                if (a3 != 0) {
-                    func_8001EA24((s16)(_x + *(s32 *)(b + 0x108) / 2 + xb),
-                                  (s16)(_y + *(s32 *)(b + 0x10C) / 2), (s16)_a2, c, a4, a8);
-                } else {
-                    func_8001EC74((s16)(_x + *(s32 *)(b + 0x108) / 2 + xa),
-                                  (s16)(_y + *(s32 *)(b + 0x10C) / 2), (s16)_a2, c, a4, a8);
-                }
-            }
-            xa += 10;
-            xb += 14;
-            i++;
-            p++;
-        } while (i < n);
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C__8001E180", func_8001F1A8);
 
 void func_8001F35C(s32 x, s32 y, s32 z, s32 big, s32 c4, u32 val, u32 count, s32 c7) {
     extern u8 D_8008ED68[];

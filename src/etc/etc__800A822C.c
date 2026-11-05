@@ -94,31 +94,7 @@ void func_800A83CC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x38) = (s32) (M2C_FIELD(arg0, s32 *, 0x38) | 1);
 }
 
-void func_800A847C(u8 *arg0) {
-    extern M2C_UNK D_8008ED68[];
-    extern s32 D_800B3C1C[];
-    register u8 c asm("v0");
-    if ((u32) (M2C_GFIELD(D_8008ED68, u16, 0xDC) - 6) < 2U) {
-        *(s32 *)(arg0 + 0x38) &= ~1;
-        if (*(s32 *)(arg0 + 0x84) == 0) {
-            s32 v = 0x12;
-            if (M2C_GFIELD(D_8008ED68, u16, 0xDC) == 6) {
-                v = 0xF;
-            }
-            *(s32 *)(arg0 + 0x18) = func_80019F30(0x6000C, v);
-        }
-        {
-            register s32 selected asm("v1") = *(s32 *)(arg0 + 0x84);
-            if (selected == *D_800B3C1C) c = 0x80;
-            else c = 0x30;
-        }
-        arg0[0x5A] = c;
-        arg0[0x59] = c;
-        arg0[0x58] = c;
-    } else {
-        *(s32 *)(arg0 + 0x38) |= 1;
-    }
-}
+INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A847C);
 
 #include "common.h"
 
@@ -159,17 +135,7 @@ block_6:
     }
 }
 
-void func_800A8638(void *arg0) {
-    extern u16 D_8008EE44[];
-    extern s32 D_800B3C20[];
-    s32 f = *(s32 *)((u8 *)arg0 + 0x38) | 1;
-    *(s32 *)((u8 *)arg0 + 0x38) = f;
-    if (*D_8008EE44 == 7) {
-        s32 g = *D_800B3C20;
-        *(s32 *)((u8 *)arg0 + 0x38) = f & ~1;
-        *(s32 *)((u8 *)arg0 + 0x18) = func_80019F30(0x6000C, g + 0x22);
-    }
-}
+INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A8638);
 
 void func_800A86A4(u8 *arg0) {
     extern u16 D_8008EE44[];
@@ -236,60 +202,7 @@ void func_800A88DC(u8 *arg0) {
     }
 }
 
-s32 func_800A8988(u8 *p) {
-    extern u8 D_8008ED68[], D_80085428[];
-    extern struct { u8 pad[0x10]; u16 f10; u8 pad3[0x196]; } D_80091618[];
-    extern s32 D_800B3C20[], D_800B3C1C[];
-    extern u8 D_800B3C2A[];
-    extern u16 D_800B2688[];
-    s32 sel = 0;
-    register s32 v asm("v0");
-    u8 flag;
-    u8 *d = D_8008ED68;
-    u16 m = *(u16 *)(d + 0xDC);
-    if (m == 6) {
-        u8 *base = D_80085428;
-        sel = base[0x50 + *D_800B3C20 * 14];
-        if (*(u16 *)(d + 0xE0) == 2) *(u32 *)(p + 0x38) |= 1;
-        else *(u32 *)(p + 0x38) &= ~1;
-        *(s16 *)(p + 0x46) = 0x50;
-        v = (u16)(D_800B2688[sel] - 0x10);
-        flag = *D_800B3C2A;
-    } else if (m == 7) {
-        typeof(D_80091618[0]) *base = D_80091618;
-        typeof(D_80091618[0]) *e = &base[*D_800B3C20];
-        if (e->f10 == 0xFFFF) goto hide;
-        sel = *(u16 *)e;
-        *(s16 *)(p + 0x46) = 0x50;
-        *(u32 *)(p + 0x38) &= ~1;
-        v = D_800B2688[sel] - 0x10;
-        flag = *D_800B3C2A;
-    } else if (m == 9) {
-        sel = *D_800B3C1C;
-        *(s16 *)(p + 0x46) = -0x60;
-        *(u32 *)(p + 0x38) &= ~1;
-        v = D_800B2688[sel] - 0xC;
-        flag = *D_800B3C2A;
-    } else {
-        goto hide;
-    }
-    *(u16 *)(p + 0x4A) = v;
-    if (flag) {
-        *D_800B3C2A = 0;
-        func_80015CD0(p + 0x14, func_80019F30(0x7000C, sel + 0xB), 0);
-    }
-    goto scale;
-hide:
-    *(u32 *)(p + 0x38) |= 1;
-scale:
-    {
-        s32 scale_value = 0x1000;
-        if (sel == 0x31) scale_value = 0xF00;
-        *(u16 *)(p + 0x52) = scale_value;
-        *(u16 *)(p + 0x50) = scale_value;
-        return scale_value;
-    }
-}
+INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A8988);
 
 void func_800A8B74(u8 *arg0) {
     extern u16 D_8008EE44[];

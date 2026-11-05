@@ -22,16 +22,7 @@ s32 func_800133A4(void)
   return 0;
 }
 
-void func_800133C4(void) {
-    extern u8 D_8008ED68[];
-    u8 *d = D_8008ED68;
-    func_8004FEDC();
-    func_8004FE3C(0xF2000003, 2, 0x1000, func_800133A4);
-    func_8004FE7C(*(s32 *)(d + 0x10));
-    SetRCnt(0xF2000003, 1, 0x1000);
-    StartRCnt(0xF2000003);
-    func_8004FEEC();
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_800133C4);
 
 #include "common.h"
 
@@ -87,42 +78,7 @@ void func_80013440(int arg0)
   }
 }
 
-void func_800134BC(void) {
-    extern u8 D_8008ED68[];
-    u8 *d = D_8008ED68;
-    s32 i;
-    u8 *q;
-    u8 *e;
-    if (*(s32 *)(d + 0xF8) == 0) {
-        i = 0;
-        e = d;
-        q = d;
-        do {
-            if ((*(s32 *)(q + 0x80) & 0x90F) == 0x90F) {
-                if (*(u16 *)(e + 0xFE) != i) {
-                    *(u16 *)(e + 0xFE) = i;
-                    *(u16 *)(e + 0xFC) = 0;
-                }
-                *(u16 *)(e + 0xFC) = *(u16 *)(e + 0xFC) + 1;
-                if ((u16)*(u16 *)(e + 0xFC) >= 0x41) {
-                    *(s32 *)(e + 0xF4) = 1;
-                    ResetRCnt(0xF2000003);
-                    *(u16 *)(e + 0xFC) = 0;
-                    *(u16 *)(e + 0xFE) = 0xFF;
-                }
-                break;
-            }
-            i++;
-            q += 0x10;
-        } while (i < 2);
-        if (i == 2) {
-            *(u16 *)(d + 0xFC) = 0;
-        }
-    } else {
-        *(u16 *)(d + 0xFC) = 0;
-        *(u16 *)(d + 0xFE) = 0xFF;
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_800134BC);
 
 #include "common.h"
 

@@ -1,12 +1,6 @@
 #include "common.h"
 
-typedef struct {
-    u8 pad0[0x8A];
-    u16 unk8A;
-    u8 pad8C[0x100];
-    s32 f_18C;
-    u8 pad190[0x18];
-} S_80091618;
+#include "common.h"
 
 void func_800DC640(void) {
     extern u8 D_8006AFCC[];

@@ -670,27 +670,7 @@ s32 func_8003B6F4(u8 *s) {
     return more;
 }
 
-s32 func_8003B6F4(u8 *s) {
-    u32 i = 0;
-    u32 n = func_8003AAF0(s);
-    s32 result;
-    register s32 more asm("v0");
-    do {
-        Unk_800944B8 *e = &D_800944B8[D_80078C9C];
-        u32 pos = *(u32 *)s;
-        u8 c = e->unk_0x284[pos];
-        *(u32 *)s = ++pos;
-        i++;
-        if (e->unk_0x294 < pos) { s[0x20] = 1; result = -1; }
-        else result = c;
-        if ((u8)result == 0xF7) {
-            more = i < n;
-            break;
-        }
-        more = i < n;
-    } while (more);
-    return more;
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003B7B4);
 
 s32 func_8003BC94(Unk_800944B8Stream *p) {
     extern s32 D_800714A0[];
@@ -978,29 +958,9 @@ void func_8003C530(s32 n) {
     }
 }
 
-    /* Read 1: into a1 */
-    {
-        register Unk_800944B8 *base asm("a0") = D_800944B8;
-        Unk_800944B8 *e = &base[D_80078C9C];
-        u8 *data = *(u8 *volatile *)&e->unk_0x284;
-        register u32 pos asm("a0") = *(volatile u32 *)&p->unk_0x0;
-        register u8 c asm("v1") = data[pos];
-        pos++;
-        *(u32 *)&p->unk_0x0 = pos;
-        if (e->unk_0x294 < pos) { p->unk_0x20 = 1; a1 = -1; }
-        else a1 = (u8)c;
-    }
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C5BC);
 
-    a2 = a1;
-    if (!(a1 & 0x80)) {
-        a1 = p->unk_0x25;
-        p->unk_0x24 = 1;
-    } else {
-        if ((a2 & 0xFF) != 0xFF) {
-            p->unk_0x25 = a1;
-        }
-        p->unk_0x24 = 0;
-    }
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C654);
 
 void func_8003C73C(void) {
     extern Unk_800947E8 D_800947E8[];

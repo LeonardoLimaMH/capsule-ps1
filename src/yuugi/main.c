@@ -1,35 +1,7 @@
 #include "common.h"
 #include "yuugi.h"
 
-typedef struct {
-    u16 unk0;
-    u16 unk2;
-    void (*callback)();
-    u8 unk8[0x10];
-} MainState;
-
-void main(void) {
-    extern u8 D_8008ED50[];
-    register u8 *p asm("s0");
-    void (*callback)();
-
-    func_800118BC();
-    p = D_8008ED50;
-    while (1) {
-        func_800118FC();
-        func_80012698();
-        if (*(u16 *)D_8008ED50 != 0) {
-            do {
-                callback = *(void (**)())(p + 4);
-                if (callback == 0) {
-                    func_800126F8();
-                } else {
-                    callback();
-                }
-            } while (*(u16 *)D_8008ED50 != 0);
-        }
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", main);
 
 void func_800118BC(void) {
     ResetGraph(0);

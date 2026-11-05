@@ -15,18 +15,7 @@ s32 func_8004B038(s32 arg0, s32 arg1)
   }
 }
 
-s32 func_8004B054(s16 *arg0) {
-    s32 pat[4];
-    if (arg0 != NULL) {
-        pat[0] = (u32)(u8)arg0[0] >> 3;
-        pat[2] = (-arg0[2] & 0xFF) >> 3;
-        pat[1] = (u32)(u8)arg0[1] >> 3;
-        pat[3] = (-arg0[3] & 0xFF) >> 3;
-        return (pat[1] << 15) | ((pat[0] << 10) | 0xE2000000) | (pat[3] << 5) | pat[2];
-    } else {
-        return 0;
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/sdk_libgpu_sys__8004B038", func_8004B054);
 
 s32 func_8004B0D4(void) {
     extern s32 * D_80078A24[];

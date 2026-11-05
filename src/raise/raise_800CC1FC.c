@@ -2,25 +2,7 @@
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CC1FC);
 
-void func_800CC34C(void) {
-    extern s32 D_800F19C8[2][6][3];
-    extern u8 D_80103CE8[8][8];
-    s32 i, j, k;
-
-    for (i = 0; i < 2; i++) {
-        for (j = 0; j < 6; j++) {
-            for (k = 2; k >= 0; k--) {
-                D_800F19C8[i][j][k] = 0;
-            }
-        }
-    }
-    for (i = 0; i < 8; i++) {
-        k = 7;
-        do {
-            D_80103CE8[i][k] = 0;
-        } while (--k >= 0);
-    }
-}
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CC34C);
 
 
 void func_800CC3E4(void) {

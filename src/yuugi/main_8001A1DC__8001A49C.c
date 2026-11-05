@@ -45,11 +45,7 @@ void func_8001A684(s32 arg0, s32 *arg1, s32 arg2) {
     }
 }
 
-void func_8001A6B8(s32 arg0, s32 **arg1, s32 arg2) {
-    s32 *p = *arg1;
-    register s32 v asm("v0") = -1;
-    register s32 end asm("v1");
-    s32 d;
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001A49C", func_8001A6B8);
 
 void func_8001A704(s32 arg0, s32 ***arg1, s32 arg2) {
     register s32 i asm("t1");
@@ -80,62 +76,4 @@ void func_8001A704(s32 arg0, s32 ***arg1, s32 arg2) {
     }
 }
 
-void func_8001A704(s32 arg0, s32 ***arg1, s32 arg2) {
-    register s32 i asm("t1");
-    register s32 *q asm("t0");
-    register u32 j asm("a3");
-    register s32 *p asm("v1");
-    register s32 end asm("t2");
-
-    if (*arg1 != 0) {
-        i = 0;
-        end = -1;
-        arg0 -= arg2;
-        while (1) {
-            q = (*arg1)[i];
-            j = 0;
-            if ((s32)q == end) break;
-            q[1] += arg0;
-            if (q[2] != 0) {
-                p = q;
-                do {
-                    j++;
-                    p[3] += arg0;
-                    p++;
-                } while (j < (u32)q[2]);
-            }
-            i++;
-        }
-    }
-}
-
-void func_8001A784(s32 arg0, s32 ***arg1, s32 arg2) {
-    s32 i = 0;
-    s32 *q;
-    register u32 j;
-    register s32 d;
-    register s32 off asm("t0");
-    register s32 *x;
-    register s32 *end asm("t3");
-    if (*arg1 != 0) {
-        end = (s32 *)-1;
-        d = arg0 - arg2;
-        while (1) {
-            q = (*arg1)[i];
-            j = 0;
-            if (q == end) break;
-            q[2] += d;
-            if ((u32)q[0] != 0) {
-                off = j;
-                do {
-                    x = (s32 *)(q[2] + off);
-                    j++;
-                    x[1] += d;
-                    x[2] += d;
-                    off += 0x24;
-                } while (j < (u32)q[0]);
-            }
-            i++;
-        }
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001A49C", func_8001A784);

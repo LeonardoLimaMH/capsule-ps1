@@ -143,27 +143,7 @@ void func_80015CD0(int param_1,int param_2,uint param_3)
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015D14);
 
-s32 func_80015E60(u8 *arg0) {
-    extern u8 D_8008ED68[];
-    s32 limit;
-    u8 *d = D_8008ED68;
-    s32 n = d[0x103];
-
-    if (n == 0) {
-        if (*(s16 *)(arg0 + 0x24) > 0) return 0;
-        if (*(s32 *)(arg0 + 0x20) + 1 == **(s32 **)(arg0 + 0x1C)) return 1;
-        if (*(s16 *)(arg0 + 0x24) >= 0) return 0;
-        limit = 1;
-        goto check;
-    }
-    limit = n - 1;
-check:
-    if (*(s16 *)(arg0 + 0x24) <= limit) {
-        if (*(s32 *)(arg0 + 0x20) + 1 == **(s32 **)(arg0 + 0x1C)) return 1;
-    }
-    if (*(s16 *)(arg0 + 0x24) < 0) return 1;
-    return 0;
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015E60);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015EF8);
 
@@ -216,20 +196,7 @@ u32 func_800160F8(u32 arg0) {
     return *(u32 *)(base + 0xA74);
 }
 
-void func_8001611C(u32 arg0) {
-    extern u32 D_8008ED68[];
-    u32 *d = D_8008ED68;
-    s32 ok = arg0 < 0x2001;
-    if (ok) {
-        d[0xA6C / 4] = arg0;
-    }
-    if (ok) {
-        d[0xA70 / 4] = arg0;
-    }
-    if (ok) {
-        d[0xA74 / 4] = arg0;
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_8001611C);
 
 void func_80016148(void *arg0) {
     extern u8 D_8008F702[];
@@ -263,24 +230,7 @@ void func_80018608(void) {
 
 }
 
-void func_80018610(s32 arg0, s32 arg1) {
-    extern void SetDrawMode();
-    extern u8 *D_8008ED68[];
-    u8 **g = D_8008ED68;
-    u32 *p;
-    u8 *q = 0;
-    p = *(u32 **)(g[0] + 0x1090);
-    if (p != 0) {
-        q = (u8 *)p + 0xC;
-        if (q <= g[0] + 0x4594) {
-            *(u8 **)(g[0] + 0x1090) = q;
-            SetDrawMode(p, 0, 0, arg0, 0);
-        }
-    }
-    *p = (*p & 0xFF000000) | (*(u32 *)(g[0] + arg1 * 4 + 0x70) & 0xFFFFFF);
-    *(u32 *)(g[0] + arg1 * 4 + 0x70) =
-        (*(u32 *)(g[0] + arg1 * 4 + 0x70) & 0xFF000000) | ((u32)p & 0xFFFFFF);
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018610);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800186E4);
 
@@ -290,17 +240,7 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800188F0);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018C00);
 
-void func_80018EF4(s16 a, s16 b, s32 c, s32 d, s32 e) {
-    extern u8 D_80078B90[];
-    extern u16 D_80078B88[];
-    extern s32 func_800188F0();
-    extern s32 func_8001F1A8();
-    if (d == 0) {
-        func_800188F0(a, b, D_80078B90[c], 4, e);
-    } else {
-        func_8001F1A8(a, b, 4, 1, 0, (u8 *)D_80078B88 + c * 2, 1, 1, e);
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018EF4);
 
 s32 func_80018F90(u32 arg0, s32 arg1) {
     extern void func_80020688();
