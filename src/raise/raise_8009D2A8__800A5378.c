@@ -12,7 +12,43 @@ void func_800A5378(void) {
     func_800A5954();
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A5378", func_800A53A4);
+s32 func_800A53A4(void) {
+    extern u8 D_800EFF58[], D_80091618[];
+    extern s32 D_800ED8D8[];
+    extern u16 D_8006AF80[];
+    u8 *f;
+    register u32 index asm("v1");
+    u16 *selection;
+    register u8 *g asm("a2");
+    register u8 *e asm("a0");
+    register u16 i asm("a1");
+    func_800A5CF8(2, 0);
+    f = D_800EFF58;
+    g = f;
+    if (*(s32 *)(f + 0x420) == 2) {
+        if (D_800ED8D8[0] != 0) {
+            D_800ED8D8[0]--;
+        } else if (*(s32 *)(f + 0x424) > 0) {
+            *(s32 *)(f + 0x424) -= 1;
+            func_800BD684(2);
+        } else {
+            *(s32 *)(f + 0x420) = 0;
+        }
+        return 0;
+    }
+    i = 0;
+    selection = D_8006AF80;
+    e = D_80091618;
+    index = *selection;
+    e += index * 0x1A8;
+    do {
+        register u32 off asm("v1") = i;
+        register u8 value asm("v0") = g[0x434 + off];
+        i++;
+        (e + off)[8] = value;
+    } while (i < 8);
+    return -1;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A5378", func_800A548C);
 
