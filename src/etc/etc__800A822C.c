@@ -194,12 +194,13 @@ void func_800A8758(u8 *arg0) {
     extern struct { u8 pad[0x10]; u16 f10; u8 pad2[2]; u16 tbl[1]; u8 pad3[0x192]; } D_80091618[];
     extern u16 D_8008EE44[];
     extern s32 D_800B3C20[];
-    typeof(D_80091618[0]) *p = &D_80091618[*D_800B3C20];
-    u32 fl = *(u32 *)(arg0 + 0x38);
+    typeof(D_80091618[0]) *base = D_80091618;
+    typeof(D_80091618[0]) *p = base + *D_800B3C20;
     u16 a1 = p->tbl[*(s32 *)(arg0 + 0x84)];
-    *(u32 *)(arg0 + 0x38) = fl | 1;
+    u32 fl = *(u32 *)(arg0 + 0x38) | 1;
+    *(u32 *)(arg0 + 0x38) = fl;
     if (*D_8008EE44 == 7 && p->f10 != 0xFFFF && a1 != 0xFFFF) {
-        *(u32 *)(arg0 + 0x38) = (fl | 1) & ~1;
+        *(u32 *)(arg0 + 0x38) = fl & ~1;
         *(s32 *)(arg0 + 0x18) = func_80019F30(0x6000C, a1 + 0x36);
     }
 }
