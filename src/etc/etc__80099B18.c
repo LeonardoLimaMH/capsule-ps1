@@ -72,42 +72,46 @@ s32 func_80099C78(void) {
 }
 
 void func_80099D34(void) {
-    extern M2C_UNK D_8008ED68[];
-    struct E { u8 pad[0x19]; u8 a, b, c; u8 pad2[0x4594 - 0x1C]; };
-    extern struct E D_80086228[];
+    extern u8 D_8008ED68[];
+    extern u8 D_80086228[];
     extern void func_8001ADA0(s32);
     extern void func_8001AD48(s32);
     extern void func_80012578(void);
-    struct E *p;
-    switch (M2C_GFIELD(D_8008ED68, u16, 0xE0)) {
+    extern s32 func_80012508(void);
+    register u8 *d asm("a0") = D_8008ED68;
+    register u8 *p asm("v0");
+    register s32 val asm("v1");
+
+    switch (*(u16 *)(d + 0xE0)) {
     case 0:
-        if (M2C_GFIELD(D_8008ED68, s32, 0xA68) == 0) {
-            if (M2C_GFIELD(D_8008ED68, u16, 0xDC) == 3) {
+        if (*(s32 *)(d + 0xA68) == 0) {
+            if (*(u16 *)(d + 0xDC) == 3) {
                 p = D_80086228;
-                p->a = 0xE0;
-                p->b = 0xE0;
-                p->c = 0xE0;
-                p++;
-                p->a = 0xE0;
-                p->b = 0xE0;
-                p->c = 0xE0;
+                val = 0xE0;
+                p[0x19] = val;
+                p[0x1A] = val;
+                p[0x1B] = val;
+                p += 0x4594;
+                p[0x19] = val;
+                p[0x1A] = val;
+                p[0x1B] = val;
             } else {
                 p = D_80086228;
-                p->a = 0;
-                p->b = 0;
-                p->c = 0;
-                p++;
-                p->a = 0;
-                p->b = 0;
-                p->c = 0;
+                p[0x19] = 0;
+                p[0x1A] = 0;
+                p[0x1B] = 0;
+                p += 0x4594;
+                p[0x19] = 0;
+                p[0x1A] = 0;
+                p[0x1B] = 0;
             }
             func_8001ADA0(8);
             func_80012578();
         }
         break;
     case 1:
-        if (M2C_GFIELD(D_8008ED68, s32, 0xA68) == 0) {
-            if (M2C_GFIELD(D_8008ED68, u16, 0xDC) != 3) {
+        if (*(s32 *)(d + 0xA68) == 0) {
+            if (*(u16 *)(d + 0xDC) != 3) {
                 func_8001AD48(6);
             }
             func_80012508();
@@ -296,7 +300,7 @@ void func_8009AD04(void) {
 }
 
 void func_8009AEB4(void) {
-    extern M2C_UNK D_8008ED68[];
+    extern u8 D_8008ED68[];
     extern u8 D_80085428[];
     extern s32 D_800B3AE0[], D_800B3B28[], D_800B3AE8[], D_800B3B24[];
     extern u8 D_8001FF50[], D_8001FDFC[];
@@ -304,28 +308,30 @@ void func_8009AEB4(void) {
     extern void func_80011C40(void);
     extern void func_80012200(void *);
     extern void func_80099394();
-    void *arg;
+    u8 *d = D_8008ED68;
     u8 *p = D_80085428;
-    if (M2C_GFIELD(D_8008ED68, s32, 0xA68) == 0) {
+
+    if (*(s32 *)(d + 0xA68) == 0) {
+        s32 cond;
         func_80013668();
         func_80011C40();
         *D_800B3AE0 = 0;
         *D_800B3B28 = 0;
+        cond = *D_800B3AE8;
         *D_800B3B24 = 0;
-        if (*D_800B3AE8 != 0) {
-            M2C_GFIELD(D_8008ED68, s32, 0xA14) = 0;
-            arg = func_80099394;
+        if (cond != 0) {
+            *(s32 *)(d + 0xA14) = 0;
+            func_80012200(func_80099394);
         } else {
             p[1] = 1;
             D_80085428[0] = 1;
-            M2C_GFIELD(D_8008ED68, s32, 0xA14) += 1;
-            if (M2C_GFIELD(D_8008ED68, s32, 0xA14) & 1) {
-                arg = D_8001FF50;
+            *(s32 *)(d + 0xA14) += 1;
+            if (*(s32 *)(d + 0xA14) & 1) {
+                func_80012200(D_8001FF50);
             } else {
-                arg = D_8001FDFC;
+                func_80012200(D_8001FDFC);
             }
         }
-        func_80012200(arg);
     }
 }
 
