@@ -92,7 +92,24 @@ s32 func_800E1C14(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800E1B30", func_800E1DAC);
+extern s32 D_800EF2D8[];
+s32 func_800E1DAC(void) {
+    u16 c = D_80091618[*D_800EF2D8].f_0;
+    s32 a;
+    s32 b;
+    s32 r;
+
+    if (D_800F2D30[c] != 0xFF) {
+        r = 1;
+    } else {
+        a = func_800A8CB4(c);
+        b = func_800A0E6C(c);
+        func_8001A464(a, b);
+        func_80019F30(a, func_80012508);
+        r = 0;
+    }
+    return r;
+}
 
 #include "common.h"
 
