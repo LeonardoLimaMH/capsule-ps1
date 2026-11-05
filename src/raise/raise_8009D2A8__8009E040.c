@@ -113,7 +113,23 @@ void func_8009ED34(void) {
     func_8009ED54();
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009ED54);
+s32 func_8009ED54(void)
+{
+  typedef struct {
+    u8 pad[0x84];
+    s32 f84;
+    s32 f88;
+  } T_ED54;
+  T_ED54 *d = (T_ED54 *) D_800EFF58;
+  if (d->f88 > 0)
+  {
+    d->f88 = d->f88 - 1;
+    func_800BBC40(d->f84);
+    return 0;
+  }
+  d->f84 = 0;
+  return -1;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009EDA0);
 
@@ -184,14 +200,10 @@ void func_800A0424(void)
 {
   extern s32 D_800EE5F0[];
   extern u8 D_800EFF58[];
-  u8 (*new_var)[];
   u8 *w = D_800EFF58;
-  new_var = &D_80091618;
-  {
-    s32 t = D_800EE5F0[3] + *((s32 *) (w + 0x318)) + 3;
-    s32 r = func_80019F30(D_800EE5F0[0] | 0x60000, t - *((u16 *) (((*new_var) + (*D_8006AF80) * 0x1A8) + 0x12)));
-    *((s32 *) (*((s32 *) (w + 0x314)) + 0x18)) = r;
-  }
+  s32 t = D_800EE5F0[3] + *((s32 *) (w + 0x318)) + 3;
+  s32 r = func_80019F30(D_800EE5F0[0] | 0x60000, t - *((u16 *) (D_80091618 + (*D_8006AF80) * 0x1A8 + 0x12)));
+  *((s32 *) (*((s32 *) (w + 0x314)) + 0x18)) = r;
 }
 
 #include "common.h"
