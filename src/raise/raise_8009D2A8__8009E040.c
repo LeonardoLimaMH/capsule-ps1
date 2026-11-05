@@ -42,11 +42,13 @@ extern s16 D_800ED880[];
 extern void func_800E2AA0(s32, s32, s32);
 s32 func_8009E12C(void)
 {
+  u8 (*new_var)[];
+  new_var = &D_80091618;
   if (*D_800ED880 > 0)
   {
     if (*D_800ED880 == 8)
     {
-      func_800E2AA0(*((u16 *) (D_80091618 + (*D_8006AF80) * 0x1A8 + 0x10)), 1, 0);
+      func_800E2AA0(*((u16 *) (((*new_var) + (*D_8006AF80) * 0x1A8) + 0x10)), 1, 0);
     }
     *D_800ED880 = *D_800ED880 - 1;
     return 0;
@@ -84,7 +86,8 @@ void func_8009E508(s32 a)
 {
   extern s16 D_800EEA78[];
   extern s32 D_8008ED68[];
-  s32 v = D_8008ED68[D_800EEA78[a] + 0x29];
+  s32 *d = D_8008ED68;
+  s32 v = d[D_800EEA78[a] + 0x29];
   if (v != 7 && (v & 7) == 7)
   {
     func_8009E3A8(a);
@@ -182,8 +185,9 @@ void func_800A0424(void)
   extern s32 D_800EE5F0[];
   extern u8 D_800EFF58[];
   u8 *w = D_800EFF58;
+  u8 *p = D_80091618;
   s32 t = D_800EE5F0[3] + *((s32 *) (w + 0x318)) + 3;
-  s32 r = func_80019F30(D_800EE5F0[0] | 0x60000, t - *((u16 *) (D_80091618 + (*D_8006AF80) * 0x1A8 + 0x12)));
+  s32 r = func_80019F30(D_800EE5F0[0] | 0x60000, t - *((u16 *) (p + (*D_8006AF80) * 0x1A8 + 0x12)));
   *((s32 *) (*((s32 *) (w + 0x314)) + 0x18)) = r;
 }
 
