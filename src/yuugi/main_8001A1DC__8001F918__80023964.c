@@ -1,7 +1,47 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918__80023964", func_80023964);
+void func_80023B0C();
+s32 func_80012508();
+void func_80023964(void) {
+    extern u8 D_80069A5C[];
+    extern s32 D_80078C04;
+    extern u8 D_8008ED68[];
+    extern s32 D_8008EDF0[];
+    u8 *s0 = D_80069A5C;
+    u8 *s1 = D_8008ED68;
+    s32 var_v0;
+
+    func_80023B0C(0, 2, D_80078C04, s0);
+    if (*(s32 *)(s1 + 0x88) & 0xF000) {
+        func_80023B0C(2, 2, D_80078C04, s0);
+        if (*(s32 *)(s1 + 0x88) & 0x6000) {
+            var_v0 = 0;
+            if (D_80078C04 <= 0) {
+                var_v0 = D_80078C04 + 1;
+            }
+            D_80078C04 = var_v0;
+        }
+        if (*D_8008EDF0 & 0x9000) {
+            var_v0 = 1;
+            if (D_80078C04 > 0) {
+                var_v0 = D_80078C04 - 1;
+            }
+            D_80078C04 = var_v0;
+        }
+        func_80023B0C(1, 2, D_80078C04, D_80069A5C);
+    }
+    if (*D_8008EDF0 & 0x20) {
+        func_80012508();
+    } else {
+        if (!(*D_8008EDF0 & 0x100) && *(u16 *)(s1 + 0xDE) != 1) {
+            return;
+        }
+    }
+    func_80012508();
+}
+
+#include "common.h"
 
 extern void func_8001F8D8();
 
@@ -9,6 +49,8 @@ s32 func_80023A90(void) {
     func_80013668();
     return func_80012200(func_8001F8D8);
 }
+
+#include "common.h"
 
 void func_80023ABC(void)
 {
@@ -55,30 +97,8 @@ single:
     }
 }
 
-typedef struct {
-    u16 x;
-    u16 y;
-    u16 z;
-    u16 pad;
-} Vec3s_80023C74;
-
-typedef struct {
-    u8 pad0[8];
-    s32 unk8;
-    u8 padC[0xB4 - 0xC];
-    Vec3s_80023C74 *unkB4;
-    Vec3s_80023C74 *unkB8;
-} Struct_80023C74;
-
-extern u8 D_80069E4C[];
-
-extern s16 D_80078C20;
-extern u8 D_80069AD4[], D_80078C18[], D_80069B84[];
-extern void func_8001A998(), SetBackColor(), SetColorMatrix(), RotMatrix();
-
-extern void func_8001DBF4(s32, s32, s32, s32, void *, void *);
-
 void func_80023C00(s32 mode, s32 a1, s32 a2) {
+    extern u8 D_80069E4C[];
     extern s32 D_80069B28[];
 
     if (mode == 1) {
@@ -95,7 +115,7 @@ void func_80023C00(s32 mode, s32 a1, s32 a2) {
 
 case_1:
     {
-        u8 *p = ((u8 *)D_80069E4C);
+        u8 *p = D_80069E4C;
         *(s32 *)(p + 0x64) = a1;
         *(s32 *)(p + 0x68) = *(s32 *)(p + 0x60);
     }
@@ -103,7 +123,7 @@ case_1:
 
 case_2:
     {
-        u8 *p = ((u8 *)D_80069E4C);
+        u8 *p = D_80069E4C;
         *(s32 *)(p + 0x64) = a1;
         *(s32 *)(p + 0x68) = a2;
         *(s32 *)(p + 0x60) = a1;
@@ -114,13 +134,26 @@ set_b28:
 
 end:
     {
-        u8 *p = ((u8 *)D_80069E4C);
+        u8 *p = D_80069E4C;
         *(s32 *)(p + 0x6C) = 0;
         *(s32 *)(p + 0x70) = 0x40;
     }
 }
 
-extern void func_8001DBF4(s32, s32, s32, s32, void *, void *);
+typedef struct {
+    u16 x;
+    u16 y;
+    u16 z;
+    u16 pad;
+} Vec3s_80023C74;
+
+typedef struct {
+    u8 pad0[8];
+    s32 unk8;
+    u8 padC[0xB4 - 0xC];
+    Vec3s_80023C74 *unkB4;
+    Vec3s_80023C74 *unkB8;
+} Struct_80023C74;
 
 void func_80023C74(Struct_80023C74 *arg0, s32 arg1, Vec3s_80023C74 *arg2) {
     extern s32 D_80069B28[];
@@ -241,8 +274,6 @@ end:
     *D_80069BB4 = *D_80069EB0;
 }
 
-extern void func_8001DBF4(s32, s32, s32, s32, void *, void *);
-
 void func_80023ECC(Struct_80023C74 *arg0, s32 arg1) {
     extern u8 D_8008F702[];
 
@@ -291,21 +322,25 @@ void func_80023ECC(Struct_80023C74 *arg0, s32 arg1) {
     }
 }
 
+#include "common.h"
+
 void func_80023F68(void) {
+    extern M2C_UNK D_80069AD4[];
+    extern M2C_UNK D_80069E4C[];
     s32 temp_a0;
 
-    if (M2C_GFIELD(((M2C_UNK *)D_80069E4C), s32, 0x6C) == 0) {
-        M2C_GFIELD(((M2C_UNK *)D_80069E4C), s32, 0x6C) = 1;
-        M2C_GFIELD(((M2C_UNK *)D_80069E4C), s32, 0x70) = 0x40;
+    if (M2C_GFIELD(D_80069E4C, s32, 0x6C) == 0) {
+        M2C_GFIELD(D_80069E4C, s32, 0x6C) = 1;
+        M2C_GFIELD(D_80069E4C, s32, 0x70) = 0x40;
         return;
     }
-    temp_a0 = M2C_GFIELD(((M2C_UNK *)D_80069E4C), s32, 0x70) - 1;
-    M2C_GFIELD(((M2C_UNK *)D_80069E4C), s32, 0x70) = temp_a0;
-    M2C_GFIELD(((M2C_UNK *)D_80069AD4), s32, 0xE0) = (s32) (M2C_GFIELD(((M2C_UNK *)D_80069AD4), s32, 0xE0) + ((s32) (M2C_GFIELD(((M2C_UNK *)D_80069E4C), s32, 0x68) - M2C_GFIELD(((M2C_UNK *)D_80069E4C), s32, 0x64)) >> 6));
+    temp_a0 = M2C_GFIELD(D_80069E4C, s32, 0x70) - 1;
+    M2C_GFIELD(D_80069E4C, s32, 0x70) = temp_a0;
+    M2C_GFIELD(D_80069AD4, s32, 0xE0) = (s32) (M2C_GFIELD(D_80069AD4, s32, 0xE0) + ((s32) (M2C_GFIELD(D_80069E4C, s32, 0x68) - M2C_GFIELD(D_80069E4C, s32, 0x64)) >> 6));
     if (temp_a0 == 0) {
-        M2C_GFIELD(((M2C_UNK *)D_80069E4C), s32, 0x6C) = 0;
-        M2C_GFIELD(((M2C_UNK *)D_80069AD4), s32, 0xE0) = (s32) M2C_GFIELD(((M2C_UNK *)D_80069E4C), s32, 0x68);
-        M2C_GFIELD(((M2C_UNK *)D_80069AD4), s32, 0x54) = 0;
+        M2C_GFIELD(D_80069E4C, s32, 0x6C) = 0;
+        M2C_GFIELD(D_80069AD4, s32, 0xE0) = (s32) M2C_GFIELD(D_80069E4C, s32, 0x68);
+        M2C_GFIELD(D_80069AD4, s32, 0x54) = 0;
     }
 }
 
@@ -316,6 +351,10 @@ void func_80023FD8(void) {
 void func_80023FE0(void) {
 
 }
+
+#include "common.h"
+
+extern u8 D_80069E4C[];
 
 s32 func_80023FE8(void) {
     M2C_GFIELD(D_80069E4C, s32, 0x60) = -0x800;
@@ -330,4 +369,7 @@ s32 func_80023FE8(void) {
     return (s32)D_80069E4C;
 }
 
+extern s16 D_80078C20;
+extern u8 D_80069AD4[], D_80078C18[], D_80069B84[];
+extern void func_8001A998(), SetBackColor(), SetColorMatrix(), RotMatrix();
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918__80023964", func_80024024);
