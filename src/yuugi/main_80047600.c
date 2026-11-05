@@ -1,7 +1,7 @@
 #include "common.h"
 #include "yuugi.h"
 
-extern s32 D_800733A0[];
+extern s32 D_800733A0;
 extern s32 D_800733B4[];
 extern s32 D_800733BC;
 extern s32 D_800733C0;
