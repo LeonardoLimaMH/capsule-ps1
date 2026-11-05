@@ -24,7 +24,16 @@ void func_800DD3D8(s16 arg0, s16 arg1) {
     M2C_FIELD(temp_v0, s16 *, 0x20) = arg0;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800DD428);
+void func_800DD428(U4_800DD *arg0, U4_800DD *arg1, s16 arg2) {
+    extern u8 D_80018600[];
+    extern int func_800DDD34();
+    u8 *v;
+
+    v = func_80015B3C(D_80018600, &func_800DDD34, 1);
+    *(U4_800DD *)(v + 0x28) = *arg0;
+    *(U4_800DD *)(v + 0x2C) = *arg1;
+    *(s16 *)(v + 0x32) = arg2;
+}
 
 void func_800DD4A8(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x1C) == 0) {
@@ -96,7 +105,21 @@ void func_800DDC98(void *arg0, void *arg1, s32 arg2, s8 arg3) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800DDD34);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800DDE7C);
+void func_800DDE7C(u8 *arg0) {
+    extern u8 D_8008ED68[];
+    u8 *ed = D_8008ED68;
+    s32 v;
+
+    if (ed[0x103] < 2U) {
+        v = *(s32 *)(arg0 + 0x3C) + 1;
+    } else {
+        v = *(s32 *)(arg0 + 0x3C) + ed[0x103];
+    }
+    *(s32 *)(arg0 + 0x3C) = v;
+    if (*(u32 *)(arg0 + 0x84) < v) {
+        func_80013920();
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800DDEDC);
 
