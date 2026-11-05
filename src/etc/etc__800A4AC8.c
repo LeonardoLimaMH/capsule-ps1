@@ -89,7 +89,29 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A5654);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A6198);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A6D68);
+void func_800A6D68(void) {
+    extern u8 D_80065164[];
+    extern struct { s16 count; s16 entries[3]; } D_8006AF90[];
+    extern struct { u8 p0[0x88]; u32 f88; u8 p8c[0xC]; u32 f98; } D_8008ED68[];
+    extern u8 D_800B2DA8[];
+    extern s32 D_800B3C1C[];
+    s32 i;
+    func_8001F1A8(-0x38, 0x50, 0, 1, 0, D_800B2DA8, 1, 9, 2);
+    for (i = 0; i < 3; i++) {
+        func_80020844((s16)(i * 0x60 - 0x88), 0x10, 0x50, 0x18, 0, 0, 0, 0, 5);
+    }
+    if (D_8006AF90[0].count > 0) {
+        for (i = 0; i < D_8006AF90[0].count; i++) {
+            func_8001F1A8((s16)(i * 0x60 - 0x84), 0x14, 0, 1, 0,
+                D_80065164 + D_8006AF90[0].entries[i] * 12, 1, 6, 2);
+        }
+    }
+    if ((D_8008ED68[0].f88 & 0x40) || (D_8008ED68[0].f98 & 0x40)) {
+        func_80034AB0(0x5D);
+        D_800B3C1C[0] = 2;
+        func_80012544(5);
+    }
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A6F10);
 
