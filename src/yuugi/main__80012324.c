@@ -321,7 +321,18 @@ void func_80012684(s16 value) {
     p->b = 0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012698);
+void func_80012698(void) {
+    extern u8 D_8008ED50[];
+    extern u16 D_800508D0[];
+    extern void func_80012264(void);
+    u8 *p = D_8008ED50;
+    *(void **)(p + 0x14) = (void *)func_80012264;
+    *(u16 *)(p + 0xE) = 0;
+    *(u16 *)D_8008ED50 = 1;
+    func_800127AC(D_800508D0[0]);
+    *(s16 *)(p + 0xC) = 0;
+    *(s32 *)(p + 4) = **(s32 **)(p + 8);
+}
 
 void func_800126F8(void)
 {
