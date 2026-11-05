@@ -1,15 +1,53 @@
 #include "common.h"
 
+extern u8 D_8008ED68[];
+extern void *func_80015B3C();
 extern void func_800C63AC();
 extern void func_800C4FC4();
 extern void func_800161C4();
 extern void func_800AADE0();
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800C4ECC);
+void func_800C4ECC(s32 a0, u8 *a1) {
+    s32 i;
+    u8 *o;
+    s16 r;
+    for (i = 0; i < 0x18; i++) {
+        o = func_80015B3C(func_800C63AC, func_800161C4, 5);
+        func_80015EF8(o);
+        r = func_800202A4(0x1e);
+        if (i & 1) {
+            *(s16 *)(o + 0x46) = *(s16 *)(a1 + 0x46) + r;
+        } else {
+            *(s16 *)(o + 0x46) = *(s16 *)(a1 + 0x46) - r;
+        }
+        r = func_800202A4(10);
+        if (i < 6) {
+            *(s16 *)(o + 0x4A) = *(s16 *)(a1 + 0x4A) - 10 + r;
+        } else {
+            *(s16 *)(o + 0x4A) = *(s16 *)(a1 + 0x4A) - 10 - r;
+        }
+        *(u32 *)(o + 0x34) = (*(u32 *)(o + 0x34) & ~0x7f) | (i & 0x7f);
+        *(u16 *)(o + 0x4E) = *(u16 *)(a1 + 0x4E) - 1;
+        *(u16 *)(o + 0x50) = *(u16 *)(a1 + 0x50);
+        *(u32 *)(o + 0x38) |= 1;
+        *(u16 *)(o + 0x52) = *(u16 *)(a1 + 0x52);
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800C4FC4);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800C523C);
+void func_800C523C(s32 a0, u8 *a1, s32 a2, s32 a3) {
+    u8 *o = func_80015B3C(func_800C4FC4, func_800AADE0, 5);
+    func_80015EF8(o);
+    *(s32 *)(o + 0x7c) = a2;
+    *(s32 *)(o + 0x80) = a3;
+    *(s32 *)(o + 0x84) = 0;
+    *(u32 *)(o + 0x38) |= 1;
+    func_8001AA70(o + 0x14, a1 + 0x14, 0x20);
+    *(u8 **)(o + 0x40) = a1;
+    *(u32 *)(o + 0x34) = (*(u32 *)(o + 0x34) & ~0x7f) | 1;
+    *(u32 *)(o + 0x38) = ((*(u32 *)(o + 0x38) | 0x40) & ~0x30) | 0x10;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800C5300);
 
