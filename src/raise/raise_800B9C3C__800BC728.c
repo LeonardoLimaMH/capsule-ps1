@@ -60,7 +60,29 @@ s32 func_800BCE1C(void) {
     return r;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BCE94);
+extern u8 D_800EE630[];
+extern s16 D_8006AF90[];
+extern s32 func_800BD2E0();
+s32 func_800BD2E0();
+void func_800BCE94(void)
+{
+    struct S {
+        u8 _0[0x344];
+        s32 f344;
+        u8 _348[0x398 - 0x348];
+        s32 f398[1];
+        u8 _39C[0x3D4 - 0x39C];
+        s32 f3D4[1];
+        u8 _3D8[0x414 - 0x3D8];
+        s32 f414;
+    };
+    s32 idx = (*(struct S *)D_800EFF58).f3D4[(*(struct S *)D_800EFF58).f344];
+    (*(struct S *)D_800EFF58).f414 = func_800BD2E0(
+        0x19, 0x1E0, 0x80, 4,
+        0, D_800EE630,
+        (*(struct S *)D_800EFF58).f398[idx],
+        0, 0, 0, 2, 0, 0);
+}
 
 #include "common.h"
 
