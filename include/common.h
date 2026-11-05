@@ -7,6 +7,8 @@
 #include "psyq.h"
 
 #endif
+#ifndef D_80100E60_DECL
+#define D_80100E60_DECL
 typedef struct {
     s16 pad0[2];
     u16 idx;
