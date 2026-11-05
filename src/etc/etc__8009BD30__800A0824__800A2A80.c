@@ -2,7 +2,21 @@
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A2A80);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A2B64);
+void func_800A2B64(u8 *arg0, s16 arg1) {
+    if (arg0[0x5DA] == 0) {
+        if (arg1 == 0) {
+            arg0[0x5DE] = 2;
+            arg0[0x5DF] = 1;
+            return;
+        }
+    } else if (arg1 != 0) {
+        arg0[0x5DE] = 2;
+        arg0[0x5DF] = 1;
+        return;
+    }
+    arg0[0x5DE] = 1;
+    arg0[0x5DF] = 2;
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A2BB0);
 
