@@ -1,7 +1,22 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002CC2C", func_8002CC2C);
+extern u8 D_80069BAC[];
+void func_8002CC2C(void) {
+    s16 *p;
+    s16 *q;
+    *(s32 *)(D_80069BAC + 0) = 0;
+    *(s32 *)(D_80069BAC + 8) = 0x800;
+    *(s16 *)(D_80069BAC + 0x10) = 0x200;
+    p = (s16 *)(D_80069BAC + 0x10);
+    *(s32 *)(D_80069BAC + 4) = 0;
+    p[1] = 0;
+    p[2] = 0;
+    q = (s16 *)(D_80069BAC - 0x28);
+    q[0] = -0x800;
+    q[1] = -0x60;
+    q[2] = 0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002CC2C", func_8002CC74);
 
