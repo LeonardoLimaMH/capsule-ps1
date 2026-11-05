@@ -23,5 +23,4 @@ extern s32 func_800E1820(s32);
 extern s32 func_800E17F8(s32);
 extern void func_800C0EE8(s32, s32, s32);
 #endif
-extern u8 D_80100F38[];
 
