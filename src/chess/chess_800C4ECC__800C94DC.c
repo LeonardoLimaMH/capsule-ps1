@@ -1,6 +1,10 @@
 #include "common.h"
 #include "ghidra.h"
 
+typedef struct { u8 pad[0x15]; u8 x; u8 y; } Pos800C;
+typedef struct { u8 pad0[0x10]; u32 w10; u32 w14; u8 pad1[0x28]; } Ent63940;
+typedef struct { u8 pad[0x30]; u16 h; u8 pad1[2]; } Ent1010B0;
+
 s32 func_800C94DC(s32 unused_arg0, s32 arg1) {
     extern s16 D_80069BBE[];
     s32 temp_a1;
@@ -38,15 +42,62 @@ void func_800C9534(s32 unused,u8 *o,s32 v) {
 
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9560);
+void func_800C9560(u8 *p, u8 *o, s32 idx, s32 flag) {
+    extern u8 D_80063940[];
+    extern u8 D_801010B0[];
+    s32 d;
+    s32 s;
+    if (p[0xBEA] < 5) {
+        d = *(s16 *)(o + 0x4E);
+        if (d <= 0) {
+            return;
+        }
+        if (flag == 0) {
+            s = 0x140000 / d;
+            *(u16 *)(o + 0x52) = s;
+            *(u16 *)(o + 0x50) = s;
+            s &= -0x10;
+        } else {
+            u32 *q = (u32 *)(D_80063940 + idx * 0x3C);
+            s = (((((q[5] & 3) << 2) | (q[4] >> 30)) * 8 + 0x100) * 0x1000) / d;
+            *(u16 *)(o + 0x52) = s;
+            *(u16 *)(o + 0x50) = s;
+            s &= -0x10;
+        }
+    } else {
+        s = 0xC00000 / *(u16 *)(D_801010B0 + p[0x5D9] * 0x34 + 0x30);
+    }
+    *(u16 *)(o + 0x52) = s;
+    *(u16 *)(o + 0x50) = s;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9648);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9A34);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9B78);
+s32 func_800C9B78(u8 *first, u8 *second) {
+    s32 x = first[0x15] - second[0x15];
+    s32 y, squared;
+    if (x < 0) x = -x;
+    squared = func_8001AA44(x * 100, 2);
+    y = first[0x16] - second[0x16];
+    if (y < 0) y = -y;
+    squared += func_8001AA44(y * 100, 2);
+    return (s32)sqrt((double)squared);
+}
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9C38);
+extern s32 func_8001AA44(s32, s32);
+extern double sqrt(double);
+s32 func_800C9C38(u8 *a, u8 *b) {
+    s32 d = a[0x15] - b[0x15];
+    if (d < 0) d = -d;
+    if (d < 2) {
+        d = a[0x16] - b[0x16];
+        if (d < 0) d = -d;
+        return d < 2;
+    }
+    return 0;
+}
 
 s32 func_800C9C90(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 0x5CC) & 0x40;
@@ -56,7 +107,27 @@ s32 func_800C9C9C(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 0x5CC) & 0x80;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9CA8);
+s32 func_800C9CA8(s32 a, s32 b, s32 c, s32 d) {
+    if (b < d) {
+        if (c <= a) {
+            if (a <= c) return 1;
+            return 8;
+        }
+        return 2;
+    }
+    if (d < b) {
+        if (c <= a) {
+            if (a <= c) return 5;
+            return 6;
+        }
+        return 4;
+    }
+    if (c <= a) {
+        if (a <= c) return 0;
+        return 7;
+    }
+    return 3;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9D18);
 
