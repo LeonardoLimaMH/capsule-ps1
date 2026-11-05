@@ -343,7 +343,7 @@ void func_8009AF80(void) {
     extern s32 D_800B3AE4[], D_800B3AE8[], D_800B3ADC[], D_800B3B28[], D_800B3B24[], D_800B3AE0[];
     extern void func_8001ADCC(s32);
     extern void func_8001ADA0(s32);
-    extern void func_80012544(void);
+    extern void func_80012544(s32);
     u8 *d = D_8008ED68;
     switch (*D_800B3AE4) {
     case 0:
@@ -351,19 +351,18 @@ void func_8009AF80(void) {
         *D_800B3AE4 = *D_800B3AE4 + 1;
         break;
     case 1:
-        if (M2C_GFIELD(d, s32, 0xA68) != 0) {
-            break;
+        if (*(s32 *)(d + 0xA68) == 0) {
+            *D_800B3AE8 = 0;
+            *D_800B3ADC = 0;
+            *D_800B3B28 = 0;
+            *D_800B3B24 = 0;
+            func_80012544(8);
+            func_8001ADA0(8);
+            *D_800B3AE4 = *D_800B3AE4 + 1;
         }
-        *D_800B3AE8 = 0;
-        *D_800B3ADC = 0;
-        *D_800B3B28 = 0;
-        *D_800B3B24 = 0;
-        func_80012544();
-        func_8001ADA0(8);
-        *D_800B3AE4 = *D_800B3AE4 + 1;
         break;
     case 2:
-        if (M2C_GFIELD(d, s32, 0xA68) == 0) {
+        if (*(s32 *)(d + 0xA68) == 0) {
             *D_800B3AE4 = 0;
             *D_800B3AE0 = 0;
         }
