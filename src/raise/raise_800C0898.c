@@ -67,6 +67,9 @@ void func_800C0DD4(void) {
     } while (var_s0 < 0xA);
 }
 
+extern u8 D_80100F38[];
+extern s32 func_800B1260(s32);
+
 void func_800C0E14(void) {
 
 }
