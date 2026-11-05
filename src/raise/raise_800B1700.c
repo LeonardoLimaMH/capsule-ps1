@@ -158,7 +158,8 @@ s32 func_800B1E7C(void) {
     extern u16 D_800EFA4C[], D_800EFA4A[];
     extern s32 D_800EEB70[];
     s32 i = 2;
-    s32 *p = D_80069AD4 + 2;
+    s32 *p = D_80069AD4;
+    p += 2;
     do {
         p[0x11] = 0;
         i--;
