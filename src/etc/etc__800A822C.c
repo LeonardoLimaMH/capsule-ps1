@@ -164,9 +164,9 @@ void func_800A8638(void *arg0) {
     s32 f = *(s32 *)((u8 *)arg0 + 0x38) | 1;
     *(s32 *)((u8 *)arg0 + 0x38) = f;
     if (*D_8008EE44 == 7) {
-        s32 g = *D_800B3C20;
+        s32 g = *D_800B3C20 + 0x22;
         *(s32 *)((u8 *)arg0 + 0x38) = f & ~1;
-        *(s32 *)((u8 *)arg0 + 0x18) = func_80019F30(0x6000C, g + 0x22);
+        *(s32 *)((u8 *)arg0 + 0x18) = func_80019F30(0x6000C, g);
     }
 }
 
@@ -190,11 +190,49 @@ void func_800A86A4(u8 *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A8758);
+void func_800A8758(u8 *arg0) {
+    extern u8 D_80091618[];
+    extern u16 D_8008EE44[];
+    extern s32 D_800B3C20[];
+    u8 *p = D_80091618 + *D_800B3C20 * 0x1A8;
+    u32 fl = *(u32 *)(arg0 + 0x38);
+    u16 a1 = *(u16 *)(p + *(s32 *)(arg0 + 0x84) * 2 + 0x14);
+    *(u32 *)(arg0 + 0x38) = fl | 1;
+    if (*D_8008EE44 == 7 && *(u16 *)(p + 0x10) != 0xFFFF && a1 != 0xFFFF) {
+        *(u32 *)(arg0 + 0x38) = (fl | 1) & ~1;
+        *(s32 *)(arg0 + 0x18) = func_80019F30(0x6000C, a1 + 0x36);
+    }
+}
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A8810);
+void func_800A8810(u8 *arg0) {
+    extern u8 D_80091618[];
+    extern u16 D_8008EE44[];
+    extern s32 D_800B3C20[];
+    extern u8 D_800B3C2A[];
+    extern s16 D_800B3C38[];
+    u32 fl = *(u32 *)(arg0 + 0x38) | 1;
+    s32 a2;
+    *(u32 *)(arg0 + 0x38) = fl;
+    a2 = *(s32 *)(arg0 + 0x84);
+    if (*D_8008EE44 == 7 && *(u16 *)(D_80091618 + *D_800B3C20 * 0x1A8 + 0x10) != 0xFFFF) {
+        *(u32 *)(arg0 + 0x38) = fl & ~1;
+        if (*D_800B3C2A != 0) {
+            func_80015CD0(arg0 + 0x14, func_80019F30(0x7000C, D_800B3C38[a2] + 4), 0);
+        }
+    }
+}
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A88DC);
+void func_800A88DC(u8 *arg0) {
+    extern u16 D_8008EE44[];
+    extern s16 D_8006AF90[];
+    s32 i;
+    if (*D_8008EE44 == 8 && D_8006AF90[(i = *(s32 *)(arg0 + 0x84)) + 1] >= 0 && i < *D_8006AF90) {
+        *(u32 *)(arg0 + 0x38) &= ~1;
+        *(s32 *)(arg0 + 0x18) = func_80019F30(0x6000C, D_8006AF90[i + 1] + 0x59);
+    } else {
+        *(u32 *)(arg0 + 0x38) |= 1;
+    }
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A8988);
 
@@ -318,7 +356,17 @@ void func_800A9EC8(void)
   }
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800AA020);
+void func_800AA020(void) {
+    extern struct { u8 pad[0xDC]; u16 f; u8 pad2[0xA68 - 0xDE]; s32 g; } D_8008ED68;
+    extern u8 D_80085428[];
+    extern u16 D_8008EE44[];
+    extern void (*D_800B3AA0[])(u8 *);
+    u8 *s = D_80085428;
+    if (D_8008ED68.f < 7 || D_8008ED68.g != 0) {
+        func_800152C8();
+    }
+    D_800B3AA0[*D_8008EE44](s);
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800AA0A0);
 
