@@ -1,6 +1,11 @@
 #include "common.h"
 #include "yuugi.h"
 
+typedef struct {
+    u8 pad[0x103];
+    u8 n;
+} S_8ED68;
+
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015540);
 
 #include "common.h"
@@ -90,7 +95,21 @@ void func_80015BE8(void *arg0) {
     func_80012A20(M2C_FIELD(M2C_FIELD(arg0, s32 *, 8) + M2C_FIELD(arg0, s32 *, 0) * 0x24 - 0x1c, s32 *, 0), 1, 0, 0);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015C2C);
+void func_80015C2C(void *arg0) {
+    u32 temp_s1;
+    u32 var_s0;
+
+    func_80012A20(M2C_FIELD(M2C_FIELD(arg0, s32 *, 8) + M2C_FIELD(arg0, s32 *, 0) * 0x24 - 0x1c, s32 *, 0), 1, 0, 0);
+    temp_s1 = M2C_FIELD(arg0, u32 *, 8);
+    var_s0 = (temp_s1 + (M2C_FIELD(arg0, s32 *, 0) * 0x24)) - 0x24;
+    if (var_s0 >= temp_s1) {
+        do {
+            s32 temp_a0 = M2C_FIELD(var_s0, s32 *, 4);
+            var_s0 -= 0x24;
+            func_80012A20(temp_a0, 1, 0, 0);
+        } while (var_s0 >= temp_s1);
+    }
+}
 
 #include "ghidra.h"
 void func_80015CD0(int param_1,int param_2,uint param_3)
@@ -114,17 +133,19 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015D14);
 
 s32 func_80015E60(u8 *arg0) {
     extern u8 D_8008ED68[];
-    u8 n = D_8008ED68[0x103];
-    s32 h;
+    u8 *d = D_8008ED68;
+    u8 n = d[0x103];
     if (n == 0) {
         if (*(s16 *)(arg0 + 0x24) > 0) return 0;
         if (*(s32 *)(arg0 + 0x20) + 1 == **(s32 **)(arg0 + 0x1C)) return 1;
-        return *(s16 *)(arg0 + 0x24) < 0;
+        if (*(s16 *)(arg0 + 0x24) >= 0) return 0;
+        return 1;
     }
     if (*(s16 *)(arg0 + 0x24) <= n - 1) {
         if (*(s32 *)(arg0 + 0x20) + 1 == **(s32 **)(arg0 + 0x1C)) return 1;
     }
-    return *(s16 *)(arg0 + 0x24) < 0;
+    if (*(s16 *)(arg0 + 0x24) < 0) return 1;
+    return 0;
 }
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015EF8);
