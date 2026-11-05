@@ -6,6 +6,19 @@ typedef struct {
     u8 n;
 } S_8ED68;
 
+typedef struct {
+    u8 pad0[0x14];
+    s32 f14;
+    u8 b18[0x34];
+    u16 f4c;
+    u16 f4e;
+    u32 flags;
+    s32 f54;
+    u8 f58;
+    u8 pad59[3];
+    s32 w5c[10];
+} ArVObj;
+
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015540);
 
 #include "common.h"
