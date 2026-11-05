@@ -5,6 +5,7 @@ extern void func_80012668();
 extern void func_800374E8();
 extern void func_80034AB0();
 extern u8 D_8008ED68[];
+typedef struct { u8 pad[0x103]; u8 cnt; } DState;
 extern void *func_80015B3C();
 extern void func_800C63AC();
 extern void func_800C4FC4();
