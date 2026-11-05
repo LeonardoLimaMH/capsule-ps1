@@ -1,6 +1,21 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44__800DD5B8", func_800DD5B8);
+s32 func_800DD5B8(s32 a0, s32 a1) {
+    extern u8 D_80100F38[];
+    extern s32 func_800B1260(s32);
+    s32 res = 0;
+    s32 i;
+    u8 *p;
+    s16 *ptr;
+
+    p = D_80100F38 + (func_800B1260(a0) & 0xFFFF) * 0x79C;
+    ptr = (s16 *)((s16)a1 * 32 + (s32)p + 0x48E);
+    for (i = 0; i < 15; i++) {
+        res |= ptr[i];
+    }
+
+    return (s16)res;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44__800DD5B8", func_800DD64C);
 
@@ -101,7 +116,28 @@ void func_800DDBE4(void) {
 
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44__800DD5B8", func_800DDBEC);
+void func_800DDBEC(s32 a0) {
+    struct {
+        s16 x, y;
+        s16 u, v;
+    } t;
+    extern u8 D_80100F38[];
+    extern s32 func_800B1260(s32);
+    extern void func_800DE304(s32, s32, s16 *, s16 *);
+    extern void func_800DE35C(s32, s32, s32, s32, s32, s16 *, s16 *);
+    u8 *p = D_80100F38 + (func_800B1260(a0) & 0xFFFF) * 0x79C;
+    u8 *q = p + (s16)((*(s16 *)(p + 0x5B0) + 31) % 32) * 4;
+    u16 s1 = *(u16 *)(q + 0x6B6);
+    u16 s0 = *(u16 *)(q + 0x6B8);
+    u16 u, v;
+
+    func_800DE304((s16)(*(u16 *)(q + 0x636) - 1), (s16)(*(u16 *)(q + 0x638) - 1), &t.x, &t.y);
+    func_800DE35C((s16)s0, t.x, t.y, *(s16 *)(p + 0x220), (s16)s1, &t.u, &t.v);
+    u = t.u;
+    v = t.v;
+    *(u16 *)(p + 0x1D0) = u;
+    *(u16 *)(p + 0x1CC) = v;
+}
 
 void func_800DDCF4(void) {
 
