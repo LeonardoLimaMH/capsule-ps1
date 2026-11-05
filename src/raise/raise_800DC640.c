@@ -208,6 +208,14 @@ void func_800DC9C4(void) {
     func_8009D27C();
 }
 
+typedef struct {
+    u8 pad0[0x8A];
+    u16 unk8A;
+    u8 pad8C[0x100];
+    s32 f_18C;
+    u8 pad190[0x18];
+} S_80091618;
+
 void func_800DC9E4(s32 arg0, s32 arg1) {
     extern s32 D_8006AF84[];
     extern u8 D_8006AFCC[];

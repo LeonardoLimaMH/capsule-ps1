@@ -77,9 +77,21 @@
         "progress_categories": [
           "yuugi"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main_8001A1DC__8001A818.o"
+    },
+    {
+      "name": "yuugi/main_8001A1DC__8001A818__8001A998",
+      "target_path": "build/objdiff/target/yuugi/main_8001A1DC__8001A818__8001A998.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_8001A1DC__8001A818__8001A998.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8001A1DC__8001A818__8001A998.o"
     },
     {
       "name": "yuugi/main_8001A1DC__8001AA44",
@@ -2741,7 +2753,7 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284.o"
     },
@@ -2789,7 +2801,7 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800B61E4__800B8E04__800B8EF0__800B8FAC__800B9284__800B9610__800B9914.o"
     },

@@ -36,3 +36,4 @@ src/yuugi/sdk_libgpu_sys.c
 src/yuugi/main_80043134.c
 src/yuugi/main_8004C8A0.c
 src/yuugi/sdk_libspu_s_itc.c
+src/slpm/loader_8011B770.c

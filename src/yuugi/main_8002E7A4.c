@@ -141,15 +141,7 @@ void func_80032398(void) {
 }
 
 extern s32 func_8001F1A8(s16, s16, s32, s32, s32, s32, s32, s32, s32);
-void func_80032474(s32 arg0, s32 arg1, s16 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
-    extern s16 D_800922D2[];
-    s32 c = 1;
-    if (D_800922D2[0] == arg2) {
-        c = 3;
-    }
-    func_8001F1A8(arg0, arg1, ((s16) arg3 == 1) ? c : 0, 1, 0, arg4, 1, arg5, 0);
-    func_8001F1A8(arg0 + 0x28, arg1, ((s16) arg3 == 0) ? c : 0, 1, 0, arg6, 1, arg7, 0);
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4", func_80032474);
 
 void func_80032570(void) {
     extern u8 D_800922FA[];

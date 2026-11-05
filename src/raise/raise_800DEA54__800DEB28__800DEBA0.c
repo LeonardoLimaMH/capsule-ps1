@@ -122,20 +122,6 @@ s32 func_800DF67C(s32 a0, u16 a1, s32 a2, s16 a3, s16 a4) {
     s16 i;
     register s32 result asm("t0") = 0;
 
-    if (n) {
-        if (n != 0) {
-            for (i = 0; i < n; i++) {
-                u16 h = *(u16 *)(((i * 2) + (u32)e) + 4);
-                if (((h >> 3) & 0x3F) + 1 == a3 && ((h >> 9) & 0x3F) + 1 == a4) {
-                    result = 1;
-                    break;
-                }
-            }
-        }
-    }
-    return result;
-}
-
 void func_800DF734(s32 unused, u16 idx, u32 kind, s32 x, s32 y) {
     register u32 bits asm("a0") = 0xFFFE07FF;
     register u32 upper asm("a1") = 0xFF81FFFF;

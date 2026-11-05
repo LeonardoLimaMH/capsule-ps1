@@ -70,6 +70,21 @@ void func_8001E2BC(void *arg0, s32 arg1, s32 arg2, s32 arg3, volatile s32 arg4, 
     M2C_FIELD(arg0, s16 *, 0x16) = arg3;
 }
 
+void func_8001E2BC(void *arg0, s32 arg1, s32 arg2, s32 arg3, volatile s32 arg4, volatile s32 arg5) {
+    extern u8 D_8008ED68[];
+    u8 *b = D_8008ED68;
+    s32 a, c, h;
+    M2C_FIELD(arg0, s32 *, 0) = arg1;
+    M2C_FIELD(arg0, s16 *, 0x14) = arg2 + *(s32 *)(b + 0x108) / 2;
+    a = arg4;
+    c = arg5;
+    h = *(s32 *)(b + 0x10C);
+    M2C_FIELD(arg0, s8 *, 8) = a;
+    arg3 += h / 2;
+    M2C_FIELD(arg0, s8 *, 0xD) = c;
+    M2C_FIELD(arg0, s16 *, 0x16) = arg3;
+}
+
 void func_8001E310(void) {
     extern u8 D_8008ED68[], D_800861B0[];
     u8 *b = D_8008ED68;

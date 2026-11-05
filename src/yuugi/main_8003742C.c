@@ -33,30 +33,7 @@ typedef struct {
     u16 f2e;
 } OscObj;
 
-s32 func_8003742C(s32 a, s32 b) {
-    s32 x[4];
-    s32 y[4];
-    u16 v;
-
-    if (!(D_800922FA[0] & 2)) {
-        v = a;
-        if (v > 0x8021 && v <= 0x8320) {
-            return 0;
-        }
-    }
-    if (!(a & 0x8000)) {
-        return 0;
-    }
-    ((u8 *)x)[0] = 0x24;
-    ((u16 *)x)[1] = a & 0x7FFF;
-    func_80036DB0(x);
-    ((u8 *)y)[0] = 0x29;
-    y[2] = (s16)b;
-    ((u8 *)y)[1] = 0xFF;
-    func_80036DB0(y);
-    *(u16 *)D_800922F0 = (*(u16 *)D_800922F0 | 1) & 0xFFFB;
-    return 1;
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_8003742C);
 
 void func_800374E8(s32 a) {
     s32 b[4];
@@ -188,53 +165,7 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_8003793C);
 
 extern u8 D_80078CC8[];
 extern u16 D_80078C7C;
-void func_80037A7C(u8 *v, u8 *p) {
-    extern u8 D_800944B8[], D_800947E8[], D_80078CC8[];
-    register u8 *base asm("a0") = D_800944B8;
-    u8 *e = base + (v[3] >> 4) * 0x2AC;
-    s32 k = *(s16 *)(e + 0x288);
-    register s32 pan asm("a0") = 0x40;
-    s32 vol, l, r;
-    register u8 *bank asm("v1");
-    
-
-    if (D_80078CC8[0] == 0) {
-        bank = D_800947E8;
-        pan = bank[k * 0x1C + 0x1B] + v[0x12] + v[0x13] + p[1] - 0xC0;
-    }
-    if (pan < 0) {
-        pan = 0;
-    }
-    if (pan >= 0x80) {
-        pan = 0x7F;
-    }
-    *(s16 *)(v + 0x14) = pan;
-    bank = D_800947E8;
-    vol = (s32)(bank[k * 0x1C + 0x18] * D_80078C7C * p[5] * p[3]) >> 14;
-    vol = (s32)(vol * v[0x10] * v[0x11]) >> 14;
-    if (pan < 0x40) {
-        l = vol;
-        r = (pan * (vol << 1)) >> 7;
-    } else if (pan == 0x40) {
-        r = vol;
-        l = vol;
-    } else {
-        r = vol;
-        l = ((0x40 - (pan & 0x3F)) * (vol << 1)) >> 7;
-    }
-    base = D_800944B8;
-    e = base + (v[3] >> 4) * 0x2AC;
-    l = (l * *(s16 *)(e + 0x28C)) >> 7;
-    r = (r * *(s16 *)(e + 0x28E)) >> 7;
-    *(s16 *)(v + 0xC) = (l * (v[0x1A] & 0x7F)) >> 7;
-    *(s16 *)(v + 0xE) = (r * (v[0x1A] & 0x7F)) >> 7;
-    if (p[0x11] >= 0x40) {
-        l = *(u16 *)(v + 0xC) * *(u16 *)(v + 0xC);
-        r = *(u16 *)(v + 0xE) * *(u16 *)(v + 0xE);
-        *(s16 *)(v + 0xC) = l >> 14;
-        *(s16 *)(v + 0xE) = r >> 14;
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80037A7C);
 
 #include "common.h"
 
@@ -284,12 +215,7 @@ extern u8 D_80093790[];
 extern s32 D_8007142C[];
 extern s32 D_80078C78;
 extern u8 D_80093D68[];
-void func_80037F64(void) {
-    struct VoiceE *e = (struct VoiceE *)D_80093D68;
-    s32 *ids = D_8007142C;
-    s32 i;
-    s16 t;
-    s32 x, y;
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80037F64);
 
     for (i = 0; i < D_80078C78; i++, ids++, e++) {
         t = e->cur;

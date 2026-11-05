@@ -670,145 +670,26 @@ s32 func_8003B6F4(u8 *s) {
     return more;
 }
 
-void func_8003B7B4(Unk_800944B8Stream *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    extern u8 D_800937D0[][0x54];
-    extern void func_80039724(s32, s32, s32);
-    extern void func_80038CA8(s32, s32, s32);
-    extern void func_800398B4(s32, s32, s32);
-    extern void func_80039E60(s32, s32, s32);
-    extern void func_8003A5C8(s32, s32, s32);
-    extern void func_8003A594(s32, s32);
-    extern void func_8003A5C0(s32, s32);
-
-    register Unk_800944B8Stream *stream asm("t5") = arg0;
-    register s32 arg2_val asm("t3");
-    register s32 channel asm("t4");
-    register s32 v1 asm("v1");
-    register s32 v0 asm("v0");
-
-    v1 = arg1 & 0xF;
-    arg2_val = arg2;
-    v0 = *(u8 *)&D_80078C9C;
-    v0 <<= 4;
-    channel = v1 | v0;
-
-    switch (arg1 & 0xF0) {
-    case 0x80:
-        func_80039724(channel & 0xFF, arg2_val & 0xFF, arg3 & 0xFF);
-        break;
-    case 0x90:
-        if ((arg3 & 0xFF) != 0) {
-            func_80038CA8(channel & 0xFF, arg2_val & 0xFF, arg3 & 0xFF);
-        } else {
-            func_80039724(channel & 0xFF, arg2_val & 0xFF, 0);
+s32 func_8003B6F4(u8 *s) {
+    u32 i = 0;
+    u32 n = func_8003AAF0(s);
+    s32 result;
+    register s32 more asm("v0");
+    do {
+        Unk_800944B8 *e = &D_800944B8[D_80078C9C];
+        u32 pos = *(u32 *)s;
+        u8 c = e->unk_0x284[pos];
+        *(u32 *)s = ++pos;
+        i++;
+        if (e->unk_0x294 < pos) { s[0x20] = 1; result = -1; }
+        else result = c;
+        if ((u8)result == 0xF7) {
+            more = i < n;
+            break;
         }
-        break;
-    case 0xA0:
-        func_800398B4(channel & 0xFF, arg2_val & 0xFF, arg3 & 0xFF);
-        break;
-    case 0xB0:
-        if ((arg2_val & 0xFF) == 0x63) {
-            if ((arg3 & 0xFF) == 0x14) {
-                register s32 index asm("t0") = D_80078C9C;
-                Unk_800944B8 *base = D_800944B8;
-                if (base[index].unk_0x2A0 != 0) {
-                    if (base[index].unk_0x2A2 != 0) {
-                        register s32 var_t1 asm("t1") = 0;
-                        register Unk_800944B8 *loopbase asm("a2")=base;
-                        register u8 *var_t2 asm("t2") = (u8 *)loopbase;
-                        do {
-                            register Unk_800944B8Stream *s asm("a1") = (Unk_800944B8Stream *)(index * sizeof(Unk_800944B8) + (u8 *)var_t2);
-                            register u32 h18 asm("a0");
-                            v0 = s->unk_0x20;
-                            v1 = s->unk_0x25;
-                            h18 = s->unk_0x18;
-                            s->unk_0x22 = arg3;
-                            s->unk_0x21 = v0;
-                            s->unk_0x26 = v1;
-                            index=D_80078C9C;
-                            {
-                                v0 = s->unk_0x0;
-                                v1 = s->unk_0x1C;
-                                s->unk_0x1A = h18;
-                                s->unk_0x4 = v0;
-                                s->unk_0x1E = v1;
-                            }
-                            var_t2 += sizeof(Unk_800944B8Stream);
-                        } while (++var_t1 < (s32)loopbase[index].unk_0x2A2);
-                    }
-                    *(u32 *)D_800944B8[D_80078C9C].unk_0x29C = D_800944B8[D_80078C9C].unk_0x298;
-                } else {
-                    stream->unk_0x22 = 0x7F;
-                    stream->unk_0x4 = stream->unk_0x0;
-                }
-            } else if ((arg3 & 0xFF) == 0x1E) {
-                register s32 index asm("t0") = D_80078C9C;
-                Unk_800944B8 *base = D_800944B8;
-                if (stream->unk_0x22 != 0) {
-                    if (stream->unk_0x22 < 0x7F) {
-                        stream->unk_0x22--;
-                    }
-                    if (base[index].unk_0x2A0 != 0) {
-                        if (base[index].unk_0x2A2 != 0) {
-                            register s32 var_t1_2 asm("t1") = 0;
-                        register Unk_800944B8 *loopbase asm("a2")=base;
-                            register u8 *var_t2_2 asm("t2") = (u8 *)loopbase;
-                            do {
-                                register Unk_800944B8Stream *s asm("a1") = (Unk_800944B8Stream *)(index * sizeof(Unk_800944B8) + (u8 *)var_t2_2);
-                                register u32 h1a asm("a0");
-                                v0 = s->unk_0x21;
-                                v1 = s->unk_0x26;
-                                h1a = s->unk_0x1A;
-                                s->unk_0x20 = v0;
-                                s->unk_0x25 = v1;
-                            index=D_80078C9C;
-                                {
-                                    v0 = s->unk_0x4;
-                                    v1 = s->unk_0x1E;
-                                    s->unk_0x18 = h1a;
-                                    s->unk_0x0 = v0;
-                                    s->unk_0x1C = v1;
-                                }
-                                    var_t2_2 += sizeof(Unk_800944B8Stream);
-                            } while (++var_t1_2 < (s32)loopbase[index].unk_0x2A2);
-                        }
-                        D_800944B8[D_80078C9C].unk_0x298 = *(u32 *)D_800944B8[D_80078C9C].unk_0x29C;
-                    } else {
-                        stream->unk_0x0 = stream->unk_0x4;
-                    }
-                }
-            }
-        }
-        if ((arg2_val & 0xFF) == 6) {
-            if (D_800937D0[channel & 0xFF][0x24] == 0x14) {
-                if (D_800944B8[D_80078C9C].unk_0x2A0 != 0) {
-                    if (D_800944B8[D_80078C9C].unk_0x2A2 != 0) {
-                        s32 var_t1_3 = 0;
-                        u32 var_a1 = 0;
-                        do {
-                            *(u8 *)((u8 *)D_800944B8 + D_80078C9C * sizeof(Unk_800944B8) + var_a1 + 0x22) = arg3;
-                            var_t1_3++;
-                            var_a1 += sizeof(Unk_800944B8Stream);
-                        } while (var_t1_3 < (s32)D_800944B8[D_80078C9C].unk_0x2A2);
-                    }
-                } else {
-                    stream->unk_0x22 = arg3;
-                    return;
-                }
-            }
-        }
-        func_80039E60(channel & 0xFF, arg2_val & 0xFF, arg3 & 0xFF);
-        break;
-    case 0xE0:
-        func_8003A5C8(channel & 0xFF, arg2_val & 0xFF, arg3 & 0xFF);
-        break;
-    case 0xC0:
-        func_8003A594(channel & 0xFF, arg2_val & 0xFF);
-        break;
-    case 0xD0:
-        func_8003A5C0(channel & 0xFF, arg2_val & 0xFF);
-        break;
-    }
+        more = i < n;
+    } while (more);
+    return more;
 }
 
 s32 func_8003BC94(Unk_800944B8Stream *p) {
@@ -1097,49 +978,29 @@ void func_8003C530(s32 n) {
     }
 }
 
-s32 func_8003C5BC(s32 n) {
-    s32 i = 0;
-    s32 offset;
-    u8 *base = (u8 *)D_800944B8;
-    if (D_800944B8[n].unk_0x2A2 != 0) {
-        u8 *p = base;
-        offset = i;
-        do {
-            register u16 count asm("v0");
-            if (((Unk_800944B8 *)(p + offset))[n].unk_0x0[0].unk_0x20 != 1)
-                return 1;
-            count = *(volatile u16 *)&((Unk_800944B8 *)p)[n].unk_0x2A2;
-            i++;
-            offset += 0x28;
-            if (i >= count) break;
-        } while (1);
+    /* Read 1: into a1 */
+    {
+        register Unk_800944B8 *base asm("a0") = D_800944B8;
+        Unk_800944B8 *e = &base[D_80078C9C];
+        u8 *data = *(u8 *volatile *)&e->unk_0x284;
+        register u32 pos asm("a0") = *(volatile u32 *)&p->unk_0x0;
+        register u8 c asm("v1") = data[pos];
+        pos++;
+        *(u32 *)&p->unk_0x0 = pos;
+        if (e->unk_0x294 < pos) { p->unk_0x20 = 1; a1 = -1; }
+        else a1 = (u8)c;
     }
-    return 3;
-}
 
-void func_8003C654(void) {
-    extern s32 D_80094768[];
-    s32 n, i, j;
-    s32 *a, *b;
-    volatile s32 temp[2];
-    for (n = 0; n < 16; n++) {
-        if (D_80094768[n * 2] == 0) break;
-    }
-    for (i = 0; i < n; i++) {
-        a = &D_80094768[i * 2];
-        for (j = n - 1; i < j; j--) {
-            b = &D_80094768[j * 2];
-            if (a[0] > b[0]) {
-                temp[1] = a[1];
-                temp[0] = a[0];
-                a[1] = b[1];
-                a[0] = b[0];
-                b[1] = temp[1];
-                b[0] = temp[0];
-            }
+    a2 = a1;
+    if (!(a1 & 0x80)) {
+        a1 = p->unk_0x25;
+        p->unk_0x24 = 1;
+    } else {
+        if ((a2 & 0xFF) != 0xFF) {
+            p->unk_0x25 = a1;
         }
+        p->unk_0x24 = 0;
     }
-}
 
 void func_8003C73C(void) {
     extern Unk_800947E8 D_800947E8[];

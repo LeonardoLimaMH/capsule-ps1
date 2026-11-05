@@ -179,6 +179,16 @@ void func_800E3450(s32 arg0, s32 arg1, s32 arg2) {
     *(s16 *)(*temp_s2 + 0x4E) = func_800E3A04(s3, temp_s4, temp_s2);
 }
 
+    *(s16 *)(temp_s0 + 0x32C) = val;
+    *(s16 *)(temp_s0 + 0x32A) = val;
+    *(s16 *)(temp_s0 + 0x326) = 0;
+    *(s16 *)(temp_s0 + 0x324) = 0;
+    func_800D0730(temp_s4, (s16)temp_s1, (s16)(s5 - 1), 0);
+    func_800CED80(s3, *(s16 *)(temp_s0 + 0x32A), *(s16 *)(temp_s0 + 0x32C));
+    temp_s2 = &D_800FDE08[s];
+    *(s16 *)(*temp_s2 + 0x4E) = func_800E3A04(s3, temp_s4, temp_s2);
+}
+
 void func_800E355C(s32 arg0) {
     extern u8 D_80091618[];
     extern u8 *D_800FDE08[];
@@ -200,16 +210,14 @@ void func_800E355C(s32 arg0) {
     u8 *temp_s4;
     u8 **temp_s3;
 
-    *(s16 *)(temp_a1 + 0x1D4) = 0;
-    *(s16 *)(temp_a1 + 0x1D6) = 0;
-    *(s16 *)(temp_a1 + 0x1D8) = 0;
-    val_v0 = *(s32 *)(temp_v1 + 0xA4);
-    s2 = *(s32 *)(temp_v1 + 0xA8);
-    *(s16 *)(temp_a1 + 0x338) = s2;
-    *(s16 *)(temp_a1 + 0x334) = s2;
-    *(s16 *)(temp_a1 + 0x332) = val_v0;
-    s1 = *(s16 *)(temp_a1 + 0x332);
-    *(s16 *)(temp_a1 + 0x336) = val_v0;
+#include "gte_inline.h"
+
+extern u8 D_800900C0[], D_8008ED68[];
+extern s32 func_800E3810(s32);
+extern void PushMatrix(void), PopMatrix(void);
+extern void func_8002CEC0(void *);
+extern s32 RotTransPers(void *, s32 *, s32 *, s32 *);
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3A04);
 
     temp_s0 = base_s4 + ((func_800B1260(arg0) & 0xFFFF) * 0x79C);
     temp_s4 = temp_s0 + 0x1CC;
@@ -396,42 +404,7 @@ s32 func_800E3D10(void) {
 extern u8 D_800900C0[], D_8008ED68[], D_80063940[], D_80100F38[];
 extern s16 D_800F1A68[];
 extern void PushMatrix(void), PopMatrix(void), func_8002CEC0(void *);
-s32 func_800E3D18(s32 a0, void *v, u8 **obj) {
-    struct {
-        u16 sx;
-        u16 sy;
-        s32 p;
-        s32 flag;
-        s32 z;
-    } t;
-    u8 *scr;
-    u8 *pl;
-    s32 s;
-    u16 k;
-    s32 g;
-
-    k = func_800B1260(a0);
-    s = func_800E3810(a0);
-    PushMatrix();
-    func_8002CEC0(D_800900C0 + s * 0xBC);
-    gte_ldv0(v);
-    gte_rtps();
-    gte_stsxy(&t);
-    gte_stir0(&t.p);
-    gte_stflg(&t.flag);
-    GTE_MFC2(t.z, 19);
-    t.z >>= 2;
-    scr = D_8008ED68;
-    *(u16 *)(*obj + 0x46) = t.sx - *(s32 *)(scr + 0x108) / 2;
-    *(u16 *)(*obj + 0x4A) = t.sy - *(s32 *)(scr + 0x10C) / 2 + 2;
-    PopMatrix();
-    g = (*(u32 *)(D_80063940 + k * 60 + 0x20) >> 15) & 0xF;
-    pl = D_80100F38 + k * 0x79C;
-    *(u16 *)(*obj + 0x46) += (u16)D_800F1A68[(*(s16 *)(pl + 0x2BA) - 10) * 3 + g * 9];
-    *(u16 *)(*obj + 0x4A) += (u16)D_800F1A68[(*(s16 *)(pl + 0x2BA) - 10) * 3 + g * 9 + 1];
-    t.z += D_800F1A68[(*(s16 *)(pl + 0x2BA) - 10) * 3 + g * 9 + 2];
-    return (s16)((u16)t.z - 5);
-}
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3D18);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E3F38);
 

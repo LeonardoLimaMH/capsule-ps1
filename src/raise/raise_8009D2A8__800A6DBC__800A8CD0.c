@@ -8,24 +8,7 @@ typedef struct {
     u8 col[4];
 } Result_800EE914;
 
-s16 func_800A8CD0(s16 arg0, s32 arg1) {
-    extern s16 D_800F2D20[];
-    extern s32 D_800F2D24[];
-    extern s16 D_800F2D28[];
-    *D_800F2D24 = func_800202A4(100);
-    *D_800F2D20 = 0;
-    if (arg0 > 0) {
-        do {
-            *D_800F2D28 = func_800A8DB8(*D_800F2D20, arg1);
-            if (*D_800F2D28 >= *D_800F2D24) {
-                return *D_800F2D20;
-            }
-            (*D_800F2D20)++;
-        } while (*D_800F2D20 < arg0);
-    }
-    *D_800F2D20 = arg0 - 1;
-    return *D_800F2D20;
-}
+INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A8CD0", func_800A8CD0);
 
 s16 func_800A8DB8(s16 arg0, u16 *arg1) {
     s32 sum;
@@ -154,22 +137,6 @@ void func_800A95D4(void) {
     LocalResult *res = temp_res;
     s32 i;
     s32 j;
-
-    res->state = 0;
-    res->col[0] = 0x40;
-    res->col[1] = 0x74;
-    res->col[2] = 0xb8;
-    res->unk94 = 0;
-    res->col[3] = 0x2c;
-
-    for (i = 0; i < 9; i++) {
-        res->cells[i] = 0;
-        res->indices[i] = -1;
-        for (j = 0; j < 2; j++) {
-            res->extra[j][i] = 0;
-        }
-    }
-}
 
 s32 func_800A9658(s16 arg0) {
     register s32 r asm("v0");

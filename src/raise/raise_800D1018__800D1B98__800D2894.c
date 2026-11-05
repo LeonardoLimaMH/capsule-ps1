@@ -128,6 +128,80 @@ s32 func_800D2B34(void) {
     return 0;
 }
 
+    if (id != 0xFFFF) {
+        id = *(u16 *)(D_80091618 + id * 0x1A8);
+        if (id != 0xFFFF) {
+            u8 *base = D_80063940;
+            u8 *q = id * 0x3C + base;
+            return (*(u32 *)(q + 0x18) & 3) == 1;
+        }
+    }
+    return 0;
+}
+
+s32 func_800D2D6C(s32 arg0) {
+    extern u8 D_80063940[];
+    extern u8 D_80091618[];
+    u32 id;
+    register s32 r asm("v0");
+    id = (u16)func_800B1260(arg0);
+    if (id == 0xFFFF || (id = *(u16 *)(D_80091618 + id * 0x1A8)) == 0xFFFF) {
+        r = 0;
+    } else {
+        u8 *base = D_80063940;
+        u8 *q = id * 0x3C + base;
+        r = (*(u32 *)(q + 0x18) & 3) == 2;
+    }
+    if (r) return 1;
+    id = (u16)func_800B1260(arg0);
+    if (id == 0xFFFF || (id = *(u16 *)(D_80091618 + id * 0x1A8)) == 0xFFFF) {
+        r = 0;
+    } else {
+        u8 *base = D_80063940;
+        u8 *q = id * 0x3C + base;
+        r = (*(u32 *)(q + 0x18) & 3) == 1;
+    }
+    return r << 1;
+}
+
+s32 func_800D2E90(s32 arg0) {
+    extern u8 D_80063940[];
+    extern u8 D_80091618[];
+    u32 id;
+    register s32 r asm("v0");
+    id = (u16)func_800B1260(arg0);
+    if (id == 0xFFFF || (id = *(u16 *)(D_80091618 + id * 0x1A8)) == 0xFFFF) {
+        r = 0;
+    } else {
+        u8 *base = D_80063940;
+        u8 *q = id * 0x3C + base;
+        r = (*(u32 *)(q + 0x18) & 3) == 0;
+    }
+    if (r) return 1;
+    id = (u16)func_800B1260(arg0);
+    if (id == 0xFFFF || (id = *(u16 *)(D_80091618 + id * 0x1A8)) == 0xFFFF) {
+        r = 0;
+    } else {
+        u8 *base = D_80063940;
+        u8 *q = id * 0x3C + base;
+        r = (*(u32 *)(q + 0x18) & 3) == 1;
+    }
+    return r << 1;
+}
+
+s32 func_800D2B34(void) {
+    u32 id = func_800B1260() & 0xFFFF;
+
+    if (id != 0xFFFF) {
+        u8 *p = (u8 *)&D_80100F38[id];
+        s32 res = func_800CE128(*(s16 *)(p + 0x326));
+        if (res == 2 || res == 6) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 s32 func_800D2BB8(s32 arg0) {
     extern u8 D_80063940[], D_80091618[];
     register s32 k asm("a0") = func_800B1260(arg0);
