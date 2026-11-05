@@ -68,16 +68,17 @@ void func_8003C884(void) {
     D_80078CC8 = 1;
 }
 
-u8 func_8003C894(u8 arg0) {
+u32 func_8003C894(s32 arg0) {
     extern u32 D_80078C78[];
-    if (arg0 < 0x19) {
-        if (arg0 == 0) {
-            goto err;
+    u32 temp_a0 = arg0 & 0xFF;
+
+    if (temp_a0 < 0x19U) {
+        if (temp_a0 != 0) {
+            D_80078C78[0] = temp_a0;
+            return temp_a0;
         }
-        D_80078C78[0] = arg0;
-        return arg0;
+        return 0xFF;
     }
-err:
     return 0xFF;
 }
 
@@ -123,36 +124,37 @@ void func_8003C950(s32 left, s32 right)
   SpuSetCommonAttr(&attr);
 }
 
-s32 func_8003C990(u8 *arg0, s16 arg1, s32 arg2) {
+s32 func_8003C990(u8 *arg0, s32 arg1, s32 arg2) {
     extern s32 D_80078CD0;
     extern SndSlot D_800947E8[];
-    s16 i = 0;
-    SndSlot *p;
+    register u8 *p asm("t1") = arg0;
+    register s32 i asm("a3") = 0;
+    register s32 slot asm("v1");
+    register u8 *s asm("t0") = p;
+    SndSlot *e;
     D_80078CD0 = 0;
+    slot = arg1;
+    arg1 = (s16)arg1;
     if (arg1 == -1) {
-        while (1) {
-            if (D_800947E8[i].id == -1) {
-                arg1 = i;
-                break;
-            }
-            i++;
-            if (i >= 16) {
-                return -1;
-            }
+        register SndSlot *base asm("a1") = D_800947E8;
+        for (; (s16)i < 16;) {
+            if (base[(s16)i].id == -1) goto found;
+            { register s32 next asm("v0") = i + 1; i = next; }
         }
-    } else if (arg1 >= 16) {
         return -1;
     }
-    p = &D_800947E8[arg1];
-    p->id = arg1;
-    p->src = arg0;
-    p->unk10 = arg2;
-    p->unk8 = *(u16 *)(arg0 + 0x12) * 0x200 + 0xA20;
-    p->unkC = 0;
-    p->unk14 = *(s32 *)(arg0 + 0xC) - p->unk8;
-    p->unk18 = arg0[0x18];
-    p->unk1B = arg0[0x19];
-    return arg1;
+    i = slot;
+    if ((s16)i >= 16) return -1;
+found:
+    e = &D_800947E8[(s16)i];
+    e->id = i;
+    e->src = p;
+    e->unk10 = arg2;
+    e->unk8 = *(u16 *)(s + 0x12) * 512 + 0xA20;
+    e->unk14 = *(s32 *)(s + 0xC) - e->unk8;
+    e->unk18 = s[0x18];
+    e->unk1B = s[0x19];
+    return -1;
 }
 
 void func_8003CA90(s16 arg0) {
@@ -172,29 +174,34 @@ void func_8003CACC(s16 arg0) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CAD8);
 
-s32 func_8003CC00(s32 *arg0, s16 arg1) {
+s16 func_8003CC00(s32 *arg0, s16 arg1) {
     extern s32 D_80078C84[4];
     extern SndVoice D_800944B8[16];
     SndVoice *p;
     s32 i;
-
+    register s32 minus1 asm("a3");
+    s32 magic;
     D_80078C84[0] = 1;
-    if (*arg0 == 0x53455170 || *arg0 == 0x6468544D || *arg0 == 0x2054444B || *arg0 == 0x3154444B) {
-        i = 0;
-        p = D_800944B8;
-        do {
-            if (p->id == -1) {
-                p->src = (s32)arg0;
-                p->id = arg1;
-                p->state = 2;
-                D_80078C84[0] = 0;
-                return (s16)i;
-            }
-            i++;
-            p++;
-        } while (i < 1);
-        D_80078C84[0] = 0;
-    }
+    magic = *arg0;
+    if (magic == 0x53455170 || magic == 0x6468544D || magic == 0x2054444B || magic == 0x3154444B)
+        goto search;
+    return -1;
+found:
+    p->src = (s32)arg0;
+    p->id = arg1;
+    p->state = 2;
+    D_80078C84[0] = 0;
+    return i;
+search:
+    i = 0;
+    minus1 = -1;
+    { register SndVoice *base asm("v0") = D_800944B8; p = base; }
+    do {
+        if (p->id == minus1) goto found;
+        i++;
+        p++;
+    } while (i <= 0);
+    D_80078C84[0] = 0;
     return -1;
 }
 
@@ -231,19 +238,18 @@ void func_8003CCAC(s16 arg0, s32 arg1, s16 arg2) {
 void func_8003CD70(s16 arg0) {
     extern s32 D_80078C84;
     extern SndVoice D_800944B8[];
-    SndVoice *p;
-    SndVoice *base;
-    s16 id;
+    register SndVoice *base asm("a0");
+    register SndVoice *p asm("s0");
+    register s32 off asm("v0");
 
     if (arg0 != -1) {
         base = D_800944B8;
-        p = &base[arg0];
-        id = p->id;
-        if (id != -1) {
-            s16 a = arg0;
+        off = arg0 * sizeof(SndVoice);
+        p = (SndVoice *)(off + (u32)base);
+        if (p->id != -1) {
             D_80078C84 = 1;
-            func_8003C530(a);
-            func_8003860C(a);
+            func_8003C530(arg0);
+            func_8003860C(arg0);
             p->volR = 0x7F;
             p->volL = 0x7F;
             p->state = 2;
@@ -319,5 +325,6 @@ s32 func_8003D518(s16 arg0) {
         }
     }
     base = D_800944B8;
-    return base[arg0].state;
+    c = &base[arg0];
+    return c->state;
 }
