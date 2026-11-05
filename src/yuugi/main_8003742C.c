@@ -9,7 +9,7 @@ typedef struct {
     u8 pad0[2];
     u8 f2;
     u8 pad3[0x11];
-    s16 f14;
+    u16 f14;
     u8 pad16[6];
     s16 f1c;
     s16 f1e;
@@ -308,7 +308,27 @@ s16 func_8003804C(u8 *p, u32 a) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_800380C8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80038294);
+void func_80038294(OscObj *p) {
+    if (p->f2 != 0) {
+        if (p->f14 != 0) {
+            if (p->f1e + p->f1c < p->f20) {
+                p->f1e = p->f1e + p->f1c;
+            } else {
+                p->f14 = 0;
+                p->f1e = p->f20;
+            }
+        } else {
+            if (-p->f20 < p->f1e - p->f1c) {
+                p->f1e = p->f1e - p->f1c;
+            } else {
+                p->f14 = 1;
+                p->f1e = -p->f20;
+            }
+        }
+    } else {
+        p->f1e = 0;
+    }
+}
 
 void func_80038348(OscObj *p) {
     if (p->f26 != 0) {
