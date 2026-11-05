@@ -71,9 +71,10 @@ void func_8003C884(void) {
 u8 func_8003C894(u8 arg0) {
     extern u32 D_80078C78[];
     if (arg0 < 0x19) {
-        if (arg0 != 0) {
-            D_80078C78[0] = arg0;
+        if (arg0 == 0) {
+            return 0xFF;
         }
+        D_80078C78[0] = arg0;
         return arg0;
     }
     return 0xFF;
@@ -126,41 +127,40 @@ s32 func_8003C990(u8 *arg0, s16 arg1, s32 arg2) {
     extern SndSlot D_800947E8[];
     s16 i = 0;
     SndSlot *p;
-    s32 ret;
     D_80078CD0 = 0;
     if (arg1 == -1) {
-        do {
-            arg1 = i;
-            i++;
-            if (D_800947E8[arg1].id == -1) {
-                goto found;
+        while (1) {
+            if (D_800947E8[i].id == -1) {
+                arg1 = i;
+                break;
             }
-        } while (i < 16);
-        ret = -1;
-    } else {
-        ret = -1;
-        if (arg1 < 16) {
-found:
-            ret = arg1;
-            p = &D_800947E8[arg1];
-            p->id = arg1;
-            p->src = arg0;
-            p->unk10 = arg2;
-            p->unk8 = *(u16 *)(arg0 + 0x12) * 0x200 + 0xA20;
-            p->unk14 = *(s32 *)(arg0 + 0xC) - p->unk8;
-            p->unk18 = arg0[0x18];
-            p->unk1B = arg0[0x19];
+            i++;
+            if (i >= 16) {
+                return -1;
+            }
         }
+    } else if (arg1 >= 16) {
+        return -1;
     }
-    return ret;
+    p = &D_800947E8[arg1];
+    p->id = arg1;
+    p->src = arg0;
+    p->unk10 = arg2;
+    p->unk8 = *(u16 *)(arg0 + 0x12) * 0x200 + 0xA20;
+    p->unkC = 0;
+    p->unk14 = *(s32 *)(arg0 + 0xC) - p->unk8;
+    p->unk18 = arg0[0x18];
+    p->unk1B = arg0[0x19];
+    return arg1;
 }
 
 void func_8003CA90(s16 arg0) {
     extern SndSlot D_800947E8[];
-    SndSlot *base = D_800947E8;
-    SndSlot *p = base + arg0;
-    if (p->id != -1) {
-        p->id = -1;
+    register SndSlot *p asm("v1") = D_800947E8;
+    register s32 minus1 asm("a0") = -1;
+    p += arg0;
+    if (p->id != minus1) {
+        p->id = minus1;
     }
 }
 
@@ -172,12 +172,12 @@ void func_8003CACC(s16 arg0) {
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CAD8);
 
 s32 func_8003CC00(s32 *arg0, s16 arg1) {
-    extern s32 D_80078C84;
-    extern SndVoice D_800944B8[];
+    extern s32 D_80078C84[4];
+    extern SndVoice D_800944B8[16];
     SndVoice *p;
-    s16 i;
+    s32 i;
 
-    D_80078C84 = 1;
+    D_80078C84[0] = 1;
     if (*arg0 == 0x53455170 || *arg0 == 0x6468544D || *arg0 == 0x2054444B || *arg0 == 0x3154444B) {
         i = 0;
         p = D_800944B8;
@@ -186,13 +186,13 @@ s32 func_8003CC00(s32 *arg0, s16 arg1) {
                 p->src = (s32)arg0;
                 p->id = arg1;
                 p->state = 2;
-                D_80078C84 = 0;
-                return i;
+                D_80078C84[0] = 0;
+                return (s16)i;
             }
             i++;
             p++;
         } while (i < 1);
-        D_80078C84 = 0;
+        D_80078C84[0] = 0;
     }
     return -1;
 }
@@ -243,18 +243,19 @@ void func_8003CD70(s16 arg0) {
 }
 
 void func_8003CE14(s16 arg0) {
-    extern s32 D_80078C84;
-    extern SndChan D_800944B8[];
-    SndChan *c;
-    if (arg0 != -1) {
-        c = &D_800944B8[arg0];
+    extern s32 D_80078C84[4];
+    extern SndChan D_800944B8[16];
+    s32 k = arg0;
+    if (k != -1) {
+        SndChan *base = D_800944B8;
+        SndChan *c = &base[k];
         if (c->prog != -1) {
-            D_80078C84 = 1;
-            c->prog = -1;
+            D_80078C84[0] = 1;
+            c->prog = k;
             c->state = 0;
             c->vol2 = 0x7F;
             c->vol1 = 0x7F;
-            D_80078C84 = 0;
+            D_80078C84[0] = 0;
         }
     }
 }
@@ -271,16 +272,13 @@ void func_8003CE88(s16 arg0, u16 arg1, u16 arg2) {
 }
 
 void func_8003CEF8(s16 arg0, u16 arg1, u16 arg2) {
-    extern u16 D_80078D54[];
-    extern u16 D_80078D56[];
+    extern u16 D_80078D54;
+    extern u16 D_80078D56;
     extern SndChan D_800944B8[];
-    SndChan *base = D_800944B8;
-    D_80078D54[0] = arg1;
-    if (base[arg0].state != 2) {
-        D_80078D56[0] = arg2;
+    D_80078D54 = arg1;
+    D_80078D56 = arg2;
+    if (D_800944B8[arg0].state != 2) {
         func_80037E40();
-    } else {
-        D_80078D56[0] = arg2;
     }
 }
 
@@ -299,11 +297,17 @@ void func_8003CF90(void) {
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CFBC);
 
 s32 func_8003D518(s16 arg0) {
-    extern SndChan D_800944B8[];
-    if (D_800944B8[arg0].state == 1) {
-        if (func_8003C5BC() == 3) {
-            D_800944B8[arg0].state = 3;
+    extern SndChan D_800944B8[16];
+    SndChan *base = D_800944B8;
+    SndChan *c = &base[arg0];
+    SndChan *d;
+    s16 r;
+    if (c->state == 1) {
+        r = func_8003C5BC();
+        if (r == 3) {
+            c->state = r;
         }
     }
-    return D_800944B8[arg0].state;
+    d = D_800944B8;
+    return d[arg0].state;
 }
