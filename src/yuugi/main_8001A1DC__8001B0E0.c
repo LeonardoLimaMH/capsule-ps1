@@ -52,7 +52,7 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0", func_8001B484);
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0", func_8001B964);
 
 u8 func_8001BAA0(u8 *buf, s32 len, u8 *out) {
-    u32 sum = 7;
+    register u32 sum asm("a3") = 7;
     u32 i = 0;
     len -= 4;
     if (len != 0) {
