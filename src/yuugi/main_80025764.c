@@ -9,7 +9,24 @@ typedef struct {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80025764);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80025C48);
+void func_80025C48(s32 arg0, u16 arg1, u16 arg2) {
+    extern M2C_UNK D_80069E4C[];
+    extern u8 D_80085428[];
+    extern M2C_UNK D_80100F38[];
+    S_80100F38b *p;
+
+    switch (D_80085428[0]) {
+    case 0:
+        p = &((S_80100F38b *)D_80100F38)[func_800B1260(arg0) & 0xFFFF];
+        p->f33E = arg1;
+        p->f340 = arg2;
+        break;
+    case 1:
+        M2C_GFIELD(D_80069E4C, u8, 0x14) = arg1;
+        M2C_GFIELD(D_80069E4C, u8, 0x15) = arg2;
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80025CEC);
 
@@ -77,7 +94,19 @@ void func_80025EF8(s32 arg0) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80025FC0);
+void func_80025FC0(u8 arg0, u16 arg1, u16 arg2, u16 arg3) {
+    extern u8 D_80085428[];
+
+    *D_80085428 = arg0;
+    switch (arg0) {
+    case 0:
+        func_80026020();
+        break;
+    case 1:
+        func_80026078(arg1, arg2, arg3);
+        break;
+    }
+}
 
 #include "common.h"
 
