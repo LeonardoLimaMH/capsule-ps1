@@ -1,6 +1,12 @@
 #include "common.h"
 #include "yuugi.h"
 
+typedef struct {
+    u8 pad0[0x332];
+    u16 f332, f334, f336, f338, f33A, f33C, f33E, f340;
+    u8 pad1[0x79C - 0x342];
+} S_80100F38b;
+
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80025764);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80025C48);
@@ -155,7 +161,120 @@ void func_800260C8(s32 arg0, s32 arg1) {
     func_80025C48(1, arg0 & 0xFF, arg1 & 0xFF);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800260F4);
+extern u8 *D_80078D20, *D_80078D24, *D_80078D18, *D_80078D1C;
+void func_800260F4(u8 *base) {
+    s32 i, j, k;
+    u8 *t0;
+    u32 v, w;
+
+    register s32 val_m1 asm("a1") = -1;
+    u8 *p500 = base + 0x500;
+    D_80078D20 = base + 0xC;
+    D_80078D24 = base + 0x50;
+    D_80078D18 = base + 0x508;
+    *(s32 *)(p500 + 4) = 0x20D0;
+    D_80078D1C = p500;
+    base[0x500] = 7;
+
+    for (i = 2; i >= 0; i--) {
+        ((s32 *)D_80078D20)[i] = val_m1;
+    }
+    for (i = 0; i < 0xB; i++) {
+        *(s32 *)(D_80078D20 + i * 4 + 0xC) = 0;
+        D_80078D20[0x38 + i] = 0;
+    }
+    for (k = 0; k < 6; k++) {
+        D_80078D24[0] = 0xFF;
+        for (j = 0; j < 8; j++) {
+            D_80078D24[1 + j] = 0;
+        }
+        D_80078D24[9] = 0;
+        D_80078D24[0xA] = 0;
+        D_80078D24[0xB] = 0;
+        D_80078D24[0xC] = 0;
+        D_80078D24[0xD] = 0;
+        D_80078D24[0x14] = 0xFF;
+        *(s16 *)(D_80078D24 + 0xE) = 0xFA;
+        *(s16 *)(D_80078D24 + 0x10) = 0x4B;
+        *(s16 *)(D_80078D24 + 0x12) = 0xFF;
+        D_80078D24[0x15] = 0;
+        for (j = 0; j < 3; j++) {
+            D_80078D24[0x16 + j] = 0xFF;
+            D_80078D24[0x19 + j * 2] = 0xFF;
+            D_80078D24[0x1A + j * 2] = 0xFF;
+        }
+        D_80078D24[0x1F] = 0xFF;
+        D_80078D24[0x20] = 0xFF;
+        D_80078D24[0x21] = 0xFF;
+        D_80078D24[0x22] = 0xFF;
+        D_80078D24[0x23] = 0xFF;
+        D_80078D24[0x24] = 0xFF;
+        *(u16 *)(D_80078D24 + 0x26) = 0xFFFF;
+        for (j = 0; j < 4; j++) {
+            D_80078D24[0x28 + j] = 0;
+            *(s32 *)(D_80078D24 + 0x2C + j * 4) = 0;
+            *(s16 *)(D_80078D24 + 0x3C + j * 2) = 0;
+        }
+        t0 = D_80078D24;
+        v = *(u32 *)(t0 + 0x44);
+        *(s32 *)(t0 + 0x4C) = 0;
+        *(s32 *)(t0 + 0x50) = 0;
+        for (j = 0xB; j >= 0; j--) {
+            t0[0x54 + j] = 0;
+        }
+        v &= ~3;
+        v &= ~0xC;
+        v |= 0x70;
+        v &= ~0x80;
+        v &= ~0x100;
+        v &= ~0x1E00;
+        v &= ~0x6000;
+        v |= 0x3C0000;
+        v |= 0x3C00000;
+        v &= 0xFFFC7FFF;
+        v &= 0x1FFFFFFF;
+        *(u32 *)(t0 + 0x44) = v;
+        v &= 0xFBFFFFFF;
+        v &= 0xF7FFFFFF;
+        w = *(u32 *)(t0 + 0x48);
+        *(u32 *)(t0 + 0x48) = w & ~1;
+        v &= 0xEFFFFFFF;
+        *(u32 *)(t0 + 0x44) = v;
+        D_80078D24[0x63] = 0;
+        D_80078D24[0x62] = 0;
+        D_80078D24[0x61] = 0;
+        D_80078D24[0x60] = 0;
+        for (j = 15; j >= 0; j--) {
+            *(s16 *)(D_80078D24 + 0x64 + j * 2) = 0;
+        }
+        for (j = 0; j < 8; j++) {
+            *(s16 *)(D_80078D24 + 0x94 + j * 2) = 0;
+            *(s16 *)(D_80078D24 + 0x84 + j * 2) = 0;
+        }
+        for (j = 0; j < 7; j++) {
+            *(s16 *)(D_80078D24 + 0xB2 + j * 2) = 0;
+            *(s16 *)(D_80078D24 + 0xA4 + j * 2) = 0;
+        }
+        *(s16 *)(D_80078D24 + 0xC6) = 0;
+        *(s16 *)(D_80078D24 + 0xC4) = 0;
+        D_80078D24 += 0xC8;
+    }
+    t0 = D_80078D18;
+    for (k = 0; k < 6; k++) {
+        v = *(u32 *)t0;
+        v &= ~1;
+        v &= ~2;
+        v &= ~0x1C;
+        v |= ((k & 7) << 2);
+        v &= ~0x7E0;
+        v &= 0xFFFE07FF;
+        v &= 0xFF81FFFF;
+        *(u32 *)t0 = v;
+        for (j = 0; j < 0x20; j++) {
+            *(s16 *)(t0 + 4 + j * 2) = 0;
+        }
+    }
+}
 
 void func_800264BC(void *arg0)
 {
@@ -185,11 +304,11 @@ extern s32 D_80078C38;
 extern u8 D_8006AF80[], D_8006AF90[], D_8006AFCC[];
 extern void func_80026514(s32);
 void func_800267F0(void) {
-    register s32 neg1 asm("a2") = -1;
+    s32 neg1 = -1;
     u8 *base = D_8006AF90;
-    register u8 *a1 asm("a1") = base;
-    register s32 off asm("a3") = 0;
-    register u8 *t1 asm("t1") = a1 + 0x3C;
+    u8 *a1 = base;
+    s32 off = 0;
+    u8 *t1 = a1 + 0x3C;
     s32 i;
 
     D_8008F703 = 0;
@@ -198,31 +317,30 @@ void func_800267F0(void) {
     *(s32 *)(D_8006AF80 + 4) = 0x20D0;
 
     do {
+        s32 a0;
+        u8 *v1;
+
         *(s16 *)a1 = 0;
         i = 0;
-        {
-            register s32 a0 asm("a0") = off;
-            register u8 *v1 asm("v1") = a1;
-            do {
-                u8 *v0 = (u8 *)((u32)a0 + (u32)base);
-                a0 += 4;
-                *(s16 *)(v1 + 2) = neg1;
-                *(s16 *)(v0 + 8) = neg1;
-                *(s16 *)(v0 + 10) = neg1;
-                v1 += 2;
-            } while (++i < 3);
-        }
+        a0 = off;
+        v1 = a1;
+        do {
+            u8 *v0 = (u8 *)((u32)a0 + (u32)base);
+            a0 += 4;
+            *(s16 *)(v1 + 2) = neg1;
+            *(s16 *)(v0 + 8) = neg1;
+            *(s16 *)(v0 + 10) = neg1;
+            v1 += 2;
+        } while (++i < 3);
 
         *(s16 *)(a1 + 0x14) = 0;
         i = 0;
-        {
-            register u8 *v1 asm("v1") = a1;
-            do {
-                *(s16 *)(v1 + 0x16) = neg1;
-                *(s16 *)(v1 + 0x1A) = neg1;
-                v1 += 2;
-            } while (++i < 2);
-        }
+        v1 = a1;
+        do {
+            *(s16 *)(v1 + 0x16) = neg1;
+            *(s16 *)(v1 + 0x1A) = neg1;
+            v1 += 2;
+        } while (++i < 2);
 
         a1 += 0x1E;
         off += 0x1E;
@@ -230,10 +348,8 @@ void func_800267F0(void) {
 
     i = 0;
     {
-        register s32 a0 asm("a0") = -1;
-        register u8 *v1 asm("v1");
-        u8 *ptr = D_8006AFCC;
-        v1 = ptr;
+        s32 a0 = -1;
+        u8 *v1 = D_8006AFCC;
         do {
             *(s32 *)(v1 + 8) = a0;
             *(s32 *)(v1 + 0x1C) = 0;
@@ -243,8 +359,8 @@ void func_800267F0(void) {
 
     i = 0;
     {
-        register u8 *a0 asm("a0") = D_8006AFCC;
-        register u8 *v1 asm("v1") = a0;
+        u8 *a0 = D_8006AFCC;
+        u8 *v1 = a0;
         do {
             *(s16 *)(v1 + 0x30) = 0;
             *(s32 *)(a0 + 0x48) = 0;
