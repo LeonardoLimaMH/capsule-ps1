@@ -8,10 +8,11 @@ void func_8002EC18(void) {
     extern M2C_UNK D_8008ED68[];
     extern s32 D_80078D28;
     extern s32 D_800922D8[];
+    u8 *p = D_80085428;
     if (M2C_GFIELD(D_8008ED68, u8, 0x99A) == 0) {
         D_80078D28--;
         if (D_80078D28 <= 0) {
-            D_80085428[0x5CB] = 1;
+            p[0x5CB] = 1;
             D_800922D8[0] = 1;
             M2C_GFIELD(D_8008ED68, u16, 0xF0)++;
         }
@@ -130,9 +131,40 @@ void func_80032398(void) {
     D_80085428[0x5E3] = D_800922D0[12];
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4", func_80032474);
+void func_80032474(s16 arg0, s16 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
+    extern s16 D_800922D2[];
+    s32 c = 1;
+    if (D_800922D2[0] == arg2) {
+        c = 3;
+    }
+    func_8001F1A8(arg0, arg1, (arg3 == 1) ? c : 0, 1, 0, arg4, 1, arg5, 0);
+    func_8001F1A8(arg0 + 0x28, arg1, (arg3 == 0) ? c : 0, 1, 0, arg6, 1, arg7, 0);
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4", func_80032570);
+void func_80032570(void) {
+    extern u8 D_800922FA[];
+    extern s16 D_800922DE[];
+    extern s16 D_800922DC[];
+    extern u8 D_80078D34;
+    extern u16 D_80085430[];
+    u8 v = D_800922FA[0];
+    if (D_800922DE[0] != 0) {
+        v |= 2;
+    } else {
+        v &= ~2;
+    }
+    if (D_800922DC[0] == 2) {
+        v &= ~1;
+    } else {
+        v |= 1;
+    }
+    func_800337E0(v);
+    if (D_800922DC[0] != 2 && D_80078D34 != 1) {
+        func_800338DC(D_80085430[0]);
+    } else {
+        func_80033974(0);
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4", func_80032610);
 
