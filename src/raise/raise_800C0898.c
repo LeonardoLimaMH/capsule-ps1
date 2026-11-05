@@ -1,4 +1,5 @@
 #include "common.h"
+#include "raise_ring.h"
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0898", func_800C0898);
 
