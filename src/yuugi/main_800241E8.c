@@ -10,6 +10,8 @@ typedef struct {
 } Unk80069E4C;
 
 typedef struct { u8 b[0x18]; } Blk18;
+typedef struct { s32 w[4]; } Blk10;
+typedef struct { u8 b[8]; } Blk8;
 typedef struct { s32 a, b, c; s32 pad; s16 d, e, f; } Z69E6C;
 typedef struct { s32 a, b, c; } Z6AF70;
 
@@ -17,7 +19,30 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_800241E8);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_8002453C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_800246E4);
+void func_800246E4(void) {
+    extern Z69E6C D_80069E6C;
+    extern Z6AF70 D_8006AF70;
+    extern s16 D_80078C24, D_80078C26, D_80078C28, D_80078C2A, D_80078C2C, D_80078C30;
+    extern s16 D_800EFA4A, D_800EFA4C, D_800EFA4E;
+    D_80069E6C.a = 0;
+    D_80069E6C.b = 0;
+    D_80069E6C.c = 0;
+    D_80069E6C.d = 0;
+    D_80069E6C.e = 0;
+    D_80069E6C.f = 0;
+    D_8006AF70.a = 0;
+    D_8006AF70.b = 0;
+    D_8006AF70.c = 0;
+    D_80078C24 = 0;
+    D_80078C26 = 0;
+    D_80078C28 = 0;
+    D_80078C2A = 0;
+    D_80078C2C = 0;
+    D_80078C30 = 0;
+    D_800EFA4A = 0;
+    D_800EFA4C = 0;
+    D_800EFA4E = 0x3c;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_8002475C);
 
@@ -55,7 +80,11 @@ void func_80025000(void *arg0) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_80025050);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_80025448);
+void func_80025448(void) {
+    extern u8 D_80069AD4[];
+    extern u8 D_80069E4C[];
+    *(Blk18 *)(D_80069AD4 + 0xD8) = *(Blk18 *)(D_80069E4C + 0x38);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_800254A0);
 
