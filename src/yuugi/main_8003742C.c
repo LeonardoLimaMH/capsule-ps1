@@ -101,7 +101,55 @@ void func_80037704(u8 *v) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_8003793C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80037A7C);
+extern u8 D_80078CC8[];
+extern u16 D_80078C7C;
+void func_80037A7C(u8 *v, u8 *p) {
+    extern u8 D_800944B8[], D_800947E8[], D_80078CC8[];
+    register u8 *base asm("a0") = D_800944B8;
+    u8 *e = base + (v[3] >> 4) * 0x2AC;
+    s32 k = *(s16 *)(e + 0x288);
+    register s32 pan asm("a0") = 0x40;
+    s32 vol, l, r;
+    register u8 *bank asm("v1");
+    
+
+    if (D_80078CC8[0] == 0) {
+        bank = D_800947E8;
+        pan = bank[k * 0x1C + 0x1B] + v[0x12] + v[0x13] + p[1] - 0xC0;
+    }
+    if (pan < 0) {
+        pan = 0;
+    }
+    if (pan >= 0x80) {
+        pan = 0x7F;
+    }
+    *(s16 *)(v + 0x14) = pan;
+    bank = D_800947E8;
+    vol = (s32)(bank[k * 0x1C + 0x18] * D_80078C7C * p[5] * p[3]) >> 14;
+    vol = (s32)(vol * v[0x10] * v[0x11]) >> 14;
+    if (pan < 0x40) {
+        l = vol;
+        r = (pan * (vol << 1)) >> 7;
+    } else if (pan == 0x40) {
+        r = vol;
+        l = vol;
+    } else {
+        r = vol;
+        l = ((0x40 - (pan & 0x3F)) * (vol << 1)) >> 7;
+    }
+    base = D_800944B8;
+    e = base + (v[3] >> 4) * 0x2AC;
+    l = (l * *(s16 *)(e + 0x28C)) >> 7;
+    r = (r * *(s16 *)(e + 0x28E)) >> 7;
+    *(s16 *)(v + 0xC) = (l * (v[0x1A] & 0x7F)) >> 7;
+    *(s16 *)(v + 0xE) = (r * (v[0x1A] & 0x7F)) >> 7;
+    if (p[0x11] >= 0x40) {
+        l = *(u16 *)(v + 0xC) * *(u16 *)(v + 0xC);
+        r = *(u16 *)(v + 0xE) * *(u16 *)(v + 0xE);
+        *(s16 *)(v + 0xC) = l >> 14;
+        *(s16 *)(v + 0xE) = r >> 14;
+    }
+}
 
 #include "common.h"
 
@@ -147,9 +195,49 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80037D28);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80037E40);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80037F64);
+extern u8 D_80093790[];
+extern s32 D_8007142C[];
+extern s32 D_80078C78;
+extern u8 D_80093D68[];
+void func_80037F64(void) {
+    u8 *e = D_80093D68;
+    s32 *ids = D_8007142C;
+    s32 i;
+    s16 t;
+    s32 x, y;
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_8003804C);
+    for (i = 0; i < D_80078C78; i++, ids++, e += 0x4E) {
+        t = *(s16 *)(e + 0x3E);
+        if (*(s16 *)(e + 0x46) == t) {
+            continue;
+        }
+        x = (*(u16 *)(e + 0xC) + t) * D_80078D54;
+        y = (*(u16 *)(e + 0xE) + t) * D_80078D56;
+        *(s32 *)(D_80093790 + 4) = 0xF;
+        *(s16 *)(D_80093790 + 0xC) = 0;
+        *(s16 *)(D_80093790 + 0xE) = 0;
+        *(s32 *)D_80093790 = *ids;
+        *(s16 *)(D_80093790 + 8) = x >> 7;
+        *(s16 *)(D_80093790 + 0xA) = y >> 7;
+        SpuSetVoiceAttr(D_80093790);
+    }
+}
+
+s16 func_8003804C(u8 *p, u32 a) {
+    if (a < 0x40U) {
+        if (p[0x1D] != 0) {
+            return -(p[0x1D] * 2 * (0x40 - a));
+        }
+        return 0;
+    }
+    if (a == 0x40) {
+        return 0;
+    }
+    if (p[0x1C] != 0) {
+        return p[0x1C] * 2 * (a - 0x3F);
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_800380C8);
 
