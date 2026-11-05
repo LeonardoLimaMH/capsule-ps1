@@ -183,7 +183,19 @@ u32 func_800160F8(u32 arg0) {
     return *(u32 *)(base + 0xA74);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_8001611C);
+void func_8001611C(u32 arg0) {
+    extern u32 D_8008ED68[];
+    u8 *base = (u8 *)D_8008ED68;
+    if (arg0 < 0x2001) {
+        *(u32 *)(base + 0xA6C) = arg0;
+    }
+    if (arg0 < 0x2001) {
+        *(u32 *)(base + 0xA70) = arg0;
+    }
+    if (arg0 < 0x2001) {
+        *(u32 *)(base + 0xA74) = arg0;
+    }
+}
 
 void func_80016148(void *arg0) {
     extern u8 D_8008F702[];
@@ -252,15 +264,3 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800190F4);
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80019654);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800196A0);
-typedef struct {
-    u8 pad0[0x14];
-    s32 f14;
-    u8 b18[0x34];
-    u16 f4c;
-    u16 f4e;
-    u32 flags;
-    s32 f54;
-    u8 f58;
-    u8 pad59[3];
-    s32 w5c[10];
-} ArVObj;
