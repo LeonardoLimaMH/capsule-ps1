@@ -85,7 +85,19 @@ void func_800C0E14(void) {
 
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0898", func_800C0E1C);
+void func_800C0E1C(s32 a0, s32 a1, s32 a2) {
+    u16 k = func_800B1260(a0);
+    if (k != 0xFFFF) {
+        if (func_800E1820(k) != 0 || func_800E17F8(k) == 0) {
+            func_800C0EE8(a0, (s16)a1, (s16)a2);
+        } else {
+            u8 *p = D_80100F38 + k * 0x79C;
+            *(s16 *)(p + 0x2C0) = a1;
+            *(s16 *)(p + 0x2C2) = a2;
+            *(s16 *)(p + 0x2C8) = 1;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0898", func_800C0EE8);
 
