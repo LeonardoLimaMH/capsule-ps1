@@ -47,9 +47,30 @@ void func_8003C884(void) {
     D_80078CC8 = 1;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003C894);
+u8 func_8003C894(u8 arg0) {
+    extern u32 D_80078C78;
+    if (arg0 >= 0x19) {
+        return 0xFF;
+    }
+    if (arg0 != 0) {
+        D_80078C78 = arg0;
+    }
+    return arg0;
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003C8C8);
+void func_8003C8C8(void) {
+    extern s32 D_80078D64;
+    s32 i;
+    func_80038890();
+    if (D_80078D64 > 0) {
+        if (D_80078D64 < 4) {
+            func_8003A71C();
+        }
+    }
+    for (i = 7; i >= 0; i--) {
+    }
+    func_8003C73C();
+}
 
 void SsInitHot(void) {
     func_80038890();
