@@ -191,21 +191,21 @@ void func_800A86A4(u8 *arg0) {
 }
 
 void func_800A8758(u8 *arg0) {
-    extern u8 D_80091618[];
+    extern struct { u8 pad[0x10]; u16 f10; u8 pad2[2]; u16 tbl[1]; u8 pad3[0x192]; } D_80091618[];
     extern u16 D_8008EE44[];
     extern s32 D_800B3C20[];
-    u8 *p = D_80091618 + *D_800B3C20 * 0x1A8;
+    typeof(D_80091618[0]) *p = &D_80091618[*D_800B3C20];
     u32 fl = *(u32 *)(arg0 + 0x38);
-    u16 a1 = *(u16 *)(p + *(s32 *)(arg0 + 0x84) * 2 + 0x14);
+    u16 a1 = p->tbl[*(s32 *)(arg0 + 0x84)];
     *(u32 *)(arg0 + 0x38) = fl | 1;
-    if (*D_8008EE44 == 7 && *(u16 *)(p + 0x10) != 0xFFFF && a1 != 0xFFFF) {
+    if (*D_8008EE44 == 7 && p->f10 != 0xFFFF && a1 != 0xFFFF) {
         *(u32 *)(arg0 + 0x38) = (fl | 1) & ~1;
         *(s32 *)(arg0 + 0x18) = func_80019F30(0x6000C, a1 + 0x36);
     }
 }
 
 void func_800A8810(u8 *arg0) {
-    extern u8 D_80091618[];
+    extern struct { u8 pad[0x10]; u16 f10; u8 pad3[0x196]; } D_80091618[];
     extern u16 D_8008EE44[];
     extern s32 D_800B3C20[];
     extern u8 D_800B3C2A[];
@@ -214,9 +214,10 @@ void func_800A8810(u8 *arg0) {
     s32 a2;
     *(u32 *)(arg0 + 0x38) = fl;
     a2 = *(s32 *)(arg0 + 0x84);
-    if (*D_8008EE44 == 7 && *(u16 *)(D_80091618 + *D_800B3C20 * 0x1A8 + 0x10) != 0xFFFF) {
+    if (*D_8008EE44 == 7 && D_80091618[*D_800B3C20].f10 != 0xFFFF) {
+        u8 c = *D_800B3C2A;
         *(u32 *)(arg0 + 0x38) = fl & ~1;
-        if (*D_800B3C2A != 0) {
+        if (c) {
             func_80015CD0(arg0 + 0x14, func_80019F30(0x7000C, D_800B3C38[a2] + 4), 0);
         }
     }
@@ -224,11 +225,10 @@ void func_800A8810(u8 *arg0) {
 
 void func_800A88DC(u8 *arg0) {
     extern u16 D_8008EE44[];
-    extern s16 D_8006AF90[];
-    s32 i;
-    if (*D_8008EE44 == 8 && D_8006AF90[(i = *(s32 *)(arg0 + 0x84)) + 1] >= 0 && i < *D_8006AF90) {
+    extern struct { s16 n; s16 v[200]; } D_8006AF90;
+    if (*D_8008EE44 == 8 && D_8006AF90.v[*(s32 *)(arg0 + 0x84)] >= 0 && *(s32 *)(arg0 + 0x84) < D_8006AF90.n) {
         *(u32 *)(arg0 + 0x38) &= ~1;
-        *(s32 *)(arg0 + 0x18) = func_80019F30(0x6000C, D_8006AF90[i + 1] + 0x59);
+        *(s32 *)(arg0 + 0x18) = func_80019F30(0x6000C, D_8006AF90.v[*(s32 *)(arg0 + 0x84)] + 0x59);
     } else {
         *(u32 *)(arg0 + 0x38) |= 1;
     }
