@@ -264,13 +264,12 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800E0A1C);
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800E0E2C);
 
 void func_800E1180(u8 *arg0) {
-    s32 n = *(s32 *)(arg0 + 0x18) + 1;
     s32 v;
 
-    *(s32 *)(arg0 + 0x18) = n;
+    *(s32 *)(arg0 + 0x18) += 1;
     *(u16 *)(arg0 + 0x3A) += 14;
     *(u16 *)(arg0 + 0x3C) += 14;
-    v = 0x7F - 127 * n / 30;
+    v = 0x7F - (*(s32 *)(arg0 + 0x18) * 127) / 30;
     arg0[0x32] = v;
     arg0[0x31] = v;
     arg0[0x30] = v;
