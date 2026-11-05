@@ -136,23 +136,36 @@ extern u8 D_80100F38[];
 extern s32 func_800B1260(s32);
 extern s16 func_800A9658(s16);
 extern void func_800CD6E0(s32, s32);
-void func_800CD1A0(s32 a0, s16 a1, s32 a2, s32 a3) {
-    s16 next_i;
-    s32 limit = func_800A9658(a1) << 16;
-    s16 i = 0;
-    a0 = a0 != 1;
-    if (limit > 0) {
-        u8 *base = D_800EFF58 + (a0 << 6) + 0x94;
-        s32 w = a1 + 1;
-        s16 y = a2;
-        s16 x = a3;
+void func_800CD1A0(s32 arg0, s16 arg1, s32 arg2, s32 arg3) {
+    u8 *base;
+    u8 *p;
+    s16 temp_a0;
+    s16 var_a2;
+    s32 temp_a1;
+    s32 temp_a3;
+    s32 temp_v0;
+    s32 temp_v1;
+    s32 ret;
+    u8 *row;
+
+    ret = func_800A9658(arg1);
+    var_a2 = 0;
+    arg0 = arg0 != 1;
+    temp_a3 = ret << 16;
+    if (temp_a3 > 0) {
+        temp_a1 = arg1 + 1;
+        p = D_800EFF58;
+        base = p + (arg0 << 6) + 0x94;
         do {
-            s16 q = i / w;
-            s16 r = i % w;
-            next_i = i + 1;
-            i = next_i;
-            *(base + (y - (q + 1)) * 8 + (x - (r + 1))) = 0;
-        } while ((next_i << 16) < limit);
+            temp_v0 = var_a2 / temp_a1;
+            temp_v1 = var_a2 % temp_a1;
+            temp_a0 = var_a2 + 1;
+            var_a2 = temp_a0;
+            temp_v0 = (s16)temp_v0 + 1;
+            row = (u8 *)(((s16)arg2 - temp_v0) * 8 + (u32)base);
+            temp_v1 = (s16)temp_v1 + 1;
+            row[(s16)arg3 - temp_v1] = 0;
+        } while ((temp_a0 << 16) < temp_a3);
     }
 }
 
