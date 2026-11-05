@@ -382,4 +382,8 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800127F4);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012868);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_800129DC);
+void func_800129DC(void) {
+    u8 *p = D_8008ED68;
+    func_800131C0();
+    VSync(p[0x103]);
+}
