@@ -1,6 +1,10 @@
 #include "common.h"
 #include "yuugi.h"
 
+extern u8 D_800922FA;
+extern u8 D_800922F0[];
+extern void func_80036DB0();
+
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_8003742C);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_800374E8);
