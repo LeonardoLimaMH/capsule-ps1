@@ -143,7 +143,19 @@ void func_80013C14(undefined4 *param_1,int param_2)
   return;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013C44);
+extern s32 D_8008FC10[];
+extern s32 D_80078B7C;
+void func_80013C44(void) {
+    extern s32 D_8008FC10[];
+    s32 i = 2;
+    s32 *p = D_8008FC10;
+    p += 18;
+    do {
+        *p = 0;
+        i--;
+        p -= 9;
+    } while (i >= 0);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013C6C);
 
