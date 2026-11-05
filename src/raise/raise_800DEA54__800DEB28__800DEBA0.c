@@ -36,13 +36,17 @@ s32 func_800DEC04(s32 unused, s32 a1, s32 a2, s32 a3, s32 a4) {
     register s32 yy asm("a1");
     register u32 row asm("v0");
     register u8 *p asm("v1");
+    register s32 temp asm("v1");
     if ((u16)(a3 - 1) >= 8 || (u16)(y - 1) >= 8) return 0;
     row = (u16)a1;
     p = D_800EF364;
     row = (row << 6) + (u32)p;
-    x = (s16)a3 * 8;
-    yy = (s16)y;
-    b = *(u8 *)(x + row + yy - 9);
+    temp = (u32)a3 << 16;
+    x = temp >> 13;
+    row = x + row;
+    temp = (u32)y << 16;
+    yy = temp >> 16;
+    b = *(u8 *)(row + yy - 9);
     if (b != 0xFF) {
         p = D_800EFF58;
         row = (u16)a2;
