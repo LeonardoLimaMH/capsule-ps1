@@ -451,7 +451,22 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B7E70);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B7ED8);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B7F40);
+void func_800B7F40(s32 mode) {
+    typedef struct Obj {
+        u8 pad[0x38];
+        u32 f38_0 : 1;
+        u32 f38_1 : 3;
+        u32 f38_4 : 2;
+        u32 f38_6 : 1;
+        u32 f38_7 : 25;
+    } Obj;
+    extern u8 D_800EEB9C[];
+    u8 *base = D_800EEB9C;
+    Obj *obj = *(Obj **)(base + 0x1C);
+
+    *(s32 *)(base + 0x14) = mode;
+    obj->f38_6 = mode != 1;
+}
 
 s32 func_800B7F74(s32 arg0, s32 arg1) {
     extern S_800EEB9C D_800EEB9C;
