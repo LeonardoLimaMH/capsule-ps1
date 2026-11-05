@@ -333,8 +333,8 @@ void func_80032BB8(void *arg0) {
     extern u16 D_8008EE58[];
     extern s16 D_800922D0[];
     extern u32 D_800922D8[];
-    u16 v = D_8008EE58[0];
-    if (v == 4 || v == 7 || ((u32) (v - 5) < 2U && D_800922D0[0] > 0)) {
+    u32 a = D_8008EE58[0];
+    if ((u16) a == 4 || (u16) a == 7 || ((a - 5) < 2U && D_800922D0[0] > 0)) {
         M2C_FIELD(arg0, s32 *, 0x38) = M2C_FIELD(arg0, s32 *, 0x38) & ~1;
     } else {
         M2C_FIELD(arg0, s32 *, 0x38) = M2C_FIELD(arg0, s32 *, 0x38) | 1;
