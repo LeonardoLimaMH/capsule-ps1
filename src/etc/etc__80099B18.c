@@ -198,7 +198,29 @@ void func_8009A160(u8 *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__80099B18", func_8009A1D4);
+void func_8009A1D4(void) {
+    extern u8 D_8008ED68[];
+    extern u16 D_8008EE44[];
+    extern void (*D_800AF1B8[])(void);
+    extern void (*D_800AF1E4[])(void);
+    extern s32 D_800B3AE0[];
+    u8 *d = D_8008ED68;
+
+    if ((u16)(*(u16 *)(d + 0xDC) - 5) < 3) {
+        if (*D_800B3AE0 != 0) {
+            D_800AF1E4[0]();
+            goto call_tbl;
+        }
+        if ((*(s32 *)(d + 0x88) & 0x8F0) != 0 || (*(s32 *)(d + 0x98) & 0x8F0) != 0) {
+            *D_800B3AE0 = 1;
+        }
+    }
+    if (*D_800B3AE0 != 0) {
+        D_800AF1E4[0]();
+    }
+call_tbl:
+    D_800AF1B8[*D_8008EE44]();
+}
 
 #include "common.h"
 
