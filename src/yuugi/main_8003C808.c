@@ -1,6 +1,19 @@
 #include "common.h"
 #include "yuugi.h"
 
+typedef struct {
+    s16 id;
+    u8 pad2[2];
+    u8 *src;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    u8 unk18;
+    u8 pad19[2];
+    u8 unk1B;
+} SndSlot;
+
 void func_8003C808(void) {
     extern s32 D_80078CC0;
     extern s32 D_80078D64;
