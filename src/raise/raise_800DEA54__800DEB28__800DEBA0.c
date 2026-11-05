@@ -1,5 +1,17 @@
 #include "common.h"
 
+/* Entrada de 0x44 bytes de D_80092008: campos em bits + 32 slots u16. */
+typedef struct {
+    u32 f0 : 1;
+    u32 f1 : 1;
+    u32 f2 : 3;
+    u32 f3 : 6;
+    u32 idx : 6;
+    u32 cnt : 6;
+    u32 pad : 9;
+    u16 slots[32];
+} RaiseEnt;
+
 extern u8 D_80092008[];
 extern u8 D_80091618[];
 extern u8 D_800EF364[], D_800EFF58[];
@@ -19,14 +31,30 @@ extern u8 D_800EF364[], D_800EFF58[];
 extern u8 D_80091618[];
 s32 func_800DEC04(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4) {
     u8 b;
-    if ((u16)(a3 - 1) >= 8 || (u16)(a4 - 1) >= 8) return 0;
-    b = D_800EF364[(u16)a1 * 64 + (s16)a3 * 8 + (s16)a4 - 9];
-    if (b == 0xFF) return 0;
-    if (D_800EFF58[(u16)a2 * 64 + (s16)a3 * 8 + (s16)a4 + 0x8B] == 1) b = 0xFF;
-    return b != 0xFF;
+    if ((u16)(a3 - 1) < 8 && (u16)(a4 - 1) < 8) {
+        b = D_800EF364[(u16)a1 * 64 + (s16)a3 * 8 + (s16)a4 - 9];
+        if (b != 0xFF) {
+            if (D_800EFF58[(u16)a2 * 64 + (s16)a3 * 8 + (s16)a4 + 0x8B] == 1) b = 0xFF;
+        }
+        return b != 0xFF;
+    }
+    return 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_800DECA8);
+void func_800DECA8(u32 param_1, u32 param_2) {
+    u32 *p;
+    int i;
+
+    i = 0;
+    p = (u32 *)(D_80092008 + (param_2 & 0xffff) * 0x44);
+    *p = *p & 0xff800000 | *(u16 *)(D_80091618 + (param_2 & 0xffff) * 0x1a8 + 0x90) & 1 |
+         (param_1 & 1) << 1 | (param_2 & 7) << 2;
+    do {
+        *(u16 *)(p + 1) = 0;
+        i = i + 1;
+        p = (u32 *)((int)p + 2);
+    } while (i < 0x20);
+}
 
 #include "ghidra.h"
 undefined4 func_800DED74(undefined4 param_1,undefined2 param_2,short param_3,short param_4)
@@ -83,6 +111,7 @@ s32 func_800DF67C(s32 a0, u16 a1, s32 a2, s16 a3, s16 a4) {
 void func_800DF734(s32 param_1, u32 param_2, u16 param_3, s16 param_4, s16 param_5) {
     u32 uVar1;
     u32 *p;
+    u8 pad[8];
 
     p = (u32 *)(D_80092008 + (param_2 & 0xffff) * 0x44);
     *(u16 *)((int)p + (*p >> 10 & 0x7e) + 4) =
