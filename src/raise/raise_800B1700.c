@@ -94,7 +94,10 @@ s32 func_800B1B3C(void) {
         func_80026514(s1);
         base = (u8 *)D_80100F38;
         k = s1;
-        offset = k * 0x79C;
+        offset = k << 4;
+        offset = (offset - k) << 2;
+        offset = (offset + k) << 3;
+        offset = (offset - k) << 2;
         slots = (u8 **)(base + 0x194);
         a = (u8 **)((u8 *)slots + offset);
         D_800F2DBC[0] = *(s32 *)(base + offset + 0x190);
@@ -117,7 +120,10 @@ s32 func_800B1B3C(void) {
         func_80026514(s0);
         base = (u8 *)D_80100F38;
         k = s0;
-        offset = k * 0x79C;
+        offset = k << 4;
+        offset = (offset - k) << 2;
+        offset = (offset + k) << 3;
+        offset = (offset - k) << 2;
         slots = (u8 **)(base + 0x194);
         a = (u8 **)((u8 *)slots + offset);
         D_800F2DBC[0] = *(s32 *)(base + offset + 0x190);
