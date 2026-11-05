@@ -36,15 +36,53 @@ void func_8003C884(void) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003C894);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003C8C8);
+typedef struct {
+    s16 id;
+    u8 pad2[2];
+    u8 *src;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    u8 unk18;
+    u8 pad19[2];
+    u8 unk1B;
+} SndSlot;
 
-void SsInitHot(void) {
+typedef struct {
+    u8 pad0[0x284];
+    s32 unk284;
+    s16 id;
+    s16 state;
+    s16 volL;
+    s16 volR;
+    s32 src;
+    s32 unk294;
+    u8 pad298[0x2AC - 0x298];
+} SndVoice;
+
+typedef struct {
+    u8 pad0[0x288];
+    s16 prog;
+    s16 state;
+    s16 vol1;
+    s16 vol2;
+    u8 pad290[0x2AC - 0x290];
+} SndChan;
+
+void func_8003C8C8(void) {
+    extern s32 D_80078D64;
+    s32 i;
     func_80038890();
+    if (D_80078D64 > 0) {
+        if (D_80078D64 < 4) {
+            func_8003A71C();
+        }
+    }
+    for (i = 7; i >= 0; i--) {
+    }
     func_8003C73C();
-    SpuQuit();
 }
-
-#include "common.h"
 
 typedef struct {
     s32 mask;
@@ -54,6 +92,12 @@ typedef struct {
     s16 mvolmode_right;
     u8 rest[0x1C];
 } SpuCommonAttrLocal;
+
+void SsInitHot(void) {
+    func_80038890();
+    func_8003C73C();
+    SpuQuit();
+}
 
 void func_8003C950(s32 left, s32 right)
 {
