@@ -26,6 +26,15 @@ typedef struct {
     u8 pad298[0x2AC - 0x298];
 } SndVoice;
 
+typedef struct {
+    u8 pad0[0x288];
+    s16 prog;
+    s16 state;
+    s16 vol1;
+    s16 vol2;
+    u8 pad290[0x2AC - 0x290];
+} SndChan;
+
 void func_8003C808(void) {
     extern s32 D_80078CC0;
     extern s32 D_80078D64;
@@ -61,13 +70,14 @@ void func_8003C884(void) {
 
 u8 func_8003C894(u8 arg0) {
     extern u32 D_80078C78[];
+    u8 r = 0xFF;
     if (arg0 < 0x19) {
-        if (arg0 != 0) {
+        r = arg0;
+        if (r != 0) {
             D_80078C78[0] = arg0;
         }
-        return arg0;
     }
-    return 0xFF;
+    return r;
 }
 
 void func_8003C8C8(void) {
@@ -115,40 +125,42 @@ void func_8003C950(s32 left, s32 right)
 s32 func_8003C990(u8 *arg0, s16 arg1, s32 arg2) {
     extern s32 D_80078CD0;
     extern SndSlot D_800947E8[];
-    SndSlot *base = D_800947E8;
     s16 i = 0;
     SndSlot *p;
+    s32 ret;
     D_80078CD0 = 0;
     if (arg1 == -1) {
-        while (1) {
-            if (base[i].id == -1) {
-                arg1 = i;
-                break;
-            }
+        do {
+            arg1 = i;
             i++;
-            if (i >= 16) {
-                return -1;
+            if (D_800947E8[arg1].id == -1) {
+                goto found;
             }
+        } while (i < 16);
+        ret = -1;
+    } else {
+        ret = -1;
+        if (arg1 < 16) {
+found:
+            ret = arg1;
+            p = &D_800947E8[arg1];
+            p->id = arg1;
+            p->src = arg0;
+            p->unk10 = arg2;
+            p->unk8 = *(u16 *)(arg0 + 0x12) * 0x200 + 0xA20;
+            p->unk14 = *(s32 *)(arg0 + 0xC) - p->unk8;
+            p->unk18 = arg0[0x18];
+            p->unk1B = arg0[0x19];
         }
-    } else if (arg1 >= 16) {
-        return -1;
     }
-    p = &D_800947E8[arg1];
-    p->id = arg1;
-    p->src = arg0;
-    p->unk10 = arg2;
-    p->unk8 = *(u16 *)(arg0 + 0x12) * 0x200 + 0xA20;
-    p->unk14 = *(s32 *)(arg0 + 0xC) - p->unk8;
-    p->unk18 = arg0[0x18];
-    p->unk1B = arg0[0x19];
-    return arg1;
+    return ret;
 }
 
 void func_8003CA90(s16 arg0) {
     extern SndSlot D_800947E8[];
-    SndSlot *p = D_800947E8;
-    if (p[arg0].id != -1) {
-        p[arg0].id = -1;
+    SndSlot *p = &D_800947E8[arg0];
+    if (p->id != -1) {
+        p->id = -1;
     }
 }
 
