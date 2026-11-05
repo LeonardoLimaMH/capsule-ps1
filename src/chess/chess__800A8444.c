@@ -215,7 +215,8 @@ u8 *func_800A8E84(s32 arg0)
 
 u8 *func_800A8EE8(s32 arg0, s32 arg1, s32 arg2)
 {
-  return D_8006B2A4 + *((u8 *) (arg0 + arg2 * 0x7C + arg1 * 0x2E8 + 0x18)) * 0x58;
+  s32 p = arg0 + ((arg2 * 0x7C) + (arg1 * 0x2E8));
+  return D_8006B2A4 + *((u8 *) (p + 0x18)) * 0x58;
 }
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8F3C);
