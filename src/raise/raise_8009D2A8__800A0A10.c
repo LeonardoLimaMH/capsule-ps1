@@ -46,23 +46,32 @@ void func_800A0ACC(s32 arg0) {
     extern s16 D_800EEA78[];
     extern s32 D_8008ED68[];
     extern s32 D_800EFF58[];
-    s32 v = D_8008ED68[D_800EEA78[arg0] + 0x29];
+    s32 *d = D_8008ED68;
+    s32 v = d[D_800EEA78[arg0] + 0x29];
+    s32 n;
+    s32 *w;
 
     if (v != 7 && (v & 7) == 7) {
         func_80034AB0(0x84);
         func_800A0D88(2, 0);
-        if (arg0 == 2) {
-            if (D_800EFF58[0xD1] > 0) {
-                D_800EFF58[0xD1]--;
+        switch (arg0) {
+        case 2:
+            w = D_800EFF58;
+            n = w[0xD1];
+            if (n > 0) {
+                n = n - 1;
             } else {
-                D_800EFF58[0xD1] = D_800EFF58[0xD2];
+                n = w[0xD2];
             }
-        } else if (arg0 == 3) {
+            w[0xD1] = n;
+            break;
+        case 3:
+            n = 0;
             if (D_800EFF58[0xD1] < D_800EFF58[0xD2]) {
-                D_800EFF58[0xD1]++;
-            } else {
-                D_800EFF58[0xD1] = 0;
+                n = D_800EFF58[0xD1] + 1;
             }
+            D_800EFF58[0xD1] = n;
+            break;
         }
         func_800A0D88(1, 0);
     }
