@@ -265,17 +265,21 @@ void func_80018608(void) {
 
 void func_80018610(s32 arg0, s32 arg1) {
     extern void SetDrawMode();
-    extern u8 *D_8008ED68;
+    extern u8 *D_8008ED68[];
+    u8 **g = D_8008ED68;
     u32 *p;
-    u32 *q;
-    p = *(u32 **)(D_8008ED68 + 0x1090);
-    q = 0;
+    u8 *q = 0;
+    p = *(u32 **)(g[0] + 0x1090);
     if (p != 0) {
-        q = p + 3;
-        if (q <= (u32 *)(D_8008ED68 + 0x4594)) {
-            *(u32 **)(D_8008ED68 + 0x1090) = q;
+        q = (u8 *)p + 0xC;
+        if (q <= g[0] + 0x4594) {
+            *(u8 **)(g[0] + 0x1090) = q;
+            SetDrawMode(p, 0, 0, arg0, 0);
         }
     }
+    *p = (*p & 0xFF000000) | (*(u32 *)(g[0] + arg1 * 4 + 0x70) & 0xFFFFFF);
+    *(u32 *)(g[0] + arg1 * 4 + 0x70) =
+        (*(u32 *)(g[0] + arg1 * 4 + 0x70) & 0xFF000000) | ((u32)p & 0xFFFFFF);
 }
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800186E4);
@@ -294,18 +298,18 @@ void func_80018EF4(s16 a, s16 b, s32 c, s32 d, s32 e) {
     if (d == 0) {
         func_800188F0(a, b, D_80078B90[c], 4, e);
     } else {
-        func_8001F1A8(a, b, 4, 1, 0, &D_80078B88[c], 1, 1, e);
+        func_8001F1A8(a, b, 4, 1, 0, (u8 *)D_80078B88 + c * 2, 1, 1, e);
     }
 }
 
-s32 func_80018F90(u32 arg0, s16 arg1) {
+s32 func_80018F90(u32 arg0, s32 arg1) {
     extern void func_80020688();
     func_80020688(-0x9C, 0x34, 0x80, 0x30, 0x3A0, 0, 0x3F0, (arg1 + 0x160) & 0xFFFF, 0x80, 0x80, 0x80, 0, 0, 0);
-    if ((arg0 / 20) & 1) {
-        return 1;
+    if (!((arg0 / 20) & 1)) {
+        func_80020688(-0x40, -0x18, 0x80, 0x10, 0x3A0, 0x30, 0x3F0, (arg1 + 0x160) & 0xFFFF, 0x80, 0x80, 0x80, 0, 0, 0);
+        return 0;
     }
-    func_80020688(-0x40, -0x18, 0x80, 0x10, 0x3A0, 0x30, 0x3F0, (arg1 + 0x160) & 0xFFFF, 0x80, 0x80, 0x80, 0, 0, 0);
-    return 0;
+    return 1;
 }
 
 #include "common.h"
