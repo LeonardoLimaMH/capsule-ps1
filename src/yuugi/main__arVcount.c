@@ -246,10 +246,10 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80014728);
 void func_80014C4C(s32 n) {
     extern u8 D_8008FC80[];
     extern u8 D_8005091C[];
-    s32 i = 0;
+    register s32 i asm("s2") = 0;
     u8 *base = D_8008FC80;
     u8 *table = D_8005091C;
-    s32 off = n * 64;
+    register s32 off asm("s1") = n * 64;
     u8 *e;
     s32 v;
     s32 limit;
@@ -258,10 +258,10 @@ void func_80014C4C(s32 n) {
         e = base + off;
         *(s16 *)e = n * 128 + v;
         *(s16 *)(e + 2) = func_80020304(0xF0);
-        if (i < 5) {
-            limit = 7;
-        } else {
+        if (i >= 5) {
             limit = 5;
+        } else {
+            limit = 7;
         }
         i++;
         e[4] = func_80020304(limit);
@@ -304,7 +304,46 @@ void func_80014D30(s32 a0, s32 a1, s32 a2) {
     *(s32 *)(d + 0x2C) = 0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80014DD8);
+void func_80014DD8(void) {
+    u8 *d = D_8008ED68;
+    s32 state;
+    s32 i;
+    u8 count;
+    register s32 next asm("a1");
+    if (d[0x99A] != 1 && (state = d[0x28]) != 0) {
+        if (state == 1) {
+            count = d[0x26] - 1;
+            d[0x26] = count;
+            i = 0;
+            if (count == 0) {
+                d[0x28] = 2;
+                d[0x27] = state;
+                *(s32 *)(d + 0x20) = 0;
+                do {
+                    func_80014C4C(i);
+                    i++;
+                } while (i < 4);
+            }
+        } else if (state == 2) {
+            d[0x28] = 0;
+        } else if (state == 3) {
+            next = 4;
+            {
+                register s32 mode asm("v0") = next;
+                d[0x26] = 0;
+                d[0x28] = mode;
+            }
+            if (d[0x24] == 0) next = d[0x25];
+            d[0x25] = next;
+            d[0x27] = 0;
+            *(s32 *)(d + 0x20) = 0;
+        } else if (state == 4) {
+            count = d[0x26] + 1;
+            d[0x26] = count;
+            if (count >= 0x60U) d[0x28] = 0;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80014EE0);
 
