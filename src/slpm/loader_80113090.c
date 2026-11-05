@@ -1,5 +1,10 @@
 #include "common.h"
 
+extern s32 *D_80120AA8[];
+extern s32 *D_80120A88[];
+extern char D_80110384[], D_80110394[];
+s32 func_801131D0(char *msg);
+
 INCLUDE_ASM("asm/slpm/nonmatchings/loader_80113090", func_80113090);
 
 INCLUDE_ASM("asm/slpm/nonmatchings/loader_80113090", func_80113124);
