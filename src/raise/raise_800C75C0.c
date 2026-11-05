@@ -16,6 +16,15 @@ extern void func_800CE4B8(s32, s32, s32, s32), func_800CE164(s32), func_800CE204
 #define P16(o) (*(u16 *)(p + (o)))
 #define PS16(o) (*(s16 *)(p + (o)))
 
+typedef struct {
+    u32 unk_0 : 6;
+    u32 unk_6 : 2;
+    u32 unk_8 : 2;
+    u32 unk_A : 2;
+    u32 unk_C : 2;
+    u32 unk_E : 18;
+} Flags_800C8210;
+
 s32 func_800C79E0(s32 a0, s32 a1) {
     u16 k = func_800B1260(a1);
     u8 *p = D_80100F38 + k * 0x79C;
@@ -63,7 +72,32 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800C75C0", func_800C7BD8);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C75C0", func_800C7FC0);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C75C0", func_800C8210);
+extern void func_800D4B7C(s32, s32);
+s32 func_800C8210(s32 a0, s32 a1) {
+    extern u8 D_80100F38[], D_80091618[];
+    u16 k = func_800B1260(a1);
+    u8 *p, *e;
+    register u8 *base asm("v1");
+    Flags_800C8210 *flags;
+    if (k == 0xFFFF) return 0;
+    p = D_80100F38 + k * 0x79C;
+    func_800D4B7C(a1, k);
+    flags = (Flags_800C8210 *)(p + 0x798);
+    flags->unk_6 = 0;
+    flags->unk_8 = 0;
+    flags->unk_A = 0;
+    flags->unk_C = 0;
+    base = D_80091618;
+    e = base + k * 0x1A8;
+    if (*(u16 *)(e + 0x62) == 1) {
+        *(u16 *)(e + 0x62) = 0;
+        *(u16 *)(e + 0x64) = 0;
+    } else if (*(u16 *)(e + 0x66) == 1) {
+        *(u16 *)(e + 0x66) = 0;
+        *(u16 *)(e + 0x68) = 0;
+    }
+    return *(s32 *)(p + 0x2BC) += 1;
+}
 
 #include "ghidra.h"
 void func_800C8320(undefined4 param_1,undefined4 param_2,short param_3)
@@ -217,7 +251,49 @@ s32 func_800C8668(s32 a0, s32 a1)
   return *((s32 *) (p + 0x2BC));
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C75C0", func_800C87C0);
+extern u8 D_80100F38[], D_80091618[], D_80063940[];
+extern s16 D_800F07A8[];
+extern s32 func_800B1260(s32), func_80015E60(s32), rand(void);
+extern void func_800CE4B8(s32, s32, s32, s32), func_800C5B30(s32, s32, s32), func_800991D4(s32, s32, u8 *);
+
+
+
+
+
+s32 func_800C87C0(s32 a0, s32 a1) {
+    s32 k = func_800B1260(a1);
+    u8 *p = D_80100F38 + (u16)k * 0x79C;
+    switch (PS16(0x344)) {
+    case 0:
+        P16(0x344) = 1;
+    case 1: {
+        u8 *base = D_80091618;
+        u16 idx = (u16)k;
+        u16 mon = *(u16 *)(base + idx * 0x1A8);
+        u8 *data = D_80063940;
+        u8 *d = data + mon * 60;
+        u32 w18 = *(u32 *)(d + 0x18), w1C = *(u32 *)(d + 0x1C);
+        s32 s = 0;
+        w18 >>= 29;
+        if ((((w1C & 1) << 3) | w18) == 0xF) s = 3;
+        else if (((w1C >> 1) & 0xF) != 0xF && !(rand() & 1)) s = 3;
+        func_800CE4B8(a1, a0, s + (*D_800F07A8) + PS16(0x372), 1);
+        func_800C5B30(a1, 0, PS16(0x2BA) - 8);
+        P16(0x344) = 2;
+    }
+    case 2:
+        if (func_80015E60(a0) != 1) {
+            func_800991D4(a0, (u16)k, p);
+            break;
+        }
+        P16(0x344) = 3;
+    default:
+        P16(0x344) = 0;
+        P32(0x2BC) += 1;
+        break;
+    }
+    return P32(0x2BC);
+}
 
 #include "common.h"
 
