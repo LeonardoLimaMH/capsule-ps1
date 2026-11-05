@@ -182,14 +182,18 @@ void func_800B6D2C(u8 *arg0, u8 *arg1, s32 arg2) {
     struct { u8 *p; s32 q; s32 f8; s32 fc; s32 f10; s32 f14; } s;
     struct { u8 a; u8 b; u8 c; u8 d; } t;
     s32 i;
+    s32 x;
+    s32 y;
     func_8001A998(buf, 0xA9);
     s.p = buf;
     s.q = D_801010B0[arg0[9]].f0;
     s.f10 = arg1[0x11];
-    s.f8 = arg1[0x15];
-    s.fc = arg1[0x16];
+    x = arg1[0x15];
+    s.f8 = x;
+    y = arg1[0x16];
+    s.fc = y;
     s.f14 = 0;
-    if (func_800B7630(arg0, arg2) == 0) {
+    if (func_800B7630(arg0, arg2, x, y) == 0) {
         i = 0;
         do {
             t.a = arg1[0x15];
@@ -240,8 +244,8 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B7200);
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B74BC);
 
 s32 func_800B75C4(u8 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    (arg0 + arg0[0x26] * 2)[8] = arg2;
-    (arg0 + arg0[0x26] * 2)[9] = arg1;
+    arg0[arg0[0x26] * 2 + 8] = arg2;
+    arg0[arg0[0x26] * 2 + 9] = arg1;
     arg0[0x26]++;
     if (arg0[2] == arg2 && arg0[3] == arg1 && arg0[0x27] == arg3 + arg4) {
         return 1;
@@ -350,7 +354,18 @@ void func_800B8DA0(void *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B8EC0);
+void func_800B8EC0(void *arg0) {
+    extern u32 D_8008ED84[];
+    extern u8 D_80086012[];
+    if (((D_8008ED84[0] / 20) & 1) == 0) {
+        M2C_FIELD(arg0, s32 *, 0x38) = M2C_FIELD(arg0, s32 *, 0x38) & ~1;
+    } else {
+        M2C_FIELD(arg0, s32 *, 0x38) = M2C_FIELD(arg0, s32 *, 0x38) | 1;
+    }
+    if (D_80086012[0] != 5) {
+        func_800185F8(arg0);
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B8F38);
 
