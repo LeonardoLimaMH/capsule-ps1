@@ -14,6 +14,18 @@ typedef struct {
     u8 unk1B;
 } SndSlot;
 
+typedef struct {
+    u8 pad0[0x284];
+    s32 unk284;
+    s16 id;
+    s16 state;
+    s16 volL;
+    s16 volR;
+    s32 src;
+    s32 unk294;
+    u8 pad298[0x2AC - 0x298];
+} SndVoice;
+
 void func_8003C808(void) {
     extern s32 D_80078CC0;
     extern s32 D_80078D64;
@@ -48,14 +60,14 @@ void func_8003C884(void) {
 }
 
 u8 func_8003C894(u8 arg0) {
-    extern u32 D_80078C78;
-    if (arg0 >= 0x19) {
-        return 0xFF;
+    extern u32 D_80078C78[];
+    if (arg0 < 0x19) {
+        if (arg0 != 0) {
+            D_80078C78[0] = arg0;
+        }
+        return arg0;
     }
-    if (arg0 != 0) {
-        D_80078C78 = arg0;
-    }
-    return arg0;
+    return 0xFF;
 }
 
 void func_8003C8C8(void) {
@@ -100,9 +112,45 @@ void func_8003C950(s32 left, s32 right)
   SpuSetCommonAttr(&attr);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003C990);
+s32 func_8003C990(u8 *arg0, s16 arg1, s32 arg2) {
+    extern s32 D_80078CD0;
+    extern SndSlot D_800947E8[];
+    SndSlot *base = D_800947E8;
+    s16 i = 0;
+    SndSlot *p;
+    D_80078CD0 = 0;
+    if (arg1 == -1) {
+        while (1) {
+            if (base[i].id == -1) {
+                arg1 = i;
+                break;
+            }
+            i++;
+            if (i >= 16) {
+                return -1;
+            }
+        }
+    } else if (arg1 >= 16) {
+        return -1;
+    }
+    p = &D_800947E8[arg1];
+    p->id = arg1;
+    p->src = arg0;
+    p->unk10 = arg2;
+    p->unk8 = *(u16 *)(arg0 + 0x12) * 0x200 + 0xA20;
+    p->unk14 = *(s32 *)(arg0 + 0xC) - p->unk8;
+    p->unk18 = arg0[0x18];
+    p->unk1B = arg0[0x19];
+    return arg1;
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CA90);
+void func_8003CA90(s16 arg0) {
+    extern SndSlot D_800947E8[];
+    SndSlot *p = D_800947E8;
+    if (p[arg0].id != -1) {
+        p[arg0].id = -1;
+    }
+}
 
 void func_8003CACC(s16 arg0) {
     extern s16 D_80078CC4;
