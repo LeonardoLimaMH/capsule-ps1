@@ -49,11 +49,61 @@ void func_8002C4E8(void *arg0, void *arg1) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002C214", func_8002C534);
+void func_8002C534(u8 *dst, u8 *src, int mode)
+{
+    u8 r = src[0];
+    u8 g = src[1];
+    u8 b = src[2];
+    u8 f;
+
+    if (mode == 4) {
+        f = 0x24;
+        if ((r | g | b) == 0) {
+            r = g = b = 0x80;
+        }
+    } else if (mode == 5) {
+        f = 0x30;
+        if ((r | g | b) == 0) {
+            r = g = b = 0x80;
+        }
+    } else if (mode == 1 || mode == 3) {
+        if ((r | g | b) != 0) {
+            return;
+        }
+        r = g = b = 0x80;
+        f = (mode / 2) * 16 + 0x28 + (mode - (mode / 2) * 2) * 4;
+    } else {
+        return;
+    }
+    dst[0] = r;
+    dst[1] = g;
+    dst[2] = b;
+    dst[3] = f;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002C214", func_8002C610);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002C214", func_8002C728);
+extern u8 D_80069AD4[];
+void func_8002C728(void)
+{
+    s16 *a;
+    s32 *w;
+    s16 *c;
+    u8 *base = D_80069AD4;
+    *(s32 *)(base + 0x130) = 0;
+    a = (s16 *)(base + 0x168);
+    a[0] = 0;
+    a[1] = 0;
+    a[2] = 0;
+    w = (s32 *)(base + 0x158);
+    w[0] = 0;
+    w[1] = 0;
+    w[2] = 0;
+    c = (s16 *)(base + 0x170);
+    c[0] = 0;
+    c[1] = 0;
+    c[2] = 0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002C214", func_8002C768);
 
