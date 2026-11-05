@@ -112,7 +112,15 @@ void func_8003C950(s32 left, s32 right)
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003C990);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CA90);
+void func_8003CA90(s16 arg0) {
+    extern SndSlot D_800947E8[];
+    register SndSlot *p asm("v1") = D_800947E8;
+    register s32 minus1 asm("a0") = -1;
+    p += arg0;
+    if (p->id != minus1) {
+        p->id = minus1;
+    }
+}
 
 void func_8003CACC(s16 arg0) {
     extern s16 D_80078CC4;
