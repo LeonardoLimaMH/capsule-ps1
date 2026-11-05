@@ -44,4 +44,20 @@ void func_800C0810(undefined4 param_1, undefined2 param_2)
   return;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C07B8", func_800C083C);
+extern s16 D_80100E60[];
+void func_800C083C(void)
+{
+  s32 i;
+  u8 *b;
+  D_80100E60[0] = 0;
+  b = (u8 *)D_80100E60;
+  *(s16 *)(b + 2) = 0;
+  *(s16 *)(b + 4) = 0;
+  *(s16 *)(b + 6) = 0;
+  *(s16 *)(b + 8) = -1;
+  for (i = 0; i < 0x20; i++) {
+    *(s16 *)(b + i * 2 + 0xa) = -1;
+    *(s16 *)(b + i * 2 + 0x4a) = -1;
+    *(s16 *)(b + i * 2 + 0x8a) = -1;
+  }
+}
