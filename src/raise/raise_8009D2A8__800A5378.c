@@ -141,4 +141,22 @@ void func_800A6CAC(void) {
     func_80018F90(M2C_GFIELD(D_80085428, u16, 0xC), 3);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A5378", func_800A6CE8);
+void func_800A6CE8(void) {
+    extern s32 D_8006AF84[];
+    M2C_UNK var_a1;
+    M2C_UNK var_a2;
+
+    func_8001A49C(0x80113000);
+    func_8001A49C(0x80146A18);
+    func_800C0C60();
+    func_800A6ED4();
+    func_8001AD48(8);
+    func_8001611C(0x1000);
+    if ((u32)(((*D_8006AF84) % 28800) - 0x20D0) < 0x3840U) {
+        func_80014D30(1, 0, 0);
+    } else {
+        func_80014D30(1, 1, 4);
+    }
+    func_800AED5C(7, 0);
+    func_80033974(0);
+}
