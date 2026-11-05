@@ -10,6 +10,7 @@ typedef struct {
 } Unk80069E4C;
 
 typedef struct { u8 b[0x18]; } Blk18;
+typedef struct { u8 pad[0x18]; s32 *n; u8 pad2[0x30]; u32 p : 3; u32 b : 1; } O248;
 typedef struct { s32 w[4]; } Blk10;
 typedef struct { u8 b[8]; } Blk8;
 typedef struct { s32 a, b, c; s32 pad; s16 d, e, f; } Z69E6C;
@@ -65,13 +66,18 @@ void func_800248C8(undefined4 param_1)
 }
 
 void func_800248E8(void *arg0) {
-    extern u8 D_80085428;
-    if (D_80085428 == 0) {
+    extern u8 D_80085428[];
+    switch (*D_80085428) {
+    case 0:
         if (((M2C_FIELD(arg0, u32 *, 0x50) >> 3) & 1) == 1 && M2C_FIELD(M2C_FIELD(arg0, s32 **, 0x18), s32 *, 4) == 0) {
             func_80024A7C(arg0);
         }
-    } else if (D_80085428 == 1 && ((M2C_FIELD(arg0, u32 *, 0x50) >> 3) & 1) == 1) {
-        func_80024A7C(arg0);
+        break;
+    case 1:
+        if (((M2C_FIELD(arg0, u32 *, 0x50) >> 3) & 1) == 1) {
+            func_80024A7C(arg0);
+        }
+        break;
     }
     func_8002475C(arg0, 1);
 }
@@ -110,16 +116,18 @@ void func_80025448(void) {
 }
 
 void func_800254A0(void) {
-    extern u8 D_80069AD4[];
-    extern u8 D_80069E4C[];
-    *(Blk10 *)(D_80069E4C + 0x38) = *(Blk10 *)(D_80069AD4 + 0xD8);
-    *(Blk8 *)(D_80069E4C + 0x48) = *(Blk8 *)(D_80069AD4 + 0xE8);
-    ((Z69E6C *)(D_80069E4C + 0x20))->a = 0;
-    ((Z69E6C *)(D_80069E4C + 0x20))->b = 0;
-    ((Z69E6C *)(D_80069E4C + 0x20))->c = 0;
-    ((Z69E6C *)(D_80069E4C + 0x20))->d = 0;
-    ((Z69E6C *)(D_80069E4C + 0x20))->e = 0;
-    ((Z69E6C *)(D_80069E4C + 0x20))->f = 0;
+    extern S69AD4 D_80069AD4;
+    extern S69E4C D_80069E4C;
+    register S69E4C *d asm("v1") = &D_80069E4C;
+    register S69AD4 *s asm("v0") = &D_80069AD4;
+    d->a = s->a;
+    d->b = s->b;
+    d->z.a = 0;
+    d->z.b = 0;
+    d->z.c = 0;
+    d->z.d = 0;
+    d->z.e = 0;
+    d->z.f = 0;
 }
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_80025514);
