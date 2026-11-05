@@ -56,9 +56,10 @@ u8 func_8001BAA0(u8 *buf, s32 len, u8 *out) {
     u32 i = 0;
     len -= 4;
     if (len != 0) {
-        for (; i < len; i++) {
+        do {
             sum += *buf++;
-        }
+            i++;
+        } while (i < len);
     }
     *buf = sum;
     *out = sum;
@@ -71,9 +72,8 @@ u32 func_8001BAD8(u8 *buf, s32 len, u8 *out) {
     len -= 4;
     if (len != 0) {
         do {
-            sum += *buf;
+            sum += *buf++;
             i++;
-            buf++;
         } while (i < len);
     }
     *out = sum;
