@@ -131,7 +131,39 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B34FC);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B3824);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B3C38);
+s32 func_800B3C38(s32 arg0) {
+    extern s32 D_8006AF84[];
+    extern u8 D_8006AFCC[];
+    extern s16 D_80105990[];
+    register s32 id asm("s1") = arg0;
+    register s32 t asm("a0") = D_8006AF84[0];
+    s32 state;
+    u8 *s = D_8006AFCC;
+    
+    if (*(u16 *)(s + 0x32) == 0 && (state = *(u16 *)(s + 0x30)) == 1) {
+        if (D_80105990[0] != state) {
+            if (t >= 1200) {
+                t %= 1200;
+                if (t != 0) {
+                    if (t == (t / 600) * 600) {
+                        if (func_800202A4(0x24) == 0x12) {
+                            *(u16 *)(s + 0x32) = 2;
+                            func_800DC770(id & 0xFFFF, 0x11);
+                            return 1;
+                        }
+                        goto done;
+                    }
+                    return 0;
+                }
+                goto done;
+            }
+            return 0;
+        }
+done:
+        return 0;
+    }
+    return 0;
+}
 
 s32 func_800B3D44(s32 arg0, s32 arg1) {
     extern s32 D_8006AF84[];
@@ -257,8 +289,10 @@ s32 func_800B44B8(s32 arg0) {
     extern u8 D_8006AFCC[];
     extern s32 func_800202A4();
     extern void func_800DC84C();
-    s32 t = D_8006AF84[0];
-    u8 *s = D_8006AFCC;
+    u8 *s;
+    s32 t;
+    t = D_8006AF84[0];
+    s = D_8006AFCC;
     if (*(u16 *)(s + 0x40) != 0) {
         return 0;
     }
