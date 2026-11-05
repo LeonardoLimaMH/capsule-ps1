@@ -12,7 +12,6 @@ s16 func_800A8CD0(s16 arg0, s32 arg1) {
     extern s16 D_800F2D20[];
     extern s32 D_800F2D24[];
     extern s16 D_800F2D28[];
-
     *D_800F2D24 = func_800202A4(100);
     *D_800F2D20 = 0;
     if (arg0 > 0) {
@@ -82,7 +81,44 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A8CD0", func_80
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A8CD0", func_800A91A0);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A8CD0", func_800A9490);
+s32 func_800A9490(void) {
+    extern s32 D_80069AD4[];
+    extern u8 D_80091618[];
+    extern s32 func_800B1260(s32);
+    extern void func_800A9A74(void), func_80023F68(void);
+    s32 i;
+    register s32 n asm("a2");
+    s32 *state = D_80069AD4;
+    u8 *slots;
+    if (state[0x15] != 0) {
+        func_800A9A74();
+        func_80023F68();
+        if (state[0x15] != 0) return 0;
+    }
+    i = 1;
+    slots = D_80091618;
+    do {
+        u32 k = (u16)func_800B1260(i);
+        u32 v;
+        if (k != 0xFFFF) {
+            v = *(u16 *)(slots + k * 0x1A8 + 0x10);
+            n = (v == 1 || v == 5 || v == 3) ? 3 : 2;
+            {
+                s32 j = 0;
+                if (n != 0) {
+                    u8 *e = (u8 *)(k * 0x1A8 + (u32)slots);
+                    do {
+                        u8 *p = *(u8 **)(e + 0x18C);
+                        *(s32 *)(p + 0x50) |= 1;
+                        e += 4;
+                    } while (++j < n);
+                }
+            }
+        }
+        i--;
+    } while (i >= 0);
+    return -1;
+}
 
 void func_800A95AC(void) {
 
@@ -114,11 +150,10 @@ void func_800A95D4(void) {
         u8 col[4];
     } LocalResult;
     extern Result_800EE914 D_800EE914;
+    register void *temp_res asm("v0") = &D_800EE914;
+    LocalResult *res = temp_res;
     s32 i;
     s32 j;
-    LocalResult *res;
-    register void *temp_res asm("v0") = &D_800EE914;
-    res = temp_res;
 
     res->state = 0;
     res->col[0] = 0x40;
