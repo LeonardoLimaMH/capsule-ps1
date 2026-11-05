@@ -1,12 +1,27 @@
 #include "common.h"
 
+extern u8 D_80100F38[];
+
 void func_800CF2E4(void) {
     func_800B1260();
 }
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CF2E4", func_800CF304);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CF2E4", func_800CF418);
+extern s32 func_800B1260(void);
+extern s16 func_800CFF9C(s32, s32, s32);
+s32 func_800CF418(s32 arg0, s32 arg1) {
+    register s32 b asm("s1") = arg1;
+    u8 *rec = D_80100F38 + (func_800B1260() & 0xFFFF) * 0x79C;
+    s32 val = 0xFF;
+    s32 i;
+
+    for (i = 7; i >= 0; i--) {
+        ((s16 *)(rec + 0x346))[i] = val;
+    }
+    ((s16 *)(rec + 0x346))[b] = func_800CFF9C(arg0, b, 0);
+    return b;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CF2E4", func_800CF4BC);
 
