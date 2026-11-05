@@ -243,11 +243,11 @@ void *func_800A8FFC(void *arg0)
 void func_800A903C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 p;
     if (arg3 != 5) {
-        func_80028200(*(u8 *) (arg0 + arg3 * 0x7C + arg2 * 0x2E8 + 0x5E8), 2);
+        func_80028200(*(u8 *) (arg0 + (arg2 * 0x2E8 + arg3 * 0x7C) + 0x5E8), 2);
     } else {
         func_80034AB0(0x48);
     }
-    p = arg1 + arg3 * 0x7C + arg2 * 0x2E8;
+    p = arg1 + (arg3 * 0x7C + arg2 * 0x2E8);
     *(u32 *) (p + 0x30) |= 0x100;
 }
 
