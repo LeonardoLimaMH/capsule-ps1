@@ -168,7 +168,27 @@ void func_800A3060(void *arg0) {
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A3128);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A3230);
+void func_800A3230(u8 *arg0) {
+    extern u8 D_80085428[];
+    extern u8 D_80078C6C[];
+    extern u16 D_8008EE44[];
+    extern s16 D_800B3B40[];
+    u8 *p = D_80085428;
+    func_800A3128();
+    if (*D_8008EE44 == 0xF && (p[0x5D6] & D_80078C6C[*(s32 *)(arg0 + 0x80)])) {
+        u8 v;
+        *(s32 *)(arg0 + 0x18) = func_80019F30(0x60013, *(s32 *)(arg0 + 0x80) + 0x32);
+        *(u16 *)(arg0 + 0x46) += 4;
+        *(u16 *)(arg0 + 0x4A) += 4;
+        v = 0x40;
+        if (*D_800B3B40 == *(s32 *)(arg0 + 0x80)) {
+            v = 0x80;
+        }
+        arg0[0x5A] = v;
+        arg0[0x59] = v;
+        arg0[0x58] = v;
+    }
+}
 
 #include "common.h"
 
@@ -215,7 +235,31 @@ void func_800A3388(void *arg0)
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A3410);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A3570);
+void func_800A3570(u8 *arg0) {
+    extern u16 D_8008EE44[];
+    extern s16 D_800B3B40[];
+    s32 a2 = *(s32 *)(arg0 + 0x7C);
+    if (*D_8008EE44 == 0x11) {
+        *(u32 *)(arg0 + 0x38) &= ~1;
+        if (*(s32 *)(arg0 + 0x80) == *D_800B3B40) {
+            arg0[0x5A] = 0x80;
+            arg0[0x59] = 0x80;
+            arg0[0x58] = 0x80;
+            if (*(s32 *)(arg0 + 0x1C) == 0) {
+                *(s32 *)(arg0 + 0x18) = 0;
+                func_80015CD0(arg0 + 0x14, func_80019F30(0x70010, 8 - *(s32 *)(arg0 + 0x80)), 0);
+            }
+        } else {
+            arg0[0x5A] = 0x50;
+            arg0[0x59] = 0x50;
+            arg0[0x58] = 0x50;
+            *(s32 *)(arg0 + 0x18) = func_80019F30(0x60010, a2);
+            *(s32 *)(arg0 + 0x1C) = 0;
+        }
+    } else {
+        *(u32 *)(arg0 + 0x38) |= 1;
+    }
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A3654);
 
@@ -230,7 +274,18 @@ void func_800A3718(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = func_80019F30(0x60010, (*D_800B3B3C) + 0x19);
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A378C);
+void func_800A378C(void *arg0) {
+    extern u8 D_80085428[];
+    extern u16 D_8008EE44[];
+    extern s16 D_800B3B40[];
+    u8 *p = D_80085428;
+    if (*D_8008EE44 == 0x12) {
+        *(u32 *)((u8 *)arg0 + 0x38) &= ~1;
+        *(s32 *)((u8 *)arg0 + 0x18) = func_80019F30(0x6001D, p[0x5D9] * 2 + *D_800B3B40 + 0xB);
+    } else {
+        *(u32 *)((u8 *)arg0 + 0x38) |= 1;
+    }
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A3814);
 
