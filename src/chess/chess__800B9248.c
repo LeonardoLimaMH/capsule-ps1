@@ -78,7 +78,6 @@ void func_800BA744(u8 *p) {
     s32 o = base[0x70c];
     s32 i = base[c + 0x5fb];
     s32 n = 1 - c;
-    D_8008EE6A = 0;
     base[0x614] = 0;
     base[c * 0x2e8 + 0x18 + i * 0x7c + 0x25] = func_800A835C(p, c);
     base[n * 0x2e8 + 0x18 + o * 0x7c + 0x25] = func_800A835C(p, n);
