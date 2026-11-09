@@ -36,7 +36,8 @@ void func_800D10A8(void) {
 void func_800D1134(void) {
     s32 i;
     for (i = 0; i < 11; i++) {
-        if (D_8006AFCC[0x18 + i] == 1) {
+        S_AFCC *q = (S_AFCC *)&D_8006AFCC[i];
+        if (q->f30 == 1) {
             if (i != 0 || *D_80105990 != 1) {
                 if (D_800F1C98[i] != 0xFFFF) {
                     func_80034AB0(D_800F1C98[i]);
