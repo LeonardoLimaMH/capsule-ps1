@@ -64,21 +64,23 @@ void func_800FF2CC(s32 arg0, void *arg1, s16 arg2) {
     extern u8 D_80119710[];
     extern u8 D_800906A0[];
     extern s32 D_8008ED68[];
-    s16 sp[2];
+    s32 xy;
     s32 b, c;
     s32 r;
     s32 d;
+    s32 t;
     u8 *q = *(u8 **)((u8 *)arg0 + 0x70);
 
     if (D_80119710[0x3d] == 0) {
         func_8002CEC0(D_800906A0);
         D_80119710[0x3d] = 1;
     }
-    r = RotTransPers(arg1, sp, &b, &c);
+    r = RotTransPers(arg1, &xy, &b, &c);
     d = 0x140000 / r;
-    *(s16 *)(q + 0x46) = sp[0] - D_8008ED68[0x108 / 4] / 2;
-    *(s16 *)(q + 0x4a) = sp[1] - D_8008ED68[0x10c / 4] / 2;
-    *(s16 *)(q + 0x4e) = r - 15 - arg2;
+    *(s16 *)(q + 0x46) = ((s16 *)&xy)[0] - D_8008ED68[0x108 / 4] / 2;
+    *(s16 *)(q + 0x4a) = ((s16 *)&xy)[1] - D_8008ED68[0x10c / 4] / 2;
+    t = r - 15;
+    *(s16 *)(q + 0x4e) = t - arg2;
     *(s16 *)(q + 0x50) = d;
     *(s16 *)(q + 0x52) = d & ~0xf;
     *(s16 *)(q + 0x50) = d & ~0xf;
