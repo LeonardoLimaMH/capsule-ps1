@@ -1,6 +1,27 @@
 #include "common.h"
 #include "yuugi.h"
 
+typedef struct { s32 v[4]; } Blk10;
+typedef struct { u8 v[8]; } Blk8;
+typedef struct {
+    u8 pad[0xD8];
+    Blk10 fd8;
+    Blk8 fe8;
+    u8 padf0[0x178 - 0xF0];
+    s32 f178;
+} S69AD4;
+typedef struct {
+    u8 pad[0x38];
+    Blk10 f38;
+    Blk8 f48;
+    s32 f50;
+} S69E4C;
+extern S69AD4 D_80069AD4[];
+extern S69E4C D_80069E4C[];
+extern s32 D_8006AF30[];
+extern s16 D_80078C28, D_80078C2A, D_80078C2C;
+
+
 typedef struct {
     u8 pad[0x10];
     u16 f10;
@@ -22,14 +43,15 @@ s32 func_8002475C(void *arg0, s32 arg1) {
     extern s16 D_80078C28;
     extern u8 D_80085428[];
     extern u16 D_8008EE44[];
-    extern u8 D_80091618[];
+    extern S_1A8 D_80091618[];
     extern s32 D_800EEB70[];
     if (*D_80085428 == 0) {
         if (arg1 != 0) {
             if (arg1 == 1) {
                 if ((D_80078C24 != arg1) || (D_80078C28 != 0)) {
                     if (M2C_FIELD(arg0, u16 *, 0x4E) != 0) {
-                        if (M2C_GFIELD(D_80091618 + *D_8006AF80 * 0x1A8, u16, 0x8A) == 0xFFFF) {
+                        S_1A8 *p = D_80091618;
+                        if (p[*D_8006AF80].f8A == 0xFFFF) {
                             if (M2C_FIELD(arg0, s16 *, 0x4C) != *D_80078C20) {
                                 goto block_17;
                             }
@@ -44,7 +66,8 @@ s32 func_8002475C(void *arg0, s32 arg1) {
             goto block_15;
         }
         if ((D_80078C24 != 1) || (D_80078C28 != 0)) {
-            if (M2C_GFIELD(D_80091618 + *D_8006AF80 * 0x1A8, u16, 0x8A) == 0xFFFF) {
+            S_1A8 *p = D_80091618;
+            if (D_80091618[*D_8006AF80].f8A == 0xFFFF) {
                 if ((*D_800EEB70 != 2) && (*D_800EEB70 != 0)) {
                     goto block_15;
                 }
