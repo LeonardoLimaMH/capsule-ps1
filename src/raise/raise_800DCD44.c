@@ -19,7 +19,7 @@ extern void func_800DD3B0(s32, s32, s32);
 typedef struct { u8 _p[0x48E]; s16 g[8][16]; } Grid_800DCE54;
 typedef struct { u8 _a[0x10]; u16 unk_10; u8 _b[0x7E]; u16 unk_90; } Slot_DD2B8;
 extern u8 D_80091618[];
-extern s32 func_800B12D8(s32);
+extern s32 func_800B12D8();
 extern s32 func_800DD64C(s32, s32, s32, s32, s32);
 
 s32 func_800DCE54(s32 a0) {
