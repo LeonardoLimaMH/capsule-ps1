@@ -12,6 +12,36 @@ s32 DsLastCom(void) {
     return func_80044B10() & 0xFF;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800446D0", func_800446F0);
+void func_800446F0(void) {
+    s32 r;
+    S_DsEnt2 *e;
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800446D0", func_80044794);
+    r = func_80044AF8(0);
+    if (r == 1 && D_80094B70[0] > 0 && func_80044AF8(0) == r) {
+        e = &((S_DsEnt2 *)((u8 *)D_80094B70 - 0xc8))[D_80094B6C[0]];
+        if (e->f_0 != 0) {
+            func_80044A4C(e->f_4, e->f_c);
+        }
+    }
+}
+
+void func_80044794(u8 arg0, u8 *arg1) {
+    u8 *p;
+
+    if (arg0 == 5 && (*arg1 & 0x10)) {
+        func_8004360C(5);
+    }
+    if (arg0 == 4) {
+        p = (u8 *)D_80094A98;
+        goto set;
+    } else if (arg0 == 1 || arg0 == 5) {
+        p = (u8 *)D_80094A88;
+set:
+        *(s32 *)p = 1;
+        p[4] = arg0;
+        func_800458A0(p + 5, arg1);
+    }
+    if (*(s32 *)&D_80094C54 != 0) {
+        D_80094C54(arg0, arg1);
+    }
+}
