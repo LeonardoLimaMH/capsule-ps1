@@ -1,6 +1,14 @@
 #include "common.h"
 #include "yuugi.h"
 
+typedef struct { s16 x, y, z, pad; } S_2453C_Point;
+typedef struct {
+    u8 pad[0x10];
+    S_2453C_Point *points;
+    u8 pad14[8];
+} S_2453C_Entry;
+extern S_2453C_Entry D_80069EC4[][26];
+extern s16 D_80078C20[];
 typedef struct { s32 v[4]; } Blk10;
 typedef struct { u8 v[8]; } Blk8;
 typedef struct {
@@ -96,7 +104,20 @@ void func_800248C8(undefined4 param_1)
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_800248E8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_80024990);
+void func_80024990(u8 *o, s32 a1, s32 a2, s32 a3) {
+    S69AD4 *p = D_80069AD4;
+    S69E4C *q = D_80069E4C;
+    func_800254A0();
+    *(s32 *)(o + 0x54) = 0;
+    *(s32 *)(o + 0x50) |= 8;
+    p->f178 = a1 == 2 ? 4 : 5;
+    D_80078C28 = a1;
+    D_80078C2A = a2;
+    D_80078C2C = a3;
+    q->f50 = D_8006AF30[a3];
+    q->f38 = p->fd8;
+    q->f48 = p->fe8;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_80024A7C);
 
