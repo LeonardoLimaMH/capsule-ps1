@@ -104,9 +104,14 @@ s32 func_800FF644(void) {
     s32 sum = 0;
 
     for (i = 0; i < 2; i++) {
-        for (j = 0; j < 6; j++) {
-            u8 *e = D_80085428 + (j * 0x7c + i * 0x2e8);
-            sum += ((i * 6 + j) * 169 + 1) * (e[0x5fd] * 13 + e[0x5fe]);
+        s32 k, off;
+        j = 0;
+        k = i * 6;
+        off = i * 0x2e8;
+        for (; j < 6; j++) {
+            s32 n = (k + j) * 169;
+            u8 *e = D_80085428 + (j * 0x7c + off);
+            sum += (n + 1) * (e[0x5fd] * 13 + e[0x5fe]);
         }
     }
     return sum;
