@@ -60,11 +60,12 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF0A0);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF190);
 
-void func_800FF2CC(s32 arg0, void *arg1, s32 arg2) {
+void func_800FF2CC(s32 arg0, void *arg1, s16 arg2) {
     extern u8 D_80119710[];
     extern u8 D_800906A0[];
     extern s32 D_8008ED68[];
-    s16 sp[4];
+    s16 sp[2];
+    s32 b, c;
     s32 r;
     s32 d;
     u8 *q = *(u8 **)((u8 *)arg0 + 0x70);
@@ -73,7 +74,7 @@ void func_800FF2CC(s32 arg0, void *arg1, s32 arg2) {
         func_8002CEC0(D_800906A0);
         D_80119710[0x3d] = 1;
     }
-    r = RotTransPers(arg1, &sp[0], &sp[2], &sp[4]);
+    r = RotTransPers(arg1, sp, &b, &c);
     d = 0x140000 / r;
     *(s16 *)(q + 0x46) = sp[0] - D_8008ED68[0x108 / 4] / 2;
     *(s16 *)(q + 0x4a) = sp[1] - D_8008ED68[0x10c / 4] / 2;
@@ -119,12 +120,11 @@ void func_800FF700(void) {
 
 void func_800FF740(u8 *arg0) {
     extern u8 D_80118C18[];
-    extern u8 D_80085FF2;
+    extern u8 D_80085FF2[];
     u8 *p;
 
-    D_80118C18[0x9E9] = (D_80118C18[0x9E9] + 1) % 10;
-    p = D_80118C18 + D_80118C18[0x9E9] * 4;
-    p[0x9EA] = (D_80085FF2 << 7) | (arg0[0] + 1);
+    p = D_80118C18 + (D_80118C18[0x9E9] = (D_80118C18[0x9E9] + 1) % 10) * 4;
+    p[0x9EA] = (D_80085FF2[0] << 7) | (arg0[0] + 1);
     p[0x9EB] = arg0[1];
     p[0x9EC] = arg0[3] + arg0[2] * 13;
     p[0x9ED] = arg0[5] + arg0[4] * 13;
