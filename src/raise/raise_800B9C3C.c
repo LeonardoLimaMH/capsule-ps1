@@ -1,5 +1,17 @@
 #include "common.h"
 
+typedef struct { u8 _0[0x10]; u16 f10; u8 _1[0x76]; u16 f86; u16 _2; u16 f8a; u8 _3[0xEC]; s32 f178; s32 f17c; u8 _4[0x20]; } RSlot;
+#define RSLOT ((RSlot *)D_80091618)
+typedef struct { u8 _0[0x10]; u32 w10; u32 w14; u8 _1[0x30]; } RTab;
+typedef struct { u8 _0[0x4E]; s16 f4e; s16 f50; s16 f52; u8 _1[0x3A]; s32 f8c; } RObj;
+extern u8 D_80091618[];
+extern u16 D_8006AF80;
+extern u16 D_8008EE44;
+extern s32 D_800ED890;
+extern RTab D_80063940[];
+extern s32 D_800FDE08[], D_800FAE10[];
+extern s32 func_800E16AC(), func_800ACDE0(), func_800E0DF8(), func_800B1260(), func_800E2D7C(), func_800E355C(), func_800E3090(), func_800E4158();
+
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C", func_800B9C3C);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C", func_800B9CEC);
