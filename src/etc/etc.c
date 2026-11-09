@@ -207,12 +207,12 @@ void func_80099474(void) {
         *D_800B3AC8 = 0;
         M2C_GFIELD(D_80085428, s16, 8) = 0x7003;
         if (M2C_GFIELD(D_8008ED68, s32, 0xA20) == 1 || !(M2C_GFIELD(D_80085428, u8, 0x5C8) & 4)) {
-            goto a;
+            goto b;
         }
-        goto b;
+        goto a;
     case 1:
         if (func_80019654()) {
-            goto b;
+            goto a;
         }
         break;
     case 2:
