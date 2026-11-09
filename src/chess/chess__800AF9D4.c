@@ -10,7 +10,8 @@ void func_800AF9D4(void *arg0) {
 void func_800AF9DC(u8 *arg0) {
     extern u8 D_8008ED68[];
     u8 *s1 = D_8008ED68;
-    if (func_800CAE6C(arg0 + 0x5D0) == 0 && arg0[arg0[0xBCA] + 0x5E0] == 0) {
+    u8 *q;
+    if (func_800CAE6C(arg0 + 0x5D0) == 0 && (q = arg0 + arg0[0xBCA], q[0x5E0] == 0)) {
         if (*(s32 *)(s1 + (arg0[0xBCA] << 4) + 0x80) == 0) {
             u16 v = *(u16 *)(arg0 + 0xBE2) + 1;
             *(u16 *)(arg0 + 0xBE2) = v;
