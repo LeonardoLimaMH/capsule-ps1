@@ -20,8 +20,8 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248", func_800B9684);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248", func_800B97B4);
 
-extern u16 D_8008EE50;
-extern u8 D_8008EE6A;
+extern u16 D_8008EE50[];
+extern u8 D_8008EE6A[];
 extern s32 func_800B2ABC(u8 *a, s32 b, u8 *c, u8 *d);
 extern void func_800125D8(void);
 extern void func_80012628(void);
