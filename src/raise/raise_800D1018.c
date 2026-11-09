@@ -1,6 +1,11 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018", func_800D1018);
+extern u16 D_800F1C98[];
+extern u16 D_8006AFCC[];
+extern s16 D_80105990[];
+extern void func_8003422C(s32);
+extern void func_80034AB0(s32);
+
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018", func_800D10A8);
 
