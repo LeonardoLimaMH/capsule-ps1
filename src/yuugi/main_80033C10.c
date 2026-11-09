@@ -36,20 +36,20 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_80033CEC);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_80033E5C);
 
-s16 func_800340B4(u16 a0) {
+s16 func_800340B4(s32 a0) {
     extern u8 D_800922F0[];
     s16 n = 0;
     s32 i;
     u32 idx;
     u32 bit;
-    u32 id = a0;
-    if (!(id & 0x8000)) {
-        id = 0xFFFF;
+    if (!(a0 & 0x8000)) {
+        a0 = 0xFFFF;
     }
+    a0 &= 0xFFFF;
     idx = VOZ->f126;
     bit = 1 << idx;
     for (i = 3; i >= 0; i--) {
-        if ((VOZ->f125 & bit) && VOZ->f12c[(u8)idx] == (u16)id) {
+        if ((VOZ->f125 & bit) && VOZ->f12c[(u8)idx] == a0) {
             n++;
         }
         bit <<= 1;
@@ -121,7 +121,26 @@ void func_800342CC(void)
   return;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_800342F4);
+u32 func_800342F4(u8 a0) {
+    typedef struct { u8 _p[0x12c]; u16 f12c[4]; u8 _r[12]; u8 *_q; } V2;
+    extern u8 D_800922F0[];
+    extern void SpuGetVoiceEnvelope(), SpuSetKey();
+    s16 env[4];
+    u32 mask = 0;
+    u32 bit = 1;
+    s32 i;
+    for (i = 0; i < 4; i++) {
+        SpuGetVoiceEnvelope(i + 0x14, env);
+        if ((((V2 *)D_800922F0)->_q[((V2 *)D_800922F0)->f12c[i] * 16 + 3] & 0xF) == a0 && env[0] != 0) {
+            mask |= bit;
+        }
+        bit <<= 1;
+    }
+    if (mask != 0) {
+        SpuSetKey(0, mask << 20);
+    }
+    return mask;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_800343C4);
 
