@@ -6,7 +6,7 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DDD70", func_800DDD70);
 
 /* stub-ret: mixed */
 extern u8 D_80100F38[];
-extern s32 func_800B1260(s32);
+extern s32 func_800B1260();
 
 #define PL(a) (D_80100F38 + (func_800B1260(a) & 0xFFFF) * 0x79C)
 #define P32(o) (*(s32 *)(p + (o)))
@@ -57,4 +57,14 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DDD70", func_800DE480);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DDD70", func_800DE770);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DDD70", func_800DE938);
+s32 func_800DE938(void) {
+    u8 *p = PL(0);
+    s16 n;
+    if (PS16(0x5B4) == 0) return 0;
+    n = PS16(0x5B0);
+    PS16(0x736) = *(u16 *)(p + n * 4 + 0x5B6);
+    P32(0x738) = D_800F1E94[*(s16 *)(p + n * 4 + 0x5B8)];
+    PS16(0x5B0) = (n + 1) % 32;
+    PS16(0x5B4) = P16(0x5B4) - 1;
+    return 1;
+}
