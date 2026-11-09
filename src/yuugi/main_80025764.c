@@ -7,6 +7,10 @@ typedef struct {
     u8 pad1[0x79C - 0x342];
 } S_80100F38b;
 
+typedef struct {
+    u16 v[6];
+} Six;
+
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80025764);
 
 void func_80025C48(s32 arg0, u16 arg1, u16 arg2) {
@@ -252,7 +256,74 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800270D4);
 
 extern u8 *D_80078D14;
 extern u8 D_8006AF90[];
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800278C8);
+void func_800278C8(s32 a, s32 b) {
+    register u8 *base asm("a2") = (u8 *)0x801CC040;
+    register s32 i asm("t0") = 0;
+    register s32 c_ff asm("t3") = 0xFF;
+    register s32 v asm("v0");
+    register u8 *af90 asm("t4");
+    register s32 c_ffff asm("t2") = 0xFFFF;
+    register s32 c_neg1 asm("t1") = -1;
+    u32 dst_off;
+    u8 *p;
+    register u8 *v1 asm("v1");
+    register u8 *src asm("a2");
+    register u8 *s asm("a1");
+    register u8 *dst_ptr asm("v1");
+    register u8 *dst2 asm("a0");
+
+    v = (s32)D_8006AF90;
+    af90 = (u8 *)v;
+    v = b * 30;
+    dst_off = v;
+    p = base + a * 0x668;
+    v1 = p + 0x323;
+    src = v1;
+    s = src;
+
+    D_80078D14 = src;
+    dst_ptr = af90 + dst_off;
+    *(u16 *)dst_ptr = p[0x323];
+
+    do {
+        v = *(src + i + 1);
+        if (v == c_ff) {
+            v = 0xFFFF;
+        }
+        if (v != c_ffff) {
+            *(u16 *)(dst_ptr + 2) = v;
+        } else {
+            *(u16 *)(dst_ptr + 2) = c_neg1;
+        }
+
+        v = s[4];
+        if (v == c_ff) {
+            v = 0xFFFF;
+        }
+        dst2 = (u8 *)((u32)dst_off + (u32)af90);
+        if (v != c_ffff) {
+            *(u16 *)(dst2 + 8) = v;
+        } else {
+            *(u16 *)(dst2 + 8) = c_neg1;
+        }
+
+        v = s[5];
+        if (v == c_ff) {
+            v = 0xFFFF;
+        }
+        dst2 = (u8 *)((u32)dst_off + (u32)af90);
+        if (v != c_ffff) {
+            *(u16 *)(dst2 + 10) = v;
+        } else {
+            *(u16 *)(dst2 + 10) = c_neg1;
+        }
+
+        dst_off += 4;
+        s += 2;
+        i++;
+        dst_ptr += 2;
+    } while (i < 3);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800279D4);
 
