@@ -40,8 +40,41 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DCFB4);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DD110);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DD2B8);
+s32 func_800DD2B8(s32 a0, s16 a1, s16 a2) {
+    s32 k = func_800B1260(a0);
+    s32 flag = a0 != 1;
+    Slot_DD2B8 *s = (Slot_DD2B8 *)D_80091618;
+    if (s[(u16)k].unk_90 != 0) {
+        k = func_800B12D8(a0);
+        flag = a0 == 1;
+    }
+    return (s16)func_800DD64C(a0, s[(u16)k].unk_10, flag, a1, a2);
+}
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DD3B0);
+void func_800DD3B0(s32 a0, s32 a1, s32 a2) {
+    u8 *p = PL(a0);
+    s16 n = PS16(0x3F0);
+    s16 i;
+    if (n != 0x20) {
+        u8 *q;
+        PS16(0x3F0) = n + 1;
+        i = PS16(0x3EE);
+        q = p + i * 4;
+        *(s16 *)(q + 0x3F2) = a1;
+        *(s16 *)(q + 0x3F4) = a2;
+        PS16(0x3EE) = (i + 1) % 32;
+    }
+}
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DD45C);
+s32 func_800DD45C(s32 a0) {
+    u8 *p = PL(a0);
+    s16 i;
+    if (PS16(0x3F0) == 0) return 0;
+    i = PS16(0x3EC);
+    P16(0x472) = 1;
+    P16(0x474) = P16(0x3F2 + i * 4);
+    P32(0x478) = D_800F1E34[PS16(0x3F4 + i * 4)];
+    PS16(0x3EC) = (i + 1) % 32;
+    P16(0x3F0) = P16(0x3F0) - 1;
+    return 1;
+}
