@@ -58,12 +58,17 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DDD70", func_800DE480);
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DDD70", func_800DE770);
 
 s32 func_800DE938(void) {
-    u8 *p = PL(0);
+    u8 *p = D_80100F38 + (func_800B1260() & 0xFFFF) * 0x79C;
     s16 n;
+    u16 a, b;
+    u8 *q;
     if (PS16(0x5B4) == 0) return 0;
     n = PS16(0x5B0);
-    PS16(0x736) = *(u16 *)(p + n * 4 + 0x5B6);
-    P32(0x738) = D_800F1E94[*(s16 *)(p + n * 4 + 0x5B8)];
+    q = p + n * 4;
+    a = *(u16 *)(q + 0x5B6);
+    b = *(u16 *)(q + 0x5B8);
+    PS16(0x736) = a;
+    P32(0x738) = D_800F1E94[(s16)b];
     PS16(0x5B0) = (n + 1) % 32;
     PS16(0x5B4) = P16(0x5B4) - 1;
     return 1;
