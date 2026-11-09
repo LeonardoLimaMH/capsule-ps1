@@ -1,6 +1,10 @@
 #include "common.h"
 #include "yuugi.h"
 
+/* fila de vozes SPU em D_800922F0 */
+typedef struct { u8 _p[0x125]; u8 f125; u8 f126; u16 _1; u16 f12c[4]; } SpuVoices;
+#define VOZ ((SpuVoices *)D_800922F0)
+
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_80033C10);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_80033CEC);
