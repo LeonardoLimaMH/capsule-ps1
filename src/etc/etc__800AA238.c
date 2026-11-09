@@ -11,7 +11,8 @@ typedef struct {
     u8 padA20[0xA68 - 0xA20];
     s32 f_a68;
 } Unk8008ED68;
-extern Unk8008ED68 D_8008ED68;
+extern Unk8008ED68 D_8008ED68[];
+#define D_8008ED68 (*D_8008ED68)
 extern u16 D_800B3D22[];
 extern u8 D_800B3D46[];
 extern u8 D_8002E38C[];
@@ -33,29 +34,29 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc__800AA238", func_800AAE64);
 extern void func_8009C970(void);
 void func_800AB690(void)
 {
-    Unk8008ED68 *p = &D_8008ED68;
-    u16 mode = p->mode;
-
-    if (mode == 0) {
+    switch (D_8008ED68.mode) {
+    case 0:
         func_8001AD74(2);
         func_800339D8(-3, 0);
-        func_80033974(D_800B3D22);
+        func_80033974(D_800B3D22[0]);
         func_80012578();
-    } else if (mode == 1) {
-        if (p->f_a68 == 0) {
+        break;
+    case 1:
+        if (D_8008ED68.f_a68 == 0) {
             if (D_800B3D46[0] != 0) {
                 func_800AC20C(0);
             }
             if (D_800B3D46[1] != 0) {
                 func_800AC20C(1);
             }
-            if (p->f_a1c == 3) {
-                p->f_a18 = mode;
+            if (D_8008ED68.f_a1c == 3) {
+                D_8008ED68.f_a18 = 1;
                 func_80012200(D_8002E38C);
             } else {
-                p->f_a18 = 3;
+                D_8008ED68.f_a18 = 3;
                 func_80012200(func_8009C970);
             }
         }
+        break;
     }
 }
