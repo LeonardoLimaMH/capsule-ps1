@@ -24,7 +24,8 @@ void func_800D1018(void) {
 void func_800D10A8(void) {
     s32 i;
     for (i = 0; i < 11; i++) {
-        if (D_8006AFCC[0x18 + i] == 1) {
+        S_AFCC *q = (S_AFCC *)&D_8006AFCC[i];
+        if (q->f30 == 1) {
             if (D_800F1C98[i] != 0xFFFF) {
                 func_8003422C(D_800F1C98[i]);
             }
