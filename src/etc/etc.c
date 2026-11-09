@@ -137,7 +137,26 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800981F0);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800991AC);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800992CC);
+u8 *func_800992CC(u8 *arg0, u32 arg1) {
+    extern void func_800991AC();
+    extern void func_800161C4();
+    extern u8 *func_80015B3C();
+    u8 id = arg0[0x5E5];
+    u8 *r = func_80015B3C(func_800991AC, func_800161C4, 1);
+    func_80015EF8(r);
+    *(s16 *)(r + 0x4A) = 0x78;
+    *(s16 *)(r + 0x4E) = 4;
+    *(s16 *)(r + 0x46) = 0;
+    r[0x59] = 0;
+    r[0x58] = 0;
+    *(u32 *)(r + 0x34) = (*(u32 *)(r + 0x34) & ~0x7F) | (arg1 & 0x7F);
+    if (arg1 != 0) {
+        *(s32 *)(r + 0x18) = func_80019F30(id + 0x15 | 0x60000, 5);
+    } else {
+        *(s32 *)(r + 0x18) = func_80019F30(id + 0x15 | 0x60000, 1);
+    }
+    return r;
+}
 
 #include "common.h"
 
@@ -172,7 +191,44 @@ void func_80099444(void) {
     func_80012508();
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099474);
+extern void *func_80015B3C();
+extern void func_80015EF8();
+extern s32 func_80019F30();
+extern void func_800991AC();
+extern void func_800161C4();
+extern u8 D_800859F0[];
+extern s32 D_800B3AC8[];
+void func_80099474(void) {
+    extern u8 D_80085428[];
+    extern u8 D_800859F0[];
+    extern s32 D_800B3AC8[];
+    switch (M2C_GFIELD(D_8008ED68, u16, 0xE0)) {
+    case 0:
+        *D_800B3AC8 = 0;
+        M2C_GFIELD(D_80085428, s16, 8) = 0x7003;
+        if (M2C_GFIELD(D_8008ED68, s32, 0xA20) == 1 || !(M2C_GFIELD(D_80085428, u8, 0x5C8) & 4)) {
+            goto a;
+        }
+        goto b;
+    case 1:
+        if (func_80019654()) {
+            goto b;
+        }
+        break;
+    case 2:
+        func_800338DC(0x7003);
+    a:
+        func_80012578();
+        break;
+    case 3:
+        if ((D_800859F0[0] & 4) && !(func_800337EC() & 0x80)) {
+            break;
+        }
+    b:
+        func_80012508();
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099570);
 
