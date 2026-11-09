@@ -111,7 +111,9 @@ void func_80100AF4(S80100AF4 *p) {
         } else if (M2C_GFIELD(D_8008ED68, u16, 0xE0) == 1) {
             p->f38 &= ~1;
             v = func_800372B4();
-            a = (v >= 0xFB) ? 0x29 : ((v < 0x7E) ? 0x2B : 0x2A);
+            if (v >= 0xFB) a = 0x29;
+            else if (v >= 0x7E) a = 0x2A;
+            else a = 0x2B;
             p->f18 = func_80019F30(0x6000A, a);
         }
     }
