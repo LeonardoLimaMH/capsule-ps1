@@ -6,7 +6,8 @@ extern s32 D_80094B6C[];
 extern s32 D_80094B70[];
 extern s32 D_80094A88[];
 extern s32 D_80094A98[];
-extern void (*D_80094C54)(s32, u8 *);
+extern s32 D_80094C54[];
+#define D_80094C54(a, b) ((void (*)(s32, u8 *))D_80094C54[0])(a, b)
 
 s32 DsLastCom(void) {
     return func_80044B10() & 0xFF;
