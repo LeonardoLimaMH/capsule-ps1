@@ -1,5 +1,11 @@
 #include "common.h"
 
+typedef struct { u8 b[4]; } W4;
+typedef struct { W4 a; W4 b; } P8;
+typedef struct { u8 _p0[0x5b]; u8 f5b; P8 f5c; } T5B;
+typedef struct { u8 _p0[0x38]; u32 f38; } T38;
+extern P8 D_80097C8C;
+
 void func_8009D568(void) {
 
 }
