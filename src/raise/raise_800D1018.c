@@ -8,6 +8,9 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018", func_800D1134);
 
 #include "common.h"
 
+/* elemento de D_8006AFCC visto a partir de &D_8006AFCC[i] (campo em +0x30) */
+typedef struct { u8 _p[0x30]; u16 f30; } S_AFCC;
+
 extern u8 D_80085428[];
 extern void func_800A5E54();
 
