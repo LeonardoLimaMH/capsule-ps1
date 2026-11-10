@@ -1,11 +1,11 @@
 #include "common.h"
 #include "yuugi.h"
 
-extern volatile s32 D_80094C10[4];
+extern s32 D_80094C10[];
 #define D_80094C10 (*D_80094C10)
-extern volatile s32 D_80094C0C[4];
+extern s32 D_80094C0C[];
 #define D_80094C0C (*D_80094C0C)
-extern volatile s32 D_80094C08[4];
+extern s32 D_80094C08[];
 #define D_80094C08 (*D_80094C08)
 extern s32 D_80073084[];
 extern s32 D_80073088[];
