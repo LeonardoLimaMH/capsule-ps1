@@ -1,5 +1,11 @@
 #include "common.h"
 
+/* tabuleiros 13x13 por partida (0x34 bytes cada) */
+extern struct {
+    u32 (*b)[13];
+    u8 _pad[0x30];
+} D_801010B0[];
+
 void func_800AF9D4(void *arg0) {
     M2C_FIELD(arg0, s16 *, 0xBE2) = 0;
 }
