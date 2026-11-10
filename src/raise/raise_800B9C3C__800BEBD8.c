@@ -1,5 +1,19 @@
 #include "common.h"
 
+/* objeto apontado por D_800EEB9C+0x764 (usado por func_800BED10) */
+struct RaiseObjetoBED10 {
+    u8 _pad0[0x38];
+    s32 unk_0x38;
+    u8 _pad3C[0x40];
+    s32 unk_0x7C;
+};
+
+/* estado global em D_800EEB9C */
+struct RaiseEstadoBED10 {
+    u8 _pad0[0x764];
+    struct RaiseObjetoBED10 *unk_0x764;
+};
+
 s32 func_800BEBD8(void) {
     extern s16 D_800F062A[];
     (*D_800F062A) = 0x10;
