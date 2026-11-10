@@ -2,6 +2,20 @@
 
 #include "common.h"
 
+/* objeto de peça usado por func_80100AF4 */
+typedef struct {
+    u8 _p0[0x18];
+    s32 f18;
+    u8 _p1[0x1C];
+    s32 f38;
+    u8 _p2[0x1C];
+    u8 f58;
+    u8 f59;
+    u8 f5A;
+} S80100AF4;
+
+extern void func_80012578();
+
 void func_801002CC(void) {
     extern u16 D_8008EE44[];
     extern u8 D_80102870[];
