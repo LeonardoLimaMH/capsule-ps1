@@ -100,7 +100,19 @@ void func_800FF700(void) {
     M2C_FIELD(D_80119600, s32 *, 0x2C) = func_800FF644();
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF740);
+void func_800FF740(u8 *arg0) {
+    extern u8 D_80118C18[];
+    extern u8 D_80085FF2[];
+    u8 *p;
+
+    p = D_80118C18 + (D_80118C18[0x9E9] = (D_80118C18[0x9E9] + 1) % 10) * 4;
+    p[0x9EA] = (D_80085FF2[0] << 7) | (arg0[0] + 1);
+    p[0x9EB] = arg0[1];
+    p[0x9EC] = arg0[3] + arg0[2] * 13;
+    p[0x9ED] = arg0[5] + arg0[4] * 13;
+    *(s32 *)(p + 0xA14) = func_800FF644();
+    func_800FF820();
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF820);
 
