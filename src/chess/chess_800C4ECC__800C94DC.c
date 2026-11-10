@@ -1,6 +1,10 @@
 #include "common.h"
 #include "ghidra.h"
 
+typedef struct { u8 pad[0x15]; u8 x; u8 y; } Pos800C;
+typedef struct { u8 pad0[0x10]; u32 w10; u32 w14; u8 pad1[0x28]; } Ent63940;
+typedef struct { u8 pad[0x30]; u16 h; u8 pad1[2]; } Ent1010B0;
+
 s32 func_800C94DC(s32 unused_arg0, s32 arg1) {
     extern s16 D_80069BBE[];
     s32 temp_a1;
@@ -46,6 +50,8 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9A34);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9B78);
 
+extern s32 func_8001AA44(s32, s32);
+extern double sqrt(double);
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9C38);
 
 s32 func_800C9C90(void *arg0) {
@@ -56,7 +62,21 @@ s32 func_800C9C9C(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 0x5CC) & 0x80;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9CA8);
+s32 func_800C9CA8(s32 a, s32 b, s32 c, s32 d) {
+    if (b < d) {
+        if (a < c) return 2;
+        if (c < a) return 8;
+        return 1;
+    }
+    if (d < b) {
+        if (a < c) return 4;
+        if (c < a) return 6;
+        return 5;
+    }
+    if (a < c) return 3;
+    if (c < a) return 7;
+    return 0;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9D18);
 
@@ -139,6 +159,10 @@ s32 func_800CA4AC(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA4CC);
 
+extern u16 D_8005089C[];
+extern s32 func_80027B34();
+extern s32 func_80033E5C();
+extern s32 func_800A8E34();
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA574);
 
 s32 func_800CA664(s16 arg0) {
@@ -156,7 +180,19 @@ s32 func_800CA6B0(void) {
     return 0;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA6B8);
+s32 func_800CA6B8(u8 *p, s32 a1, s32 a2, s32 a3) {
+    u8 *b = p + 0x5D0;
+    u8 *q;
+    u8 *r;
+    if (a1 == b[0x5FA]) {
+        q = b + (a3 * 0x7C + a2 * 0x2E8);
+        r = b + a1 * 2;
+        if (q[0x2D] == r[0x601]) {
+            if (q[0x2E] == r[0x602]) return 1;
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA730);
 

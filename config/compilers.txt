@@ -303,3 +303,4 @@ src/yuugi/main__80012A14__80012E54.c 2.7.2-cdk
 src/yuugi/sdk_libc2_printf.c 2.7.2-cdk
 src/slpm/sdk_libc2_printf.c 2.7.2-cdk
 src/yuugi/main_8001A1DC__8001A818__8001A998.c 2.7.2-cdk
+src/chess/chess_800C4ECC__800C6330.c 2.7.2-cdk
