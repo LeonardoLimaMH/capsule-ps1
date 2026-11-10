@@ -38,6 +38,19 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DD110);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DD2B8);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DD3B0);
+void func_800DD3B0(s32 a0, s32 a1, s32 a2) {
+    u8 *p = PL(a0);
+    s16 n = PS16(0x3F0);
+    s16 i;
+    if (n != 0x20) {
+        u8 *q;
+        PS16(0x3F0) = n + 1;
+        i = PS16(0x3EE);
+        q = p + i * 4;
+        *(s16 *)(q + 0x3F2) = a1;
+        *(s16 *)(q + 0x3F4) = a2;
+        PS16(0x3EE) = (i + 1) % 32;
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DD45C);
