@@ -65,7 +65,23 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF820);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF8E0);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF96C);
+u8 func_800FF96C(void) {
+    extern u8 D_80118C18[];
+    u8 i;
+    u8 n = 0;
+
+    for (i = 0; i < 10; i += 2) {
+        u8 *q = D_80118C18 + (((D_80118C18[0x9E9] - i) + 10) % 10 & 0xFF) * 4;
+        u8 v = q[0x9EB];
+        if (v != 0) {
+            if (v != 1) {
+                return n;
+            }
+            n++;
+        }
+    }
+    return n;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FFA00);
 
