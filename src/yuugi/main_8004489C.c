@@ -1,9 +1,9 @@
 #include "common.h"
 #include "yuugi.h"
 
-extern volatile s32 D_80094C10;
-extern s32 D_80094C0C;
-extern s32 D_80094C08;
+extern s32 D_80094C10[];
+extern s32 D_80094C0C[];
+extern s32 D_80094C08[];
 extern s32 D_80073084[];
 extern s32 D_80073088[];
 extern s32 D_800730A8[];
@@ -19,9 +19,9 @@ void VSyncCallbacks(s32, void (*)(void));
 void func_8004489C(void) {
     CD_init();
     CD_initvol();
-    D_80094C10 = 0;
-    D_80094C0C = D_80094C10;
-    D_80094C08 = 0;
+    D_80094C10[0] = 0;
+    D_80094C0C[0] = D_80094C10[0];
+    D_80094C08[0] = 0;
     func_80044934();
     func_8004795C(0);
     D_80073084[0] = (s32)func_8004506C;
