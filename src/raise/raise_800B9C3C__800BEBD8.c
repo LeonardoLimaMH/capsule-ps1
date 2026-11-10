@@ -64,6 +64,19 @@ s32 func_800BEBEC(void)
   return 1;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BEBD8", func_800BED10);
+s32 func_800BED10(void) {
+    extern s32 D_800EE630[];
+    extern u8 D_800EEB9C[];
+    extern s16 D_800F0654[], D_800F0656[];
+    s32 n = D_800EE630[6] + 0xF;
+    s32 resource = func_80019F30(D_800EE630[0] | 0x70000, n);
+    struct RaiseEstadoBED10 *base = (struct RaiseEstadoBED10 *)D_800EEB9C;
+    func_80015CD0((u8 *)base->unk_0x764 + 0x14, resource, 1);
+    D_800F0654[0] = 0;
+    base->unk_0x764->unk_0x7C = n;
+    D_800F0656[0] = 0;
+    base->unk_0x764->unk_0x38 &= ~0x40;
+    return 0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BEBD8", func_800BEDA8);
