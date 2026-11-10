@@ -65,7 +65,19 @@ void func_8003577C(u8 a0, u8 *a1) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_80035810);
+void func_80035810(u8 a0, u8 *a1) {
+    extern u8 D_800922F0[];
+    DsSyncCallback(0);
+    if (a0 == 2) {
+        if (!(*a1 & 0xE0)) {
+            D_800922F0[0x112] = 0;
+            D_800922F0[0x113] = 0;
+            *(u16 *)D_800922F0 &= 0xFFF8;
+        }
+    } else {
+        DsSyncCallback(func_80035810);
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_80035894);
 
