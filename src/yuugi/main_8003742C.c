@@ -33,7 +33,32 @@ typedef struct {
     u16 f2e;
 } OscObj;
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_8003742C);
+s32 func_8003742C(u16 a, s16 b) {
+    s32 x[4];
+    s32 y[4];
+    register s32 *py asm("a0");
+
+    if (!(D_800922FA[0] & 2)) {
+        if (a > 0x8021) {
+            if (a <= 0x8320) {
+                return 0;
+            }
+        }
+    }
+    if (!(a & 0x8000)) {
+        return 0;
+    }
+    ((u8 *)x)[0] = 0x24;
+    ((u16 *)x)[1] = a & 0x7FFF;
+    func_80036DB0(x);
+    py = y;
+    ((u8 *)y)[0] = 0x29;
+    y[2] = b;
+    ((u8 *)py)[1] = 0xFF;
+    func_80036DB0(py);
+    *(u16 *)D_800922F0 = (*(u16 *)D_800922F0 | 1) & 0xFFFB;
+    return 1;
+}
 
 void func_800374E8(s32 a) {
     s32 b[4];
@@ -217,7 +242,24 @@ extern s32 D_80078C78;
 extern u8 D_80093D68[];
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80037F64);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_8003804C);
+s16 func_8003804C(u8 *p, u32 a) {
+    s16 r;
+    if (a < 0x40U) {
+        if (p[0x1D] == 0) {
+            return 0;
+        }
+        r = -((p[0x1D] * 2) * (0x40 - a));
+    } else {
+        if (a == 0x40) {
+            return 0;
+        }
+        if (p[0x1C] == 0) {
+            return 0;
+        }
+        r = (p[0x1C] * 2) * (a - 0x3F);
+    }
+    return r;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_800380C8);
 
