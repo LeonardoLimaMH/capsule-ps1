@@ -288,7 +288,27 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A3
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A3D44);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A3F70);
+void func_800A3F70(u8 *arg0) {
+    extern u8 D_80085428[];
+    extern u16 D_8008EE44[];
+    extern s16 D_800B3B38[];
+    u8 *p = D_80085428;
+    if (D_8008EE44[0] == 0x18) {
+        s16 *t = D_800B3B38;
+        *(s32 *)(arg0 + 0x18) = func_80019F30(0x60010, *(s16 *)((u8 *)(t + *(s32 *)(arg0 + 0x84)) + 4) + 0x23);
+        if (p[0x5D0] == 2) {
+            *(s16 *)(arg0 + 0x4A) = -8;
+            *(s32 *)(arg0 + 0x38) &= ~1;
+            return;
+        }
+        if (*(s32 *)(arg0 + 0x84) == 0) {
+            *(s16 *)(arg0 + 0x4A) = -0x60;
+            *(s32 *)(arg0 + 0x38) &= ~1;
+            return;
+        }
+    }
+    *(s32 *)(arg0 + 0x38) |= 1;
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A4038);
 
