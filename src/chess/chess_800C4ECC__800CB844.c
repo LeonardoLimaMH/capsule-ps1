@@ -1,5 +1,7 @@
 #include "common.h"
 
+typedef struct { u32 unk0; u32 unk4; u32 unk8; u8 pad[0x30]; } D63940_t;
+
 void func_800CB844(s32 arg0) {
     func_8001A998(arg0 + 0x10, 0x10);
     func_8001A998(arg0 + 0x28, 8);
@@ -325,9 +327,23 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844", func_800D80F8);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844", func_800D82A0);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844", func_800D8490);
+s32 func_800D8490(u8 arg0, u32 arg1) {
+    extern u8 D_80085428[];
+    u8 *base = D_80085428;
+    u8 *p = base + (((arg1 & 0x7F) - 1) * 0x7C + ((arg1 & 0xFF) >> 7) * 0x2E8);
+    u8 r = func_800D7B80(arg0 & 0xFF, p[0x5F7]);
+    return r - p[0x5F7];
+}
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844", func_800D8508);
+s32 func_800D8508(u8 arg0, u32 arg1) {
+    extern u8 D_80085428[];
+    extern u32 func_800D7B80();
+    u8 *base = D_80085428;
+    s32 i = ((arg1 & 0x7F) - 1) * 0x7C + ((arg1 & 0xFF) >> 7) * 0x2E8;
+    u8 *q = base + i;
+    u32 r = func_800D7B80(arg0, q[0x5F8]);
+    return (r & 0xFF) - q[0x5F8];
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844", func_800D8580);
 
