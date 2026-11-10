@@ -73,7 +73,24 @@ void func_800FF3B4(void *arg0, void *arg1, s32 arg2, s32 arg3, void *arg4) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF460);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF644);
+s32 func_800FF644(void) {
+    extern u8 D_80085428[];
+    u8 i, j;
+    s32 sum = 0;
+
+    for (i = 0; i < 2; i++) {
+        s32 k, off;
+        j = 0;
+        k = i * 6;
+        off = i * 0x2e8;
+        for (; j < 6; j++) {
+            s32 n = (k + j) * 169;
+            u8 *e = D_80085428 + (j * 0x7c + off);
+            sum += (n + 1) * (e[0x5fd] * 13 + e[0x5fe]);
+        }
+    }
+    return sum;
+}
 
 #include "common.h"
 
