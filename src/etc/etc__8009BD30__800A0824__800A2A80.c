@@ -299,7 +299,28 @@ void func_800A4820(void *arg0) {
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A4884);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A4964);
+void func_800A4964(u8 *arg0) {
+    extern u16 D_8008ED68[];
+    u8 t;
+    if (D_8008ED68[0xDC / 2] == 0xE) {
+        *(u32 *)(arg0 + 0x38) &= ~1;
+        if (D_8008ED68[0xE0 / 2] == 0) {
+            t = arg0[0x58] + 1;
+            arg0[0x58] = t;
+            if (t >= 0x80) {
+                func_80012578();
+            } else {
+                arg0[0x5A] = t;
+                arg0[0x59] = t;
+            }
+        }
+    } else {
+        *(u32 *)(arg0 + 0x38) |= 1;
+    }
+    if (D_8008EE44[0] < 0xE) {
+        func_800185F8(arg0);
+    }
+}
 
 #include "common.h"
 
