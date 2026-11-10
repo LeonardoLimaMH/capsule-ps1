@@ -22,16 +22,7 @@ s32 func_800133A4(void)
   return 0;
 }
 
-void func_800133C4(void) {
-    extern u8 D_8008ED68[];
-    u8 *d = D_8008ED68;
-    func_8004FEDC();
-    func_8004FE3C(0xF2000003, 2, 0x1000, func_800133A4);
-    func_8004FE7C(*(s32 *)(d + 0x10));
-    SetRCnt(0xF2000003, 1, 0x1000);
-    StartRCnt(0xF2000003);
-    func_8004FEEC();
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_800133C4);
 
 #include "common.h"
 
@@ -87,48 +78,7 @@ void func_80013440(int arg0)
   }
 }
 
-void func_800134BC(void) {
-    extern u8 D_8008ED68[];
-    u8 *d = D_8008ED68;
-    s32 i;
-    register u8 *q asm("a0");
-    u8 *e;
-    u16 temp_v0;
-    if (*(s32 *)(d + 0xF8) == 0) {
-        i = 0;
-        e = d;
-        q = d;
-loop_2:
-        if ((*(s32 *)(q + 0x80) & 0x90F) == 0x90F) {
-            if (*(u16 *)(e + 0xFE) != i) {
-                *(u16 *)(e + 0xFE) = i;
-                *(u16 *)(e + 0xFC) = 0;
-            }
-            temp_v0 = *(u16 *)(e + 0xFC) + 1;
-            *(u16 *)(e + 0xFC) = temp_v0;
-            if ((u32)(temp_v0 & 0xFFFF) >= 0x41U) {
-                *(s32 *)(e + 0xF4) = 1;
-                ResetRCnt(0xF2000003);
-                *(u16 *)(e + 0xFC) = 0;
-                *(u16 *)(e + 0xFE) = 0xFF;
-            }
-        } else {
-            i++;
-            q += 0x10;
-            if (i < 2) {
-                goto loop_2;
-            }
-        }
-        switch (i) {
-        case 2:
-            *(u16 *)(d + 0xFC) = 0;
-            break;
-        }
-    } else {
-        *(u16 *)(d + 0xFC) = 0;
-        *(u16 *)(d + 0xFE) = 0xFF;
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_800134BC);
 
 #include "common.h"
 
@@ -189,23 +139,7 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013928);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013A68);
 
-void func_80013B84(void *arg0) {
-    u32 i;
-    void *p;
-    s32 a = M2C_FIELD(arg0, s32 *, 4);
-    if (a != 0) {
-        func_80012A20(a, 1, 0, 0);
-    }
-    i = 0;
-    if (M2C_FIELD(arg0, u32 *, 8) != 0) {
-        p = arg0;
-        do {
-            func_80012A20(M2C_FIELD(p, s32 *, 0xC), 1, 0, 0);
-            p += 4;
-            i++;
-        } while (i < M2C_FIELD(arg0, u32 *, 8));
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013B84);
 
 #include "ghidra.h"
 void func_80013C14(undefined4 *param_1,int param_2)
@@ -243,107 +177,11 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_800142E4);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80014728);
 
-void func_80014C4C(s32 n) {
-    extern u8 D_8008FC80[];
-    extern u8 D_8005091C[];
-    register s32 i asm("s2") = 0;
-    u8 *base = D_8008FC80;
-    u8 *table = D_8005091C;
-    register s32 off asm("s1") = n * 64;
-    u8 *e;
-    s32 v;
-    s32 limit;
-    do {
-        v = func_80020304(0x80);
-        e = base + off;
-        *(s16 *)e = n * 128 + v;
-        *(s16 *)(e + 2) = func_80020304(0xF0);
-        if (i >= 5) {
-            limit = 5;
-        } else {
-            limit = 7;
-        }
-        i++;
-        e[4] = func_80020304(limit);
-        v = func_80020304(5);
-        e = base + off;
-        e[5] = v;
-        v = func_80020304(10);
-        off += 8;
-        e[6] = table[v];
-        e[7] = func_800202A4(0x96);
-    } while (i < 8);
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80014C4C);
 
-void func_80014D30(s32 a0, s32 a1, s32 a2) {
-    s32 i;
-    u8 *d = D_8008ED68;
-    *(s32 *)(d + 0x20) = 0;
-    d[0x24] = a0;
-    d[0x28] = 0;
-    if (a0 != 0) {
-        d[0x25] = 4;
-        d[0x26] = 0x60;
-    } else {
-        d[0x25] = a2;
-        d[0x26] = 0x60;
-    }
-    if (a1 != 0) {
-        d[0x27] = 1;
-        d[0x26] = 0x20;
-        for (i = 0; i < 4; i++) {
-            func_80014C4C(i);
-        }
-        d[0x29] = 0;
-    } else {
-        d[0x27] = 0;
-        d[0x29] = 0;
-    }
-    d[0x2A] = 0;
-    d[0x2B] = 0;
-    *(s32 *)(d + 0x2C) = 0;
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80014D30);
 
-void func_80014DD8(void) {
-    u8 *d = D_8008ED68;
-    s32 state;
-    s32 i;
-    u8 count;
-    register s32 next asm("a1");
-    if (d[0x99A] != 1 && (state = d[0x28]) != 0) {
-        if (state == 1) {
-            count = d[0x26] - 1;
-            d[0x26] = count;
-            i = 0;
-            if (count == 0) {
-                d[0x28] = 2;
-                d[0x27] = state;
-                *(s32 *)(d + 0x20) = 0;
-                do {
-                    func_80014C4C(i);
-                    i++;
-                } while (i < 4);
-            }
-        } else if (state == 2) {
-            d[0x28] = 0;
-        } else if (state == 3) {
-            next = 4;
-            {
-                register s32 mode asm("v0") = next;
-                d[0x26] = 0;
-                d[0x28] = mode;
-            }
-            if (d[0x24] == 0) next = d[0x25];
-            d[0x25] = next;
-            d[0x27] = 0;
-            *(s32 *)(d + 0x20) = 0;
-        } else if (state == 4) {
-            count = d[0x26] + 1;
-            d[0x26] = count;
-            if (count >= 0x60U) d[0x28] = 0;
-        }
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80014DD8);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80014EE0);
 

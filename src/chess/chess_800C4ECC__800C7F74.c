@@ -1,8 +1,5 @@
 #include "common.h"
 
-extern int func_800A8E34(s32 a, s32 b, s32 c);
-extern u32 *func_800A8E84(void);
-
 int func_800C7F74(s32 arg0)
 {
   s32 var_a1;
@@ -61,24 +58,4 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C7F74", func_800C8EF0);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C7F74", func_800C9254);
 
-extern int func_800A8E34(s32 a, s32 b, s32 c);
-extern u32 *func_800A8E84(void);
-int func_800C9338(s32 arg0, u8 *arg1)
-{
-  u8 *p;
-  if (arg1[1] >= 5)
-  {
-    if (arg1[0] != 0)
-    {
-      return 1;
-    }
-    arg1[0] = 1;
-    arg1[1] = 0;
-  }
-  if (func_800A8E34(arg0, arg1[0], arg1[1]) != 0)
-  {
-    return 0;
-  }
-  p = (u8 *) (arg0 + arg1[1] * 0x7C + arg1[0] * 0x2E8);
-  return *(u8 *) (arg0 + p[0x2D] * 13 + p[0x2E] + 0x630) == 2;
-}
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C7F74", func_800C9338);

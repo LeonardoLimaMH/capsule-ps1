@@ -960,29 +960,7 @@ void func_8003C530(s32 n) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C5BC);
 
-void func_8003C654(void) {
-    extern s32 D_80094768[];
-    s32 n, i, j;
-    s32 *b;
-    volatile s32 temp[2];
-    for (n = 0; n < 16; n++) {
-        if (D_80094768[n * 2] == 0) break;
-    }
-    for (i = 0; i < n; i++) {
-        s32 (*pairs)[2] = (s32 (*)[2])D_80094768;
-        for (j = n - 1; i < j; j--) {
-            b = &D_80094768[j * 2];
-            if (pairs[i][0] > b[0]) {
-                temp[1] = pairs[i][1];
-                temp[0] = pairs[i][0];
-                pairs[i][1] = b[1];
-                pairs[i][0] = b[0];
-                b[1] = temp[1];
-                b[0] = temp[0];
-            }
-        }
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8", func_8003C654);
 
 void func_8003C73C(void) {
     extern Unk_800947E8 D_800947E8[];

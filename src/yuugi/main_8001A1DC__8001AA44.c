@@ -88,31 +88,4 @@ void func_8001AFDC(void *arg0) {
     M2C_FIELD(arg0, u16 *, 0x40) = (u16) (M2C_FIELD(arg0, u16 *, 0x40) + 1);
 }
 
-void func_8001AFF0(u8 *p) {
-    switch (*(s32 *)(p + 0x34) & 1) {
-    case 0:
-        if ((s32)(p[0x30] + *(s32 *)(p + 0x38)) < 0xFF) {
-            p[0x30] = p[0x30] + p[0x38];
-            p[0x31] = p[0x31] + p[0x38];
-            p[0x32] = p[0x32] + p[0x38];
-        } else {
-            p[0x32] = 0xFF;
-            p[0x31] = 0xFF;
-            p[0x30] = 0xFF;
-            *(u16 *)(p + 0x40) += 1;
-        }
-        break;
-    case 1:
-        if ((s32)(p[0x30] - *(s32 *)(p + 0x38)) > 0) {
-            p[0x30] = p[0x30] - p[0x38];
-            p[0x31] = p[0x31] - p[0x38];
-            p[0x32] = p[0x32] - p[0x38];
-        } else {
-            p[0x32] = 0;
-            p[0x31] = 0;
-            p[0x30] = 0;
-            *(u16 *)(p + 0x40) += 1;
-        }
-        break;
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001AA44", func_8001AFF0);

@@ -1,15 +1,5 @@
 #include "common.h"
 
-typedef struct { u8 b[4]; } W4;
-typedef struct { W4 a; W4 b; } P8;
-typedef struct { u8 _p0[0x5b]; u8 f5b; P8 f5c; } T5B;
-typedef struct { u8 _p0[0x38]; u32 f38; } T38;
-extern P8 D_80097C8C[];
-#define D_80097C8C (*D_80097C8C)
-extern M2C_UNK D_800EFF58[];
-extern s32 D_8008F7D0[];
-extern s32 D_800EFFB8[];
-
 void func_8009D568(void) {
 
 }
@@ -73,28 +63,7 @@ void func_8009DDB4(void) {
     func_800BAD64(1);
 }
 
-s32 func_8009DDDC(void) {
-    P8 tmp;
-    s32 i;
-    char *p;
-    if (*D_8008F7D0 != 0) {
-        return 0;
-    }
-    if (func_8009DFAC() != -1) {
-        return 0;
-    }
-    p = (char *)D_800EFF58;
-    ((T38 *)*(s32 *)(p + 0x7c))->f38 &= ~1;
-    for (i = 0; i < 7; i++) {
-        tmp = D_80097C8C;
-        tmp = *(P8 *)(p + 0x64);
-        ((T5B *)*(s32 *)(p + 0x28))->f5b = 1;
-        ((T5B *)*(s32 *)(p + 0x28))->f5c = tmp;
-        p += 4;
-    }
-    *D_800EFFB8 = 1;
-    return -1;
-}
+INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009D568", func_8009DDDC);
 
 void func_8009DED0(void) {
     func_8009DEF8();

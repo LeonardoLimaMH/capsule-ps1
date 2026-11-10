@@ -2,15 +2,6 @@
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C8CAC", func_800C8CAC);
 
-typedef struct {
-    u8 _p0[0x112];
-    s16 last;
-    u16 cnt[8];
-    u16 run[0x40];
-} Raise_80091618;
-extern Raise_80091618 D_80091618[];
-extern u32 func_800B1260(s32);
-
 s32 func_800C922C(void) {
     return 0;
 }

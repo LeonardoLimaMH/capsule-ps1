@@ -64,44 +64,9 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A865C);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A875C);
 
-extern u8 D_800916E8[];
-extern u16 D_800EC588[][17];
-extern u16 D_800ECB84[][17];
-void func_800A88E4(u16 a0, u16 a1) {
-    s16 *e = (s16 *)(D_800916E8 + a0 * 0x1A8);
-    s16 i = 1;
-    u16 *t = (u16 *)(D_800EC588 + a1 * 34);
-    do {
-        s16 v = *e + t[i];
-        if (i >= 2) {
-            v = (v < 0) ? 0 : ((v > 0xFF) ? 0xFF : v);
-        }
-        if (i >= 13) {
-            v = (v < 0) ? 0 : ((v > 100) ? 100 : v);
-        }
-        *e = v;
-        i++;
-        e++;
-    } while (i < 17);
-}
+INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A88E4);
 
-void func_800A89E0(u16 a0, s16 a1) {
-    s16 *e = (s16 *)(D_800916E8 + a0 * 0x1A8);
-    u16 *t = (u16 *)(D_800ECB84 + a1 * 34);
-    s16 i;
-    for (i = 1; i < 17; i++, e++) {
-        s16 v = *e + t[i];
-        if (i >= 2) {
-            if (v < 0) v = 0;
-            else if (v >= 0x100) v = 0xFF;
-        }
-        if (i >= 13) {
-            if (v < 0) v = 0;
-            else if (v >= 0x65) v = 0x64;
-        }
-        *e = v;
-    }
-}
+INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A89E0);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A8AE0);
 

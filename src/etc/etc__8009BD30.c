@@ -75,25 +75,7 @@ void func_8009E700(void) {
     }
 }
 
-extern void func_800A4964();
-void func_8009E75C(u8 *p) {
-    s32 i;
-    u8 *q;
-    for (i = 0; i < 4; i++) {
-        func_80012A20(func_80019F30((p[0x5d4] + 0x15) | 0x20000, i), 1, 0, 0);
-    }
-    func_80012A20(func_80019F30((p[0x5d4] + 0x15) | 0x50000, 0), 1, 0, 0);
-    q = (u8 *)func_80032DB0(0, 0x78, 5, p[0x5d4] + 0x15, 0, func_800A4964);
-    q[0x5a] = 0;
-    q[0x59] = 0;
-    q[0x58] = 0;
-    i = 0;
-    do {
-        func_800992CC(p, i);
-        i++;
-    } while (i < 2);
-    func_80012508();
-}
+INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30", func_8009E75C);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30", func_8009E854);
 
