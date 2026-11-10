@@ -318,7 +318,36 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A4
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A4654);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A4720);
+void func_800A4720(u8 *arg0) {
+    extern u8 D_80085428[];
+    extern u16 D_8008EE44[];
+    extern u16 D_800B3B38[];
+    u8 *p = D_80085428;
+    s16 v;
+    if (D_8008EE44[0] == 0x18 && (u32)(D_800B3B38[*(s32 *)(arg0 + 0x84)] - 2) < 3) {
+        *(s16 *)(arg0 + 0x46) = 0x20;
+        if (p[0x5D0] == 2) {
+            v = -0x60;
+            *(s32 *)(arg0 + 0x38) &= ~1;
+            if (*(s32 *)(arg0 + 0x84) != 0) {
+                v = 0x28;
+            }
+            *(s16 *)(arg0 + 0x4A) = v;
+            return;
+        }
+        if (*(s32 *)(arg0 + 0x84) == 0) {
+            *(s16 *)(arg0 + 0x4A) = 0x20;
+            *(s32 *)(arg0 + 0x38) &= ~1;
+            return;
+        }
+    } else if ((u32)(D_8008EE44[0] - 0x19) < 2 && p[0x5D0] != 2) {
+        *(s16 *)(arg0 + 0x46) = -0x40;
+        *(s16 *)(arg0 + 0x4A) = 0x20;
+        *(s32 *)(arg0 + 0x38) &= ~1;
+        return;
+    }
+    *(s32 *)(arg0 + 0x38) |= 1;
+}
 
 #include "common.h"
 
