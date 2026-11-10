@@ -53,4 +53,20 @@ void func_800DD3B0(s32 a0, s32 a1, s32 a2) {
     }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DD45C);
+s32 func_800DD45C(s32 a0) {
+    u8 *p = PL(a0);
+    s16 n;
+    u16 a, b;
+    u8 *q;
+    if (PS16(0x3F0) == 0) return 0;
+    n = PS16(0x3EC);
+    q = p + n * 4;
+    a = *(u16 *)(q + 0x3F2);
+    b = *(u16 *)(q + 0x3F4);
+    P16(0x472) = 1;
+    PS16(0x474) = a;
+    P32(0x478) = D_800F1E34[(s16)b];
+    PS16(0x3EC) = (n + 1) % 32;
+    PS16(0x3F0) = P16(0x3F0) - 1;
+    return 1;
+}
