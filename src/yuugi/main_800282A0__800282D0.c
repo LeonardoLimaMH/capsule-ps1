@@ -39,7 +39,7 @@ s32 func_800282E0(void)
 void func_8002835C(void) {
     extern struct { u8 pad[0x40]; s32 n; s32 a[1]; } D_800EF524;
     extern s32 D_80069EA0[];
-    extern s32 D_800EF360[];
+    extern s32 D_800EF360[4];
     s32 i;
 
     D_80069EA0[0] = D_800EF524.n != 0;
@@ -148,7 +148,26 @@ s32 func_800293E8(void) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_800294AC);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_800296C0);
+s32 func_800296C0(s32 a0, s32 a1) {
+    extern u8 D_800EF364[][8][8];
+    extern struct { u8 pad[0x10]; u16 f10; u8 pad2[0x1A8 - 0x12]; } D_80091618[];
+    u32 id = (u16)func_800B1260();
+    u16 t;
+
+    if (id != 0xFFFF) {
+        t = D_80091618[id].f10;
+        if (t == 0xFFFF) {
+            return 0;
+        }
+        switch (t) {
+        case 1:
+        case 5:
+        case 3:
+            return D_800EF364[t][a1 / 8][a1 % 8] == 0xFF;
+        }
+    }
+    return 0;
+}
 
 extern s16 D_80078C28, D_80078C2C;
 extern s32 D_80069B28[];
