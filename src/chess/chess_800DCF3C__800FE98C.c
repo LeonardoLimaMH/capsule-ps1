@@ -136,7 +136,30 @@ u8 func_800FF96C(void) {
     return n;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FFA00);
+s32 func_800FFA00(u8 *arg0, s32 arg1, u8 *arg2) {
+    extern u8 D_801010B0[];
+    s32 n = 0;
+    s32 i, j, k;
+    u8 *base = arg0 + 0x5d0;
+    u32 *row = *(u32 **)(D_801010B0 + base[9] * 0x34);
+    u32 *q;
+
+    for (i = 0; i < 13; i++) {
+        j = 0;
+        k = i * 16;
+        q = row;
+        for (; j < 13; j++) {
+            u32 w = *q;
+            if (((w >> 22) & 3) == (base + arg1)[0xe] && ((w >> 6) & 0xFF) == 1 && ((u8 *)q)[3] == 0) {
+                arg2[n] = k + j;
+                n++;
+            }
+            q++;
+        }
+        row += 13;
+    }
+    return n;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FFAB0);
 
