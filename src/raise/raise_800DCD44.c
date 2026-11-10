@@ -36,7 +36,21 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DCFB4);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DD110);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DD2B8);
+extern u8 D_80091618[];
+extern s32 func_800B12D8();
+extern s32 func_800DD64C(s32, s32, s32, s32, s32);
+s32 func_800DD2B8(s32 a0, s16 a1, s16 a2) {
+    struct S { u8 _p0[0x10]; u16 unk_10; u8 _p1[0x7E]; u16 unk_90; u8 _p2[0x116]; };
+    s32 k = func_800B1260(a0);
+    s32 x = a0 ^ 1;
+    u8 f = x != 0;
+    struct S *s = (struct S *)D_80091618;
+    if (s[(u16)k].unk_90 != 0) {
+        k = func_800B12D8(a0, k, f);
+        f = x == 0;
+    }
+    return (s16)func_800DD64C(a0, s[(u16)k].unk_10, f, a1, a2);
+}
 
 void func_800DD3B0(s32 a0, s32 a1, s32 a2) {
     u8 *p = PL(a0);
