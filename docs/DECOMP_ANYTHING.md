@@ -24,7 +24,7 @@ A instância usada é a **desktop**, instalada pelo usuário, numa distribuiçã
 |---|---|
 | distribuição WSL | `decomp-wtf` (Debian 13, usuário `decomp`) |
 | app | `http://127.0.0.1:6464`, a porta padrão (o link com a chave de acesso é impresso por `decomp url`) |
-| executável | `/home/decomp/.local/bin/decomp` |
+| executável | `/usr/local/bin/decomp`, o wrapper do instalador: carrega `/etc/profile.d/decomp-wtf.sh` e chama `~/.local/bin/decomp`. Para subir o app e ver o link: `wsl -d decomp-wtf --exec /usr/local/bin/decomp url` |
 | cópia do projeto (a única na `decomp-wtf`) | `/home/decomp/Decomp/capsule-ps1`, branch `decomp-wtf`, origem no GitHub; tem `disc/`, `orig/` e `.cache/bin/objdiff-cli` |
 | Node | 22.23.4 em `/usr/local`. A atualização do REA exige Node ≥ 22.23.4; o Debian trazia o 20.19 |
 | Docker | integração do Docker Desktop ligada também para a `decomp-wtf` (`IntegratedWslDistros`) |
@@ -45,7 +45,7 @@ Notas:
   O app só esteve na 6465 porque a instância de teste ocupava a 6464.
 - **Docker dentro do app:** a integração do Docker põe o usuário `decomp` no grupo
   `docker`. Um app aberto antes disso não tem o grupo e falha com `permission denied ...
-  docker.sock`. Reinicie o app: `decomp stop` e `decomp url`.
+  docker.sock`. Reinicie o app: `wsl -d decomp-wtf --exec /usr/local/bin/decomp stop` e depois `... decomp url`.
 
 ### Preparação: o manifesto `.decomp.wtf.json`
 
