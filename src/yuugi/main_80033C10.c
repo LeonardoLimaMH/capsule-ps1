@@ -1,7 +1,32 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_80033C10);
+s16 func_80033C10(u16 a0) {
+    struct Fila { u16 f0; u8 _p[0x132]; s16 f134; u8 _q[0x1190 - 0x136]; s16 f1190; };
+    extern u8 D_800922F0[];
+    extern s16 D_80078D3C;
+    extern struct { u16 h; u16 _; u32 w; } D_80070594[];
+    extern s32 func_80036DB0(), func_80034C10(), func_800373A0(), func_80034D78();
+    struct { u8 c; u8 a; u16 s; u32 w4; u32 w8; u32 wC; } cmd;
+    ((struct Fila *)D_800922F0)->f134 = 0;
+    D_80078D3C = 0;
+    cmd.c = 0x50;
+    ((struct Fila *)D_800922F0)->f0 |= 2;
+    func_80036DB0(&cmd);
+    if (((struct Fila *)D_800922F0)->f0 & 0x80) {
+        func_80034C10(-4);
+    }
+    func_800373A0();
+    cmd.c = 0x52;
+    cmd.wC = D_80070594[a0].w;
+    cmd.s = D_80070594[a0].h;
+    func_80036DB0(&cmd);
+    ((struct Fila *)D_800922F0)->f134 = D_80070594[a0].h;
+    if (((struct Fila *)D_800922F0)->f0 & 0x80) {
+        func_80034D78(((struct Fila *)D_800922F0)->f1190);
+    }
+    return ((struct Fila *)D_800922F0)->f134;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_80033CEC);
 
