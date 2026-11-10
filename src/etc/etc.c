@@ -191,7 +191,37 @@ void func_80099444(void) {
     func_80012508();
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099474);
+void func_80099474(void) {
+    extern u8 D_80085428[];
+    extern u8 D_800859F0[];
+    extern s32 D_800B3AC8[];
+    switch (M2C_GFIELD(D_8008ED68, u16, 0xE0)) {
+    case 0:
+        *D_800B3AC8 = 0;
+        M2C_GFIELD(D_80085428, s16, 8) = 0x7003;
+        if (M2C_GFIELD(D_8008ED68, s32, 0xA20) == 1 || !(M2C_GFIELD(D_80085428, u8, 0x5C8) & 4)) {
+            goto b;
+        }
+        goto a;
+    case 1:
+        if (func_80019654()) {
+            goto a;
+        }
+        break;
+    case 2:
+        func_800338DC(0x7003);
+    a:
+        func_80012578();
+        break;
+    case 3:
+        if ((D_800859F0[0] & 4) && !(func_800337EC() & 0x80)) {
+            break;
+        }
+    b:
+        func_80012508();
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099570);
 
