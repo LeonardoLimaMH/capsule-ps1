@@ -948,7 +948,84 @@ void func_80021BB4(void *p, s32 a1, s32 idx, s32 mode) {
 
 extern s32 (*D_80069AA4[])(void);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_80021EA8);
+void func_80021EA8(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    extern u8 D_8008ED68[];
+    s32 var_a0;
+    s32 var_a1;
+    register s32 test asm("v0");
+    register u16 *temp_v0 asm("v0");
+    register u16 *var_a0_2 asm("a0");
+    register u16 *old asm("v1");
+    register u16 temp_v1 asm("v1");
+    u16 var_v1;
+    u8 temp_v1_2;
+    register void *temp_s2 asm("s2");
+    register void *temp_s1 asm("s1");
+
+    temp_s1 = arg0 + 0x10;
+    temp_s2 = M2C_FIELD(arg0, void **, 0x20);
+    M2C_FIELD(temp_s1, s16 *, 0xC) = 0;
+    M2C_FIELD(temp_s1, s8 *, 2) = 1;
+    if (((M2C_FIELD(temp_s2, u8 *, 0x12) != 0) || (M2C_FIELD(temp_s2, u8 *, 0xE) == 2)) && ((arg3 == 2) || !(func_800337EC() & 4)) && !(func_800337EC() & 1)) {
+        var_v1 = M2C_FIELD(temp_s1, u16 *, 0xE);
+        if (D_8008ED68[0x103] >= 2U) {
+            var_v1 += D_8008ED68[0x103];
+        } else {
+            var_v1 += 1;
+        }
+        M2C_FIELD(temp_s1, u16 *, 0xE) = var_v1;
+        var_a0 = 0xC8;
+        test = 3;
+        if (arg3 != test) {
+            var_a0 = 0x128;
+        }
+        var_a1 = 0xD4;
+        test = var_v1 & 0x10;
+        if (test) {
+            var_a1 = 0xD0;
+        }
+        func_8001EA24(var_a0, var_a1, 1, 0xEE, 0, 3);
+    }
+    if (func_80021A9C(arg0, arg1, arg2, arg3) != 0) {
+        if (M2C_FIELD(temp_s2, u8 *, 0x12) != 0) {
+            func_8001E310();
+            if (arg3 != 2) {
+                goto block_26;
+            }
+            goto block_27;
+        }
+        temp_v1_2 = M2C_FIELD(temp_s2, u8 *, 0xE);
+        if (temp_v1_2 == 2) {
+            M2C_FIELD(temp_s1, u16 *, 0xE) = 0U;
+            M2C_FIELD(temp_s2, u8 *, 0xE) = (u8) (M2C_FIELD(temp_s2, u8 *, 0xE) + 1);
+            return;
+        }
+        if (temp_v1_2 == 1) {
+            if (arg3 != 2) {
+                func_8003422C(0x8000);
+            }
+            var_a0_2 = M2C_FIELD(temp_s2, u16 **, 0);
+            if (*var_a0_2 != 0xFFEB) {
+                do {
+                    temp_v0 = var_a0_2 + 1;
+                    old = var_a0_2;
+                    M2C_FIELD(temp_s2, u16 **, 0) = temp_v0;
+                    var_a0_2 = temp_v0;
+                    temp_v1 = old[1];
+                } while (temp_v1 != 0xFFEB);
+            }
+        } else {
+            func_8001E310();
+            if (arg3 != 2) {
+block_26:
+                func_8003422C(0x8000);
+            }
+block_27:
+            M2C_FIELD(temp_s1, u16 *, 0xE) = 0U;
+            M2C_FIELD(temp_s1, u8 *, 0) = (u8) (M2C_FIELD(temp_s1, u8 *, 0) + 1);
+        }
+    }
+}
 
 void func_800220B8(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0x10) = 0;
