@@ -1,9 +1,12 @@
 #include "common.h"
 #include "yuugi.h"
 
-extern volatile s32 D_80094C10 __attribute__((section(".data")));
-extern volatile s32 D_80094C0C __attribute__((section(".data")));
-extern volatile s32 D_80094C08 __attribute__((section(".data")));
+extern volatile s32 D_80094C10[4];
+#define D_80094C10 (*D_80094C10)
+extern volatile s32 D_80094C0C[4];
+#define D_80094C0C (*D_80094C0C)
+extern volatile s32 D_80094C08[4];
+#define D_80094C08 (*D_80094C08)
 extern s32 D_80073084[];
 extern s32 D_80073088[];
 extern s32 D_800730A8[];
