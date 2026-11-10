@@ -1,4 +1,11 @@
 #include "common.h"
+#include "raise_ring.h"
+
+extern u8 D_80100F38[];
+extern s32 func_800B1260(s32);
+extern s32 func_800E1820(u16);
+extern s32 func_800E17F8(u16);
+void func_800C0EE8(s32, s16, s16);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0898", func_800C0898);
 
