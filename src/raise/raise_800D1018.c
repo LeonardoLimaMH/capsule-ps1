@@ -30,7 +30,19 @@ void func_800D10A8(void) {
     }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018", func_800D1134);
+void func_800D1134(void) {
+    s32 i;
+    for (i = 0; i < 11; i++) {
+        struct { u8 _p[0x30]; u16 f30; } *q = (void *)&D_8006AFCC[i];
+        if (q->f30 == 1) {
+            if (i != 0 || *D_80105990 != 1) {
+                if (D_800F1C98[i] != 0xFFFF) {
+                    func_80034AB0(D_800F1C98[i]);
+                }
+            }
+        }
+    }
+}
 
 #include "common.h"
 
