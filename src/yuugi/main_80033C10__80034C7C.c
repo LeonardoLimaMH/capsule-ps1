@@ -1,7 +1,41 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_80034C7C);
+s32 func_80034C7C(s16 arg0) {
+    extern u8 D_800922F0[];
+    extern s32 func_80036DB0();
+    struct { u8 c; u8 a; s16 s; s32 w4; s32 w8; s32 wC; } c, ab[2], *p;
+    u8 *g = D_800922F0;
+
+    if (arg0 != *(s16 *)(g + 0x1190)) {
+        *(u16 *)g |= 2;
+        p = ab;
+        if (*(u16 *)g & 0x80) {
+            ab[1].c = 0x45;
+            p[1].w8 = -0x80;
+            ab[1].a = 0;
+            func_80036DB0(&ab[1]);
+            p->c = 0x49;
+            func_80036DB0(p);
+        }
+        p->c = 0x47;
+        func_80036DB0(p);
+        c.c = 0x2C;
+        c.s = arg0;
+        func_80036DB0(&c);
+        c.c = 0x4A;
+        c.s = arg0;
+        func_80036DB0(&c);
+        c.c = 0x11;
+        func_80036DB0(&c);
+    } else {
+        c.c = 0x46;
+        c.s = arg0;
+        c.wC = 0x801F6800;
+        func_80036DB0(&c);
+    }
+    return 0;
+}
 
 void func_80034D78(s16 arg0) {
     func_80034DA0(arg0, 0x80);
@@ -353,7 +387,29 @@ void func_80037138(s32 a)
   *((s16 *) D_800922F0) = 0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_800371A4);
+void func_800371A4(s16 arg0) {
+    typedef struct { u8 _0; u8 _1; u8 f2; u8 _3; u16 f4; u8 _p[0x1187 - 6]; u8 f1187; } G;
+    extern s16 D_80092434[];
+    extern void DsMix();
+    u8 buf[4];
+    s32 x;
+    s32 t;
+    u16 v;
+    t = (arg0 * ((G *)D_800922F0)->f4) >> 8;
+    v = ((G *)D_800922F0)->f1187 * t;
+    x = v >> 3;
+    buf[3] = 0;
+    buf[0] = x;
+    if (((G *)D_800922F0)->f2 == 0) {
+        buf[1] = 0;
+        buf[2] = x;
+    } else {
+        buf[1] = x;
+        buf[2] = 0;
+    }
+    DsMix(buf);
+    *D_80092434 = arg0;
+}
 
 s16 func_80037234(void) {
     extern s16 D_80092434[];
