@@ -18,7 +18,17 @@ void func_800D1018(void) {
     }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018", func_800D10A8);
+void func_800D10A8(void) {
+    s32 i;
+    for (i = 0; i < 11; i++) {
+        struct { u8 _p[0x30]; u16 f30; } *q = (void *)&D_8006AFCC[i];
+        if (q->f30 == 1) {
+            if (D_800F1C98[i] != 0xFFFF) {
+                func_8003422C(D_800F1C98[i]);
+            }
+        }
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018", func_800D1134);
 
