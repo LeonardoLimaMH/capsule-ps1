@@ -474,8 +474,13 @@ s32 func_800E6A14(void) {
 }
 
 s32 func_800E6A1C(u16 a0, s16 a1) {
-    extern u8 D_80091618[];
-    s32 t = *(s32 *)(D_80091618 + a0 * 0x1A8 + 0xC4) / 0x7080;
+    typedef struct {
+        u8 pad0[0xC4];
+        s32 unkC4;
+        u8 padC8[0x1A8 - 0xC8];
+    } S_80091618;
+    extern S_80091618 D_80091618[];
+    s32 t = D_80091618[a0].unkC4 / 0x7080;
     if (t >= 0x13) {
         a1 = (s16)(a1 * 80) / 100;
     } else if (t >= 0xE) {
