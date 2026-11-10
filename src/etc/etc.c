@@ -137,7 +137,26 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800981F0);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800991AC);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800992CC);
+u8 *func_800992CC(u8 *arg0, u32 arg1) {
+    extern void func_800991AC();
+    extern void func_800161C4();
+    extern u8 *func_80015B3C();
+    u8 id = arg0[0x5E5];
+    u8 *r = func_80015B3C(func_800991AC, func_800161C4, 1);
+    func_80015EF8(r);
+    *(s16 *)(r + 0x4A) = 0x78;
+    *(s16 *)(r + 0x4E) = 4;
+    *(s16 *)(r + 0x46) = 0;
+    r[0x59] = 0;
+    r[0x58] = 0;
+    *(u32 *)(r + 0x34) = (*(u32 *)(r + 0x34) & ~0x7F) | (arg1 & 0x7F);
+    if (arg1 != 0) {
+        *(s32 *)(r + 0x18) = func_80019F30(id + 0x15 | 0x60000, 5);
+    } else {
+        *(s32 *)(r + 0x18) = func_80019F30(id + 0x15 | 0x60000, 1);
+    }
+    return r;
+}
 
 #include "common.h"
 
