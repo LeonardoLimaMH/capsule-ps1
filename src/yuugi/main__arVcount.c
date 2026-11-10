@@ -148,7 +148,17 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013928);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013A68);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013B84);
+void func_80013B84(void *arg0) {
+    struct { s32 f0; s32 f4; u32 n; s32 a[1]; } *s = arg0;
+    u32 i;
+
+    if (s->f4 != 0) {
+        func_80012A20(s->f4, 1, 0, 0);
+    }
+    for (i = 0; i < s->n; i++) {
+        func_80012A20(s->a[i], 1, 0, 0);
+    }
+}
 
 #include "ghidra.h"
 void func_80013C14(undefined4 *param_1,int param_2)
