@@ -1156,7 +1156,36 @@ s32 func_80023120(s32 n) {
 
 extern s32 (*D_80069AA4[])(void);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800231C4);
+s32 func_800231C4(u8 *o, s32 a1, s32 idx) {
+    extern u16 D_8008EE54[];
+    extern u8 D_8006AF90[];
+    extern s32 func_8001F8B0();
+    extern s32 func_800212AC();
+    s32 r = 0;
+
+    switch (D_8008EE54[0]) {
+    case 0:
+        if (*(s16 *)(D_8006AF90 + idx * 30) >= 4) {
+            func_80012668();
+            o[0xBE0] = 0;
+        } else {
+            r = 1;
+        }
+        break;
+    case 1:
+        func_800220B8(o);
+        *(s32 *)(o + 0x14) = func_8001F8B0(0x1B, 0);
+        func_80012668();
+        break;
+    case 2:
+        r = func_800212AC(o, a1, 2, 1);
+        if (r == 2) {
+            (*(u16 *)(D_8006AF90 + idx * 30))--;
+        }
+        break;
+    }
+    return r;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918", func_800232F4);
 
