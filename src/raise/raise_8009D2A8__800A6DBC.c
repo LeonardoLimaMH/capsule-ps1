@@ -58,6 +58,9 @@ void func_800A847C(void) {
 
 }
 
+extern u8 D_800916E8[];
+extern s16 D_800EC588[][17];
+
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A8484);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A865C);
