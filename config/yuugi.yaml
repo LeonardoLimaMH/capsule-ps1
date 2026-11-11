@@ -60,6 +60,8 @@ segments:
       - [0x3570, c, main__80012A14__80012D70]
       - [0x3654, c, main__80012A14__80012E54]
       - [0x3828, c, main__80013028]
+      - [0x38D8, c, main__80013028__800130D8]
+      - [0x392C, c, main__80013028__8001312C]
       - [0x3B2C, c, main__arVcount]
       - [0x5D24, c, main__arVcount__80015524]
       - [0x5D40, c, main__arVcount__80015540]
