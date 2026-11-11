@@ -428,28 +428,6 @@ void func_800A39D8(u8 *arg0) {
     register u8 *p asm("a2") = arg0;
     u8 i = D_80085A01[0];
 
-    if (D_8008EE44[0] != 0x12) {
-        *(s32 *)(p + 0x38) |= 1;
-    } else {
-        s32 f;
-        u16 v;
-        *(s32 *)(p + 0x38) &= ~1;
-        if (D_800B3B40[0] != 0) {
-            *(u16 *)(p + 0x46) = D_800B2CB4[i];
-            f = *(s32 *)(p + 0x30);
-            v = D_800B2CE4[i];
-            *(s32 *)(p + 0x30) = (f & ~0x1C0) | 0x40;
-            *(u16 *)(p + 0x4A) = v;
-        } else {
-            *(u16 *)(p + 0x46) = D_800B2C9C[i];
-            f = *(s32 *)(p + 0x30);
-            v = D_800B2CCC[i];
-            *(s32 *)(p + 0x30) = f & ~0x1C0;
-            *(u16 *)(p + 0x4A) = v;
-        }
-    }
-}
-
 void func_800A3AB4(u8 *arg0) {
     extern u8 D_80065390[];
     extern u8 D_8008ED68[];

@@ -79,56 +79,23 @@ void func_80033CEC(u16 *param_1, s32 param_2) {
     }
 }
 
-void func_80033E5C(u16 *list, s32 n) {
-    struct Element16 { u8 _pad[0xC]; s32 fC; };
-    struct Fila { u16 f0; u8 _p[0x132]; s16 f134; u8 _q[0xA]; struct Element16 *f140; };
-    extern u8 D_800922F0[];
-    extern s16 D_80078D3C;
-    extern struct { u16 h; u16 _; u32 w; } D_80070594[];
-    extern u16 D_80093510[];
-    extern void func_80033CEC(u16 *, s32), func_80034C10(s32), func_8003727C(s32, s32), func_80036DB0(void *);
-    struct { u8 c; u8 a; u16 s; u32 w4; u32 w8; u32 wC; } cmd;
-    struct Fila *g;
-    u16 *p_list;
-    s32 i, j, k;
-
-    ((struct Fila *)D_800922F0)->f134 = 0;
-    D_80078D3C = 0;
-    for (i = 0; i < 0x99; i++) {
-        ((struct Fila *)D_800922F0)->f140[i].fC = 0;
-    }
-    g = (struct Fila *)D_800922F0;
-    g->f134 = 0;
-    D_80078D3C = 0;
-    p_list = list;
-    for (j = 0; j < n; j++, p_list++) {
-        if (*p_list != 0xFFFF && D_80070594[*p_list].h != 0) {
-            k = 0;
-            do {
-                AdicionaSom(list, j, k, (u8 *)g);
-                k++;
-            } while (k < D_80070594[list[j]].h);
+    for (k = param_2 / 2; k > 0; k--) {
+        i = k;
+        val = param_1[i - 1];
+        j = i * 2;
+        while (j <= param_2) {
+            if (j < param_2 && param_1[j - 1] < param_1[j]) {
+                j++;
+            }
+            if (val >= param_1[j - 1]) {
+                break;
+            }
+            param_1[i - 1] = param_1[j - 1];
+            i = j;
+            j = i * 2;
         }
+        param_1[i - 1] = val;
     }
-    func_80033CEC(D_80093510, ((struct Fila *)D_800922F0)->f134);
-    if (*(u16 *)D_800922F0 & 0x80) {
-        func_80034C10(-4);
-    }
-    if (*(u16 *)D_800922F0 & 0xF) {
-        func_8003727C(-0x20, 0);
-        cmd.c = 0x26;
-        func_80036DB0(&cmd);
-    }
-    cmd.c = 0x50;
-    *(u16 *)D_800922F0 |= 2;
-    func_80036DB0(&cmd);
-    cmd.c = 0x52;
-    cmd.wC = (u32)D_80093510;
-    cmd.s = ((struct Fila *)D_800922F0)->f134;
-    func_80036DB0(&cmd);
-    cmd.c = 0x11;
-    func_80036DB0(&cmd);
-}
 
 s16 func_800340B4(s32 a0) {
     struct Voz { u8 _p[0x125]; u8 f125; u8 f126; u8 _q[5]; u16 f12c[4]; };

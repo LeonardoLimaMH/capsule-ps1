@@ -12,5 +12,3 @@ u8 slpm_GetGraphDebug(void) {
 }
 
 INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys", slpm_DrawSyncCallback);
-
-INCLUDE_ASM("asm/slpm/nonmatchings/sdk_libgpu_sys", slpm_SetDispMask);

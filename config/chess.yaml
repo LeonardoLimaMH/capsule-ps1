@@ -73,6 +73,7 @@ segments:
       - [0x2EB30, c, chess_800C4ECC__800C6330]
       - [0x2EBAC, c, chess_800C4ECC__800C63AC]
       - [0x30774, c, chess_800C4ECC__800C7F74]
+      - [0x31B38, c, chess_800C4ECC__800C7F74__800C9338]
       - [0x31C14, c, chess_800C4ECC__800C9414]
       - [0x31C2C, c, chess_800C4ECC__800C942C]
       - [0x31CDC, c, chess_800C4ECC__800C94DC]

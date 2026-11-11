@@ -523,6 +523,73 @@ static inline s32 bright(s32 a) {
     }
 }
 
+    b = base;
+    p = *(u32 **)(base + 0x1090);
+    if (p != 0 && (u8 *)p + 0xC <= b + 0x4594) {
+        next = (u8 *)p + 0xC;
+    }
+    *(u8 **)(b + 0x1090) = next;
+    SetDrawArea(p, &rect);
+    mask2 = 0x00FFFFFF;
+    off = s2 * 4;
+    mask = 0xFF000000;
+    *p = (*p & mask) | (*(u32 *)((u8 *)off + (u32)g[0] + 0x70) & mask2);
+    off += (s32)g[0];
+    *(u32 *)(off + 0x70) = (*(u32 *)(off + 0x70) & mask) | ((u32)p & mask2);
+}
+
+void func_800187E8(s32 arg0) {
+    typedef struct {
+        s16 x;
+        s16 y;
+        s16 w;
+        s16 h;
+    } Rect;
+    extern void SetDrawArea();
+    extern Rect D_80078B80[];
+    extern u8 *D_8008ED68[];
+    extern u8 D_8008A7BC[];
+    Rect rect;
+    u8 **g;
+    register u8 *base asm("v1");
+    u32 *p;
+    u8 *next;
+    s32 off;
+    register u8 *b asm("a0");
+
+    rect = D_80078B80[0];
+    g = D_8008ED68;
+    base = g[0];
+    next = 0;
+    if (base == D_8008A7BC) {
+        rect.y = 0xF0;
+    }
+
+    b = base;
+    p = *(u32 **)(base + 0x1090);
+    if (p != 0 && (u8 *)p + 0xC <= b + 0x4594) {
+        next = (u8 *)p + 0xC;
+    }
+    *(u8 **)(b + 0x1090) = next;
+    SetDrawArea(p, &rect);
+    off = arg0 * 4;
+    *p = (*p & 0xFF000000) | (*(u32 *)((u8 *)off + (u32)g[0] + 0x70) & 0xFFFFFF);
+    off += (s32)g[0];
+    *(u32 *)(off + 0x70) = (*(u32 *)(off + 0x70) & 0xFF000000) | ((u32)p & 0xFFFFFF);
+}
+
+static inline s32 bright(s32 a) {
+    if (a == 0x1000) {
+        return 0x80;
+    }
+    if (a < 0x1000) {
+        return (a << 7) / 4096;
+    } else {
+        s32 b = 0x7F;
+        return ((a - 0x1000) * b) / 4096 + 0x80;
+    }
+}
+
 s32 func_800188F0(s32 x, s32 y, s32 dig, s32 pal, s32 ot) {
     extern u8 *D_8008ED68[];
     extern void SetSprt();

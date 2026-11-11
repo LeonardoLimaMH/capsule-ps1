@@ -16,11 +16,3 @@ s32 func_800BEA6C(void) {
     (*D_80100D44) = (*D_800F0620);
     return 0;
 }
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BE7A0", func_800BEA90);
-
-s32 func_800BEB3C(void) {
-    extern void * D_800EF304[];
-    M2C_FIELD((*D_800EF304), s32 *, 0x38) = (s32) (M2C_FIELD((*D_800EF304), s32 *, 0x38) & ~1);
-    return 0;
-}

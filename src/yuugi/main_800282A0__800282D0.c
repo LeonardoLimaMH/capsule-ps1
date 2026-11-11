@@ -289,6 +289,7 @@ void func_80029A9C(void *arg0) {
 }
 
 #include "common.h"
+#include "gte_inline.h"
 
 void func_80029B28(void *arg0) {
     extern s32 D_80069B28[];
@@ -359,6 +360,7 @@ void func_80029B28(void *arg0) {
     }
 }
 
+extern s32 func_800D8AF8(void *, s32), func_80023ECC(void *, s32), func_8002BD08(void *, void *, s32);
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_80029C90);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_80029E90);

@@ -327,28 +327,11 @@ void func_800279D4(s32 a, s32 b) {
     }
 }
 
-void func_80027A88(void) {
-    extern struct { u16 v[6]; } D_80010524;
-    extern u16 D_8006B1EC[];
-    extern u8 D_80078C50[7];
-    extern s32 D_80078C4C, D_80078C3C, D_80078C40, D_80078C44, D_80078C48;
-    struct { u16 v[6]; } l;
-    s32 i;
-
-    *(typeof(D_80010524) *)&l = D_80010524;
-    D_80078C4C = 7;
-    D_80078C3C = 0;
-    D_80078C40 = 0;
-    D_80078C44 = 0;
-    D_80078C48 = 0;
-    D_8006B1EC[0] = 0;
-    D_80078C50[0] = 1;
-    for (i = 1; i < 7; i++) {
-        extern u8 D_80078C50[];
-        D_8006B1EC[i] = l.v[i - 1];
-        D_80078C50[i] = 0;
-    }
-}
+        v = *(src + i * 2 + 4);
+        if (v == 0xFF) {
+            v = 0xFFFF;
+        }
+        D_8006AF90[b].f8[i][0] = (v == 0xFFFF) ? -1 : v;
 
 s32 func_80027B34(u32 a) {
     extern u8 D_80085428[];

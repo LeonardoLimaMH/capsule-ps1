@@ -67,6 +67,10 @@ void func_800C4ECC(s32 a0, void *arg1) {
     }
 }
 
+void func_800C4FC4();
+void func_800AADE0();
+void *func_80015B3C();
+
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800C4FC4);
 
 void func_800C4FC4();

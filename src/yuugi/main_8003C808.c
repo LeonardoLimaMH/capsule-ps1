@@ -202,36 +202,3 @@ void func_8003CCAC(s16 arg0, s32 arg1, s16 arg2) {
         D_80078C84[0] = 0;
     }
 }
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CD70);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CE14);
-
-void func_8003CE88(s16 arg0, u16 arg1, u16 arg2) {
-    extern SndVoice D_800944B8[];
-    SndVoice *base = D_800944B8;
-    SndVoice *p = &base[arg0];
-    p->volL = arg1 & 0x7F;
-    p->volR = arg2 & 0x7F;
-    if (p->state != 2) {
-        func_80037E40();
-    }
-}
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CEF8);
-
-void func_8003CF68(void) {
-    SpuReserveReverbWorkArea(1);
-    SpuSetReverb(1);
-}
-
-void func_8003CF90(void) {
-    extern s32 D_80078CCC;
-    D_80078CCC = 0;
-    SpuSetReverb(0);
-    SpuReserveReverbWorkArea(0);
-}
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CFBC);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003D518);

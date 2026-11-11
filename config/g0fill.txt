@@ -91,3 +91,7 @@ src/slpm/sdk_libc2_printf.c
 src/yuugi/sdk_libspu_s_q.c
 src/slpm/sdk_libspu_s_q.c
 src/slpm/loader_8011B770.c
+src/yuugi/main_800446D0__80044794.c
+src/slpm/sdk_libetc_pad.c
+src/slpm/sdk_libgpu_sys__slpm_SetDispMask.c
+src/yuugi/main_8003C808__8003CD70.c

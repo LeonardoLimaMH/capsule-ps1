@@ -27,7 +27,3 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B84BC", func_800B84FC);
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B84BC", func_800B8700);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B84BC", func_800B8898);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B84BC", func_800B89F4);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B84BC", func_800B8AD0);

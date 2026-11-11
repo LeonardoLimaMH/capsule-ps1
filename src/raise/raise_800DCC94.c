@@ -11,10 +11,9 @@ typedef struct {
 extern RaiseSlot_800DCC94 D_80100F38[];
 u16 func_800B1260(void);
 void func_800DCC94(void) {
-    struct { u8 pad[0x32C]; s16 x32C; u8 pad2[8]; s16 x336; s16 x338; u8 pad3[0x79C - 0x33A]; } *p;
+    RaiseSlot_800DCC94 *p = &D_80100F38[func_800B1260()];
     s16 a;
 
-    p = (void *)(D_80100F38 + func_800B1260() * 0x79C);
     a = p->x336;
     if (p->x336 > 0) {
         if (p->x336 >= 9) {

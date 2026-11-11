@@ -15,42 +15,7 @@ extern void func_80011D84(void);
 extern void func_80011B1C(void);
 extern void func_80011A60(s32 mode);
 extern void func_80011AA4(void);
-void func_800118FC(void) {
-    struct Rect8 { s16 x, y, w, h; };
-    extern struct Rect8 D_80078B74;
-    extern u8 D_8008ED68[];
-    struct Rect8 r;
-
-    r = D_80078B74;
-    ResetCallback();
-    func_8001A998(D_8008ED68, 0xA78);
-    func_8001A998(__bss_start, 4);
-    func_8001A998(D_80078B7C, 0xC588);
-    func_8001A998((void *)0x1F800100, 0x300);
-    func_80013668();
-    func_8001DB54();
-    func_80011D84();
-    func_80013C44();
-    func_8004FE1C(2);
-    func_800130D8();
-    ResetGraph(1);
-    *(s32 *)(D_8008ED68 + 0x108) = 320;
-    *(s32 *)(D_8008ED68 + 0x10C) = 240;
-    SetGraphDebug(0);
-    SetDispMask(0);
-    ClearImage(&r, 0, 0, 0);
-    DrawSync(0);
-    func_80011B1C();
-    InitGeom();
-    func_800133C4();
-    func_80019088();
-    DsInit();
-    func_80011A60(*(s32 *)__bss_start);
-    *(s32 *)__bss_start = 1;
-    SetGeomOffset(160, 120);
-    func_80048A2C(0x200);
-    func_80011AA4();
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_800118FC);
 
 extern void func_80011AFC();
 

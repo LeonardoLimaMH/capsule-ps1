@@ -214,62 +214,6 @@ void func_800991AC(u8 *arg0) {
     extern s32 func_80019F30(s32, s32);
     extern void func_80015CD0(void *, s32, s32);
 
-    register u8 *s0 asm("s0") = arg0;
-    register u32 s1 asm("s1");
-    register s32 v1 asm("v1");
-    register s32 temp_v0 asm("v0");
-    register s32 a0 asm("a0");
-    s32 a1;
-
-    s1 = *D_80085A0D;
-    func_800A4964();
-
-    v1 = 1;
-    if ((*(u32 *)(s0 + 0x38) & 1) == v1) {
-        *(u32 *)(s0 + 0x3C) = 0;
-        return;
-    }
-
-    if (*(s32 *)(s0 + 0x3C) == 0) {
-        *(s16 *)(s0 + 0x24) = -1;
-    }
-    *(u32 *)(s0 + 0x3C) = v1;
-
-    if ((*(u32 *)(s0 + 0x34) & 0x7F) == 0) {
-        s32 ret = func_800372B4();
-        a1 = 4;
-        if (ret < 0x17D) {
-            a1 = 3;
-            if (ret < 0xBF) {
-                a1 = 1;
-                if (ret > 0) {
-                    a1 = 2;
-                }
-            }
-        }
-        temp_v0 = s1 + 0x15;
-        a0 = 0x60000;
-        a0 |= temp_v0;
-    } else {
-        s32 temp;
-        if (*(s16 *)(s0 + 0x24) >= 0) {
-            return;
-        }
-        if (func_80020304(500) < 5) {
-            temp_v0 = s1 + 0x15;
-            temp = func_80019F30(temp_v0 | 0x70000, 0);
-            func_80015CD0(s0 + 0x14, temp, 1);
-            return;
-        }
-        temp_v0 = s1 + 0x15;
-        a0 = 0x60000;
-        a0 |= temp_v0;
-        a1 = 5;
-    }
-
-    *(s32 *)(s0 + 0x18) = func_80019F30(a0, a1);
-}
-
 u8 *func_800992CC(u8 *arg0, u32 arg1) {
     extern void func_800991AC();
     extern void func_800161C4();
