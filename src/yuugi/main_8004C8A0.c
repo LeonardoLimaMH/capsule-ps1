@@ -32,6 +32,26 @@ extern TMD_PRIM* ReadTMD(TMD_PRIM* tmdprim);
 
 typedef unsigned char PACKET;
 
+typedef struct {
+    short x;
+    short y;
+    short w;
+    short h;
+} RECT;
+
+typedef struct {
+    u_long mode;
+    RECT* crect;
+    u_long* caddr;
+    RECT* prect;
+    u_long* paddr;
+} TIM_IMAGE;
+
+/* Strings de depuração do get_tim_addr (rodata) */
+extern char D_800113D0[];
+extern char D_800113DC[];
+extern char D_800113E8[];
+
 extern s32 D_800965C4;
 
 extern s32 D_800965C8;
@@ -59,7 +79,42 @@ TMD_PRIM* ReadTMD(TMD_PRIM* tmdprim)
 
 s32 func_8004CDD4(PACKET* arg0, TMD_PRIM* arg1);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8004C8A0", func_8004CB48);
+extern char D_800113D0[];
+extern char D_800113DC[];
+extern char D_800113E8[];
+u8 GetGraphDebug(void);
+int printf();
+s32 func_8004CB48(u_long *tim, u_long *timimg)
+{
+    u_long n;
+
+    if (*tim++ != 0x10) {
+        return -1;
+    }
+    timimg[0] = *tim++;
+    if (GetGraphDebug() == 2) {
+        printf(D_800113D0, 0x10);
+    }
+    if (GetGraphDebug() == 2) {
+        printf(D_800113DC, timimg[0]);
+    }
+    if (GetGraphDebug() == 2) {
+        printf(D_800113E8, tim);
+    }
+    if (timimg[0] & 8) {
+        timimg[1] = (u_long)(tim + 1);
+        timimg[2] = (u_long)(tim + 3);
+        n = *tim >> 2;
+        tim += n;
+    } else {
+        n = 0;
+        timimg[1] = 0;
+        timimg[2] = 0;
+    }
+    timimg[3] = (u_long)(tim + 1);
+    timimg[4] = (u_long)(tim + 3);
+    return n + (*tim >> 2) + 2;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8004C8A0", func_8004CC60);
 
