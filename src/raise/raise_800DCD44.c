@@ -50,7 +50,32 @@ s32 func_800DCE54(s32 a0) {
     return PS16(0x3F0) != 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DCFB4);
+extern s16 func_800DD110(s32, s32, s16 *, s16 *);
+s16 func_800DCFB4(s32 a0, s32 a1, s32 a2) {
+    extern s16 func_800DD2B8(s32, s16, s16);
+    u8 *p = PL(a0);
+    s16 pos[2];
+    s16 r, j;
+    s16 n;
+    s32 c;
+    s16 x = P16(0x336);
+    s16 y = P16(0x338);
+    pos[0] = x;
+    pos[1] = y;
+    n = a1;
+    while ((c = *(u8 *)a2) != 0xFF) {
+        r = 1;
+        for (j = 0; j < n - 1; j++) {
+            r = func_800DD110(a0, c, &pos[0], &pos[1]);
+            if (r == 0) break;
+            r = func_800DD2B8(a0, pos[0], pos[1]);
+            if (r == 0) break;
+        }
+        if (r != 1) return 0;
+        a2++;
+    }
+    return 1;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DD110);
 
