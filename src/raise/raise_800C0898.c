@@ -1,5 +1,23 @@
 #include "common.h"
 
+/* fila circular de 32 entradas usada por func_800C0BC8 */
+typedef struct {
+    s32 unk0;
+    u16 idx;
+    u16 cnt;
+    s16 unk8;
+    s16 a[32];
+    s16 b[32];
+    s16 c[32];
+} D_80100E60_t;
+
+extern D_80100E60_t D_80100E60;
+extern u8 D_80100F38[];
+s32 func_800B1260(s32);
+s32 func_800E1820(s32);
+s32 func_800E17F8(s32);
+void func_800C0EE8(s32, s16, s16);
+
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0898", func_800C0898);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0898", func_800C0BC8);
