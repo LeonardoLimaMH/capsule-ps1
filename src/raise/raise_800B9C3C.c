@@ -1,6 +1,6 @@
 #include "common.h"
 
-extern volatile u16 D_8006AF80[];
+extern u16 D_8006AF80[];
 extern u8 D_80091618[];
 s32 func_800E16AC();
 s32 func_800ACDE0();
