@@ -47,6 +47,7 @@ segments:
       - [0x800, rodata]
       - [0x1448, c, loader]
       - [0x151C, c, loader_80110D1C]
+      - [0x1610, c, loader_80110D1C__80110E10]
       - [0x2364, c, sdk_libapi_counter]
       - [0x24D4, c, sdk_libapi_pad]
       - [0x24F0, c, loader_80111CF0]

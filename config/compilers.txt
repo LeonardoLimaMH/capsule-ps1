@@ -323,3 +323,4 @@ src/yuugi/main_8003A5F8__8003C73C.c 2.7.2-cdk
 src/yuugi/main_8003A5F8__8003C654.c 2.7.2-cdk
 src/etc/etc__8009BD30__800A0824__800A2A80__800A39D8.c 2.7.2-cdk
 src/etc/etc__8009BD30__800A0824__800A2A80__800A3814.c 2.7.2-cdk
+src/slpm/loader_80110D1C.c 2.7.2-cdk

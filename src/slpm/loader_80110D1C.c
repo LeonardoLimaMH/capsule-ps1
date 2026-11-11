@@ -19,73 +19,62 @@ typedef struct {
 extern char D_80110060[];
 extern char D_80110070[];
 extern char D_80110080[];
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80110D1C);
+/* Estado do player de filme (MDEC/stream) do loader; layout deduzido de func_80110F10/801111D4/80111464. */
 
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80110E10);
-
-void func_80110E70(s16 arg0, s16 arg1)
+void func_80110D1C(void)
 {
-  extern s32 D_80133484;
-  extern s32 D_80133488;
-  s16 new_var;
-  D_80133484 = (s32) arg0;
-  D_80133484 = (s32) arg0;
-  new_var = arg1;
- do { } while (0);
-  D_80133488 = (s32) new_var;
-}
-
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80110E90);
-
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80110F10);
-
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80110FDC);
-
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_801111D4);
-
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80111268);
-
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80111464);
-
-#include "common.h"
-
-void func_80111538(s32 arg0)
-{
-  s32 new_var;
+  int new_var;
+  extern void slpm_printf(char *);
+  u8 pad[64];
+  volatile u8 c[8];
   if (new_var)
   {
-    new_var = arg0;
+    slpm_printf(D_80110060);
+    slpm_DrawSync(0);
+    SsEnd();
+    func_8011BBC4();
+    new_var = 0xE;
+    c[0] = 0x80;
+    CdControlB(new_var, (u8 *) c, 0);
+    DecDCToutCallback(0);
+    CdDataCallback(0);
+    CdReadyCallback(0);
+    CdControlB(9, 0, 0);
+    slpm_StopRCnt(0xF2000000);
+    slpm_StopRCnt(0xF2000001);
+    slpm_StopRCnt(0xF2000002);
+    slpm_StopRCnt(0xF2000003);
+    slpm_PadStop();
+    slpm_ResetGraph(3);
+    slpm_StopCallback();
+    slpm_printf(D_80110070);
+    func_80111B24();
+    func_80111B14(D_80110080, 0x801FF000, 0);
+    slpm__96_remove();
   }
   else
   {
-    new_var = arg0;
+    slpm_printf(D_80110060);
+    slpm_DrawSync(0);
+    SsEnd();
+    func_8011BBC4();
+    new_var = 0xE;
+    c[0] = 0x80;
+    CdControlB(new_var, (u8 *) c, 0);
+    DecDCToutCallback(0);
+    CdDataCallback(0);
+    CdReadyCallback(0);
+    CdControlB(9, 0, 0);
+    slpm_StopRCnt(0xF2000000);
+    slpm_StopRCnt(0xF2000001);
+    slpm_StopRCnt(0xF2000002);
+    slpm_StopRCnt(0xF2000003);
+    slpm_PadStop();
+    slpm_ResetGraph(3);
+    slpm_StopCallback();
+    slpm_printf(D_80110070);
+    func_80111B24();
+    func_80111B14(D_80110080, 0x801FF000, 0);
+    slpm__96_remove();
   }
-  do
-  {
-  }
-  while (CdControl(0x15, new_var, 0) == 0);
-  do
-  {
-  }
-  while (CdRead2(0x1C0) == 0);
 }
-
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80111584);
-
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_801119E4);
-
-void func_80111A40(void) {
-
-}
-
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", __SN_ENTRY_POINT_loader);
-
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80111B04);
-
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80111B14);
-
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80111B24);
-
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", slpm__96_remove);
-
-INCLUDE_ASM("asm/slpm/nonmatchings/loader_80110D1C", func_80111B54);
