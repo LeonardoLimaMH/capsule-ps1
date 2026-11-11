@@ -76,7 +76,35 @@ void func_8010053C(void) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_801002CC", func_80100618);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_801002CC", func_801007D8);
+void func_801007D8(void) {
+    extern u16 D_8008EE48[];
+    extern u8 D_80085428[];
+    extern u8 D_80069AD4[];
+    u8 *p = D_80085428;
+    switch ((s32)D_8008EE48[0]) {
+    case 0: break;
+    case 1:
+        if (func_800220D4(p, 1, 1, 4) != 0) func_80012578();
+        break;
+    case 2:
+        p = D_80069AD4;
+        if (M2C_FIELD(p, s32 *, 0xDC) > 0) {
+            M2C_FIELD(p, s32 *, 0xDC) -= 2;
+        } else {
+            M2C_FIELD(p, u16 *, 0xEA) += 8;
+            if (M2C_FIELD(p, s16 *, 0xE8) < 0x140) M2C_FIELD(p, u16 *, 0xE8) += 1;
+            if (M2C_FIELD(p, s32 *, 0xE0) < 0xC80) M2C_FIELD(p, s32 *, 0xE0) += 6;
+        }
+        func_8002CC74();
+        if (M2C_GFIELD(D_80069AD4, s32, 0xE0) >= 0xC80 && M2C_GFIELD(D_80069AD4, s16, 0xE8) >= 0x140) {
+            func_8001AD74(2);
+            func_80034BD8(-3, 0);
+            func_80033974(0x701F);
+            func_80012508();
+        }
+        break;
+    }
+}
 
 #include "common.h"
 
