@@ -30,5 +30,3 @@ void func_8001A704(s32 arg0, s32 ***arg1, s32 arg2) {
         }
     }
 }
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001A49C__8001A704", func_8001A784);

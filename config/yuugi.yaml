@@ -73,6 +73,7 @@ segments:
       - [0xAC9C, c, main_8001A1DC__8001A49C]
       - [0xAEB8, c, main_8001A1DC__8001A49C__8001A6B8]
       - [0xAF04, c, main_8001A1DC__8001A49C__8001A704]
+      - [0xAF84, c, main_8001A1DC__8001A49C__8001A704__8001A784]
       - [0xB018, c, main_8001A1DC__8001A818]
       - [0xB198, c, main_8001A1DC__8001A818__8001A998]
       - [0xB244, c, main_8001A1DC__8001AA44]
