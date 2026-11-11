@@ -79,23 +79,7 @@ void func_80033CEC(u16 *param_1, s32 param_2) {
     }
 }
 
-    for (k = param_2 / 2; k > 0; k--) {
-        i = k;
-        val = param_1[i - 1];
-        j = i * 2;
-        while (j <= param_2) {
-            if (j < param_2 && param_1[j - 1] < param_1[j]) {
-                j++;
-            }
-            if (val >= param_1[j - 1]) {
-                break;
-            }
-            param_1[i - 1] = param_1[j - 1];
-            i = j;
-            j = i * 2;
-        }
-        param_1[i - 1] = val;
-    }
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_80033E5C);
 
 s16 func_800340B4(s32 a0) {
     struct Voz { u8 _p[0x125]; u8 f125; u8 f126; u8 _q[5]; u16 f12c[4]; };

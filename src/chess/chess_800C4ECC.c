@@ -73,23 +73,7 @@ void *func_80015B3C();
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800C4FC4);
 
-void func_800C4FC4();
-void func_800AADE0();
-void *func_80015B3C();
-u8 *func_800C523C(s32 a0, u8 *a1, s32 a2, s32 a3) {
-    struct Obj_800C523C *o = func_80015B3C(func_800C4FC4, func_800AADE0, 5);
-    func_80015EF8(o);
-    *(s32 *)((u8 *)o + 0x7c) = a2;
-    *(s32 *)((u8 *)o + 0x80) = a3;
-    *(s32 *)((u8 *)o + 0x84) = 0;
-    o->f38_0 = 1;
-    func_8001AA70((u8 *)o + 0x14, a1 + 0x14, 0x20);
-    o->f40 = a1;
-    o->f34_0 = 1;
-    o->f38_6 = 1;
-    o->f38_4 = 1;
-    return (u8 *)o;
-}
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800C523C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC", func_800C5300);
 

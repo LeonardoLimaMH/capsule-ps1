@@ -90,33 +90,7 @@ u32 func_8001AB74(u32 n) {
     return y;
 }
 
-s32 func_8001ABD4(s32 *a, s32 *b) {
-    s32 m;
-    s32 s;
-    s32 t;
-    s32 dx, dy, dz;
-    u32 n, x, y;
-
-    m = __builtin_abs(a[0] - b[0]);
-    t = distance_abs(a[1] - b[1]);
-    s = 0;
-    if (t < m) {
-        t = distance_abs(a[2] - b[2]);
-        if (t < m) goto loop;
-    }
-    m = distance_abs(a[2] - b[2]);
-    t = distance_abs(a[1] - b[1]);
-    if (m < t) m = t;
-loop:
-    while ((m >> s) > 0x4000) {
-        s++;
-    }
-    dx = (a[0] - b[0]) >> s;
-    dy = (a[1] - b[1]) >> s;
-    dz = (a[2] - b[2]) >> s;
-    n = dx * dx + dy * dy + dz * dz;
-    return distance_sqrt(n) << s;
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001AA44", func_8001ABD4);
 
 void func_8001AD48(s32 arg0)
 {

@@ -100,33 +100,7 @@ loop_2:
     } while (var_s2 < 2);
 }
 
-s32 func_800AFDB0(u8 *arg0, u8 *arg1, u8 *arg2, s32 arg3, s32 arg4) {
-    u32 (*b)[13] = D_801010B0[arg0[0x5D9]].b;
-    u32 *p;
-    s32 v;
-    if (arg3 >= 0 && arg4 >= 0 && arg3 < 13 && arg4 < 13) {
-        p = &b[arg3][arg4];
-        v = (*p >> 6) & 0x1FFF;
-        if (v != 0) {
-            if (v >= 3) {
-                return 3;
-            }
-            if (((u8 *)p)[3] == 0) {
-                return 1;
-            }
-            if (arg1[0x15] == arg3 && arg1[0x16] == arg4) {
-                return 1;
-            }
-            if (arg2[0x15] == arg3) {
-                if (arg2[0x16] == arg4) {
-                    return 1;
-                }
-            }
-            return 2;
-        }
-    }
-    return 0;
-}
+INCLUDE_ASM("asm/chess/nonmatchings/chess__800AF9D4", func_800AFDB0);
 
 s32 func_800AFEA4(u8 *arg0, u8 *arg1, u8 *arg2, s32 arg3, s32 arg4) {
     u32 (*b)[13] = D_801010B0[arg0[0x5D9]].b;

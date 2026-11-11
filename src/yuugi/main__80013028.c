@@ -11,23 +11,6 @@ typedef struct {
     u32 *paddr;
 } Tim;
 
-/* Estado de um controle (D_8008ED68 + 0x80 + i * 0x10). */
-typedef struct {
-    u32 now;
-    u32 old;
-    u32 trig;
-    u32 rel;
-} PadState;
-
-/* Visão parcial de D_8008ED68 usada pelas rotinas de controle. */
-typedef struct {
-    u8 unk0[0x80];
-    PadState pad[2];
-    u8 unkA0[4];
-    u32 hold[2][4];
-} PadWork;
-
-
 extern s32 ReadTIM();
 extern s32 func_80019F30();
 

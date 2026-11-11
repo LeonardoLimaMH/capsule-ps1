@@ -188,31 +188,11 @@ s32 func_80097D8C(s32 arg0, s32 arg1, s32 arg2)
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80097E40);
 
-void func_8009807C(EtcCtx *arg0, s32 arg1, s32 arg2) {
-    extern void func_8001A49C();
-    s32 ret = 0;
-
-    if (arg2 != 5) {
-        if (Etc_FindPrev(arg0, arg1, arg2) != 0) {
-            ret = 1;
-        }
-    } else if (arg0->unk5E8[arg1][arg2].unk2A < 10 || arg1 != arg0->unk5E8[arg1][arg2].unk2A - 10) {
-        ret = 1;
-    }
-    if (ret == 0) {
-        func_8001A49C(Etc_GetVramAddr(arg0->unk5E8[arg1][arg2].unk2A));
-    }
-}
+INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009807C);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800981F0);
 
-void func_800991AC(u8 *arg0) {
-    extern u8 D_80085A0D[];
-    extern void func_800A4964();
-    extern s32 func_800372B4();
-    extern s32 func_80020304(s32);
-    extern s32 func_80019F30(s32, s32);
-    extern void func_80015CD0(void *, s32, s32);
+INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800991AC);
 
 u8 *func_800992CC(u8 *arg0, u32 arg1) {
     extern void func_800991AC();

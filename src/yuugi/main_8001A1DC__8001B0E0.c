@@ -49,66 +49,7 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0", func_8001B1A8);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0", func_8001B484);
 
-extern s32 D_80078B94[];
-extern s32 D_80078B9C[];
-extern char D_80078BA4[];
-void *memcpy(void *, const void *, unsigned int);
-extern void *firstfile();
-extern void *func_8004FF5C();
-extern void func_8001BB18();
-extern s32 func_8004FEFC();
-extern s32 func_8004FF1C();
-extern void func_8004FF3C();
-
-/* Lê o cabeçalho (0x80 bytes) de um arquivo do memory card; inline em func_8001B964. */
-static inline s32 readhdr(char *path, u8 *buf) {
-    s32 fd = func_8004FEFC(path, 1);
-    if (fd == -1) {
-        return -2;
-    }
-    if (func_8004FF1C(fd, buf, 0x80) == -1) {
-        func_8004FF3C(fd);
-        return -2;
-    }
-    func_8004FF3C(fd);
-    return 0;
-}
-static inline s32 readentry(u8 *de, u8 *buf, s32 port) {
-    char path[0x20];
-    func_8001BB18(de, path, port);
-    return readhdr(path, buf);
-}
-
-s32 func_8001B964(s32 a0) {
-    s32 name[8];
-    u8 buf[0x80];
-    u8 de[0x28];
-    void *p;
-    void *entry;
-    s32 total = 0;
-    s32 r;
-
-    if (a0 == 0) {
-        memcpy(name, D_80078B94, 6);
-    } else {
-        memcpy(name, D_80078B9C, 6);
-    }
-    memcpy((char *)name + 5, D_80078BA4, 2);
-    entry = firstfile(name, de);
-    if (entry == de) {
-        p = entry;
-        do {
-            u8 path[0x20];
-            func_8001BB18(de, path, a0);
-            r = readhdr((char *)path, buf);
-            if (r < 0) {
-                return r;
-            }
-            total += buf[3];
-        } while (func_8004FF5C(p) == p);
-    }
-    return 15 - total;
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0", func_8001B964);
 
 u8 func_8001BAA0(u8 *buf, s32 len, u8 *out) {
     register u32 sum asm("a3") = 7;

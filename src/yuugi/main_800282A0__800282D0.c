@@ -36,24 +36,7 @@ s32 func_800282E0(void)
 
 }
 
-void func_8002835C(void) {
-    extern struct { u8 pad[0x40]; s32 n; s32 a[1]; } D_800EF524;
-    extern s32 D_80069EA0[];
-    extern s32 D_800EF360[];
-    s32 i;
-
-    D_80069EA0[0] = D_800EF524.n != 0;
-    if (D_80069EA0[0] != 0) {
-        if (D_800EF360[0] == -1) {
-            D_800EF360[0] = 0;
-        }
-        for (i = 0; i < D_800EF524.n; i++) {
-            if (D_800EF524.a[i] != -1) {
-                func_8002840C(0xF, i + 7);
-            }
-        }
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002835C);
 
 #include "common.h"
 

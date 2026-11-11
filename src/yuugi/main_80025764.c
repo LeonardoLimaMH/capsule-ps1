@@ -327,11 +327,7 @@ void func_800279D4(s32 a, s32 b) {
     }
 }
 
-        v = *(src + i * 2 + 4);
-        if (v == 0xFF) {
-            v = 0xFFFF;
-        }
-        D_8006AF90[b].f8[i][0] = (v == 0xFFFF) ? -1 : v;
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80027A88);
 
 s32 func_80027B34(u32 a) {
     extern u8 D_80085428[];

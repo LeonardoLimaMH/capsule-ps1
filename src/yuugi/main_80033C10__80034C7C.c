@@ -43,76 +43,7 @@ void func_80034D78(s16 arg0) {
     func_80034DA0(arg0, 0x80);
 }
 
-void func_80034DA0(s32 a0, s32 a1) {
-    extern u8 D_800922F0[];
-    extern s32 func_80036DB0();
-    struct { u8 c; u8 a; s16 s; s32 w4; s32 w8; s32 wC; } d, ab[2], c, ab2[2], *p, *q;
-    register s32 s2 asm("s2") = a0;
-    register s32 s4 asm("s4") = s2;
-    s32 val = a1;
-    u8 *g;
-
-    if ((s16)a0 >= 0x24) {
-        return;
-    }
-    if ((s16)a0 < 0) {
-        if ((s16)a1 > 0) {
-            val = -(s16)a1;
-        }
-        p = ab;
-        if (*(u16 *)D_800922F0 & 0x80) {
-            ab[1].c = 0x45;
-            ab[1].w8 = (s16)val;
-            ab[1].a = 0;
-            func_80036DB0(&ab[1]);
-            p->c = 0x49;
-            func_80036DB0(p);
-        }
-        p->c = 0x47;
-        func_80036DB0(p);
-        return;
-    }
-
-    g = D_800922F0;
-    q = &c;
-    if ((s16)a0 != *(s16 *)(g + 0x1190)) {
-        *(u16 *)g |= 2;
-        p = ab2;
-        if (*(u16 *)g & 0x80) {
-            ab2[1].c = 0x45;
-            p[1].w8 = -0x80;
-            ab2[1].a = 0;
-            func_80036DB0(&ab2[1]);
-            p->c = 0x49;
-            func_80036DB0(p);
-        }
-        p->c = 0x47;
-        func_80036DB0(p);
-        c.c = 0x2C;
-        c.s = s2;
-        func_80036DB0(q);
-        c.c = 0x4A;
-        c.s = s2;
-        func_80036DB0(q);
-        c.c = 0x11;
-        func_80036DB0(q);
-    } else {
-        c.c = 0x46;
-        c.s = s2;
-        q->wC = 0x801F6800;
-        func_80036DB0(q);
-    }
-    d.c = 0x48;
-    d.s = s4;
-    func_80036DB0(&d);
-    {
-        struct { u8 c; u8 a; s16 s; s32 w4; s32 w8; s32 wC; } *cmd = ab;
-        ab[0].c = 0x44;
-        ab[0].w8 = (s16)val;
-        cmd->a = 0xFF;
-        func_80036DB0(cmd);
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_80034DA0);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_80034F74);
 

@@ -487,28 +487,6 @@ s32 func_800E6A1C(u16 a0, s16 a1) {
     return a1;
 }
 
-void func_800E6AF4(u16 a0, u16 a1)
-{
-    extern u8 D_800916E8[];
-    extern u8 D_800ECBEC[];
-    s16 *e = (s16 *)(D_800916E8 - 0xD0 + a0 * 0x1A8);
-    s16 *q = (s16 *)(D_800ECBEC + a1 * 0x22);
-    s32 i;
-
-    for (i = 2; i < 17; i++) {
-        if (i != 16 || e[0x77] != 0) {
-            e[0x67 + i] += q[i];
-        }
-        if (e[0x67 + i] < 0) {
-            e[0x67 + i] = 0;
-        } else if (i >= 13) {
-            if (e[0x67 + i] > 100) {
-                e[0x67 + i] = 100;
-            }
-        } else if (e[0x67 + i] > 0xFF) {
-            e[0x67 + i] = 0xFF;
-        }
-    }
-}
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E6AF4);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E6BD8);
