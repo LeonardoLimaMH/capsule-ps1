@@ -130,7 +130,24 @@ void func_80025EF8(s32 arg0) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80025FC0);
+void func_80025FC0(s8 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    extern s8 D_80085428[];
+    s32 temp_a0;
+
+    *D_80085428 = arg0;
+    temp_a0 = arg0 & 0xFF;
+    switch (temp_a0) {
+    case 0:
+        func_80026020();
+        break;
+    case 1:
+        func_80026078((u16)arg1, (u16)arg2, (u16)arg3);
+        break;
+    case 2:
+    default:
+        break;
+    }
+}
 
 #include "common.h"
 
@@ -242,7 +259,7 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80026514);
 
 extern u8 D_8008F703;
 extern s32 D_80078C38;
-extern u8 D_8006AF80[], D_8006AF90[], D_8006AFCC[];
+extern u8 D_8006AF80[], D_8006AFCC[];
 extern void func_80026514(s32);
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800267F0);
 
@@ -251,21 +268,158 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80026930);
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800270D4);
 
 extern u8 *D_80078D14;
-extern u8 D_8006AF90[];
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800278C8);
+void func_800278C8(s32 a, s32 b) {
+    extern struct {
+        s16 f0;
+        s16 f2[3];
+        s16 f8[3][2];
+        s16 f14[5];
+    } D_8006AF90[];
+    extern u8 *D_80078D14;
+    s32 v;
+    u8 *dst = (u8 *)0x801CC040 + a * 0x668;
+    u8 *src;
+    s32 i;
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800279D4);
+    D_80078D14 = dst + 0x323;
+    src = D_80078D14;
+    D_8006AF90[b].f0 = dst[0x323];
+    for (i = 0; i < 3; i++) {
+        v = *(src + i + 1);
+        if (v == 0xFF) {
+            v = 0xFFFF;
+        }
+        D_8006AF90[b].f2[i] = (v == 0xFFFF) ? -1 : v;
+
+        v = *(src + i * 2 + 4);
+        if (v == 0xFF) {
+            v = 0xFFFF;
+        }
+        D_8006AF90[b].f8[i][0] = (v == 0xFFFF) ? -1 : v;
+
+        v = *(src + i * 2 + 5);
+        if (v == 0xFF) {
+            v = 0xFFFF;
+        }
+        D_8006AF90[b].f8[i][1] = (v == 0xFFFF) ? -1 : v;
+    }
+}
+
+void func_800279D4(s32 a, s32 b) {
+    extern struct {
+        s16 f0;
+        s16 f2[3];
+        s16 f8[3][2];
+        s16 f14[5];
+    } D_8006AF90[];
+    extern u8 *D_80078D14;
+    u8 *dst = (u8 *)0x801CC040 + a * 0x668;
+    s32 i;
+    s32 k;
+
+    D_80078D14 = dst + 0x323;
+    dst[0x323] = D_8006AF90[b].f0;
+    for (i = 0; i < 3; i++) {
+        *(D_80078D14 + i + 1) = D_8006AF90[b].f2[i];
+        k = i * 2;
+        *(D_80078D14 + k + 4) = D_8006AF90[b].f8[i][0];
+        *(D_80078D14 + k + 5) = D_8006AF90[b].f8[i][1];
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80027A88);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80027B34);
+s32 func_80027B34(u32 a) {
+    extern u8 D_80085428[];
+    extern u8 D_80063940[];
+    extern s32 D_8006B058[];
+    register s32 r asm("a2") = 0;
+    register s32 *tb asm("a0");
+    register u8 *tm asm("v1");
+    u16 b;
+    u8 *e;
+    u32 f8;
+    u32 idx;
+
+    switch (D_80085428[0]) {
+    case 0:
+        if ((b = a) != 0xFFFF) {
+            tb = D_8006B058;
+            tm = D_80063940;
+            e = tm + b * 60;
+            f8 = *(u32 *)(e + 8) >> 31;
+            idx = ((*(u32 *)(e + 0xC) & 0xF) << 1) | f8;
+            r = tb[idx];
+        }
+        break;
+    case 1:
+        if ((b = a) != 0xFFFF) {
+            tb = D_8006B058;
+            tm = D_80063940;
+            e = tm + b * 60;
+            f8 = *(u32 *)(e + 8) >> 31;
+            idx = ((*(u32 *)(e + 0xC) & 0xF) << 1) | f8;
+            r = *(s32 *)((u8 *)(tb + idx) + 0x5c);
+        }
+        break;
+    }
+    return r;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80027C14);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80027E04);
+s32 func_80027E04(u16 a0) {
+    extern struct {
+        u16 f0;
+        u8 pad[0xE];
+        u16 f10;
+        u8 pad2[0x196];
+    } D_80091618[];
+    extern u8 D_800F2D30[];
+    u16 c;
+    u16 i;
+
+    c = D_80091618[a0].f0;
+    for (i = 0; i < 6; i++) {
+        if (i != a0) {
+            if (D_80091618[a0].f10 != 0xFFFF && D_80091618[a0].f0 == c) {
+                break;
+            }
+        }
+    }
+    if (i == 6) {
+        D_800F2D30[c] = 0xFF;
+        return 0;
+    }
+    return 1;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80027EAC);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80028084);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80028200);
+s32 func_80028200(s32 a, s32 b) {
+    extern u8 D_80085428[];
+    extern u8 D_80063940[];
+    extern u16 D_8006B110[][4];
+    u8 *tm;
+    u8 *e;
+    u32 f8;
+    u32 idx;
+
+    switch (D_80085428[0]) {
+    case 0:
+    case 1:
+        if ((a &= 0xFFFF) != 0xFFFF) {
+            tm = D_80063940;
+            e = tm + a * 60;
+            f8 = *(u32 *)(e + 8) >> 31;
+            idx = ((*(u32 *)(e + 0xC) & 0xF) << 1) | f8;
+            break;
+        }
+    default:
+        return 0;
+    }
+    func_80034AB0(D_8006B110[idx][b & 0xFFFF]);
+    return 1;
+}
