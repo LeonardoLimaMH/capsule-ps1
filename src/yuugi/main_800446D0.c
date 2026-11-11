@@ -6,5 +6,3 @@ s32 DsLastCom(void) {
 }
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800446D0", func_800446F0);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800446D0", func_80044794);

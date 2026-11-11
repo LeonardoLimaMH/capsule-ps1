@@ -199,6 +199,7 @@ segments:
       - [0x34E80, c, main_80044634__QueueLen]
       - [0x34EB0, c, main_800446B0]
       - [0x34ED0, c, main_800446D0]
+      - [0x34F94, c, main_800446D0__80044794]
       - [0x35068, c, main_80044868]
       - [0x3509C, c, main_8004489C]
       - [0x35134, c, main_80044934]
