@@ -10,5 +10,21 @@
     ["./run.sh", "make", "split"],
     ["./run.sh", "make", "-j8"],
     ["./run.sh", "python3", "tools/objdiff_report.py", "--objects"]
-  ]
+  ],
+  "matrix": {
+    "build": ["./run.sh", "python3", "tools/matrix_build.py", "{job}"],
+    "profiles": [
+      {"name": "2.7.2-psx", "compiler": "GCC 2.7.2 PSX", "flags": "-O2 -G8"},
+      {"name": "2.7.2-psx+g0fill", "compiler": "GCC 2.7.2 PSX", "flags": "-O2 -G0 + aspsx_fill"},
+      {"name": "2.7.2-psx+g0fill+spfill", "compiler": "GCC 2.7.2 PSX", "flags": "-O2 -G0 + aspsx_fill --sp"},
+      {"name": "2.7.2-cdk", "compiler": "GCC 2.7.2 CDK", "flags": "-O2 -G8"},
+      {"name": "2.7.2-cdk+g0fill", "compiler": "GCC 2.7.2 CDK", "flags": "-O2 -G0 + aspsx_fill"},
+      {"name": "2.7.2-cdk+g0fill+spfill", "compiler": "GCC 2.7.2 CDK", "flags": "-O2 -G0 + aspsx_fill --sp"},
+      {"name": "2.8.1-psx", "compiler": "GCC 2.8.1 PSX", "flags": "-O2 -G8"},
+      {"name": "2.8.1-psx+g0fill", "compiler": "GCC 2.8.1 PSX", "flags": "-O2 -G0 + aspsx_fill"},
+      {"name": "2.8.1-psx+g0fill+spfill", "compiler": "GCC 2.8.1 PSX", "flags": "-O2 -G0 + aspsx_fill --sp"}
+    ],
+    "contexts": ["file", "alone", "neighbors", "extern", "tentative"],
+    "auto": true
+  }
 }
