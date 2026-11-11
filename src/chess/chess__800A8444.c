@@ -63,29 +63,20 @@ void func_800A84A0(undefined1 *param_1,undefined4 param_2,int param_3,int param_
   return;
 }
 
-static inline void update_800A8548(u8 *p, s32 side, s32 index, s32 active)
-{
-    extern u8 D_80085428[];
-    if (index != 5) {
-        switch (*p) {
-        case 0x13: case 0x22: case 0x25: case 0x31:
-        case 0x47: case 0x48: case 0x5C: case 0x5D:
-            if (active == 0) {
-                if (p[0x27] == 0) {
-                    p[0x27] = 1;
-                    func_8009C5C4(D_80085428, side, index, p);
-                }
-            } else if (p[0x27] != 0) {
-                p[0x27] = 0;
-                func_8009C278(D_80085428, side, index);
-            }
-        }
-    }
-}
+typedef struct {
+    u8 unk0;
+    u8 pad01[0x16];
+    u8 unk17;
+    u8 pad18[0xB];
+    u8 unk23;
+    u8 pad24[3];
+    u8 unk27;
+    u8 unk28;
+    u8 pad29[0x53];
+} ChessEnt7C;
 
 void func_800A8548(s32 arg0, s32 arg1, s32 arg2)
 {
-    extern u8 D_80085428[];
     s32 i = 0;
     u8 *p = (u8 *)(arg1 + arg2 * 0x2E8 + 0x18);
     do {
@@ -95,30 +86,10 @@ void func_800A8548(s32 arg0, s32 arg1, s32 arg2)
             if (func_800CA6B8(arg0, arg2, arg2, i) != 0) {
                 p[0x23] = 0;
                 p[0x17] |= 0x80;
-                if (i != 5) {
-                    switch (p[0]) {
-                    case 0x13: case 0x22: case 0x25: case 0x31:
-                    case 0x47: case 0x48: case 0x5C: case 0x5D:
-                        if (p[0x27] != 0) {
-                            p[0x27] = 0;
-                            func_8009C278(D_80085428, arg2, i);
-                        }
-                        break;
-                    }
-                }
+                update_800A8548(p, arg2, i, 1);
             } else {
                 p[0x17] &= 0x7F;
-                if (i != 5) {
-                    switch (p[0]) {
-                    case 0x13: case 0x22: case 0x25: case 0x31:
-                    case 0x47: case 0x48: case 0x5C: case 0x5D:
-                        if (p[0x27] == 0) {
-                            p[0x27] = 1;
-                            func_8009C5C4(D_80085428, arg2, i, p);
-                        }
-                        break;
-                    }
-                }
+                update_800A8548(p, arg2, i, 0);
             }
         }
         p += 0x7C;
