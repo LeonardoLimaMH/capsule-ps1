@@ -19,27 +19,41 @@ typedef struct {
     RaiseSlotB slots[32];
 } RaiseEntB;
 
-void func_800DFB80(s32 unused, u16 idx) {
-    u32 *e = (u32 *)(D_80092008 + idx * 0x44);
-    s16 i = 0;
-    s16 n;
-    s32 half;
+/* Inverte a ordem dos n slots e gira a direção de cada um em 180 graus. */
+static inline void RaiseEnt_Reverse(RaiseEntB *e, s16 n) {
+    s16 i;
     s32 j;
-    u16 tmp;
+    RaiseSlotB tmp;
 
-    n = (e[0] >> 11) & 0x3F;
-    e[0] = ((e[0] & 0xFF81FFFF) | (n << 17)) & ~0x7E0;
+    for (i = 0; i < (u32)n >> 1; i++) {
+        j = n - (i + 1);
+        tmp = e->slots[i];
+        e->slots[i] = e->slots[j];
+        e->slots[j] = tmp;
+        e->slots[i].dir = (e->slots[i].dir + 4) % 8;
+        e->slots[j].dir = (e->slots[j].dir + 4) % 8;
+    }
+}
+
+void func_800DFB80(s32 unused, u16 idx) {
+    RaiseEntB *e = (RaiseEntB *)(D_80092008 + idx * 0x44);
+    s16 i = 0;
+    s32 n;
+    u32 half;
+    s32 j;
+    RaiseSlotB tmp;
+
+    n = (s16)e->idx;
+    e->cnt = n;
+    e->f3 = 0;
     half = (u32)n >> 1;
-    if (half != 0) {
-        do {
-            j = n - (i + 1);
-            tmp = ((u16 *)e)[i + 2];
-            ((u16 *)e)[i + 2] = ((u16 *)e)[j + 2];
-            ((u16 *)e)[j + 2] = tmp;
-            ((u16 *)e)[i + 2] = (((u16 *)e)[i + 2] & 0xFFF8) | (((((u16 *)e)[i + 2] & 7) + 4) % 8 & 7);
-            ((u16 *)e)[j + 2] = (((u16 *)e)[j + 2] & 0xFFF8) | (((((u16 *)e)[j + 2] & 7) + 4) % 8 & 7);
-            i++;
-        } while (i < half);
+    for (; i < (s32)half; i++) {
+        j = n - (i + 1);
+        tmp = e->slots[i];
+        e->slots[i] = e->slots[j];
+        e->slots[j] = tmp;
+        e->slots[i].dir = (e->slots[i].dir + 4) % 8;
+        e->slots[j].dir = (e->slots[j].dir + 4) % 8;
     }
 }
 
