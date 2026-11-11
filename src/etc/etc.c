@@ -25,7 +25,10 @@ static inline s32 Etc_FindPrev(EtcCtx *arg0, s32 arg1, s32 arg2) {
     u8 id = arg0->unk5E8[arg1][arg2].unk0;
     s32 ret = 0;
 
-    while (arg1 != 0 || arg2 != 0) {
+    if (arg1 == 0 && arg2 == 0) {
+        return ret;
+    }
+    do {
         if (arg2 == 0) {
             arg1--;
             arg2 = 4;
@@ -35,7 +38,7 @@ static inline s32 Etc_FindPrev(EtcCtx *arg0, s32 arg1, s32 arg2) {
         if (id == arg0->unk5E8[arg1][arg2].unk0) {
             ret = arg0->unk5E8[arg1][arg2].unk2A + 1;
         }
-    }
+    } while (arg1 != 0 || arg2 != 0);
     return ret;
 }
 
@@ -170,82 +173,21 @@ s32 func_80097D8C(s32 arg0, s32 arg1, s32 arg2)
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80097E40);
 
-void func_8009807C(s32 arg0, s32 arg1, s32 arg2) {
+void func_8009807C(EtcCtx *arg0, s32 arg1, s32 arg2) {
     extern void func_8001A49C();
-    register EtcCtx *var_t4 asm("t4");
-    register s32 var_t2 asm("t2");
-    register Etc7C *temp_t3 asm("t3");
-    register s32 var_t1 asm("t1");
-    register u8 temp_t0 asm("t0");
-    register s32 var_a3 asm("a3");
-    s32 v;
-    s32 var_a0;
+    s32 ret = 0;
+    Etc7C *p = &arg0->unk5E8[arg1][arg2];
 
-    var_t4 = (EtcCtx *)arg0;
-    var_t2 = 0;
-    temp_t3 = &var_t4->unk5E8[arg1][arg2];
     if (arg2 == 5) {
-        goto block_12;
+        if (p->unk2A < 10 || arg1 != p->unk2A - 10) {
+            ret = 1;
+        }
+    } else if (Etc_FindPrev(arg0, arg1, arg2) != 0) {
+        ret = 1;
     }
-    var_t1 = var_t2;
-    temp_t0 = var_t4->unk5E8[arg1][arg2].unk0;
-    var_a3 = arg1;
-    if (arg1 != 0) {
-        goto loop_3;
+    if (ret == 0) {
+        func_8001A49C(Etc_GetVramAddr(p->unk2A));
     }
-    if (arg2 == 0) {
-        goto block_10;
-    }
-loop_3:
-    if (arg2 == 0) {
-        goto block_5;
-    }
-block_4:
-    arg2 -= 1;
-    goto block_6;
-block_5:
-    var_a3 -= 1;
-    arg2 = 4;
-block_6:
-    if (temp_t0 == var_t4->unk5E8[var_a3][arg2].unk0) {
-        var_t1 = var_t4->unk5E8[var_a3][arg2].unk2A + 1;
-    }
-    if (var_a3 != 0) {
-        goto loop_3;
-    }
-    if (arg2 != 0) {
-        goto block_4;
-    }
-block_10:
-    if (var_t1 != 0) {
-        var_t2 = 1;
-    }
-    goto block_15;
-
-block_12:
-    if (temp_t3->unk2A < 10) {
-        goto block_14;
-    }
-    if (arg1 == temp_t3->unk2A - 10) {
-        goto block_15;
-    }
-block_14:
-    var_t2 = 1;
-
-block_15:
-    if (var_t2 != 0) {
-        return;
-    }
-
-    v = temp_t3->unk2A;
-    arg1 = v;
-    if (v < 10) {
-        var_a0 = (v * 0xE000) + (s32)0x80140000;
-    } else {
-        var_a0 = (s32)0x80124000;
-        var_a0 = ((arg1 - 10) * 0xE000) + var_a0;
-    }
-    func_8001A49C(var_a0);
 }
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800981F0);
