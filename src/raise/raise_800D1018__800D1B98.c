@@ -108,12 +108,7 @@ s32 func_800D262C(s32 mode, s32 player) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98", func_800D2748);
 
-typedef struct {
-    u8 pad[0x384];
-    s16 enabled;
-    s16 timer;
-    u8 tail[0x414];
-} WorkTimerRecord;
+typedef struct WorkTimerRecord WorkTimerRecord;
 
 extern WorkTimerRecord D_80100F38[];
 
