@@ -301,7 +301,17 @@ u8 func_800D7328(u8 arg0, void *arg1) {
     return (*D_80119659);
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844", func_800D7388);
+u8 func_800D7388(u8 *arg0, s32 arg1) {
+    extern u8 D_80119658[];
+    extern u8 D_80119659[];
+    extern u8 (*D_80118C18[])[13][4];
+    u8 v = D_80118C18[0][arg0[0x15]][arg0[0x16]][3];
+    func_8001A998(arg1, 0xC);
+    D_80119658[0] = 1;
+    D_80119659[0] = 0;
+    func_800D6DA4(v, arg1);
+    return D_80119659[0];
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844", func_800D741C);
 
