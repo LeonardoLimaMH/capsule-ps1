@@ -56,7 +56,41 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BC8FC);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BCAEC);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BCB58);
+extern s32 func_800BBA38();
+extern s32 func_800B4D60(s32);
+void func_800BCB58(void)
+{
+    struct T { s16 n; s16 a[1]; };
+    extern u8 D_800EFF58[];
+    extern u8 D_800EE5D0[];
+    extern u8 D_80100F38[];
+    s32 i;
+    s32 j;
+    u8 *p;
+    s32 *base;
+
+    func_8001611C(0x1000);
+    base = (s32 *)D_800EFF58;
+    base[0x33C / 4] = 1;
+    base[0x340 / 4] = 0x20;
+    base[0x344 / 4] = 0;
+    base[0x348 / 4] = ((struct T *)D_8006AF90)->n + 4;
+    for (j = 0; j < ((struct T *)D_8006AF90)->n; j++) {
+        base[0x3E8 / 4 + j] = ((struct T *)D_8006AF90)->a[j];
+    }
+    M2C_GFIELD(D_800EFF58, s32, 0x14) = func_800BBA38(0x1A, 0x60, -0x30, 5, 0, D_800EE5D0, M2C_GFIELD(D_800EFF58, s32, 0x18), 1, 0, 0, 2, 0, 0);
+    func_800BCD9C();
+    func_800BCE1C();
+    func_800BCC98();
+    func_800BCE94();
+    func_800BCF20();
+    func_800BE020(2);
+    p = D_80100F38;
+    for (i = 0; i < 6; i++) {
+        *(s32 *)(p + 0x190) = func_800B4D60(i);
+        p += 0x79C;
+    }
+}
 
 extern u8 D_800178F8[];
 extern u8 D_8008ED68[];
