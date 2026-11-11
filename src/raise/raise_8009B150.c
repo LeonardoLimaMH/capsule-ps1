@@ -3,13 +3,58 @@
 static inline s32 verifica_indice_8009B150(s32 i) {
     extern u8 D_80091618[];
     extern u16 D_8006AF80[];
-    u8 *p = D_80091618 + i * 0x1A8;
+    register s32 indice asm("v1") = i;
+    u8 *p = D_80091618 + indice * 0x1A8;
     if (*(u16 *)(p + 0x10) == 0xFFFF || i == *D_8006AF80) return 0;
     if (*(u16 *)(p + 0x8A) != 0xFFFF) return 0;
     return *(u16 *)(p + 0x84) < 3U;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009B150", func_8009B150);
+s32 func_8009B150(void) {
+    extern u8 D_8008ED68[];
+    extern s32 D_8008F710[];
+    extern s32 D_8008F704[];
+    extern void func_80034AB0(s32);
+    u8 *base = D_8008ED68;
+    s32 s0 = *(s32 *)(base + 0x99C);
+    s32 flags = *(s32 *)(base + 0x88);
+    s32 ret = 0;
+    u32 temp_a0;
+    u8 *b;
+    s32 result;
+    if (flags & 0x20) {
+        func_80034AB0(0x48);
+        ret = 1;
+    } else if (flags & 0x40) {
+        func_80034AB0(0x5D);
+        ret = -1;
+    } else {
+        b = base;
+        if (flags & 0x2000) {
+            do {
+                temp_a0 = *(u32 *)(b + 0x99C);
+                temp_a0 += 1;
+                temp_a0 %= 6;
+                *(s32 *)(b + 0x99C) = temp_a0;
+            } while (!verifica_indice_8009B150(temp_a0));
+            *D_8008F710 = 2;
+        } else if (flags & 0x8000) {
+            do {
+                temp_a0 = *(u32 *)(b + 0x99C);
+                temp_a0 += 5;
+                temp_a0 %= 6;
+                *(s32 *)(b + 0x99C) = temp_a0;
+            } while (!verifica_indice_8009B150(temp_a0));
+            *D_8008F710 = 1;
+        }
+    }
+    result = ret;
+    if (s0 != *D_8008F704) {
+        func_80034AB0(0x84);
+        result = 2;
+    }
+    return result;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009B150", func_8009B350);
 
