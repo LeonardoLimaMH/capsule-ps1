@@ -4,10 +4,9 @@ static inline s32 verifica_indice_8009B150(s32 i) {
     extern u8 D_80091618[];
     extern u16 D_8006AF80[];
     register s32 indice asm("v1") = i;
-    register u32 limite asm("a1") = 0xFFFF;
     u8 *p = D_80091618 + indice * 0x1A8;
-    if (*(u16 *)(p + 0x10) == limite || i == *D_8006AF80) return 0;
-    if (*(u16 *)(p + 0x8A) != limite) return 0;
+    if (*(u16 *)(p + 0x10) == 0xFFFF || i == *D_8006AF80) return 0;
+    if (*(u16 *)(p + 0x8A) != 0xFFFF) return 0;
     return *(u16 *)(p + 0x84) < 3U;
 }
 
