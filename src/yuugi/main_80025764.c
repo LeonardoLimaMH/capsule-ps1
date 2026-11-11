@@ -130,7 +130,24 @@ void func_80025EF8(s32 arg0) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80025FC0);
+void func_80025FC0(s8 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    extern s8 D_80085428[];
+    s32 temp_a0;
+
+    *D_80085428 = arg0;
+    temp_a0 = arg0 & 0xFF;
+    switch (temp_a0) {
+    case 0:
+        func_80026020();
+        break;
+    case 1:
+        func_80026078((u16)arg1, (u16)arg2, (u16)arg3);
+        break;
+    case 2:
+    default:
+        break;
+    }
+}
 
 #include "common.h"
 
@@ -329,7 +346,7 @@ void func_80027A88(void) {
     for (i = 1; i < 7; i++) {
         extern u8 D_80078C50[];
         D_8006B1EC[i] = l.v[i - 1];
-        *(D_80078C50 + i) = 0;
+        D_80078C50[i] = 0;
     }
 }
 
@@ -375,4 +392,22 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80027EAC);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80028084);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80028200);
+s32 func_80028200(s32 a, s32 b) {
+    extern u8 D_80085428[];
+    extern u8 D_80063940[];
+    extern u8 D_8006B110[];
+    u8 *e;
+    u32 idx;
+    s32 t = D_80085428[0];
+    s32 r;
+
+    if (t < 2 && t >= 0 && (a &= 0xFFFF) != 0xFFFF) {
+        e = D_80063940 + a * 60;
+        idx = (*(u32 *)(e + 8) >> 31) | ((*(u32 *)(e + 0xC) & 0xF) << 1);
+        func_80034AB0(*(u16 *)(D_8006B110 + idx * 8 + (b & 0xFFFF) * 2));
+        r = 1;
+    } else {
+        r = 0;
+    }
+    return r;
+}
