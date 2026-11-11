@@ -23,33 +23,10 @@ typedef struct {
 static inline void RaiseEnt_Reverse(RaiseEntB *e, s16 n) {
     s16 i;
     s32 j;
+    s32 k;
     u32 half = (u32)n >> 1;
     RaiseSlotB tmp;
 
-    for (i = 0; i < (s32)half; i++) {
-        tmp = e->slots[i];
-        j = n - (i + 1);
-        e->slots[i] = e->slots[j];
-        e->slots[j] = tmp;
-        e->slots[i].dir = (e->slots[i].dir + 4) % 8;
-        e->slots[j].dir = (e->slots[j].dir + 4) % 8;
-    }
-}
-
-void func_800DFB80(s32 unused, u16 idx) {
-    RaiseEntB *e = (RaiseEntB *)(D_80092008 + idx * 0x44);
-    register s16 n asm("v1");
-    s16 i;
-    s32 j;
-    s32 k;
-    u32 half;
-    RaiseSlotB tmp;
-
-    n = e->idx;
-    e->cnt = n;
-    e->f3 = 0;
-
-    half = (u32)n >> 1;
     for (i = 0; i < (s32)half; i++) {
         tmp = e->slots[i];
         k = i + 1;
@@ -59,6 +36,16 @@ void func_800DFB80(s32 unused, u16 idx) {
         e->slots[i].dir = (e->slots[i].dir + 4) % 8;
         e->slots[j].dir = (e->slots[j].dir + 4) % 8;
     }
+}
+
+void func_800DFB80(s32 unused, u16 idx) {
+    RaiseEntB *e = (RaiseEntB *)(D_80092008 + idx * 0x44);
+    s16 n;
+
+    n = e->idx;
+    e->cnt = n;
+    e->f3 = 0;
+    RaiseEnt_Reverse(e, n);
 }
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800DFCA0);
