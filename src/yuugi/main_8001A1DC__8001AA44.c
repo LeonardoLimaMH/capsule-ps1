@@ -1,6 +1,13 @@
 #include "common.h"
 #include "yuugi.h"
 
+static inline s32 distance_abs(s32 value) {
+    if (value < 0) {
+        value = -value;
+    }
+    return value;
+}
+
 s32 func_8001AA44(s32 arg0, s32 arg1) {
     s32 var_a2;
     s32 var_v1;
@@ -64,7 +71,47 @@ u32 func_8001AB74(u32 n) {
     return y;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001AA44", func_8001ABD4);
+s32 func_8001ABD4(s32 *a, s32 *b) {
+    s32 m;
+    s32 s;
+    s32 t;
+    s32 dx, dy, dz;
+    u32 n, x, y;
+
+    m = __builtin_abs(a[0] - b[0]);
+    t = __builtin_abs(a[1] - b[1]);
+    s = 0;
+    if (t < m) {
+        t = __builtin_abs(a[2] - b[2]);
+        if (t < m) goto loop;
+    }
+    m = __builtin_abs(a[2] - b[2]);
+    t = __builtin_abs(a[1] - b[1]);
+    if (m < t) m = t;
+loop:
+    while ((m >> s) > 0x4000) {
+        s++;
+    }
+    dx = (a[0] - b[0]) >> s;
+    dy = (a[1] - b[1]) >> s;
+    dz = (a[2] - b[2]) >> s;
+    n = dx * dx + dy * dy + dz * dz;
+    if (n == 0) {
+        y = 0;
+    } else {
+        x = 1;
+        y = n;
+        while (x < y) {
+            x <<= 1;
+            y >>= 1;
+        }
+        do {
+            y = x;
+            x = (n / y + y) >> 1;
+        } while (x < y);
+    }
+    return y << s;
+}
 
 void func_8001AD48(s32 arg0)
 {
