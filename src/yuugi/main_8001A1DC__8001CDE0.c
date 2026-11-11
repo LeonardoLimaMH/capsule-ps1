@@ -20,7 +20,55 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001CDE0", func_8001D230);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001CDE0", func_8001D4FC);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001CDE0", func_8001D748);
+void func_8001D748(void) {
+    extern u8 D_80085428[];
+    extern struct {
+        u8 f0;
+        u8 f1;
+        u8 pad2[2];
+        s32 f4;
+        u8 f8[0x2BC];
+        u8 f2c4[0x67];
+        u8 f32b;
+        u8 f32c[3];
+        u8 f32f[3][2];
+        u8 f335;
+        u8 f336;
+        u8 f337;
+    } D_8008FD80;
+    extern s32 D_8008ED84[];
+    extern struct {
+        u8 pad0[0x14];
+        u32 f14;
+        u8 pad18[0x24];
+    } D_80063940[];
+    extern struct {
+        s16 f0;
+        s16 f2[3];
+        s16 f8[3][2];
+        s16 f14[5];
+    } D_8006AF90[];
+    extern void func_8001AA70(void *, void *, s32);
+    u8 *s1 = D_80085428;
+    s32 i;
+
+    D_8008FD80.f0 = s1[2];
+    D_8008FD80.f1 = s1[4];
+    D_8008FD80.f4 = D_8008ED84[0];
+    func_8001AA70(D_8008FD80.f8, s1 + 0x50, 0x2BC);
+    for (i = 0; i < 0x67; i++) {
+        D_8008FD80.f2c4[i] = (D_80063940[i].f14 >> 5) & 1;
+    }
+    D_8008FD80.f335 = s1[0x5D6];
+    D_8008FD80.f337 = s1[0x5D4];
+    D_8008FD80.f336 = s1[6];
+    D_8008FD80.f32b = D_8006AF90[0].f0;
+    for (i = 0; i < 3; i++) {
+        D_8008FD80.f32c[i] = D_8006AF90[0].f2[i];
+        D_8008FD80.f32f[i][0] = D_8006AF90[0].f8[i][0];
+        D_8008FD80.f32f[i][1] = D_8006AF90[0].f8[i][1];
+    }
+}
 
 void func_8001D850(void) {
     extern u8 D_80085428[];
