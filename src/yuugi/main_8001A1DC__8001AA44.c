@@ -16,7 +16,32 @@ s32 func_8001AA44(s32 arg0, s32 arg1) {
     return var_a2;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001AA44", func_8001AA70);
+void func_8001AA70(void *dst, void *src, s32 n) {
+    struct { s32 *s; s32 *d; } p4;
+    struct { u16 *s; u16 *d; } p2;
+    u8 *s1;
+    u8 *d1;
+    s32 i;
+    if (((u32)src & 3) == 0 && ((u32)dst & 3) == 0 && (n & 3) == 0) {
+        p4.s = src;
+        p4.d = dst;
+        for (i = n / 4 - 1; i >= 0; i--) {
+            p4.d[i] = p4.s[i];
+        }
+    } else if (((u32)src & 1) == 0 && ((u32)dst & 1) == 0 && (n & 1) == 0) {
+        p2.s = src;
+        p2.d = dst;
+        for (i = n / 2 - 1; i >= 0; i--) {
+            p2.d[i] = p2.s[i];
+        }
+    } else {
+        s1 = src;
+        d1 = dst;
+        for (i = n - 1; i >= 0; i--) {
+            d1[i] = s1[i];
+        }
+    }
+}
 
 #include "common.h"
 
