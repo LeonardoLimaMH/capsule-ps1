@@ -270,15 +270,17 @@ s16 func_8003804C(u8 *p, u32 a) {
         if (p[0x1D] == 0) {
             return 0;
         }
-        r = -((p[0x1D] * 2) * (0x40 - a));
+        r = -((p[0x1D] << 1) * (0x40 - a));
     } else {
+        register u32 d asm("v1");
         if (a == 0x40) {
             return 0;
         }
+        d = a - 0x3F;
         if (p[0x1C] == 0) {
             return 0;
         }
-        r = (p[0x1C] * 2) * (a - 0x3F);
+        r = (p[0x1C] << 1) * d;
     }
     return r;
 }
