@@ -39,7 +39,37 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CAECC);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CAF74);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CB10C);
+s32 func_800CB24C(void *arg0, u8 *arg1, s32 arg2);
+s32 func_800CB10C(void *arg0, u8 *arg1, s32 arg2)
+{
+    s32 sc[2];
+    s32 ret;
+    s32 i;
+    s32 j;
+    u8 *e;
+    s32 d;
+
+    ret = func_800CB24C(arg0, arg1, arg2);
+    if (ret != 1) {
+        return ret;
+    }
+    for (i = 0; i < 2; i++) {
+        sc[i] = 0;
+        for (j = 0; j < 5; j++) {
+            e = arg1 + 0x18 + i * 0x2E8 + j * 0x7C;
+            if (!(*(u32 *)(e + 0x18) & 0x300)) {
+                sc[i] += 0x46;
+                sc[i] += e[0xE] * 50 / e[9];
+            }
+        }
+        sc[i] -= (arg1 + i)[0x60A] * 80;
+    }
+    d = sc[arg2] - sc[1 - arg2];
+    if (d > 80) {
+        return 2;
+    }
+    return d >= -80;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CB24C);
 
