@@ -1,5 +1,9 @@
 #include "common.h"
 
+extern s16 D_8006AF90[];
+void func_800BCC98(void);
+void func_800BCE94(void);
+
 void func_800BC728(s32 arg0)
 {
   int new_var3;
