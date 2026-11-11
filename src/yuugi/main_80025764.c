@@ -386,7 +386,31 @@ s32 func_80027B34(u32 a) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80027C14);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80027E04);
+s32 func_80027E04(u16 a0) {
+    extern struct {
+        u16 f0;
+        u8 pad[0xE];
+        u16 f10;
+        u8 pad2[0x196];
+    } D_80091618[];
+    extern u8 D_800F2D30[];
+    u16 c;
+    u16 i;
+
+    c = D_80091618[a0].f0;
+    for (i = 0; i < 6; i++) {
+        if (i != a0) {
+            if (D_80091618[a0].f10 != 0xFFFF && D_80091618[a0].f0 == c) {
+                break;
+            }
+        }
+    }
+    if (i == 6) {
+        D_800F2D30[c] = 0xFF;
+        return 0;
+    }
+    return 1;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80027EAC);
 
@@ -395,19 +419,23 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80028084);
 s32 func_80028200(s32 a, s32 b) {
     extern u8 D_80085428[];
     extern u8 D_80063940[];
-    extern u8 D_8006B110[];
+    extern u16 D_8006B110[][4];
+    u8 *tm;
     u8 *e;
     u32 idx;
-    s32 t = D_80085428[0];
-    s32 r;
 
-    if (t < 2 && t >= 0 && (a &= 0xFFFF) != 0xFFFF) {
-        e = D_80063940 + a * 60;
-        idx = (*(u32 *)(e + 8) >> 31) | ((*(u32 *)(e + 0xC) & 0xF) << 1);
-        func_80034AB0(*(u16 *)(D_8006B110 + idx * 8 + (b & 0xFFFF) * 2));
-        r = 1;
-    } else {
-        r = 0;
+    switch (D_80085428[0]) {
+    case 0:
+    case 1:
+        if ((a &= 0xFFFF) != 0xFFFF) {
+            tm = D_80063940;
+            e = tm + a * 60;
+            idx = (*(u32 *)(e + 8) >> 31) | ((*(u32 *)(e + 0xC) & 0xF) << 1);
+            break;
+        }
+    default:
+        return 0;
     }
-    return r;
+    func_80034AB0(D_8006B110[idx][b & 0xFFFF]);
+    return 1;
 }
