@@ -40,7 +40,22 @@ void func_800A2B64(u8 *arg0, s16 arg1) {
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A2BB0);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A2CC8);
+void func_800A2CC8(s32 arg0, s32 arg1) {
+    extern s16 D_800B3B38[];
+    extern s16 D_800B3B70[][6];
+    extern u8 D_800B3B90[][0x32];
+    s32 i, j;
+    for (; arg0 < arg1; arg0++) {
+        for (i = 0; i < 6; i++) {
+            ((s16 *)((u8 *)D_800B3B38 + arg0 * 12 + 0x10))[i] = -1;
+            D_800B3B70[arg0][i] = 0;
+        }
+        for (j = 0x31; j >= 0; j--) {
+            D_800B3B90[arg0][j] = 0;
+        }
+        D_800B3B38[arg0 + 2] = 6;
+    }
+}
 
 void func_800A2D84(void *arg0)
 {
@@ -362,11 +377,11 @@ void func_800A3814(u8 *arg0) {
     extern u16 D_800B2CCC[];
     extern u16 D_800B2CE4[];
     extern s16 D_800B3B40[];
-    s32 i;
     u8 *p = D_800859F8;
+    u8 i = p[9];
     s32 a1;
+    s32 f;
     s16 v;
-    i = p[9];
     if (*D_8008EE44 != 0x12) {
         *(s32 *)(arg0 + 0x38) |= 1;
     } else {
@@ -379,23 +394,23 @@ void func_800A3814(u8 *arg0) {
         if (*D_800B3B40 != 0) {
             if (i == 0xA) {
                 if (p[0xA] == 0 && p[0x11] == 1) {
-                    v = *D_800B2CC8 - 0x20;
+                    *(s16 *)(arg0 + 0x46) = *D_800B2CC8 - 0x20;
                 } else {
-                    v = D_800B2CB4[i] - 8;
+                    *(s16 *)(arg0 + 0x46) = D_800B2CB4[i] - 8;
                 }
             } else {
-                v = D_800B2CB4[i] + 0x20;
+                *(s16 *)(arg0 + 0x46) = D_800B2CB4[i] + 0x20;
             }
-            *(s16 *)(arg0 + 0x46) = v;
-            *(s32 *)(arg0 + 0x30) = (*(s32 *)(arg0 + 0x30) & ~0x1C0) | 0x40;
-            *(s16 *)(arg0 + 0x4A) = D_800B2CE4[i] - 0x20;
+            f = *(s32 *)(arg0 + 0x30) & ~0x1C0;
+            v = D_800B2CE4[i];
+            *(s32 *)(arg0 + 0x30) = f | 0x40;
+            *(s16 *)(arg0 + 0x4A) = v - 0x20;
         } else {
             if (i == 0xA) {
-                v = *D_800B2CB0 - 8;
+                *(s16 *)(arg0 + 0x46) = *D_800B2CB0 - 8;
             } else {
-                v = D_800B2C9C[i] - 0x30;
+                *(s16 *)(arg0 + 0x46) = D_800B2C9C[i] - 0x30;
             }
-            *(s16 *)(arg0 + 0x46) = v;
             *(s16 *)(arg0 + 0x4A) = D_800B2CCC[i] + 0x10;
             *(s32 *)(arg0 + 0x30) &= ~0x1C0;
         }
@@ -464,8 +479,9 @@ void func_800A3C70(u8 *arg0) {
     extern u16 D_8008EE44[];
     extern s16 D_800B3B38[];
     u8 *p = D_80085428;
+    register s16 *t asm("v0");
     s16 *q;
-    if (D_8008EE44[0] == 0x18 && *(q = (s16 *)(*(s32 *)(arg0 + 0x84) * 2 + (u8 *)D_800B3B38)) == 0) {
+    if (D_8008EE44[0] == 0x18 && *(q = (t = D_800B3B38) + *(s32 *)(arg0 + 0x84)) == 0) {
         if (q[6] == *(s32 *)(arg0 + 0x80)) {
             arg0[0x5A] = 0x80;
             arg0[0x59] = 0x80;
