@@ -11,7 +11,7 @@ typedef struct {
 extern s32 ReadTIM();
 extern s32 func_80019F30();
 extern u8 D_80069AD4[];
-extern s32 D_80069C08;
+extern s32 D_80069C08[];
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002C214", func_8002C214);
 
