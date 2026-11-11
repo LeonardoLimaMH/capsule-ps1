@@ -28,7 +28,56 @@ s16 func_80033C10(u16 a0) {
     return ((struct Fila *)D_800922F0)->f134;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_80033CEC);
+void func_80033CEC(u16 *param_1, s32 param_2) {
+    s32 i;
+    s32 j;
+    s32 k;
+    u16 val;
+    u16 *p;
+
+    for (k = param_2 / 2; k > 0; k--) {
+        i = k;
+        val = param_1[i - 1];
+        j = i * 2;
+        while (j <= param_2) {
+            if (j < param_2 && param_1[j - 1] < param_1[j]) {
+                j++;
+            }
+            if (val >= param_1[j - 1]) {
+                break;
+            }
+            param_1[i - 1] = param_1[j - 1];
+            i = j;
+            j = i * 2;
+        }
+        param_1[i - 1] = val;
+    }
+
+    if (param_2 > 1) {
+        p = (u16 *)((param_2 * 2) + (u32)param_1);
+        do {
+            param_2--;
+            i = 1;
+            val = p[-1];
+            j = 2;
+            (p--)[-1] = param_1[0];
+            if (param_2 > 1) {
+                while (j <= param_2) {
+                    if (j < param_2 && param_1[j - 1] < param_1[j]) {
+                        j++;
+                    }
+                    if (val >= param_1[j - 1]) {
+                        break;
+                    }
+                    param_1[i - 1] = param_1[j - 1];
+                    i = j;
+                    j = i * 2;
+                }
+            }
+            param_1[i - 1] = val;
+        } while (param_2 > 1);
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_80033E5C);
 
