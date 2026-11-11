@@ -39,7 +39,7 @@ s32 func_800282E0(void)
 void func_8002835C(void) {
     extern struct { u8 pad[0x40]; s32 n; s32 a[1]; } D_800EF524;
     extern s32 D_80069EA0[];
-    extern s32 D_800EF360[4];
+    extern s32 D_800EF360[];
     s32 i;
 
     D_80069EA0[0] = D_800EF524.n != 0;
@@ -149,24 +149,31 @@ s32 func_800293E8(void) {
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_800294AC);
 
 s32 func_800296C0(s32 a0, s32 a1) {
-    extern u8 D_800EF364[][8][8];
+    extern u8 D_800EF364[];
     extern struct { u8 pad[0x10]; u16 f10; u8 pad2[0x1A8 - 0x12]; } D_80091618[];
-    u32 id = (u16)func_800B1260();
+    u32 id = (u16)func_800B1260(a0);
     u16 t;
+    s32 row;
+    s32 idx;
+    u8 *b;
+    u8 *p;
 
     if (id != 0xFFFF) {
         t = D_80091618[id].f10;
         if (t == 0xFFFF) {
             return 0;
         }
-        switch (t) {
-        case 1:
-        case 5:
-        case 3:
-            return D_800EF364[t][a1 / 8][a1 % 8] == 0xFF;
+        if (t == 1 || t == 5 || t == 3) {
+            goto found;
         }
     }
     return 0;
+found:
+    row = a1 / 8;
+    idx = row * 8 + a1 % 8;
+    b = D_800EF364;
+    p = (t << 6) + b;
+    return p[idx] == 0xFF;
 }
 
 extern s16 D_80078C28, D_80078C2C;
