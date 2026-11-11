@@ -20,4 +20,77 @@ s32 func_800C675C(s32 a0, s32 a1) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C662C", func_800C6800);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C662C", func_800C69B0);
+/* avança o cursor de texto (+0x2BC) até o caractere c */
+static inline void skip_fwd(u8 *p, s32 c) {
+    u8 *pc = *(u8 **)(p + 0x2BC);
+    if (*pc != c) {
+        u8 *n;
+        u8 *old;
+        do {
+            n = pc + 1;
+            old = pc;
+            *(u8 **)(p + 0x2BC) = n;
+            pc = n;
+        } while (old[1] != c);
+    }
+}
+
+/* recua o cursor de texto até o caractere c e para logo depois dele */
+static inline void skip_back(u8 *p, s32 c) {
+    u8 *pc = *(u8 **)(p + 0x2BC);
+    if (*pc != c) {
+        u8 *n;
+        u8 *old;
+        do {
+            n = pc - 1;
+            old = pc;
+            *(u8 **)(p + 0x2BC) = n;
+            pc = n;
+        } while (old[-1] != c);
+    }
+    *(s32 *)(p + 0x2BC) += 1;
+}
+
+s32 func_800C69B0(s32 a0, s32 a1) {
+    extern u8 D_80100F38[];
+    extern s32 D_8006AF84[];
+    extern u8 D_8006AFCC[];
+    extern s32 func_800B1260(s32);
+    extern s32 func_800B46EC(s32);
+    s32 t = D_8006AF84[0];
+    u8 *p = D_80100F38 + (func_800B1260(a1) & 0xFFFF) * 0x79C;
+    register u8 *tbl asm("v1") = D_8006AFCC;
+    register u8 *pc asm("a0");
+    s32 c;
+
+    t -= *(s32 *)(tbl + *(s16 *)(p + 0x2BA) * 4 + 0x38);
+    if (!(t < func_800B46EC(*(s16 *)(p + 0x36A)))) {
+        c = 0x21;
+        pc = *(u8 **)(p + 0x2BC);
+        if (*pc != c) {
+            register u8 *n asm("v0");
+            register u8 *old asm("v1");
+            do {
+                n = pc + 1;
+                old = pc;
+                *(u8 **)(p + 0x2BC) = n;
+                pc = n;
+            } while (old[1] != c);
+        }
+        return *(s32 *)(p + 0x2BC);
+    }
+    c = 0x20;
+    pc = *(u8 **)(p + 0x2BC);
+    if (*pc != c) {
+        register u8 *n asm("v0");
+        register u8 *old asm("v1");
+        do {
+            n = pc - 1;
+            old = pc;
+            *(u8 **)(p + 0x2BC) = n;
+            pc = n;
+        } while (old[-1] != c);
+    }
+    *(s32 *)(p + 0x2BC) += 1;
+    return *(s32 *)(p + 0x2BC);
+}
