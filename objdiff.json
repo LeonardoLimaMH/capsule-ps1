@@ -1750,6 +1750,30 @@
       "base_path": "build/objdiff/base/chess/chess_800C4ECC.o"
     },
     {
+      "name": "chess/chess_800C4ECC__800C6330",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C6330.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800C6330.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C6330.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800C63AC",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C63AC.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800C63AC.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C63AC.o"
+    },
+    {
       "name": "chess/chess_800C4ECC__800C7F74",
       "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C7F74.o",
       "metadata": {

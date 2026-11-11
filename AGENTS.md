@@ -253,6 +253,20 @@ conexão (Claude Code e Codex) e limites: [docs/DECOMP_ANYTHING.md](docs/DECOMP_
   outros.
 - **Arquivos de outra IA ainda não commitados** não são seus.
 
+### 8b. Agentes do decomp.anything e a sincronização (2026-11-11)
+
+- Os agentes trabalham na branch `decomp-wtf`, com o compilador de cada arquivo fixo. Eles
+  **não** trocam compilador nem perfil: quando a diferença restante é de compilador, deixam
+  o melhor C salvo e uma nota `COMPILADOR?: <suspeita>`.
+- A sincronização (`.cache/tmp/agent_sync.sh`, na main) pega todo C dos agentes (commitado,
+  no working tree e as melhores tentativas do banco do app), compara byte a byte em
+  2.7.2-psx, 2.7.2-cdk e 2.8.1-psx, com e sem g0fill/spfill, e integra o que casa: no próprio
+  arquivo, ou numa TU própria com o perfil certo (`.cache/tmp/isolate.py`). Cada passo só
+  fica com os 5 SHA-1. Depois a `decomp-wtf` recebe a main e o app é re-medido.
+- SDK PsyQ fora do escopo também para os agentes: arquivos `sdk_*.c`, funções de
+  `config/symbols.<alvo>.psyq.txt` e as bibliotecas da Sony no meio do yuugi (libds/libcd,
+  faixa `main_80043xxx`–`8004Cxxx`).
+
 ---
 
 ## 9. Conhecimento acumulado (armadilhas já pagas)
@@ -342,6 +356,20 @@ Teste estas antes do permuter:
   pareamento das relocações. Confira os nomes no resultado: a comparação mascara
   relocações, só o link acusa um nome do outro executável.
 - **libc do SDK (strcmp, strcpy, memset):** compilada com `char` com sinal; use `s8`.
+- **Lições dos agentes do decomp.anything (notas, 2026-11-10/11):**
+  - Global escalar de 4/8 bytes que sai `%gp_rel` no build e `lui/%lo` no original: declare
+    como array de tamanho desconhecido (`extern s32 X[]; *X`).
+  - `register T x asm("sN")` só nas variáveis cujo registrador diverge. Prender todos os
+    parâmetros faz o GCC reaproveitar o s-reg para temporários (`func_80018C00`).
+  - Máscaras em campos de flags (0x34 bits 0–6, 0x38 bits 4–6): struct local de bitfields
+    `u32` faz o GCC carregar as duas palavras antes dos stores (`func_8009C918`).
+  - `switch` com `s32` em vez de `u32`: a árvore de comparação muda (`func_80015D14`).
+  - `static inline` helper reproduz cópias de parâmetro e quadros que o C direto não dá
+    (`func_8001B964`, `func_8009B150`).
+  - Protótipo local com o tipo de retorno certo (`extern s16 f(...)`) corrige a cópia
+    `v0→v1` antes da extensão, sem mexer na definição (`func_800DCFB4`).
+  - Switch com tabela `jtbl` casa no arquivo sem `rodata_migrate` quando a tabela é a do
+    próprio compilador (`func_8009AA0C`).
 
 ## 10. Quando parar uma abordagem
 
