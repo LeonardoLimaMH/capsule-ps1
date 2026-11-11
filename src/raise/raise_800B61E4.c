@@ -447,7 +447,39 @@ void func_800B7E68(void) {
 
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B7E70);
+/* Objeto de carta/sprite usado por func_800B6624 (flags em 0x34/0x38). */
+
+void *func_800B6D98(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u16 arg4, void *arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, u16 arg10, s16 arg11);
+
+/* Objeto de carta/sprite usado por func_800B6624 (flags em 0x34/0x38). */
+
+void *func_800B6D98(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u16 arg4, void *arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, u16 arg10, s16 arg11);
+
+/* Objeto de carta/sprite usado por func_800B6624 (flags em 0x34/0x38). */
+
+void *func_800B6D98(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u16 arg4, void *arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, u16 arg10, s16 arg11);
+
+/* Objeto de carta/sprite usado por func_800B6624 (flags em 0x34/0x38). */
+
+void *func_800B6D98(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u16 arg4, void *arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, u16 arg10, s16 arg11);
+
+s32 func_800B7E70(s32 i)
+{
+  extern S_800EEB9C D_800EEB9C;
+  S_800EEB9C *p = &D_800EEB9C;
+  register short n;
+  s32 *list;
+  s32 k;
+  for (k = 0; k < p->unk60[i]; k++)
+  {
+    if (p->unk3C8[i][k] == 1)
+    {
+      return 1;
+    }
+  }
+
+  return 0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B7ED8);
 
