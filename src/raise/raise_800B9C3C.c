@@ -33,13 +33,3 @@ void func_800BA1B4(s32 arg0) {
 }
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C", func_800BA1D8);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C", func_800BA3A8);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C", func_800BA4A0);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C", func_800BA534);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C", func_800BA744);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C", func_800BA9D8);
