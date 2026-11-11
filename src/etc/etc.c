@@ -25,20 +25,33 @@ static inline s32 Etc_FindPrev(EtcCtx *arg0, s32 arg1, s32 arg2) {
     u8 id = arg0->unk5E8[arg1][arg2].unk0;
     s32 ret = 0;
 
-    if (arg1 == 0 && arg2 == 0) {
-        return ret;
+    if (arg1 != 0) {
+        goto loop;
     }
-    do {
-        if (arg2 == 0) {
-            arg1--;
-            arg2 = 4;
-        } else {
-            arg2--;
-        }
-        if (id == arg0->unk5E8[arg1][arg2].unk0) {
-            ret = arg0->unk5E8[arg1][arg2].unk2A + 1;
-        }
-    } while (arg1 != 0 || arg2 != 0);
+    if (arg2 == 0) {
+        goto end;
+    }
+loop:
+    if (arg2 == 0) {
+        goto wrap;
+    }
+dec:
+    arg2--;
+    goto check;
+wrap:
+    arg1--;
+    arg2 = 4;
+check:
+    if (id == arg0->unk5E8[arg1][arg2].unk0) {
+        ret = arg0->unk5E8[arg1][arg2].unk2A + 1;
+    }
+    if (arg1 != 0) {
+        goto loop;
+    }
+    if (arg2 != 0) {
+        goto dec;
+    }
+end:
     return ret;
 }
 
@@ -178,11 +191,11 @@ void func_8009807C(EtcCtx *arg0, s32 arg1, s32 arg2) {
     s32 ret = 0;
     Etc7C *p = &arg0->unk5E8[arg1][arg2];
 
-    if (arg2 == 5) {
-        if (p->unk2A < 10 || arg1 != p->unk2A - 10) {
+    if (arg2 != 5) {
+        if (Etc_FindPrev(arg0, arg1, arg2) != 0) {
             ret = 1;
         }
-    } else if (Etc_FindPrev(arg0, arg1, arg2) != 0) {
+    } else if (p->unk2A < 10 || arg1 != p->unk2A - 10) {
         ret = 1;
     }
     if (ret == 0) {
