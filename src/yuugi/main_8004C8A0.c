@@ -79,11 +79,8 @@ TMD_PRIM* ReadTMD(TMD_PRIM* tmdprim)
 
 s32 func_8004CDD4(PACKET* arg0, TMD_PRIM* arg1);
 
-extern char D_800113D0[];
-extern char D_800113DC[];
-extern char D_800113E8[];
-u8 GetGraphDebug(void);
-int printf();
+int GetGraphDebug(void);
+int printf(char *fmt, ...);
 s32 func_8004CB48(u_long *tim, u_long *timimg)
 {
     u_long n;
