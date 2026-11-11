@@ -70,7 +70,68 @@ void func_800A1394(u8 *arg0) {
     func_80018F90(*(u16 *)(arg0 + 0xC), 4);
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A13E8);
+void func_800A13E8(void) {
+    extern u16 D_8008EE48[];
+    extern void func_8001A49C();
+    extern void func_80012578();
+    extern void func_80012508();
+    s32 addr;
+
+    switch (D_8008EE48[0]) {
+    case 0:
+        func_8001A49C(0x8011C400);
+        addr = 0x8011EDF4;
+        goto load;
+    case 1:
+        addr = 0x8013B9B4;
+        goto load;
+    case 2:
+        addr = 0x8014E298;
+        goto load;
+    case 3:
+        addr = 0x8016CF00;
+        goto load;
+    case 4:
+        addr = 0x801840FC;
+        goto load;
+    case 5:
+        addr = 0x801891A0;
+        goto load;
+    case 6:
+        addr = 0x8018E048;
+        goto load;
+    case 7:
+        addr = 0x80194728;
+        goto load;
+    case 8:
+        addr = 0x80199B34;
+        goto load;
+    case 9:
+        addr = 0x8019E904;
+        goto load;
+    case 10:
+        addr = 0x801A4664;
+        goto load;
+    case 11:
+        addr = 0x801A9560;
+        goto load;
+    case 12:
+        addr = 0x801AF324;
+        goto load;
+    case 13:
+        addr = 0x801B49C0;
+        goto load;
+    case 14:
+        addr = 0x801BBC64;
+    load:
+        func_8001A49C(addr);
+        func_80012578();
+        break;
+    default:
+        func_80012508();
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A150C);
 
