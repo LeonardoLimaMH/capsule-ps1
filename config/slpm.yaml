@@ -77,6 +77,7 @@ segments:
       - [0x3FA4, c, sdk_libgpu_ext__slpm_SetDefDrawEnv]
       - [0x4058, c, sdk_libgpu_ext__slpm_SetDefDispEnv]
       - [0x4094, c, sdk_libgpu_sys]
+      - [0x4378, c, sdk_libgpu_sys__slpm_SetDispMask]
       - [0x4410, c, sdk_libgpu_sys__DrawSync]
       - [0x516C, c, sdk_libgpu_sys__slpm_GetODE]
       - [0x519C, c, sdk_libgpu_sys__exWindow]
