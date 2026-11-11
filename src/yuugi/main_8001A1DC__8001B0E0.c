@@ -49,7 +49,56 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0", func_8001B1A8);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0", func_8001B484);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0", func_8001B964);
+extern char D_80078B94[];
+extern char D_80078B9C[];
+extern char D_80078BA4[];
+void *memcpy(void *, const void *, unsigned int);
+extern void *firstfile();
+extern void *func_8004FF5C();
+extern void func_8001BB18();
+extern s32 func_8004FEFC();
+extern s32 func_8004FF1C();
+extern void func_8004FF3C();
+s32 func_8001B964(s32 a0) {
+    s8 name[0x20];
+    u8 buf[0x80];
+    u8 de[0x28];
+    u8 path[0x20];
+    void *p;
+    s32 total = 0;
+    s32 r;
+    s32 fd;
+
+    if (a0 == 0) {
+        *(s32 *)name = *(s32 *)D_80078B94;
+        *(s16 *)(name + 4) = *(s16 *)(D_80078B94 + 4);
+    } else {
+        *(s32 *)name = *(s32 *)D_80078B9C;
+        *(s16 *)(name + 4) = *(s16 *)(D_80078B9C + 4);
+    }
+    name[5] = D_80078BA4[0];
+    name[6] = D_80078BA4[1];
+    p = firstfile(name, de);
+    while (p == de) {
+        func_8001BB18(de, path, a0);
+        fd = func_8004FEFC(path, 1);
+        if (fd == -1) {
+            r = -2;
+        } else if (func_8004FF1C(fd, buf, 0x80) == -1) {
+            func_8004FF3C(fd);
+            r = -2;
+        } else {
+            func_8004FF3C(fd);
+            r = 0;
+        }
+        if (r < 0) {
+            return r;
+        }
+        total += buf[3];
+        p = func_8004FF5C(p);
+    }
+    return 15 - total;
+}
 
 u8 func_8001BAA0(u8 *buf, s32 len, u8 *out) {
     register u32 sum asm("a3") = 7;
