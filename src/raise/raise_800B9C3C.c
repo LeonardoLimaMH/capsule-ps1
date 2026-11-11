@@ -88,15 +88,17 @@ void func_800BA3A8(s32 a0) {
     if ((D_800FDE08[i] = func_800E2D7C(a0)) != 0) {
         func_800E355C(a0);
         {
-            register RSlot *s asm("v0") = (RSlot *)D_80091618;
-            s[id].f178 = D_800FDE08[i];
+            RSlot *s = (RSlot *)D_80091618;
+            register RSlot *p asm("v1") = &s[id];
+            p->f178 = D_800FDE08[i];
         }
     }
     if ((D_800FAE10[i] = func_800E3090(a0)) != 0) {
         func_800E4158(a0);
         {
-            register RSlot *s asm("v0") = (RSlot *)D_80091618;
-            s[id].f17c = D_800FAE10[i];
+            RSlot *s = (RSlot *)D_80091618;
+            register RSlot *p asm("v1") = &s[id];
+            p->f17c = D_800FAE10[i];
         }
     }
 }
@@ -104,13 +106,18 @@ void func_800BA3A8(s32 a0) {
 extern u16 D_8008EE44[];
 extern s32 D_800ED890[];
 extern u8 D_80063940[];
+static inline void raise_SetCol(s16 *p, s16 c) {
+    p[2] = c;
+    p[1] = 0xCC0;
+    p[2] = c & 0xFFF0;
+}
 void func_800BA4A0(void *arg0) {
     typedef struct { u8 _p0[0x4E]; s16 f4e; s16 f50; s16 f52; u8 _p54[0x8C - 0x54]; s32 f8c; } RObj;
     typedef struct { u8 _p0[0x10]; u32 w10; u32 w14; u8 _p18[0x3C - 0x18]; } RTab;
     RObj *o = arg0;
     RTab *t;
     s16 c;
-    if (D_8008EE44 == 0x26 && D_800ED890 < 2) {
+    if (D_8008EE44[0] == 0x26 && D_800ED890[0] < 2) {
         return;
     }
     t = &((RTab *)D_80063940)[o->f8c];
