@@ -1,15 +1,24 @@
 #include "common.h"
 
 static inline s32 verifica_indice_8009B150(s32 i) {
-    extern u8 D_80091618[];
+    struct Entrada {
+        u8 _p0[0x10];
+        u16 f10;
+        u8 _p12[0x72];
+        u16 f84;
+        u8 _p86[4];
+        u16 f8a;
+        u8 _p8c[0x11c];
+    };
+    extern struct Entrada D_80091618[];
     extern u16 D_8006AF80[];
-    u8 *p = D_80091618 + i * 0x1A8;
+    struct Entrada *p = &D_80091618[i];
 
-    if (*(u16 *)(p + 0x10) == 0xFFFF || i == *D_8006AF80)
+    if (p->f10 == 0xFFFF || i == *D_8006AF80)
         return 0;
-    if (*(u16 *)(p + 0x8A) != 0xFFFF)
+    if (p->f8a != 0xFFFF)
         return 0;
-    return *(u16 *)(p + 0x84) < 3U;
+    return p->f84 < 3U;
 }
 
 static inline void avanca_indice_8009B150(u8 *b, u32 passo) {
@@ -42,23 +51,12 @@ s32 func_8009B150(void) {
         func_80034AB0(0x5D);
         ret = -1;
     } else {
+        b = base;
         if (flags & 0x2000) {
-            b = base;
-            do {
-                temp_a0 = *(u32 *)(b + 0x99C);
-                temp_a0 += 1;
-                temp_a0 %= 6;
-                *(s32 *)(b + 0x99C) = temp_a0;
-            } while (!verifica_indice_8009B150(temp_a0));
+            avanca_indice_8009B150(b, 1);
             *D_8008F710 = 2;
         } else if (flags & 0x8000) {
-            b = base;
-            do {
-                temp_a0 = *(u32 *)(b + 0x99C);
-                temp_a0 += 5;
-                temp_a0 %= 6;
-                *(s32 *)(b + 0x99C) = temp_a0;
-            } while (!verifica_indice_8009B150(temp_a0));
+            avanca_indice_8009B150(b, 5);
             *D_8008F710 = 1;
         }
     }
