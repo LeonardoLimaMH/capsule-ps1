@@ -79,33 +79,6 @@ void func_80033CEC(u16 *param_1, s32 param_2) {
     }
 }
 
-static inline void AdicionaSom(u16 *list, s32 j, s32 k, u8 *g) {
-    struct Fila { u8 _p[0x134]; s16 f134; };
-    extern u8 D_800922F0[];
-    extern struct { u16 h; u16 _; u32 w; } D_80070594[];
-    extern u16 D_80093510[];
-    s32 found = 0;
-    s32 m;
-    s16 lim;
-    u16 val;
-
-    if (((struct Fila *)g)->f134 > 0) {
-        val = ((u16 *)D_80070594[list[j]].w)[k];
-        lim = *(s16 *)(D_800922F0 + 0x134);
-        m = 0;
-        do {
-            if (D_80093510[m] == val) {
-                found = 1;
-            }
-            m++;
-        } while (m < lim);
-    }
-    if (!found) {
-        D_80093510[((struct Fila *)g)->f134] = ((u16 *)D_80070594[list[j]].w)[k];
-        ((struct Fila *)g)->f134 += 1;
-    }
-}
-
 void func_80033E5C(u16 *list, s32 n) {
     struct Element16 { u8 _pad[0xC]; s32 fC; };
     struct Fila { u16 f0; u8 _p[0x132]; s16 f134; u8 _q[0xA]; struct Element16 *f140; };
@@ -132,10 +105,7 @@ void func_80033E5C(u16 *list, s32 n) {
         if (*p_list != 0xFFFF && D_80070594[*p_list].h != 0) {
             k = 0;
             do {
-                if (!ContemSom(list, j, k)) {
-                    D_80093510[g->f134] = ((u16 *)D_80070594[list[j]].w)[k];
-                    g->f134 += 1;
-                }
+                AdicionaSom(list, j, k, (u8 *)g);
                 k++;
             } while (k < D_80070594[list[j]].h);
         }
