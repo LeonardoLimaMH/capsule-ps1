@@ -100,7 +100,45 @@ loop_2:
     } while (var_s2 < 2);
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800AF9D4", func_800AFDB0);
+s32 func_800AFDB0(u8 *arg0, u8 *arg1, u8 *arg2, s32 arg3, s32 arg4) {
+    register u32 b asm("a1");
+    register u32 *p asm("v1");
+    register s32 off asm("v0");
+    s32 v;
+
+    b = (u32)D_801010B0[arg0[0x5D9]].b;
+    if (arg3 < 0) {
+        return 0;
+    }
+    if (arg4 < 0) {
+        return 0;
+    }
+    if (arg3 >= 13) {
+        return 0;
+    }
+    if (arg4 >= 13) {
+        return 0;
+    }
+    off = arg4 << 2;
+    p = (u32 *)(off + (arg3 * 52 + b));
+    v = (*p >> 6) & 0x1FFF;
+    if (v == 0) {
+        return 0;
+    }
+    if (v >= 3) {
+        return 3;
+    }
+    if (((u8 *)p)[3] == 0) {
+        return 1;
+    }
+    if (arg1[0x15] == arg3 && arg1[0x16] == arg4) {
+        return 1;
+    }
+    if (arg2[0x15] == arg3 && arg2[0x16] == arg4) {
+        return 1;
+    }
+    return 2;
+}
 
 s32 func_800AFEA4(u8 *arg0, u8 *arg1, u8 *arg2, s32 arg3, s32 arg4) {
     u32 (*b)[13] = D_801010B0[arg0[0x5D9]].b;
