@@ -79,7 +79,99 @@ void func_80033CEC(u16 *param_1, s32 param_2) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_80033E5C);
+static inline s32 ContemSom(u16 *list, s32 j, s32 k) {
+    struct Fila { u8 _p[0x134]; s16 f134; };
+    extern u8 D_800922F0[];
+    extern struct { u16 h; u16 _; u32 w; } D_80070594[];
+    extern u16 D_80093510[];
+    s32 found = 0;
+    s32 m;
+    s16 lim;
+    u16 val;
+
+    if (((struct Fila *)D_800922F0)->f134 > 0) {
+        val = ((u16 *)D_80070594[list[j]].w)[k];
+        lim = *(s16 *)(D_800922F0 + 0x134);
+        m = 0;
+        do {
+            if (D_80093510[m] == val) {
+                found = 1;
+            }
+            m++;
+        } while (m < lim);
+    }
+    return found;
+}
+
+void func_80033E5C(u16 *list, s32 n) {
+    struct Element16 { u8 _pad[0xC]; s32 fC; };
+    struct Fila { u16 f0; u8 _p[0x132]; s16 f134; u8 _q[0xA]; struct Element16 *f140; };
+    extern u8 D_800922F0[];
+    extern s16 D_80078D3C;
+    extern struct { u16 h; u16 _; u32 w; } D_80070594[];
+    extern u16 D_80093510[];
+    extern void func_80033CEC(u16 *, s32), func_80034C10(s32), func_8003727C(s32, s32), func_80036DB0(void *);
+    struct { u8 c; u8 a; u16 s; u32 w4; u32 w8; u32 wC; } cmd;
+    struct Fila *g;
+    s32 i;
+    s32 j;
+    s32 k;
+    s32 m;
+    s32 found;
+    s16 lim;
+    u16 val;
+
+    ((struct Fila *)D_800922F0)->f134 = 0;
+    D_80078D3C = 0;
+    for (i = 0; i < 0x99; i++) {
+        ((struct Fila *)D_800922F0)->f140[i].fC = 0;
+    }
+    g = (struct Fila *)D_800922F0;
+    g->f134 = 0;
+    D_80078D3C = 0;
+    for (j = 0; j < n; j++) {
+        if (list[j] != 0xFFFF && D_80070594[list[j]].h != 0) {
+            k = 0;
+            do {
+                found = 0;
+                if (g->f134 > 0) {
+                    val = ((u16 *)D_80070594[list[j]].w)[k];
+                    lim = *(s16 *)(D_800922F0 + 0x134);
+                    m = 0;
+                    do {
+                        if (D_80093510[m] == val) {
+                            found = 1;
+                        }
+                        m++;
+                    } while (m < lim);
+                }
+                if (!found) {
+                    D_80093510[g->f134] = ((u16 *)D_80070594[list[j]].w)[k];
+                    g->f134 += 1;
+                }
+                k++;
+            } while (k < D_80070594[list[j]].h);
+        }
+    }
+    func_80033CEC(D_80093510, ((struct Fila *)D_800922F0)->f134);
+    if (*(u16 *)D_800922F0 & 0x80) {
+        func_80034C10(-4);
+    }
+    if (*(u16 *)D_800922F0 & 0xF) {
+        func_8003727C(-0x20, 0);
+        cmd.c = 0x26;
+        func_80036DB0(&cmd);
+    }
+    cmd.c = 0x50;
+    *(u16 *)D_800922F0 |= 2;
+    func_80036DB0(&cmd);
+    cmd.c = 0x52;
+    cmd.wC = (u32)D_80093510;
+    cmd.s = ((struct Fila *)D_800922F0)->f134;
+    func_80036DB0(&cmd);
+    cmd.c = 0x11;
+    func_80036DB0(&cmd);
+}
 
 s16 func_800340B4(s32 a0) {
     struct Voz { u8 _p[0x125]; u8 f125; u8 f126; u8 _q[5]; u16 f12c[4]; };
