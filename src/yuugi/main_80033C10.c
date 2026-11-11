@@ -79,7 +79,7 @@ void func_80033CEC(u16 *param_1, s32 param_2) {
     }
 }
 
-static inline s32 ContemSom(u16 *list, s32 j, s32 k) {
+static inline void AdicionaSom(u16 *list, s32 j, s32 k, u8 *g) {
     struct Fila { u8 _p[0x134]; s16 f134; };
     extern u8 D_800922F0[];
     extern struct { u16 h; u16 _; u32 w; } D_80070594[];
@@ -89,7 +89,7 @@ static inline s32 ContemSom(u16 *list, s32 j, s32 k) {
     s16 lim;
     u16 val;
 
-    if (((struct Fila *)D_800922F0)->f134 > 0) {
+    if (((struct Fila *)g)->f134 > 0) {
         val = ((u16 *)D_80070594[list[j]].w)[k];
         lim = *(s16 *)(D_800922F0 + 0x134);
         m = 0;
@@ -100,7 +100,10 @@ static inline s32 ContemSom(u16 *list, s32 j, s32 k) {
             m++;
         } while (m < lim);
     }
-    return found;
+    if (!found) {
+        D_80093510[((struct Fila *)g)->f134] = ((u16 *)D_80070594[list[j]].w)[k];
+        ((struct Fila *)g)->f134 += 1;
+    }
 }
 
 void func_80033E5C(u16 *list, s32 n) {
@@ -113,13 +116,8 @@ void func_80033E5C(u16 *list, s32 n) {
     extern void func_80033CEC(u16 *, s32), func_80034C10(s32), func_8003727C(s32, s32), func_80036DB0(void *);
     struct { u8 c; u8 a; u16 s; u32 w4; u32 w8; u32 wC; } cmd;
     struct Fila *g;
-    s32 i;
-    s32 j;
-    s32 k;
-    s32 m;
-    s32 found;
-    s16 lim;
-    u16 val;
+    u16 *p_list;
+    s32 i, j, k;
 
     ((struct Fila *)D_800922F0)->f134 = 0;
     D_80078D3C = 0;
@@ -129,23 +127,12 @@ void func_80033E5C(u16 *list, s32 n) {
     g = (struct Fila *)D_800922F0;
     g->f134 = 0;
     D_80078D3C = 0;
-    for (j = 0; j < n; j++) {
-        if (list[j] != 0xFFFF && D_80070594[list[j]].h != 0) {
+    p_list = list;
+    for (j = 0; j < n; j++, p_list++) {
+        if (*p_list != 0xFFFF && D_80070594[*p_list].h != 0) {
             k = 0;
             do {
-                found = 0;
-                if (g->f134 > 0) {
-                    val = ((u16 *)D_80070594[list[j]].w)[k];
-                    lim = *(s16 *)(D_800922F0 + 0x134);
-                    m = 0;
-                    do {
-                        if (D_80093510[m] == val) {
-                            found = 1;
-                        }
-                        m++;
-                    } while (m < lim);
-                }
-                if (!found) {
+                if (!ContemSom(list, j, k)) {
                     D_80093510[g->f134] = ((u16 *)D_80070594[list[j]].w)[k];
                     g->f134 += 1;
                 }
