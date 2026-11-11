@@ -63,7 +63,41 @@ void func_8009DDB4(void) {
     func_800BAD64(1);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009D568", func_8009DDDC);
+extern s32 D_8008F7D0[];
+extern s32 D_800EFFB8[];
+extern s32 func_8009DFAC(void);
+s32 func_8009DDDC(void) {
+    struct P8 { u8 b[8]; };
+    struct T5B { u8 _p0[0x5b]; u8 f5b; struct P8 f5c; };
+    extern struct P8 D_80097C8C[];
+    extern u8 D_800EFF58[];
+    struct P8 tmp;
+    s32 i;
+    s32 one;
+    u8 *base;
+    u8 *b;
+    struct T5B *q;
+    if (*D_8008F7D0 == 0) {
+        if (func_8009DFAC() == -1) {
+            one = 1;
+            i = 0;
+            base = D_800EFF58;
+            *(s32 *)(*(u8 **)(base + 0x7c) + 0x38) &= ~1;
+            b = base;
+            tmp = *D_80097C8C;
+            tmp = *(struct P8 *)(base + 0x64);
+            for (i = 0; i < 7; i++) {
+                q = *(struct T5B **)(b + 0x28);
+                q->f5b = one;
+                q->f5c = tmp;
+                b += 4;
+            }
+            *D_800EFFB8 = one;
+            return -1;
+        }
+    }
+    return 0;
+}
 
 void func_8009DED0(void) {
     func_8009DEF8();
