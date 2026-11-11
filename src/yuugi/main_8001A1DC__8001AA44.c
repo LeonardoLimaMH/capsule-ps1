@@ -1,6 +1,32 @@
 #include "common.h"
 #include "yuugi.h"
 
+static inline u32 distance_sqrt(u32 n) {
+    u32 x;
+    u32 y;
+    if (n == 0) {
+        return 0;
+    }
+    x = 1;
+    y = n;
+    while (x < y) {
+        x <<= 1;
+        y >>= 1;
+    }
+    do {
+        y = x;
+        x = (n / y + y) >> 1;
+    } while (x < y);
+    return y;
+}
+
+static inline s32 distance_abs(s32 value) {
+    if (value < 0) {
+        value = -value;
+    }
+    return value;
+}
+
 s32 func_8001AA44(s32 arg0, s32 arg1) {
     s32 var_a2;
     s32 var_v1;
@@ -16,7 +42,32 @@ s32 func_8001AA44(s32 arg0, s32 arg1) {
     return var_a2;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001AA44", func_8001AA70);
+void func_8001AA70(void *dst, void *src, s32 n) {
+    struct { s32 *s; s32 *d; } p4;
+    struct { u16 *s; u16 *d; } p2;
+    u8 *s1;
+    u8 *d1;
+    s32 i;
+    if (((u32)src & 3) == 0 && ((u32)dst & 3) == 0 && (n & 3) == 0) {
+        p4.s = src;
+        p4.d = dst;
+        for (i = n / 4 - 1; i >= 0; i--) {
+            p4.d[i] = p4.s[i];
+        }
+    } else if (((u32)src & 1) == 0 && ((u32)dst & 1) == 0 && (n & 1) == 0) {
+        p2.s = src;
+        p2.d = dst;
+        for (i = n / 2 - 1; i >= 0; i--) {
+            p2.d[i] = p2.s[i];
+        }
+    } else {
+        s1 = src;
+        d1 = dst;
+        for (i = n - 1; i >= 0; i--) {
+            d1[i] = s1[i];
+        }
+    }
+}
 
 #include "common.h"
 
@@ -88,4 +139,31 @@ void func_8001AFDC(void *arg0) {
     M2C_FIELD(arg0, u16 *, 0x40) = (u16) (M2C_FIELD(arg0, u16 *, 0x40) + 1);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001AA44", func_8001AFF0);
+void func_8001AFF0(u8 *p) {
+    switch (*(s32 *)(p + 0x34) & 1) {
+    case 0:
+        if ((s32)(p[0x30] + *(s32 *)(p + 0x38)) < 0xFF) {
+            p[0x30] = p[0x30] + p[0x38];
+            p[0x31] = p[0x31] + p[0x38];
+            p[0x32] = p[0x32] + p[0x38];
+        } else {
+            p[0x32] = 0xFF;
+            p[0x31] = 0xFF;
+            p[0x30] = 0xFF;
+            *(u16 *)(p + 0x40) += 1;
+        }
+        break;
+    case 1:
+        if ((s32)(p[0x30] - *(s32 *)(p + 0x38)) > 0) {
+            p[0x30] = p[0x30] - p[0x38];
+            p[0x31] = p[0x31] - p[0x38];
+            p[0x32] = p[0x32] - p[0x38];
+        } else {
+            p[0x32] = 0;
+            p[0x31] = 0;
+            p[0x30] = 0;
+            *(u16 *)(p + 0x40) += 1;
+        }
+        break;
+    }
+}
