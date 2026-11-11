@@ -30,7 +30,32 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BCAEC);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BCB58);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BCC98);
+extern u8 D_800178F8[];
+extern u8 D_8008ED68[];
+extern s32 func_800BD164();
+void func_800BCC98(void) {
+    extern u8 D_800EFF58[];
+    s16 *r;
+    u8 *p;
+
+    p = (u8 *)func_80015B3C(func_800BD164, D_800178F8, 0x1A);
+    M2C_GFIELD(D_800EFF58, u8 *, 0x5FC) = p;
+    if (p != 0) {
+        func_80015EF8(p);
+        *(s16 *)(M2C_GFIELD(D_800EFF58, u8 *, 0x5FC) + 0x46) = 0x1C4 - M2C_GFIELD(D_8008ED68, s32, 0x108) / 2;
+        *(s16 *)(M2C_GFIELD(D_800EFF58, u8 *, 0x5FC) + 0x4A) = 0x4C - M2C_GFIELD(D_8008ED68, s32, 0x10C) / 2;
+        *(s16 *)(M2C_GFIELD(D_800EFF58, u8 *, 0x5FC) + 0x4E) = 5;
+        *(u8 *)(M2C_GFIELD(D_800EFF58, u8 *, 0x5FC) + 0x58) = 0x80;
+        *(u8 *)(M2C_GFIELD(D_800EFF58, u8 *, 0x5FC) + 0x59) = 0x80;
+        *(u8 *)(M2C_GFIELD(D_800EFF58, u8 *, 0x5FC) + 0x5A) = 0x80;
+        r = (s16 *)(M2C_GFIELD(D_800EFF58, u8 *, 0x5FC) + 0x14);
+        r[0] = 0;
+        r[1] = 0;
+        r[2] = 0x3A;
+        r[3] = 0x4A;
+        *(s32 *)(M2C_GFIELD(D_800EFF58, u8 *, 0x5FC) + 0x38) |= 0x40;
+    }
+}
 
 #include "common.h"
 
