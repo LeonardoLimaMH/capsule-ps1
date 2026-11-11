@@ -94,16 +94,16 @@ void func_800D0730(void *arg0, s16 arg1, s16 arg2, s16 arg3)
   *((s16 *) (((s8 *) arg0) + 4)) = (s16) (((new_var - arg1) * 0x64) - temp_v1);
 }
 
+static inline Raise1A8 *get_ent(s32 i) {
+    return (Raise1A8 *)(D_80091618 + i * 0x1A8);
+}
+
 s32 func_800D07AC(s32 arg0, s32 arg1, s32 arg2) {
-    extern u8 D_80091618[];
-    extern u8 D_800EF364[];
-    extern u8 D_800EFF58[];
-    extern u16 D_8006AF80[];
     u8 *rec = D_80100F38 + (func_800B1260() & 0xFFFF) * 0x79C;
     s32 n;
     s16 x;
     s16 y;
-    u32 who;
+    u16 who;
     s32 side;
     s32 b;
 
@@ -114,48 +114,33 @@ s32 func_800D07AC(s32 arg0, s32 arg1, s32 arg2) {
     y = n - 1;
     x = *(u16 *)(rec + 0x332) + arg1 - 1;
     if (arg2 == -1) {
-        who = *(u16 *)(D_80091618 + (u32)D_8006AF80[0] * 0x1A8 + 0x8A);
+        who = ((Raise1A8 *)D_80091618)[*D_8006AF80].unk8A;
     } else {
-        who = D_8006AF80[0];
+        who = *D_8006AF80;
     }
     side = (arg2 == -1);
-    b = (D_800EF364 + (u32)*(u16 *)(D_80091618 + (who & 0xFFFF) * 0x1A8 + 0x10) * 64)[x * 8 + y];
+    b = (D_800EF364 + ((Raise1A8 *)D_80091618)[who].unk10 * 64)[x * 8 + y];
     if (b == 0xFF) {
         return 0xFF;
     }
-    if ((D_800EFF58 + (u32)side * 64 + 0x94)[x * 8 + y] == 1) {
+    if ((D_800EFF58 + side * 64 + 0x94)[x * 8 + y] == 1) {
         return 0xFF;
     }
     return b;
 }
 
 s32 func_800D091C(s32 arg0, s32 arg1, s32 arg2) {
-    extern u16 D_8006AF80[];
-    extern u8 D_80091618[];
-    extern u8 D_800EF364[];
-    extern u8 D_800EFF58[];
     u8 *rec = D_80100F38 + (func_800B1260() & 0xFFFF) * 0x79C;
-    s32 n;
     s16 col;
     s16 row;
-    u16 idx;
     s32 side;
     u8 v;
 
-    n = 1;
-    if (arg2 == -1) {
-        n = 8;
-    }
-    col = n - 1;
+    col = ((arg2 == -1) ? 8 : 1) - 1;
     row = *(u16 *)(rec + 0x332) + (arg1 - 1);
-    if (arg2 == -1) {
-        idx = *(u16 *)((u8 *)D_80091618 + D_8006AF80[0] * 0x1A8 + 0x8A);
-    } else {
-        idx = D_8006AF80[0];
-    }
+    v = (D_800EF364 + *(u16 *)(D_80091618 + ((arg2 == -1) ? *(u16 *)(D_80091618 + D_8006AF80[0] * 0x1A8 + 0x8A) : D_8006AF80[0]) * 0x1A8 + 0x10) * 64)[row * 8 + col];
     side = (arg2 == -1);
-    v = *(row * 8 + (D_800EF364 + *(u16 *)(D_80091618 + idx * 0x1A8 + 0x10) * 64) + col);
-    if (v != 0xFF && *(row * 8 + (D_800EFF58 + side * 64 + 0x94) + col) == 1) {
+    if (v != 0xFF && (D_800EFF58 + side * 64 + 0x94)[row * 8 + col] == 1) {
         return 0xFF;
     }
     return v;
