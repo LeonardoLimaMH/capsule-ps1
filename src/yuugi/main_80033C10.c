@@ -35,13 +35,19 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_80033E5C);
 s16 func_800340B4(s32 a0) {
     struct Voz { u8 _p[0x125]; u8 f125; u8 f126; u8 _q[5]; u16 f12c[4]; };
     extern u8 D_800922F0[];
-    s16 n = 0;
+    s32 v;
+    s16 n;
     s32 i;
-    s32 idx;
+    u32 idx;
     u32 bit;
-    if (!(a0 & 0x8000)) {
+    v = a0;
+    a0 &= 0x8000;
+    if (a0) {
+        a0 = v;
+    } else {
         a0 = 0xFFFF;
     }
+    n = 0;
     a0 &= 0xFFFF;
     idx = ((struct Voz *)D_800922F0)->f126;
     bit = 1 << idx;
@@ -53,7 +59,8 @@ s16 func_800340B4(s32 a0) {
         if (bit & 0x10) {
             bit = 1;
         }
-        idx = (idx + 1) & 3;
+        idx++;
+        idx &= 3;
     }
     return n;
 }
