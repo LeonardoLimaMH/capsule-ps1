@@ -24,10 +24,10 @@ static inline void RaiseEnt_Reverse(RaiseEntB *e, s16 n) {
     s16 i;
     s32 j;
     s32 k;
-    s32 half = (u32)n >> 1;
+    u32 half = (u32)n >> 1;
     RaiseSlotB tmp;
 
-    for (i = 0; i < half; i++) {
+    for (i = 0; i < (s32)half; i++) {
         k = i + 1;
         j = n - k;
         tmp = e->slots[i];
