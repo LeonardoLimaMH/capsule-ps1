@@ -14,6 +14,28 @@ extern void func_800DD3B0(s32, s32, s32);
 
 typedef struct { u8 _p[0x48E]; s16 g[8][16]; } Grid_800DCE54;
 
+void func_800DCD44(s32 a0) {
+    u8 *p = PL(a0);
+    s16 i, j;
+    P16(0x472) = 1;
+    PS16(0x3EC) = 0;
+    PS16(0x3EE) = 0;
+    PS16(0x3F0) = 0;
+    PS16(0x474) = 2;
+    P32(0x478) = 0;
+    for (i = 0; i < 32; i++) {
+        u8 *q = p + i * 4;
+        *(s16 *)(q + 0x3F2) = -1;
+        *(s16 *)(q + 0x3F4) = -1;
+    }
+    for (i = 2; i < 8; i++) {
+        *(s16 *)(p + 0x47C + i * 2) = 0;
+        for (j = 0; j < 15; j++) {
+            ((Grid_800DCE54 *)p)->g[i][j] = 0;
+        }
+    }
+}
+
 s32 func_800DCE54(s32 a0) {
     u8 *p = PL(a0);
     s16 i, j;
