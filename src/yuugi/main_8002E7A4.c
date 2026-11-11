@@ -143,7 +143,32 @@ void func_80032398(void) {
 extern s32 func_8001F1A8(s16, s16, s32, s32, s32, s32, s32, s32, s32);
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4", func_80032474);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4", func_80032570);
+void func_80032570(void) {
+    extern u8 D_800922FA[];
+    extern s16 D_800922DE[];
+    extern s16 D_800922DC[];
+    extern u8 D_80078D34;
+    extern u16 D_80085430[];
+    u8 v = D_800922FA[0];
+    if (D_800922DE[0] != 0) {
+        v |= 2;
+    } else {
+        v &= ~2;
+    }
+    if (D_800922DC[0] != 2) {
+        v |= 1;
+    } else {
+        v &= ~1;
+    }
+    func_800337E0(v);
+    if (D_800922DC[0] != 2) {
+        if (D_80078D34 != 1) {
+            func_800338DC(D_80085430[0]);
+        }
+    } else {
+        func_80033974(0);
+    }
+}
 
 void func_80032610(void *arg0) {
     extern M2C_UNK D_80065390[];
