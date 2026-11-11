@@ -402,7 +402,36 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E6158);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E66A4);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E680C);
+s32 func_800E680C(u16 a0, u16 a1) {
+    typedef struct {
+        u8 pad0[0xA0];
+        u16 unkA0;
+        u8 padA2[0x1A8 - 0xA2];
+    } S_80091618;
+    typedef struct {
+        u8 pad0[0x26];
+        s16 unk26;
+    } S_801061E0;
+    extern S_80091618 D_80091618[];
+    extern s16 D_800ED228[][3];
+    extern S_801061E0 D_801061E0[];
+    s16 v;
+    s32 r;
+    D_801061E0[a0].unk26 = v = D_800ED228[a1][D_80091618[a0].unkA0];
+    switch (v) {
+    case 0:
+        r = 0;
+        break;
+    case 1:
+    default:
+        r = 1;
+        break;
+    case 2:
+        r = 2;
+        break;
+    }
+    return r;
+}
 
 typedef struct {
     u8 pad[0x1A2];
@@ -419,13 +448,44 @@ void func_800E68D8(u32 player) {
     record->timer = 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E6948);
+void func_800E6948(u16 a0) {
+    typedef struct {
+        u8 pad0[0x92];
+        u16 unk92;
+        u8 pad94[0xD2 - 0x94];
+        s16 unkD2[12];
+        u8 padEA[0x1A8 - 0xEA];
+    } S_80091618;
+    extern S_80091618 D_80091618[];
+    extern u16 D_800ED75C[][13];
+    s16 *v = &D_80091618[a0].unkD2[0];
+    s16 i;
+    for (i = 2; i < 12; i++, v++) {
+        *v += D_800ED75C[D_80091618[a0].unk92][i];
+        if (*v < 0) *v = 0;
+        else if (*v >= 0x100) *v = 0xFF;
+    }
+}
 
 s32 func_800E6A14(void) {
     return 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E6A1C);
+s32 func_800E6A1C(u16 a0, s16 a1) {
+    typedef struct {
+        u8 pad0[0xC4];
+        s32 unkC4;
+        u8 padC8[0x1A8 - 0xC8];
+    } S_80091618;
+    extern S_80091618 D_80091618[];
+    s32 t = D_80091618[a0].unkC4 / 0x7080;
+    if (t >= 0x13) {
+        a1 = (s16)(a1 * 80) / 100;
+    } else if (t >= 0xE) {
+        a1 = (s16)(a1 * (100 - (t - 13) * 4)) / 100;
+    }
+    return a1;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E6AF4);
 
