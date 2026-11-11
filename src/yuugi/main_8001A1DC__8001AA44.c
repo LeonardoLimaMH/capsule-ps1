@@ -2,11 +2,12 @@
 #include "yuugi.h"
 
 static inline u32 distance_sqrt(u32 n) {
-    u32 x = 1;
+    u32 x;
     u32 y;
     if (n == 0) {
         return 0;
     }
+    x = 1;
     y = n;
     while (x < y) {
         x <<= 1;
@@ -103,7 +104,7 @@ s32 func_8001ABD4(s32 *a, s32 *b) {
         t = distance_abs(a[2] - b[2]);
         if (t < m) goto loop;
     }
-    m = __builtin_abs(a[2] - b[2]);
+    m = distance_abs(a[2] - b[2]);
     t = distance_abs(a[1] - b[1]);
     if (m < t) m = t;
 loop:
@@ -114,21 +115,7 @@ loop:
     dy = (a[1] - b[1]) >> s;
     dz = (a[2] - b[2]) >> s;
     n = dx * dx + dy * dy + dz * dz;
-    if (n == 0) {
-        y = 0;
-    } else {
-        x = 1;
-        y = n;
-        while (x < y) {
-            x <<= 1;
-            y >>= 1;
-        }
-        do {
-            y = x;
-            x = (n / y + y) >> 1;
-        } while (x < y);
-    }
-    return y << s;
+    return distance_sqrt(n) << s;
 }
 
 void func_8001AD48(s32 arg0)
