@@ -1,7 +1,7 @@
 #include "common.h"
 
 typedef struct {
-    u16 unk0;
+    volatile u16 unk0;
     u8 _pad[14];
 } D_8006AF80_t;
 extern D_8006AF80_t D_8006AF80;
@@ -71,7 +71,7 @@ s32 func_800B9CEC(void) {
 s32 func_800B9E34(void) {
     typedef struct { u8 _p0[0x10]; u16 f10; u8 _p12[0x86 - 0x12]; u16 f86; u16 _p88; u16 f8a; u8 _p8c[0x1A8 - 0x8C]; } RSlot;
     RSlot *s;
-    if (D_8006AF80.unk0 == 0xFFFF) {
+    if (*(volatile u16 *)&D_8006AF80.unk0 == 0xFFFF) {
         return 0;
     }
     s = (RSlot *)D_80091618;
