@@ -80,37 +80,39 @@ TMD_PRIM* ReadTMD(TMD_PRIM* tmdprim)
 s32 func_8004CDD4(PACKET* arg0, TMD_PRIM* arg1);
 
 int GetGraphDebug(void);
-int printf(char *fmt, ...);
-s32 func_8004CB48(u_long *tim, u_long *timimg)
+int printf();
+u_long func_8004CB48(unsigned int *tim, TIM_IMAGE *timimg)
 {
     u_long n;
+    u_long m;
 
     if (*tim++ != 0x10) {
         return -1;
     }
-    timimg[0] = *tim++;
+    timimg->mode = *tim++;
     if (GetGraphDebug() == 2) {
         printf(D_800113D0, 0x10);
     }
     if (GetGraphDebug() == 2) {
-        printf(D_800113DC, timimg[0]);
+        printf(D_800113DC, timimg->mode);
     }
     if (GetGraphDebug() == 2) {
         printf(D_800113E8, tim);
     }
-    if (timimg[0] & 8) {
-        timimg[1] = (u_long)(tim + 1);
-        timimg[2] = (u_long)(tim + 3);
+    if (timimg->mode & 8) {
         n = *tim >> 2;
+        timimg->crect = (RECT *)(tim + 1);
+        timimg->caddr = (u_long *)(tim + 3);
         tim += n;
     } else {
         n = 0;
-        timimg[1] = 0;
-        timimg[2] = 0;
+        timimg->crect = 0;
+        timimg->caddr = 0;
     }
-    timimg[3] = (u_long)(tim + 1);
-    timimg[4] = (u_long)(tim + 3);
-    return n + (*tim >> 2) + 2;
+    m = (*tim >> 2) + 2;
+    timimg->prect = (RECT *)(tim + 1);
+    timimg->paddr = (u_long *)(tim + 3);
+    return n + m;
 }
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8004C8A0", func_8004CC60);
