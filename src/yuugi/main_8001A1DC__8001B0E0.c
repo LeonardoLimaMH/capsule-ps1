@@ -59,40 +59,55 @@ extern void func_8001BB18();
 extern s32 func_8004FEFC();
 extern s32 func_8004FF1C();
 extern void func_8004FF3C();
+
+/* Lê o cabeçalho (0x80 bytes) de um arquivo do memory card; inline em func_8001B964. */
+static inline s32 readhdr(char *path, u8 *buf) {
+    s32 fd = func_8004FEFC(path, 1);
+    if (fd == -1) {
+        return -2;
+    }
+    if (func_8004FF1C(fd, buf, 0x80) == -1) {
+        func_8004FF3C(fd);
+        return -2;
+    }
+    func_8004FF3C(fd);
+    return 0;
+}
 s32 func_8001B964(s32 a0) {
-    char name[0x20];
+    s32 name[8];
     u8 buf[0x80];
     u8 de[0x28];
     u8 path[0x20];
     void *p;
     s32 total = 0;
     s32 fd;
+    s32 r;
 
     if (a0 == 0) {
         memcpy(name, D_80078B94, 6);
     } else {
         memcpy(name, D_80078B9C, 6);
     }
-    memcpy(name + 5, D_80078BA4, 2);
+    memcpy((char *)name + 5, D_80078BA4, 2);
     p = firstfile(name, de);
-    while (p == de) {
-        s32 r;
-        func_8001BB18(de, path, a0);
-        fd = func_8004FEFC(path, 1);
-        if (fd == -1) {
-            r = -2;
-        } else if (func_8004FF1C(fd, buf, 0x80) == -1) {
-            func_8004FF3C(fd);
-            r = -2;
-        } else {
-            func_8004FF3C(fd);
-            r = 0;
-        }
-        if (r < 0) {
-            return r;
-        }
-        total += buf[3];
-        p = func_8004FF5C(p);
+    if (p == de) {
+        do {
+            func_8001BB18(de, path, a0);
+            fd = func_8004FEFC(path, 1);
+            if (fd == -1) {
+                r = -2;
+            } else if (func_8004FF1C(fd, buf, 0x80) == -1) {
+                func_8004FF3C(fd);
+                r = -2;
+            } else {
+                func_8004FF3C(fd);
+                r = 0;
+            }
+            if (r < 0) {
+                return r;
+            }
+            total += buf[3];
+        } while (func_8004FF5C(p) == p);
     }
     return 15 - total;
 }
