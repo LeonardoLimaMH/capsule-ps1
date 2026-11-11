@@ -22,9 +22,11 @@ static inline s32 Etc_GetVramAddr(s32 arg0) {
 }
 
 static inline s32 Etc_FindPrev(EtcCtx *arg0, s32 arg1, s32 arg2) {
-    s32 ret = 0;
-    u8 id = arg0->unk5E8[arg1][arg2].unk0;
+    s32 ret;
+    u8 id;
 
+    id = arg0->unk5E8[arg1][arg2].unk0;
+    ret = 0;
     if (arg1 != 0) {
         goto loop;
     }
@@ -189,17 +191,16 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80097E40);
 void func_8009807C(EtcCtx *arg0, s32 arg1, s32 arg2) {
     extern void func_8001A49C();
     s32 ret = 0;
-    Etc7C *p = &arg0->unk5E8[arg1][arg2];
 
     if (arg2 != 5) {
         if (Etc_FindPrev(arg0, arg1, arg2) != 0) {
             ret = 1;
         }
-    } else if (p->unk2A < 10 || arg1 != p->unk2A - 10) {
+    } else if (arg0->unk5E8[arg1][arg2].unk2A < 10 || arg1 != arg0->unk5E8[arg1][arg2].unk2A - 10) {
         ret = 1;
     }
     if (ret == 0) {
-        func_8001A49C(Etc_GetVramAddr(p->unk2A));
+        func_8001A49C(Etc_GetVramAddr(arg0->unk5E8[arg1][arg2].unk2A));
     }
 }
 
