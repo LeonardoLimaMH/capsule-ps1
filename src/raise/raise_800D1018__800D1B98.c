@@ -1,5 +1,12 @@
 #include "common.h"
 
+struct WorkTimerRecord {
+    u8 pad[0x384];
+    u16 enabled;
+    u16 timer;
+    u8 tail[0x414];
+};
+
 s32 func_800D1B98(void) {
     return 1;
 }
