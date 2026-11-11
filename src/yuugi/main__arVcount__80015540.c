@@ -19,6 +19,63 @@ typedef struct {
     s32 w5c[10];
 } ArVObj;
 
+typedef struct {
+    u8 pad0[0x14];
+    u8 b14[0x20];
+    u32 flags34;
+    u32 flags38;
+    s32 f3c;
+    s32 f40;
+    s32 f44;
+    s32 f48;
+    s32 f4c;
+    s16 f50;
+    s16 f52;
+    s16 f54;
+    u8 f56;
+    u8 f57;
+    u8 f58;
+    u8 f59;
+    u8 f5a;
+    u8 f5b;
+    s16 f5c;
+    s16 f5e;
+    s16 f60;
+    s16 f62;
+    s16 f64;
+    s16 f66;
+    s32 f68;
+    s32 f6c;
+    s32 pad70;
+    s16 f74;
+    s16 f76;
+    s16 f78;
+    s16 f7a;
+    s32 w7c[5];
+} Struct_80015EF8;
+
+typedef struct {
+    s32 val0;
+    u16 val4;
+    u16 pad6;
+} SubEntry;
+
+typedef struct {
+    u32 count;
+    SubEntry *entries;
+} SubData;
+
+typedef struct {
+    u8 pad0[4];
+    s32 f4;
+    SubData *f8;
+    u32 fC;
+    s16 f10;
+    u16 f12;
+    u8 pad14[8];
+    u32 f1C;
+} AnimObj;
+
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015540);
 
 #include "common.h"
@@ -141,11 +198,119 @@ void func_80015CD0(int param_1,int param_2,uint param_3)
   return;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015D14);
+s32 func_80015D14(AnimObj *p) {
+    extern u8 D_8008ED68[];
+    u8 *base = D_8008ED68;
+    SubData *a3;
+    SubEntry *e;
+    s32 v1;
+    s32 a1;
+    s32 a2;
+    s32 v0;
+    s32 mode;
+
+    if (base[0x99A] != 0) {
+        return 0;
+    }
+    a3 = p->f8;
+    if (a3 == NULL) {
+        return 0;
+    }
+    v1 = 1;
+    if (base[0x103] >= 2) {
+        v1 = base[0x103];
+    }
+    a1 = p->f10;
+    a2 = (p->f1C >> 9) & 7;
+    if (a2 >= 2) {
+        v0 = a1 - v1 * a2;
+    } else {
+        v0 = a1 - v1;
+    }
+    p->f10 = v0;
+    if ((s16)v0 >= 0) {
+        return 0;
+    }
+    p->fC++;
+    if (p->fC >= a3->count) {
+        mode = p->f1C & 7;
+        switch (mode) {
+        case 3:
+            if (p->f12 == 1) {
+                p->f12++;
+                p->f8 = NULL;
+                return 0;
+            }
+        case 0:
+            p->fC = 0;
+            p->f12++;
+            break;
+        case 2:
+            p->f4 = 0;
+        case 1:
+            p->f8 = NULL;
+            return 0;
+        }
+    }
+    e = &a3->entries[p->fC];
+    p->f4 = e->val0;
+    p->f10 = e->val4;
+    return 1;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015E60);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015EF8);
+void func_80015EF8(Struct_80015EF8 *p) {
+    u32 mask = 0xFFFF0FFF;
+    s32 i = 0x1F;
+    u8 *q = p->b14;
+
+    p->f5a = 0x80;
+    p->f59 = 0x80;
+    p->f58 = 0x80;
+    p->f50 = 0x1000;
+    p->f52 = 0x1000;
+    p->f60 = 0x140;
+    p->f62 = 0xF0;
+    p->f44 = 0;
+    p->f48 = 0;
+    p->f4c = 0;
+    p->f54 = 0;
+    p->f56 = 0;
+    p->f57 = 0;
+    p->f68 = 0;
+    p->f6c = 0;
+    p->f78 = 0;
+    p->f74 = 0;
+    p->f76 = 0;
+    p->f64 = 0;
+    p->f66 = 0;
+    p->f3c = 0;
+    p->f40 = 0;
+    p->f5b = 0;
+    p->f5c = 0;
+    p->f5e = 0;
+    p->f7a = 0;
+    p->flags34 &= ~0x7F;
+    p->flags38 &= ~8;
+    p->flags38 &= ~1;
+    p->flags38 &= ~2;
+    p->flags38 &= ~4;
+    p->flags38 &= ~0x30;
+    p->flags38 &= ~0x40;
+    p->flags38 &= ~0x80;
+    p->flags34 &= ~0x80;
+    p->flags34 &= ~0x100;
+    p->flags34 &= ~0x200;
+    p->flags34 &= ~0xC00;
+    p->flags34 &= mask;
+    for (; i >= 0; i--) {
+        q[i] = 0;
+    }
+    for (i = 4; i >= 0; i--) {
+        p->w7c[i] = 0;
+    }
+}
 
 void func_8001602C(ArVObj *p) {
     s32 i = 0x33;
@@ -230,11 +395,125 @@ void func_80018608(void) {
 
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018610);
+void func_80018610(s32 arg0, s32 arg1) {
+    extern void SetDrawMode();
+    extern u8 *D_8008ED68[];
+    u8 **g = D_8008ED68;
+    u8 *base = g[0];
+    u8 *next = 0;
+    u32 *p;
+    s32 off;
+    p = *(u32 **)(base + 0x1090);
+    if (p != 0 && (u8 *)p + 0xC <= base + 0x4594) {
+        next = (u8 *)p + 0xC;
+    }
+    *(u8 **)(base + 0x1090) = next;
+    SetDrawMode(p, 0, 0, arg0, 0);
+    off = arg1 * 4;
+    *p = (*p & 0xFF000000) | (*(u32 *)((u8 *)off + (u32)g[0] + 0x70) & 0xFFFFFF);
+    off += (s32)g[0];
+    *(u32 *)(off + 0x70) = (*(u32 *)(off + 0x70) & 0xFF000000) | ((u32)p & 0xFFFFFF);
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800186E4);
+void func_800186E4(s16 *arg0, s32 arg1) {
+    extern void SetDrawArea();
+    extern u8 *D_8008ED68[];
+    extern u8 D_8008A7BC[];
+    register u8 **g asm("s1") = D_8008ED68;
+    register u8 *base asm("v1");
+    register s32 s2 asm("s2");
+    register u32 *p asm("s0");
+    register s16 y asm("a1");
+    register u8 *next asm("a1");
+    register u8 *b asm("a0");
+    register u32 mask2 asm("a1");
+    register s32 off asm("a0");
+    register u32 mask asm("a2");
+    struct {
+        s16 x;
+        s16 y;
+        s16 w;
+        s16 h;
+    } rect;
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800187E8);
+    rect.x = arg0[0];
+    base = g[0];
+    s2 = arg1;
+    y = arg0[1];
+    if (base == D_8008A7BC) {
+        y += 0xF0;
+    }
+    rect.y = y;
+    rect.w = arg0[2];
+    next = 0;
+    rect.h = arg0[3];
+
+    b = base;
+    p = *(u32 **)(base + 0x1090);
+    if (p != 0 && (u8 *)p + 0xC <= b + 0x4594) {
+        next = (u8 *)p + 0xC;
+    }
+    *(u8 **)(b + 0x1090) = next;
+    SetDrawArea(p, &rect);
+    mask2 = 0x00FFFFFF;
+    off = s2 * 4;
+    mask = 0xFF000000;
+    *p = (*p & mask) | (*(u32 *)((u8 *)off + (u32)g[0] + 0x70) & mask2);
+    off += (s32)g[0];
+    *(u32 *)(off + 0x70) = (*(u32 *)(off + 0x70) & mask) | ((u32)p & mask2);
+}
+
+void func_800187E8(s32 arg0) {
+    typedef struct {
+        s16 x;
+        s16 y;
+        s16 w;
+        s16 h;
+    } Rect;
+    extern void SetDrawArea();
+    extern Rect D_80078B80[];
+    extern u8 *D_8008ED68[];
+    extern u8 D_8008A7BC[];
+    Rect rect;
+    u8 **g;
+    register u8 *base asm("v1");
+    u32 *p;
+    u8 *next;
+    s32 off;
+    register u8 *b asm("a0");
+
+    rect = D_80078B80[0];
+    g = D_8008ED68;
+    base = g[0];
+    next = 0;
+    if (base == D_8008A7BC) {
+        rect.y = 0xF0;
+    }
+
+    b = base;
+    p = *(u32 **)(base + 0x1090);
+    if (p != 0 && (u8 *)p + 0xC <= b + 0x4594) {
+        next = (u8 *)p + 0xC;
+    }
+    *(u8 **)(b + 0x1090) = next;
+    SetDrawArea(p, &rect);
+    off = arg0 * 4;
+    *p = (*p & 0xFF000000) | (*(u32 *)((u8 *)off + (u32)g[0] + 0x70) & 0xFFFFFF);
+    off += (s32)g[0];
+    *(u32 *)(off + 0x70) = (*(u32 *)(off + 0x70) & 0xFF000000) | ((u32)p & 0xFFFFFF);
+}
+
+static inline s32 bright(s32 a) {
+    if (a == 0x1000) {
+        return 0x80;
+    }
+    if (a < 0x1000) {
+        return (a << 7) / 4096;
+    } else {
+        s32 b = 0x7F;
+        return ((a - 0x1000) * b) / 4096 + 0x80;
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800188F0);
 
