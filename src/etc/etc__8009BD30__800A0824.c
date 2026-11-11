@@ -1,6 +1,25 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A0824);
+void func_800A0824(u8 *arg0) {
+    extern s16 D_800B3B3C[];
+    extern s16 D_800B3B70[];
+    extern u8 D_8006B1FC[];
+    extern void func_80020844();
+    extern void func_800A225C();
+    extern void func_800A150C();
+
+    func_80020844(-0x90, arg0[0x5D0] == 2 ? -0x58 : -0x38, 0x120, 0x38, 0, 0, 0, 0, 5);
+    func_800A225C(arg0, 0);
+    if (arg0[0x5D0] == 2) {
+        func_80020844(-0x90, 0x28, 0x120, 0x38, 0, 0, 0, 0, 5);
+        func_800A225C(arg0, 1);
+    } else if (arg0[0x5DC] == 0) {
+        func_800A150C(D_8006B1FC, 0, D_800B3B3C[0], -0x40, 0x20);
+    } else {
+        s16 *t = D_800B3B70;
+        func_800A150C(arg0 + 0x50, 0, t[D_800B3B3C[0]], -0x40, 0x20);
+    }
+}
 
 #include "common.h"
 
