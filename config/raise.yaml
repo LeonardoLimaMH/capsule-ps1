@@ -122,6 +122,8 @@ segments:
       - [0x26E1C, c, raise_800B9C3C__800BCF98__800BE61C]
       - [0x26E74, c, raise_800B9C3C__800BCF98__800BE674]
       - [0x26FA0, c, raise_800B9C3C__800BE7A0]
+      - [0x27290, c, raise_800B9C3C__800BE7A0__800BEA90]
+      - [0x2733C, c, raise_800B9C3C__800BE7A0__800BEB3C]
       - [0x27360, c, raise_800B9C3C__800BEB60]
       - [0x27368, c, raise_800B9C3C__800BEB68]
       - [0x273D0, c, raise_800B9C3C__800BEBD0]

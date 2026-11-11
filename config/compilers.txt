@@ -308,3 +308,5 @@ src/raise/raise_800B6014.c 2.7.2-cdk
 src/raise/raise_800B61E4__800B84BC__800B8AD0.c 2.8.1-psx
 src/raise/raise_800B61E4__800B84BC__800B89F4.c 2.7.2-cdk
 src/raise/raise_800B9C3C__800BA3A8.c 2.7.2-cdk
+src/raise/raise_800B9C3C__800BE7A0__800BEB3C.c 2.8.1-psx
+src/raise/raise_800B9C3C__800BE7A0__800BEA90.c 2.7.2-cdk
