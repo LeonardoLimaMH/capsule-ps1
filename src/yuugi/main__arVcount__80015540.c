@@ -180,7 +180,57 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015D14);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015E60);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015EF8);
+void func_80015EF8(Struct_80015EF8 *p) {
+    u32 mask = 0xFFFF0FFF;
+    s32 i = 0x1F;
+    u8 *q = p->b14;
+
+    p->f5a = 0x80;
+    p->f59 = 0x80;
+    p->f58 = 0x80;
+    p->f50 = 0x1000;
+    p->f52 = 0x1000;
+    p->f60 = 0x140;
+    p->f62 = 0xF0;
+    p->f44 = 0;
+    p->f48 = 0;
+    p->f4c = 0;
+    p->f54 = 0;
+    p->f56 = 0;
+    p->f57 = 0;
+    p->f68 = 0;
+    p->f6c = 0;
+    p->f78 = 0;
+    p->f74 = 0;
+    p->f76 = 0;
+    p->f64 = 0;
+    p->f66 = 0;
+    p->f3c = 0;
+    p->f40 = 0;
+    p->f5b = 0;
+    p->f5c = 0;
+    p->f5e = 0;
+    p->f7a = 0;
+    p->flags34 &= ~0x7F;
+    p->flags38 &= ~8;
+    p->flags38 &= ~1;
+    p->flags38 &= ~2;
+    p->flags38 &= ~4;
+    p->flags38 &= ~0x30;
+    p->flags38 &= ~0x40;
+    p->flags38 &= ~0x80;
+    p->flags34 &= ~0x80;
+    p->flags34 &= ~0x100;
+    p->flags34 &= ~0x200;
+    p->flags34 &= ~0xC00;
+    p->flags34 &= mask;
+    for (; i >= 0; i--) {
+        q[i] = 0;
+    }
+    for (i = 4; i >= 0; i--) {
+        p->w7c[i] = 0;
+    }
+}
 
 void func_8001602C(ArVObj *p) {
     s32 i = 0x33;
@@ -393,7 +443,8 @@ void func_80018EF4(s16 a, s16 b, s32 c, s32 d, s32 e) {
     if (d == 0) {
         func_800188F0(a, b, D_80078B90[c], 4, e);
     } else {
-        func_8001F1A8(a, b, 4, 1, 0, &D_80078B88[c], 1, 1, e);
+        register u16 *p asm("v0") = &D_80078B88[c];
+        func_8001F1A8(a, b, 4, 1, 0, p, 1, 1, e);
     }
 }
 
