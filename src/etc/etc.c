@@ -23,12 +23,14 @@ static inline s32 Etc_GetVramAddr(s32 arg0) {
 
 static inline s32 Etc_FindPrev(EtcCtx *arg0, s32 arg1, s32 arg2) {
     register s32 ret asm("t1");
+    register u32 temp asm("v0");
+    s32 var_a1;
     u8 id;
-    u8 temp;
 
     ret = 0;
     id = arg0->unk5E8[arg1][arg2].unk0;
-    if (arg1 != 0) {
+    var_a1 = arg1;
+    if (var_a1 != 0) {
         goto loop;
     }
     if (arg2 == 0) {
@@ -42,14 +44,14 @@ dec:
     arg2--;
     goto check;
 wrap:
-    arg1--;
+    var_a1--;
     arg2 = 4;
 check:
-    if (id == arg0->unk5E8[arg1][arg2].unk0) {
-        temp = arg0->unk5E8[arg1][arg2].unk2A;
+    if (id == arg0->unk5E8[var_a1][arg2].unk0) {
+        temp = arg0->unk5E8[var_a1][arg2].unk2A;
         ret = temp + 1;
     }
-    if (arg1 != 0) {
+    if (var_a1 != 0) {
         goto loop;
     }
     if (arg2 != 0) {
