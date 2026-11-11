@@ -27,6 +27,49 @@ typedef struct {
     u32 hold[2][4];
 } PadWork;
 
+static inline void AtualizaControles(PadWork *w) {
+    extern void func_8004FEDC(), func_8004FEEC();
+    extern PadWork D_8008ED68;
+    u32 st[2];
+    u8 *p;
+    u32 v, cur, old, *c;
+    s32 i, j;
+
+    func_8004FEDC();
+    for (i = 0; i < 2; i++) {
+        p = (u8 *)w + i * 0x22;
+        if ((p[0x3D] >> 4) == 4) {
+            v = p[0x3F] | (p[0x3E] << 8);
+        } else {
+            v = 0xFFFF;
+        }
+        st[i] = ~v & 0xFFFF;
+        func_8004FEEC();
+        cur = st[i];
+        old = w->pad[i].now;
+        w->pad[i].old = old;
+        w->pad[i].now = cur;
+        w->pad[i].trig = ~old & cur;
+        w->pad[i].rel = ~cur & w->pad[i].old;
+    }
+    for (i = 0; i < 2; i++) {
+        c = ((PadWork *)((u8 *)w + i * 0x10))->hold[0];
+        for (j = 0; j < 4; j++, c++) {
+            if (((PadWork *)((u8 *)&D_8008ED68 + i * 0x10))->pad[0].now & (1 << (j + 12))) {
+                v = *c;
+                if (((u8 *)w)[0x103] >= 2) {
+                    v += ((u8 *)w)[0x103];
+                } else {
+                    v++;
+                }
+                *c = v;
+            } else {
+                *c = 0;
+            }
+        }
+    }
+}
+
 extern s32 ReadTIM();
 extern s32 func_80019F30();
 
@@ -74,18 +117,17 @@ s32 func_8001312C(s32 arg0, s32 arg1) {
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80013028", func_80013180);
 
 void func_800131C0(void) {
-    extern u8 D_8008ED68[];
+    extern PadWork D_8008ED68;
     extern void func_8004FEDC(), func_8004FEEC();
     u32 st[2];
+    PadWork *w = &D_8008ED68;
     u8 *p;
-    u32 *s1;
-    u32 v, cur, old, *c;
+    u32 v, old, *c;
     s32 i, j;
 
     func_8004FEDC();
     for (i = 0; i < 2; i++) {
-        p = D_8008ED68 + i * 0x22;
-        s1 = ((u32 (*)[4])D_8008ED68)[i];
+        p = (u8 *)w + i * 0x22;
         if ((p[0x3D] >> 4) == 4) {
             v = p[0x3F] | (p[0x3E] << 8);
         } else {
@@ -93,22 +135,23 @@ void func_800131C0(void) {
         }
         st[i] = ~v & 0xFFFF;
         func_8004FEEC();
-        cur = st[i];
-        old = s1[0x80 / 4];
-        s1[0x84 / 4] = old;
-        s1[0x80 / 4] = cur;
-        s1[0x88 / 4] = ~old & cur;
-        s1[0x8C / 4] = ~cur & s1[0x84 / 4];
+        old = w->pad[i].now;
+        w->pad[i].old = old;
+        w->pad[i].now = st[i];
+        w->pad[i].trig = ~old & st[i];
+        w->pad[i].rel = ~st[i] & w->pad[i].old;
     }
     for (i = 0; i < 2; i++) {
-        c = &((u32 (*)[4])D_8008ED68)[i][0xA4 / 4];
+        c = ((PadWork *)((u8 *)w + i * 0x10))->hold[0];
         for (j = 0; j < 4; j++, c++) {
-            if (((u32 (*)[4])D_8008ED68)[i][0x80 / 4] & (1 << (j + 12))) {
-                if (D_8008ED68[0x103] >= 2) {
-                    *c = *c + D_8008ED68[0x103];
+            if (((PadWork *)((u8 *)&D_8008ED68 + i * 0x10))->pad[0].now & (1 << (j + 12))) {
+                v = *c;
+                if (((u8 *)w)[0x103] >= 2) {
+                    v += ((u8 *)w)[0x103];
                 } else {
-                    *c = *c + 1;
+                    v++;
                 }
+                *c = v;
             } else {
                 *c = 0;
             }
