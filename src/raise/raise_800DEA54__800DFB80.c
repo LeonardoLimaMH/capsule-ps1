@@ -41,11 +41,23 @@ static inline void RaiseEnt_Reverse(RaiseEntB *e, s16 n) {
 void func_800DFB80(s32 unused, u16 idx) {
     RaiseEntB *e = (RaiseEntB *)(D_80092008 + idx * 0x44);
     s16 n;
+    s16 i;
+    s32 j;
+    s32 k;
+    RaiseSlotB tmp;
 
     n = e->idx;
     e->cnt = n;
     e->f3 = 0;
-    RaiseEnt_Reverse(e, n);
+    for (i = 0; i < n / 2; i++) {
+        tmp = e->slots[i];
+        k = i + 1;
+        j = n - k;
+        e->slots[i] = e->slots[j];
+        e->slots[j] = tmp;
+        e->slots[i].dir = (e->slots[i].dir + 4) % 8;
+        e->slots[j].dir = (e->slots[j].dir + 4) % 8;
+    }
 }
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800DFCA0);
