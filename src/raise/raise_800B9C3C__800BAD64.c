@@ -1,5 +1,17 @@
 #include "common.h"
 
+/* visão parcial de D_800EFF58 (trabalho do raise) e D_8008ED68 */
+typedef struct {
+    u8 pad0[0x600];
+    u8 *unk600[3];
+} RaiseWork600;
+
+typedef struct {
+    u8 pad0[0x108];
+    s32 unk108;
+    s32 unk10C;
+} RaiseScr108;
+
 #include "common.h"
 
 void func_800BAD64(s32 arg0) {
@@ -55,7 +67,44 @@ void func_800BAF7C(void) {
     func_800BE020(0);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BAD64", func_800BB034);
+void func_800BB034(s32 idx) {
+    extern u8 *D_800EFF58[];
+    extern u8 D_800178F8[];
+    extern s32 D_8008ED68[];
+    extern void func_800BB814();
+    s16 *r;
+    u8 *p;
+    s32 x;
+
+    p = (u8 *)func_80015B3C(func_800BB814, D_800178F8, 0x1A);
+    D_800EFF58[idx + 0x180] = p;
+    if (p != 0) {
+        func_80015EF8(p);
+        x = idx * 0x60 + 0x10 - D_8008ED68[0x42] / 2;
+        if (idx == 0) {
+            x -= 0x184;
+        } else {
+            x -= 0x180;
+        }
+        *(s16 *)(D_800EFF58[idx + 0x180] + 0x46) = x;
+        *(s16 *)(D_800EFF58[idx + 0x180] + 0x4A) = 0x38 - D_8008ED68[0x43] / 2;
+        *(s16 *)(D_800EFF58[idx + 0x180] + 0x4E) = 5;
+        *(u8 *)(D_800EFF58[idx + 0x180] + 0x58) = 0x80;
+        *(u8 *)(D_800EFF58[idx + 0x180] + 0x59) = 0x80;
+        *(u8 *)(D_800EFF58[idx + 0x180] + 0x5A) = 0x80;
+        r = (s16 *)(D_800EFF58[idx + 0x180] + 0x14);
+        r[0] = 0;
+        r[1] = 0;
+        if (idx == 0) {
+            r[2] = 0x64;
+        } else {
+            r[2] = 0x60;
+        }
+        r[3] = 0x70;
+        *(s32 *)(D_800EFF58[idx + 0x180] + 0x38) =
+            (*(s32 *)(D_800EFF58[idx + 0x180] + 0x38) & ~0x40) | ((idx != 1) << 6);
+    }
+}
 
 #include "common.h"
 
