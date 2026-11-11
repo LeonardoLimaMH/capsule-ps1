@@ -12,6 +12,16 @@ static inline s32 verifica_indice_8009B150(s32 i) {
     return *(u16 *)(p + 0x84) < 3U;
 }
 
+static inline void avanca_indice_8009B150(u8 *b, u32 passo) {
+    u32 i;
+    do {
+        i = *(u32 *)(b + 0x99C);
+        i += passo;
+        i %= 6;
+        *(s32 *)(b + 0x99C) = i;
+    } while (!verifica_indice_8009B150(i));
+}
+
 s32 func_8009B150(void) {
     extern u8 D_8008ED68[];
     extern s32 D_8008F710[];
@@ -32,8 +42,8 @@ s32 func_8009B150(void) {
         func_80034AB0(0x5D);
         ret = -1;
     } else {
-        b = base;
         if (flags & 0x2000) {
+            b = base;
             do {
                 temp_a0 = *(u32 *)(b + 0x99C);
                 temp_a0 += 1;
@@ -42,6 +52,7 @@ s32 func_8009B150(void) {
             } while (!verifica_indice_8009B150(temp_a0));
             *D_8008F710 = 2;
         } else if (flags & 0x8000) {
+            b = base;
             do {
                 temp_a0 = *(u32 *)(b + 0x99C);
                 temp_a0 += 5;
