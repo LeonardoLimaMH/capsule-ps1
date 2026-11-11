@@ -41,7 +41,13 @@ void func_800DE304(s16 arg0, s16 arg1, s16 *arg2, s16 *arg3) {
     *arg3 = ((arg1 - 4) * 0x64) + 0x32;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DDD70", func_800DE35C);
+extern s16 func_800D68D4(s32);
+extern s16 func_800D6848(s32);
+void func_800DE35C(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4, s16 *a5, s16 *a6) {
+    s32 t = a3 + a4;
+    *a6 = a2 + ((a0 * func_800D68D4(t)) / 4096);
+    *a5 = a1 + ((a0 * func_800D6848(t)) / 4096);
+}
 
 void func_800DE420(s16 arg0, s16 arg1, s16 *arg2, s16 *arg3) {
     *arg2 = ((-arg0 - 0x32) / 100) + 5;
@@ -52,4 +58,19 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800DDD70", func_800DE480);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DDD70", func_800DE770);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DDD70", func_800DE938);
+s32 func_800DE938(s32 a0) {
+    u8 *p = PL(a0);
+    s16 n;
+    u16 a, b;
+    u8 *q;
+    if (PS16(0x5B4) == 0) return 0;
+    n = PS16(0x5B0);
+    q = p + n * 4;
+    a = *(u16 *)(q + 0x5B6);
+    b = *(u16 *)(q + 0x5B8);
+    PS16(0x736) = a;
+    P32(0x738) = D_800F1E94[(s16)b];
+    PS16(0x5B0) = (n + 1) % 32;
+    PS16(0x5B4) = P16(0x5B4) - 1;
+    return 1;
+}
