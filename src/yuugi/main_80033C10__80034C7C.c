@@ -1,7 +1,43 @@
 #include "common.h"
 #include "yuugi.h"
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_80034C7C);
+s32 func_80034C7C(s16 arg0) {
+    extern u8 D_800922F0[];
+    extern s32 func_80036DB0();
+    struct { u8 c; u8 a; s16 s; s32 w4; s32 w8; s32 wC; } c, ab[2], *p;
+    u8 *g = D_800922F0;
+
+    if (arg0 != *(s16 *)(g + 0x1190)) {
+        *(u16 *)g |= 2;
+        p = ab;
+        if (*(u16 *)g & 0x80) {
+            ab[1].c = 0x45;
+            p[1].w8 = -0x80;
+            ab[1].a = 0;
+            func_80036DB0(&ab[1]);
+            p->c = 0x49;
+            func_80036DB0(p);
+        }
+        p->c = 0x47;
+        func_80036DB0(p);
+        c.c = 0x2C;
+        c.s = arg0;
+        func_80036DB0(&c);
+        c.c = 0x4A;
+        c.s = arg0;
+        func_80036DB0(&c);
+        c.c = 0x11;
+        func_80036DB0(&c);
+    } else {
+        c.c = 0x46;
+        c.s = arg0;
+        c.wC = 0x801F6800;
+        func_80036DB0(&c);
+    }
+    return 0;
+}
+
+void func_80034DA0(s32 a0, s32 a1);
 
 void func_80034D78(s16 arg0) {
     func_80034DA0(arg0, 0x80);
@@ -13,11 +49,71 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_80034F74);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_80035304);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_80035680);
+void func_80035680(u8 a0, void *a1) {
+    extern u8 D_800922F0[];
+    extern u8 D_80093710[];
+    extern s32 DsPosToInt();
+    extern void func_80037404(), func_800373A0();
+    s32 pos;
+    DsSyncCallback(0);
+    if (a0 == 2) {
+        u8 *g;
+        u16 f;
+        pos = DsPosToInt(a1);
+        f = *(u16 *)D_800922F0;
+        g = D_800922F0;
+        *(s32 *)(g + 0x1178) = pos;
+        if ((f & 4) && *(s32 *)(g + 0x1180) < pos) {
+            if (g[0x1186] != 0) {
+                func_80037404(*(u16 *)(g + 0x1174) | 0x8000, 1);
+            } else {
+                func_800373A0();
+            }
+        }
+    } else {
+        u8 *p = D_80093710;
+        if (*(s16 *)(p + 0x28) != 0) {
+            *(s16 *)(p + 0x28) = *(u16 *)(p + 0x28) - 1;
+            DsSyncCallback(func_80035680);
+            DsControlF(0x10, 0);
+        } else {
+            D_800922F0[0x112] = 0;
+            D_800922F0[0x113] = 0;
+        }
+    }
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_8003577C);
+void func_8003577C(u8 a0, u8 *a1) {
+    extern u8 D_800922F0[];
+    if (a0 == 2) {
+        if (!(*a1 & 0x40)) {
+            D_800922F0[0x112] = 0;
+            D_800922F0[0x113] = 0;
+            *(u16 *)(D_800922F0 + 0x1174) = *(u16 *)(D_800922F0 + 0x116);
+            *(u16 *)D_800922F0 = (*(u16 *)D_800922F0 & 0xFFFE) | 4;
+            DsSyncCallback(0);
+        } else {
+            DsSyncCallback(func_8003577C);
+            DsControlF(1, 0);
+        }
+    } else {
+        DsSyncCallback(func_8003577C);
+    }
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_80035810);
+void func_80035810(u8 a0, u8 *a1) {
+    extern u8 D_800922F0[];
+    DsSyncCallback(0);
+    if (a0 == 2) {
+        if (!(*a1 & 0xE0)) {
+            D_800922F0[0x112] = 0;
+            D_800922F0[0x113] = 0;
+            *(u16 *)D_800922F0 &= 0xFFF8;
+        }
+    } else {
+        DsSyncCallback(func_80035810);
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_80035894);
 
@@ -293,7 +389,34 @@ void func_80037138(s32 a)
   *((s16 *) D_800922F0) = 0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80034C7C", func_800371A4);
+void func_800371A4(s16 arg0) {
+    typedef struct { u8 _0; u8 _1; u8 f2; u8 _3; u16 f4; u8 _p[0x1187 - 6]; u8 f1187; } G;
+    extern s16 D_80092434[];
+    extern void DsMix();
+    u8 buf[4];
+    register s32 f4 asm("a1");
+    register s32 p asm("a3");
+    register s32 t asm("v0");
+    u16 v;
+    t = arg0;
+    f4 = ((G *)D_800922F0)->f4;
+    p = t * f4;
+    t = p >> 8;
+    v = ((G *)D_800922F0)->f1187;
+    v *= t;
+    v >>= 3;
+    buf[3] = 0;
+    buf[0] = v;
+    if (((G *)D_800922F0)->f2 == 0) {
+        buf[1] = 0;
+        buf[2] = v;
+    } else {
+        buf[1] = v;
+        buf[2] = 0;
+    }
+    DsMix(buf);
+    *D_80092434 = arg0;
+}
 
 s16 func_80037234(void) {
     extern s16 D_80092434[];
