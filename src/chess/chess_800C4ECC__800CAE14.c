@@ -1,5 +1,13 @@
 #include "common.h"
 
+/* peça do tabuleiro de xadrez (0x7C bytes; 6 por jogador a partir de +0x5E8) */
+typedef struct {
+    u8 unk0[0x15];
+    u8 unk15;
+    u8 unk16;
+    u8 unk17[0x7C - 0x17];
+} ChessPiece7C;
+
 void func_800CAE14(void *arg0)
 {
   u8 temp_v0;
@@ -73,7 +81,44 @@ s32 func_800CB10C(void *arg0, u8 *arg1, s32 arg2)
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CB24C);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CB400);
+s32 func_800A8E34(s32, s32, s32);
+s32 func_800CB400(s32 arg0, s32 arg1) {
+    s32 count[2];
+    s32 i;
+    s32 j;
+    s32 off;
+    s32 *p;
+    s32 *q;
+    u8 *e;
+
+    i = 0;
+    p = count;
+    off = 0x5E8;
+    do {
+        *p = 0;
+        j = 0;
+        q = p;
+        e = (u8 *)(arg0 + off);
+        do {
+            if (func_800A8E34(arg0 + 0x5D0, i, j) == 0 &&
+                *(u8 *)(arg0 + e[0x15] * 13 + e[0x16] + 0xC00) == 2) {
+                *q += 1;
+            }
+            j++;
+            e += 0x7C;
+        } while (j < 6);
+        p++;
+        i++;
+        off += 0x2E8;
+    } while (i < 2);
+    if (count[arg1] > count[1 - arg1]) {
+        return 0;
+    }
+    if (count[arg1] < count[1 - arg1]) {
+        return 2;
+    }
+    return 1;
+}
 
 void func_800CB540(void *arg0) {
     extern u8 D_8008ED68[];
