@@ -40,7 +40,47 @@ void func_80011AFC(void) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80011B1C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80011C40);
+void func_80011C40(void) {
+    extern u8 D_80085428[];
+    extern struct {
+        u8 pad0[0x14];
+        u32 f14;
+        u8 pad18[0x24];
+    } D_80063940[];
+    extern struct {
+        u8 f0;
+        u8 pad1[0xD];
+    } D_8006B1FC[];
+    extern void func_8001A998();
+    extern void func_800267F0();
+    u8 *s0 = D_80085428;
+    s32 i;
+
+    func_8001A998(s0 + 0x50, 0x578);
+    for (i = 0; i < 0x32; i++) {
+        s0[0x50 + i * 0xE] = 0xFF;
+        s0[0x30C + i * 0xE] = 0xFF;
+    }
+    func_8001A998(s0 + 0x5D0, 0x7AC);
+    func_800267F0();
+    for (i = 0; i < 2; i++) {
+        (s0 + i)[2] = 0;
+        (s0 + i)[4] = 6;
+    }
+    s0[7] = 0;
+    s0[6] = 0;
+    s0[0x5CB] = 4;
+    for (i = 0; i < 0x67; i++) {
+        u32 v = D_80063940[i].f14;
+        v &= ~0x20;
+        v &= ~0x40;
+        D_80063940[i].f14 = v;
+    }
+    for (i = 0; i < 6; i++) {
+        D_80063940[D_8006B1FC[i].f0].f14 |= 0x20;
+        D_80063940[D_8006B1FC[i].f0].f14 |= 0x40;
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80011D84);
 
