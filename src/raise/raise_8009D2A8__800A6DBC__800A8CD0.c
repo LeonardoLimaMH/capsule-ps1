@@ -58,7 +58,38 @@ void func_800A8EAC(void) {
     func_80023C00(1, -0x800, (*D_80069BB4));
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A8CD0", func_800A8EE0);
+void func_800A8EE0(void) {
+    extern u8 D_80091618[];
+    extern u8 D_800900C0[];
+    extern s32 func_800B1260(s32);
+    s32 i;
+    s32 n;
+    s32 j;
+    s32 idx;
+
+    i = 1;
+    do {
+        u16 k = func_800B1260(i);
+        if (k != 0xFFFF) {
+            u16 v;
+            u8 *e = (u8 *)(k * 0x1A8 + (u32)D_80091618);
+            if (*(u16 *)(e + 0x10) != 0xFFFF) {
+                v = k;
+            } else {
+                v = 8;
+            }
+            n = (v == 1 || v == 5 || v == 3) ? 3 : 2;
+            for (j = 0; j < n; j++) {
+                idx = j;
+                if (i != 1) {
+                    idx = j + 3;
+                }
+                *(s32 *)(D_800900C0 + idx * 0xBC) = 0;
+            }
+        }
+        i--;
+    } while (i >= 0);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A8CD0", func_800A8FF0);
 
