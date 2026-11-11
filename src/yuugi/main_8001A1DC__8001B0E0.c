@@ -73,14 +73,19 @@ static inline s32 readhdr(char *path, u8 *buf) {
     func_8004FF3C(fd);
     return 0;
 }
+static inline s32 readentry(u8 *de, u8 *buf, s32 port) {
+    char path[0x20];
+    func_8001BB18(de, path, port);
+    return readhdr(path, buf);
+}
+
 s32 func_8001B964(s32 a0) {
     s32 name[8];
     u8 buf[0x80];
     u8 de[0x28];
-    u8 path[0x20];
     void *p;
+    void *entry;
     s32 total = 0;
-    s32 fd;
     s32 r;
 
     if (a0 == 0) {
@@ -89,20 +94,13 @@ s32 func_8001B964(s32 a0) {
         memcpy(name, D_80078B9C, 6);
     }
     memcpy((char *)name + 5, D_80078BA4, 2);
-    p = firstfile(name, de);
-    if (p == de) {
+    entry = firstfile(name, de);
+    if (entry == de) {
+        p = entry;
         do {
+            u8 path[0x20];
             func_8001BB18(de, path, a0);
-            fd = func_8004FEFC(path, 1);
-            if (fd == -1) {
-                r = -2;
-            } else if (func_8004FF1C(fd, buf, 0x80) == -1) {
-                func_8004FF3C(fd);
-                r = -2;
-            } else {
-                func_8004FF3C(fd);
-                r = 0;
-            }
+            r = readhdr((char *)path, buf);
             if (r < 0) {
                 return r;
             }
