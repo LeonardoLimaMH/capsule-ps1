@@ -111,11 +111,53 @@ void func_800284C8(s32 a) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002858C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_800293E8);
+s32 func_800293E8(void) {
+    extern s16 D_80069AB4[];
+    extern struct { u8 pad[0x12]; u16 n; u16 a[(0x1A8 - 0x14) / 2]; } D_80091618[];
+    u32 id = (u16)func_800B1260();
+    u16 i, n;
+
+    if (id == 0xFFFF) {
+        return 0;
+    }
+    n = D_80091618[id].n;
+    for (i = 0; i < n; i++) {
+        if (D_80069AB4[D_80091618[id].a[i]] >= 2) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_800294AC);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_800296C0);
+s32 func_800296C0(s32 a0, s32 a1) {
+    extern u8 D_800EF364[];
+    extern struct { u8 pad[0x10]; u16 f10; u8 pad2[0x1A8 - 0x12]; } D_80091618[];
+    u32 id = (u16)func_800B1260(a0);
+    u16 t;
+    s32 row;
+    s32 idx;
+    u8 *b;
+    u8 *p;
+
+    if (id != 0xFFFF) {
+        t = D_80091618[id].f10;
+        if (t == 0xFFFF) {
+            return 0;
+        }
+        if (t == 1 || t == 5 || t == 3) {
+            goto found;
+        }
+    }
+    return 0;
+found:
+    row = a1 / 8;
+    idx = row * 8 + a1 % 8;
+    b = D_800EF364;
+    p = (t << 6) + b;
+    return p[idx] == 0xFF;
+}
 
 extern s16 D_80078C28, D_80078C2C;
 extern s32 D_80069B28[];
@@ -230,6 +272,7 @@ void func_80029A9C(void *arg0) {
 }
 
 #include "common.h"
+#include "gte_inline.h"
 
 void func_80029B28(void *arg0) {
     extern s32 D_80069B28[];
@@ -300,6 +343,7 @@ void func_80029B28(void *arg0) {
     }
 }
 
+extern s32 func_800D8AF8(void *, s32), func_80023ECC(void *, s32), func_8002BD08(void *, void *, s32);
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_80029C90);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_80029E90);
