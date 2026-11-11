@@ -251,7 +251,42 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80026930);
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800270D4);
 
 extern u8 *D_80078D14;
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800278C8);
+void func_800278C8(s32 a, s32 b) {
+    extern struct {
+        s16 f0;
+        s16 f2[3];
+        s16 f8[3][2];
+        s16 f14[5];
+    } D_8006AF90[];
+    extern u8 *D_80078D14;
+    s32 v;
+    u8 *dst = (u8 *)0x801CC040 + a * 0x668;
+    u8 *src;
+    s32 i;
+
+    D_80078D14 = dst + 0x323;
+    src = D_80078D14;
+    D_8006AF90[b].f0 = dst[0x323];
+    for (i = 0; i < 3; i++) {
+        v = *(src + i + 1);
+        if (v == 0xFF) {
+            v = 0xFFFF;
+        }
+        D_8006AF90[b].f2[i] = (v == 0xFFFF) ? -1 : v;
+
+        v = *(src + i * 2 + 4);
+        if (v == 0xFF) {
+            v = 0xFFFF;
+        }
+        D_8006AF90[b].f8[i][0] = (v == 0xFFFF) ? -1 : v;
+
+        v = *(src + i * 2 + 5);
+        if (v == 0xFF) {
+            v = 0xFFFF;
+        }
+        D_8006AF90[b].f8[i][1] = (v == 0xFFFF) ? -1 : v;
+    }
+}
 
 void func_800279D4(s32 a, s32 b) {
     extern struct {
