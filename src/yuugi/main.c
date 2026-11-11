@@ -74,4 +74,52 @@ void func_80011F84(void) {
     func_80012A20(func_80019F30(0x50001, 8), 1, 0, 0);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main", func_80012074);
+void func_80012074(s32 a0, s32 i) {
+    u8 *base = (u8 *)0x801CC000;
+    register u8 *t asm("t1");
+    register u8 *p asm("v1");
+    register s32 val asm("t0");
+    register s32 v1_var asm("v1");
+    register s32 a0_var asm("a0");
+    register s32 v0_var asm("v0");
+    s32 k;
+    u8 *s;
+    u8 *q;
+
+    v1_var = i * 3;
+    a0_var = v1_var << 4;
+    v0_var = a0_var - i;
+    v0_var = (v0_var << 3) + i;
+    v0_var = (v0_var << 3) + 0x1378;
+    t = base + v0_var;
+
+    k = 0;
+    val = 0xFF;
+
+    v1_var = ((v1_var + a0_var) << 2) + i;
+    v1_var = (v1_var << 3) + 0x40;
+    s = base + v1_var;
+
+    p = s;
+loop:
+    *p = val;
+    p += 14;
+    k++;
+    if (k < 50) goto loop;
+
+    k = 0x66;
+    q = s + 0x66;
+    do {
+        q[0x2BC] = 0;
+        k--;
+        q--;
+    } while (k >= 0);
+
+    s[0x32D] = 1;
+    t[0] = 0xF;
+    t[2] = 0x1A;
+    t[1] = 1;
+    *(u16 *)(t + 4) = 0x9BA8;
+    func_800260F4(t, i, base, k);
+    func_800264BC(s);
+}
