@@ -84,6 +84,7 @@ segments:
       - [0x1930C, c, raise_800AC34C__800B0B0C]
       - [0x19950, c, raise_800AC34C__800B1150]
       - [0x19DCC, c, raise_800B15CC]
+      - [0x19E68, c, raise_800B15CC__800B1668]
       - [0x19F00, c, raise_800B1700]
       - [0x1CEBC, c, raise_800B46BC]
       - [0x1CF2C, c, raise_800B472C]
