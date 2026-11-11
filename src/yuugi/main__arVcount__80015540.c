@@ -258,7 +258,53 @@ void func_80018610(s32 arg0, s32 arg1) {
     *(u32 *)(off + 0x70) = (*(u32 *)(off + 0x70) & 0xFF000000) | ((u32)p & 0xFFFFFF);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800186E4);
+void func_800186E4(s16 *arg0, s32 arg1) {
+    extern void SetDrawArea();
+    extern u8 *D_8008ED68[];
+    extern u8 D_8008A7BC[];
+    register u8 **g asm("s1") = D_8008ED68;
+    register u8 *base asm("v1");
+    register s32 s2 asm("s2");
+    register u32 *p asm("s0");
+    register s16 y asm("a1");
+    register u8 *next asm("a1");
+    register u8 *b asm("a0");
+    register u32 mask2 asm("a1");
+    register s32 off asm("a0");
+    register u32 mask asm("a2");
+    struct {
+        s16 x;
+        s16 y;
+        s16 w;
+        s16 h;
+    } rect;
+
+    rect.x = arg0[0];
+    base = g[0];
+    s2 = arg1;
+    y = arg0[1];
+    if (base == D_8008A7BC) {
+        y += 0xF0;
+    }
+    rect.y = y;
+    rect.w = arg0[2];
+    next = 0;
+    rect.h = arg0[3];
+
+    b = base;
+    p = *(u32 **)(base + 0x1090);
+    if (p != 0 && (u8 *)p + 0xC <= b + 0x4594) {
+        next = (u8 *)p + 0xC;
+    }
+    *(u8 **)(b + 0x1090) = next;
+    SetDrawArea(p, &rect);
+    mask2 = 0x00FFFFFF;
+    off = s2 * 4;
+    mask = 0xFF000000;
+    *p = (*p & mask) | (*(u32 *)((u8 *)off + (u32)g[0] + 0x70) & mask2);
+    off += (s32)g[0];
+    *(u32 *)(off + 0x70) = (*(u32 *)(off + 0x70) & mask) | ((u32)p & mask2);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800187E8);
 
