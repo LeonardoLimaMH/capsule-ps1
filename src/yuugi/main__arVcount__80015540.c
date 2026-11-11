@@ -19,6 +19,41 @@ typedef struct {
     s32 w5c[10];
 } ArVObj;
 
+typedef struct {
+    u8 pad0[0x14];
+    u8 b14[0x20];
+    u32 flags34;
+    u32 flags38;
+    s32 f3c;
+    s32 f40;
+    s32 f44;
+    s32 f48;
+    s32 f4c;
+    s16 f50;
+    s16 f52;
+    s16 f54;
+    u8 f56;
+    u8 f57;
+    u8 f58;
+    u8 f59;
+    u8 f5a;
+    u8 f5b;
+    s16 f5c;
+    s16 f5e;
+    s16 f60;
+    s16 f62;
+    s16 f64;
+    s16 f66;
+    s32 f68;
+    s32 f6c;
+    s32 pad70;
+    s16 f74;
+    s16 f76;
+    s16 f78;
+    s16 f7a;
+    s32 w7c[5];
+} Struct_80015EF8;
+
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015540);
 
 #include "common.h"
@@ -350,7 +385,17 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800188F0);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018C00);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018EF4);
+void func_80018EF4(s16 a, s16 b, s32 c, s32 d, s32 e) {
+    extern u8 D_80078B90[];
+    extern u16 D_80078B88[];
+    extern s32 func_800188F0();
+    extern s32 func_8001F1A8();
+    if (d == 0) {
+        func_800188F0(a, b, D_80078B90[c], 4, e);
+    } else {
+        func_8001F1A8(a, b, 4, 1, 0, &D_80078B88[c], 1, 1, e);
+    }
+}
 
 s32 func_80018F90(u32 arg0, s32 arg1) {
     extern void func_80020688();
