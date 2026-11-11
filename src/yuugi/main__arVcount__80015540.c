@@ -198,7 +198,72 @@ void func_80015CD0(int param_1,int param_2,uint param_3)
   return;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015D14);
+s32 func_80015D14(AnimObj *p) {
+    extern u8 D_8008ED68[];
+    SubData *a3;
+    u8 v1;
+    s32 a2;
+    s32 v0;
+    s16 a1;
+    u32 mode;
+    u8 *base = D_8008ED68;
+
+    if (base[0x99A] != 0) {
+        return 0;
+    }
+    a3 = p->f8;
+    if (a3 == NULL) {
+        return 0;
+    }
+    if ((u8)base[0x103] < 2) {
+        v1 = 1;
+    } else {
+        v1 = base[0x103];
+    }
+    a1 = p->f10;
+    a2 = (p->f1C >> 9) & 7;
+    if (a2 < 2) {
+        v0 = a1 - v1;
+    } else {
+        v0 = a1 - v1 * a2;
+    }
+    p->f10 = v0;
+    if ((s16)v0 >= 0) {
+        return 0;
+    }
+    p->fC++;
+    if (p->fC >= a3->count) {
+        mode = p->f1C & 7;
+        if (mode == 1) {
+            p->f8 = NULL;
+            return 0;
+        }
+        if (mode < 2) {
+            if (mode == 0) {
+                p->fC = 0;
+                p->f12++;
+            }
+        } else {
+            if (mode == 2) {
+                p->f4 = 0;
+                p->f8 = NULL;
+                return 0;
+            }
+            if (mode == 3) {
+                if (p->f12 == 1) {
+                    p->f12++;
+                    p->f8 = NULL;
+                    return 0;
+                }
+                p->fC = 0;
+                p->f12++;
+            }
+        }
+    }
+    p->f4 = a3->entries[p->fC].val0;
+    p->f10 = a3->entries[p->fC].val4;
+    return 1;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015E60);
 
@@ -451,6 +516,16 @@ void func_800187E8(s32 arg0) {
     *p = (*p & 0xFF000000) | (*(u32 *)((u8 *)off + (u32)g[0] + 0x70) & 0xFFFFFF);
     off += (s32)g[0];
     *(u32 *)(off + 0x70) = (*(u32 *)(off + 0x70) & 0xFF000000) | ((u32)p & 0xFFFFFF);
+}
+
+static inline s32 bright(s32 a) {
+    if (a == 0x1000) {
+        return 0x80;
+    }
+    if (a < 0x1000) {
+        return (a << 7) / 4096;
+    }
+    return ((a - 0x1000) * 0x7F) / 4096 + 0x80;
 }
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800188F0);
