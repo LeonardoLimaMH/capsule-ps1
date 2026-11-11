@@ -47,6 +47,7 @@ void func_800BD57C(void)
     extern u16 D_8006AF80[];
     extern u8 D_800F038C[];
     extern u16 D_800F0568[];
+    u16 v;
     s32 i;
     s32 j;
     u8 *p;
@@ -54,12 +55,12 @@ void func_800BD57C(void)
     func_8001611C(0x1000);
     func_8001A998(D_80091620 + *D_8006AF80 * 0x1A8, 8);
     func_8001A998(D_800F038C, 8);
+    v = 0xA6;
     p = D_800F038C - 0x434;
-    j = 7;
     *(s32 *)(p + 0x43C) = 0;
     *(s32 *)(p + 0x428) = 0;
-    for (; j >= 0; j--) {
-        D_800F0568[j] = 0xA6;
+    for (j = 7; j >= 0; j--) {
+        D_800F0568[j] = v;
     }
     q = D_800EFF58;
     *(s32 *)(q + 0x440) = 0;
