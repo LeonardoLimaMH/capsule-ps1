@@ -45,11 +45,3 @@ void func_8009BA40(void)
     *((s32 *) (((s8 *) D_8008ED68) + 0x2C)) = 0;
   }
 }
-static inline s32 verifica_indice_8009B150(s32 i) {
-    extern u8 D_80091618[];
-    extern u16 D_8006AF80[];
-    u8 *p = D_80091618 + i * 0x1A8;
-    if (*(u16 *)(p + 0x10) == 0xFFFF || i == *D_8006AF80) return 0;
-    if (*(u16 *)(p + 0x8A) != 0xFFFF) return 0;
-    return *(u16 *)(p + 0x84) < 3U;
-}
