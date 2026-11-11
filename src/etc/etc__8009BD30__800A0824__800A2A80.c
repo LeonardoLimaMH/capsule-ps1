@@ -450,7 +450,34 @@ void func_800A39D8(u8 *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A3AB4);
+void func_800A3AB4(u8 *arg0) {
+    extern u8 D_80065390[];
+    extern u8 D_8008ED68[];
+    extern s16 D_800B3B38[];
+    extern u8 D_800B3B88[];
+    u8 *q = D_8008ED68;
+    s32 temp;
+
+    *(s32 *)(arg0 + 0x38) |= 1;
+    if ((*(u16 *)(q + 0xDC) == 0x13 && *(u16 *)(q + 0xE0) == 0) || (*(u16 *)(q + 0xDC) == 0x1B && *(u16 *)(q + 0xE0) == 4)) {
+        temp = *(s32 *)(arg0 + 0x84);
+        switch (temp) {
+        case 1:
+            *(s32 *)(arg0 + 0x38) &= ~1;
+            if (*(s32 *)(arg0 + 0x84) == 1) {
+                *(s32 *)(arg0 + 0x18) = func_8001A434(*(s32 *)(arg0 + 0x7C) + D_800B3B88[*(s32 *)(arg0 + 0x80)], D_80065390);
+            }
+            break;
+        case 2:
+            if (((struct { u8 _p[8]; s16 v; } *)(D_800B3B38 + *(s32 *)(arg0 + 0x80)))->v == 0) {
+                break;
+            }
+        case 0:
+            *(s32 *)(arg0 + 0x38) &= ~1;
+            break;
+        }
+    }
+}
 
 void func_800A3BDC(u8 *arg0) {
     extern u8 D_80085428[];
