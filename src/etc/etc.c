@@ -1,5 +1,18 @@
 #include "common.h"
 
+/* Elemento de 0x7C bytes da matriz [?][6] em +0x5E8 (0x2E8 = 6 * 0x7C). */
+typedef struct {
+    u8 unk0;
+    u8 pad1[0x29];
+    u8 unk2A;
+    u8 pad2B[0x51];
+} Etc7C;
+
+typedef struct {
+    u8 pad0[0x5E8];
+    Etc7C unk5E8[1][6];
+} EtcCtx;
+
 s32 func_800979BC(s32 arg0) {
     register s32 a asm("v0");
     register s32 b asm("v1");
@@ -131,11 +144,149 @@ s32 func_80097D8C(s32 arg0, s32 arg1, s32 arg2)
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80097E40);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009807C);
+void func_8009807C(s32 arg0, s32 arg1, s32 arg2) {
+    extern void func_8001A49C();
+    register u8 *var_t4 asm("t4");
+    register s32 var_t2 asm("t2");
+    register u8 *temp_t3 asm("t3");
+    register s32 var_t1 asm("t1");
+    register u8 temp_t0 asm("t0");
+    register s32 var_a3 asm("a3");
+    s32 v;
+    s32 var_a0;
+
+    var_t4 = (u8 *)arg0;
+    var_t2 = 0;
+    temp_t3 = ((u8 (*)[6][0x7C])(var_t4 + 0x5E8))[arg1][arg2];
+    if (arg2 == 5) {
+        goto block_12;
+    }
+    var_t1 = var_t2;
+    temp_t0 = ((u8 (*)[6][0x7C])(var_t4 + 0x5E8))[arg1][arg2][0];
+    var_a3 = arg1;
+    if (arg1 != 0) {
+        goto loop_3;
+    }
+    if (arg2 == 0) {
+        goto block_10;
+    }
+loop_3:
+    if (arg2 == 0) {
+        goto block_5;
+    }
+block_4:
+    arg2 -= 1;
+    goto block_6;
+block_5:
+    var_a3 -= 1;
+    arg2 = 4;
+block_6:
+    if (temp_t0 == ((u8 (*)[6][0x7C])(var_t4 + 0x5E8))[var_a3][arg2][0]) {
+        var_t1 = ((u8 (*)[6][0x7C])(var_t4 + 0x5E8))[var_a3][arg2][0x2A] + 1;
+    }
+    if (var_a3 != 0) {
+        goto loop_3;
+    }
+    if (arg2 != 0) {
+        goto block_4;
+    }
+block_10:
+    if (var_t1 != 0) {
+        var_t2 = 1;
+    }
+    goto block_15;
+
+block_12:
+    if (temp_t3[0x2A] < 10) {
+        goto block_14;
+    }
+    if (arg1 == temp_t3[0x2A] - 10) {
+        goto block_15;
+    }
+block_14:
+    var_t2 = 1;
+
+block_15:
+    if (var_t2 != 0) {
+        return;
+    }
+
+    v = temp_t3[0x2A];
+    arg1 = v;
+    if (v < 10) {
+        var_a0 = (v * 0xE000) + (s32)0x80140000;
+    } else {
+        var_a0 = (s32)0x80124000;
+        var_a0 = ((arg1 - 10) * 0xE000) + var_a0;
+    }
+    func_8001A49C(var_a0);
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800981F0);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800991AC);
+void func_800991AC(u8 *arg0) {
+    extern u8 D_80085A0D[];
+    extern void func_800A4964();
+    extern s32 func_800372B4();
+    extern s32 func_80020304(s32);
+    extern s32 func_80019F30(s32, s32);
+    extern void func_80015CD0(void *, s32, s32);
+
+    register u8 *s0 asm("s0") = arg0;
+    register u32 s1 asm("s1");
+    register s32 v1 asm("v1");
+    register s32 temp_v0 asm("v0");
+    register s32 a0 asm("a0");
+    s32 a1;
+
+    s1 = *D_80085A0D;
+    func_800A4964();
+
+    v1 = 1;
+    if ((*(u32 *)(s0 + 0x38) & 1) == v1) {
+        *(u32 *)(s0 + 0x3C) = 0;
+        return;
+    }
+
+    if (*(s32 *)(s0 + 0x3C) == 0) {
+        *(s16 *)(s0 + 0x24) = -1;
+    }
+    *(u32 *)(s0 + 0x3C) = v1;
+
+    if ((*(u32 *)(s0 + 0x34) & 0x7F) == 0) {
+        s32 ret = func_800372B4();
+        a1 = 4;
+        if (ret < 0x17D) {
+            a1 = 3;
+            if (ret < 0xBF) {
+                a1 = 1;
+                if (ret > 0) {
+                    a1 = 2;
+                }
+            }
+        }
+        temp_v0 = s1 + 0x15;
+        a0 = 0x60000;
+        a0 |= temp_v0;
+    } else {
+        s32 temp;
+        if (*(s16 *)(s0 + 0x24) >= 0) {
+            return;
+        }
+        if (func_80020304(500) < 5) {
+            temp_v0 = s1 + 0x15;
+            temp = func_80019F30(temp_v0 | 0x70000, 0);
+            func_80015CD0(s0 + 0x14, temp, 1);
+            return;
+        }
+        temp_v0 = s1 + 0x15;
+        a0 = 0x60000;
+        a0 |= temp_v0;
+        a1 = 5;
+    }
+
+    *(s32 *)(s0 + 0x18) = func_80019F30(a0, a1);
+}
 
 u8 *func_800992CC(u8 *arg0, u32 arg1) {
     extern void func_800991AC();
