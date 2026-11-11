@@ -62,7 +62,19 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A72E0);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A7340);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A74C0);
+void func_800A74C0(u16 a, u16 b)
+{
+    extern u8 D_80091618[];
+    extern u16 D_800EBFF8[];
+    u32 base = (u32)D_80091618;
+    int off = a * 0x1A8;
+    u32 tab = (u32)D_800EBFF8;
+    u16 *s = (u16 *)(tab + b * 8);
+    *(u16 *)(base + off + 0xE8) = s[0];
+    *(u16 *)(base + off + 0xEA) = s[1];
+    *(u16 *)(base + off + 0xEC) = s[2];
+    *(u16 *)(base + off + 0xEE) = s[3];
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A752C);
 
