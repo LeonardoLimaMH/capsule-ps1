@@ -2,8 +2,8 @@
 #include "yuugi.h"
 
 /* prefixos de caminho do memory card (6 bytes, alinhados a 4) */
-extern u8 D_80078B94[], D_80078BA8[], D_80078BB0[], D_80078BB8[];
-extern u8 D_80078B9C[], D_80078BC0[], D_80078BC8[], D_80078BD0[];
+extern s32 D_80078B94[], D_80078BA8[], D_80078BB0[], D_80078BB8[];
+extern s32 D_80078B9C[], D_80078BC0[], D_80078BC8[], D_80078BD0[];
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0__8001BCE4", func_8001BCE4);
 
@@ -15,15 +15,34 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0__8001BCE4", func_800
 
 extern s32 func_8001CB94(s32);
 extern s32 func_8004FF4C(char *);
+extern void *memcpy();
 s32 func_8001C864(u32 idx) {
     char buf[0x20];
-    u8 *src;
     s32 r;
     switch (idx) {
     case 0:
-        src = (u8 *)&D_80078B94;
-        *(s32 *)buf = *(s32 *)src;
-        *(s16 *)(buf + 4) = *(s16 *)(src + 4);
+        memcpy(buf, D_80078B94, 6);
+        break;
+    case 1:
+        memcpy(buf, D_80078BA8, 6);
+        break;
+    case 2:
+        memcpy(buf, D_80078BB0, 6);
+        break;
+    case 3:
+        memcpy(buf, D_80078BB8, 6);
+        break;
+    case 16:
+        memcpy(buf, D_80078B9C, 6);
+        break;
+    case 17:
+        memcpy(buf, D_80078BC0, 6);
+        break;
+    case 18:
+        memcpy(buf, D_80078BC8, 6);
+        break;
+    case 19:
+        memcpy(buf, D_80078BD0, 6);
         break;
     }
     r = func_8001CB94(idx);
