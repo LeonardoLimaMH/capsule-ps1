@@ -54,6 +54,28 @@ typedef struct {
     s32 w7c[5];
 } Struct_80015EF8;
 
+typedef struct {
+    s32 val0;
+    u16 val4;
+    u16 pad6;
+} SubEntry;
+
+typedef struct {
+    u32 count;
+    SubEntry *entries;
+} SubData;
+
+typedef struct {
+    u8 pad0[4];
+    s32 f4;
+    SubData *f8;
+    u32 fC;
+    s16 f10;
+    u16 f12;
+    u8 pad14[8];
+    u32 f1C;
+} AnimObj;
+
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015540);
 
 #include "common.h"
@@ -443,8 +465,8 @@ void func_80018EF4(s16 a, s16 b, s32 c, s32 d, s32 e) {
     if (d == 0) {
         func_800188F0(a, b, D_80078B90[c], 4, e);
     } else {
-        register u16 *p asm("v0") = &D_80078B88[c];
-        func_8001F1A8(a, b, 4, 1, 0, p, 1, 1, e);
+        register u16 *base asm("v1") = D_80078B88;
+        func_8001F1A8(a, b, 4, 1, 0, base + c, 1, 1, e);
     }
 }
 
