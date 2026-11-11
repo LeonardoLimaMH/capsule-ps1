@@ -1,34 +1,15 @@
 #include "common.h"
 
 static inline s32 verifica_indice_8009B150(s32 i) {
-    struct Entrada {
-        u8 _p0[0x10];
-        u16 f10;
-        u8 _p12[0x72];
-        u16 f84;
-        u8 _p86[4];
-        u16 f8a;
-        u8 _p8c[0x11c];
-    };
-    extern struct Entrada D_80091618[];
+    extern u8 D_80091618[];
     extern u16 D_8006AF80[];
-    struct Entrada *p = &D_80091618[i];
+    u8 *p = D_80091618 + i * 0x1A8;
 
-    if (p->f10 == 0xFFFF || i == *D_8006AF80)
+    if (*(u16 *)(p + 0x10) == 0xFFFF || i == *D_8006AF80)
         return 0;
-    if (p->f8a != 0xFFFF)
+    if (*(u16 *)(p + 0x8A) != 0xFFFF)
         return 0;
-    return p->f84 < 3U;
-}
-
-static inline void avanca_indice_8009B150(u8 *b, u32 passo) {
-    u32 i;
-    do {
-        i = *(u32 *)(b + 0x99C);
-        i += passo;
-        i %= 6;
-        *(s32 *)(b + 0x99C) = i;
-    } while (!verifica_indice_8009B150(i));
+    return *(u16 *)(p + 0x84) < 3U;
 }
 
 s32 func_8009B150(void) {
