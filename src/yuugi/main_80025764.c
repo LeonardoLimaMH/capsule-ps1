@@ -422,6 +422,7 @@ s32 func_80028200(s32 a, s32 b) {
     extern u16 D_8006B110[][4];
     u8 *tm;
     u8 *e;
+    u32 f8;
     u32 idx;
 
     switch (D_80085428[0]) {
@@ -430,7 +431,8 @@ s32 func_80028200(s32 a, s32 b) {
         if ((a &= 0xFFFF) != 0xFFFF) {
             tm = D_80063940;
             e = tm + a * 60;
-            idx = (*(u32 *)(e + 8) >> 31) | ((*(u32 *)(e + 0xC) & 0xF) << 1);
+            f8 = *(u32 *)(e + 8) >> 31;
+            idx = ((*(u32 *)(e + 0xC) & 0xF) << 1) | f8;
             break;
         }
     default:
