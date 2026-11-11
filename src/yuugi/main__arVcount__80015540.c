@@ -200,15 +200,15 @@ void func_80015CD0(int param_1,int param_2,uint param_3)
 
 s32 func_80015D14(AnimObj *p) {
     extern u8 D_8008ED68[];
-    register SubData *a3 asm("a3");
-    u8 *base;
-    u8 v1;
+    u8 *base = D_8008ED68;
+    SubData *a3;
+    SubEntry *e;
+    s32 v1;
+    s32 a1;
     s32 a2;
     s32 v0;
-    s32 a1;
-    u32 mode;
+    s32 mode;
 
-    base = D_8008ED68;
     if (base[0x99A] != 0) {
         return 0;
     }
@@ -222,9 +222,10 @@ s32 func_80015D14(AnimObj *p) {
     }
     a1 = p->f10;
     a2 = (p->f1C >> 9) & 7;
-    v0 = a1 - v1;
     if (a2 >= 2) {
         v0 = a1 - v1 * a2;
+    } else {
+        v0 = a1 - v1;
     }
     p->f10 = v0;
     if ((s16)v0 >= 0) {
@@ -233,41 +234,27 @@ s32 func_80015D14(AnimObj *p) {
     p->fC++;
     if (p->fC >= a3->count) {
         mode = p->f1C & 7;
-        if (mode == 1) {
-            goto L_case1;
+        switch (mode) {
+        case 3:
+            if (p->f12 == 1) {
+                p->f12++;
+                p->f8 = NULL;
+                return 0;
+            }
+        case 0:
+            p->fC = 0;
+            p->f12++;
+            break;
+        case 2:
+            p->f4 = 0;
+        case 1:
+            p->f8 = NULL;
+            return 0;
         }
-        if (mode < 2) {
-            if (mode == 0) {
-                goto L_case0;
-            }
-        } else {
-            if (mode == 2) {
-                p->f4 = 0;
-                goto L_case1;
-            }
-            if (mode == 3) {
-                if (p->f12 == 1) {
-                    p->f12++;
-                    goto L_case1;
-                }
-                goto L_case0;
-            }
-        }
-        goto update;
-
-L_case0:
-        p->fC = 0;
-        p->f12++;
-        goto update;
-
-L_case1:
-        p->f8 = NULL;
-        return 0;
     }
-
-update:
-    p->f4 = a3->entries[p->fC].val0;
-    p->f10 = a3->entries[p->fC].val4;
+    e = &a3->entries[p->fC];
+    p->f4 = e->val0;
+    p->f10 = e->val4;
     return 1;
 }
 
@@ -545,17 +532,29 @@ s32 func_800188F0(s32 x, s32 y, s32 dig, s32 pal, s32 ot) {
     extern void SetDrawMode();
     extern u16 GetClut();
     extern u16 GetTPage();
-    u8 **g = D_8008ED68;
+    register s32 s0_dig asm("s0") = dig;
+    register s32 s7_pal asm("s7") = pal;
+    register u8 *nx asm("a2") = 0;
+    register s32 s4_x asm("s4") = x;
+    register s32 s5_y asm("s5") = y;
+    register s32 s6_ot asm("s6") = ot;
+    register u8 *p asm("s2");
+    register u8 *q asm("s1");
+    register u8 *nx_q asm("t1");
+    register u8 *base_q asm("t0");
+    register u32 mask2 asm("a1");
+    register s32 off asm("a0");
+    register u32 mask asm("a2");
+    u8 **g;
     u8 *base;
-    u8 *p;
-    u8 *q;
-    u8 *nx;
-    u32 *slot;
     u16 tp;
+    s32 clut;
+    s32 pal_arg;
 
+    g = D_8008ED68;
     base = g[0];
     p = *(u8 **)(base + 0x1090);
-    nx = 0;
+
     if (p != 0 && (u8 *)p + 0x14 <= base + 0x4594) {
         nx = p + 0x14;
     }
@@ -566,29 +565,110 @@ s32 func_800188F0(s32 x, s32 y, s32 dig, s32 pal, s32 ot) {
     p[4] = bright(*(s32 *)((u8 *)g + 0xA6C));
     p[5] = bright(*(s32 *)((u8 *)g + 0xA70));
     p[6] = bright(*(s32 *)((u8 *)g + 0xA74));
-    p[0xC] = (dig + 1) * 10 - 0x80;
-    p[0xD] = 0xEE;
-    *(s16 *)(p + 8) = x + *(s32 *)((u8 *)g + 0x108) / 2;
-    *(s16 *)(p + 0x10) = 0xA;
-    *(s16 *)(p + 0x12) = 0xA;
-    *(s16 *)(p + 0xA) = y + *(s32 *)((u8 *)g + 0x10C) / 2;
-    *(u16 *)(p + 0xE) = GetClut(0x3E0, pal + 0x178);
-    AddPrim((s32 *)((u8 *)g[0] + 0x70 + ot * 4), (s32 *)p);
-    tp = GetTPage(0, 0, 0x2A0, 0x180);
-    base = g[0];
-    q = *(u8 **)(base + 0x1090);
-    nx = 0;
-    if (q != 0 && (u8 *)q + 0xC <= base + 0x4594) {
-        nx = q + 0xC;
+    {
+        s32 d = s0_dig + 1;
+        p[0xC] = d * 10 - 0x80;
     }
-    *(u8 **)(base + 0x1090) = nx;
-    SetDrawMode(q, 0, 0, tp, 0);
-    *(u32 *)q = (*(u32 *)q & 0xFF000000) | (*(u32 *)((u8 *)g[0] + ot * 4 + 0x70) & 0xFFFFFF);
-    slot = (u32 *)((u8 *)g[0] + ot * 4);
-    *(u32 *)((u8 *)slot + 0x70) = (*(u32 *)((u8 *)slot + 0x70) & 0xFF000000) | ((u32)q & 0xFFFFFF);
+    {
+        register u8 **s0_g asm("s0") = D_8008ED68;
+        p[0xD] = 0xEE;
+        pal_arg = s7_pal + 0x178;
+        *(s16 *)(p + 8) = *(s32 *)((u8 *)s0_g + 0x108) / 2 + s4_x;
+        *(s16 *)(p + 0x10) = 10;
+        *(s16 *)(p + 0x12) = 10;
+        *(s16 *)(p + 0xA) = *(s32 *)((u8 *)s0_g + 0x10C) / 2 + s5_y;
+        clut = GetClut(0x3E0, pal_arg);
+        *(u16 *)(p + 0xE) = clut;
+        AddPrim((s32 *)((u8 *)g[0] + (s6_ot * 4 + 0x70)), (s32 *)p);
+        tp = GetTPage(0, 0, 0x2A0, 0x180);
+        base_q = s0_g[0];
+        nx_q = 0;
+        q = *(u8 **)(base_q + 0x1090);
+        if (q != 0 && (u8 *)q + 0xC <= base_q + 0x4594) {
+            nx_q = q + 0xC;
+        }
+        *(u8 **)(base_q + 0x1090) = nx_q;
+        SetDrawMode(q, 0, 0, tp, 0);
+        mask2 = 0x00FFFFFF;
+        off = s6_ot * 4;
+        mask = 0xFF000000;
+        *(u32 *)q = (*(u32 *)q & mask) | (*(u32 *)((u8 *)off + (u32)s0_g[0] + 0x70) & mask2);
+        off += (s32)s0_g[0];
+        *(u32 *)(off + 0x70) = (*(u32 *)(off + 0x70) & mask) | ((u32)q & mask2);
+    }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018C00);
+void func_80018C00(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5) {
+    extern u8 *D_8008ED68[];
+    extern void SetPolyFT4();
+    extern void SetShadeTex();
+    extern void SetSemiTrans();
+    extern void AddPrim();
+    extern u16 GetClut();
+    extern u16 GetTPage();
+    register s32 reg_a0 asm("s3") = a0;
+    register s32 reg_a1 asm("s4") = a1;
+    register s32 reg_a2 asm("s5") = a2;
+    register s32 reg_a3 asm("s6") = a3;
+    register s32 reg_a4 asm("s1") = a4;
+    register u8 **g asm("s2") = D_8008ED68;
+    register u8 *nx asm("a2") = 0;
+    u8 *base;
+    u8 *p;
+    s32 temp;
+    s32 x;
+    s32 y;
+    s32 half;
+
+    base = g[0];
+    p = *(u8 **)(base + 0x1090);
+    if (p != 0 && (u8 *)p + 0x28 <= base + 0x4594) {
+        nx = p + 0x28;
+    }
+    *(u8 **)(base + 0x1090) = nx;
+    SetPolyFT4(p);
+    SetShadeTex(p, 0);
+    SetSemiTrans(p, 0);
+    p[4] = bright(*(s32 *)((u8 *)g + 0xA6C));
+    p[5] = bright(*(s32 *)((u8 *)g + 0xA70));
+    p[6] = bright(*(s32 *)((u8 *)g + 0xA74));
+
+    temp = (reg_a2 + 1) * 10;
+    p[0x1C] = temp - 0x80;
+    p[0xC] = temp - 0x80;
+    p[0x24] = temp - 0x76;
+    p[0x14] = temp - 0x76;
+    p[0x15] = 0xEE;
+    p[0xD] = 0xEE;
+    p[0x25] = 0xF8;
+    p[0x1D] = 0xF8;
+
+    if (reg_a4 >= 0x14) {
+        p[0x14]--;
+        p[0x24]--;
+        p[0x1D]--;
+        p[0x25]--;
+    }
+
+    half = reg_a4 / 2;
+    x = reg_a0 + *(s32 *)((u8 *)g + 0x108) / 2 - half;
+    *(s16 *)(p + 0x18) = x;
+    *(s16 *)(p + 8) = x;
+    x += reg_a4;
+    *(s16 *)(p + 0x20) = x;
+    *(s16 *)(p + 0x10) = x;
+
+    y = reg_a1 + *(s32 *)((u8 *)g + 0x10C) / 2 - half;
+    *(s16 *)(p + 0x12) = y;
+    *(s16 *)(p + 0xA) = y;
+    y += reg_a4;
+    *(s16 *)(p + 0x22) = y;
+    *(s16 *)(p + 0x1A) = y;
+
+    *(u16 *)(p + 0xE) = GetClut(0x3E0, reg_a3 + 0x178);
+    *(u16 *)(p + 0x16) = GetTPage(0, 0, 0x2A0, 0x180);
+    AddPrim((s32 *)((u8 *)g[0] + 0x70 + a5 * 4), (s32 *)p);
+}
 
 void func_80018EF4(s16 a, s16 b, s32 c, s32 d, s32 e) {
     extern u8 D_80078B90[];
