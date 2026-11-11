@@ -32,11 +32,100 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_80033CEC);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_80033E5C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_800340B4);
+s16 func_800340B4(s32 a0) {
+    struct Voz { u8 _p[0x125]; u8 f125; u8 f126; u8 _q[5]; u16 f12c[4]; };
+    extern u8 D_800922F0[];
+    s16 n = 0;
+    s32 i;
+    s32 idx;
+    u32 bit;
+    if (!(a0 & 0x8000)) {
+        a0 = 0xFFFF;
+    }
+    a0 &= 0xFFFF;
+    idx = ((struct Voz *)D_800922F0)->f126;
+    bit = 1 << idx;
+    for (i = 3; i >= 0; i--) {
+        if ((((struct Voz *)D_800922F0)->f125 & bit) && ((struct Voz *)D_800922F0)->f12c[(u8)idx] == a0) {
+            n++;
+        }
+        bit <<= 1;
+        if (bit & 0x10) {
+            bit = 1;
+        }
+        idx = (idx + 1) & 3;
+    }
+    return n;
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_80034148);
+void func_80034148(s32 a0) {
+    struct Voz { u8 _p[0x125]; u8 f125; u8 f126; u8 _q[5]; u16 f12c[4]; };
+    extern u8 D_800922F0[];
+    extern void SpuSetKey();
+    s32 v;
+    s32 i;
+    u32 idx;
+    u32 bit;
+    u32 t;
+    v = a0;
+    a0 &= 0x8000;
+    if (a0) {
+        a0 = v;
+        goto start;
+    found:
+        SpuSetKey(0, 1 << (t + 0x14));
+        ((struct Voz *)D_800922F0)->f126 = idx;
+        ((struct Voz *)D_800922F0)->f125 &= ~bit;
+        return;
+    } else {
+        a0 = 0xFFFF;
+    }
+start:
+    i = 0;
+    a0 &= 0xFFFF;
+    idx = ((struct Voz *)D_800922F0)->f126;
+    bit = 1 << idx;
+    for (; i < 4; i++) {
+        if (((struct Voz *)D_800922F0)->f125 & bit) {
+            t = (u8)idx;
+            if (((struct Voz *)D_800922F0)->f12c[t] == a0) {
+                goto found;
+            }
+        }
+        bit <<= 1;
+        if (bit & 0x10) {
+            bit = 1;
+        }
+        idx++;
+        idx &= 3;
+    }
+}
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10", func_8003422C);
+void func_8003422C(s32 a0) {
+    struct Voz { u8 _p[0x125]; u8 f125; u8 f126; u8 _q[5]; u16 f12c[4]; };
+    extern u8 D_800922F0[];
+    extern void SpuSetKey(), func_800373A0();
+    s32 i;
+    u32 keys;
+    u32 bit;
+
+    if ((u16)a0 & 0x8000) {
+        func_800373A0(a0 & 0x8000);
+    } else {
+        bit = 1;
+        keys = 0;
+        for (i = 0; i < 4; i++) {
+            if (((struct Voz *)D_800922F0)->f12c[i] == (a0 & 0xFFFF)) {
+                keys |= 1 << (i + 0x14);
+                ((struct Voz *)D_800922F0)->f125 &= ~bit;
+            }
+            bit <<= 1;
+        }
+        if (keys != 0) {
+            SpuSetKey(0, keys);
+        }
+    }
+}
 
 #include "ghidra.h"
 void func_800342CC(void)
