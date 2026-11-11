@@ -11,6 +11,22 @@ typedef struct {
     u32 *paddr;
 } Tim;
 
+/* Estado de um controle (D_8008ED68 + 0x80 + i * 0x10). */
+typedef struct {
+    u32 now;
+    u32 old;
+    u32 trig;
+    u32 rel;
+} PadState;
+
+/* Visão parcial de D_8008ED68 usada pelas rotinas de controle. */
+typedef struct {
+    u8 unk0[0x80];
+    PadState pad[2];
+    u8 unkA0[4];
+    u32 hold[2][4];
+} PadWork;
+
 extern s32 ReadTIM();
 extern s32 func_80019F30();
 
@@ -57,4 +73,45 @@ s32 func_8001312C(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80013028", func_80013180);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80013028", func_800131C0);
+void func_800131C0(void) {
+    extern u8 D_8008ED68[];
+    extern void func_8004FEDC(), func_8004FEEC();
+    u32 st[2];
+    u8 *p;
+    u32 *s1;
+    u32 v, cur, old, *c;
+    s32 i, j;
+
+    func_8004FEDC();
+    for (i = 0; i < 2; i++) {
+        p = D_8008ED68 + i * 0x22;
+        s1 = ((u32 (*)[4])D_8008ED68)[i];
+        if ((p[0x3D] >> 4) == 4) {
+            v = p[0x3F] | (p[0x3E] << 8);
+        } else {
+            v = 0xFFFF;
+        }
+        st[i] = ~v & 0xFFFF;
+        func_8004FEEC();
+        cur = st[i];
+        old = s1[0x80 / 4];
+        s1[0x84 / 4] = old;
+        s1[0x80 / 4] = cur;
+        s1[0x88 / 4] = ~old & cur;
+        s1[0x8C / 4] = ~cur & s1[0x84 / 4];
+    }
+    for (i = 0; i < 2; i++) {
+        c = &((u32 (*)[4])D_8008ED68)[i][0xA4 / 4];
+        for (j = 0; j < 4; j++, c++) {
+            if (((u32 (*)[4])D_8008ED68)[i][0x80 / 4] & (1 << (j + 12))) {
+                if (D_8008ED68[0x103] >= 2) {
+                    *c = *c + D_8008ED68[0x103];
+                } else {
+                    *c = *c + 1;
+                }
+            } else {
+                *c = 0;
+            }
+        }
+    }
+}
