@@ -52,6 +52,24 @@ extern char D_800113D0[];
 extern char D_800113DC[];
 extern char D_800113E8[];
 
+/* Strings de depuração do get_tmd_addr (rodata) */
+extern char D_800113F8[];
+extern char D_8001140C[];
+extern char D_80011434[];
+extern char D_8001144C[];
+extern char D_80011464[];
+
+/* Cabeçalho de objeto TMD (7 palavras por objeto) */
+typedef struct {
+    u_long *vert_top;
+    u_long n_vert;
+    u_long *normal_top;
+    u_long n_normal;
+    u_long *primitive_top;
+    u_long n_primitive;
+    long scale;
+} TMD_OBJ;
+
 extern s32 D_800965C4;
 
 extern s32 D_800965C8;
@@ -115,6 +133,40 @@ u_long func_8004CB48(unsigned int *tim, TIM_IMAGE *timimg)
     return n + m;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8004C8A0", func_8004CC60);
+extern char D_800113F8[];
+extern char D_8001140C[];
+extern char D_80011434[];
+extern char D_8001144C[];
+extern char D_80011464[];
+int func_8004CC60(u_long *tmd, int obj_no, u_long **primitive_top, u_long **vertex_top, u_long **normal_top)
+{
+    u_long *base;
+    u_long *obj;
+
+    base = tmd + 3;
+    if (GetGraphDebug() == 2) {
+        printf(D_800113F8);
+    }
+    if (GetGraphDebug() == 2) {
+        printf(D_8001140C, tmd[0], tmd[1], tmd[2], obj_no);
+    }
+    if (GetGraphDebug() == 2) {
+        obj = base + obj_no * 7;
+        printf(D_80011434, obj[0], obj[1]);
+    }
+    if (GetGraphDebug() == 2) {
+        obj = base + obj_no * 7;
+        printf(D_8001144C, obj[2], obj[3]);
+    }
+    if (GetGraphDebug() == 2) {
+        obj = base + obj_no * 7;
+        printf(D_80011464, obj[4], obj[5]);
+    }
+    obj = base + obj_no * 7;
+    *vertex_top = (u_long *)((u_char *)base + obj[0]);
+    *normal_top = (u_long *)((u_char *)base + obj[2]);
+    *primitive_top = (u_long *)((u_char *)base + obj[4]);
+    return obj[5];
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8004C8A0", func_8004CDD4);
