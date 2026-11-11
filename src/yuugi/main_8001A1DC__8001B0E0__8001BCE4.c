@@ -1,12 +1,9 @@
 #include "common.h"
 #include "yuugi.h"
 
-typedef struct {
-    u8 b[6];
-} Blk6;
-
-extern Blk6 D_80078B94, D_80078BA8, D_80078BB0, D_80078BB8;
-extern Blk6 D_80078B9C, D_80078BC0, D_80078BC8, D_80078BD0;
+/* prefixos de caminho do memory card (6 bytes, alinhados a 4) */
+extern u8 D_80078B94[], D_80078BA8[], D_80078BB0[], D_80078BB8[];
+extern u8 D_80078B9C[], D_80078BC0[], D_80078BC8[], D_80078BD0[];
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0__8001BCE4", func_8001BCE4);
 
@@ -16,7 +13,28 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0__8001BCE4", func_800
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0__8001BCE4", func_8001C5D4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0__8001BCE4", func_8001C864);
+extern s32 func_8001CB94(s32);
+extern s32 func_8004FF4C(char *);
+s32 func_8001C864(u32 idx) {
+    char buf[0x20];
+    u8 *src;
+    s32 r;
+    switch (idx) {
+    case 0:
+        src = (u8 *)&D_80078B94;
+        *(s32 *)buf = *(s32 *)src;
+        *(s16 *)(buf + 4) = *(s16 *)(src + 4);
+        break;
+    }
+    r = func_8001CB94(idx);
+    if (r == 3) {
+        if (func_8004FF4C(buf) == 0) {
+            return 5;
+        }
+        return -1;
+    }
+    return r;
+}
 
 #include "common.h"
 
