@@ -354,11 +354,12 @@ s32 func_80027B34(u32 a) {
     extern u8 D_80085428[];
     extern u8 D_80063940[];
     extern s32 D_8006B058[];
-    s32 r = 0;
+    register s32 r asm("a2") = 0;
+    register s32 *tb asm("a0");
+    register u8 *tm asm("v1");
     u16 b;
-    s32 *tb;
-    u8 *tm;
     u8 *e;
+    u32 f8;
     u32 idx;
 
     switch (D_80085428[0]) {
@@ -367,7 +368,8 @@ s32 func_80027B34(u32 a) {
             tb = D_8006B058;
             tm = D_80063940;
             e = tm + b * 60;
-            idx = (*(u32 *)(e + 8) >> 31) | ((*(u32 *)(e + 0xC) & 0xF) << 1);
+            f8 = *(u32 *)(e + 8) >> 31;
+            idx = ((*(u32 *)(e + 0xC) & 0xF) << 1) | f8;
             r = tb[idx];
         }
         break;
@@ -376,7 +378,8 @@ s32 func_80027B34(u32 a) {
             tb = D_8006B058;
             tm = D_80063940;
             e = tm + b * 60;
-            idx = (*(u32 *)(e + 8) >> 31) | ((*(u32 *)(e + 0xC) & 0xF) << 1);
+            f8 = *(u32 *)(e + 8) >> 31;
+            idx = ((*(u32 *)(e + 0xC) & 0xF) << 1) | f8;
             r = *(s32 *)((u8 *)(tb + idx) + 0x5c);
         }
         break;
