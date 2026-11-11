@@ -196,7 +196,15 @@ u32 func_800160F8(u32 arg0) {
     return *(u32 *)(base + 0xA74);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_8001611C);
+void func_8001611C(u32 arg0) {
+    extern u32 D_8008ED68[];
+    u8 *base = (u8 *)D_8008ED68;
+    if (arg0 < 0x2001) {
+        *(u32 *)(base + 0xA6C) = arg0;
+        *(u32 *)(base + 0xA70) = arg0;
+        *(u32 *)(base + 0xA74) = arg0;
+    }
+}
 
 void func_80016148(void *arg0) {
     extern u8 D_8008F702[];
@@ -230,7 +238,25 @@ void func_80018608(void) {
 
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018610);
+void func_80018610(s32 arg0, s32 arg1) {
+    extern void SetDrawMode();
+    extern u8 *D_8008ED68[];
+    u8 **g = D_8008ED68;
+    u8 *base = g[0];
+    u8 *next = 0;
+    u32 *p;
+    s32 off;
+    p = *(u32 **)(base + 0x1090);
+    if (p != 0 && (u8 *)p + 0xC <= base + 0x4594) {
+        next = (u8 *)p + 0xC;
+    }
+    *(u8 **)(base + 0x1090) = next;
+    SetDrawMode(p, 0, 0, arg0, 0);
+    off = arg1 * 4;
+    *p = (*p & 0xFF000000) | (*(u32 *)((u8 *)off + (u32)g[0] + 0x70) & 0xFFFFFF);
+    off += (s32)g[0];
+    *(u32 *)(off + 0x70) = (*(u32 *)(off + 0x70) & 0xFF000000) | ((u32)p & 0xFFFFFF);
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800186E4);
 
