@@ -1,9 +1,5 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DCD44);
-
-#include "common.h"
-
 /* stub-ret: mixed */
 extern u8 D_80100F38[];
 extern s32 func_800B1260(s32);
