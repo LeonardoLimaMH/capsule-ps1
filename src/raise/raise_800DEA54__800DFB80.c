@@ -1,9 +1,47 @@
 #include "common.h"
 
 extern u8 D_80092008[];
-extern u8 D_80092008[];
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800DFB80);
+/* Entrada de 0x44 bytes de D_80092008 (ver raise_800DEA54__800DEB28__800DEBA0.c). */
+typedef struct {
+    u16 dir : 3;
+    u16 rest : 13;
+} RaiseSlotB;
+
+typedef struct {
+    u32 f0 : 1;
+    u32 f1 : 1;
+    u32 f2 : 3;
+    u32 f3 : 6;
+    u32 idx : 6;
+    u32 cnt : 6;
+    u32 pad : 9;
+    RaiseSlotB slots[32];
+} RaiseEntB;
+
+void func_800DFB80(s32 unused, u16 idx) {
+    u32 *e = (u32 *)(D_80092008 + idx * 0x44);
+    s16 i = 0;
+    s16 n;
+    s32 half;
+    s32 j;
+    u16 tmp;
+
+    n = (e[0] >> 11) & 0x3F;
+    e[0] = ((e[0] & 0xFF81FFFF) | (n << 17)) & ~0x7E0;
+    half = (u32)n >> 1;
+    if (half != 0) {
+        do {
+            j = n - (i + 1);
+            tmp = ((u16 *)e)[i + 2];
+            ((u16 *)e)[i + 2] = ((u16 *)e)[j + 2];
+            ((u16 *)e)[j + 2] = tmp;
+            ((u16 *)e)[i + 2] = (((u16 *)e)[i + 2] & 0xFFF8) | (((((u16 *)e)[i + 2] & 7) + 4) % 8 & 7);
+            ((u16 *)e)[j + 2] = (((u16 *)e)[j + 2] & 0xFFF8) | (((((u16 *)e)[j + 2] & 7) + 4) % 8 & 7);
+            i++;
+        } while (i < half);
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800DFCA0);
 
