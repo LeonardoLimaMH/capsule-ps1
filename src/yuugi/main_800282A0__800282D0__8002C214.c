@@ -104,7 +104,7 @@ void func_8002C610(void)
         *(s16 *)(base + 0x174) = (*(s16 *)(base + 0x154) - *(s16 *)(base + 0xB4)) >> 5;
         break;
     }
-    *(s32 *)(D_80069AD4 + 0x134) = 0x20;
+    D_80069C08[0] = 0x20;
 }
 
 extern u8 D_80069AD4[];
