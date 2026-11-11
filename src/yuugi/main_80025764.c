@@ -253,7 +253,27 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800270D4);
 extern u8 *D_80078D14;
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800278C8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800279D4);
+void func_800279D4(s32 a, s32 b) {
+    extern struct {
+        s16 f0;
+        s16 f2[3];
+        s16 f8[3][2];
+        s16 f14[5];
+    } D_8006AF90[];
+    extern u8 *D_80078D14;
+    u8 *dst = (u8 *)0x801CC040 + a * 0x668;
+    s32 i;
+    s32 k;
+
+    D_80078D14 = dst + 0x323;
+    dst[0x323] = D_8006AF90[b].f0;
+    for (i = 0; i < 3; i++) {
+        *(D_80078D14 + i + 1) = D_8006AF90[b].f2[i];
+        k = i * 2;
+        *(D_80078D14 + k + 4) = D_8006AF90[b].f8[i][0];
+        *(D_80078D14 + k + 5) = D_8006AF90[b].f8[i][1];
+    }
+}
 
 void func_80027A88(void) {
     extern struct { u16 v[6]; } D_80010524;
