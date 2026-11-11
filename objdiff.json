@@ -65,9 +65,45 @@
         "progress_categories": [
           "yuugi"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main_8001A1DC__8001A49C.o"
+    },
+    {
+      "name": "yuugi/main_8001A1DC__8001A49C__8001A6B8",
+      "target_path": "build/objdiff/target/yuugi/main_8001A1DC__8001A49C__8001A6B8.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_8001A1DC__8001A49C__8001A6B8.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8001A1DC__8001A49C__8001A6B8.o"
+    },
+    {
+      "name": "yuugi/main_8001A1DC__8001A49C__8001A704",
+      "target_path": "build/objdiff/target/yuugi/main_8001A1DC__8001A49C__8001A704.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_8001A1DC__8001A49C__8001A704.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8001A1DC__8001A49C__8001A704.o"
+    },
+    {
+      "name": "yuugi/main_8001A1DC__8001A49C__8001A704__8001A784",
+      "target_path": "build/objdiff/target/yuugi/main_8001A1DC__8001A49C__8001A704__8001A784.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_8001A1DC__8001A49C__8001A704__8001A784.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8001A1DC__8001A49C__8001A704__8001A784.o"
     },
     {
       "name": "yuugi/main_8001A1DC__8001A818",
@@ -298,6 +334,30 @@
       "base_path": "build/objdiff/base/yuugi/main_800241E8.o"
     },
     {
+      "name": "yuugi/main_800241E8__800248E8",
+      "target_path": "build/objdiff/target/yuugi/main_800241E8__800248E8.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_800241E8__800248E8.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/main_800241E8__800248E8.o"
+    },
+    {
+      "name": "yuugi/main_800241E8__80024990",
+      "target_path": "build/objdiff/target/yuugi/main_800241E8__80024990.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_800241E8__80024990.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/yuugi/main_800241E8__80024990.o"
+    },
+    {
       "name": "yuugi/main_80025764",
       "target_path": "build/objdiff/target/yuugi/main_80025764.o",
       "metadata": {
@@ -473,7 +533,7 @@
         "progress_categories": [
           "yuugi"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main_80033AC8.o"
     },
@@ -598,6 +658,30 @@
       "base_path": "build/objdiff/base/yuugi/main_8003A5F8.o"
     },
     {
+      "name": "yuugi/main_8003A5F8__8003C654",
+      "target_path": "build/objdiff/target/yuugi/main_8003A5F8__8003C654.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_8003A5F8__8003C654.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8003A5F8__8003C654.o"
+    },
+    {
+      "name": "yuugi/main_8003A5F8__8003C73C",
+      "target_path": "build/objdiff/target/yuugi/main_8003A5F8__8003C73C.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_8003A5F8__8003C73C.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8003A5F8__8003C73C.o"
+    },
+    {
       "name": "yuugi/main_8003C808",
       "target_path": "build/objdiff/target/yuugi/main_8003C808.o",
       "metadata": {
@@ -608,6 +692,30 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/yuugi/main_8003C808.o"
+    },
+    {
+      "name": "yuugi/main_8003C808__8003CD70",
+      "target_path": "build/objdiff/target/yuugi/main_8003C808__8003CD70.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_8003C808__8003CD70.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8003C808__8003CD70.o"
+    },
+    {
+      "name": "yuugi/main_8003C808__8003CE14",
+      "target_path": "build/objdiff/target/yuugi/main_8003C808__8003CE14.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_8003C808__8003CE14.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8003C808__8003CE14.o"
     },
     {
       "name": "yuugi/main_800425BC",
@@ -704,6 +812,18 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/yuugi/main_800446D0.o"
+    },
+    {
+      "name": "yuugi/main_800446D0__80044794",
+      "target_path": "build/objdiff/target/yuugi/main_800446D0__80044794.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_800446D0__80044794.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/main_800446D0__80044794.o"
     },
     {
       "name": "yuugi/main_80044868",
@@ -1133,7 +1253,7 @@
         "progress_categories": [
           "yuugi"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main__80012324.o"
     },
@@ -1145,7 +1265,7 @@
         "progress_categories": [
           "yuugi"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main__80012A14.o"
     },
@@ -1181,9 +1301,33 @@
         "progress_categories": [
           "yuugi"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main__80013028.o"
+    },
+    {
+      "name": "yuugi/main__80013028__800130D8",
+      "target_path": "build/objdiff/target/yuugi/main__80013028__800130D8.o",
+      "metadata": {
+        "source_path": "src/yuugi/main__80013028__800130D8.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/main__80013028__800130D8.o"
+    },
+    {
+      "name": "yuugi/main__80013028__8001312C",
+      "target_path": "build/objdiff/target/yuugi/main__80013028__8001312C.o",
+      "metadata": {
+        "source_path": "src/yuugi/main__80013028__8001312C.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/yuugi/main__80013028__8001312C.o"
     },
     {
       "name": "yuugi/main__arVcount",
@@ -1786,6 +1930,18 @@
       "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C7F74.o"
     },
     {
+      "name": "chess/chess_800C4ECC__800C7F74__800C9338",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C7F74__800C9338.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800C7F74__800C9338.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C7F74__800C9338.o"
+    },
+    {
       "name": "chess/chess_800C4ECC__800C9414",
       "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C9414.o",
       "metadata": {
@@ -2374,6 +2530,30 @@
       "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC.o"
     },
     {
+      "name": "raise/raise_8009D2A8__800A6DBC__800A76C0",
+      "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A76C0.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009D2A8__800A6DBC__800A76C0.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC__800A76C0.o"
+    },
+    {
+      "name": "raise/raise_8009D2A8__800A6DBC__800A7730",
+      "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A7730.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009D2A8__800A6DBC__800A7730.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC__800A7730.o"
+    },
+    {
       "name": "raise/raise_8009D2A8__800A6DBC__800A8C30",
       "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A8C30.o",
       "metadata": {
@@ -2537,9 +2717,21 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800B15CC.o"
+    },
+    {
+      "name": "raise/raise_800B15CC__800B1668",
+      "target_path": "build/objdiff/target/raise/raise_800B15CC__800B1668.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B15CC__800B1668.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B15CC__800B1668.o"
     },
     {
       "name": "raise/raise_800B1700",
@@ -2609,7 +2801,7 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800B6014.o"
     },
@@ -2696,6 +2888,30 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/raise/raise_800B61E4__800B84BC.o"
+    },
+    {
+      "name": "raise/raise_800B61E4__800B84BC__800B89F4",
+      "target_path": "build/objdiff/target/raise/raise_800B61E4__800B84BC__800B89F4.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B61E4__800B84BC__800B89F4.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B61E4__800B84BC__800B89F4.o"
+    },
+    {
+      "name": "raise/raise_800B61E4__800B84BC__800B8AD0",
+      "target_path": "build/objdiff/target/raise/raise_800B61E4__800B84BC__800B8AD0.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B61E4__800B84BC__800B8AD0.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B61E4__800B84BC__800B8AD0.o"
     },
     {
       "name": "raise/raise_800B61E4__800B8BCC",
@@ -2866,6 +3082,30 @@
       "base_path": "build/objdiff/base/raise/raise_800B9C3C.o"
     },
     {
+      "name": "raise/raise_800B9C3C__800BA3A8",
+      "target_path": "build/objdiff/target/raise/raise_800B9C3C__800BA3A8.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B9C3C__800BA3A8.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B9C3C__800BA3A8.o"
+    },
+    {
+      "name": "raise/raise_800B9C3C__800BA4A0",
+      "target_path": "build/objdiff/target/raise/raise_800B9C3C__800BA4A0.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B9C3C__800BA4A0.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B9C3C__800BA4A0.o"
+    },
+    {
       "name": "raise/raise_800B9C3C__800BAD64",
       "target_path": "build/objdiff/target/raise/raise_800B9C3C__800BAD64.o",
       "metadata": {
@@ -2933,7 +3173,7 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800B9C3C__800BCF98__800BE674.o"
     },
@@ -2948,6 +3188,30 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/raise/raise_800B9C3C__800BE7A0.o"
+    },
+    {
+      "name": "raise/raise_800B9C3C__800BE7A0__800BEA90",
+      "target_path": "build/objdiff/target/raise/raise_800B9C3C__800BE7A0__800BEA90.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B9C3C__800BE7A0__800BEA90.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B9C3C__800BE7A0__800BEA90.o"
+    },
+    {
+      "name": "raise/raise_800B9C3C__800BE7A0__800BEB3C",
+      "target_path": "build/objdiff/target/raise/raise_800B9C3C__800BE7A0__800BEB3C.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B9C3C__800BE7A0__800BEB3C.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B9C3C__800BE7A0__800BEB3C.o"
     },
     {
       "name": "raise/raise_800B9C3C__800BEB60",
@@ -3274,6 +3538,30 @@
       "base_path": "build/objdiff/base/raise/raise_800C49CC.o"
     },
     {
+      "name": "raise/raise_800C49CC__800C5670",
+      "target_path": "build/objdiff/target/raise/raise_800C49CC__800C5670.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800C49CC__800C5670.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C49CC__800C5670.o"
+    },
+    {
+      "name": "raise/raise_800C49CC__800C57A8",
+      "target_path": "build/objdiff/target/raise/raise_800C49CC__800C57A8.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800C49CC__800C57A8.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C49CC__800C57A8.o"
+    },
+    {
       "name": "raise/raise_800C5888",
       "target_path": "build/objdiff/target/raise/raise_800C5888.o",
       "metadata": {
@@ -3281,9 +3569,21 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800C5888.o"
+    },
+    {
+      "name": "raise/raise_800C5888__800C593C",
+      "target_path": "build/objdiff/target/raise/raise_800C5888__800C593C.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800C5888__800C593C.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C5888__800C593C.o"
     },
     {
       "name": "raise/raise_800C59F4",
@@ -3653,7 +3953,7 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800DCC94.o"
     },
@@ -4001,9 +4301,21 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800E6DA8.o"
+    },
+    {
+      "name": "raise/raise_800E6DA8__800E6DCC",
+      "target_path": "build/objdiff/target/raise/raise_800E6DA8__800E6DCC.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800E6DA8__800E6DCC.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800E6DA8__800E6DCC.o"
     },
     {
       "name": "raise/raise_800E6E68",
