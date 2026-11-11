@@ -81,7 +81,31 @@ void func_8002C534(u8 *dst, u8 *src, s32 mode) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002C214", func_8002C610);
+void func_8002C610(void)
+{
+    u8 *base = D_80069AD4;
+
+    switch (*(s32 *)(base + 0x130)) {
+    case 0:
+        return;
+    case 1:
+        *(s16 *)(base + 0x168) = (*(s16 *)(base + 0x148) - *(s16 *)(base + 0xE8)) >> 5;
+        *(s16 *)(base + 0x16A) = (*(s16 *)(base + 0x14A) - *(s16 *)(base + 0xEA)) >> 5;
+        *(s16 *)(base + 0x16C) = (*(s16 *)(base + 0x14C) - *(s16 *)(base + 0xEC)) >> 5;
+        break;
+    case 2:
+        *(s32 *)(base + 0x158) = (*(s32 *)(base + 0x138) - *(s32 *)(base + 0xD8)) >> 5;
+        *(s32 *)(base + 0x15C) = (*(s32 *)(base + 0x13C) - *(s32 *)(base + 0xDC)) >> 5;
+        *(s32 *)(base + 0x160) = (*(s32 *)(base + 0x140) - *(s32 *)(base + 0xE0)) >> 5;
+        break;
+    case 3:
+        *(s16 *)(base + 0x170) = (*(s16 *)(base + 0x150) - *(s16 *)(base + 0xB0)) >> 5;
+        *(s16 *)(base + 0x172) = (*(s16 *)(base + 0x152) - *(s16 *)(base + 0xB2)) >> 5;
+        *(s16 *)(base + 0x174) = (*(s16 *)(base + 0x154) - *(s16 *)(base + 0xB4)) >> 5;
+        break;
+    }
+    *(s32 *)(D_80069AD4 + 0x134) = 0x20;
+}
 
 extern u8 D_80069AD4[];
 void func_8002C728(void)
