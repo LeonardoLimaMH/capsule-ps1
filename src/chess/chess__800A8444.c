@@ -128,9 +128,13 @@ void func_800A8548(s32 arg0, s32 arg1, s32 arg2)
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8710);
 
 u32 func_800A8770(s32 arg0, s32 arg1, s32 arg2) {
-    extern u8 D_80063940[];
-    u8 b = *(u8 *)(arg0 + arg2 * 0x7C + arg1 * 0x2E8 + 0x5E8);
-    return (*(u32 *)(D_80063940 + b * 0x3C + 8) >> 8) & 0xF;
+    extern Struct_80063940 D_80063940[];
+    Struct_80063940 *table = D_80063940;
+    u8 b;
+
+    arg0 += (arg2 * 0x7C) + (arg1 * 0x2E8);
+    b = *(u8 *)(arg0 + 0x5E8);
+    return (table[b].unk8 >> 8) & 0xF;
 }
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A87C8);
