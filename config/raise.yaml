@@ -154,6 +154,7 @@ segments:
       - [0x2DE70, c, raise_800C49CC__800C5670]
       - [0x2DFA8, c, raise_800C49CC__800C57A8]
       - [0x2E088, c, raise_800C5888]
+      - [0x2E13C, c, raise_800C5888__800C593C]
       - [0x2E1F4, c, raise_800C59F4]
       - [0x2ED2C, c, raise_800C652C]
       - [0x2EE2C, c, raise_800C662C]
