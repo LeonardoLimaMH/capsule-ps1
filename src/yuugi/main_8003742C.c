@@ -234,7 +234,38 @@ void func_80037CAC(s32 n, s32 x, s32 y)
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80037D28);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80037E40);
+void func_80037E40(s32 ch) {
+    extern u8 D_800937D0[];
+    extern u8 D_80093790[];
+    extern struct VoiceE D_80093D68[];
+    extern s32 D_8007142C[];
+    extern s32 D_80078C78;
+    extern u16 D_80078D54;
+    extern u16 D_80078D56;
+    extern void func_80037A7C();
+    extern void SpuSetVoiceAttr();
+
+    s32 i = 0;
+    s32 x, y;
+
+    if (i < D_80078C78) {
+        do {
+            struct VoiceE *e = &D_80093D68[i];
+            if ((e->_p0[3] >> 4) == ch) {
+                func_80037A7C(e, D_800937D0 + e->_p0[3] * 84);
+                x = e->l * D_80078D54;
+                y = e->r * D_80078D56;
+                M2C_GFIELD(D_80093790, s32, 4) = 0xF;
+                *(s32 *)D_80093790 = D_8007142C[i];
+                M2C_GFIELD(D_80093790, s16, 0xC) = 0;
+                M2C_GFIELD(D_80093790, s16, 0xE) = 0;
+                M2C_GFIELD(D_80093790, s16, 8) = x >> 7;
+                M2C_GFIELD(D_80093790, s16, 0xA) = y >> 7;
+                SpuSetVoiceAttr(D_80093790);
+            }
+        } while (++i < D_80078C78);
+    }
+}
 
 extern u8 D_80093790[];
 extern s32 D_8007142C[];
