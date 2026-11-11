@@ -28,7 +28,35 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A6ED4);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A70F8);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A7280);
+u16 func_800A7280(s32 a, s32 b)
+{
+    typedef struct {
+        s16 unk[10][3];
+    } Struct_D_800ED504;
+    extern Struct_D_800ED504 D_800ED504[];
+    s32 i = 0;
+    s32 neg = -1;
+    Struct_D_800ED504 *base;
+    u32 q;
+    s16 *p;
+
+    a &= 0xffff;
+    base = D_800ED504;
+    q = (u32)&base[a];
+    p = (s16 *)(((u16)b * 6) + q);
+    do {
+        if (*p != neg) goto out;
+        i++;
+        p++;
+    } while (i < 3);
+out:
+    return i;
+}
+
+extern u8 D_800916E8[];
+extern s16 D_800EC588[][17];
+
+extern s16 D_800ECB84[][17];
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A72E0);
 
