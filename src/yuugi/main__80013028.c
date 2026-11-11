@@ -27,55 +27,6 @@ typedef struct {
     u32 hold[2][4];
 } PadWork;
 
-static inline void AtualizaEstadoControle(u32 *estado, u32 atual) {
-    u32 anterior = estado[0];
-    estado[1] = anterior;
-    estado[0] = atual;
-    estado[2] = ~anterior & atual;
-    estado[3] = ~atual & estado[1];
-}
-
-static inline void AtualizaRepeticaoControle(u32 *contador, u8 *base) {
-    u32 valor = *contador;
-    if (base[0x103] >= 2) {
-        valor += base[0x103];
-    } else {
-        valor++;
-    }
-    *contador = valor;
-}
-
-static inline void AtualizaControles(PadWork *w) {
-    extern void func_8004FEDC(), func_8004FEEC();
-    extern PadWork D_8008ED68;
-    u32 st[2];
-    u8 *p;
-    u32 v, cur, old, *c;
-    s32 i, j;
-
-    func_8004FEDC();
-    for (i = 0; i < 2; i++) {
-        p = (u8 *)w + i * 0x22;
-        if ((p[0x3D] >> 4) == 4) {
-            v = p[0x3F] | (p[0x3E] << 8);
-        } else {
-            v = 0xFFFF;
-        }
-        st[i] = ~v & 0xFFFF;
-        func_8004FEEC();
-        AtualizaEstadoControle((u32 *)&w->pad[i], st[i]);
-    }
-    for (i = 0; i < 2; i++) {
-        c = ((PadWork *)((u8 *)w + i * 0x10))->hold[0];
-        for (j = 0; j < 4; j++, c++) {
-            if (((PadWork *)((u8 *)&D_8008ED68 + i * 0x10))->pad[0].now & (1 << (j + 12))) {
-                AtualizaRepeticaoControle(c, (u8 *)w);
-            } else {
-                *c = 0;
-            }
-        }
-    }
-}
 
 extern s32 ReadTIM();
 extern s32 func_80019F30();
