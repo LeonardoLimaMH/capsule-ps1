@@ -120,6 +120,8 @@ segments:
       - [0x2ADC0, c, main_8003742C__8003A5C0]
       - [0x2ADC8, c, main_8003742C__8003A5C8]
       - [0x2ADF8, c, main_8003A5F8]
+      - [0x2CE54, c, main_8003A5F8__8003C654]
+      - [0x2CF3C, c, main_8003A5F8__8003C73C]
       - [0x2D008, c, main_8003C808]
       - [0x2DDD8, c, sdk_libmath_adddf3]
       - [0x2E158, c, sdk_libmath_addmant]
