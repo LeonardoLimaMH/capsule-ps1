@@ -46,7 +46,50 @@ s32 func_80012A20(u8 *a0, u16 a1, u16 a2, u16 a3)
   return 0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14", func_80012A98);
+void func_80012C7C(u32 *);
+void func_80012D70(u32 *, s16, s16);
+void func_80012E54(u8 *);
+void func_80012EB8(void *, s16, s16);
+void func_80012F0C(u8 *);
+void func_80012A98(void) {
+    extern u8 D_8008ED68[];
+    u8 *b = D_8008ED68;
+    Ent12A20 *e = (Ent12A20 *)(b + 0x158);
+    s32 i;
+
+    for (i = 0; i < 0x50; i++, e++) {
+        if ((u32)(e->t - 1) < 3) {
+            switch (e->b) {
+            case 0:
+                if (e->t == 2) {
+                    *(u16 *)(e->p + 4) = e->x;
+                    *(u16 *)(e->p + 6) = e->y;
+                }
+                if (e->t != 3) {
+                    func_80012C7C((u32 *)e->p);
+                } else {
+                    func_80012D70((u32 *)e->p, e->x, e->y);
+                }
+                break;
+            case 1:
+                if (e->t == 2) {
+                    *(u16 *)(e->p + 4) = e->x;
+                    *(u16 *)(e->p + 6) = e->y;
+                }
+                if (e->t != 3) {
+                    func_80012E54(e->p);
+                } else {
+                    func_80012EB8(e->p, e->x, e->y);
+                }
+                break;
+            case 0x10:
+                func_80012F0C(e->p);
+                break;
+            }
+            e->t = 0;
+        }
+    }
+}
 
 #include "common.h"
 
