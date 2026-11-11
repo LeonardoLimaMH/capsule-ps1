@@ -239,8 +239,35 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80037E40);
 extern u8 D_80093790[];
 extern s32 D_8007142C[];
 extern s32 D_80078C78;
-extern u8 D_80093D68[];
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80037F64);
+extern struct VoiceE D_80093D68[];
+void func_80037F64(void) {
+    struct VoiceE *e;
+    s32 *ids;
+    s32 i = 0;
+    s16 t;
+    s32 x, y;
+
+    if (i < D_80078C78) {
+        ids = D_8007142C;
+        e = (struct VoiceE *)D_80093D68;
+        do {
+            t = e->cur;
+            if (e->last != t) {
+                x = (e->l + t) * D_80078D54;
+                y = (e->r + t) * D_80078D56;
+                M2C_GFIELD(D_80093790, s32, 4) = 0xF;
+                *(s32 *)D_80093790 = *ids;
+                M2C_GFIELD(D_80093790, s16, 0xC) = 0;
+                M2C_GFIELD(D_80093790, s16, 0xE) = 0;
+                M2C_GFIELD(D_80093790, s16, 8) = x >> 7;
+                M2C_GFIELD(D_80093790, s16, 0xA) = y >> 7;
+                SpuSetVoiceAttr(D_80093790);
+            }
+            ids++;
+            e++;
+        } while (++i < D_80078C78);
+    }
+}
 
 s16 func_8003804C(u8 *p, u32 a) {
     s16 r;
