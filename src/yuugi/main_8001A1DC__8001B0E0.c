@@ -49,8 +49,8 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0", func_8001B1A8);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0", func_8001B484);
 
-extern char D_80078B94[];
-extern char D_80078B9C[];
+extern s32 D_80078B94[];
+extern s32 D_80078B9C[];
 extern char D_80078BA4[];
 void *memcpy(void *, const void *, unsigned int);
 extern void *firstfile();
@@ -60,26 +60,23 @@ extern s32 func_8004FEFC();
 extern s32 func_8004FF1C();
 extern void func_8004FF3C();
 s32 func_8001B964(s32 a0) {
-    s8 name[0x20];
+    char name[0x20];
     u8 buf[0x80];
     u8 de[0x28];
     u8 path[0x20];
     void *p;
     s32 total = 0;
-    s32 r;
     s32 fd;
 
     if (a0 == 0) {
-        *(s32 *)name = *(s32 *)D_80078B94;
-        *(s16 *)(name + 4) = *(s16 *)(D_80078B94 + 4);
+        memcpy(name, D_80078B94, 6);
     } else {
-        *(s32 *)name = *(s32 *)D_80078B9C;
-        *(s16 *)(name + 4) = *(s16 *)(D_80078B9C + 4);
+        memcpy(name, D_80078B9C, 6);
     }
-    name[5] = D_80078BA4[0];
-    name[6] = D_80078BA4[1];
+    memcpy(name + 5, D_80078BA4, 2);
     p = firstfile(name, de);
     while (p == de) {
+        s32 r;
         func_8001BB18(de, path, a0);
         fd = func_8004FEFC(path, 1);
         if (fd == -1) {
