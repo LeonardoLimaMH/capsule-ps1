@@ -1,6 +1,7 @@
 #include "common.h"
 
 void func_800DDD70(s32 a0) {
+    typedef struct { u8 _p[0x746]; s16 g[16][8]; } Grid_DDD70;
     extern u8 D_80100F38[];
     extern s32 func_800B1260(s32);
     u8 *p = D_80100F38 + (func_800B1260(a0) & 0xFFFF) * 0x79C;
@@ -20,10 +21,9 @@ void func_800DDD70(s32 a0) {
         *(s16 *)(q + 0x6B8) = 0;
     }
     for (i = 2; i < 4; i++) {
-        s16 *r;
         *(s16 *)(p + 0x73C + i * 2) = 0;
-        for (j = 0, r = (s16 *)(i * 16 + p + 0x746); j < 7; j++) {
-            r[j] = 0;
+        for (j = 0; j < 7; j++) {
+            ((Grid_DDD70 *)p)->g[i][j] = 0;
         }
     }
 }
