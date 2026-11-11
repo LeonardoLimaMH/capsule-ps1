@@ -122,12 +122,54 @@ void func_8003CA90(s16 arg0) {
     }
 }
 
+typedef struct {
+    u8 pad0[0x16];
+    u16 unk16;
+    u8 pad18[0x4E - 0x18];
+} SndKeyEnt;
+
 void func_8003CACC(s16 arg0) {
     extern s16 D_80078CC4;
     D_80078CC4 = arg0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CAD8);
+void func_8003CAD8(void) {
+    extern s16 D_80078CC4;
+    extern s32 D_80078C78[];
+    extern u8 D_80093D68[];
+    extern s32 D_8007142C[];
+    s32 mask = 0;
+    s32 i;
+    u8 *s1;
+    s32 *s2;
+    s32 *s0;
+    s32 st;
+    u16 v;
+
+    if (D_80078CC4 == 0) {
+        s1 = D_80093D68;
+        s2 = D_8007142C;
+        for (i = 0; i < D_80078C78[0]; i++, s1 += 0x4E, s2++) {
+            if (*(u16 *)(s1 + 0x16) != 0 && SpuGetKeyStatus(*s2) == 3) {
+                v = *(u16 *)(s1 + 0x16);
+                if (v >= 2) {
+                    mask |= *s2;
+                    s0 = s2;
+                    do {
+                        SpuSetKey(0, *s0);
+                        st = SpuGetKeyStatus(*s0);
+                    } while (st != 2 && st != 0);
+                    *(u16 *)(s1 + 0x16) = 0;
+                } else {
+                    *(u16 *)(s1 + 0x16) = v + 1;
+                }
+            }
+        }
+    }
+    if (mask != 0) {
+        SpuSetKey(0, mask);
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808", func_8003CC00);
 
