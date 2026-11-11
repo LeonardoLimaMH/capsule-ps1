@@ -4,12 +4,7 @@
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800241E8", func_800241E8);
 
 extern u16 D_80078C20[];
-typedef struct {
-    u8 pad0[0x10];
-    u8 *unk10;
-    u8 pad14[0x1C - 0x14];
-} S_80069EC4;
-extern S_80069EC4 D_80069EC4[][26];
+extern u8 D_80069EC4[];
 void func_8002453C(u8 *o, u8 *poly, s32 index, s32 mode, volatile s32 depth)
 {
     s32 type;
