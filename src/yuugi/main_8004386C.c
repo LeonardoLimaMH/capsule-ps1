@@ -13,16 +13,19 @@ typedef struct {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8004386C", func_8004386C);
 
-extern s32 D_80094BF8;
-extern s32 D_80094B78[];
-extern u8 D_80094B7C[];
+extern Entry78 D_80094B78[];
+extern Entry7C D_80094B7C[];
+extern s32 D_80094BF8[];
 void func_800458A0(u8 *, s32);
+
 void func_80043A90(s32 a0, s32 a1, s32 a2) {
-    *(s32 *)((u8 *)D_80094B78 + (D_80094BF8 << 4)) = a0;
-    *(u8 *)((u8 *)D_80094B7C + (D_80094BF8 << 4)) = a1;
-    func_800458A0((u8 *)&D_80094BF8 - 0x7B + (D_80094BF8 << 4), a2);
-    if (++D_80094BF8 >= 8) {
-        D_80094BF8 = 0;
+    s32 *p = D_80094BF8;
+
+    D_80094B78[*p].id = a0;
+    D_80094B7C[*p].f4 = a1;
+    func_800458A0((u8 *)p - 0x7B + (*p << 4), a2);
+    if (++(*p) >= 8) {
+        *p = 0;
     }
 }
 
