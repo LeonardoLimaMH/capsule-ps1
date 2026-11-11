@@ -1,9 +1,5 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DCD44);
-
-#include "common.h"
-
 /* stub-ret: mixed */
 extern u8 D_80100F38[];
 extern s32 func_800B1260(s32);
@@ -17,6 +13,28 @@ extern s16 func_800DCFB4(s32, s32, s32), func_800DD5B8(s32, s32);
 extern void func_800DD3B0(s32, s32, s32);
 
 typedef struct { u8 _p[0x48E]; s16 g[8][16]; } Grid_800DCE54;
+
+void func_800DCD44(s32 a0) {
+    u8 *p = PL(a0);
+    s16 i, j;
+    P16(0x472) = 1;
+    PS16(0x3EC) = 0;
+    PS16(0x3EE) = 0;
+    PS16(0x3F0) = 0;
+    PS16(0x474) = 2;
+    P32(0x478) = 0;
+    for (i = 0; i < 32; i++) {
+        u8 *q = p + i * 4;
+        *(s16 *)(q + 0x3F2) = -1;
+        *(s16 *)(q + 0x3F4) = -1;
+    }
+    for (i = 2; i < 8; i++) {
+        *(s16 *)(p + 0x47C + i * 2) = 0;
+        for (j = 0; j < 15; j++) {
+            ((Grid_800DCE54 *)p)->g[i][j] = 0;
+        }
+    }
+}
 
 s32 func_800DCE54(s32 a0) {
     u8 *p = PL(a0);
@@ -32,12 +50,80 @@ s32 func_800DCE54(s32 a0) {
     return PS16(0x3F0) != 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DCFB4);
+extern s16 func_800DD110(s32, s32, s16 *, s16 *);
+s16 func_800DCFB4(s32 a0, s32 a1, s32 a2) {
+    extern s16 func_800DD2B8(s32, s16, s16);
+    u8 *p = PL(a0);
+    s16 pos[2];
+    s16 r, j;
+    s16 n;
+    s32 c;
+    s16 x = P16(0x336);
+    s16 y = P16(0x338);
+    pos[0] = x;
+    pos[1] = y;
+    n = a1;
+    while ((c = *(u8 *)a2) != 0xFF) {
+        r = 1;
+        for (j = 0; j < n - 1; j++) {
+            r = func_800DD110(a0, c, &pos[0], &pos[1]);
+            if (r == 0) break;
+            r = func_800DD2B8(a0, pos[0], pos[1]);
+            if (r == 0) break;
+        }
+        if (r != 1) return 0;
+        a2++;
+    }
+    return 1;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DD110);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DD2B8);
+extern u8 D_80091618[];
+extern s32 func_800B12D8();
+extern s32 func_800DD64C(s32, s32, s32, s32, s32);
+s32 func_800DD2B8(s32 a0, s16 a1, s16 a2) {
+    struct S { u8 _p0[0x10]; u16 unk_10; u8 _p1[0x7E]; u16 unk_90; u8 _p2[0x116]; };
+    s32 k = func_800B1260(a0);
+    s32 x = a0 ^ 1;
+    u8 f = x != 0;
+    struct S *s = (struct S *)D_80091618;
+    if (s[(u16)k].unk_90 != 0) {
+        k = func_800B12D8(a0, k, f);
+        f = x == 0;
+    }
+    return (s16)func_800DD64C(a0, s[(u16)k].unk_10, f, a1, a2);
+}
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DD3B0);
+void func_800DD3B0(s32 a0, s32 a1, s32 a2) {
+    u8 *p = PL(a0);
+    s16 n = PS16(0x3F0);
+    s16 i;
+    if (n != 0x20) {
+        u8 *q;
+        PS16(0x3F0) = n + 1;
+        i = PS16(0x3EE);
+        q = p + i * 4;
+        *(s16 *)(q + 0x3F2) = a1;
+        *(s16 *)(q + 0x3F4) = a2;
+        PS16(0x3EE) = (i + 1) % 32;
+    }
+}
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DCD44", func_800DD45C);
+s32 func_800DD45C(s32 a0) {
+    u8 *p = PL(a0);
+    s16 n;
+    u16 a, b;
+    u8 *q;
+    if (PS16(0x3F0) == 0) return 0;
+    n = PS16(0x3EC);
+    q = p + n * 4;
+    a = *(u16 *)(q + 0x3F2);
+    b = *(u16 *)(q + 0x3F4);
+    P16(0x472) = 1;
+    PS16(0x474) = a;
+    P32(0x478) = D_800F1E34[(s16)b];
+    PS16(0x3EC) = (n + 1) % 32;
+    PS16(0x3F0) = P16(0x3F0) - 1;
+    return 1;
+}
