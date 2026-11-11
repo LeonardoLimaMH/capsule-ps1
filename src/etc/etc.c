@@ -13,6 +13,32 @@ typedef struct {
     Etc7C unk5E8[1][6];
 } EtcCtx;
 
+/* Versões inline de func_800979BC e func_80097D8C (usadas por func_8009807C). */
+static inline s32 Etc_GetVramAddr(s32 arg0) {
+    if (arg0 < 10) {
+        return arg0 * 0xE000 + (s32)0x80140000;
+    }
+    return (arg0 - 10) * 0xE000 + (s32)0x80124000;
+}
+
+static inline s32 Etc_FindPrev(EtcCtx *arg0, s32 arg1, s32 arg2) {
+    u8 id = arg0->unk5E8[arg1][arg2].unk0;
+    s32 ret = 0;
+
+    while (arg1 != 0 || arg2 != 0) {
+        if (arg2 == 0) {
+            arg1--;
+            arg2 = 4;
+        } else {
+            arg2--;
+        }
+        if (id == arg0->unk5E8[arg1][arg2].unk0) {
+            ret = arg0->unk5E8[arg1][arg2].unk2A + 1;
+        }
+    }
+    return ret;
+}
+
 s32 func_800979BC(s32 arg0) {
     register s32 a asm("v0");
     register s32 b asm("v1");
@@ -146,23 +172,23 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80097E40);
 
 void func_8009807C(s32 arg0, s32 arg1, s32 arg2) {
     extern void func_8001A49C();
-    register u8 *var_t4 asm("t4");
+    register EtcCtx *var_t4 asm("t4");
     register s32 var_t2 asm("t2");
-    register u8 *temp_t3 asm("t3");
+    register Etc7C *temp_t3 asm("t3");
     register s32 var_t1 asm("t1");
     register u8 temp_t0 asm("t0");
     register s32 var_a3 asm("a3");
     s32 v;
     s32 var_a0;
 
-    var_t4 = (u8 *)arg0;
+    var_t4 = (EtcCtx *)arg0;
     var_t2 = 0;
-    temp_t3 = ((u8 (*)[6][0x7C])(var_t4 + 0x5E8))[arg1][arg2];
+    temp_t3 = &var_t4->unk5E8[arg1][arg2];
     if (arg2 == 5) {
         goto block_12;
     }
     var_t1 = var_t2;
-    temp_t0 = ((u8 (*)[6][0x7C])(var_t4 + 0x5E8))[arg1][arg2][0];
+    temp_t0 = var_t4->unk5E8[arg1][arg2].unk0;
     var_a3 = arg1;
     if (arg1 != 0) {
         goto loop_3;
@@ -181,8 +207,8 @@ block_5:
     var_a3 -= 1;
     arg2 = 4;
 block_6:
-    if (temp_t0 == ((u8 (*)[6][0x7C])(var_t4 + 0x5E8))[var_a3][arg2][0]) {
-        var_t1 = ((u8 (*)[6][0x7C])(var_t4 + 0x5E8))[var_a3][arg2][0x2A] + 1;
+    if (temp_t0 == var_t4->unk5E8[var_a3][arg2].unk0) {
+        var_t1 = var_t4->unk5E8[var_a3][arg2].unk2A + 1;
     }
     if (var_a3 != 0) {
         goto loop_3;
@@ -197,10 +223,10 @@ block_10:
     goto block_15;
 
 block_12:
-    if (temp_t3[0x2A] < 10) {
+    if (temp_t3->unk2A < 10) {
         goto block_14;
     }
-    if (arg1 == temp_t3[0x2A] - 10) {
+    if (arg1 == temp_t3->unk2A - 10) {
         goto block_15;
     }
 block_14:
@@ -211,7 +237,7 @@ block_15:
         return;
     }
 
-    v = temp_t3[0x2A];
+    v = temp_t3->unk2A;
     arg1 = v;
     if (v < 10) {
         var_a0 = (v * 0xE000) + (s32)0x80140000;
