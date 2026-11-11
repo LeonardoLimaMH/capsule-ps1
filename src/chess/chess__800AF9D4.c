@@ -158,7 +158,29 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800AF9D4", func_800AFFA4);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800AF9D4", func_800B03B8);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800AF9D4", func_800B0478);
+void func_800B0478(u8 *arg0) {
+    extern u8 D_80069AD4[];
+    register u8 *ctx asm("a0") = D_80069AD4;
+    u8 *tab = (u8 *)D_801010B0;
+    register s32 val1 asm("a1") = 0;
+    register u8 *b asm("v0");
+    register s32 val2 asm("v1");
+    u8 *entry;
+
+    entry = tab + arg0[0x5D9] * 52;
+    b = *(u8 **)entry;
+    if (entry[0xA] & 1) {
+        val1 = -0x32;
+    }
+    *(s32 *)(ctx + 0x44) = val1;
+    *(s32 *)(ctx + 0x48) = ((*(u32 *)(b + 0x150) >> 19) & 7) * 50;
+    entry = tab + arg0[0x5D9] * 52;
+    val2 = 0;
+    if (entry[0xB] & 1) {
+        val2 = -0x32;
+    }
+    *(s32 *)(ctx + 0x4C) = val2;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800AF9D4", func_800B0530);
 
