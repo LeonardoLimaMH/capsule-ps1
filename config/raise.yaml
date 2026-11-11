@@ -151,6 +151,8 @@ segments:
       - [0x2BB34, c, raise_800C3334]
       - [0x2D164, c, raise_800C4964]
       - [0x2D1CC, c, raise_800C49CC]
+      - [0x2DE70, c, raise_800C49CC__800C5670]
+      - [0x2DFA8, c, raise_800C49CC__800C57A8]
       - [0x2E088, c, raise_800C5888]
       - [0x2E1F4, c, raise_800C59F4]
       - [0x2ED2C, c, raise_800C652C]
