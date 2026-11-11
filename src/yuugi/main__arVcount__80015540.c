@@ -517,77 +517,7 @@ static inline s32 bright(s32 a) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800188F0);
 
-void func_80018C00(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5) {
-    extern u8 *D_8008ED68[];
-    extern void SetPolyFT4();
-    extern void SetShadeTex();
-    extern void SetSemiTrans();
-    extern void AddPrim();
-    extern u16 GetClut();
-    extern u16 GetTPage();
-    register s32 reg_a0 asm("s3") = a0;
-    register s32 reg_a1 asm("s4") = a1;
-    register u8 **g asm("s2") = D_8008ED68;
-    register u8 *nx asm("a2") = 0;
-    u8 *base;
-    register u8 *p asm("s0");
-    s32 temp;
-    register s32 x asm("v0");
-    register s32 y asm("v0");
-    s32 half;
-
-    base = g[0];
-    p = *(u8 **)(base + 0x1090);
-    if (p != 0 && (u8 *)p + 0x28 <= base + 0x4594) {
-        nx = p + 0x28;
-    }
-    *(u8 **)(base + 0x1090) = nx;
-    SetPolyFT4(p);
-    SetShadeTex(p, 0);
-    SetSemiTrans(p, 0);
-    p[4] = bright(*(s32 *)((u8 *)g + 0xA6C));
-    p[5] = bright(*(s32 *)((u8 *)g + 0xA70));
-    p[6] = bright(*(s32 *)((u8 *)g + 0xA74));
-
-    temp = (a2 + 1) * 10;
-    p[0x1C] = temp - 0x80;
-    p[0xC] = temp - 0x80;
-    p[0x24] = temp - 0x76;
-    p[0x14] = temp - 0x76;
-    p[0x15] = 0xEE;
-    p[0xD] = 0xEE;
-    p[0x25] = 0xF8;
-    p[0x1D] = 0xF8;
-
-    if (a4 >= 0x14) {
-        p[0x14]--;
-        p[0x24]--;
-        p[0x1D]--;
-        p[0x25]--;
-    }
-
-    {
-        register u8 **a1_g asm("a1") = D_8008ED68;
-        half = a4 / 2;
-        x = reg_a0 + *(s32 *)((u8 *)a1_g + 0x108) / 2 - half;
-        *(s16 *)(p + 0x18) = x;
-        *(s16 *)(p + 8) = x;
-        x += a4;
-        *(s16 *)(p + 0x20) = x;
-        *(s16 *)(p + 0x10) = x;
-
-        y = reg_a1 + *(s32 *)((u8 *)a1_g + 0x10C) / 2 - half;
-        *(s16 *)(p + 0x12) = y;
-        *(s16 *)(p + 0xA) = y;
-        y += a4;
-        *(s16 *)(p + 0x22) = y;
-        *(s16 *)(p + 0x1A) = y;
-    }
-
-    *(u16 *)(p + 0xE) = GetClut(0x3E0, a3 + 0x178);
-    *(u16 *)(p + 0x16) = GetTPage(0, 0, 0x2A0, 0x180);
-    AddPrim((s32 *)((u8 *)g[0] + 0x70 + a5 * 4), (s32 *)p);
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018C00);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018EF4);
 

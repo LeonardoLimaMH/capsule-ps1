@@ -199,31 +199,7 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800DED1C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800DF3A0);
 
-void func_800DF67C(u32 arg0, s32 arg1, s32 *arg2, s32 *arg3) {
-    if (arg1 == 0) {
-        switch (arg0) {
-        case 0: *arg2 = 7; *arg3 = -23; break;
-        case 1: *arg2 = -3; *arg3 = -24; break;
-        case 2: *arg2 = -10; *arg3 = -27; break;
-        case 3: *arg2 = -7; *arg3 = -28; break;
-        case 4: *arg2 = -11; *arg3 = -23; break;
-        case 5: *arg2 = -8; *arg3 = -32; break;
-        case 6: *arg2 = 10; *arg3 = -27; break;
-        case 7: *arg2 = 13; *arg3 = -28; break;
-        }
-    } else {
-        switch (arg0) {
-        case 0: *arg2 = -7; *arg3 = -23; break;
-        case 1: *arg2 = -13; *arg3 = -28; break;
-        case 2: *arg2 = -10; *arg3 = -27; break;
-        case 3: *arg2 = 8; *arg3 = -32; break;
-        case 4: *arg2 = 11; *arg3 = -23; break;
-        case 5: *arg2 = 7; *arg3 = -28; break;
-        case 6: *arg2 = 10; *arg3 = -27; break;
-        case 7: *arg2 = 3; *arg3 = -24; break;
-        }
-    }
-}
+INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800DF67C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8", func_800DF7CC);
 

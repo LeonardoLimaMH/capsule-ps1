@@ -1,37 +1,6 @@
 #include "common.h"
 #include "yuugi.h"
 
-extern s32 D_80078B94[];
-extern s32 D_80078B9C[];
-extern char D_80078BA4[];
-void *memcpy(void *, const void *, unsigned int);
-extern void *firstfile();
-extern void *func_8004FF5C();
-extern void func_8001BB18();
-extern s32 func_8004FEFC();
-extern s32 func_8004FF1C();
-extern void func_8004FF3C();
-
-/* Lê o cabeçalho (0x80 bytes) de um arquivo do memory card; inline em func_8001B964. */
-static inline s32 readhdr(char *path, u8 *buf) {
-    s32 fd = func_8004FEFC(path, 1);
-    if (fd == -1) {
-        return -2;
-    }
-    if (func_8004FF1C(fd, buf, 0x80) == -1) {
-        func_8004FF3C(fd);
-        return -2;
-    }
-    func_8004FF3C(fd);
-    return 0;
-}
-
-static inline s32 readentry(u8 *de, u8 *buf, s32 port) {
-    char path[0x20];
-    func_8001BB18(de, path, port);
-    return readhdr(path, buf);
-}
-
 typedef struct {
     u8 a;
     u8 b;

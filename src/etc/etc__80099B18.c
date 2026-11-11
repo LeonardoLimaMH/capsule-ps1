@@ -259,49 +259,7 @@ void func_8009A9B0(void) {
     }
 }
 
-void func_8009AA0C(void) {
-    extern u16 D_8008EE48[];
-    extern s32 D_800B3ADC[];
-    extern s32 D_800B3B20[];
-    extern s32 D_800B3B24[];
-    extern void func_8009BDD8(s32, s32, s32);
-    extern void func_80012578(void);
-    extern int func_80012508();
-
-    if (*D_800B3B20 != 0) {
-        func_8009BDD8(0, 0xA0, 5);
-    }
-    switch (*D_8008EE48) {
-    case 0:
-        *D_800B3ADC = *D_800B3ADC - 1;
-        if (*D_800B3ADC > 0) return;
-        func_80012578();
-        break;
-    case 1:
-        if (*D_800B3B20 < 10) return;
-        *D_800B3ADC = 0x90;
-        func_80012578();
-        break;
-    case 2:
-        *D_800B3ADC = *D_800B3ADC - 1;
-        if (*D_800B3ADC > 0) return;
-        *D_800B3ADC = 0x70;
-        func_80012578();
-        break;
-    case 3:
-        *D_800B3ADC = *D_800B3ADC - 1;
-        if (*D_800B3ADC > 0) return;
-        *D_800B3ADC = 0x30;
-        func_80012578();
-        break;
-    case 4:
-        *D_800B3ADC = *D_800B3ADC - 1;
-        if (*D_800B3ADC > 0) return;
-        func_80012508();
-        *D_800B3B24 = 0;
-        break;
-    }
-}
+INCLUDE_ASM("asm/etc/nonmatchings/etc__80099B18", func_8009AA0C);
 
 void func_8009AB30(void) {
     extern u16 D_8008EE48[];

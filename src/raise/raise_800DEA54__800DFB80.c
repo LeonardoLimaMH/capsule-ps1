@@ -1,64 +1,9 @@
 #include "common.h"
 
 extern u8 D_80092008[];
+extern u8 D_80092008[];
 
-/* Entrada de 0x44 bytes de D_80092008 (ver raise_800DEA54__800DEB28__800DEBA0.c). */
-typedef struct {
-    u16 dir : 3;
-    u16 rest : 13;
-} RaiseSlotB;
-
-typedef struct {
-    u32 f0 : 1;
-    u32 f1 : 1;
-    u32 f2 : 3;
-    u32 f3 : 6;
-    u32 idx : 6;
-    u32 cnt : 6;
-    u32 pad : 9;
-    RaiseSlotB slots[32];
-} RaiseEntB;
-
-/* Inverte a ordem dos n slots e gira a direção de cada um em 180 graus. */
-static inline void RaiseEnt_Reverse(RaiseEntB *e, s16 n) {
-    s16 i;
-    s32 j;
-    s32 k;
-    u32 half = (u32)n >> 1;
-    RaiseSlotB tmp;
-
-    for (i = 0; i < (s32)half; i++) {
-        tmp = e->slots[i];
-        k = i + 1;
-        j = n - k;
-        e->slots[i] = e->slots[j];
-        e->slots[j] = tmp;
-        e->slots[i].dir = (e->slots[i].dir + 4) % 8;
-        e->slots[j].dir = (e->slots[j].dir + 4) % 8;
-    }
-}
-
-void func_800DFB80(s32 unused, u16 idx) {
-    RaiseEntB *e = (RaiseEntB *)(D_80092008 + idx * 0x44);
-    s16 n;
-    s16 i;
-    s32 j;
-    s32 k;
-    RaiseSlotB tmp;
-
-    n = e->idx;
-    e->cnt = n;
-    e->f3 = 0;
-    for (i = 0; i < n / 2; i++) {
-        tmp = e->slots[i];
-        k = i + 1;
-        j = n - k;
-        e->slots[i] = e->slots[j];
-        e->slots[j] = tmp;
-        e->slots[i].dir = (e->slots[i].dir + 4) % 8;
-        e->slots[j].dir = (e->slots[j].dir + 4) % 8;
-    }
-}
+INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800DFB80);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800DFCA0);
 

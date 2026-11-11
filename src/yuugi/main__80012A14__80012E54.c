@@ -29,17 +29,7 @@ void func_80012E54(u8 *arg0) {
     }
 }
 
-void func_80012EB8(u8 *arg0, s16 arg1, s16 arg2) {
-    Rect r;
-
-    if (!(*(u32 *)arg0 & 0x400)) {
-        r.x = arg1;
-        r.y = arg2;
-        r.w = *(u16 *)(arg0 + 8);
-        r.h = *(u16 *)(arg0 + 0xA);
-        LoadImage(&r, arg0 + 0xC);
-    }
-}
+INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14__80012E54", func_80012EB8);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012A14__80012E54", func_80012F0C);
 

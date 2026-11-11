@@ -2,13 +2,6 @@
 #include "matching.h"
 #include "common.h"
 
-typedef struct {
-    u8 pad[8];
-    u32 unk8;
-    u8 pad2[0x30];
-} Struct_80063940;
-
-
 int func_800A8444(undefined4 param_1, int param_2, int param_3, int param_4)
 {
   int iVar1;
@@ -70,80 +63,11 @@ void func_800A84A0(undefined1 *param_1,undefined4 param_2,int param_3,int param_
   return;
 }
 
-typedef struct {
-    u8 unk0;
-    u8 pad01[0x16];
-    u8 unk17;
-    u8 pad18[0xB];
-    u8 unk23;
-    u8 pad24[3];
-    u8 unk27;
-    u8 unk28;
-    u8 pad29[0x53];
-} ChessEnt7C;
+INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8548);
 
-void func_800A8548(s32 arg0, s32 arg1, s32 arg2)
-{
-    extern u8 D_80085428[];
-    s32 i = 0;
-    ChessEnt7C *p = (ChessEnt7C *)(arg1 + arg2 * 0x2E8 + 0x18);
-    do {
-        if ((p->unk17 & 0x7F) != 4 &&
-            func_800A8E34(arg1, arg2, i) == 0 &&
-            p->unk28 == 0) {
-            if (func_800CA6B8(arg0, arg2, arg2, i) != 0) {
-                p->unk23 = 0;
-                p->unk17 |= 0x80;
-                if (i != 5) {
-                    switch (p->unk0) {
-                    case 0x13: case 0x22: case 0x25: case 0x31:
-                    case 0x47: case 0x48: case 0x5C: case 0x5D:
-                        if (p->unk27 != 0) {
-                            p->unk27 = 0;
-                            func_8009C278(D_80085428, arg2, i);
-                        }
-                        break;
-                    }
-                }
-            } else {
-                p->unk17 &= 0x7F;
-                if (i != 5) {
-                    switch (p->unk0) {
-                    case 0x13: case 0x22: case 0x25: case 0x31:
-                    case 0x47: case 0x48: case 0x5C: case 0x5D:
-                        if (p->unk27 == 0) {
-                            p->unk27 = 1;
-                            func_8009C5C4(D_80085428, arg2, i, p);
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-        p++;
-        i++;
-    } while (i < 5);
-}
+INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8710);
 
-s32 func_800A8710(s32 arg0, s32 arg1, s32 arg2) {
-    extern Struct_80063940 D_80063940[];
-    Struct_80063940 *table = D_80063940;
-    u8 b;
-
-    arg0 += (arg2 * 0x7C) + (arg1 * 0x2E8);
-    b = *(u8 *)(arg0 + 0x5E8);
-    return ((table[b].unk8 >> 8) & 0xF) == 1;
-}
-
-u32 func_800A8770(s32 arg0, s32 arg1, s32 arg2) {
-    extern Struct_80063940 D_80063940[];
-    Struct_80063940 *table = D_80063940;
-    u8 b;
-
-    arg0 += (arg2 * 0x7C) + (arg1 * 0x2E8);
-    b = *(u8 *)(arg0 + 0x5E8);
-    return (table[b].unk8 >> 8) & 0xF;
-}
+INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8770);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A87C8);
 
