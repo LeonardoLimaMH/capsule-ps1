@@ -417,7 +417,46 @@ void func_800127F4(void) {
     func_80012778();
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__80012324", func_80012868);
+void func_80012868(void) {
+    extern u8 D_80086228[], D_800922F0[], D_80010000[];
+    u8 *s1 = D_8008ED68;
+    u8 *p;
+    s32 v, n, r;
+
+    if (*(s32 *)(s1 + 0xF4) == 1) {
+        func_80012A14();
+    }
+    PutDispEnv(*(u8 **)D_8008ED68 + 0x5C);
+    PutDrawEnv(*(u8 **)D_8008ED68);
+    DrawOTag(*(u8 **)D_8008ED68 + 0x108C);
+    func_800131C0();
+    func_800134BC();
+    v = *(s32 *)(s1 + 0x18);
+    if (s1[0x103] >= 2) {
+        n = v + s1[0x103];
+    } else {
+        n = v + 1;
+    }
+    *(s32 *)(s1 + 0x18) = n;
+    *(u8 **)s1 = (*(u8 **)s1 == D_80086228) ? D_80086228 + 0x4594 : D_80086228;
+    *(u16 *)(s1 + 0xF2) = *(u8 **)s1 != D_80086228;
+    ClearOTagR(*(u8 **)s1 + 0x70, 0x408);
+    p = *(u8 **)s1;
+    *(u8 **)(p + 0x1090) = p + 0x1094;
+    func_80012150();
+    func_80013A68();
+    r = func_800337EC();
+    func_8001DB8C(D_80010000, (s16)r, D_800922F0[0x112], D_800922F0[0x113]);
+    func_8001DB68();
+    func_8001E414();
+    func_800196A0();
+    func_80012A98();
+    DrawSync(0);
+    func_80013350();
+    VSync(s1[0x103]);
+    GsClearVcount();
+    s1[0x103] = s1[0x102];
+}
 
 void func_800129DC(void) {
     u8 *p = D_8008ED68;
