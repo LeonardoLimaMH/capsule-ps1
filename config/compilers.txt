@@ -313,3 +313,4 @@ src/raise/raise_800C5888.c 2.7.2-cdk
 src/raise/raise_800C5888__800C593C.c 2.7.2-cdk
 src/raise/raise_800DCC94.c 2.7.2-cdk
 src/yuugi/main_800241E8__800248E8.c 2.7.2-cdk
+src/chess/chess_800C4ECC__800C7F74__800C9338.c 2.7.2-cdk
