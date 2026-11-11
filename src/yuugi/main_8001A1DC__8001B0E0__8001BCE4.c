@@ -1,6 +1,13 @@
 #include "common.h"
 #include "yuugi.h"
 
+typedef struct {
+    u8 b[6];
+} Blk6;
+
+extern Blk6 D_80078B94, D_80078BA8, D_80078BB0, D_80078BB8;
+extern Blk6 D_80078B9C, D_80078BC0, D_80078BC8, D_80078BD0;
+
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0__8001BCE4", func_8001BCE4);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001B0E0__8001BCE4", func_8001BFF4);
