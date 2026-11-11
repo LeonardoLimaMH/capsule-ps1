@@ -1,5 +1,12 @@
 #include "common.h"
 
+struct WorkTimerRecord {
+    u8 pad[0x384];
+    s16 enabled;
+    s16 timer;
+    u8 tail[0x414];
+};
+
 s32 func_800D1B98(void) {
     return 1;
 }
@@ -51,7 +58,53 @@ end:
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98", func_800D1CC4);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98", func_800D262C);
+s32 func_800D2894(s32, s32);
+s32 func_800D2864(s32, s32);
+s32 func_800D2748(s32, s32);
+void func_800D2828(s32, s32);
+s32 func_800E14C4(u16);
+s32 func_800E1140(u16);
+s32 func_800E1388(u16);
+s32 func_800E16AC(u16);
+void func_800C0810(s32, u16);
+s32 func_800D262C(s32 mode, s32 player) {
+    struct Rec {
+        u8 pad[0x384];
+        s16 enabled;
+        s16 timer;
+        u8 tail[0x414];
+    };
+    extern struct Rec D_80100F38[];
+
+    if (mode == 2) {
+        if (D_80100F38[player].enabled != 0) {
+            func_800D2894(2, player);
+            if (D_80100F38[player].timer != 0) {
+                return 0;
+            }
+            func_800D2864(2, player);
+            return 1;
+        }
+        if (func_800E14C4(player) == 1) {
+            return 0;
+        }
+        if (func_800E1140(player) == 0) {
+            return 0;
+        }
+        if (func_800E1388(player) == 0) {
+            return 0;
+        }
+        if (func_800E16AC(player) != 1) {
+            if (func_800D2748(2, player) <= 0) {
+                return 0;
+            }
+            func_80034AB0(0x55);
+            func_800D2828(2, player);
+            func_800C0810(0x20, player);
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98", func_800D2748);
 
