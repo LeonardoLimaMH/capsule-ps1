@@ -315,3 +315,4 @@ src/raise/raise_800DCC94.c 2.7.2-cdk
 src/yuugi/main_800241E8__800248E8.c 2.7.2-cdk
 src/chess/chess_800C4ECC__800C7F74__800C9338.c 2.7.2-cdk
 src/raise/raise_800B15CC__800B1668.c 2.7.2-cdk
+src/raise/raise_800E6DA8__800E6DCC.c 2.7.2-cdk
