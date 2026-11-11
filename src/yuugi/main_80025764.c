@@ -251,7 +251,6 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80026930);
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800270D4);
 
 extern u8 *D_80078D14;
-extern u8 D_8006AF90[];
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800278C8);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_800279D4);
