@@ -8,8 +8,6 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_8009B150", func_8009B4DC);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009B150", func_8009B800);
 
-#include "common.h"
-
 void func_8009BA00(void) {
     extern M2C_UNK D_8008ED68[];
     M2C_GFIELD(D_8008ED68, s8, 0x28) = 0;
