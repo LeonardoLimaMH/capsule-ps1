@@ -112,17 +112,22 @@ void func_8003422C(s32 a0) {
     struct Voz { u8 _p[0x125]; u8 f125; u8 f126; u8 _q[5]; u16 f12c[4]; };
     extern u8 D_800922F0[];
     extern void SpuSetKey(), func_800373A0();
+    s32 v;
     s32 i;
     u32 keys;
     u32 bit;
 
-    if ((u16)a0 & 0x8000) {
-        func_800373A0(a0 & 0x8000);
+    v = a0;
+    a0 &= 0x8000;
+    if (a0) {
+        func_800373A0();
     } else {
         bit = 1;
         keys = 0;
-        for (i = 0; i < 4; i++) {
-            if (((struct Voz *)D_800922F0)->f12c[i] == (a0 & 0xFFFF)) {
+        i = 0;
+        a0 = v & 0xFFFF;
+        for (; i < 4; i++) {
+            if (((struct Voz *)D_800922F0)->f12c[i] == a0) {
                 keys |= 1 << (i + 0x14);
                 ((struct Voz *)D_800922F0)->f125 &= ~bit;
             }
