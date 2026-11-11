@@ -392,19 +392,24 @@ void func_800371A4(s16 arg0) {
     extern s16 D_80092434[];
     extern void DsMix();
     u8 buf[4];
-    s32 x;
-    s32 t;
+    register s32 f4 asm("a1");
+    register s32 p asm("a3");
+    register s32 t asm("v0");
     u16 v;
-    t = (arg0 * ((G *)D_800922F0)->f4) >> 8;
-    v = ((G *)D_800922F0)->f1187 * t;
-    x = v >> 3;
+    t = arg0;
+    f4 = ((G *)D_800922F0)->f4;
+    p = t * f4;
+    t = p >> 8;
+    v = ((G *)D_800922F0)->f1187;
+    v *= t;
+    v >>= 3;
     buf[3] = 0;
-    buf[0] = x;
+    buf[0] = v;
     if (((G *)D_800922F0)->f2 == 0) {
         buf[1] = 0;
-        buf[2] = x;
+        buf[2] = v;
     } else {
-        buf[1] = x;
+        buf[1] = v;
         buf[2] = 0;
     }
     DsMix(buf);
