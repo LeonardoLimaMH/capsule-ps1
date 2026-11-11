@@ -378,7 +378,7 @@ void func_800A3814(u8 *arg0) {
     extern u16 D_800B2CE4[];
     extern s16 D_800B3B40[];
     u8 *p = D_800859F8;
-    u8 i = p[9];
+    s8 i = p[9];
     s32 a1;
     s32 f;
     s16 v;
@@ -536,7 +536,80 @@ void func_800A3C70(u8 *arg0) {
     *(s32 *)(arg0 + 0x38) |= 1;
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A3D44);
+void func_800A3D44(u8 *arg0) {
+    extern u8 D_80085428[];
+    extern u8 D_8008ED68[];
+    extern u16 D_8008EE44[];
+    extern s16 D_800B3B38[];
+    extern s32 D_800B3BF8[];
+    extern u8 D_800B3C00[];
+    register u8 *a2 asm("a2") = arg0;
+    u8 *p = D_80085428;
+    s32 idx = *(s32 *)(a2 + 0x84);
+    s16 temp_v1;
+
+    if (D_8008EE44[0] == 0x18 && ((temp_v1 = D_800B3B38[idx]) == 1 || temp_v1 == 5)) {
+        if (p[0x5D0] == 2) {
+            *(s32 *)(a2 + 0x38) &= ~1;
+            if (idx != 0) {
+                *(s16 *)(a2 + 0x4A) = 0x28;
+            } else {
+                *(s16 *)(a2 + 0x4A) = -0x58;
+            }
+            if (D_800B3C00[idx] == 0) {
+                if (D_800B3BF8[idx] != 0) {
+                    *(u16 *)(a2 + 0x52) = 0;
+                    *(u16 *)(a2 + 0x50) = 0;
+                    return;
+                } else {
+                    *(u16 *)(a2 + 0x52) -= *(u16 *)(a2 + 0x76);
+                    *(u16 *)(a2 + 0x50) -= *(u16 *)(a2 + 0x74);
+                    if ((s16)*(u16 *)(a2 + 0x50) <= 0) {
+                        D_800B3BF8[idx] = 1;
+                    }
+                    return;
+                }
+            } else {
+                if (D_800B3BF8[idx] != 0) {
+                    *(u16 *)(a2 + 0x52) = 0x1000;
+                    *(u16 *)(a2 + 0x50) = 0x1000;
+                    return;
+                } else {
+                    *(u16 *)(a2 + 0x50) += *(u16 *)(a2 + 0x74);
+                    *(u16 *)(a2 + 0x52) += *(u16 *)(a2 + 0x76);
+                    if (*(s16 *)(a2 + 0x50) >= 0x1000) {
+                        D_800B3BF8[idx] = 1;
+                    }
+                    return;
+                }
+            }
+        } else if (idx == 0) {
+            *(s16 *)(a2 + 0x4A) = 0x10;
+            *(u16 *)(a2 + 0x52) = 0x1000;
+            *(u16 *)(a2 + 0x50) = 0x1000;
+            *(s32 *)(a2 + 0x38) &= ~1;
+            return;
+        }
+    } else {
+        u8 *q = D_8008ED68;
+        if (*(u16 *)(q + 0xDC) == 0xE && *(u16 *)(q + 0xE0) == 3) {
+            *(u16 *)(a2 + 0x52) = 0x1000;
+            *(u16 *)(a2 + 0x50) = 0x1000;
+            *(s16 *)(a2 + 0x4A) = 0;
+            *(s32 *)(a2 + 0x38) &= ~1;
+            return;
+        }
+        q = D_8008ED68;
+        if (*(u16 *)(q + 0xDC) == 0x1B && (*(u16 *)(q + 0xE0) == 1 || *(u16 *)(q + 0xE0) == 8)) {
+            *(s16 *)(a2 + 0x4A) = -0x14;
+            *(u16 *)(a2 + 0x52) = 0x1000;
+            *(u16 *)(a2 + 0x50) = 0x1000;
+            *(s32 *)(a2 + 0x38) &= ~1;
+            return;
+        }
+    }
+    *(s32 *)(a2 + 0x38) |= 1;
+}
 
 void func_800A3F70(u8 *arg0) {
     extern u8 D_80085428[];
