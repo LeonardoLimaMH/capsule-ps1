@@ -11,6 +11,7 @@
     ["./run.sh", "make", "-j8"],
     ["./run.sh", "python3", "tools/objdiff_report.py", "--objects"]
   ],
+  "seeds": ["equiv/{target}/{symbol}.c"],
   "matrix": {
     "build": ["./run.sh", "python3", "tools/matrix_build.py", "{job}"],
     "profiles": [

@@ -209,7 +209,7 @@ disco), `asm/` (assembly desmontado), `build/`.
 | `bytearith.py` / `index_form.py` / `structidx.py` | reescrevem a aritmética em bytes do m2c como ponteiro `u8*` com largura do assembly / índice de array tipado / array de struct sintetizada |
 | `rodata_migrate.py` | integra funções com jump table dando o trecho do `.rodata` ao objeto C |
 | `objdiff_report.py` | relatório do objdiff para o [ByteMatch](https://bytematch.dev/LeonardoLimaMH/capsule-ps1) (`make report`; envio com `--upload` no host) |
-| `matrix_build.py` | build da matriz de compiladores do decomp.anything: compila o C de uma função nos 9 perfis (2.7.2-psx, 2.7.2-cdk, 2.8.1-psx, com e sem g0fill/spfill) e em vários contextos de TU, sem tocar em `src/` nem `config/` (seção `matrix` do `.decomp.wtf.json`) |
+| `matrix_build.py` | build da matriz de compiladores do decomp.anything: compila o C de uma função nos 9 perfis (2.7.2-psx, 2.7.2-cdk, 2.8.1-psx, com e sem g0fill/spfill) e em vários contextos de TU, sem tocar em `src/` nem `config/` (seção `matrix` do `.decomp.wtf.json`). A seção `seeds` do mesmo manifesto aponta `equiv/<alvo>/<função>.c` como ponto de partida: o decomp.anything mostra esse C ao agente e o passa pela matriz quando a função ainda não tem C em `src/` |
 | `profile_sweep.py` | compila o C de `equiv/` em todos os perfis; retomável, com invalidação quando o C ou a TU mudam |
 | `assign_compilers.py` | define o compilador de cada arquivo pela evidência de byte-matching e cria fronteiras de TU onde o compilador troca (`--split`) |
 | `full_asm.py` | gera o assembly de todas as funções (inclusive as já em C) em `.cache/fullasm`, para análise |
