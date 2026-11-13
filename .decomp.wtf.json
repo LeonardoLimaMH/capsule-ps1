@@ -14,6 +14,7 @@
   "seeds": ["equiv/{target}/{symbol}.c"],
   "matrix": {
     "build": ["./run.sh", "python3", "tools/matrix_build.py", "{job}"],
+    "permute": ["./run.sh", "python3", "tools/matrix_permute.py", "{job}"],
     "profiles": [
       {"name": "2.7.2-psx", "compiler": "GCC 2.7.2 PSX", "flags": "-O2 -G8"},
       {"name": "2.7.2-psx+g0fill", "compiler": "GCC 2.7.2 PSX", "flags": "-O2 -G0 + aspsx_fill"},
