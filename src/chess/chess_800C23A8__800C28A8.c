@@ -57,19 +57,3 @@ void func_800C41E8(void) {
 }
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C23A8__800C28A8", func_800C42A4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C23A8__800C28A8", func_800C44BC);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C23A8__800C28A8", func_800C4600);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C23A8__800C28A8", func_800C471C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C23A8__800C28A8", func_800C47B8);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C23A8__800C28A8", func_800C48DC);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C23A8__800C28A8", func_800C4B40);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C23A8__800C28A8", func_800C4C18);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C23A8__800C28A8", func_800C4D88);
