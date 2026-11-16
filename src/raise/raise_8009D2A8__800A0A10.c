@@ -1,5 +1,12 @@
 #include "common.h"
 
+static inline u32 current_id_800A1778(void) {
+    extern u16 D_8006AF80[];
+    extern u16 D_80091618[];
+    u16 *p = D_80091618;
+    return p[D_8006AF80[0] * 0xD4];
+}
+
 typedef struct { s32 pad[14]; u32 flags; } Obj_800A1D58;
 typedef struct {
     u8 pad[0x764];
@@ -77,7 +84,96 @@ void func_800A0ACC(s32 arg0) {
     }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A0BB4);
+s32 func_800A0BB4(void) {
+    extern u16 D_8006AF80[];
+    extern u8 D_8008ED68[];
+    extern s32 D_8008EDF0[];
+    extern u8 D_80091618[];
+    extern s16 D_800ED88C[];
+    extern u8 D_800EFF58[];
+    extern u8 D_80103ED8[];
+    extern s32 func_800D1598(void *);
+    extern void func_80034AB0(s32);
+    extern void func_800BCF98(s32);
+    extern void func_800A0ACC(s32);
+    extern void func_800A0D88();
+
+    typedef struct {
+        u8 pad0[0x88];
+        s32 unk88;
+        u8 pad8C[0x18];
+        s32 unkA4;
+        s32 padA8;
+        s32 unkAC;
+    } Work_8ED68;
+
+    typedef struct {
+        u8 pad0[0x344];
+        s32 unk344;
+        s32 unk348;
+        u8 pad34C[0x3D4 - 0x34C];
+        s32 unk3D4[16];
+    } Work_EFF58;
+
+    typedef struct {
+        u8 pad0[0x158];
+        u16 unk158;
+        u8 pad15A[0x1A8 - 0x15A];
+    } Mon_800A0BB4;
+
+    Work_8ED68 *s0 = (Work_8ED68 *)D_8008ED68;
+    s32 flags;
+    s32 n;
+
+    func_800D1598(D_80103ED8);
+    flags = s0->unk88;
+    if (flags & 0x20) {
+        u8 *p = D_800EFF58;
+        u8 *q = p + *(s16 *)(p + 0x344) * 4;
+        ((Mon_800A0BB4 *)D_80091618)[*D_8006AF80].unk158 = *(u16 *)(q + 0x3D4);
+        func_80034AB0(0x48);
+        *D_800ED88C = 0;
+        func_800BCF98(2);
+        return -1;
+    }
+    if (flags & 0x40) {
+        func_80034AB0(0x5D);
+        *D_800ED88C = 1;
+        func_800BCF98(2);
+        return -2;
+    }
+    if (flags & 0x1000) {
+        Work_EFF58 *w;
+        func_80034AB0(0x84);
+        func_800A0D88(2, 0);
+        w = (Work_EFF58 *)D_800EFF58;
+        n = w->unk344;
+        if (n > 0) {
+            n = n - 1;
+        } else {
+            n = w->unk348;
+        }
+        w->unk344 = n;
+        func_800A0D88(1, 0);
+    } else if (s0->unkA4 != 0) {
+        func_800A0ACC(2);
+    }
+    if (*D_8008EDF0 & 0x4000) {
+        func_80034AB0(0x84);
+        func_800A0D88(2, 0);
+        n = 0;
+        if (((Work_EFF58 *)D_800EFF58)->unk344 < ((Work_EFF58 *)D_800EFF58)->unk348) {
+            n = ((Work_EFF58 *)D_800EFF58)->unk344 + 1;
+        }
+        ((Work_EFF58 *)D_800EFF58)->unk344 = n;
+        func_800A0D88(1, 0);
+        return 0;
+    }
+    if (s0->unkAC != 0) {
+        func_800A0ACC(3);
+    }
+    return 0;
+}
 
 #include "common.h"
 
