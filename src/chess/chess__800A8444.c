@@ -88,7 +88,20 @@ u32 func_800A8770(s32 arg0, s32 arg1, s32 arg2) {
 
 extern s32 rsin(s32);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A87C8);
+void func_800A87C8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    register s32 base asm("t0") = arg0;
+    register s32 off asm("a0");
+    if (arg2 != 5) {
+        off = arg2 * 0x7C;
+        off += arg1 * 0x2E8;
+        off = base + off;
+        func_80028200(*(u8 *)(off + 0x5E8), arg3 & 0xFFFF);
+    } else {
+        func_80034AB0(0x48);
+    }
+}
+
+extern s32 rsin(s32);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8830);
 
