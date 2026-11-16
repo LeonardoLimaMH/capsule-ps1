@@ -59,5 +59,7 @@ segments:
       - [0x10A2C, c, etc__800A822C]
       - [0x12A38, c, etc__800AA238]
       - [0x13F8C, c, etc__800AA238__800AB78C]
+      - [0x14E50, c, etc__800AA238__800AB78C__800AC650]
+      - [0x14F80, c, etc__800AA238__800AB78C__800AC780]
       - [0x15D5C, data]
   - [0x1C55C]
