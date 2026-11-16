@@ -65,6 +65,8 @@ segments:
       - [0x4014, c, chess__8009B814]
       - [0x4148, c, chess__8009B948]
       - [0x42D8, c, chess__8009B948__8009BAD8]
+      - [0x4630, c, chess__8009B948__8009BAD8__8009BE30]
+      - [0x46E0, c, chess__8009B948__8009BAD8__8009BEE0]
       - [0x53DC, c, chess__8009CBDC]
       - [0x559C, c, chess__8009CD9C]
       - [0x74F8, c, chess__8009ECF8]
