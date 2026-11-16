@@ -58,7 +58,33 @@ extern s16 D_800EC588[][17];
 
 extern s16 D_800ECB84[][17];
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A72E0);
+u16 func_800A72E0(s32 a, s32 b)
+{
+    typedef struct {
+        s16 unk[10][3];
+    } Struct_D_800ED2AC;
+    extern Struct_D_800ED2AC D_800ED2AC[];
+    s32 i = 0;
+    s32 neg = -1;
+    Struct_D_800ED2AC *base;
+    u32 q;
+    s16 *p;
+    u16 last;
+
+    a &= 0xffff;
+    base = D_800ED2AC;
+    q = (u32)&base[a];
+    p = (s16 *)(((u16)b * 6) + q);
+    do {
+        s16 v = *p;
+        last = *(volatile u16 *)p;
+        if (v != neg) goto out;
+        i++;
+        p++;
+    } while (i < 3);
+out:
+    return last;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A7340);
 
