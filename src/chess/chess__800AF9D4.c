@@ -190,7 +190,21 @@ s32 func_800AFEA4(u8 *arg0, u8 *arg1, u8 *arg2, s32 arg3, s32 arg4) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800AF9D4", func_800AFFA4);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800AF9D4", func_800B03B8);
+s32 func_800B03B8(void *arg0, u8 *arg1, s32 arg2) {
+    extern u8 D_80069AD4[];
+    u8 *s0 = D_80069AD4;
+    s32 s1 = 0;
+
+    *(s16 *)(s0 + 0xEA) += 0x10;
+    *(s16 *)(s0 + 0xEA) %= 0x1000;
+    func_8002CC74();
+    func_8002CD50();
+    if ((*(s16 *)(s0 + 0xEA) & 0x1FF) == 0) {
+        (arg1 + arg2)[0x605] = *(s16 *)(s0 + 0xEA) / 0x200;
+        s1 = 1;
+    }
+    return s1;
+}
 
 void func_800B0478(u8 *arg0) {
     extern u8 D_80069AD4[];
