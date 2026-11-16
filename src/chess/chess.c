@@ -86,5 +86,3 @@ void func_8009A30C(u8 *arg0, s32 arg1) {
 void func_8009A48C(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0xF) = 3;
 }
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009A498);

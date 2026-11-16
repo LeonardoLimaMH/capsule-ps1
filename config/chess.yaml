@@ -42,7 +42,8 @@ segments:
     subsegments:
       - [0x0, rodata]
       - [0x1C, .rodata, chess]
-      - [0x30, rodata]
+      - [0x30, .rodata, chess__8009A498]
+      - [0x44, rodata]
       - [0x138, .rodata, chess__8009B948__8009BAD8__8009BEE0__8009C5C4__8009CA60]
       - [0x150, rodata]
       - [0x338, .rodata, chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4]
@@ -64,6 +65,7 @@ segments:
       - [0x209C, .rodata, chess_800FFE6C]
       - [0x2238, rodata]
       - [0x2340, c, chess]
+      - [0x2C98, c, chess__8009A498]
       - [0x2E08, c, chess__8009A608]
       - [0x2F5C, c, chess__8009A75C]
       - [0x3CC8, c, chess__8009A75C__8009B4C8]

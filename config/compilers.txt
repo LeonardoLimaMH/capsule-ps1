@@ -385,3 +385,4 @@ src/raise/raise_800C0124__800C0648__800C0658.c 2.7.2-cdk
 src/raise/raise_800C8CAC__800C9590__800CA818.c 2.7.2-cdk
 src/raise/raise_800CF2E4__800CF304.c 2.7.2-cdk
 src/chess/chess__8009B948__8009BAD8__8009BEE0__8009C5C4__8009CA60.c 2.7.2-cdk
+src/chess/chess__8009A498.c 2.7.2-cdk
