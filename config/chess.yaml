@@ -41,7 +41,7 @@ segments:
     vram: 0x80097800
     subsegments:
       - [0x0, rodata]
-      - [0x338, .rodata, chess__8009ECF8__8009EDA4]
+      - [0x338, .rodata, chess__8009ECF8__8009EDA4__800A0850]
       - [0x358, rodata]
       - [0x4B4, .rodata, chess__800A8444]
       - [0x5E0, rodata]
@@ -75,6 +75,8 @@ segments:
       - [0x74F8, c, chess__8009ECF8]
       - [0x752C, c, chess__8009ECF8__8009ED2C]
       - [0x75A4, c, chess__8009ECF8__8009EDA4]
+      - [0x8F0C, c, chess__8009ECF8__8009EDA4__800A070C]
+      - [0x9050, c, chess__8009ECF8__8009EDA4__800A0850]
       - [0x10BE0, c, chess__800A83E0]
       - [0x10C44, c, chess__800A8444]
       - [0x174C4, c, chess__800AECC4]
