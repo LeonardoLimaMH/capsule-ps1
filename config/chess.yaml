@@ -245,5 +245,7 @@ segments:
       - [0x68ACC, c, chess_801002CC]
       - [0x68C0C, c, chess_801002CC__8010040C]
       - [0x68D3C, c, chess_801002CC__8010053C]
+      - [0x68E18, c, chess_801002CC__8010053C__80100618]
+      - [0x68FD8, c, chess_801002CC__8010053C__801007D8]
       - [0x693C4, data]
   - [0x81F80]
