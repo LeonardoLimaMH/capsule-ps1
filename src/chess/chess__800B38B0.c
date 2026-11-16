@@ -537,7 +537,43 @@ void func_800B7790(s32 arg0, s32 arg1, u8 *arg2, u8 *arg3, u8 *arg4) {
     }
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B780C);
+void func_800B780C(void *arg0) {
+    extern u8 D_80085428[];
+    extern s32 D_8008ED68[];
+    extern void func_800161C4(void *);
+    u8 *base = D_80085428;
+    s8 temp_v1;
+    void *temp_a2;
+    s32 *ed;
+
+    temp_a2 = M2C_FIELD(arg0, void **, 0x40);
+    M2C_FIELD(arg0, u16 *, 0x46) = (u16) M2C_FIELD(temp_a2, u16 *, 0x5C);
+    if (!(M2C_FIELD(arg0, s32 *, 0x34) & 0x7F)) {
+        M2C_FIELD(arg0, u16 *, 0x4A) = (u16) M2C_FIELD(temp_a2, u16 *, 0x60);
+    } else {
+        M2C_FIELD(arg0, u16 *, 0x4A) = (u16) M2C_FIELD(temp_a2, u16 *, 0x74);
+    }
+    M2C_FIELD(arg0, s16 *, 0x4E) = (s16) (M2C_FIELD(temp_a2, u16 *, 0x64) - 1);
+    M2C_FIELD(arg0, u16 *, 0x54) = (u16) M2C_FIELD(temp_a2, u16 *, 0x68);
+    M2C_FIELD(arg0, s16 *, 0x50) = (s16) ((M2C_FIELD(temp_a2, s32 *, 0x6C) << 0xC) / 97);
+    M2C_FIELD(arg0, s16 *, 0x52) = (s16) ((M2C_FIELD(temp_a2, s32 *, 0x70) << 0xC) / 79);
+    ed = D_8008ED68;
+    M2C_FIELD(arg0, u16 *, 0x46) -= ed[0x108 / 4] / 2;
+    M2C_FIELD(arg0, u16 *, 0x4A) -= ed[0x10C / 4] / 2;
+    if (base[0xCE7] >= 2) {
+        temp_v1 = ((10 - M2C_FIELD(temp_a2, s32 *, 0x54)) * 128) / 10;
+        M2C_FIELD(arg0, s8 *, 0x5A) = temp_v1;
+        M2C_FIELD(arg0, s8 *, 0x59) = temp_v1;
+        M2C_FIELD(arg0, s8 *, 0x58) = temp_v1;
+        if ((u8)temp_v1 < 0x50) {
+            M2C_FIELD(arg0, s32 *, 0x38) |= 0x40;
+        }
+    }
+    func_800161C4(arg0);
+}
+
+extern void func_800A84A0(void *, s32, s32, s32);
+extern void func_800125AC(s32);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B7988);
 
