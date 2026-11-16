@@ -476,3 +476,5 @@ src/chess/chess_801002CC__8010053C.c 2.7.2-cdk
 src/chess/chess_801002CC__8010040C.c 2.7.2-cdk
 src/chess/chess_801002CC__8010053C__801007D8.c 2.7.2-cdk
 src/chess/chess_801002CC__8010053C__80100618.c 2.7.2-cdk
+src/chess/chess_801002CC__8010053C__801007D8__80100AF4.c 2.7.2-cdk
+src/chess/chess_801002CC__8010053C__801007D8__80100968.c 2.7.2-cdk
