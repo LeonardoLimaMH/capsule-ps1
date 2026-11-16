@@ -334,7 +334,43 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A9100);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A924C);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A93DC);
+extern s32 rsin(s32);
+void func_800A93DC(void *arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 arg5) {
+    register s32 t1 asm("t1") = arg4;
+    register s32 a2 asm("a2");
+    register s32 a1 asm("a1");
+    register s32 t0 asm("t0");
+    register s32 v1 asm("v1");
+    s32 half;
+    s32 mid;
+    s32 s0;
+    s32 diff;
+
+    M2C_FIELD(arg2, s16 *, 0) = (s16) ((u16) M2C_FIELD(arg1, s16 *, 0) - ((s32) ((M2C_FIELD(arg1, s16 *, 0) - M2C_FIELD(arg0, s16 *, 0)) * t1) / arg3));
+    M2C_FIELD(arg2, s16 *, 4) = (s16) ((u16) M2C_FIELD(arg1, s16 *, 4) - ((s32) ((M2C_FIELD(arg1, s16 *, 4) - M2C_FIELD(arg0, s16 *, 4)) * t1) / arg3));
+
+    half = arg3 / 2;
+    a2 = M2C_FIELD(arg0, s16 *, 2);
+    a1 = M2C_FIELD(arg1, s16 *, 2);
+    t0 = arg5;
+    if (a1 < a2) {
+        s0 = a1 - t0;
+    } else {
+        s0 = a2 - t0;
+    }
+    mid = arg3 / 2;
+    if (mid < t1) {
+        s0 = M2C_FIELD(arg0, s16 *, 2) - s0;
+        diff = arg3 - t1;
+        v1 = (s0 * rsin((diff << 10) / half)) / 4096;
+        M2C_FIELD(arg2, s16 *, 2) = (s16) ((u16) M2C_FIELD(arg0, u16 *, 2) - v1);
+    } else {
+        s0 = M2C_FIELD(arg1, s16 *, 2) - s0;
+        diff = mid - t1;
+        v1 = (s0 * rsin(((diff << 10) / half) + 0x400)) / 4096;
+        M2C_FIELD(arg2, s16 *, 2) = (s16) ((u16) M2C_FIELD(arg1, u16 *, 2) - v1);
+    }
+}
 
 void func_800A954C(void *arg0, void *arg1, void *arg2, s32 arg3, s32 arg4) {
     M2C_FIELD(arg2, s16 *, 0) = (s16) ((u16) M2C_FIELD(arg1, s16 *, 0) - ((s32) ((M2C_FIELD(arg1, s16 *, 0) - M2C_FIELD(arg0, s16 *, 0)) * arg4) / arg3));
