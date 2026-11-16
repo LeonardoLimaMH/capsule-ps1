@@ -431,7 +431,50 @@ void func_800C13F0(u8 *p) {
     }
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800C1528);
+void func_800C1528(u8 *p) {
+    extern u8 D_8008ED68[];
+    extern void func_80012628();
+    extern s32 __udivdi3();
+    extern s32 func_800A9100();
+    extern void func_80012604(s32);
+    u8 *base = p + 0x5d0;
+    s32 c = base[0x712];
+    s32 o = base[0x713];
+    u8 *y;
+    u8 *ed;
+    u16 temp_a2;
+    u16 var_v0;
+    s32 v;
+    s32 v1;
+
+    y = base + (c * 0x2e8 + 0x18) + o * 0x7c;
+    ed = D_8008ED68;
+    switch (*(u16 *)(ed + 0xe8)) {
+    case 0:
+        *(u16 *)(p + 0xc) = 0;
+        func_80012628();
+        break;
+    case 1:
+        temp_a2 = *(u16 *)(p + 0xc);
+        if (ed[0x103] >= 2) {
+            var_v0 = temp_a2 + ed[0x103];
+        } else {
+            var_v0 = temp_a2 + 1;
+        }
+        *(u16 *)(p + 0xc) = var_v0;
+        if (var_v0 >= 100) {
+            if (__udivdi3(base, y, c, o) == 0) {
+                v = func_800A9100(p, base, c, o);
+                v1 = v - 1;
+                if (v != 0) {
+                    base[0x611] = (v1 * 8) | ((1 - c) * 2) | 1;
+                }
+            }
+            func_80012604(0xa);
+        }
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800C1658);
 
