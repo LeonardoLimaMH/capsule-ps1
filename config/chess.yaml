@@ -103,6 +103,8 @@ segments:
       - [0x24110, c, chess_800BB910]
       - [0x2A278, c, chess_800BB910__800C1A78]
       - [0x2A4A4, c, chess_800BB910__800C1CA4]
+      - [0x2A784, c, chess_800BB910__800C1CA4__800C1F84]
+      - [0x2A82C, c, chess_800BB910__800C1CA4__800C202C]
       - [0x2AAA0, c, chess_800C22A0]
       - [0x2ABA8, c, chess_800C23A8]
       - [0x2D694, c, chess_800C4E94]
