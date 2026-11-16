@@ -9,7 +9,53 @@ void func_800BAD64(s32 arg0) {
     M2C_FIELD(M2C_FIELD(D_800EFF58, void **, 0x7C), s32 *, 0x38) = (s32) (M2C_FIELD(M2C_FIELD(D_800EFF58, void **, 0x7C), s32 *, 0x38) | 1);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BAD64", func_800BAD90);
+void func_800BAD90(s32 arg0) {
+    typedef struct { u8 pad[0x46]; u16 x; u16 unk48; u16 y; } Sprite;
+    typedef struct {
+        u8 pad0[0x20];
+        Sprite *unk20;
+        u8 pad24[4];
+        Sprite *unk28[7];
+        u8 pad44[0x28];
+        Sprite *unk6C;
+        u8 pad70[4];
+        Sprite *unk74;
+        u8 pad78[0x580];
+        Sprite *unk5F8;
+        u8 pad5FC[4];
+        Sprite *unk600[3];
+    } Work;
+    extern Work D_800EFF58;
+    s32 i;
+    switch (arg0) {
+    case 0:
+        break;
+    case 1:
+        D_800EFF58.unk20->x += 12;
+        for (i = 0; i < 7; i++) {
+            D_800EFF58.unk28[i]->x += 12;
+        }
+        for (i = 0; i < 3; i++) {
+            D_800EFF58.unk600[i]->x += 12;
+        }
+        D_800EFF58.unk6C->y -= 3;
+        D_800EFF58.unk74->y -= 3;
+        D_800EFF58.unk5F8->y -= 3;
+        break;
+    case 2:
+        D_800EFF58.unk20->x -= 12;
+        for (i = 0; i < 7; i++) {
+            D_800EFF58.unk28[i]->x -= 12;
+        }
+        for (i = 0; i < 3; i++) {
+            D_800EFF58.unk600[i]->x -= 12;
+        }
+        D_800EFF58.unk6C->y += 3;
+        D_800EFF58.unk74->y += 3;
+        D_800EFF58.unk5F8->y += 3;
+        break;
+    }
+}
 
 #include "common.h"
 
