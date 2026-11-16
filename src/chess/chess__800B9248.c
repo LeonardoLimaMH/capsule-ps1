@@ -46,7 +46,19 @@ void func_800B97B4(u8 *p) {
     base[0x619] = 0;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248", func_800B98E8);
+void func_800B98E8(u8 *p) {
+    u8 *base = p + 0x5d0;
+    s32 c = base[0x5fa];
+    u8 *bc = base + c;
+    u8 *x = base + (c * 0x2e8 + 0x18) + bc[0x5fb] * 0x7c;
+    s32 n = 1 - c;
+    u8 *y_base = base + (n * 0x2e8 + 0x18);
+    s32 o = base[0x70c];
+    u8 *y = y_base + o * 0x7c;
+    if (func_800B2ABC(p, 0, x, y)) {
+        func_800125D8();
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248", func_800B9990);
 
