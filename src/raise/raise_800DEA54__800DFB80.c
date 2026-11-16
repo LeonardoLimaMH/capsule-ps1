@@ -1,9 +1,67 @@
 #include "common.h"
 
+typedef struct { u8 pad[0x90]; u16 f90; u8 pad2[0x118]; } Rec_800E0A90;
+
+s16 func_800E0A90(s32 ctx, s32 vec, u8 ***objp);
+
+/* Entrada de 0x44 bytes, com a direção nos três bits baixos de cada slot. */
+typedef struct {
+    u16 dir : 3;
+    u16 pad : 13;
+} RaiseSlotB;
+
+typedef struct {
+    u32 f0 : 1;
+    u32 f1 : 1;
+    u32 f2 : 3;
+    u32 f3 : 6;
+    u32 idx : 6;
+    u32 cnt : 6;
+    u32 pad : 9;
+    RaiseSlotB slots[32];
+} RaiseEntB;
+
 extern u8 D_80092008[];
 extern u8 D_80092008[];
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800DFB80);
+/* Máscara de flags em +0x798 de cada entrada de D_80100F38 */
+typedef struct {
+    u32 a : 2;
+    u32 b : 1;
+    u32 c : 1;
+    u32 d : 1;
+    u32 e : 1;
+    u32 f : 2;
+    u32 g : 2;
+    u32 h : 2;
+    u32 i : 2;
+    u32 j : 6;
+    u32 k : 6;
+    u32 l : 5;
+    u32 m : 1;
+} Flags_800E0E8C;
+
+void func_800DFB80(s32 unused, u16 idx) {
+    RaiseEntB *e = (RaiseEntB *)(D_80092008 + idx * 0x44);
+    s16 n;
+    s16 i;
+    s32 j;
+    s32 k;
+    RaiseSlotB tmp;
+
+    n = e->idx;
+    e->cnt = n;
+    e->f3 = 0;
+    for (i = 0; i < n / 2; i++) {
+        tmp = e->slots[i];
+        k = i + 1;
+        j = n - k;
+        e->slots[i] = e->slots[j];
+        e->slots[j] = tmp;
+        e->slots[i].dir = (e->slots[i].dir + 4) % 8;
+        e->slots[j].dir = (e->slots[j].dir + 4) % 8;
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800DFCA0);
 
@@ -56,6 +114,11 @@ void func_800E085C(s32 arg0) {
     func_800B1260(arg0);
 }
 
+#define PL(a) (D_80100F38 + (func_800B1260(a) & 0xFFFF) * 0x79C)
+#define P32(o) (*(s32 *)(p + (o)))
+#define P16(o) (*(u16 *)(p + (o)))
+#define PS16(o) (*(volatile s16 *)(p + (o)))
+extern void func_800D0730(void *, s32, s32, s32);
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800E088C);
 
 void func_800E0A50(void) {
@@ -68,7 +131,52 @@ void func_800E0A70(void) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800E0A90);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800E0C08);
+s32 func_800E0C08(s32 a0, s32 a1, s32 a2, s32 a3) {
+    typedef struct {
+        u8 pad0[0x10];
+        u16 unk10;
+        u8 pad12[0x8A - 0x12];
+        u16 unk8A;
+        u8 pad8C[0x1A8 - 0x8C];
+    } S_80091618;
+    typedef struct {
+        u8 pad0[0x10];
+        u8 *unk10;
+        u8 pad14[0x1C - 0x14];
+    } S_80069EC4;
+    extern S_80091618 D_80091618[];
+    extern u8 D_800EF364[][8][8];
+    extern S_80069EC4 D_80069EC4[][26];
+    extern u16 D_8006AF80[], D_80078C20[];
+    extern s32 func_800E36E4();
+    s32 n = 4;
+    s32 c;
+    u16 idx, m;
+    u8 b;
+
+    if (a0 == 1) {
+        n = 1;
+    }
+    if (a3 > 0) {
+        if (a3 < 9) {
+            c = a3;
+        } else {
+            c = 8;
+        }
+    } else {
+        c = 1;
+    }
+    a3 = c;
+    if (func_800E36E4() == 1) {
+        idx = D_8006AF80[0];
+        m = D_80078C20[0];
+    } else {
+        m = 1 - D_80078C20[0];
+        idx = D_80091618[D_8006AF80[0]].unk8A;
+    }
+    b = D_800EF364[D_80091618[idx].unk10][a2][a3 - 9];
+    return (s16)(*(u16 *)(D_80069EC4[(s16)m][n].unk10 + b * 8 + 4) - 4);
+}
 
 s32 func_800E0D84(void) {
     s32 i;
@@ -107,7 +215,48 @@ ushort func_800E0DF8(void)
   return uVar3 & 1;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800E0E8C);
+void func_800E0E8C(s32 arg0) {
+    extern u8 D_80091618[];
+    extern u8 D_80100F38[];
+    s32 temp_a0;
+    u8 *temp_s0;
+    u8 *temp_s1;
+    Flags_800E0E8C *fl;
+    union {
+        Flags_800E0E8C bits;
+        u32 word;
+    } flags;
+
+    temp_a0 = arg0 & 0xFFFF;
+    temp_s0 = (temp_a0 * 0x79C) + D_80100F38;
+    fl = (Flags_800E0E8C *)(temp_s0 + 0x798);
+    *(s16 *)(temp_s0 + 0x228) = 0;
+    *(s16 *)(temp_s0 + 0x37E) = 0;
+    *(s16 *)(temp_s0 + 0x38A) = 0;
+    flags.word = *(u32 *)fl;
+    flags.bits.e = 0;
+    *(volatile u32 *)fl = flags.word;
+    flags.bits.c = 0;
+    flags.bits.d = 0;
+    flags.bits.b = 0;
+    flags.bits.a = 0;
+    *(volatile u32 *)fl = flags.word;
+    flags.bits.f = 0;
+    flags.bits.g = 0;
+    flags.bits.h = 0;
+    flags.bits.i = 0;
+    flags.bits.j = 0;
+    flags.bits.k = 2;
+    flags.bits.l = 0;
+    *(u32 *)fl = flags.word;
+    temp_s1 = (temp_a0 * 0x1A8) + D_80091618;
+    if (func_800E16AC(temp_a0) == 1) {
+        *(s16 *)(temp_s0 + 0x388) = 2;
+    } else {
+        *(s16 *)(temp_s0 + 0x388) = 0;
+    }
+    *(s16 *)(temp_s1 + 0x110) = 0;
+}
 
 #include "common.h"
 
