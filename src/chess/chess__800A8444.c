@@ -103,7 +103,23 @@ void func_800A87C8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 extern s32 rsin(s32);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8830);
+u32 func_800A8830(s32 arg0, s32 arg1, s32 arg2) {
+    extern u32 D_80063940[][15];
+    register s32 off asm("a3");
+    u32 result;
+
+    off = arg2 * 0x7C;
+    off += arg1 * 0x2E8;
+    arg0 += off;
+    if (*(u8 *)(arg0 + 0x5E8) == 0x63) {
+        result = func_800CA664(*(s16 *)(*(s32 *)(arg0 + 0x658) + 0x64));
+    } else {
+        result = (D_80063940[*(u8 *)(arg0 + 0x5E8)][2] >> 12) & 3;
+    }
+    return result;
+}
+
+extern s32 rsin(s32);
 
 s16 func_800A88C4(s16 a) {
      return 0x4020 / a;
