@@ -358,6 +358,30 @@
       "base_path": "build/objdiff/base/yuugi/main_800241E8__80024990.o"
     },
     {
+      "name": "yuugi/main_800241E8__80024990__80025000",
+      "target_path": "build/objdiff/target/yuugi/main_800241E8__80024990__80025000.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_800241E8__80024990__80025000.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/main_800241E8__80024990__80025000.o"
+    },
+    {
+      "name": "yuugi/main_800241E8__80024990__80025050",
+      "target_path": "build/objdiff/target/yuugi/main_800241E8__80024990__80025050.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_800241E8__80024990__80025050.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/yuugi/main_800241E8__80024990__80025050.o"
+    },
+    {
       "name": "yuugi/main_80025764",
       "target_path": "build/objdiff/target/yuugi/main_80025764.o",
       "metadata": {
@@ -1409,9 +1433,21 @@
         "progress_categories": [
           "slpm"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/slpm/loader_80110D1C.o"
+    },
+    {
+      "name": "slpm/loader_80110D1C__80110E10",
+      "target_path": "build/objdiff/target/slpm/loader_80110D1C__80110E10.o",
+      "metadata": {
+        "source_path": "src/slpm/loader_80110D1C__80110E10.c",
+        "progress_categories": [
+          "slpm"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/slpm/loader_80110D1C__80110E10.o"
     },
     {
       "name": "slpm/loader_80111E78",
@@ -4436,6 +4472,30 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/etc/etc__8009BD30__800A0824__800A2A80.o"
+    },
+    {
+      "name": "etc/etc__8009BD30__800A0824__800A2A80__800A3814",
+      "target_path": "build/objdiff/target/etc/etc__8009BD30__800A0824__800A2A80__800A3814.o",
+      "metadata": {
+        "source_path": "src/etc/etc__8009BD30__800A0824__800A2A80__800A3814.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/etc/etc__8009BD30__800A0824__800A2A80__800A3814.o"
+    },
+    {
+      "name": "etc/etc__8009BD30__800A0824__800A2A80__800A39D8",
+      "target_path": "build/objdiff/target/etc/etc__8009BD30__800A0824__800A2A80__800A39D8.o",
+      "metadata": {
+        "source_path": "src/etc/etc__8009BD30__800A0824__800A2A80__800A39D8.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/etc/etc__8009BD30__800A0824__800A2A80__800A39D8.o"
     },
     {
       "name": "etc/etc__800A4AC8",

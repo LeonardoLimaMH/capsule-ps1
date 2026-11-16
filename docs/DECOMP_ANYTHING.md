@@ -160,3 +160,18 @@ Main → agentes:
 
 O link do branch deles costuma falhar (o C em andamento muda tamanhos); os agentes só usam os
 objetos por unidade do objdiff, então basta tudo compilar.
+
+### Integração em lote (2026-11-16)
+
+`.cache/tmp/agent_sync_batch.sh <pasta> [tar|db|both]` faz o mesmo que `agent_sync.sh` e
+`agent_sync_db.sh` juntos, mas a passada "no arquivo" vai em lotes (`BATCH=16` por padrão): aplica o
+lote, faz um build e commita se os 5 SHA-1 baterem; se falhar, divide o lote ao meio até isolar a
+função que quebra, que segue pelo caminho antigo (`integrate_manual.sh`). Cai de ~1 build por função
+para ~1 por lote. A pasta tem o `agents.tar` (src do working tree da `decomp-wtf`) e o `dbx.json`
+(melhor tentativa / C casado de cada função, do banco do app).
+
+A integração roda muitos builds: com pouca memória livre no Windows o Claude Code encerra tarefas
+longas em segundo plano. Antes: liberar o cache do WSL
+(`wsl -d Ubuntu -u root -- sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'`) ou abrir o Claude Code
+com `CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1`. Se um passo for interrompido, `git checkout -- src
+config && git clean -fd src`, `make split` e conferir os 5 SHA-1: os commits anteriores já estão provados.
