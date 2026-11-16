@@ -215,6 +215,7 @@ segments:
       - [0x3943C, c, raise_800CF2E4__800D0C3C]
       - [0x39540, c, raise_800CF2E4__800D0D40]
       - [0x39710, c, raise_800D0F10]
+      - [0x397E0, c, raise_800D0F10__800D0FE0]
       - [0x39818, c, raise_800D1018]
       - [0x39A14, c, raise_800D1018__800D1214]
       - [0x39BEC, c, raise_800D1018__800D13EC]
