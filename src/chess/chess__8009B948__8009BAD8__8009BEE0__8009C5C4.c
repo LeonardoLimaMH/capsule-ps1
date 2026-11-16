@@ -48,5 +48,3 @@ void func_8009C898(void) {
 }
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009B948__8009BAD8__8009BEE0__8009C5C4", func_8009C964);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess__8009B948__8009BAD8__8009BEE0__8009C5C4", func_8009CA60);
