@@ -73,4 +73,65 @@ void func_800AF1C0(s32 arg0) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800AED50", func_800AF340);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800AED50", func_800AF81C);
+void func_800AF81C(u8 *p) {
+    typedef struct {
+        u8 pad[0x18];
+        u8 f18;
+        u8 pad2[0x23];
+    } S_D63940;
+    extern S_D63940 D_80063940[];
+    extern u16 D_8008EE50[];
+    u16 old;
+    s32 team;
+    s32 piece;
+    u8 *base;
+    u8 *row;
+    u8 *selection;
+    u8 *q;
+
+    base = p + 0x5D0;
+    team = base[0x5FA];
+    selection = base + team;
+    row = base + (team * 0x2E8 + 0x18);
+    piece = selection[0x5FB];
+    q = row + piece * 0x7C;
+    switch (*D_8008EE50) {
+    case 1:
+        q[0x26] = 3;
+        func_8009C4B0(p, team, piece);
+    case 0:
+advance:
+        func_80012628();
+        return;
+    case 2:
+        q[0x17] = 0x85;
+        q[0x23] = 0;
+        q[0x25] = func_800C94DC(p, D_80063940[q[0]].f18 >> 5);
+        func_800A84A0(q, team, piece, 1);
+        func_800A87C8(p, team, piece, 0);
+        *(u16 *)(p + 0xC) = 0;
+        goto advance;
+    case 3:
+        old = *(u16 *)(p + 0xC);
+        *(u16 *)(p + 0xC) = old + 1;
+        if (old < 0x51U) {
+            return;
+        }
+        goto advance;
+    default:
+        return;
+    case 4:
+        if (func_800B2F48(p, 1) != 0) {
+            goto advance;
+        }
+        break;
+    case 5:
+        q[0x17] = 1;
+        q[0x25] = func_800A835C(p, team);
+        func_800A84A0(q, team, piece, 0);
+        goto advance;
+    case 6:
+        func_800125D8();
+        break;
+    }
+}
