@@ -1,7 +1,6 @@
 #include "ghidra.h"
 #include "common.h"
 
-#include "common.h"
 
 typedef struct {
     s16 vx, vy, vz, pad;
@@ -13,6 +12,11 @@ typedef struct {
 } S_800EFCF4_Work;
 
 typedef struct { u8 b[4]; } U4_800DD;
+
+extern u8 D_8008ED68[];
+extern s32 func_800FF190();
+extern s32 func_800202A4();
+extern void func_80013920();
 
 typedef struct {
     u8 pad0[0x10];
@@ -27,22 +31,25 @@ typedef struct {
     u8 pad14[0x28];
 } S_800DD_Tab8;
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378", func_800FE378);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378", func_800FE428);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378", func_800FE5B0);
+typedef struct { u8 pad0[0x28]; u16 x28; u16 x2a; u16 x2c; u8 b2e, b2f, b30, pad31; u8 b32, b33, b34, pad35; u16 x36; u16 x38; } ChessObjA;
 
-#include "ghidra.h"
-void func_800FE74C(short *param_1,short *param_2)
 
-{
-  SquareRoot0(((int)*param_1 - (int)*param_2) * ((int)*param_1 - (int)*param_2) +
-                  ((int)param_1[1] - (int)param_2[1]) * ((int)param_1[1] - (int)param_2[1]) +
-                  ((int)param_1[2] - (int)param_2[2]) * ((int)param_1[2] - (int)param_2[2]));
-  return;
+
+
+
+
+
+s32 func_800FE378(s16 *arg0, s32 *arg1, s32 *arg2) {
+    extern s32 D_80118C18[];
+
+    *arg1 = (arg0[0] + 0x226) / 100;
+    *arg2 = (arg0[2] + 0x226) / 100;
+    if (*arg1 >= 13 || *arg2 >= 13) {
+        return 0;
+    }
+    return (((*(u32 *)(D_80118C18[0] + *arg1 * 0x34 + *arg2 * 4)) >> 6) & 0x1FFF) != 0;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378", func_800FE7B8);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378", func_800FE840);
