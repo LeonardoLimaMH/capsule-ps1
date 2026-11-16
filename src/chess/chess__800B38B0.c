@@ -228,7 +228,67 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B52FC);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B5438);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B5780);
+void func_800B5780(u8 *arg0) {
+    extern s32 func_800C9414();
+    extern void func_800CAE14(u8 *);
+    extern void func_800125AC(s32);
+
+    struct S0 {
+        u8 pad[0x5ED];
+        struct {
+            u8 val;
+            u8 pad[5];
+        } unk[2];
+    };
+
+    u8 *s0 = arg0 + 0x5D0;
+    s32 s1 = s0[0x5FA];
+    u8 *temp_a0 = s0 + s1;
+    s32 s3 = temp_a0[0x5FB];
+    u8 *s2 = s0 + (s1 * 0x2E8 + 0x18) + s3 * 0x7C;
+
+    if (func_800C9414(temp_a0) != 0) {
+        return;
+    }
+
+    s0[0x615] = 1;
+    s0[0x614] = 0;
+
+    if (s2[0] == 0x17 && s2[0x29] == 1 && s0[0x60D] != 0) {
+        if (s3 != 5) {
+            func_800125AC(10);
+            return;
+        }
+    }
+    if (s2[0] == 0x52 && s2[0x29] == 1) {
+        func_800125AC(10);
+        return;
+    }
+
+    {
+        s32 b = 0;
+
+        if (s0[0x60E] != 0) {
+            b = s0[0x61E] == 7;
+        }
+
+        if (b == 0) {
+            if (((struct S0 *)s0)->unk[s1].val != 4) {
+                func_800125AC(3);
+                return;
+            }
+        } else {
+            if (((struct S0 *)s0)->unk[s1].val != 4) {
+                func_800CAE14(arg0);
+            }
+        }
+    }
+
+    func_800125AC(10);
+}
+
+extern void func_800A84A0(void *, s32, s32, s32);
+extern void func_800125AC(s32);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B58EC);
 
