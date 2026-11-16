@@ -125,7 +125,59 @@ void func_8001ADCC(s32 arg0) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001AA44", func_8001ADF8);
+extern u8 D_8008ED68[];
+extern u8 *func_80015B3C();
+extern s32 func_8001AFA0(u8 *);
+extern void func_80018440();
+typedef enum { E0 = 0, E1 = 1, E2 = 2, E3 = 3 } MyEnum;
+u8 *func_8001ADF8(MyEnum a0, s32 a1, MyEnum a2, s32 a3) {
+    u8 *b = D_8008ED68;
+    u8 *o = func_80015B3C(func_8001AFA0, func_80018440, 0);
+    u8 *q;
+    s32 w, h;
+
+    *(s32 *)(o + 0x38) = a1;
+    *(s32 *)(o + 0x3C) = a3;
+    switch (a2) {
+    case E0:
+        *(u32 *)(o + 0x28) &= ~0x30;
+        break;
+    case E1:
+        *(u32 *)(o + 0x28) = (*(u32 *)(o + 0x28) & ~0x30) | 0x10;
+        break;
+    case E2:
+        *(u32 *)(o + 0x28) = (*(u32 *)(o + 0x28) & ~0x30) | 0x20;
+        break;
+    case E3:
+        *(u32 *)(o + 0x28) |= 0x30;
+        break;
+    }
+    *(s32 *)(o + 0x34) = a0;
+    *(u32 *)(o + 0x28) = (*(u32 *)(o + 0x28) | 0x40) & ~1;
+    switch (a0) {
+    case E0:
+    case E2:
+        o[0x32] = 0;
+        o[0x31] = 0;
+        o[0x30] = 0;
+        break;
+    case E1:
+    case E3:
+        o[0x32] = 0xFF;
+        o[0x31] = 0xFF;
+        o[0x30] = 0xFF;
+        break;
+    }
+    q = D_8008ED68;
+    w = *(s32 *)(q + 0x108) / 2;
+    *(s16 *)(o + 0x14) = -w;
+    h = *(s32 *)(q + 0x10C) / 2;
+    *(s16 *)(o + 0x18) = 0x140;
+    *(s16 *)(o + 0x1A) = 0xF0;
+    *(s16 *)(o + 0x16) = -h;
+    *(s32 *)(b + 0xA68) = 1;
+    return o;
+}
 
 #include "common.h"
 
