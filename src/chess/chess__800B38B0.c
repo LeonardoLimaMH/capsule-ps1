@@ -1,5 +1,6 @@
 #include "ghidra.h"
 #include "common.h"
+#include "ghidra.h"
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B38B0);
 
@@ -53,6 +54,8 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B3EC4);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B40F0);
 
+#include "common.h"
+
 void func_800B4284(void) {
     extern u16 D_8008EE4C[];
     switch ((*D_8008EE4C)) {                           /* irregular */
@@ -99,6 +102,8 @@ void func_800B4384(u8 *arg0) {
     *(s32 *)(arg0 + 0x54) += ed[0x103] < 2 ? 1 : ed[0x103];
     func_800A360C(p, p[0xBCA], arg0, 0);
 }
+
+#include "common.h"
 
 void func_800B4400(void *arg0) {
     extern u8 D_8006388C[];
@@ -179,9 +184,6 @@ void func_800B5020(u8 *arg0) {
     }
 }
 
-extern void func_800A84A0(void *, s32, s32, s32);
-extern void func_800125AC(s32);
-
 void func_800B5184(u8 *arg0) {
     extern struct { u8 pad[8]; u32 f8; u8 pad2[0x30]; } D_80063940[];
     extern void (*D_80100C20[])(u8 *, u8 *, s32, s32);
@@ -221,9 +223,6 @@ void func_800B5184(u8 *arg0) {
     func_800125D8();
 }
 
-extern void func_800A84A0(void *, s32, s32, s32);
-extern void func_800125AC(s32);
-
 void func_800B52FC(u8 *p) {
     extern s8 func_800A8378(u8 *);
     extern void func_800125D8(void);
@@ -262,10 +261,100 @@ void func_800B52FC(u8 *p) {
     func_800125D8();
 }
 
-extern void func_800A84A0(void *, s32, s32, s32);
-extern void func_800125AC(s32);
+void func_800B5438(u8 *arg0) {
+    extern struct { s32 f0; u8 pad[0x30]; } D_801010B0[];
+    extern u8 D_8008ED68[];
+    extern void func_800B077C(u8 *, s32);
+    extern u16 func_800203DC(u8);
+    extern void func_80034AB0(s32);
+    extern s32 func_800A835C(u8 *, s32);
+    extern void func_80012604(s32);
+    struct S0 {
+        u8 pad[0x5ED];
+        struct {
+            u8 val;
+            u8 pad[5];
+        } unk[2];
+    };
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B5438);
+    u8 *s0 = arg0 + 0x5D0;
+    s32 s2 = s0[0x5FA];
+    s32 s4 = (s0 + s2)[0x5FB];
+    u8 *s1 = s0 + (s2 * 0x2E8 + 0x18) + s4 * 0x7C;
+    u32 (*s3)[13] = (u32 (*)[13])D_801010B0[s0[9]].f0;
+    register s32 s5 = 0;
+    s32 i;
+    u8 *p;
+    volatile u8 *ed;
+    u8 v1;
+    u8 v;
+    short code;
+
+    if (s0[0x60E] != 0) {
+        s5 = s0[0x61E] == 7;
+    }
+
+    if (s5 == 0) {
+        if (s1[0x22] == 1) {
+            return;
+        }
+        if (s0[0x709] == s0[0x708]) {
+            for (i = 0, p = (u8 *)(s2 * 2 + (s32)s0 + 0x601); i < 2; i++) {
+                p[i] = (s0 + i)[0x6E4];
+            }
+            func_800B077C(arg0, s0[0x708] - 3);
+        }
+    } else {
+        if ((*(s32 *)(s1 + 0x18) & 0xC0) == 0) {
+            return;
+        }
+        if (s0[0x709] == s0[0x708]) {
+            for (i = 0, p = (u8 *)(s2 * 2 + (s32)s0 + 0x601); i < 2; i++) {
+                p[i] = (s0 + i)[0x6E2];
+            }
+            func_800B077C(arg0, s0[0x70A]);
+        }
+    }
+
+    ed = D_8008ED68;
+    v1 = s0[0x709];
+    if (ed[0x103] >= 2) {
+        v = v1 - ed[0x103];
+    } else {
+        v = v1 - 1;
+    }
+    s0[0x709] = v;
+
+    if (v < 2) {
+        func_80034AB0(func_800203DC(s1[0]));
+        s1[0x25] = func_800A835C(arg0, s2);
+        s1[0x17] = 1;
+        *(s32 *)(s1 + 0x18) = 0;
+        ((u8 *)&s3[s1[0x15]][s1[0x16]])[3] = 0;
+        for (i = 0; i < 2; i++) {
+            (s1 + i)[0x15] = (s0 + i)[0x6E4];
+        }
+        ((u8 *)&s3[s1[0x15]][s1[0x16]])[3] = (s4 + 1) & 0x7F;
+        if (s2 != 0) {
+            ((u8 *)&s3[s1[0x15]][s1[0x16]])[3] |= 0x80;
+        }
+        if (((*(u32 *)(s1 + 0x14) >> 8) & 0xFFFF) == *(u16 *)(s0 + 0x6E2)) {
+            s0[0x610] = 2;
+            if (s5 != 0) {
+                func_80012604(8);
+                return;
+            }
+            code = 0xB;
+            if (((struct S0 *)s0)->unk[s2].val != 4) {
+                code = 0xE;
+            }
+            func_80012604(code);
+            s0[0x60C] = 1;
+            return;
+        }
+        func_80012604(s5 != 0 ? 5 : 9);
+    }
+}
 
 void func_800B5780(u8 *arg0) {
     extern s32 func_800C9414();
@@ -325,9 +414,6 @@ void func_800B5780(u8 *arg0) {
 
     func_800125AC(10);
 }
-
-extern void func_800A84A0(void *, s32, s32, s32);
-extern void func_800125AC(s32);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B58EC);
 
@@ -394,9 +480,6 @@ void func_800B5C4C(u8 *arg0, u8 *arg1, s32 arg2) {
         }
     }
 }
-
-extern void func_800A84A0(void *, s32, s32, s32);
-extern void func_800125AC(s32);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B5DA0);
 
@@ -516,9 +599,6 @@ u8 func_800B7630(u8 *arg0, u32 arg1, u32 arg2, s32 arg3) {
     return 0;
 }
 
-extern void func_800A84A0(void *, s32, s32, s32);
-extern void func_800125AC(s32);
-
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B7734);
 
 void func_800B7790(s32 arg0, s32 arg1, u8 *arg2, u8 *arg3, u8 *arg4) {
@@ -572,9 +652,6 @@ void func_800B780C(void *arg0) {
     func_800161C4(arg0);
 }
 
-extern void func_800A84A0(void *, s32, s32, s32);
-extern void func_800125AC(s32);
-
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B7988);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B7D64);
@@ -620,9 +697,6 @@ label_6:
     }
 }
 
-extern void func_800A84A0(void *, s32, s32, s32);
-extern void func_800125AC(s32);
-
 void func_800B8310(u8 *p) {
     typedef struct {
         u8 pad[0x18];
@@ -665,9 +739,6 @@ void func_800B8310(u8 *p) {
         break;
     }
 }
-
-extern void func_800A84A0(void *, s32, s32, s32);
-extern void func_800125AC(s32);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B8478);
 
@@ -731,6 +802,8 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B881C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B8A0C);
 
+#include "common.h"
+
 void func_800B8DA0(void *arg0) {
     extern u8 D_8008610F[];
     u16 temp_v1;
@@ -790,3 +863,4 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B9020);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B90FC);
 
+#include "ghidra.h"
