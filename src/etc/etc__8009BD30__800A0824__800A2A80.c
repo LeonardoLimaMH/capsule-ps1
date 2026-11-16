@@ -38,6 +38,8 @@ void func_800A2B64(u8 *arg0, s16 arg1) {
     arg0[0x5DF] = 2;
 }
 
+extern s32 func_8001F1A8(s32, s32, s32, s32, s32, void *, s32, s32, s32);
+extern s32 func_8001F1A8();
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A2BB0);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A2CC8);
@@ -85,7 +87,42 @@ void func_800A2DBC(void *arg0)
   *((s32 *) (((s8 *) arg0) + 0x38)) = var_v0;
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A2E00);
+void func_800A2E00(u8 *arg0) {
+    extern u16 D_8008EE44[];
+    extern s16 D_800B3B38[];
+    s32 a2 = *(s32 *)(arg0 + 0x7C);
+    s32 id;
+    if (*D_8008EE44 == 6) {
+        if (*D_800B3B38 != 0) {
+            id = 0x60010;
+            arg0[0x5A] = 0x50;
+            arg0[0x59] = 0x50;
+            arg0[0x58] = 0x50;
+            *(u32 *)(arg0 + 0x38) &= ~1;
+        } else {
+            *(u32 *)(arg0 + 0x38) &= ~1;
+            if (*(s32 *)(arg0 + 0x80) == D_800B3B38[4]) {
+                arg0[0x5A] = 0x80;
+                arg0[0x59] = 0x80;
+                arg0[0x58] = 0x80;
+                if (*(s32 *)(arg0 + 0x1C) != 0) {
+                    return;
+                }
+                *(s32 *)(arg0 + 0x18) = 0;
+                func_80015CD0(arg0 + 0x14, func_80019F30(0x70010, *(s32 *)(arg0 + 0x80) + 9), 0);
+                return;
+            }
+            id = 0x60010;
+            arg0[0x5A] = 0x50;
+            arg0[0x59] = 0x50;
+            arg0[0x58] = 0x50;
+        }
+        *(s32 *)(arg0 + 0x18) = func_80019F30(id, a2);
+        *(s32 *)(arg0 + 0x1C) = 0;
+    } else {
+        *(u32 *)(arg0 + 0x38) |= 1;
+    }
+}
 
 void func_800A2F1C(void *arg0) {
     extern u16 D_8008EE44[];
@@ -166,7 +203,48 @@ void func_800A3060(void *arg0) {
     } while (var_v1 < 8);
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A3128);
+void func_800A3128(arg0)
+void *arg0;
+{
+    extern u16 D_8008EE44[];
+    extern u8 D_80085428[];
+    u8 *p = D_80085428;
+    u32 flags;
+    u32 t;
+    s32 v;
+    if (*D_8008EE44 != 0xF) {
+        flags = M2C_FIELD(arg0, u32 *, 0x38) | 1;
+    } else {
+        t = M2C_FIELD(arg0, u32 *, 0x38) & ~1;
+        M2C_FIELD(arg0, u32 *, 0x38) = t;
+        if (p[0x5D6] & 0x80) {
+            M2C_FIELD(arg0, s16 *, 0x46) = (M2C_FIELD(arg0, s32 *, 0x80) & 3) * 0x48 - 0x90;
+            if (M2C_FIELD(arg0, s32 *, 0x80) < 4) {
+                M2C_FIELD(arg0, s16 *, 0x4A) = -0x50;
+            } else {
+                M2C_FIELD(arg0, s16 *, 0x4A) = 0x10;
+            }
+            return;
+        }
+        v = M2C_FIELD(arg0, s32 *, 0x80);
+        if (v >= 0) {
+            if (v < 3) {
+                M2C_FIELD(arg0, s16 *, 0x46) = (v & 3) * 0x50 - 0x70;
+                M2C_FIELD(arg0, s16 *, 0x4A) = -0x50;
+                return;
+            }
+            if (v == 7) {
+                flags = t | 1;
+                goto set;
+            }
+        }
+        M2C_FIELD(arg0, s16 *, 0x4A) = 0x10;
+        M2C_FIELD(arg0, s16 *, 0x46) = (M2C_FIELD(arg0, s32 *, 0x80) - 3) * 0x48 - 0x90;
+        return;
+    }
+set:
+    M2C_FIELD(arg0, u32 *, 0x38) = flags;
+}
 
 void func_800A3230(u8 *arg0) {
     extern u8 D_80085428[];
