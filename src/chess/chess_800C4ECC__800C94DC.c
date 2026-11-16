@@ -169,7 +169,24 @@ loop_1:
     return var_v1;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA408);
+s32 func_800CA408(s8 *arg0) {
+    typedef struct {
+        u8 pad0[0x13];
+        u8 unk13;
+        u8 pad14[0x44];
+    } S_6B2A4_CA408;
+    extern S_6B2A4_CA408 D_8006B2A4[];
+
+    switch (D_8006B2A4[(u8)arg0[0]].unk13 & 3) {
+    case 0:
+        return -1;
+    case 1:
+        return 1;
+    case 2:
+    default:
+        return arg0[0xD];
+    }
+}
 
 s32 func_800CA474(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x5D9) + 0x29;
@@ -203,7 +220,40 @@ s32 func_800CA4AC(s32 arg0, s32 arg1) {
     return var_a2;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA4CC);
+s32 func_800CA4CC(u8 *arg0) {
+    extern s32 func_80020304(s32);
+    s32 ret;
+    u8 val;
+
+    if (arg0[1] != 0) {
+        if (func_80020304(2) != 0) {
+            return 0x7000;
+        }
+        return 0x7014;
+    }
+    switch (arg0[0x5D0]) {
+    case 0:
+        val = arg0[0x5D4];
+        if (val < 3) {
+            ret = 0x7000;
+        } else if (val < 6) {
+            ret = 0x7011;
+        } else if (val == 6) {
+            ret = 0x700F;
+        } else {
+            ret = 0x7010;
+        }
+        break;
+    case 1:
+        ret = 0x7014;
+        break;
+    case 2:
+    default:
+        ret = 0x7000;
+        break;
+    }
+    return ret;
+}
 
 extern u16 D_8005089C[];
 extern s32 func_80027B34();
@@ -264,7 +314,50 @@ void func_800CA7B0(u8 *p0, u8 *p, s32 a2, s32 a3, s16 v) {
     }
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA87C);
+extern void func_8001AA70();
+typedef struct {
+    u8 b[6];
+} UnitModBytes;
+void func_800CA87C(u8 *arg0) {
+    u8 *base = arg0 + 0x5D0;
+    s32 i = 0;
+    s32 row_off = 0x18;
+
+    do {
+        s32 j = 0;
+        s32 col_off = 0;
+
+        do {
+            if (func_800A8E34(base, i, j) == 0) {
+                u8 *unit = base + row_off + col_off;
+                s32 k;
+
+                for (k = 0; k < unit[0x6A]; k++) {
+                    if (--((UnitModBytes *)unit)[k].b[0x32] == 0) {
+                        (unit + ((UnitModBytes *)unit)[k].b[0x2E])[0xE] -= ((UnitModBytes *)unit)[k].b[0x30];
+                        *(s16 *)&((UnitModBytes *)unit)[k].b[0x30] = 0;
+                    }
+                }
+
+                for (k = 0; k < unit[0x6A]; k++) {
+                    if (*(s16 *)&((UnitModBytes *)unit)[k].b[0x30] == 0) {
+                        s32 l;
+                        for (l = k + 1; l < unit[0x6A]; l++) {
+                            func_8001AA70(unit + ((l - 1) * 6 + 0x2E), unit + (l * 6 + 0x2E), 6);
+                        }
+                        k--;
+                        unit[0x6A]--;
+                    }
+                }
+            }
+            j++;
+            col_off += 0x7C;
+        } while (j < 5);
+
+        i++;
+        row_off += 0x2E8;
+    } while (i < 2);
+}
 
 #include "ghidra.h"
 void func_800CAA44(undefined4 param_1,int param_2)
@@ -400,7 +493,38 @@ void func_800CAC50(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s8 *, 0xCF0) = 0;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CACC4);
+void func_800CACC4(s32 arg0) {
+    s32 temp_s4;
+    s32 var_s1;
+    s32 var_s2;
+    s32 var_s3;
+    u8 temp_v0;
+    void *var_s0;
+
+    temp_s4 = arg0 + 0x5D0;
+    var_s2 = 0;
+    var_s3 = 0x18;
+loop_1:
+    var_s1 = 0;
+    var_s0 = temp_s4 + var_s3;
+loop_2:
+    if ((func_800A8E34(temp_s4, var_s2, var_s1) == 0) && (M2C_FIELD(var_s0, u8 *, 0) == 0xC)) {
+        temp_v0 = M2C_FIELD(var_s0, u8 *, 0x29);
+        if (temp_v0 != 0) {
+            M2C_FIELD(var_s0, u8 *, 0x29) = (u8) (temp_v0 - 1);
+        }
+    }
+    var_s1 += 1;
+    var_s0 += 0x7C;
+    if (var_s1 < 5) {
+        goto loop_2;
+    }
+    var_s2 += 1;
+    var_s3 += 0x2E8;
+    if (var_s2 < 2) {
+        goto loop_1;
+    }
+}
 
 void func_800CAD74(s32 arg0) {
     s32 temp_s4;
