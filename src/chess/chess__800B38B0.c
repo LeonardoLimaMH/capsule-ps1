@@ -182,7 +182,47 @@ void func_800B5020(u8 *arg0) {
 extern void func_800A84A0(void *, s32, s32, s32);
 extern void func_800125AC(s32);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B5184);
+void func_800B5184(u8 *arg0) {
+    extern struct { u8 pad[8]; u32 f8; u8 pad2[0x30]; } D_80063940[];
+    extern void (*D_80100C20[])(u8 *, u8 *, s32, s32);
+    extern u8 *func_800A8E84(u8 *);
+    extern void func_800B5C4C(u8 *, u8 *, s32, s32);
+    extern void func_800125D8(void);
+
+    u8 *s0 = arg0 + 0x5D0;
+    s32 s2 = s0[0x5FA];
+    s32 s3 = (s0 + s2)[0x5FB];
+    u8 *s1 = s0 + (s2 * 0x2E8 + 0x18) + s3 * 0x7C;
+    u8 *s4 = func_800A8E84(s0);
+    s32 a = 0;
+    s32 b;
+
+    if (s0[0x60E] != 0) {
+        a = s0[0x61E] == 7;
+    }
+    if (a != 0) {
+        s1[0x11] += s4[0x14];
+    }
+
+    if (s3 != 5) {
+        D_80100C20[(D_80063940[s1[0]].f8 >> 8) & 0xF](s0, s1, s2, s3);
+    } else {
+        func_800B5C4C(s0, s1, s2, 5);
+    }
+
+    s0[0x706] = 0;
+    b = 0;
+    if (s0[0x60E] != 0) {
+        b = s0[0x61E] == 7;
+    }
+    if (b != 0) {
+        s1[0x11] -= s4[0x14];
+    }
+    func_800125D8();
+}
+
+extern void func_800A84A0(void *, s32, s32, s32);
+extern void func_800125AC(s32);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B52FC);
 
