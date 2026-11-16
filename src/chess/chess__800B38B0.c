@@ -1,6 +1,5 @@
 #include "ghidra.h"
 #include "common.h"
-#include "ghidra.h"
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B38B0);
 
@@ -54,8 +53,6 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B3EC4);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B40F0);
 
-#include "common.h"
-
 void func_800B4284(void) {
     extern u16 D_8008EE4C[];
     switch ((*D_8008EE4C)) {                           /* irregular */
@@ -103,8 +100,6 @@ void func_800B4384(u8 *arg0) {
     func_800A360C(p, p[0xBCA], arg0, 0);
 }
 
-#include "common.h"
-
 void func_800B4400(void *arg0) {
     extern u8 D_8006388C[];
     extern u8 D_80063890[];
@@ -132,7 +127,60 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B48F0);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B4CA4);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B5020);
+void func_800B5020(u8 *arg0) {
+    extern u16 D_8008EE50[];
+    extern void func_800B077C(u8 *, s32);
+    extern void func_80012628(void);
+    extern s32 func_800C9414(void);
+    extern void func_8009C4B0(u8 *, s32, s32);
+    extern void func_800125D8(void);
+
+    u8 *s1 = arg0 + 0x5D0;
+    s32 a1 = s1[0x5FA];
+    s32 a2 = (s1 + a1)[0x5FB];
+    u8 *s0 = s1 + (a1 * 0x2E8 + 0x18) + a2 * 0x7C;
+
+    switch (*D_8008EE50) {
+    case 0:
+        s1[0x615] = 2;
+        {
+            u8 *p = s1;
+            p += a1 * 2;
+            p[0x601] = s0[0x15];
+            p[0x602] = s0[0x16];
+        }
+        func_800B077C(arg0, 10);
+        func_80012628();
+        break;
+    case 1:
+        if (func_800C9414() == 0) {
+            func_80012628();
+        }
+        break;
+    case 2:
+        if (a2 != 5) {
+            if (s0[0] == 0x17 && s0[0x29] != 0) {
+                s0[0x26] = 2;
+            } else {
+                s32 b = 0;
+                if (s1[0x60E] != 0) {
+                    b = s1[0x61E] == 7;
+                }
+                if (b == 0) {
+                    s0[0x26] = 0;
+                } else {
+                    s0[0x26] = 2;
+                }
+            }
+            func_8009C4B0(arg0, a1, a2);
+        }
+        func_800125D8();
+        break;
+    }
+}
+
+extern void func_800A84A0(void *, s32, s32, s32);
+extern void func_800125AC(s32);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B5184);
 
@@ -319,8 +367,6 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B881C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B8A0C);
 
-#include "common.h"
-
 void func_800B8DA0(void *arg0) {
     extern u8 D_8008610F[];
     u16 temp_v1;
@@ -380,4 +426,3 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B9020);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B90FC);
 
-#include "ghidra.h"
