@@ -547,7 +547,45 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B7F34);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B80E4);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B81E0);
+void func_800B81E0(u8 *p) {
+    extern struct { s32 f0; u8 pad[0x30]; } D_801010B0[];
+    extern void func_80012604(s32);
+    extern void func_800125D8(void);
+
+    u8 *base = p + 0x5D0;
+    s32 c = base[0x5FA];
+    u8 *bc = base + c;
+    u8 *x = base + (c * 0x2E8 + 0x18) + bc[0x5FB] * 0x7C;
+    s32 board = D_801010B0[base[9]].f0;
+    s32 code;
+    u32 *puVar;
+
+    switch (base[0x716]) {
+    case 3:
+        code = 9;
+        goto handle;
+    case 4:
+        code = 8;
+handle:
+        puVar = (u32 *)((x[0x16] * 4) + (x[0x15] * 0x34 + board));
+        *puVar = (*puVar & ~0x3F) | 2;
+        func_80012604(code);
+        return;
+    case 5:
+        goto label_6;
+    case 6:
+label_6:
+        *(s16 *)(p + 0xC) = 0;
+        func_80012604(6);
+        return;
+    default:
+        func_800125D8();
+        return;
+    }
+}
+
+extern void func_800A84A0(void *, s32, s32, s32);
+extern void func_800125AC(s32);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B8310);
 
