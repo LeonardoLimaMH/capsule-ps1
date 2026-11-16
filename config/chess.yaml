@@ -198,6 +198,8 @@ segments:
       - [0x2E9F4, c, chess_800C4ECC__800C5300__800C5A74__800C61F4]
       - [0x2EB30, c, chess_800C4ECC__800C6330]
       - [0x2EBAC, c, chess_800C4ECC__800C63AC]
+      - [0x2ECC8, c, chess_800C4ECC__800C63AC__800C64C8]
+      - [0x2ED6C, c, chess_800C4ECC__800C63AC__800C656C]
       - [0x30774, c, chess_800C4ECC__800C7F74]
       - [0x30D28, c, chess_800C4ECC__800C7F74__800C8528]
       - [0x30E7C, c, chess_800C4ECC__800C7F74__800C867C]
