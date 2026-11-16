@@ -1217,7 +1217,7 @@
         "progress_categories": [
           "yuugi"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main_800505D0.o"
     },
@@ -1882,6 +1882,66 @@
       "base_path": "build/objdiff/base/chess/chess_800BB910.o"
     },
     {
+      "name": "chess/chess_800BB910__800C1A78",
+      "target_path": "build/objdiff/target/chess/chess_800BB910__800C1A78.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800BB910__800C1A78.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800BB910__800C1A78.o"
+    },
+    {
+      "name": "chess/chess_800BB910__800C1CA4",
+      "target_path": "build/objdiff/target/chess/chess_800BB910__800C1CA4.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800BB910__800C1CA4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800BB910__800C1CA4.o"
+    },
+    {
+      "name": "chess/chess_800BB910__800C1CA4__800C1F84",
+      "target_path": "build/objdiff/target/chess/chess_800BB910__800C1CA4__800C1F84.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800BB910__800C1CA4__800C1F84.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800BB910__800C1CA4__800C1F84.o"
+    },
+    {
+      "name": "chess/chess_800BB910__800C1CA4__800C202C",
+      "target_path": "build/objdiff/target/chess/chess_800BB910__800C1CA4__800C202C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800BB910__800C1CA4__800C202C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800BB910__800C1CA4__800C202C.o"
+    },
+    {
+      "name": "chess/chess_800BB910__800C1CA4__800C202C__800C20E8",
+      "target_path": "build/objdiff/target/chess/chess_800BB910__800C1CA4__800C202C__800C20E8.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800BB910__800C1CA4__800C202C__800C20E8.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800BB910__800C1CA4__800C202C__800C20E8.o"
+    },
+    {
       "name": "chess/chess_800C22A0",
       "target_path": "build/objdiff/target/chess/chess_800C22A0.o",
       "metadata": {
@@ -1964,6 +2024,30 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C7F74.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800C7F74__800C8528",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C7F74__800C8528.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800C7F74__800C8528.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C7F74__800C8528.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800C7F74__800C867C",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C7F74__800C867C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800C7F74__800C867C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C7F74__800C867C.o"
     },
     {
       "name": "chess/chess_800C4ECC__800C7F74__800C9338",
@@ -2213,7 +2297,7 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess__8009B948__8009BAD8.o"
     },
@@ -2326,6 +2410,30 @@
       "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4.o"
     },
     {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A0448",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0448.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A0448.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0448.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A04C8",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A04C8.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A04C8.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A04C8.o"
+    },
+    {
       "name": "chess/chess__8009ECF8__8009EDA4__800A070C",
       "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A070C.o",
       "metadata": {
@@ -2350,6 +2458,30 @@
       "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850.o"
     },
     {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A0850__800A0930",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0850__800A0930.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0930.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0930.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A0850__800A0AD4",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0850__800A0AD4.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0AD4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0AD4.o"
+    },
+    {
       "name": "chess/chess__8009ECF8__8009EDA4__800A0850__800A0D40",
       "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0850__800A0D40.o",
       "metadata": {
@@ -2372,6 +2504,18 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A1278",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A1278.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A1278.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A1278.o"
     },
     {
       "name": "chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A1330",
@@ -2609,9 +2753,33 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_8009B150__8009C5C0.o"
+    },
+    {
+      "name": "raise/raise_8009B150__8009C5C0__8009C5F4",
+      "target_path": "build/objdiff/target/raise/raise_8009B150__8009C5C0__8009C5F4.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009B150__8009C5C0__8009C5F4.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009B150__8009C5C0__8009C5F4.o"
+    },
+    {
+      "name": "raise/raise_8009B150__8009C5C0__8009C918",
+      "target_path": "build/objdiff/target/raise/raise_8009B150__8009C5C0__8009C918.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009B150__8009C5C0__8009C918.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009B150__8009C5C0__8009C918.o"
     },
     {
       "name": "raise/raise_8009B150__8009CFB4",
@@ -2864,6 +3032,30 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A9738.o"
+    },
+    {
+      "name": "raise/raise_8009D2A8__800A9738__800AA60C",
+      "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A9738__800AA60C.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009D2A8__800A9738__800AA60C.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A9738__800AA60C.o"
+    },
+    {
+      "name": "raise/raise_8009D2A8__800A9738__800AA77C",
+      "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A9738__800AA77C.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009D2A8__800A9738__800AA77C.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A9738__800AA77C.o"
     },
     {
       "name": "raise/raise_8009D2A8__800AA990",
@@ -3142,6 +3334,30 @@
       "base_path": "build/objdiff/base/raise/raise_800B61E4__800B84BC.o"
     },
     {
+      "name": "raise/raise_800B61E4__800B84BC__800B8700",
+      "target_path": "build/objdiff/target/raise/raise_800B61E4__800B84BC__800B8700.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B61E4__800B84BC__800B8700.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B61E4__800B84BC__800B8700.o"
+    },
+    {
+      "name": "raise/raise_800B61E4__800B84BC__800B8898",
+      "target_path": "build/objdiff/target/raise/raise_800B61E4__800B84BC__800B8898.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B61E4__800B84BC__800B8898.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B61E4__800B84BC__800B8898.o"
+    },
+    {
       "name": "raise/raise_800B61E4__800B84BC__800B89F4",
       "target_path": "build/objdiff/target/raise/raise_800B61E4__800B84BC__800B89F4.o",
       "metadata": {
@@ -3329,9 +3545,57 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800B9C3C.o"
+    },
+    {
+      "name": "raise/raise_800B9C3C__800B9CEC",
+      "target_path": "build/objdiff/target/raise/raise_800B9C3C__800B9CEC.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B9C3C__800B9CEC.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B9C3C__800B9CEC.o"
+    },
+    {
+      "name": "raise/raise_800B9C3C__800B9CEC__800B9E34",
+      "target_path": "build/objdiff/target/raise/raise_800B9C3C__800B9CEC__800B9E34.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B9C3C__800B9CEC__800B9E34.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B9C3C__800B9CEC__800B9E34.o"
+    },
+    {
+      "name": "raise/raise_800B9C3C__800B9CEC__800BA1D8",
+      "target_path": "build/objdiff/target/raise/raise_800B9C3C__800B9CEC__800BA1D8.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B9C3C__800B9CEC__800BA1D8.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B9C3C__800B9CEC__800BA1D8.o"
+    },
+    {
+      "name": "raise/raise_800B9C3C__800B9CEC__raise_SpuInit",
+      "target_path": "build/objdiff/target/raise/raise_800B9C3C__800B9CEC__raise_SpuInit.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B9C3C__800B9CEC__raise_SpuInit.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B9C3C__800B9CEC__raise_SpuInit.o"
     },
     {
       "name": "raise/raise_800B9C3C__800BA3A8",
@@ -3358,6 +3622,42 @@
       "base_path": "build/objdiff/base/raise/raise_800B9C3C__800BA4A0.o"
     },
     {
+      "name": "raise/raise_800B9C3C__800BA4A0__800BA534",
+      "target_path": "build/objdiff/target/raise/raise_800B9C3C__800BA4A0__800BA534.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B9C3C__800BA4A0__800BA534.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B9C3C__800BA4A0__800BA534.o"
+    },
+    {
+      "name": "raise/raise_800B9C3C__800BA4A0__800BA744",
+      "target_path": "build/objdiff/target/raise/raise_800B9C3C__800BA4A0__800BA744.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B9C3C__800BA4A0__800BA744.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B9C3C__800BA4A0__800BA744.o"
+    },
+    {
+      "name": "raise/raise_800B9C3C__800BA4A0__800BA744__800BA9D8",
+      "target_path": "build/objdiff/target/raise/raise_800B9C3C__800BA4A0__800BA744__800BA9D8.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B9C3C__800BA4A0__800BA744__800BA9D8.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B9C3C__800BA4A0__800BA744__800BA9D8.o"
+    },
+    {
       "name": "raise/raise_800B9C3C__800BAD64",
       "target_path": "build/objdiff/target/raise/raise_800B9C3C__800BAD64.o",
       "metadata": {
@@ -3368,6 +3668,30 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/raise/raise_800B9C3C__800BAD64.o"
+    },
+    {
+      "name": "raise/raise_800B9C3C__800BAD64__800BB814",
+      "target_path": "build/objdiff/target/raise/raise_800B9C3C__800BAD64__800BB814.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B9C3C__800BAD64__800BB814.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B9C3C__800BAD64__800BB814.o"
+    },
+    {
+      "name": "raise/raise_800B9C3C__800BAD64__800BBA38",
+      "target_path": "build/objdiff/target/raise/raise_800B9C3C__800BAD64__800BBA38.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800B9C3C__800BAD64__800BBA38.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800B9C3C__800BAD64__800BBA38.o"
     },
     {
       "name": "raise/raise_800B9C3C__800BBC28",
@@ -3605,9 +3929,21 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800C0124__800C0648.o"
+    },
+    {
+      "name": "raise/raise_800C0124__800C0648__800C0658",
+      "target_path": "build/objdiff/target/raise/raise_800C0124__800C0648__800C0658.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800C0124__800C0648__800C0658.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C0124__800C0648__800C0658.o"
     },
     {
       "name": "raise/raise_800C07B8",
@@ -3946,6 +4282,54 @@
       "base_path": "build/objdiff/base/raise/raise_800C8CAC.o"
     },
     {
+      "name": "raise/raise_800C8CAC__800C9478",
+      "target_path": "build/objdiff/target/raise/raise_800C8CAC__800C9478.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800C8CAC__800C9478.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C8CAC__800C9478.o"
+    },
+    {
+      "name": "raise/raise_800C8CAC__800C9590",
+      "target_path": "build/objdiff/target/raise/raise_800C8CAC__800C9590.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800C8CAC__800C9590.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C8CAC__800C9590.o"
+    },
+    {
+      "name": "raise/raise_800C8CAC__800C9590__800CA818",
+      "target_path": "build/objdiff/target/raise/raise_800C8CAC__800C9590__800CA818.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800C8CAC__800C9590__800CA818.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C8CAC__800C9590__800CA818.o"
+    },
+    {
+      "name": "raise/raise_800C8CAC__800C9590__800CA944",
+      "target_path": "build/objdiff/target/raise/raise_800C8CAC__800C9590__800CA944.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800C8CAC__800C9590__800CA944.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C8CAC__800C9590__800CA944.o"
+    },
+    {
       "name": "raise/raise_800CB438",
       "target_path": "build/objdiff/target/raise/raise_800CB438.o",
       "metadata": {
@@ -4037,9 +4421,33 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800CF2E4.o"
+    },
+    {
+      "name": "raise/raise_800CF2E4__800CF304",
+      "target_path": "build/objdiff/target/raise/raise_800CF2E4__800CF304.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800CF2E4__800CF304.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800CF2E4__800CF304.o"
+    },
+    {
+      "name": "raise/raise_800CF2E4__800CF418",
+      "target_path": "build/objdiff/target/raise/raise_800CF2E4__800CF418.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800CF2E4__800CF418.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800CF2E4__800CF418.o"
     },
     {
       "name": "raise/raise_800CF2E4__800D0C14",
@@ -4342,6 +4750,54 @@
       "base_path": "build/objdiff/base/raise/raise_800DEA54__800DEB28__800DEBA0.o"
     },
     {
+      "name": "raise/raise_800DEA54__800DEB28__800DEBA0__800DEE18",
+      "target_path": "build/objdiff/target/raise/raise_800DEA54__800DEB28__800DEBA0__800DEE18.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800DEA54__800DEB28__800DEBA0__800DEE18.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800DEA54__800DEB28__800DEBA0__800DEE18.o"
+    },
+    {
+      "name": "raise/raise_800DEA54__800DEB28__800DEBA0__800DEF3C",
+      "target_path": "build/objdiff/target/raise/raise_800DEA54__800DEB28__800DEBA0__800DEF3C.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800DEA54__800DEB28__800DEBA0__800DEF3C.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800DEA54__800DEB28__800DEBA0__800DEF3C.o"
+    },
+    {
+      "name": "raise/raise_800DEA54__800DEB28__800DEBA0__800DF058",
+      "target_path": "build/objdiff/target/raise/raise_800DEA54__800DEB28__800DEBA0__800DF058.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800DEA54__800DEB28__800DEBA0__800DF058.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800DEA54__800DEB28__800DEBA0__800DF058.o"
+    },
+    {
+      "name": "raise/raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF914",
+      "target_path": "build/objdiff/target/raise/raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF914.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF914.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF914.o"
+    },
+    {
       "name": "raise/raise_800DEA54__800DFB10",
       "target_path": "build/objdiff/target/raise/raise_800DEA54__800DFB10.o",
       "metadata": {
@@ -4582,6 +5038,30 @@
       "base_path": "build/objdiff/base/raise/raise_800E6E68.o"
     },
     {
+      "name": "raise/raise_800E6E68__800E7934",
+      "target_path": "build/objdiff/target/raise/raise_800E6E68__800E7934.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800E6E68__800E7934.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800E6E68__800E7934.o"
+    },
+    {
+      "name": "raise/raise_800E6E68__800E79C0",
+      "target_path": "build/objdiff/target/raise/raise_800E6E68__800E79C0.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800E6E68__800E79C0.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800E6E68__800E79C0.o"
+    },
+    {
       "name": "etc/etc",
       "target_path": "build/objdiff/target/etc/etc.o",
       "metadata": {
@@ -4625,9 +5105,33 @@
         "progress_categories": [
           "etc"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/etc/etc__8009B738.o"
+    },
+    {
+      "name": "etc/etc__8009B738__8009B774",
+      "target_path": "build/objdiff/target/etc/etc__8009B738__8009B774.o",
+      "metadata": {
+        "source_path": "src/etc/etc__8009B738__8009B774.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/etc/etc__8009B738__8009B774.o"
+    },
+    {
+      "name": "etc/etc__8009B738__8009B7EC",
+      "target_path": "build/objdiff/target/etc/etc__8009B738__8009B7EC.o",
+      "metadata": {
+        "source_path": "src/etc/etc__8009B738__8009B7EC.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/etc/etc__8009B738__8009B7EC.o"
     },
     {
       "name": "etc/etc__8009BD30",
@@ -4772,6 +5276,78 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/etc/etc__800AA238__800AB78C.o"
+    },
+    {
+      "name": "etc/etc__800AA238__800AB78C__800AC650",
+      "target_path": "build/objdiff/target/etc/etc__800AA238__800AB78C__800AC650.o",
+      "metadata": {
+        "source_path": "src/etc/etc__800AA238__800AB78C__800AC650.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/etc/etc__800AA238__800AB78C__800AC650.o"
+    },
+    {
+      "name": "etc/etc__800AA238__800AB78C__800AC780",
+      "target_path": "build/objdiff/target/etc/etc__800AA238__800AB78C__800AC780.o",
+      "metadata": {
+        "source_path": "src/etc/etc__800AA238__800AB78C__800AC780.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/etc/etc__800AA238__800AB78C__800AC780.o"
+    },
+    {
+      "name": "etc/etc__800AA238__800AB78C__800AC780__800ACCA8",
+      "target_path": "build/objdiff/target/etc/etc__800AA238__800AB78C__800AC780__800ACCA8.o",
+      "metadata": {
+        "source_path": "src/etc/etc__800AA238__800AB78C__800AC780__800ACCA8.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/etc/etc__800AA238__800AB78C__800AC780__800ACCA8.o"
+    },
+    {
+      "name": "etc/etc__800AA238__800AB78C__800AC780__800ACD40",
+      "target_path": "build/objdiff/target/etc/etc__800AA238__800AB78C__800AC780__800ACD40.o",
+      "metadata": {
+        "source_path": "src/etc/etc__800AA238__800AB78C__800AC780__800ACD40.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/etc/etc__800AA238__800AB78C__800AC780__800ACD40.o"
+    },
+    {
+      "name": "etc/etc__800AA238__800AB78C__800AC780__800ACD98",
+      "target_path": "build/objdiff/target/etc/etc__800AA238__800AB78C__800AC780__800ACD98.o",
+      "metadata": {
+        "source_path": "src/etc/etc__800AA238__800AB78C__800AC780__800ACD98.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/etc/etc__800AA238__800AB78C__800AC780__800ACD98.o"
+    },
+    {
+      "name": "etc/etc__800AA238__800AB78C__800AC780__800ACEDC",
+      "target_path": "build/objdiff/target/etc/etc__800AA238__800AB78C__800AC780__800ACEDC.o",
+      "metadata": {
+        "source_path": "src/etc/etc__800AA238__800AB78C__800AC780__800ACEDC.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/etc/etc__800AA238__800AB78C__800AC780__800ACEDC.o"
     }
   ],
   "progress_categories": [

@@ -57,6 +57,15 @@ def rodata_symbols(target):
     return out
 
 
+ORIGINAL = {"yuugi": "disc/YUUGI.EXE", "slpm": "disc/SLPM_860.96", "chess": "disc/MASTER/PSF/CHESS.BIN",
+            "raise": "disc/MASTER/PSF/RAISE.BIN", "etc": "disc/MASTER/PSF/ETC.BIN"}
+
+
+def original(target):
+    """Os bytes do executável original (os offsets dos .rodata.s são offsets nele)."""
+    return (ROOT / ORIGINAL[target]).read_bytes()
+
+
 def rodata_size(obj):
     for line in match.sh(f"mips-linux-gnu-readelf -SW {obj}").splitlines():
         m = re.search(r"\]\s+\.r(?:o)?data\s+\S+\s+\S+\s+\S+\s+([0-9a-f]+)", line)
@@ -97,6 +106,10 @@ def main():
 
     obj = match.compile_c(a.cand, a.gcc, "-O2 -G8", False, a.target)
     size = rodata_size(obj)
+    if size < hi - lo and hi - lo - size < 8 and size % 4 == 0 and not any(original(a.target)[lo + size:hi]):
+        # o fim do trecho é só o alinhamento até o próximo símbolo: esses bytes (zeros) ficam no assembly
+        # seguinte, e o objeto C cobre exatamente o que gera
+        hi = lo + size
     if size != hi - lo:
         sys.exit(f"o C gera {size:#x} bytes de .rodata; o trecho tem {hi - lo:#x}")
     print(f"{a.func}: .rodata {lo:#x}-{hi:#x} ({', '.join(used)}) -> {src.stem}")
