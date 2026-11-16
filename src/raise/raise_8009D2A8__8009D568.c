@@ -54,7 +54,89 @@ void func_8009D678(void) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009D568", func_8009D6A4);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009D568", func_8009DAAC);
+void func_8009DAAC(void) {
+    typedef struct {
+        s32 f0;
+        s32 f4;
+        s32 f8;
+        s32 fC;
+    } Ent;
+    typedef struct {
+        u8 _p0[0x18];
+        s32 f18;
+        s32 f1C;
+        u8 _p20[0x10];
+        u32 f30_0 : 3;
+        u32 f30_3 : 1;
+        u32 f30_4 : 2;
+        u32 f30_6 : 3;
+        u32 f30_9 : 23;
+        s32 f34;
+        u32 f38_0 : 1;
+        u32 f38_1 : 31;
+        u8 _p3C[0xA];
+        s16 f46;
+        s16 f48;
+        s16 f4A;
+        s16 f4C;
+        s16 f4E;
+        u8 _p50[0x16];
+        s16 f66;
+    } Obj;
+    extern s32 D_800EBDE4[];
+    extern Ent *D_800EBDE8[];
+    extern s32 D_800EBFF4[];
+    extern void func_8001611C(s32);
+    extern s32 func_80019F30(s32, s32);
+    extern void func_80013B84(s32);
+    extern Obj *func_80015B3C(void *, void *, s32);
+    extern void func_80015EF8(Obj *);
+    extern void func_80012A20(s32, s32, s32, s32);
+    extern void func_8009D6A4();
+    extern void func_800161C4();
+
+    Obj *o;
+    Ent *e;
+    s32 a1;
+    s32 arg1;
+    s32 idx;
+
+    func_8001611C(0x1000);
+    func_80013B84(func_80019F30(D_800EBDE8[*D_800EBDE4]->f0 | 0x10000, D_800EBDE8[*D_800EBDE4]->f4));
+    o = func_80015B3C(func_8009D6A4, func_800161C4, 1);
+    if (o != NULL) {
+        func_80015EF8(o);
+        if (*D_800EBDE4 == 7) {
+            func_80012A20(func_80019F30(0x2000E, *D_800EBFF4 / 2 + 0x20), 1, 0, 0);
+        }
+        e = D_800EBDE8[*D_800EBDE4];
+        arg1 = e->fC + *D_800EBFF4;
+        a1 = func_80019F30(e->f0 | 0x60000, arg1);
+        o->f66 = 0;
+        idx = *D_800EBDE4;
+        o->f30_6 = 1;
+        if (idx < 4) {
+            o->f30_4 = 2;
+        } else if (idx >= 8) {
+            if (idx < 10) {
+                o->f30_4 = 2;
+            } else if (idx < 0x1A) {
+                o->f30_4 = 2;
+            } else {
+                o->f30_4 = 1;
+            }
+        } else {
+            o->f30_4 = 1;
+        }
+        o->f4E = 5;
+        o->f1C = 0;
+        o->f18 = a1;
+        o->f46 = 0;
+        o->f4A = 0;
+        o->f30_3 = 0;
+        o->f38_0 = 0;
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009D568", func_8009DC78);
 
