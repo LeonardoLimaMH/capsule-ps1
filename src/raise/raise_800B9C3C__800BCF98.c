@@ -9,7 +9,55 @@ void func_800BCF98(s32 arg0)
   *((s32 *) (((s8 *) new_var) + 0x340)) = 0x20;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BCF98", func_800BCFB0);
+void func_800BCFB0(s32 arg0) {
+    typedef struct {
+        u8 _p00[0x46];
+        u16 unk46;
+        u16 unk48;
+        u16 unk4A;
+    } Obj;
+    extern s16 D_800ED88C[];
+    extern Obj *D_800EFF6C[];
+    extern struct {
+        u8 _p00[0x34C];
+        Obj *unk34C;
+        u8 _p350[0x4];
+        Obj *unk354;
+        u8 _p358[0xBC];
+        Obj *unk414;
+        Obj *unk418;
+        u8 _p41C[0x1DC];
+        Obj *unk5F8;
+        Obj *unk5FC;
+    } D_800EFF58[];
+
+    switch (arg0) {
+    case 0:
+        break;
+    case 1:
+        if (*D_800ED88C == 1) {
+            (*D_800EFF6C)->unk4A += 2;
+        }
+        D_800EFF58->unk34C->unk46 += 8;
+        D_800EFF58->unk354->unk46 -= 8;
+        D_800EFF58->unk5FC->unk46 -= 8;
+        D_800EFF58->unk414->unk46 -= 8;
+        D_800EFF58->unk418->unk4A -= 3;
+        D_800EFF58->unk5F8->unk4A -= 3;
+        break;
+    case 2:
+        if (*D_800ED88C == 1) {
+            (*D_800EFF6C)->unk4A -= 2;
+        }
+        D_800EFF58->unk34C->unk46 -= 8;
+        D_800EFF58->unk354->unk46 += 8;
+        D_800EFF58->unk5FC->unk46 += 8;
+        D_800EFF58->unk414->unk46 += 8;
+        D_800EFF58->unk418->unk4A += 3;
+        D_800EFF58->unk5F8->unk4A += 3;
+        break;
+    }
+}
 
 void func_800BD164(u8 *o)
 {
@@ -113,7 +161,53 @@ void func_800BD66C(s32 arg0)
   *((s32 *) (((s8 *) D_800EFF58) + 0x424)) = 0x20;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BCF98", func_800BD684);
+void func_800BD684(s32 arg0) {
+    typedef struct { u8 pad[0x46]; u16 x; u16 unk48; u16 y; } Sprite;
+    typedef struct {
+        u8 pad0[0x42C];
+        Sprite *unk42C;
+        u8 pad430[0x5B0 - 0x430];
+        Sprite *unk5B0;
+        u8 pad5B4[4];
+        Sprite *unk5B8[3];
+        u8 pad5C4[0x5D0 - 0x5C4];
+        Sprite *unk5D0;
+        u8 pad5D4[4];
+        Sprite *unk5D8;
+        u8 pad5DC[0x5F0 - 0x5DC];
+        Sprite *unk5F0;
+        u8 pad5F4[4];
+        Sprite *unk5F8;
+    } Work;
+    extern u8 D_800EFF58[];
+    s32 i;
+    switch (arg0) {
+    case 0:
+        break;
+    case 1:
+        ((Work *)D_800EFF58)->unk5F0->y += 3;
+        ((Work *)D_800EFF58)->unk42C->y += 6;
+        ((Work *)D_800EFF58)->unk5B0->y -= 8;
+        for (i = 0; i < 3; i++) {
+            ((Work *)D_800EFF58)->unk5B8[i]->y -= 8;
+        }
+        ((Work *)D_800EFF58)->unk5D0->y -= 8;
+        ((Work *)D_800EFF58)->unk5D8->y -= 8;
+        ((Work *)D_800EFF58)->unk5F8->y -= 8;
+        break;
+    case 2:
+        ((Work *)D_800EFF58)->unk5F0->y -= 3;
+        ((Work *)D_800EFF58)->unk42C->y -= 6;
+        ((Work *)D_800EFF58)->unk5B0->y += 8;
+        for (i = 0; i < 3; i++) {
+            ((Work *)D_800EFF58)->unk5B8[i]->y += 8;
+        }
+        ((Work *)D_800EFF58)->unk5D0->y += 8;
+        ((Work *)D_800EFF58)->unk5D8->y += 8;
+        ((Work *)D_800EFF58)->unk5F8->y += 8;
+        break;
+    }
+}
 
 #include "common.h"
 
@@ -276,6 +370,73 @@ s32 func_800BE1F0(void) {
     return 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BCF98", func_800BE290);
+s32 func_800BE290(void) {
+    typedef struct { u8 b[44]; } S44;
+    typedef struct {
+        u8 pad0[0x10];
+        u16 unk10;
+        u8 pad12[0x1A8 - 0x12];
+    } Unk91618;
+    typedef struct {
+        u8 pad0[0x332];
+        s16 unk332;
+        s16 unk334;
+        u8 pad336[0x79C - 0x336];
+    } Unk100F38;
+    extern Unk100F38 D_80100F38[];
+    extern Unk91618 D_80091618[];
+    extern u8 D_800EF364[][8][8];
+    extern u16 D_8006AF80[];
+    extern u8 *D_8009021C;
+    extern u8 *D_80100D40;
+    extern S44 D_80100D50;
+    S44 *d = &D_80100D50;
+    register Unk100F38 *f asm("a1") = D_80100F38;
+    u16 k = *D_8006AF80;
+    Unk100F38 *p = &f[k];
+    u8 *s;
+    D_80100D48 = D_800EF364[D_80091618[k].unk10][p->unk332 - 1][p->unk334 - 1];
+    s = D_8009021C + D_80100D48 * 44;
+    D_80100D40 = s;
+    *d = *(S44 *)s;
+    D_80100D4E = 0x40;
+    D_80100D4C = 0;
+    return 0;
+}
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BCF98", func_800BE434);
+#define OS(x) (*(s16 *)(o + (x)))
+typedef struct {
+    u8 pad0[0xA];
+    s16 x0;
+    s16 y0;
+    u8 padE[4];
+    s16 x1;
+    s16 y1;
+    u8 pad16[4];
+    s16 bx0;
+    s16 by0;
+    u8 pad1E[4];
+    s16 bx1;
+    s16 by1;
+    u8 pad26[0x2C - 0x26];
+} S44;
+s32 func_800BE434(void) {
+    extern u8 *D_80100D40;
+    extern u16 D_80100D4E;
+    extern s32 rsin(s32);
+    extern s32 rcos(s32);
+
+    if (D_80100D4E != 0) {
+        s32 a = (s32)(double)(s32)((0x40 - D_80100D4E) << 4);
+        double ds = (double)rsin(a) * 100.0 * (1.0 / 4096.0);
+        double dc = (double)rcos(a) * 100.0 * (1.0 / 4096.0);
+        S44 *o = (S44 *)D_80100D40;
+        o->x0 = (double)o->bx0 + ds;
+        o->y0 = (double)o->by0 - dc;
+        o->x1 = (double)o->bx1 + ds;
+        o->y1 = (double)o->by1 - dc;
+        D_80100D4E--;
+        return 0;
+    }
+    return 1;
+}
