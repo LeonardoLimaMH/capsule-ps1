@@ -41,19 +41,3 @@ int func_800C7F74(s32 arg0)
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C7F74", func_800C7FDC);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C7F74", func_800C8368);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C7F74", func_800C8528);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C7F74", func_800C867C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C7F74", func_800C87C0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C7F74", func_800C8A48);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C7F74", func_800C8BF4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C7F74", func_800C8DE0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C7F74", func_800C8EF0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C7F74", func_800C9254);
