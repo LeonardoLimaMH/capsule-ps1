@@ -131,12 +131,33 @@ void func_80013668(void) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_800136C8);
 
+typedef struct Node_80013A68 {
+    u16 size;
+    u16 prio;
+    struct Node_80013A68 *prev;
+    struct Node_80013A68 *next;
+    void (*funcC)(struct Node_80013A68 *);
+    void (*func10)(struct Node_80013A68 *);
+} Node_80013A68;
+
+typedef struct Manager_80013928 {
+    u8 pad_0[0xC000];
+    Node_80013A68 *nodes[0x155];
+    u32 count;
+    Node_80013A68 *heads[8];
+    Node_80013A68 *first;
+    s32 b;
+    s32 c;
+    u32 overflow;
+} Manager_80013928;
+
 void func_80013920(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x10) = 0;
 }
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013928);
 
+extern void func_80013928(Node_80013A68 *);
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013A68);
 
 void func_80013B84(void *arg0) {
@@ -179,6 +200,9 @@ void func_80013C44(void) {
     } while (i >= 0);
 }
 
+extern u8 *func_80015B3C();
+extern void func_80015EF8(), func_80015B00(), func_800161C4();
+extern s32 func_80020304(), func_80019F30();
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013C6C);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013DFC);
@@ -262,7 +286,63 @@ void func_80014DD8(void) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80014EE0);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_800152C8);
+void func_800152C8(void) {
+    extern u8 D_8008ED68[];
+    extern void func_80013DFC(void);
+    extern void func_800142E4(void);
+    extern void func_80014728(void);
+    extern void func_80014EE0(void);
+    u8 *d = D_8008ED68;
+    u32 t;
+    s32 n;
+    s32 i;
+    u8 tmp;
+
+    func_80014DD8();
+    if (d[0x27] == 0) {
+        u8 mode = d[0x24];
+        if (mode == 0) {
+            func_80013DFC();
+        } else if (mode == 1) {
+            func_800142E4();
+        } else if (mode == 2) {
+            func_80014728();
+        }
+    }
+    if (d[0x99A] != 1) {
+        *(s32 *)(d + 0x20) += d[0x103] ? d[0x103] : 1;
+    }
+    if (d[0x27] != 0) {
+        func_80014EE0();
+    }
+    if (d[0x99A] != 1 && d[0x29] != 0) {
+        t = *(u32 *)(d + 0x2C);
+        if (t % 720 == 0) {
+            if (t % 1440 == 0) {
+                *(u8 **)(d + 0x9BC) = func_80013C6C(0);
+            } else {
+                func_80013C6C(1);
+            }
+        }
+        *(u32 *)(d + 0x2C) += d[0x103] ? d[0x103] : 1;
+    }
+    n = d[0x103] ? d[0x103] : 1;
+    for (i = 0; i < n; i++) {
+        if (d[0x2B] == 1) {
+            tmp = d[0x2A] + 1;
+            d[0x2A] = tmp;
+            if (tmp >= 0x20) {
+                d[0x2B] = 0;
+            }
+        } else if (d[0x2B] == 2) {
+            tmp = d[0x2A] - 1;
+            d[0x2A] = tmp;
+            if (tmp == 0) {
+                d[0x2B] = 0;
+            }
+        }
+    }
+}
 
 #include "common.h"
 
