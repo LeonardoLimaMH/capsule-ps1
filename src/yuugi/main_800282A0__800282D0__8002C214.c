@@ -129,7 +129,53 @@ void func_8002C728(void)
     c[2] = 0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002C214", func_8002C768);
+void func_8002C768(void) {
+    u8 *base = D_80069AD4;
+    u8 *q;
+    s16 *a;
+    s32 *w;
+    s16 *b;
+    s32 x, y, z, pos;
+    switch (*(s32 *)(base + 0x130)) {
+    case 0:
+        return;
+    case 1:
+        *(s16 *)(base + 0xE8) = (*(s16 *)(base + 0xE8) + *(s16 *)(base + 0x168)) % 4096;
+        *(s16 *)(base + 0xEA) = (*(s16 *)(base + 0xEA) + *(s16 *)(base + 0x16A)) % 4096;
+        *(s16 *)(base + 0xEC) = (*(s16 *)(base + 0xEC) + *(s16 *)(base + 0x16C)) % 4096;
+        break;
+    case 2:
+        pos = *(s32 *)(base + 0xD8);
+        x = *(s32 *)(base + 0x158);
+        y = *(s32 *)(base + 0x15C);
+        z = *(s32 *)(base + 0x160);
+        *(s32 *)(base + 0xD8) = pos + x;
+        *(s32 *)(base + 0xDC) += y;
+        *(s32 *)(base + 0xE0) += z;
+        break;
+    case 3:
+        *(s16 *)(base + 0xB0) = (*(s16 *)(base + 0xB0) + *(s16 *)(base + 0x170)) % 4096;
+        *(s16 *)(base + 0xB2) = (*(s16 *)(base + 0xB2) + *(s16 *)(base + 0x172)) % 4096;
+        *(s16 *)(base + 0xB4) = (*(s16 *)(base + 0xB4) + *(s16 *)(base + 0x174)) % 4096;
+        break;
+    }
+    q = D_80069AD4;
+    if (--*(s32 *)(q + 0x134) == 0) {
+        *(s32 *)(q + 0x130) = 0;
+        a = (s16 *)(q + 0x168);
+        a[0] = 0;
+        a[1] = 0;
+        a[2] = 0;
+        w = (s32 *)(q + 0x158);
+        w[0] = 0;
+        w[1] = 0;
+        w[2] = 0;
+        b = (s16 *)(q + 0x170);
+        b[0] = 0;
+        b[1] = 0;
+        b[2] = 0;
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0__8002C214", func_8002C93C);
 
