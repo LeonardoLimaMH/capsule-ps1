@@ -267,4 +267,46 @@ s32 func_800C463C(s32 a0, s32 a1)
   return *((s32 *) (p + 0x2BC));
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C3334", func_800C478C);
+extern u8 D_80100F38[], D_80091618[], D_80063940[];
+extern s16 D_800F0758[];
+extern s32 func_800B1260(s32), func_800CE128(s32), func_80015E60(s32);
+extern void func_800CE4B8(s32, s32, s32, s32), func_800CC1FC(s32, s32, s32);
+s32 func_800C478C(u8 *o, s32 a1) {
+    s32 k = func_800B1260(a1);
+    u8 *p = D_80100F38 + (u16)k * 0x79C;
+    u8 *e, *d;
+    register u8 *base asm("a0");
+    register u8 *data asm("v1");
+    register s32 v asm("v0");
+    s32 t;
+    switch (*(s16 *)(p + 0x344)) {
+    case 0:
+        *(u16 *)(p + 0x344) = 1;
+        break;
+    case 1:
+        func_800CE4B8(a1, (s32)o, *D_800F0758 + func_800CE128(*(s16 *)(p + 0x326)), 1);
+        *(u16 *)(p + 0x344) = 2;
+    case 2:
+        if (func_80015E60((s32)o) == 1) {
+            *(u16 *)(p + 0x344) = 3;
+            break;
+        }
+        e = (base = D_80091618) + (u16)k * 0x1A8;
+        d = (data = D_80063940) + *(u16 *)e * 60;
+        t = (*(u32 *)(d + 0x24) >> 10) & 0x1F;
+        if (t == 1) {
+            if (*(u16 *)(o + 0x24) != *(s32 *)(*(u8 **)(*(u8 **)(o + 0x1C) + 4) + 4)) break;
+            v = *(s32 *)(o + 0x20);
+        } else {
+            if (*(u16 *)(o + 0x20) != t - 2) break;
+            v = *(s16 *)(o + 0x24);
+        }
+        if (v == 0) func_800CC1FC(a1, *(u16 *)e, 1);
+        break;
+    default:
+        *(u16 *)(p + 0x344) = 0;
+        *(s32 *)(p + 0x2BC) += 1;
+        break;
+    }
+    return *(s32 *)(p + 0x2BC);
+}
