@@ -41,6 +41,8 @@ segments:
     vram: 0x80097800
     subsegments:
       - [0x0, rodata]
+      - [0x338, .rodata, chess__8009ECF8]
+      - [0x358, rodata]
       - [0x4B4, .rodata, chess__800A8444]
       - [0x5E0, rodata]
       - [0xF94, .rodata, chess_800C22A0]
