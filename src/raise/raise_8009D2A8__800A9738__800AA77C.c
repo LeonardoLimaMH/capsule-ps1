@@ -13,34 +13,52 @@ typedef struct {
     u32 state;
 } WorkSlotRecord;
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A9738__800AA77C", func_800AA77C);
+typedef struct {
+    u32 pad[0x14];
+    u32 b0 : 1;
+    u32 b1 : 2;
+    u32 b3 : 1;
+    u32 rest : 28;
+} Flags_800AA494;
 
-void func_800AA8D0(u32 player) {
-    extern WorkSlotRecord D_80100F38[];
-    WorkSlotRecord *record = &D_80100F38[player & 0xFFFF];
-    record->slots[(record->state >> 26) & 31] = 0;
-    record->task->flags |= 1;
+typedef struct {
+    u8 pad[0x10];
+    u16 f10;
+    u8 pad2[0x17A];
+    Flags_800AA494 *fl[2];
+} Ent_800AA494;
+
+s32 func_800AA77C(u32 arg0) {
+    register s32 i asm("s3");
+    register s32 ret asm("s2");
+    s32 v;
+    ret = 0;
+    for (i = 1; i >= 0; i--) {
+        v = func_800B1260(i) & 0xFFFF;
+        if (v == 0xFFFF) continue;
+        switch (arg0) {
+        case 0:
+        case 1:
+            if (func_800E1594((u16)v) == 1) return 0;
+            if (func_800E1388((u16)v) != 1) return 0;
+            if (func_800E1140((u16)v) == 0) return 0;
+            if (func_800E16AC((u16)v) == 1) break;
+            if (func_800E14C4((u16)v) != 1) ret |= 1;
+            break;
+        case 2:
+            ret = 1;
+            break;
+        case 3:
+            if (func_800E1594((u16)v) == 1) return 0;
+            if (func_800E1388((u16)v) != 1) return 0;
+            if (func_800E16AC((u16)v) == 1) break;
+            ret |= 1;
+            break;
+        case 4:
+            if (func_800E1594() == 1) return 0;
+            break;
+        }
+    }
+    return ret;
 }
 
-void func_800AA930(s32 idx) {
-    typedef struct {
-        u8 pad[0x38];
-        u32 flags;
-    } Obj_800AA930;
-    typedef struct {
-        u8 pad[0x21C];
-        Obj_800AA930 *obj;
-        u8 pad2[0x189];
-        u8 slots[32];
-        u8 pad3[0x3CD];
-        u32 state;
-    } Player_800AA930;
-    extern Player_800AA930 D_80100F38[];
-    Player_800AA930 *rec = &D_80100F38[idx & 0xFFFF];
-    u32 w;
-
-    rec->obj->flags |= 1;
-    w = rec->state;
-    rec->obj = 0;
-    rec->slots[(w >> 26) & 0x1F] = 0;
-}

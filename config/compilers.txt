@@ -358,7 +358,6 @@ src/etc/etc__800AA238__800AB78C__800AC780__800ACEDC.c 2.8.1-psx
 src/etc/etc__800AA238__800AB78C__800AC780__800ACD98.c 2.7.2-cdk
 src/raise/raise_8009B150__8009C5C0__8009C918.c 2.7.2-cdk
 src/raise/raise_8009B150__8009C5C0__8009C5F4.c 2.7.2-cdk
-src/raise/raise_8009D2A8__800A9738__800AA77C.c 2.7.2-cdk
 src/raise/raise_8009D2A8__800A9738__800AA60C.c 2.7.2-cdk
 src/raise/raise_800B9C3C.c 2.7.2-cdk
 src/raise/raise_800B9C3C__800B9CEC__800BA1D8.c 2.7.2-cdk
@@ -535,3 +534,5 @@ src/chess/chess_800C4ECC__800CAE14__800CAF74.c 2.7.2-cdk
 src/chess/chess_800C4ECC__800CAE14__800CAECC.c 2.7.2-cdk
 src/raise/raise_8009B150__8009C5C0__8009C918__8009CCEC.c 2.7.2-cdk
 src/raise/raise_8009B150__8009C5C0__8009C918__8009CAB4.c 2.7.2-cdk
+src/raise/raise_8009D2A8__800A9738__800AA77C__800AA8D0.c 2.7.2-cdk
+src/raise/raise_8009D2A8__800A9738__800AA77C.c 2.7.2-cdk
