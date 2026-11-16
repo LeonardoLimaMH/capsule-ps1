@@ -547,13 +547,3 @@ void func_800C1A50(void) {
     func_800CAE14();
     func_800125AC(0xA);
 }
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800C1A78);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800C1CA4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800C1F84);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800C202C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800C20E8);
