@@ -107,5 +107,3 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C5300__800C5A74", func_80
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C5300__800C5A74", func_800C5DE8);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C5300__800C5A74", func_800C5FA0);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C5300__800C5A74", func_800C61F4);
