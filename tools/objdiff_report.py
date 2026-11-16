@@ -60,19 +60,50 @@ def tu_functions(text):
 INCREMENTAL = False
 
 
+JTBL_REF = re.compile(r"%(?:hi|lo)\((jtbl_\w+)\)")
+_JTBLS = {}
+
+
+def jump_tables(t):
+    """{jtbl_X: bloco "dlabel ... enddlabel"} das tabelas de salto que ainda estão no .rodata em assembly do alvo.
+    Vão para o objeto-alvo junto com as funções que as usam: assim o conteúdo da tabela (para onde vai cada
+    case) pode ser comparado com o do C, e não só as instruções."""
+    if t not in _JTBLS:
+        found = {}
+        for f in sorted((ROOT / "asm" / t / "data").glob("*.rodata.s")):
+            text = f.read_text(encoding="utf-8")
+            for m in re.finditer(r"^dlabel (jtbl_\w+)\n.*?^enddlabel \1\n", text, re.M | re.S):
+                found[m.group(1)] = m.group(0)
+        _JTBLS[t] = found
+    return _JTBLS[t]
+
+
 def build_target(t, src, funcs):
     """Objeto com o assembly original das funções do arquivo, na ordem do arquivo."""
     folder = ROOT / ".cache" / "fullasm" / t / "nonmatchings" / src.stem
     done = OUT / "target" / t / f"{src.stem}.o"
     lines = ['.include "include/macro.inc"', ".set noat", ".set noreorder", ".text"]
     n = 0
+    used, defined = [], set()
     for f in funcs:
         s = folder / f"{f}.s"
         if s.exists():
             lines.append(f'.include "{s.relative_to(ROOT).as_posix()}"')
             n += 1
+            body = s.read_text(encoding="utf-8")
+            for j in JTBL_REF.findall(body):  # %hi e %lo: o mesmo nome duas vezes
+                if j not in used:
+                    used.append(j)
+            defined.update(re.findall(r"^\s*(?:dlabel|glabel|jlabel)\s+(jtbl_\w+)|^(jtbl_\w+):", body, re.M))
     if not n:
         return None
+    defined = {d for pair in defined for d in pair if d}
+    # só as que nenhum .s incluído já define (alguns trazem a própria tabela)
+    tables = [jump_tables(t)[j] for j in used if j in jump_tables(t) and j not in defined]
+    if tables:
+        # numa seção própria, não alocável: o objdiff não a conta como dados (o relatório do ByteMatch fica como antes), e quem
+        # confere as tabelas (o decomp.anything) lê o ELF direto
+        lines += ['.section .jtbl, ""', ".align 2", *tables]
     asm = OUT / "target" / t / f"{src.stem}.s"
     # só reaproveita se a lista de funções do arquivo não mudou (um split de TU deixava o
     # objeto antigo com funções que foram para o arquivo novo, contadas duas vezes)

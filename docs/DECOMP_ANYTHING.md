@@ -196,3 +196,11 @@ só essa etapa). O que faz cada passo passar nos 5 SHA-1:
 O objdiff (e o julgamento do app) compara o código, não a tabela de saltos no `.rodata`. Um `case` no bloco
 errado passa no app e só aparece no SHA-1: `func_800AA77C` e `func_800DBB3C` foram corrigidas assim (rótulos
 `case` movidos para o bloco do original; o código não muda).
+
+### Tabelas de salto no objeto-alvo (2026-11-16)
+
+`tools/objdiff_report.py` põe no objeto-alvo de cada arquivo as tabelas de salto (`jtbl_*`) que as funções
+dele usam, numa seção própria não alocável (`.jtbl`): o objdiff não a conta, e o relatório do ByteMatch fica
+idêntico (conferido função por função). O decomp.anything (fork com a checagem de tabelas, `literals.py`)
+lê essas tabelas e passa a recusar, já no app, o C cujo `case` cai no bloco errado, com a mensagem de qual
+entrada mover. Antes isso só aparecia no SHA-1 da integração.
