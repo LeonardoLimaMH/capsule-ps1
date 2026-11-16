@@ -2,7 +2,33 @@
 #include "matching.h"
 #include "common.h"
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__8009B948__8009BAD8", func_8009BAD8);
+typedef struct {
+    u8 unk_00[0x54];
+    s32 unk_54;
+    s32 unk_58;
+} ChessUnk69E4C;
+
+void func_8009BAD8(u8 *arg0) {
+    extern s32 D_801010B0[][13];
+    extern u8 D_80118710[][13];
+    register s32 lim asm("t3") = 0xA9;
+    s32 i;
+    u8 count;
+    s32 (*table)[13];
+
+    i = 0;
+    count = 0;
+    table = (s32 (*)[13])D_801010B0[arg0[0x5D9]][0];
+    do {
+        if (table[i / 13][i % 13] & 0x3F) {
+            D_80118710[i / 13][i % 13] = count;
+            count++;
+        } else {
+            D_80118710[i / 13][i % 13] = 0;
+        }
+        i++;
+    } while (i < lim);
+}
 
 void func_8009BB98(int param_1)
 
@@ -47,12 +73,6 @@ void func_8009BB98(int param_1)
   func_800190F4(0xff,&func_80012578,0,0);
   return;
 }
-
-typedef struct {
-    u8 unk_00[0x54];
-    s32 unk_54;
-    s32 unk_58;
-} ChessUnk69E4C;
 
 void func_8009BCC8(int param_1, undefined4 param_2)
 {

@@ -76,4 +76,42 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__8009B948__8009BAD8__8009BEE0", func_8
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009B948__8009BAD8__8009BEE0", func_8009C278);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__8009B948__8009BAD8__8009BEE0", func_8009C3BC);
+void func_8009C3BC(void) {
+    extern u8 D_80085428[];
+    extern s32 func_800A8954();
+    extern void func_8001A49C();
+    extern s32 func_80019F30();
+    extern void func_80012A20();
+    register u8 *p asm("a1") = D_80085428;
+    register s32 s0 asm("s0");
+    register s32 s1 asm("s1");
+    s32 off1;
+    s32 off2;
+    s32 a0;
+
+    s0 = 0;
+    s1 = 0x03C00000;
+    off1 = p[0xD78] * 0x7C;
+    off2 = p[0xD77] * 0x2E8;
+    off1 += off2;
+    off1 += (s32)p;
+    a0 = *(u8 *)(off1 + 0x612);
+
+    func_8001A49C(func_800A8954(a0));
+    do {
+        register s32 step asm("v0");
+        func_80012A20(func_80019F30(0x20174, s0), 3, s1 >> 16, 0x180);
+        step = 0x00200000;
+        s1 += step;
+        s0++;
+    } while (s0 < 2);
+    s0 = 0;
+    s1 = 0x03C00000;
+    do {
+        register s32 step asm("v0");
+        func_80012A20(func_80019F30(0x20174, s0 + 2), 3, s1 >> 16, 0x80);
+        step = 0x00200000;
+        s1 += step;
+        s0++;
+    } while (s0 < 2);
+}
