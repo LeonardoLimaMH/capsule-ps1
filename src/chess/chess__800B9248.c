@@ -100,7 +100,54 @@ void func_800B9E8C(u8 *p) {
     }
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248", func_800B9F9C);
+void func_800B9F9C(u8 *p) {
+    extern void func_800CAC50(u8 *, u8 *, s32);
+    extern void func_800A8EE8(u8 *, s32, s32);
+    extern void func_800CABDC(u8 *, u8 *, s32);
+    extern void func_80012604(s32);
+    extern void func_80034AB0(s32);
+
+    u8 *base = p + 0x5d0;
+    s32 c = base[0x5fa];
+    s32 o = base[0x70c];
+    u8 *bc = base + c;
+    u8 *x = base + (c * 0x2e8 + 0x18) + bc[0x5fb] * 0x7c;
+    s32 n = 1 - c;
+    u8 *y = base + (n * 0x2e8 + 0x18) + o * 0x7c;
+    u32 flags;
+    s32 code;
+
+    if (base[0x60d] != 2) {
+        return;
+    }
+    x[0x17] = 1;
+    y[0x17] = 1;
+    if (o == 5) {
+        func_800CAC50(p, y, 0x1000);
+        code = 0xb;
+        goto block_call;
+    }
+    func_800A8EE8(base, n, o);
+    func_800CABDC(p, y, 0x10000);
+    func_80012604(10);
+    flags = *(u32 *)(y + 0x1c);
+    if (flags & 0x10000) {
+        *(u32 *)(y + 0x1c) = flags ^ 0x10000;
+        return;
+    }
+    if (flags & 0x20000) {
+        s32 v = *y;
+        *(u32 *)(y + 0x1c) = flags ^ 0x20000;
+        if (v == 3 || v == 0x59) {
+            func_80034AB0((v == 3) ? 0x3a : 0x4b);
+            code = 9;
+            y[0x17] = 0x8a;
+            y[0x24] = 0x45;
+block_call:
+            func_80012604(code);
+        }
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248", func_800BA108);
 
