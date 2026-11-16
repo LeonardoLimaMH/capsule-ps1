@@ -22,12 +22,14 @@ static inline s32 Etc_GetVramAddr(s32 arg0) {
 }
 
 static inline s32 Etc_FindPrev(EtcCtx *arg0, s32 arg1, s32 arg2) {
-    s32 ret;
+    register s32 ret asm("t1");
+    s32 var_a1;
     u8 id;
 
-    id = arg0->unk5E8[arg1][arg2].unk0;
     ret = 0;
-    if (arg1 != 0) {
+    id = arg0->unk5E8[arg1][arg2].unk0;
+    var_a1 = arg1;
+    if (var_a1 != 0) {
         goto loop;
     }
     if (arg2 == 0) {
@@ -41,13 +43,14 @@ dec:
     arg2--;
     goto check;
 wrap:
-    arg1--;
+    var_a1--;
     arg2 = 4;
 check:
-    if (id == arg0->unk5E8[arg1][arg2].unk0) {
-        ret = arg0->unk5E8[arg1][arg2].unk2A + 1;
+    if (id == arg0->unk5E8[var_a1][arg2].unk0) {
+        register u32 temp asm("v0") = arg0->unk5E8[var_a1][arg2].unk2A;
+        ret = temp + 1;
     }
-    if (arg1 != 0) {
+    if (var_a1 != 0) {
         goto loop;
     }
     if (arg2 != 0) {
@@ -280,7 +283,82 @@ void func_80099474(void) {
     }
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80099570);
+void func_80099570(void) {
+    extern u8 D_80033450[];
+    extern s8 D_800859F3[];
+    extern s32 D_8008F788[];
+    extern s32 func_80019F30(s32, s32);
+    extern void func_80012A20(s32, s32, s32, s32);
+    extern u8 *func_80032DB0(s32, s32, s32, s32, s32, void (*)(void));
+    extern u8 *func_80032F50(s32, s32, s32, s32, u8 *);
+    extern void func_80099AE4(void);
+    extern void func_80099B18(void);
+    extern void func_8002E708(void);
+    extern void func_80012544(s32);
+    extern void func_8001AD48(s32);
+    extern void func_80012508(void);
+
+    s32 i;
+    s32 j;
+    s32 x;
+    s32 y;
+    s32 alt;
+    s32 col;
+    u8 *p;
+
+    for (i = 0; i < 4; i++) {
+        func_80012A20(func_80019F30(0x20009, i + 2), 1, 0, 0);
+    }
+    func_80012A20(func_80019F30(0x50009, 0), 1, 0, 0);
+
+    p = func_80032DB0(-0x70, -0x68, 4, 9, 7, func_80099B18);
+    *(s32 *)(p + 0x80) = 0;
+    *(u32 *)(p + 0x30) = (*(u32 *)(p + 0x30) & ~0x1C0) | 0x40;
+
+    p = func_80032DB0(0x20, -0x68, 4, 9, 0xF, func_80099B18);
+    *(s32 *)(p + 0x80) = 1;
+
+    p = func_80032DB0(-0x70, -0x10, 4, 9, 0x11, func_80099B18);
+    *(s32 *)(p + 0x80) = 2;
+
+    p = func_80032DB0(0x20, -0x10, 4, 9, 0x18, func_80099B18);
+    *(s32 *)(p + 0x80) = 3;
+
+    func_80032DB0(-0x88, 0x48, 4, 9, 0, func_80099AE4);
+
+    alt = 0;
+    j = 0;
+    col = 0x70;
+    y = -0xA0;
+    do {
+        register s32 cur_y asm("s2");
+        x = -0xA0;
+        cur_y = y;
+        do {
+            p = func_80032F50(x, cur_y, 5, (alt & 1) ? 0x1E : 0x1F, D_80033450);
+            x += 0x40;
+            alt++;
+            *(s16 *)(p + 0x6A) = -1;
+            *(s16 *)(p + 0x6E) = 1;
+            p[0x5A] = col;
+            p[0x59] = col;
+            p[0x58] = col;
+            *(u32 *)(p + 0x38) |= 8;
+        } while (x < 0xA1);
+        y += 0x40;
+        j++;
+        alt++;
+    } while (j < 5);
+
+    if (*D_8008F788 == 1) {
+        func_8002E708();
+        *D_800859F3 = 0;
+        func_80012544(6);
+    } else {
+        func_8001AD48(4);
+        func_80012508();
+    }
+}
 
 void func_800997D4(void) {
     extern s32 D_8008F7D0[];
