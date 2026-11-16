@@ -100,7 +100,34 @@ void func_800375B8(void) {
 
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_800375C0);
+extern u16 D_8007082C[][128];
+u16 func_800375C0(s32 a0, s32 a1, s32 a2, s32 a3) {
+    register s32 v0 asm("v0");
+    u16 ret;
+    s32 v1;
+    s16 m;
+    s32 t;
+
+    a1 = (s16)(a1 + a3);
+    v0 = a1 / 128;
+    v1 = a0 + v0;
+    v0 = v0 * 128;
+    a3 = a1 - v0;
+    v0 = v1 - a2;
+    v1 = v0 << 16;
+    a1 = v1 >> 16;
+    if (a1 < 0) {
+        m = (s16)(-v0) % 12;
+        a1 = (s16)(-v0);
+        t = 12 - m;
+        v0 = D_8007082C[t % 12][(s16)a3];
+        ret = v0 >> ((a1 + 11) / 12);
+    } else {
+        m = a1 % 12;
+        ret = D_8007082C[m][(s16)a3] << (a1 / 12);
+    }
+    return ret;
+}
 
 #include "common.h"
 
@@ -186,7 +213,65 @@ void func_80037704(u8 *v) {
     SpuSetVoiceAttr(D_80093790);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_8003793C);
+void func_8003793C(u8 *p) {
+    u16 temp_a1 = *(u16 *)(p + 0x26);
+    if (temp_a1 != 0) {
+        if (p[0x22] != p[0x29]) {
+            p[0x22]++;
+            return;
+        }
+        if (p[0x28] >= p[0x2A]) {
+            *(u16 *)(p + 0x24) = temp_a1;
+        } else {
+            if (p[0x28] != 0) {
+                *(u16 *)(p + 0x24) += *(u16 *)(p + 0x2C);
+            } else {
+                *(u16 *)(p + 0x24) = *(u16 *)(p + 0x2C);
+            }
+            p[0x28]++;
+        }
+        p[0x23] += p[0x2B];
+        p[0x21] = 0;
+        {
+            s8 c = (s8)p[0x23];
+            s32 prod;
+            register s32 v1 asm("v1");
+            s32 a1;
+            if (c < 0) {
+                s32 v0 = -c;
+                v1 = v0 * 2;
+                if ((v0 << 25) >= 0) {
+                    a1 = v1;
+                } else {
+                    a1 = -v1;
+                }
+                prod = *(u16 *)(p + 0x24) * (s8)a1;
+                if (prod > 0) {
+                    prod = -prod;
+                }
+            } else {
+                v1 = c * 2;
+                if ((c << 25) >= 0) {
+                    a1 = v1;
+                } else {
+                    a1 = -v1;
+                }
+                prod = *(u16 *)(p + 0x24) * (s8)a1;
+                if (prod < 0) {
+                    prod = -prod;
+                }
+            }
+            if (prod != 0) {
+                if (prod < 0) {
+                    prod += 0x3FF;
+                }
+                *(s16 *)(p + 0x2E) = prod >> 10;
+                return;
+            }
+            *(s16 *)(p + 0x2E) = 0;
+        }
+    }
+}
 
 extern u8 D_80078CC8[];
 extern u16 D_80078C7C;
@@ -362,7 +447,64 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_800383C8);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_8003860C);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80038890);
+extern u8 D_80093D10[];
+extern s32 D_8007142C[], D_80078C78;
+extern void func_8003860C(s32);
+extern void func_80038A60(s32);
+extern s32 SpuSetKey(s32, s32);
+extern s32 SpuGetKeyStatus(s32);
+void func_80038890(void) {
+    s32 i, bit, status, mask = 0;
+    u8 *v;
+    register s32 two asm("s0");
+    register u8 *p asm("v0");
+    register u8 val asm("a0");
+
+    for (i = 0; i <= 0; i++) {
+        func_8003860C(i);
+    }
+
+    for (i = 0; i < D_80078C78; i++) {
+        v = (u8 *)&D_80093D68[i];
+        v[0] = i;
+        *(s16 *)(v + 0x16) = 0;
+        *(s16 *)(v + 0x14) = 0x40;
+        *(s16 *)(v + 0x48) = 0x40;
+        *(s16 *)(v + 0x4A) = 0x40;
+        bit = D_8007142C[i];
+        mask |= bit;
+        func_80038A60(i);
+        do {
+            SpuSetKey(0, bit);
+            status = SpuGetKeyStatus(bit);
+            if (status == 2) {
+                break;
+            }
+        } while (status != 0);
+    }
+
+    two = 2;
+    p = D_80093D10;
+    val = 0x7F;
+    p[1] = 0x40;
+    p[7] = 0x40;
+    p[3] = val;
+    p[6] = 0;
+    p[5] = val;
+    *(s32 *)(p + 8) = 0x7F;
+    *(s32 *)(p + 0xC) = 0x7F;
+    p[2] = 0;
+    *(s16 *)(p + 0x30) = 0;
+    *(s16 *)(p + 0x26) = 0;
+
+    do {
+        SpuSetKey(0, mask);
+        status = SpuGetKeyStatus(mask);
+        if (status == two) {
+            break;
+        }
+    } while (status != 0);
+}
 
 void func_800389E8(void) {
 
