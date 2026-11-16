@@ -86,6 +86,7 @@ segments:
       - [0x75A4, c, chess__8009ECF8__8009EDA4]
       - [0x8C48, c, chess__8009ECF8__8009EDA4__800A0448]
       - [0x8CC8, c, chess__8009ECF8__8009EDA4__800A04C8]
+      - [0x8D40, c, chess__8009ECF8__8009EDA4__800A04C8__800A0540]
       - [0x8F0C, c, chess__8009ECF8__8009EDA4__800A070C]
       - [0x9050, c, chess__8009ECF8__8009EDA4__800A0850]
       - [0x9130, c, chess__8009ECF8__8009EDA4__800A0850__800A0930]

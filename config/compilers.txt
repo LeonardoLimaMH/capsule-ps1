@@ -342,7 +342,6 @@ src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60.c 2.7.2-cdk
 src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0D40.c 2.7.2-cdk
 src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4.c 2.7.2-cdk
 src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A1330.c 2.7.2-cdk
-src/chess/chess__8009ECF8__8009EDA4__800A04C8.c 2.7.2-cdk
 src/chess/chess__8009ECF8__8009EDA4__800A0448.c 2.7.2-cdk
 src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0AD4.c 2.7.2-cdk
 src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0930.c 2.7.2-cdk
@@ -388,3 +387,5 @@ src/chess/chess__8009B948__8009BAD8__8009BEE0__8009C5C4__8009CA60.c 2.7.2-cdk
 src/chess/chess__8009A498.c 2.7.2-cdk
 src/chess/chess__8009B948__8009BAD8__8009BEE0__8009C0E4.c 2.7.2-cdk
 src/chess/chess__8009B948__8009BAD8__8009BEE0__8009BFD4.c 2.7.2-cdk
+src/chess/chess__8009ECF8__8009EDA4__800A04C8__800A0540.c 2.7.2-cdk
+src/chess/chess__8009ECF8__8009EDA4__800A04C8.c 2.7.2-cdk
