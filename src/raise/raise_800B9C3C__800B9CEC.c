@@ -29,5 +29,3 @@ void func_800BA190(s32 arg0) {
 void func_800BA1B4(s32 arg0) {
     func_800BA744(1, arg0);
 }
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800B9CEC", func_800BA1D8);
