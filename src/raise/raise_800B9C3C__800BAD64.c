@@ -183,7 +183,3 @@ s32 func_800BB79C(void) {
     M2C_GFIELD(D_800EFF58, s32, 0x7C) = r;
     return r;
 }
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BAD64", func_800BB814);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BAD64", func_800BBA38);

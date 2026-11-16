@@ -380,3 +380,5 @@ src/etc/etc__800AA238__800AB78C__800AC780__800ACCA8.c 2.7.2-cdk
 src/raise/raise_800B61E4__800B84BC__800B8898.c 2.8.1-psx
 src/raise/raise_800B61E4__800B84BC__800B8700.c 2.7.2-cdk
 src/raise/raise_800B9C3C__800B9CEC__800B9E34.c 2.7.2-cdk
+src/raise/raise_800B9C3C__800BAD64__800BBA38.c 2.7.2-cdk
+src/raise/raise_800B9C3C__800BAD64__800BB814.c 2.7.2-cdk
