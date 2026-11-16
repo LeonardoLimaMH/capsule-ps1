@@ -28,7 +28,20 @@ void func_800FED90(u8 *arg0)
   func_800FEC2C(p);
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FEE40);
+void func_800FEE40(s32 arg0, s32 arg1) {
+    extern u8 *D_80118C18[];
+    s16 v[3];
+    s16 *p = v;
+
+    v[0] = (arg0 * 100) - 0x226;
+    p[2] = (arg1 * 100) - 0x226;
+    if (arg0 < 13 && arg1 < 13) {
+        p[1] = -(((*(u32 *)(D_80118C18[0] + arg0 * 0x34 + arg1 * 4)) >> 19) & 7) * 50;
+    } else {
+        p[1] = 0;
+    }
+    func_800FEC2C(v);
+}
 
 #include "ghidra.h"
 void func_800FEF04(undefined4 param_1,undefined4 param_2)
@@ -121,6 +134,20 @@ void func_800FF3B4(void *arg0, void *arg1, s32 arg2, s32 arg3, void *arg4) {
     M2C_FIELD(arg4, s16 *, 4) = (s16) ((s32) ((M2C_FIELD(arg0, s16 *, 4) * temp_t0) + (M2C_FIELD(arg1, s16 *, 4) * arg3)) / arg2);
 }
 
+static inline void calc_pos(u8 *arg0, s16 *v) {
+    extern u8 *D_80118C18[];
+    s32 a = arg0[0x15];
+    u8 b = arg0[0x16];
+    v[0] = (a * 100) - 0x226;
+    v[2] = (b * 100) - 0x226;
+    v[1] = (-(((*(u32 *)(D_80118C18[0] + a * 0x34 + b * 4)) >> 19) & 7)) * 50;
+}
+static inline void lerp_pos(s16 *arg0, s16 *arg1, s32 arg2, s32 arg3, s16 *arg4) {
+    s32 temp_t0 = arg2 - arg3;
+    arg4[0] = (s16)((arg0[0] * temp_t0 + arg1[0] * arg3) / arg2);
+    arg4[1] = (s16)((arg0[1] * temp_t0 + arg1[1] * arg3) / arg2);
+    arg4[2] = (s16)((arg0[2] * temp_t0 + arg1[2] * arg3) / arg2);
+}
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF460);
 
 s32 func_800FF644(void) {
@@ -213,4 +240,58 @@ s32 func_800FFA00(u8 *arg0, s32 arg1, u8 *arg2) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FFAB0);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FFCAC);
+void func_800FFCAC(u8 *arg0, s32 arg1) {
+    extern u8 D_801010B0[];
+    extern u8 D_8008ED68[];
+    extern u8 D_801021B8[][2][6][6];
+    extern s32 func_800202A4(s32);
+
+    typedef struct {
+        u8 pad0[0x9EC];
+        s32 unk9EC[4];
+    } Work_800FFCAC;
+
+    u8 *s4 = arg0 + 0x5D0;
+    u8 (*board)[13][4] = *(u8 (**)[13][4])(D_801010B0 + s4[9] * 0x34);
+    s32 idx1 = (arg0 + arg1)[0x5DE] - 1;
+    s32 idx2;
+    u8 *tbl;
+    u8 *p;
+    u8 b;
+    s32 row;
+    s32 col;
+    s32 val;
+
+    if ((s4 + arg1)[0x6D9] == 0) {
+        idx2 = func_800202A4(6);
+        ((Work_800FFCAC *)D_8008ED68)->unk9EC[arg1] = idx2;
+    } else {
+        idx2 = ((Work_800FFCAC *)D_8008ED68)->unk9EC[arg1];
+    }
+
+    tbl = D_801021B8[s4[9]][idx1][idx2];
+
+    if ((s4 + arg1)[0x6D9] != 5) {
+        u8 *q = s4 + arg1;
+        do {
+            val = func_800202A4(5);
+        } while ((q[0x6DD] >> val) & 1);
+
+        do {
+            b = tbl[func_800202A4(5)];
+            row = b >> 4;
+            col = b & 0xF;
+        } while (board[row][col][3] != 0);
+    } else {
+        b = tbl[5];
+        val = 5;
+        row = b >> 4;
+        col = b & 0xF;
+    }
+
+    p = s4 + arg1 * 6;
+    p[0x5ED] = 5;
+    p[0x5EC] = val;
+    p[0x5EE] = row;
+    p[0x5EF] = col;
+}
