@@ -680,7 +680,21 @@ void func_800A5BAC(void *arg0) {
     func_8001F35C((s16) (((1 - M2C_FIELD(arg0, s32 *, 0x7C)) * 0xD8) - 0x63), -0x68, 0, 1, 0, M2C_FIELD(arg0, s32 *, 0x80), 1, 3);
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A5C3C);
+void func_800A5C3C(u8 *arg0) {
+    extern u8 D_80085428[];
+    extern u8 D_8008ED68[];
+    u8 *ed;
+    u8 *p;
+
+    *(s16 *)(arg0 + 0x60) = (*(s32 *)(arg0 + 0x3C) * 4) & 0xFF;
+    ed = D_8008ED68;
+    *(s32 *)(arg0 + 0x3C) += ed[0x103] < 2 ? 1 : ed[0x103];
+    p = D_80085428;
+    if (p[0xD78] != 0 && *(s16 *)(arg0 + 0x60) >= 0xF1) {
+        p[0xD77] = 1;
+        func_800185F8(arg0);
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A5CCC);
 
