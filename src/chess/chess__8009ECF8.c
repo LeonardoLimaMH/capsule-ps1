@@ -698,7 +698,61 @@ void func_800A5C3C(u8 *arg0) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A5CCC);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A5DCC);
+void func_800A5DCC(s32 arg0, s32 arg1) {
+    extern int func_800161C4();
+    extern int func_800A6578();
+    extern int func_800A6938();
+    s32 p;
+    s32 image;
+    code *callback;
+    s32 col;
+    register s32 off asm("s2");
+    s32 layer;
+    s32 row;
+    s32 rowoff;
+    u32 flags;
+    layer = 0;
+    do {
+        row = 0;
+        flags = (layer + 1U) & 0x7F;
+        rowoff = row;
+        do {
+            col = 0;
+            off = rowoff;
+            do {
+                if (layer == 0) {
+                    callback = func_800A6578;
+                } else {
+                    callback = func_800A6938;
+                }
+                p = func_80015B3C(callback, func_800161C4, arg1);
+                func_80015EF8(p);
+                if (layer == 0) {
+                    *(s32 *)(arg0 + off + 0x65C) = p;
+                }
+                *(s32 *)(p + 0x7C) = row;
+                *(s32 *)(p + 0x80) = col;
+                image = func_80020364(*(u8 *)(arg0 + off + 0x5E8));
+                *(s32 *)(p + 0x84) = image;
+                *(u32 *)(p + 0x34) = (*(u32 *)(p + 0x34) & ~0x7F) | flags;
+                *(u32 *)(p + 0x38) |= 1;
+                if (layer != 0) {
+                    image = 0xD;
+                    if (col != 5) {
+                        image = 0;
+                        *(u16 *)(p + 0x66) = *(u8 *)(arg0 + row + 0x5E2);
+                    }
+                    *(s32 *)(p + 0x18) = func_80019F30(0x60012, image);
+                }
+                col++;
+                off += 0x7C;
+            } while (col < 6);
+            row++;
+            rowoff += 0x2E8;
+        } while (row < 2);
+        layer++;
+    } while (layer < 2);
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A5F2C);
 
