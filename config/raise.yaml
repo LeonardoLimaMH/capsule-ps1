@@ -121,6 +121,8 @@ segments:
       - [0x22408, c, raise_800B9B2C__800B9C08]
       - [0x2243C, c, raise_800B9C3C]
       - [0x224EC, c, raise_800B9C3C__800B9CEC]
+      - [0x22634, c, raise_800B9C3C__800B9CEC__800B9E34]
+      - [0x226E8, c, raise_800B9C3C__800B9CEC__raise_SpuInit]
       - [0x229D8, c, raise_800B9C3C__800B9CEC__800BA1D8]
       - [0x22BA8, c, raise_800B9C3C__800BA3A8]
       - [0x22CA0, c, raise_800B9C3C__800BA4A0]
