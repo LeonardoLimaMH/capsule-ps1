@@ -77,5 +77,3 @@ s32 func_800DEDE4(s32 idx)
   new_var = &(*((u32 *) (D_80092008 + ((idx & 0xFFFF) * 0x44))));
   return (((*new_var) >> 17) & 0x3F) == 0;
 }
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0", func_800DEE18);
