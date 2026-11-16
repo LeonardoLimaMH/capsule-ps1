@@ -480,3 +480,5 @@ src/chess/chess_801002CC__8010053C__801007D8__80100AF4.c 2.7.2-cdk
 src/chess/chess_801002CC__8010053C__801007D8__80100968.c 2.7.2-cdk
 src/etc/etc__80099B18__8009AB30.c 2.7.2-cdk
 src/etc/etc__80099B18__8009AA0C.c 2.7.2-cdk
+src/raise/raise_80098FEC__80099370.c 2.7.2-cdk
+src/raise/raise_80098FEC__800991D4.c 2.7.2-cdk

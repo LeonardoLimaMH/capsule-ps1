@@ -41,6 +41,8 @@ segments:
     vram: 0x80097800
     subsegments:
       - [0x0, rodata]
+      - [0x164, .rodata, raise_80098FEC__800991D4]
+      - [0x2A0, rodata]
       - [0x3DC, .rodata, raise_8009D2A8__8009D324]
       - [0x3F0, rodata]
       - [0x9B4, .rodata, raise_800B9C3C__800BCF98]
@@ -50,6 +52,8 @@ segments:
       - [0x16AC, c, raise]
       - [0x17B4, c, raise_80098FB4]
       - [0x17EC, c, raise_80098FEC]
+      - [0x19D4, c, raise_80098FEC__800991D4]
+      - [0x1B70, c, raise_80098FEC__80099370]
       - [0x3888, c, raise_8009B088]
       - [0x3950, c, raise_8009B150]
       - [0x4260, c, raise_8009B150__8009BA60]
