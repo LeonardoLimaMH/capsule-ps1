@@ -405,7 +405,34 @@ void func_800AAAA0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800AAB8C);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800AACAC);
+extern s32 rsin(s32);
+
+u8 *func_800AACAC(u8 *arg0, u8 *arg1, s32 arg2, s32 arg3, s32 arg4, void *arg5) {
+    extern void func_800AADE0();
+    extern u8 *func_80015B3C();
+    extern void func_80015EF8();
+    extern s32 func_80019F30();
+    extern void func_80015CD0();
+    extern void func_800A81D8();
+    s32 s2;
+    s32 s3;
+    u8 *s0;
+
+    s2 = *(s32 *)(arg1 + 0x7C);
+    s3 = *(s32 *)(arg1 + 0x80);
+    s0 = func_80015B3C(arg5, func_800AADE0, 4);
+    func_80015EF8(s0);
+    *(u8 **)(s0 + 0x40) = arg1;
+    *(u32 *)(s0 + 0x30) = (*(u32 *)(s0 + 0x30) & ~0x30) | 0x10;
+    *(u32 *)(s0 + 0x30) = (*(u32 *)(s0 + 0x30) & ~0x1C0) | 0x40;
+    *(u32 *)(s0 + 0x38) |= 1;
+    *(s32 *)(s0 + 0x7C) = *(s32 *)(arg1 + 0x7C);
+    *(s32 *)(s0 + 0x80) = *(s32 *)(arg1 + 0x80);
+    *(s32 *)(s0 + 0x84) = 0;
+    func_80015CD0(s0 + 0x14, func_80019F30((*(u8 *)(arg0 + (s2 * 0x2E8 + s3 * 0x7C) + 0x5E8) + 0x10D) | 0x70000, arg2), arg3);
+    func_800A81D8(arg0, s0, s2, s3);
+    return s0;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800AADE0);
 
