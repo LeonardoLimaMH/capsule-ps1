@@ -13,9 +13,6 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BC49C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BCE0C);
 
-#include "common.h"
-
-#include "ghidra.h"
 void func_800BCEEC(int param_1)
 
 {
@@ -57,7 +54,6 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BDBC0);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BE244);
 
-#include "common.h"
 void func_800BE408(s32 arg0) {
     void *temp_s1;
 
@@ -78,15 +74,102 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BEC20);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BEE98);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BF0D0);
+void func_800BF0D0(s32 arg0, s32 arg1) {
+    extern u8 D_8008ED68[];
+    s32 sp10;
+    s32 sp14;
+    s32 flags;
+    s32 c;
+    s32 x;
+    s32 y;
+    s32 o;
+    s32 state;
+    u8 *pair;
+    u8 *base;
+    u8 *selection;
+    register u8 *p asm("v0");
+    register u8 *cell asm("v1");
+    register s32 unit_offset asm("v1");
+    u8 *unit;
+    u8 *ed;
+
+    base = (u8 *)(arg0 + 0x5D0);
+    c = base[0x5FA];
+    state = base[0x61A];
+    selection = base + c;
+    o = selection[0x5FB];
+    if (state == 0 || state == 5) {
+        if ((((M2C_FIELD(func_800A8E84(base), u32 *, 0x10) >> 21) & 7) ^ 1) != 0) {
+            if (selection[0x10] != 0) {
+                func_800AEA4C(base, c);
+            }
+            func_800C8EF0(arg0, c, base + (c * 2 + 0x601));
+        } else {
+            if (selection[0x10] != 0) {
+                func_800AEBD0(base, c);
+            }
+            func_800BE244(base, c, 1);
+        }
+        if (base[0x61A] != 5) {
+            if (arg1 == 2) {
+                p = base + c * 2;
+                base[0x7A8] = func_800A44E8(arg0, p[0x601], p[0x602]);
+            }
+            ed = D_8008ED68;
+            flags = *(s32 *)(c * 0x10 + ed + 0x88);
+            if (flags & 0x20) {
+                p = base + c * 2;
+                x = p[0x601];
+                y = p[0x602];
+                cell = (u8 *)(x * 13 + (u32)base + y);
+                if (cell[0x630] == 2) {
+                    func_80034AB0(0x48);
+                    base[0x619] = 0;
+                    base[0x7A7] = 1;
+                    func_800CA730(arg0, c, &sp10, &sp14);
+                    base[0x712] = *(u8 *)&sp10;
+                    base[0x713] = *(u8 *)&sp14;
+                    if ((base + c)[0x10] == 0) {
+                        p = base + c * 6;
+                        p[0x5F0] = x;
+                        p[0x5F1] = y;
+                    }
+                    unit_offset = o * 0x7C;
+                    unit_offset += c * 0x2E8;
+                    cell = base + unit_offset;
+                    cell[0x2F] = 1;
+                    base[0x615] = 0;
+                    if (arg1 != 1) {
+                        base[0x614] = 0;
+                    }
+                    func_800125D8();
+                    return;
+                }
+                func_80034AB0(0x4C);
+                return;
+            }
+            if (flags & 0x40) {
+                func_80034AB0(0x5D);
+                pair = base + c * 2;
+                base[0x7A7] = 1;
+                unit = base + (o * 0x7C + c * 0x2E8);
+                base[0x619] = 0;
+                pair[0x601] = unit[0x2D];
+                pair[0x602] = unit[0x2E];
+                unit[0x2F] = 0x81;
+                unit[0x3B] = 0;
+                base[0x610] = 2;
+                func_800125AC(3);
+            }
+        }
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BF39C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BF6A0);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BF86C);
-
-#include "common.h"
 
 void func_800BF9B0(void *arg0) {
     extern u16 D_8008EE50[];
@@ -127,7 +210,6 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800C0440);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800C0658);
 
-#include "ghidra.h"
 void func_800C087C(undefined4 param_1)
 
 {
