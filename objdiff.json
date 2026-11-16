@@ -1313,7 +1313,7 @@
         "progress_categories": [
           "yuugi"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/yuugi/main__80012A14__80012E54.o"
     },
@@ -2033,7 +2033,7 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB588.o"
     },
@@ -2146,6 +2146,126 @@
       "base_path": "build/objdiff/base/chess/chess_801002CC.o"
     },
     {
+      "name": "chess/chess__8009A608",
+      "target_path": "build/objdiff/target/chess/chess__8009A608.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009A608.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009A608.o"
+    },
+    {
+      "name": "chess/chess__8009A75C",
+      "target_path": "build/objdiff/target/chess/chess__8009A75C.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009A75C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009A75C.o"
+    },
+    {
+      "name": "chess/chess__8009A75C__8009B4C8",
+      "target_path": "build/objdiff/target/chess/chess__8009A75C__8009B4C8.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009A75C__8009B4C8.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009A75C__8009B4C8.o"
+    },
+    {
+      "name": "chess/chess__8009B814",
+      "target_path": "build/objdiff/target/chess/chess__8009B814.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009B814.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009B814.o"
+    },
+    {
+      "name": "chess/chess__8009B948",
+      "target_path": "build/objdiff/target/chess/chess__8009B948.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009B948.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009B948.o"
+    },
+    {
+      "name": "chess/chess__8009B948__8009BAD8",
+      "target_path": "build/objdiff/target/chess/chess__8009B948__8009BAD8.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009B948__8009BAD8.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009B948__8009BAD8.o"
+    },
+    {
+      "name": "chess/chess__8009B948__8009BAD8__8009BE30",
+      "target_path": "build/objdiff/target/chess/chess__8009B948__8009BAD8__8009BE30.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009B948__8009BAD8__8009BE30.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009B948__8009BAD8__8009BE30.o"
+    },
+    {
+      "name": "chess/chess__8009B948__8009BAD8__8009BEE0",
+      "target_path": "build/objdiff/target/chess/chess__8009B948__8009BAD8__8009BEE0.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009B948__8009BAD8__8009BEE0.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009B948__8009BAD8__8009BEE0.o"
+    },
+    {
+      "name": "chess/chess__8009B948__8009BAD8__8009BEE0__8009C4B0",
+      "target_path": "build/objdiff/target/chess/chess__8009B948__8009BAD8__8009BEE0__8009C4B0.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009B948__8009BAD8__8009BEE0__8009C4B0.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009B948__8009BAD8__8009BEE0__8009C4B0.o"
+    },
+    {
+      "name": "chess/chess__8009B948__8009BAD8__8009BEE0__8009C5C4",
+      "target_path": "build/objdiff/target/chess/chess__8009B948__8009BAD8__8009BEE0__8009C5C4.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009B948__8009BAD8__8009BEE0__8009C5C4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009B948__8009BAD8__8009BEE0__8009C5C4.o"
+    },
+    {
       "name": "chess/chess__8009CBDC",
       "target_path": "build/objdiff/target/chess/chess__8009CBDC.o",
       "metadata": {
@@ -2177,9 +2297,105 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess__8009ECF8.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009ED2C",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009ED2C.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009ED2C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009ED2C.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A070C",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A070C.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A070C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A070C.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A0850",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0850.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A0850.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A0850__800A0D40",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0850__800A0D40.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0D40.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0D40.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A1330",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A1330.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A1330.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A1330.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4.o"
     },
     {
       "name": "chess/chess__800A83E0",
