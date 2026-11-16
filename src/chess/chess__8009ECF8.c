@@ -43,8 +43,6 @@ void func_8009F960(void) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_8009F98C);
 
-#include "common.h"
-
 void func_8009FD2C(void *arg0, void *arg1) {
     extern s16 D_80101B3A[];
     (*D_80101B3A) = ((s32) (M2C_FIELD(arg1, u8 *, 0x28) + 1) >> 1) + 0xC2;
@@ -264,8 +262,6 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A1278);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A1330);
 
-#include "common.h"
-
 void func_800A13B4(void *arg0) {
     extern u16 D_8008EE4C[];
     u16 temp_v1;
@@ -446,7 +442,6 @@ loop_2:
     } while (var_a2 < 0xD);
 }
 
-#include "ghidra.h"
 undefined4 func_800A4678(undefined4 param_1)
 
 {
@@ -482,7 +477,6 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A4900);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A4A10);
 
-#include "common.h"
 void func_800A4B34(void *arg0) {
     extern int func_800161C4();
     extern int func_800A5BAC();
@@ -511,8 +505,6 @@ void func_800A4B34(void *arg0) {
     }
     func_800125D8();
 }
-
-#include "common.h"
 
 void func_800A4C3C(void *arg0) {
     void *temp_s0;
@@ -639,9 +631,45 @@ block_8:
     }
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A5B00);
+void func_800A5B00(u8 *arg0) {
+    typedef struct {
+        u32 f88;
+        u8 pad[0xC];
+    } PadEntry;
+    typedef struct {
+        u8 pad[0x88];
+        PadEntry entry[4];
+    } EdGlobal;
+    extern u8 D_80085428[];
+    extern EdGlobal D_8008ED68[];
+    extern void func_800185F8(u8 *);
+    u8 *p = D_80085428;
+    s32 idx = *(s32 *)(arg0 + 0x5C);
+    u8 *q = p + idx * 2;
+    register s32 flag asm("t0") = 0;
 
-#include "common.h"
+    if (q[0xBD1] != *(s32 *)(arg0 + 0x68)) {
+        goto hit;
+    }
+    if (q[0xBD2] != *(s32 *)(arg0 + 0x6C)) {
+        goto hit;
+    }
+    {
+        u32 v = D_8008ED68->entry[idx].f88;
+        if (v & 0x40) goto hit;
+        if (v & 0x10) goto hit;
+        if (v & 1) goto hit;
+        if (v & 2) {
+        hit:
+            flag = 1;
+            p[0xD77] = 0;
+            p[0xBE0] = 1;
+        }
+    }
+    if (flag != 0) {
+        func_800185F8(arg0);
+    }
+}
 
 void func_800A5BAC(void *arg0) {
     extern u16 D_8008EE48[];
@@ -669,8 +697,6 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A6578);
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A6938);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A6DA8);
-
-#include "common.h"
 
 void func_800A70EC(void *arg0) {
     extern u8 D_80085428[];
