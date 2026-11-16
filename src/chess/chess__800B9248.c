@@ -1,6 +1,5 @@
 #include "ghidra.h"
 #include "common.h"
-#include "ghidra.h"
 
 void func_800B9248(undefined4 param_1,char *param_2)
 
@@ -18,7 +17,34 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248", func_800B9298);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248", func_800B9684);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248", func_800B97B4);
+void func_800B97B4(u8 *p) {
+    extern u8 *func_800A8EE8();
+    extern void func_8009C4B0();
+    u8 *base = p + 0x5d0;
+    s32 c = base[0x5fa];
+    s32 o = base[0x70c];
+    s32 i = (base + c)[0x5fb];
+    u32 *ret = (u32 *)func_800A8EE8(base, 1 - c, o);
+    u32 flags;
+    u32 type;
+
+    (base + (c * 0x2e8 + i * 0x7c))[0x3e] = 1;
+    func_8009C4B0(p, c, i);
+
+    flags = ret[4];
+    if ((flags & 3) == 2) {
+        type = (flags >> 2) & 0x1f;
+        if (type == 1 || type == 8 || type == 3) {
+            s32 off = o * 0x7c;
+            off += (1 - c) * 0x2e8;
+            (base + off)[0x3e] = 2;
+            if (o != 5) {
+                func_8009C4B0(p, 1 - c, o);
+            }
+        }
+    }
+    base[0x619] = 0;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248", func_800B98E8);
 
