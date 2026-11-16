@@ -11,5 +11,3 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__8009A75C", func_8009AAA4);
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009A75C", func_8009AC88);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009A75C", func_8009B23C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess__8009A75C", func_8009B4C8);

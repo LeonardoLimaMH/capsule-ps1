@@ -332,3 +332,4 @@ src/chess/chess__8009A75C.c 2.7.2-cdk
 src/chess/chess__8009A608.c 2.7.2-cdk
 src/chess/chess__8009B948__8009BAD8__8009BEE0.c 2.7.2-cdk
 src/chess/chess__8009B948__8009BAD8__8009BE30.c 2.7.2-cdk
+src/chess/chess__8009A75C__8009B4C8.c 2.7.2-cdk
