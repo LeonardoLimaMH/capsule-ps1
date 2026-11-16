@@ -15,7 +15,18 @@ void func_800FEBF4(void *arg0) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FEC2C);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FED90);
+void func_800FED90(u8 *arg0)
+{
+  extern u8 *D_80118C18[];
+  s16 v[3];
+  s16 *p = v;
+  s32 a = arg0[0x15];
+  unsigned char b = arg0[0x16];
+  v[0] = (a * 100) - 0x226;
+  p[2] = (b * 100) - 0x226;
+  p[1] = (-(((*((u32 *) ((D_80118C18[0] + (a * 0x34)) + (b * 4)))) >> 19) & 7)) * 50;
+  func_800FEC2C(p);
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FEE40);
 
@@ -34,7 +45,46 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FEF40);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF0A0);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF190);
+void func_800FF190(s32 arg0, void *arg1, s32 arg2) {
+    extern u8 D_80119710[];
+    extern u8 D_800906A0[];
+    extern s32 D_8008ED68[];
+    s32 xy;
+    s32 b, c;
+    s32 r;
+    s32 d;
+    s32 t;
+    s16 val50;
+    u8 *s0 = *(u8 **)((u8 *)arg0 + 0x70);
+    u8 *s1 = *(u8 **)((u8 *)arg0 + 0x74);
+
+    if (D_80119710[0x3d] == 0) {
+        func_8002CEC0(D_800906A0);
+        D_80119710[0x3d] = 1;
+    }
+    r = RotTransPers(arg1, &xy, &b, &c);
+    *(s16 *)(s0 + 0x46) = ((s16 *)&xy)[0] - D_8008ED68[0x108 / 4] / 2;
+    *(s16 *)(s0 + 0x4a) = ((s16 *)&xy)[1] - D_8008ED68[0x10c / 4] / 2;
+    t = r - 15;
+    *(s16 *)(s0 + 0x4e) = t - arg2;
+    if (r <= 0) {
+        r = 1;
+    }
+    if ((s16)*(s16 *)(s0 + 0x4e) < 0) {
+        *(s16 *)(s0 + 0x4e) = 0;
+    }
+    d = 0x140000 / r;
+    *(s16 *)(s0 + 0x50) = d;
+    *(s16 *)(s0 + 0x52) = d & ~0xf;
+    *(s16 *)(s0 + 0x50) = d & ~0xf;
+
+    *(s16 *)(s1 + 0x46) = *(s16 *)(s0 + 0x46);
+    *(s16 *)(s1 + 0x4a) = *(s16 *)(s0 + 0x4a);
+    *(s16 *)(s1 + 0x4e) = *(s16 *)(s0 + 0x4e);
+    val50 = *(s16 *)(s0 + 0x50);
+    *(s16 *)(s1 + 0x52) = val50;
+    *(s16 *)(s1 + 0x50) = val50;
+}
 
 void func_800FF2CC(s32 arg0, void *arg1, s16 arg2) {
     extern u8 D_80119710[];
