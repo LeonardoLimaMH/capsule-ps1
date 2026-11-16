@@ -411,7 +411,50 @@ void func_800B786C(s32 a0) {
     D_800EEB9C->unk75C->unk78 = 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B78C4);
+void func_800B78C4(void) {
+    typedef struct {
+        u8 _p00[0x38];
+        u32 unk38;
+        u8 _p3C[0x18];
+        s16 unk54;
+        u8 _p56[0x22];
+        s16 unk78;
+    } Obj;
+    extern struct {
+        u16 unk0;
+        u16 unk2;
+        s32 unk4;
+    } D_8006AF80[];
+    extern struct {
+        u8 _p00[0x754];
+        Obj *unk754;
+        u32 unk758;
+        Obj *unk75C;
+    } D_800EEB9C[];
+    s32 tempo;
+    s32 total;
+    s32 hora;
+    s32 minuto;
+    s32 resto;
+    s32 intervalo;
+
+    tempo = D_8006AF80->unk4;
+    if (D_8006AF80->unk0 != 0xFFFF) {
+        total = func_800B4704(1);
+        resto = tempo % total;
+        intervalo = total / 24;
+        hora = resto / intervalo;
+        minuto = (resto % intervalo) / (intervalo / 60);
+        hora %= 12;
+        D_800EEB9C->unk754->unk38 &= ~8;
+        D_800EEB9C->unk754->unk54 = (hora << 12) / 12;
+        D_800EEB9C->unk754->unk54 += (minuto * 0x155) / 60;
+        D_800EEB9C->unk754->unk78 = 0;
+        D_800EEB9C->unk75C->unk38 &= ~8;
+        D_800EEB9C->unk75C->unk54 = (minuto << 12) / 60;
+        D_800EEB9C->unk75C->unk78 = 0;
+    }
+}
 
 s32 func_800B7A5C(void) {
     return 0;
