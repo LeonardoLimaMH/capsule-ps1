@@ -60,6 +60,8 @@ segments:
       - [0x209C, .rodata, chess_800FFE6C]
       - [0x2238, rodata]
       - [0x2340, c, chess]
+      - [0x4014, c, chess__8009B814]
+      - [0x4148, c, chess__8009B948]
       - [0x53DC, c, chess__8009CBDC]
       - [0x559C, c, chess__8009CD9C]
       - [0x74F8, c, chess__8009ECF8]
