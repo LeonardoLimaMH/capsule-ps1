@@ -403,7 +403,20 @@ void func_800AAAA0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_800A9810(arg0, arg1, arg2, arg3, 0);
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800AAB8C);
+extern s32 rsin(s32);
+
+void func_800AAB8C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    extern s32 D_80100F40[];
+    s16 temp_s0;
+
+    arg2 += 5;
+    arg3 += 7;
+    func_8001F1A8((s16) arg2, (s16) arg3, 0, 0, 0, D_80100F40, 0, 7, 3);
+    temp_s0 = arg3 + 0xE;
+    func_800188F0((s16) (arg2 + 4), temp_s0, 3, 0, 3);
+    func_8001F35C((s16) (arg2 + 0x1A), temp_s0, 0, 0, 0, 5 - M2C_FIELD((arg0 + arg1), u8 *, 0xBDA), 1, 3);
+    func_800A9810(arg0, arg1, arg2, arg3, 2);
+}
 
 extern s32 rsin(s32);
 
