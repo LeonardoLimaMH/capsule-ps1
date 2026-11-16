@@ -117,7 +117,7 @@ void func_800E085C(s32 arg0) {
 #define PL(a) (D_80100F38 + (func_800B1260(a) & 0xFFFF) * 0x79C)
 #define P32(o) (*(s32 *)(p + (o)))
 #define P16(o) (*(u16 *)(p + (o)))
-#define PS16(o) (*(volatile s16 *)(p + (o)))
+#define PS16(o) (*(s16 *)(p + (o)))
 extern void func_800D0730(void *, s32, s32, s32);
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800E088C);
 
@@ -355,7 +355,57 @@ s32 func_800E1140(s32 idx) {
     return ((*(u32 *)(obj + 0x798) >> 5) & 1) ^ 1;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DFB80", func_800E11A0);
+void func_800E11A0(s32 arg0, s32 arg1) {
+    extern u16 D_8008EE44[];
+    extern u8 D_80091618[];
+    extern s32 D_800EE9B8[];
+    extern u8 D_800F07E4[];
+    extern u8 D_800F07F4[];
+    extern u8 D_80100F38[];
+    extern s32 func_800E16AC(s32);
+    extern s32 func_800A1F44(s32, s32, s32);
+    extern s32 func_800E14C4(s32);
+    extern s32 func_800C0E1C(s32, s32, s32);
+    extern void func_800E0E8C(s32);
+    extern void func_800E1720(s32);
+
+    register s32 one asm("s2") = 1;
+    s32 temp_s0;
+    s32 var_s0;
+    u8 *temp_v0;
+    u8 *temp_v0_2;
+    u32 mbase;
+    u8 *temp_v0_3;
+
+    temp_s0 = arg1 & 0xFFFF;
+    D_800EE9B8[one - arg0] = 0;
+    temp_v0 = (temp_s0 * 0x79C) + D_80100F38;
+    *(u8 **)(temp_v0 + 0x2BC) = D_800F07F4;
+    *(s16 *)(temp_v0 + 0x2B8) = 0;
+    *(s16 *)(temp_v0 + 0x2BA) = 0;
+    *(s16 *)(temp_v0 + 0x2C8) = 0;
+    *(s16 *)(temp_v0 + 0x2C0) = 0;
+    *(s16 *)(temp_v0 + 0x2C2) = 0;
+    *(u8 **)(temp_v0 + 0x2C4) = D_800F07E4;
+    *(s16 *)(temp_v0 + 0x2CA) = 0;
+    if (func_800E16AC(temp_s0) == one) {
+        func_800A1F44(arg0, one, 0);
+    } else if (func_800E14C4(temp_s0) == one && (*D_8008EE44 < 0x35 || *D_8008EE44 >= 0x3D)) {
+        func_800C0E1C(arg0, 6, 2);
+    } else {
+        func_800C0E1C(arg0, 0, 0);
+    }
+    var_s0 = arg1 & 0xFFFF;
+    temp_v0_2 = (var_s0 * 0x79C) + D_80100F38;
+    *(s32 *)(*(u8 **)(temp_v0_2 + 0x184) + 0x38) |= 1;
+    *(s32 *)(temp_v0_2 + 0x188) = 4;
+    mbase = (u32)D_80091618;
+    temp_v0_3 = (u8 *)(mbase + (var_s0 * 0x1A8));
+    *(s16 *)(temp_v0_3 + 0x19A) = -1;
+    *(s16 *)(temp_v0_3 + 0x198) = -1;
+    func_800E0E8C(var_s0);
+    func_800E1720(var_s0);
+}
 
 #include "ghidra.h"
 void func_800E134C(int param_1)
