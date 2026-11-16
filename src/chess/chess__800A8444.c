@@ -272,7 +272,20 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8DB4);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8E08);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8E34);
+s32 func_800A8E34(s32 arg0, s32 arg1, s32 arg2)
+{
+    s32 p;
+    s32 v;
+    p = arg2 * 0x7C;
+    p += arg1 * 0x2E8;
+    v = *(s32 *) (arg0 + p + 0x30);
+    if (v & 0x100) {
+        return 2;
+    }
+    return (v & 0x200) > 0;
+}
+
+extern s32 rsin(s32);
 
 u8 *func_800A8E84(s32 arg0)
 {
