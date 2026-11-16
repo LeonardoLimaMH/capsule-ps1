@@ -756,7 +756,40 @@ void func_800A5DCC(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A5F2C);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A5FEC);
+void func_800A5FEC(void) {
+    extern void func_800161C4();
+    extern void func_800A70EC(void *);
+    extern void func_800A71DC(void *);
+    u8 *p;
+    void (*callback)(void *);
+    u32 i;
+    s32 image;
+
+    image = 0;
+    i = 2;
+    do {
+        if (i != 5) {
+            callback = func_800A71DC;
+        } else {
+            callback = func_800A70EC;
+        }
+        p = (u8 *)func_80015B3C(callback, func_800161C4, 4);
+        func_80015EF8(p);
+        *(s16 *)(p + 0x4a) = -80;
+        *(s16 *)(p + 0x46) = 0;
+        *(s16 *)(p + 0x4e) = 4;
+        *(u32 *)(p + 0x34) = (*(u32 *)(p + 0x34) & ~0x7f) | (i & 0x7f);
+        if (i == 3) {
+            image = 0x37;
+        } else if (i == 4) {
+            image = 0x38;
+        } else if (i == 5) {
+            *(u32 *)(p + 0x38) = (*(u32 *)(p + 0x38) | 0x40) & ~0x30;
+        }
+        *(s32 *)(p + 0x18) = func_80019F30(0x60012, image);
+        i++;
+    } while ((s32)i < 6);
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A60F8);
 
