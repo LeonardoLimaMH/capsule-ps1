@@ -4,6 +4,8 @@
 typedef struct { u8 pad[0x15]; u8 x; u8 y; } Pos800C;
 typedef struct { u8 pad0[0x10]; u32 w10; u32 w14; u8 pad1[0x28]; } Ent63940;
 typedef struct { u8 pad[0x30]; u16 h; u8 pad1[2]; } Ent1010B0;
+typedef struct { u16 unk0; u8 unk2; u8 unk3; } Struct80118818;
+typedef struct { u8 unk0; s8 unk1; } Struct8011881C;
 
 s32 func_800C94DC(s32 unused_arg0, s32 arg1) {
     extern s16 D_80069BBE[];
@@ -48,7 +50,15 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9648);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9A34);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9B78);
+s32 func_800C9B78(u8 *first, u8 *second) {
+    extern s32 func_8001AA44(s32, s32);
+    extern double sqrt(double);
+    s32 x, y, squared;
+    x = first[0x15] - second[0x15];
+    squared = func_8001AA44((x < 0 ? -x : x) * 100, 2);
+    y = first[0x16] - second[0x16];
+    return (s32)sqrt((double)(squared + func_8001AA44((y < 0 ? -y : y) * 100, 2)));
+}
 
 extern s32 func_8001AA44(s32, s32);
 extern double sqrt(double);
@@ -105,9 +115,45 @@ void func_800CA268(short param_1,short param_2,short param_3,short param_4,short
   return;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA2C8);
+void func_800CA2C8(s16 arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s32 arg5) {
+    typedef struct {
+        u8 pad[0x108];
+        s32 unk108;
+        s32 unk10C;
+    } S_8ED68_CA2C8;
+    extern S_8ED68_CA2C8 D_8008ED68[];
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA35C);
+    func_800CA00C(
+        1,
+        (s16)(arg0 + D_8008ED68[0].unk108 / 2),
+        (s16)(arg1 + D_8008ED68[0].unk10C / 2),
+        arg2,
+        arg3,
+        arg4,
+        arg5,
+        1
+    );
+}
+
+void func_800CA35C(void) {
+    typedef struct {
+        u8 pad0[0x20];
+        u32 unk20;
+        u8 pad24[3];
+        u8 unk27;
+        u8 unk28;
+    } S_8ED68_CA35C;
+    extern S_8ED68_CA35C D_8008ED68[];
+    S_8ED68_CA35C *p = D_8008ED68;
+
+    if (p->unk28 == 0 && p->unk20 != 0 && (p->unk20 % 10800U) == 0) {
+        if (p->unk27 == 0) {
+            p->unk28 = 1;
+        } else {
+            p->unk28 = 3;
+        }
+    }
+}
 
 s32 func_800CA3DC(s32 arg0) {
     s32 var_v1;
@@ -196,7 +242,27 @@ s32 func_800CA6B8(u8 *p, s32 a1, s32 a2, s32 a3) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA730);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA7B0);
+void func_800CA7B0(u8 *p0, u8 *p, s32 a2, s32 a3, s16 v) {
+    u8 *t = p + a2;
+    u8 *q = p + (p[0x6A] * 6 + 0x2E);
+    s32 s = t[0x6B] + v;
+    if (s >= 0x100) {
+        *(s16 *)(q + 2) = 0xFF - t[0x6B];
+    } else if (s < 0) {
+        *(s16 *)(q + 2) = -t[0x6B];
+    } else {
+        *(s16 *)(q + 2) = v;
+    }
+    if (*(s16 *)(q + 2) != 0) {
+        if (a2 != 0 && (a3 & 0xFF) != 0) {
+            q[0] = a2;
+            q[4] = (a3 & 0xFF) * 2;
+            p[0x6A]++;
+            p0[0xCE5] = a2;
+        }
+        *(p + a2 + 0x6B) += q[2];
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA87C);
 
@@ -250,11 +316,69 @@ s16 func_800CAA6C(void *arg0, s32 arg1)
   return var_a2;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CAABC);
+void func_800CAABC(void *arg0) {
+    extern u8 D_80085428[];
+    extern u8 D_8008ED68[];
+    u8 *base = D_80085428;
+    s32 flag = 1;
+    u8 *ptr = *(u8 **)((u8 *)arg0 + 0x7C);
+    u32 step_arg = *(u32 *)((u8 *)arg0 + 0x80);
+    s32 count = *(s32 *)((u8 *)arg0 + 0x3C);
+    s32 i;
+    s32 val0;
+
+    if (D_8008ED68[0x103] >= 2) {
+        val0 = count + D_8008ED68[0x103];
+    } else {
+        val0 = count + 1;
+    }
+    *(s32 *)((u8 *)arg0 + 0x3C) = val0;
+
+    for (i = 0; i < 5; i++) {
+        u32 step = 0x4000;
+        u8 cur = ptr[i + 0xE];
+        u32 val = (cur << 16) | *(u16 *)(base + 0xCEC);
+        s32 diff;
+
+        if (i != 3) {
+            step = step_arg;
+        }
+
+        diff = ptr[i + 0x6B] - cur;
+        if (diff > 0) {
+            val += step;
+            val >>= 16;
+            if (val < ptr[i + 0x6B]) {
+                ptr[i + 0xE] = val;
+                flag = 0;
+            } else {
+                ptr[i + 0xE] = ptr[i + 0x6B];
+            }
+        } else if (diff < 0) {
+            if (val < step) {
+                val = 0;
+            } else {
+                val -= step;
+            }
+            val >>= 16;
+            if (val > ptr[i + 0x6B]) {
+                ptr[i + 0xE] = val;
+                flag = 0;
+            } else {
+                ptr[i + 0xE] = ptr[i + 0x6B];
+            }
+        }
+    }
+
+    if (flag) {
+        base[0xCF0] = 1;
+        func_800CBA04(base + 0x5D0);
+        func_800185F8(arg0);
+    }
+}
 
 void func_800CABDC(void *arg0, s32 arg1, s32 arg2) {
     extern u8 D_80018600[];
-    extern int func_800CAABC();
     void *temp_v0;
 
     temp_v0 = func_80015B3C(&func_800CAABC, D_80018600, 0);
