@@ -14,8 +14,6 @@ void func_800CAE14(void *arg0)
   }
 }
 
-#include "common.h"
-
 s32 func_800CAE6C(void *arg0) {
     u8 temp_v0;
 
@@ -37,7 +35,71 @@ s32 func_800CAE6C(void *arg0) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CAECC);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CAF74);
+typedef struct {
+    u8 unk0[0x15];
+    u8 unk15;
+    u8 unk16;
+    u8 unk17[0x7C - 0x17];
+} ChessPiece7C;
+
+s32 func_800CAF74(u8 *arg0) {
+    extern u8 D_80085428[];
+    extern u8 D_801010B0[];
+    extern s8 D_801010A8[];
+    extern void func_8001A998(void *, s32);
+    register s32 count asm("s1") = 0;
+    u8 *table = D_801010B0;
+    register u8 *base asm("s0") = D_80085428;
+    u32 board = *(u32 *)(table + base[0x5D9] * 0x34);
+    register s32 i asm("t1");
+    s8 *dir;
+    register s32 x0 asm("t2");
+    s32 y0;
+    u32 x;
+    s32 y;
+    register u32 *cell asm("a3");
+    u32 *current;
+    u32 value;
+    register s32 col asm("v1");
+    register s32 diff asm("v0");
+    u8 *out;
+    u32 team;
+    s32 piece;
+
+    func_8001A998(arg0, 0xA9);
+    i = 0;
+    dir = D_801010A8;
+    y0 = base[base[0xBCA] * 2 + 0xBD2];
+    x0 = base[base[0xBCA] * 2 + 0xBD1];
+    current = (u32 *)(y0 * 4 + (x0 * 0x34 + board));
+loop:
+        x = x0 + dir[0];
+        y = y0 + dir[1];
+        if (x < 13 && y >= 0 && y < 13) {
+            col = y * 4;
+            cell = (u32 *)(col + (x * 0x34 + board));
+            value = *cell;
+            if ((s32)(value & 0x3F) > 1) {
+                diff = (value >> 19) & 7;
+                diff -= (*current >> 19) & 7;
+                if (diff < 0) diff = -diff;
+                if (diff < 3) {
+                    out = (u8 *)(x * 13 + (u32)arg0 + y);
+                    *out = 1;
+                    team = ((u8 *)cell)[3] >> 7;
+                    piece = (((u8 *)cell)[3] & 0x7F) - 1;
+                    if (base[0xBCA] == 1 - team && piece != -1) {
+                        *out = 2;
+                        count++;
+                    }
+                }
+            }
+        }
+        i++;
+        dir += 2;
+    if (i < 4) goto loop;
+    return count;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CB10C);
 
