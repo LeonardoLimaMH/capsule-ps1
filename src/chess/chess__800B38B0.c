@@ -495,7 +495,29 @@ s32 func_800B75C4(void *a, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return 0;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B7630);
+u8 func_800B7630(u8 *arg0, u32 arg1, u32 arg2, s32 arg3) {
+    extern struct { s32 f0; u8 pad[0x30]; } D_801010B0[];
+    extern s32 func_800B74BC();
+    struct S { u8 pad0[2]; u8 f2; u8 f3; u8 pad4[4]; struct { u8 a; u8 b; } e[15]; u8 f26; u8 f27; };
+    struct S *p = (struct S *)(arg0 + 0x6E0);
+    s32 q = D_801010B0[arg0[9]].f0;
+    if (*(u8 *)((u32)arg0 + arg1 + 0xE) == 1) {
+        arg3++;
+    } else {
+        arg3--;
+    }
+    if (func_800B74BC(p, q, arg3, arg2, arg1 & 0xFF, 0) != 0 &&
+        p->f2 == arg2 && p->f3 == arg3) {
+        p->e[p->f26].a = arg2;
+        p->e[p->f26].b = arg3;
+        p->f26++;
+        return 1;
+    }
+    return 0;
+}
+
+extern void func_800A84A0(void *, s32, s32, s32);
+extern void func_800125AC(s32);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B7734);
 
