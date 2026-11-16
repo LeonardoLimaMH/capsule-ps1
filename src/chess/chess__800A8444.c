@@ -76,7 +76,17 @@ extern u8 D_8006B2A4[];
 
 extern s32 rsin(s32);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8770);
+u32 func_800A8770(s32 arg0, s32 arg1, s32 arg2) {
+    extern u32 D_80063940[][15];
+    u32 (*table)[15] = D_80063940;
+    u8 b;
+
+    arg0 += (arg2 * 0x7C) + (arg1 * 0x2E8);
+    b = *(u8 *)(arg0 + 0x5E8);
+    return (table[b][2] >> 8) & 0xF;
+}
+
+extern s32 rsin(s32);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A87C8);
 
