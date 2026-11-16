@@ -38,7 +38,47 @@ void func_800BCEEC(int param_1)
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BCFB8);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BD080);
+void func_800BD080(void *arg0) {
+    extern u16 D_8008EE50[];
+    switch (*D_8008EE50) {
+    case 0:
+        if (M2C_FIELD(arg0, u8 *, 0xBE1) & 1) {
+            func_8001264C(5);
+            return;
+        }
+        func_80012628();
+        return;
+    case 1:
+        if (func_800A0C54(arg0, 1 - M2C_FIELD(arg0, u8 *, 0xBCA)) != 0) {
+            func_800220B8(arg0);
+            func_80012628();
+            return;
+        }
+        func_8001264C(3);
+        return;
+    case 2:
+        if (func_800220D4(arg0, 1, 1 - M2C_FIELD(arg0, u8 *, 0xBCA), 0) != 0) {
+            func_8001264C(5);
+        }
+        return;
+    case 3:
+        if (func_800A0C54(arg0, M2C_FIELD(arg0, u8 *, 0xBCA)) != 0) {
+            func_800220B8(arg0);
+            func_80012628();
+            return;
+        }
+        func_8001264C(5);
+        return;
+    case 4:
+        if (func_800220D4(arg0, 1, M2C_FIELD(arg0, u8 *, 0xBCA), 0) != 0) {
+            func_80012628();
+        }
+        return;
+    case 5:
+        func_800125D8();
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BD1B0);
 
