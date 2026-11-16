@@ -476,7 +476,70 @@ void func_800C1528(u8 *p) {
     }
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800C1658);
+void func_800C1658(u8 *arg0) {
+    extern u8 D_8008ED68[];
+    extern u8 *func_800A8E84(u8 *);
+    extern void func_80012628(void);
+    extern void func_800B3878(u8 *);
+    extern s32 func_800C7B30(u8 *, u8 *, u8 *, u8 *);
+    extern s32 func_800B2ABC(u8 *, s32, u8 *, u8 *);
+    extern s32 func_800B2F48(u8 *, s32);
+    extern s32 func_800A835C(u8 *, s32);
+    extern void func_800125D8(void);
+
+    u8 *s0 = arg0 + 0x5D0;
+    s32 c = s0[0x5FA];
+    s32 c2 = s0[0x712];
+    u8 *bc = s0 + c;
+    u8 *x = s0 + (c * 0x2E8 + 0x18) + bc[0x5FB] * 0x7C;
+    u8 *y = s0 + (c2 * 0x2E8 + 0x18) + s0[0x713] * 0x7C;
+    u8 *ed = D_8008ED68;
+    u16 cur;
+    u16 next;
+    u8 *mon;
+    s32 res;
+
+    switch (*(u16 *)(ed + 0xE8)) {
+    case 0:
+        func_80012628();
+        *(u16 *)(arg0 + 0xC) = 0;
+        break;
+    case 1:
+        cur = *(u16 *)(arg0 + 0xC);
+        if (ed[0x103] >= 2) {
+            next = cur + ed[0x103];
+        } else {
+            next = cur + 1;
+        }
+        *(u16 *)(arg0 + 0xC) = next;
+        if (next >= 0x3C) {
+            mon = func_800A8E84(s0);
+            if (x[0] == 0x34 || ((*(u32 *)(mon + 0x10) >> 0xB) & 0xF) != 1) {
+                func_800B3878(s0);
+            }
+            func_80012628();
+        }
+        break;
+    case 2:
+        mon = func_800A8E84(s0);
+        if (x[0] == 0x34) {
+            res = func_800C7B30(arg0, s0, x, y);
+        } else if (((*(u32 *)(mon + 0x10) >> 0xB) & 0xF) == 1) {
+            res = func_800B2ABC(arg0, 1, x, y);
+        } else {
+            res = func_800B2F48(arg0, 1);
+        }
+        if (res != 0) {
+            func_80012628();
+        }
+        break;
+    case 3:
+        x[0x25] = func_800A835C(arg0, c);
+        y[0x25] = func_800A835C(arg0, c2);
+        func_800125D8();
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800C1890);
 
