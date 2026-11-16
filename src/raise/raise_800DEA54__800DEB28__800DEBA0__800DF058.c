@@ -76,5 +76,3 @@ void func_800DF838(s32 unused, u16 idx, s32 x, s32 y) {
     upper = (bits & upper) | (((((bits >> 17) & 0x3F) + 1) & 0x3F) << 17);
     e[0] = upper;
 }
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0__800DF058", func_800DF914);
