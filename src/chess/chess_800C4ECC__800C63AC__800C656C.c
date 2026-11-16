@@ -1,30 +1,32 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C63AC__800C656C", func_800C656C);
+extern u8 D_8008ED68[];
+extern s32 func_80019F30(s32, s32);
+extern void func_800185F8(void *);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C63AC__800C656C", func_800C65EC);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C63AC__800C656C", func_800C6F80);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C63AC__800C656C", func_800C71D4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C63AC__800C656C", func_800C768C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C63AC__800C656C", func_800C77A4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C63AC__800C656C", func_800C7864);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C63AC__800C656C", func_800C7B30);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C63AC__800C656C", func_800C7D84);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C63AC__800C656C", func_800C7DD8);
-
-void __udivdi3(void)
-{
-  int new_var3;
-  int new_var2;
-  int new_var;
-  int *new_var4;
- new_var3 = 0; new_var4 = &new_var3; new_var2 = *new_var4; func_800C7DD8(new_var); new_var2 = new_var2; new_var = new_var2;
+s32 func_800C656C(s32 a0, s32 a1, u8 *a2) {
+    extern u16 D_8008EE54[];
+    extern void func_80012668(void);
+    s32 r = 0;
+    switch (D_8008EE54[0]) {
+    case 0:
+        a2[0x17] = 0x87;
+        a2[0x23] = 1;
+        func_80012668();
+        break;
+    case 1:
+        if (*(s16 *)(*(u8 **)(a2 + 0x70) + 0x24) < 0) {
+            r = 1;
+        }
+        break;
+    }
+    return r;
 }
+
+extern u16 D_8008EE54[];
+extern s32 func_80012668(void);
+extern s32 func_80034AB0(s32);
+
+s32 func_800C7DD8();
+
+
