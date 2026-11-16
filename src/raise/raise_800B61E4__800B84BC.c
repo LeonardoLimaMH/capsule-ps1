@@ -12,7 +12,3 @@ u16 func_800B84BC(s32 arg0, s32 arg1)
 }
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B84BC", func_800B84FC);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B84BC", func_800B8700);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4__800B84BC", func_800B8898);
