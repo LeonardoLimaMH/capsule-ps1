@@ -923,7 +923,28 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A7B30);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A7BB4);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A7CBC);
+s32 func_800A7CBC(u8 *arg0, u8 *arg1, s32 arg2, s32 arg3, s32 arg4) {
+    extern u32 D_80063940[][15];
+    s32 result = 0;
+    register u8 *p asm("t1") = arg1 + 0x14;
+    s32 value;
+
+    if (arg4 == 6) {
+        value = D_80063940[(arg0 + (arg2 * 0x2E8 + arg3 * 0x7C))[0x5E8]][8] >> 7;
+    } else {
+        value = D_80063940[(arg0 + (arg2 * 0x2E8 + arg3 * 0x7C))[0x5E8]][8] >> 11;
+    }
+    value &= 0xF;
+    if (*(s16 *)(p + 0x10) < 0 || value < 2) {
+        result = 3;
+    } else if (*(s16 *)(p + 0x10) == 0 && *(s32 *)(p + 0xC) == value - 2) {
+        result = 1;
+        if (*(u16 *)(p + 0x12) != 0) {
+            result = 2;
+        }
+    }
+    return result;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A7DCC);
 
