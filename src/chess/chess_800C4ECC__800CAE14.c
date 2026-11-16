@@ -132,7 +132,40 @@ s32 func_800CB10C(void *arg0, u8 *arg1, s32 arg2)
     return d >= -80;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CB24C);
+s32 func_800CB24C(void *arg0, u8 *arg1, s32 arg2) {
+    s32 count[2];
+    s32 i;
+    s32 j;
+    u8 *e;
+    register s32 ret asm("v0");
+    for (i = 0; i < 2; i++) {
+        count[i] = 0;
+        if ((arg1 + i)[0x60A] >= 4 &&
+            func_800B8F38(arg0, arg1, arg1 + 0x18 + i * 0x2E8 + 0x26C, i) != 0) {
+            count[i] = -1;
+        }
+    }
+    if (count[arg2] > count[1 - arg2]) return 2;
+    if (count[arg2] < count[1 - arg2]) return 0;
+    for (i = 0; i < 2; i++) {
+        count[i] = 0;
+        for (j = 0; j < 5; j++) {
+            e = arg1 + 0x18 + i * 0x2E8 + j * 0x7C;
+            if ((*(u32 *)(e + 0x18) & 0x300) == 0) {
+                count[i]++;
+            }
+        }
+    }
+    if (count[arg2] == 1 || count[1 - arg2] == 1) {
+        ret = 1;
+        if (count[arg2] != count[1 - arg2]) {
+            ret = (u32)(count[arg2] != 1) << 1;
+        }
+    } else {
+        ret = 1;
+    }
+    return ret;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CAE14", func_800CB400);
 
