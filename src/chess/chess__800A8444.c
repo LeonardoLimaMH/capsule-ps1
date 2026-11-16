@@ -31,9 +31,6 @@ int func_800A8444(undefined4 param_1, int param_2, int param_3, int param_4)
   return iVar1;
 }
 
-#include "common.h"
-
-#include "ghidra.h"
 void func_800A84A0(undefined1 *param_1,undefined4 param_2,int param_3,int param_4)
 
 {
@@ -65,7 +62,19 @@ void func_800A84A0(undefined1 *param_1,undefined4 param_2,int param_3,int param_
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8548);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8710);
+s32 func_800A8710(s32 arg0, s32 arg1, s32 arg2) {
+    extern u32 D_80063940[][15];
+    u32 (*table)[15] = D_80063940;
+    u8 b;
+
+    arg0 += (arg2 * 0x7C) + (arg1 * 0x2E8);
+    b = *(u8 *)(arg0 + 0x5E8);
+    return ((table[b][2] >> 8) & 0xF) == 1;
+}
+
+extern u8 D_8006B2A4[];
+
+extern s32 rsin(s32);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8770);
 
@@ -191,7 +200,6 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8E08);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8E34);
 
-extern u8 D_8006B2A4[];
 u8 *func_800A8E84(s32 arg0)
 {
   u8 a = *((u8 *) (arg0 + 0x5FA));
@@ -241,8 +249,6 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A924C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A93DC);
 
-#include "common.h"
-
 void func_800A954C(void *arg0, void *arg1, void *arg2, s32 arg3, s32 arg4) {
     M2C_FIELD(arg2, s16 *, 0) = (s16) ((u16) M2C_FIELD(arg1, s16 *, 0) - ((s32) ((M2C_FIELD(arg1, s16 *, 0) - M2C_FIELD(arg0, s16 *, 0)) * arg4) / arg3));
     M2C_FIELD(arg2, s16 *, 4) = (s16) ((u16) M2C_FIELD(arg1, s16 *, 4) - ((s32) ((M2C_FIELD(arg1, s16 *, 4) - M2C_FIELD(arg0, s16 *, 4)) * arg4) / arg3));
@@ -262,8 +268,6 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A9A78);
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A9C9C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800AA15C);
-
-#include "common.h"
 
 void func_800AAAA0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     extern s16 D_80100F38[];
