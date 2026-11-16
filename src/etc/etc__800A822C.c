@@ -94,7 +94,31 @@ void func_800A83CC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x38) = (s32) (M2C_FIELD(arg0, s32 *, 0x38) | 1);
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A847C);
+void func_800A847C(u8 *arg0) {
+    extern M2C_UNK D_8008ED68[];
+    extern s32 D_800B3C1C[];
+    if ((u32) (M2C_GFIELD(D_8008ED68, u16, 0xDC) - 6) < 2U) {
+        *(s32 *)(arg0 + 0x38) &= ~1;
+        if (*(s32 *)(arg0 + 0x84) == 0) {
+            s32 v = 0x12;
+            if (M2C_GFIELD(D_8008ED68, u16, 0xDC) == 6) {
+                v = 0xF;
+            }
+            *(s32 *)(arg0 + 0x18) = func_80019F30(0x6000C, v);
+        }
+        if (*(s32 *)(arg0 + 0x84) == *D_800B3C1C) {
+            arg0[0x5A] = 0x80;
+            arg0[0x59] = 0x80;
+            arg0[0x58] = 0x80;
+        } else {
+            arg0[0x5A] = 0x30;
+            arg0[0x59] = 0x30;
+            arg0[0x58] = 0x30;
+        }
+    } else {
+        *(s32 *)(arg0 + 0x38) |= 1;
+    }
+}
 
 #include "common.h"
 
@@ -302,9 +326,95 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A92D4);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A9650);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A98FC);
+void func_800A98FC(u8 *arg0) {
+    extern u8 D_8008ED68[];
+    extern u16 D_800B3C4E[];
+    extern s32 func_80019F30(s32, s32);
+    extern void func_80015CD0(void *, s32, s32);
+    extern void func_80012578(void);
+    u8 *d = D_8008ED68;
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A9ABC);
+    if (*(u16 *)(d + 0xDC) == 4) {
+        *(u32 *)(arg0 + 0x38) &= ~1;
+        if (*(u16 *)(d + 0xE0) == 0) {
+            if (*(s16 *)(arg0 + 0x76) < 0) {
+                if (*(s16 *)(arg0 + 0x50) <= 0x1000) {
+                    s32 v = (s16)*D_800B3C4E;
+                    *(u16 *)(arg0 + 0x52) = 0x1000;
+                    *(u16 *)(arg0 + 0x50) = 0x1000;
+                    *(u16 *)(arg0 + 0x74) = ~*(u16 *)(arg0 + 0x74);
+                    *(u16 *)(arg0 + 0x76) = ~*(u16 *)(arg0 + 0x76);
+                    *D_800B3C4E = v / 2 + v / 32;
+                    if ((s16)*D_800B3C4E <= 0x1000) {
+                        *(u16 *)(arg0 + 0x76) = 0;
+                        *(u16 *)(arg0 + 0x74) = 0;
+                        *(s32 *)(arg0 + 0x18) = 0;
+                        func_80015CD0(arg0 + 0x14, func_80019F30(0x7000B, 10), 0);
+                        func_80012578();
+                    }
+                }
+            } else {
+                u16 u = *D_800B3C4E;
+                if (*(s16 *)(arg0 + 0x50) >= (s16)*D_800B3C4E) {
+                    *(u16 *)(arg0 + 0x52) = u;
+                    *(u16 *)(arg0 + 0x50) = u;
+                    *(u16 *)(arg0 + 0x74) = ~*(u16 *)(arg0 + 0x74);
+                    *(u16 *)(arg0 + 0x76) = ~*(u16 *)(arg0 + 0x76);
+                }
+            }
+            *(s16 *)(arg0 + 0x50) += *(s16 *)(arg0 + 0x74);
+            *(s16 *)(arg0 + 0x52) += *(s16 *)(arg0 + 0x76);
+            *(s16 *)(arg0 + 0x74) -= 0x10;
+            *(s16 *)(arg0 + 0x76) -= 0x10;
+            if (*(s16 *)(arg0 + 0x74) < -0x200) {
+                *(s16 *)(arg0 + 0x76) = -0x200;
+                *(s16 *)(arg0 + 0x74) = -0x200;
+            }
+        }
+    } else if (*(u16 *)(d + 0xDC) != 5) {
+        *(u32 *)(arg0 + 0x38) |= 1;
+    }
+}
+
+s32 func_800A9ABC(u8 *arg0) {
+    extern u8 D_8008ED68[];
+    extern u16 D_800B3988[];
+    extern s32 D_800B3D08[];
+    extern s32 func_800185F8(void);
+    u8 *d = D_8008ED68;
+    u16 m = *(u16 *)(d + 0xDC);
+
+    if (m >= 5 || (m == 4 && *(u16 *)(d + 0xE0) != 0)) {
+        s32 ret;
+
+        *(u32 *)(arg0 + 0x38) = (*(u32 *)(arg0 + 0x38) & ~1) | 8;
+
+        if (*(s16 *)(arg0 + 0x4A) >= 0xA9) {
+            s16 x;
+            *(u16 *)(arg0 + 0x4A) = 0xA0;
+            *(u16 *)(arg0 + 0x6E) = D_800B3988[*(s32 *)(arg0 + 0x84)];
+            x = *(s16 *)(arg0 + 0x46);
+            if ((x >= 0xA0 && *(s16 *)(arg0 + 0x6A) > 0) || (x < -0x9F && *(s16 *)(arg0 + 0x6A) < 0)) {
+                *(u16 *)(arg0 + 0x6A) = ~*(u16 *)(arg0 + 0x6A);
+            }
+        } else if ((*D_800B3D08 & 7) == 0) {
+            *(u16 *)(arg0 + 0x6E) += 1;
+        }
+
+        d = D_8008ED68;
+        if (*(u16 *)(d + 0xDC) != 8) {
+            return 8;
+        }
+        ret = *(s32 *)(d + 0xA68);
+        if (ret != 0) {
+            return ret;
+        }
+        return func_800185F8();
+    }
+
+    *(u32 *)(arg0 + 0x38) = (*(u32 *)(arg0 + 0x38) | 1) & ~8;
+    return *(u32 *)(arg0 + 0x38);
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800A9C0C);
 
@@ -363,7 +473,56 @@ void func_800AA020(void) {
     D_800B3AA0[*D_8008EE44](s);
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A822C", func_800AA0A0);
+void func_800AA0A0(u8 *arg0) {
+    extern u16 D_8008EE48[];
+    extern u8 D_800859F0[];
+    extern u8 D_800B3D24[], D_800B3D25[];
+    extern s32 D_800B3D10[];
+    extern u16 D_800B3D22[];
+    extern void func_80033974(s32);
+    extern void func_8001611C(s32);
+    extern void func_800AB7D8(void);
+    extern s32 func_800338DC(s32);
+    extern s32 func_80019654(void);
+    extern s32 func_800337EC(void);
+    extern void func_80012578(void);
+    extern void func_80012508(void);
+
+    switch ((s32)D_8008EE48[0]) {
+    case 0:
+        func_80033974(0x8000);
+        func_8001611C(0x1000);
+        *D_800B3D24 = (arg0[0xBE1] >> 1) & 1;
+        *D_800B3D25 = (arg0[0xBE1] >> 3) & 3;
+        func_800AB7D8();
+        *D_800B3D10 = 0;
+        *D_800B3D22 = 0x7001;
+        if (arg0[0x5D0] != 2 && *D_800B3D24) {
+            *D_800B3D22 = 0x7002;
+        }
+        if (!(arg0[0x5C8] & 4)) {
+            goto b;
+        }
+        goto a;
+    case 1:
+        if (func_80019654()) {
+            goto a;
+        }
+        break;
+    case 2:
+        func_800338DC(*D_800B3D22);
+    a:
+        func_80012578();
+        break;
+    case 3:
+        if ((D_800859F0[0] & 4) && !(func_800337EC() & 0x80)) {
+            break;
+        }
+    b:
+        func_80012508();
+        break;
+    }
+}
 
 #include "ghidra.h"
 void func_800AA20C(undefined4 param_1)
