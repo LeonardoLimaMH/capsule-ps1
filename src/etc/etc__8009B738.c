@@ -16,11 +16,3 @@ void func_8009B738(void *arg0)
   }
   *((s32 *) (((s8 *) arg0) + 0x38)) = var_v0;
 }
-
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009B738", func_8009B774);
-
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009B738", func_8009B7EC);
-
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009B738", func_8009B864);
-
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009B738", func_8009BBD0);
