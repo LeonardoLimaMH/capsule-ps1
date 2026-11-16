@@ -233,5 +233,7 @@ segments:
       - [0x4F5A8, c, raise_800E6DA8]
       - [0x4F5CC, c, raise_800E6DA8__800E6DCC]
       - [0x4F668, c, raise_800E6E68]
+      - [0x50134, c, raise_800E6E68__800E7934]
+      - [0x501C0, c, raise_800E6E68__800E79C0]
       - [0x5129C, data]
   - [0x6EAD4]

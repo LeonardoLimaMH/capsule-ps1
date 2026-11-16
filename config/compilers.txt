@@ -372,3 +372,5 @@ src/raise/raise_800DEA54__800DEB28__800DEBA0__800DF058.c 2.7.2-cdk
 src/raise/raise_800DEA54__800DEB28__800DEBA0__800DEF3C.c 2.7.2-cdk
 src/raise/raise_800DEA54__800DEB28__800DEBA0__800DEE18.c 2.7.2-cdk
 src/raise/raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF914.c 2.8.1-psx
+src/raise/raise_800E6E68__800E79C0.c 2.8.1-psx
+src/raise/raise_800E6E68__800E7934.c 2.7.2-cdk
