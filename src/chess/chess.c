@@ -19,17 +19,3 @@ void func_8009A48C(void *arg0) {
 }
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009A498);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009A608);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009A75C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009A8B4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009AAA4);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009AC88);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009B23C);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess", func_8009B4C8);
