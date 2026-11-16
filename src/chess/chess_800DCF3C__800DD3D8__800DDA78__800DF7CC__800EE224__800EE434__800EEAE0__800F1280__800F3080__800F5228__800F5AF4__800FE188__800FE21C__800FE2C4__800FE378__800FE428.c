@@ -28,19 +28,3 @@ typedef struct {
 } S_800DD_Tab8;
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428", func_800FE428);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428", func_800FE5B0);
-
-#include "ghidra.h"
-void func_800FE74C(short *param_1,short *param_2)
-
-{
-  SquareRoot0(((int)*param_1 - (int)*param_2) * ((int)*param_1 - (int)*param_2) +
-                  ((int)param_1[1] - (int)param_2[1]) * ((int)param_1[1] - (int)param_2[1]) +
-                  ((int)param_1[2] - (int)param_2[2]) * ((int)param_1[2] - (int)param_2[2]));
-  return;
-}
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428", func_800FE7B8);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428", func_800FE840);
