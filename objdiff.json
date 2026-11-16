@@ -298,6 +298,30 @@
       "base_path": "build/objdiff/base/yuugi/main_8001A1DC__8001F918.o"
     },
     {
+      "name": "yuugi/main_8001A1DC__8001F918__80021618",
+      "target_path": "build/objdiff/target/yuugi/main_8001A1DC__8001F918__80021618.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_8001A1DC__8001F918__80021618.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8001A1DC__8001F918__80021618.o"
+    },
+    {
+      "name": "yuugi/main_8001A1DC__8001F918__80021870",
+      "target_path": "build/objdiff/target/yuugi/main_8001A1DC__8001F918__80021870.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_8001A1DC__8001F918__80021870.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/yuugi/main_8001A1DC__8001F918__80021870.o"
+    },
+    {
       "name": "yuugi/main_8001A1DC__8001F918__8002393C",
       "target_path": "build/objdiff/target/yuugi/main_8001A1DC__8001F918__8002393C.o",
       "metadata": {
@@ -1882,6 +1906,54 @@
       "base_path": "build/objdiff/base/chess/chess_800BB910.o"
     },
     {
+      "name": "chess/chess_800BB910__800BF86C",
+      "target_path": "build/objdiff/target/chess/chess_800BB910__800BF86C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800BB910__800BF86C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800BB910__800BF86C.o"
+    },
+    {
+      "name": "chess/chess_800BB910__800BF9B0",
+      "target_path": "build/objdiff/target/chess/chess_800BB910__800BF9B0.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800BB910__800BF9B0.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800BB910__800BF9B0.o"
+    },
+    {
+      "name": "chess/chess_800BB910__800BF9B0__800C0BEC",
+      "target_path": "build/objdiff/target/chess/chess_800BB910__800BF9B0__800C0BEC.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800BB910__800BF9B0__800C0BEC.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800BB910__800BF9B0__800C0BEC.o"
+    },
+    {
+      "name": "chess/chess_800BB910__800BF9B0__800C0E6C",
+      "target_path": "build/objdiff/target/chess/chess_800BB910__800BF9B0__800C0E6C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800BB910__800BF9B0__800C0E6C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800BB910__800BF9B0__800C0E6C.o"
+    },
+    {
       "name": "chess/chess_800BB910__800C1A78",
       "target_path": "build/objdiff/target/chess/chess_800BB910__800C1A78.o",
       "metadata": {
@@ -1988,6 +2060,66 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/chess/chess_800C4ECC.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800C523C",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C523C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800C523C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C523C.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800C5300",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C5300.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800C5300.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C5300.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800C5300__800C5928",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C5300__800C5928.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800C5300__800C5928.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C5300__800C5928.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800C5300__800C5A74",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C5300__800C5A74.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800C5300__800C5A74.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C5300__800C5A74.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800C5300__800C5A74__800C61F4",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C5300__800C5A74__800C61F4.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800C5300__800C5A74__800C61F4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C5300__800C5A74__800C61F4.o"
     },
     {
       "name": "chess/chess_800C4ECC__800C6330",
@@ -2129,9 +2261,417 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBA14",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBA14.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBA14.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBA14.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__800CF220",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__800CF220.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__800CF220.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__800CF220.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFB1C",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFB1C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFB1C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFB1C.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800CFFF8",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800CFFF8.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800CFFF8.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800CFFF8.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0270",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0270.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0270.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0270.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D0884",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D0884.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D0884.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D0884.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D0F60",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D0F60.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D0F60.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D0F60.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D2340",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D2340.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D2340.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D2340.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3128",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3128.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3128.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3128.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4EEC",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4EEC.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4EEC.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4EEC.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D8580",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D8580.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D8580.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D8580.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9688",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9688.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9688.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9688.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798__800DBF60",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798__800DBF60.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798__800DBF60.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798__800DBF60.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798__800DC06C",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798__800DC06C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798__800DC06C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798__800DC06C.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798__800DC06C__800DC750",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798__800DC06C__800DC750.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798__800DC06C__800DC750.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798__800DC06C__800DC750.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798__800DC06C__800DC874",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798__800DC06C__800DC874.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798__800DC06C__800DC874.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798__800DC06C__800DC874.o"
     },
     {
       "name": "chess/chess_800C4ECC__800DCC28",
@@ -2182,6 +2722,318 @@
       "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8.o"
     },
     {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DD920",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DD920.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DD920.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DD920.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF67C",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF67C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF67C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF67C.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE0C8",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE0C8.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE0C8.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE0C8.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE2D4",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE2D4.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE2D4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE2D4.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEA30",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEA30.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEA30.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEA30.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1058",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1058.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1058.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1058.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F2F2C",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F2F2C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F2F2C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F2F2C.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5188",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5188.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5188.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5188.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5894",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5894.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5894.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5894.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE0B4",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE0B4.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE0B4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE0B4.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428__800FE5B0",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428__800FE5B0.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428__800FE5B0.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428__800FE5B0.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428__800FE74C",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428__800FE74C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428__800FE74C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428__800FE74C.o"
+    },
+    {
       "name": "chess/chess_800DCF3C__800FE958",
       "target_path": "build/objdiff/target/chess/chess_800DCF3C__800FE958.o",
       "metadata": {
@@ -2225,9 +3077,93 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess_801002CC.o"
+    },
+    {
+      "name": "chess/chess_801002CC__8010040C",
+      "target_path": "build/objdiff/target/chess/chess_801002CC__8010040C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_801002CC__8010040C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_801002CC__8010040C.o"
+    },
+    {
+      "name": "chess/chess_801002CC__8010053C",
+      "target_path": "build/objdiff/target/chess/chess_801002CC__8010053C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_801002CC__8010053C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_801002CC__8010053C.o"
+    },
+    {
+      "name": "chess/chess_801002CC__8010053C__80100618",
+      "target_path": "build/objdiff/target/chess/chess_801002CC__8010053C__80100618.o",
+      "metadata": {
+        "source_path": "src/chess/chess_801002CC__8010053C__80100618.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_801002CC__8010053C__80100618.o"
+    },
+    {
+      "name": "chess/chess_801002CC__8010053C__801007D8",
+      "target_path": "build/objdiff/target/chess/chess_801002CC__8010053C__801007D8.o",
+      "metadata": {
+        "source_path": "src/chess/chess_801002CC__8010053C__801007D8.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_801002CC__8010053C__801007D8.o"
+    },
+    {
+      "name": "chess/chess_801002CC__8010053C__801007D8__80100968",
+      "target_path": "build/objdiff/target/chess/chess_801002CC__8010053C__801007D8__80100968.o",
+      "metadata": {
+        "source_path": "src/chess/chess_801002CC__8010053C__801007D8__80100968.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_801002CC__8010053C__801007D8__80100968.o"
+    },
+    {
+      "name": "chess/chess_801002CC__8010053C__801007D8__80100AF4",
+      "target_path": "build/objdiff/target/chess/chess_801002CC__8010053C__801007D8__80100AF4.o",
+      "metadata": {
+        "source_path": "src/chess/chess_801002CC__8010053C__801007D8__80100AF4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_801002CC__8010053C__801007D8__80100AF4.o"
+    },
+    {
+      "name": "chess/chess__8009A498",
+      "target_path": "build/objdiff/target/chess/chess__8009A498.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009A498.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009A498.o"
     },
     {
       "name": "chess/chess__8009A608",
@@ -2321,9 +3257,33 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess__8009B948__8009BAD8__8009BEE0.o"
+    },
+    {
+      "name": "chess/chess__8009B948__8009BAD8__8009BEE0__8009BFD4",
+      "target_path": "build/objdiff/target/chess/chess__8009B948__8009BAD8__8009BEE0__8009BFD4.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009B948__8009BAD8__8009BEE0__8009BFD4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009B948__8009BAD8__8009BEE0__8009BFD4.o"
+    },
+    {
+      "name": "chess/chess__8009B948__8009BAD8__8009BEE0__8009C0E4",
+      "target_path": "build/objdiff/target/chess/chess__8009B948__8009BAD8__8009BEE0__8009C0E4.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009B948__8009BAD8__8009BEE0__8009C0E4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009B948__8009BAD8__8009BEE0__8009C0E4.o"
     },
     {
       "name": "chess/chess__8009B948__8009BAD8__8009BEE0__8009C4B0",
@@ -2348,6 +3308,18 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/chess/chess__8009B948__8009BAD8__8009BEE0__8009C5C4.o"
+    },
+    {
+      "name": "chess/chess__8009B948__8009BAD8__8009BEE0__8009C5C4__8009CA60",
+      "target_path": "build/objdiff/target/chess/chess__8009B948__8009BAD8__8009BEE0__8009C5C4__8009CA60.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009B948__8009BAD8__8009BEE0__8009C5C4__8009CA60.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009B948__8009BAD8__8009BEE0__8009C5C4__8009CA60.o"
     },
     {
       "name": "chess/chess__8009CBDC",
@@ -2410,6 +3382,54 @@
       "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4.o"
     },
     {
+      "name": "chess/chess__8009ECF8__8009EDA4__8009F25C",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__8009F25C.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__8009F25C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__8009F25C.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__8009F4AC",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__8009F4AC.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__8009F4AC.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__8009F4AC.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__8009F820",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__8009F820.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__8009F820.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__8009F820.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__8009F960",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__8009F960.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__8009F960.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__8009F960.o"
+    },
+    {
       "name": "chess/chess__8009ECF8__8009EDA4__800A0448",
       "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0448.o",
       "metadata": {
@@ -2429,9 +3449,21 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A04C8.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A04C8__800A0540",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A04C8__800A0540.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A04C8__800A0540.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A04C8__800A0540.o"
     },
     {
       "name": "chess/chess__8009ECF8__8009EDA4__800A070C",
@@ -2542,6 +3574,102 @@
       "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4.o"
     },
     {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A5F2C",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A5F2C.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A5F2C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A5F2C.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A5FEC",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A5FEC.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A5FEC.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A5FEC.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A74D8",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A74D8.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A74D8.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A74D8.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8__800A7BB4",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8__800A7BB4.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8__800A7BB4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8__800A7BB4.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8__800A7CBC",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8__800A7CBC.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8__800A7CBC.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8__800A7CBC.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8__800A7CBC__800A82A0",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8__800A7CBC__800A82A0.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8__800A7CBC__800A82A0.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8__800A7CBC__800A82A0.o"
+    },
+    {
+      "name": "chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8__800A7CBC__800A835C",
+      "target_path": "build/objdiff/target/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8__800A7CBC__800A835C.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8__800A7CBC__800A835C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A77E8__800A7CBC__800A835C.o"
+    },
+    {
       "name": "chess/chess__800A83E0",
       "target_path": "build/objdiff/target/chess/chess__800A83E0.o",
       "metadata": {
@@ -2561,9 +3689,33 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess__800A8444.o"
+    },
+    {
+      "name": "chess/chess__800A8444__800A8548",
+      "target_path": "build/objdiff/target/chess/chess__800A8444__800A8548.o",
+      "metadata": {
+        "source_path": "src/chess/chess__800A8444__800A8548.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__800A8444__800A8548.o"
+    },
+    {
+      "name": "chess/chess__800A8444__800A8710",
+      "target_path": "build/objdiff/target/chess/chess__800A8444__800A8710.o",
+      "metadata": {
+        "source_path": "src/chess/chess__800A8444__800A8710.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__800A8444__800A8710.o"
     },
     {
       "name": "chess/chess__800AECC4",
@@ -2674,6 +3826,30 @@
       "base_path": "build/objdiff/base/chess/chess__800B9248.o"
     },
     {
+      "name": "chess/chess__800B9248__800B9684",
+      "target_path": "build/objdiff/target/chess/chess__800B9248__800B9684.o",
+      "metadata": {
+        "source_path": "src/chess/chess__800B9248__800B9684.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__800B9248__800B9684.o"
+    },
+    {
+      "name": "chess/chess__800B9248__800B97B4",
+      "target_path": "build/objdiff/target/chess/chess__800B9248__800B97B4.o",
+      "metadata": {
+        "source_path": "src/chess/chess__800B9248__800B97B4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__800B9248__800B97B4.o"
+    },
+    {
       "name": "raise/raise",
       "target_path": "build/objdiff/target/raise/raise.o",
       "metadata": {
@@ -2710,6 +3886,54 @@
       "base_path": "build/objdiff/base/raise/raise_80098FEC.o"
     },
     {
+      "name": "raise/raise_80098FEC__800991D4",
+      "target_path": "build/objdiff/target/raise/raise_80098FEC__800991D4.o",
+      "metadata": {
+        "source_path": "src/raise/raise_80098FEC__800991D4.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_80098FEC__800991D4.o"
+    },
+    {
+      "name": "raise/raise_80098FEC__80099370",
+      "target_path": "build/objdiff/target/raise/raise_80098FEC__80099370.o",
+      "metadata": {
+        "source_path": "src/raise/raise_80098FEC__80099370.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_80098FEC__80099370.o"
+    },
+    {
+      "name": "raise/raise_80098FEC__80099370__80099C9C",
+      "target_path": "build/objdiff/target/raise/raise_80098FEC__80099370__80099C9C.o",
+      "metadata": {
+        "source_path": "src/raise/raise_80098FEC__80099370__80099C9C.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_80098FEC__80099370__80099C9C.o"
+    },
+    {
+      "name": "raise/raise_80098FEC__80099370__80099F54",
+      "target_path": "build/objdiff/target/raise/raise_80098FEC__80099370__80099F54.o",
+      "metadata": {
+        "source_path": "src/raise/raise_80098FEC__80099370__80099F54.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_80098FEC__80099370__80099F54.o"
+    },
+    {
       "name": "raise/raise_8009B088",
       "target_path": "build/objdiff/target/raise/raise_8009B088.o",
       "metadata": {
@@ -2732,6 +3956,30 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/raise/raise_8009B150.o"
+    },
+    {
+      "name": "raise/raise_8009B150__8009B800",
+      "target_path": "build/objdiff/target/raise/raise_8009B150__8009B800.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009B150__8009B800.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009B150__8009B800.o"
+    },
+    {
+      "name": "raise/raise_8009B150__8009BA00",
+      "target_path": "build/objdiff/target/raise/raise_8009B150__8009BA00.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009B150__8009BA00.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009B150__8009BA00.o"
     },
     {
       "name": "raise/raise_8009B150__8009BA60",
@@ -2948,6 +4196,30 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC.o"
+    },
+    {
+      "name": "raise/raise_8009D2A8__800A6DBC__800A70F8",
+      "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A70F8.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009D2A8__800A6DBC__800A70F8.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC__800A70F8.o"
+    },
+    {
+      "name": "raise/raise_8009D2A8__800A6DBC__800A7280",
+      "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A7280.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009D2A8__800A6DBC__800A7280.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC__800A7280.o"
     },
     {
       "name": "raise/raise_8009D2A8__800A6DBC__800A76C0",
@@ -4493,9 +5765,21 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800D0F10.o"
+    },
+    {
+      "name": "raise/raise_800D0F10__800D0FE0",
+      "target_path": "build/objdiff/target/raise/raise_800D0F10__800D0FE0.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800D0F10__800D0FE0.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800D0F10__800D0FE0.o"
     },
     {
       "name": "raise/raise_800D1018",
@@ -4505,9 +5789,33 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800D1018.o"
+    },
+    {
+      "name": "raise/raise_800D1018__800D1214",
+      "target_path": "build/objdiff/target/raise/raise_800D1018__800D1214.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800D1018__800D1214.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800D1018__800D1214.o"
+    },
+    {
+      "name": "raise/raise_800D1018__800D13EC",
+      "target_path": "build/objdiff/target/raise/raise_800D1018__800D13EC.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800D1018__800D13EC.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800D1018__800D13EC.o"
     },
     {
       "name": "raise/raise_800D1018__800D1540",
@@ -4570,6 +5878,30 @@
       "base_path": "build/objdiff/base/raise/raise_800D1018__800D1B98__800D2894.o"
     },
     {
+      "name": "raise/raise_800D1018__800D1B98__800D2894__800D5A94",
+      "target_path": "build/objdiff/target/raise/raise_800D1018__800D1B98__800D2894__800D5A94.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800D1018__800D1B98__800D2894__800D5A94.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800D1018__800D1B98__800D2894__800D5A94.o"
+    },
+    {
+      "name": "raise/raise_800D1018__800D1B98__800D2894__800D5C10",
+      "target_path": "build/objdiff/target/raise/raise_800D1018__800D1B98__800D2894__800D5C10.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800D1018__800D1B98__800D2894__800D5C10.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800D1018__800D1B98__800D2894__800D5C10.o"
+    },
+    {
       "name": "raise/raise_800DC5F8",
       "target_path": "build/objdiff/target/raise/raise_800DC5F8.o",
       "metadata": {
@@ -4625,9 +5957,33 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800DCD44.o"
+    },
+    {
+      "name": "raise/raise_800DCD44__800DD110",
+      "target_path": "build/objdiff/target/raise/raise_800DCD44__800DD110.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800DCD44__800DD110.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800DCD44__800DD110.o"
+    },
+    {
+      "name": "raise/raise_800DCD44__800DD2B8",
+      "target_path": "build/objdiff/target/raise/raise_800DCD44__800DD2B8.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800DCD44__800DD2B8.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800DCD44__800DD2B8.o"
     },
     {
       "name": "raise/raise_800DCD44__800DD528",
@@ -5096,6 +6452,30 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/etc/etc__80099B18.o"
+    },
+    {
+      "name": "etc/etc__80099B18__8009AA0C",
+      "target_path": "build/objdiff/target/etc/etc__80099B18__8009AA0C.o",
+      "metadata": {
+        "source_path": "src/etc/etc__80099B18__8009AA0C.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/etc/etc__80099B18__8009AA0C.o"
+    },
+    {
+      "name": "etc/etc__80099B18__8009AB30",
+      "target_path": "build/objdiff/target/etc/etc__80099B18__8009AB30.o",
+      "metadata": {
+        "source_path": "src/etc/etc__80099B18__8009AB30.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/etc/etc__80099B18__8009AB30.o"
     },
     {
       "name": "etc/etc__8009B738",

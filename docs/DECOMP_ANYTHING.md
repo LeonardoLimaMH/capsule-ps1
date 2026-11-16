@@ -175,3 +175,24 @@ longas em segundo plano. Antes: liberar o cache do WSL
 (`wsl -d Ubuntu -u root -- sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'`) ou abrir o Claude Code
 com `CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1`. Se um passo for interrompido, `git checkout -- src
 config && git clean -fd src`, `make split` e conferir os 5 SHA-1: os commits anteriores já estão provados.
+
+### TU própria (2026-11-16)
+
+Quando a função dos agentes só casa com outro compilador, ela vai para uma TU própria
+(`.cache/tmp/own_tu_one.sh`, usado pelo `agent_sync_batch.sh`; `agent_sync_batch.sh <pasta> tu` refaz
+só essa etapa). O que faz cada passo passar nos 5 SHA-1:
+
+- a TU nova tem só a função, então o conteúdo dela é o próprio candidato dos agentes (o arquivo que já
+  casou compilado sozinho), não a função enxertada nas declarações herdadas do arquivo de origem, que
+  conflitavam com os `typedef` do candidato;
+- outras funções que o candidato define viram protótipo (`only_fn.py`, entende K&R): elas já existem em
+  outro arquivo;
+- `switch` com tabela no `.rodata` do assembly: `tools/rodata_migrate.py` leva o trecho para o objeto C. O
+  trecho termina no próximo limite de subsegmento do YAML e aceita o preenchimento de alinhamento (zeros)
+  no fim;
+- se o arquivo de origem já tinha `.rodata` próprio (switches das funções C dele), `split_rodata.py`
+  reparte esse trecho entre os pedaços na ordem do código, pelo tamanho que cada objeto gera.
+
+O objdiff (e o julgamento do app) compara o código, não a tabela de saltos no `.rodata`. Um `case` no bloco
+errado passa no app e só aparece no SHA-1: `func_800AA77C` e `func_800DBB3C` foram corrigidas assim (rótulos
+`case` movidos para o bloco do original; o código não muda).

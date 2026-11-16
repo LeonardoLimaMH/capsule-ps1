@@ -100,6 +100,12 @@ def main():
     if not used:
         sys.exit("a função não usa .rodata gerado pelo C")
     lo, hi = syms[used[0]][0], syms[used[-1]][1]
+    # o .rodata de um arquivo C não aparece nos .s: o "próximo símbolo" pode estar depois dele. O trecho para
+    # no próximo limite de subsegmento do YAML
+    bounds = [int(m.group(1), 16) for m in re.finditer(r"- \[(0x[0-9A-Fa-f]+), \.?\w+", y)]
+    nxt_bound = min((b for b in bounds if b > lo), default=None)
+    if nxt_bound is not None and (hi is None or hi > nxt_bound):
+        hi = nxt_bound
     inside = [n for n, (s, _) in syms.items() if lo <= s < hi]
     if sorted(inside) != sorted(used):
         sys.exit(f"trecho {lo:#x}-{hi:#x} não é contíguo: {sorted(set(inside) - set(used))}")
