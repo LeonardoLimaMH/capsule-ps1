@@ -696,7 +696,39 @@ void func_800A5C3C(u8 *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8", func_800A5CCC);
+void func_800A5CCC(s32 arg0, s32 arg1) {
+    extern int func_800A60F8();
+    extern int func_800AADE0();
+    extern s32 func_80015B3C();
+    extern void func_80015EF8();
+    s32 p;
+    s32 col;
+    s32 off;
+    s32 row;
+    s32 rowoff;
+
+    row = 0;
+    rowoff = row;
+    do {
+        col = 0;
+        off = rowoff;
+        do {
+            p = func_80015B3C(func_800A60F8, func_800AADE0, arg1);
+            func_80015EF8(p);
+            *(s32 *)(p + 0x80) = col;
+            *(s32 *)(p + 0x7C) = row;
+            *(u32 *)(p + 0x30) = (*(u32 *)(p + 0x30) & ~0x30) | 0x10;
+            *(u32 *)(p + 0x30) = (*(u32 *)(p + 0x30) & ~0x1C0) | 0x40;
+            *(u32 *)(p + 0x38) |= 1;
+            *(s32 *)(arg0 + off + 0x658) = p;
+            off += 0x7C;
+            col++;
+        } while (col < 5);
+        *(s32 *)(arg0 + (col * 0x7C + rowoff) + 0x658) = 0;
+        row++;
+        rowoff += 0x2E8;
+    } while (row < 2);
+}
 
 void func_800A5DCC(s32 arg0, s32 arg1) {
     extern int func_800161C4();
