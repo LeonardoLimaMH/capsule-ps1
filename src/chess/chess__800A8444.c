@@ -208,7 +208,42 @@ s32 func_800A89C8(s32 arg0, s32 arg1, s32 arg2)
 
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8A7C);
+s32 func_800A8A7C(s32 arg0, s32 arg1, s32 arg2) {
+    register s32 var_a0 asm("a0");
+    register s32 var_a3 asm("a3");
+    s32 var_t0;
+    s32 var_t1;
+    u8 temp_t2;
+    unsigned int new_var;
+    register void *temp_v1 asm("v1");
+
+    new_var = arg0 + ((arg2 * 0x7C) + (arg1 * 0x2E8));
+    temp_t2 = *((u8 *)((s8 *)new_var + 0x5E8));
+    var_t0 = 0;
+    var_t1 = 0;
+loop_1:
+    var_a0 = 0;
+    var_a3 = var_t1;
+loop_2:
+    temp_v1 = (void *)(arg0 + var_a3);
+    if (((var_t0 != arg1) || (var_a0 != arg2)) &&
+        (*(u8 *)((s8 *)temp_v1 + 0x5E8) == temp_t2)) {
+        return *(u8 *)((s8 *)temp_v1 + 0x612) + 1;
+    }
+    var_a0 += 1;
+    var_a3 += 0x7C;
+    if (var_a0 >= 5) {
+        var_t0 += 1;
+        var_t1 += 0x2E8;
+        if (var_t0 >= 2) {
+            return 0;
+        }
+        goto loop_1;
+    }
+    goto loop_2;
+}
+
+extern s32 rsin(s32);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444", func_800A8B14);
 
