@@ -210,6 +210,8 @@ segments:
       - [0x45678, c, chess_800DCE78]
       - [0x4573C, c, chess_800DCF3C]
       - [0x45BD8, c, chess_800DCF3C__800DD3D8]
+      - [0x46120, c, chess_800DCF3C__800DD3D8__800DD920]
+      - [0x46278, c, chess_800DCF3C__800DD3D8__800DDA78]
       - [0x67158, c, chess_800DCF3C__800FE958]
       - [0x6718C, c, chess_800DCF3C__800FE98C]
       - [0x6866C, c, chess_800FFE6C]
