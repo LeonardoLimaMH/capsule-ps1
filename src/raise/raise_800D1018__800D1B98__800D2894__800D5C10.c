@@ -710,7 +710,3 @@ void func_800DBAA8(s16 arg0) {
     q = (u32 *)(idx * 0x3C + base);
     q[3] = (q[3] & ~0xF800) | ((v & 0x1F) << 11);
 }
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894__800D5C10", func_800DBB3C);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894__800D5C10", func_800DBC98);
