@@ -84,7 +84,51 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BD1B0);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BD3D4);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BD51C);
+void func_800BD51C(u8 *arg0) {
+    extern u16 D_8008EE50[];
+    extern void func_800CABDC(u8 *, u8 *, s32);
+    extern void func_80012628(void);
+    extern void func_8009C4B0(u8 *, s32, s32);
+    extern void func_800A903C(u8 *, u8 *, s32, s32);
+    extern void func_800125AC(s32);
+    extern void func_80012604(s32);
+    extern void func_800125D8(void);
+    u8 *s0 = arg0 + 0x5D0;
+    s32 a2 = s0[0x5FA];
+    register u8 *selection asm("a0") = s0 + a2;
+    s32 t3 = a2 * 0x2E8;
+    register s32 row_offset asm("v1") = t3 + 0x18;
+    s32 a3 = selection[0x5FB];
+    s32 t1 = a3 * 0x7C;
+    u8 *a1 = s0 + row_offset + t1;
+
+    switch (*D_8008EE50) {
+    case 0:
+        func_800CABDC(arg0, a1, 0x10000);
+        func_80012628();
+        return;
+    case 1:
+        if (s0[0x720] != 0) {
+            s0[0x70D] = 1;
+            func_80012628();
+        }
+        return;
+    case 2:
+        if (a1[0xE] != 0) {
+            (s0 + (t1 + t3))[0x3E] = 1;
+            func_8009C4B0(arg0, a2, a3);
+            s0[0x60D] = 0;
+            s0[0x70D] = 0;
+            s0[0x614] = 0;
+            func_800125AC(6);
+            func_80012604(5);
+            return;
+        }
+        func_800A903C(arg0, s0, a2, a3);
+        func_800125D8();
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BD654);
 
