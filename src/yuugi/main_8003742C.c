@@ -401,6 +401,26 @@ s16 func_8003804C(u8 *p, u32 a) {
     return r;
 }
 
+static inline s32 func_800380C8_helper(u8 *p, u32 a) {
+    s32 r;
+    if (a < 0x40U) {
+        if (p[0x1D] == 0) {
+            return 0;
+        }
+        r = -((p[0x1D] << 1) * (0x40 - a));
+    } else {
+        u32 d;
+        if (a == 0x40) {
+            return 0;
+        }
+        d = a - 0x3F;
+        if (p[0x1C] == 0) {
+            return 0;
+        }
+        r = (((volatile u8 *)p)[0x1C] << 1) * d;
+    }
+    return r;
+}
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_800380C8);
 
 void func_80038294(OscObj *p) {
@@ -561,7 +581,61 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80038ABC);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80038CA8);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80039724);
+void func_80039724(u8 ch, u16 note) {
+    struct Voice9724 {
+        u8 pad0[3];
+        u8 ch;
+        u8 pad4[2];
+        u16 note;
+        u8 pad8[0xE];
+        s16 unk16;
+        u8 pad18[2];
+        u8 unk1A;
+        u8 unk1B;
+        u8 pad1C[0x24];
+        u16 unk40;
+        u16 unk42;
+        u16 unk44;
+        u8 pad46[8];
+    };
+    s32 i;
+    s32 mask = 0;
+    s32 status;
+
+    for (i = 0; i < D_80078C78; i++) {
+        if (ch == ((struct Voice9724 *)D_80093D68)[i].ch && (note & 0xFF) == ((struct Voice9724 *)D_80093D68)[i].note) {
+            if (((struct Voice9724 *)D_80093D68)[i].unk1B == 0) {
+                M2C_GFIELD(D_80093790, s32, 4) = 0x60100;
+                M2C_GFIELD(D_80093790, s32, 0) = D_8007142C[i];
+                M2C_GFIELD(D_80093790, u16, 0x3A) = ((struct Voice9724 *)D_80093D68)[i].unk40;
+                M2C_GFIELD(D_80093790, u16, 0x3C) = ((struct Voice9724 *)D_80093D68)[i].unk42;
+                M2C_GFIELD(D_80093790, s32, 0x24) = ((struct Voice9724 *)D_80093D68)[i].unk44;
+                SpuSetVoiceAttr(D_80093790);
+                mask |= D_8007142C[i];
+                do {
+                    SpuSetKey(0, D_8007142C[i]);
+                    status = SpuGetKeyStatus(D_8007142C[i]);
+                    if (status == 2) {
+                        break;
+                    }
+                } while (status != 0);
+                ((struct Voice9724 *)D_80093D68)[i].unk16 = 0;
+            } else {
+                ((struct Voice9724 *)D_80093D68)[i].unk1A |= 0x80;
+            }
+        }
+    }
+
+    if (mask != 0) {
+        do {
+            SpuSetKey(0, mask);
+            status = SpuGetKeyStatus(mask);
+            if (status == 2) {
+                break;
+            }
+        } while (status != 0);
+    }
+}
 
 void func_800398B4(void) {
 
