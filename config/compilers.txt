@@ -563,6 +563,7 @@ src/etc/etc__8009BD30__8009EBD8.c 2.7.2-cdk
 src/etc/etc__8009BD30__8009E854.c 2.7.2-cdk
 src/etc/etc__800AA238__800AB78C__800AC570.c 2.8.1-psx
 src/etc/etc__800AA238__800AB78C__800AC4A4.c 2.7.2-cdk
-src/etc/etc__800AA238__800AB78C__800ABEA0.c 2.8.1-psx
 src/etc/etc__800AA238__800AB78C__800ABBF8.c 2.7.2-cdk
 src/etc/etc__800AA238__800AB78C__800AB8E8.c 2.7.2-cdk
+src/etc/etc__800AA238__800AB78C__800ABEA0__800AC20C.c 2.8.1-psx
+src/etc/etc__800AA238__800AB78C__800ABEA0.c 2.7.2-cdk
