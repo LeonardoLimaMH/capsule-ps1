@@ -1,8 +1,100 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B1700);
+s32 func_800B1700(void) {
+    typedef struct {
+        u16 f0;
+        u8 pad2[0xE];
+        u16 f10;
+        u8 pad12[0x78];
+        u16 f8a;
+        u8 pad8c[0x1A8 - 0x8C];
+    } Rec1700;
+    extern s16 D_80078C28[];
+    extern u16 D_800EFA4C[];
+    extern u16 D_800EFA4A[];
+    extern s16 D_80103D38[];
+    extern s32 D_800EEB70[];
+    extern u16 D_8006AF80[];
+    extern s32 D_800EF2D8[];
+    extern Rec1700 D_80091618[];
+    extern u8 D_800F2D30[];
+    extern u8 D_800F2D98[];
+    extern void func_800B8BF0(s32);
+    extern s32 func_80027C14(u16);
+    extern void func_800E1B30(void);
+    extern void func_800CD418(s32, s32);
 
-#include "common.h"
+    s32 i;
+    s32 state;
+    u16 s0;
+    u16 id;
+    s32 j;
+    s16 t;
+
+    if (D_80078C28[0] != 0) {
+        return 0;
+    }
+
+    D_800EFA4A[0] = D_800EFA4C[0];
+    i = 1;
+    do {
+        if (i != D_80103D38[0]) {
+            func_800B8BF0(i);
+        }
+        i--;
+    } while (i >= 0);
+
+    state = D_80103D38[0];
+    if (D_800EEB70[0] == 0) {
+        if (state != 1) {
+            s0 = D_80091618[D_8006AF80[0]].f8a;
+        } else {
+            s0 = D_8006AF80[0];
+        }
+    } else if (state == 1) {
+        s0 = D_8006AF80[0];
+    } else {
+        s0 = D_800EF2D8[0];
+    }
+
+    func_80027C14(s0);
+
+    id = D_80091618[s0].f0;
+    j = 0;
+    while (1) {
+        if ((u16)j != s0 && D_80091618[(u16)j].f10 != 0xFFFF && D_80091618[(u16)j].f0 == id) {
+            break;
+        }
+        j++;
+        if ((u16)j >= 6) {
+            break;
+        }
+    }
+
+    if ((u16)j == 6) {
+        u8 *p = &D_800F2D30[id];
+        u8 idx = *p;
+        *p = 0xFF;
+        D_800F2D98[idx] = 0xFF;
+    }
+
+    t = D_80103D38[0];
+    if (t == 1) {
+        func_800E1B30();
+        D_800EEB70[0] = t;
+        D_800EF2D8[0] = D_80091618[D_8006AF80[0]].f8a;
+        D_80091618[D_8006AF80[0]].f8a = 0xFFFF;
+        func_800CD418(0, 0);
+    }
+
+    return 1;
+}
+
+extern u8 D_800EEB9C[];
+extern s32 D_800EE5D0[], D_800F2DBC[];
+extern u8 *D_800F2DC0[];
+extern s32 func_80019F30(s32, s32);
+extern void func_80015CD0(void *, s32, s32);
 
 s32 func_800B1940(void) {
     extern s32 D_800EEB88[];
@@ -29,9 +121,6 @@ s32 func_800B1940(void) {
     return var_v0;
 }
 
-extern u8 D_800EEB9C[];
-extern s32 D_800EE5D0[], D_800F2DBC[];
-extern u8 *D_800F2DC0[];
 extern s32 func_80019F30(s32, s32);
 extern void func_80015CD0(void *, s32, s32);
 void func_800B19E0(u16 a0) {
@@ -177,9 +266,6 @@ s32 func_800B1E7C(void) {
     return 1;
 }
 
-extern u8 D_800EEB9C[];
-extern s32 D_800EE5D0[], D_800F2DBC[];
-extern u8 *D_800F2DC0[];
 extern s32 func_80019F30(s32, s32);
 extern void func_80015CD0(void *, s32, s32);
 
@@ -391,8 +477,6 @@ s32 func_800B3D44(s32 arg0, s32 arg1) {
     return 0;
 }
 
-#include "common.h"
-
 s32 func_800B3E44(s32 arg0, s32 arg1) {
     extern s32 D_8006AF84[];
     extern M2C_UNK D_8006AFCC[];
@@ -428,8 +512,6 @@ block_8:
     }
     return 0;
 }
-
-#include "common.h"
 
 s32 func_800B3F54(s32 arg0, s32 arg1) {
     extern s32 D_8006AF84[];
