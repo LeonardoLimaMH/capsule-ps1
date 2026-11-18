@@ -4,7 +4,54 @@
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B38B0);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B3AE4);
+void func_800B3AE4(u8 *arg0) {
+    typedef struct {
+        u8 pad0[0x15];
+        u8 pos[2];
+        u8 pad17[0x7C - 0x17];
+    } ChessUnit_B3AE4;
+
+    typedef struct {
+        u8 pad0[9];
+        u8 unk9;
+        u8 padA[0x18 - 0xA];
+        ChessUnit_B3AE4 units[2][6];
+        u8 pad5E8[0x5FA - 0x5E8];
+        u8 unk5FA;
+        u8 unk5FB[2];
+        u8 pad5FD[0x601 - 0x5FD];
+        u8 unk601[2][2];
+        u8 pad605[0x60C - 0x605];
+        u8 unk60C;
+        u8 pad60D[0x6E0 - 0x60D];
+        u8 unk6E0[2];
+    } ChessSub5D0_B3AE4;
+
+    extern struct {
+        s32 f0;
+        u8 pad[0x30];
+    } D_801010B0[];
+
+    ChessSub5D0_B3AE4 *s0 = (ChessSub5D0_B3AE4 *)(arg0 + 0x5D0);
+    u8 c = s0->unk5FA;
+    u8 b = s0->unk5FB[c];
+    u32 (*board)[13] = (u32 (*)[13])D_801010B0[s0->unk9].f0;
+    ChessUnit_B3AE4 *x = &s0->units[c][b];
+    s32 i;
+
+    s0->unk60C = 0;
+    ((u8 *)&board[x->pos[0]][x->pos[1]])[3] = 0;
+    for (i = 0; i < 2; i++) {
+        x->pos[i] = s0->unk6E0[i];
+    }
+    ((u8 *)&board[x->pos[0]][x->pos[1]])[3] = (b + 1) & 0x7F;
+    if (c != 0) {
+        ((u8 *)&board[x->pos[0]][x->pos[1]])[3] |= 0x80;
+    }
+    for (i = 0; i < 2; i++) {
+        s0->unk601[c][i] = x->pos[i];
+    }
+}
 
 s32 func_800B3C4C(u8 *arg0, s32 arg1) {
     u32 f;
