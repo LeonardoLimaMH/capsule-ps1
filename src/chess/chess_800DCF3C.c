@@ -35,9 +35,3 @@ s32 func_800DD1D4(void *arg0, s32 arg1, s32 arg2) {
     var_v0 = (temp_a2 > 0) * 4;
     return var_v0;
 }
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C", func_800DD230);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C", func_800DD274);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C", func_800DD2EC);
