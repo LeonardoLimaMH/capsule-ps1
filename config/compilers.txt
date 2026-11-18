@@ -192,7 +192,6 @@ src/etc/etc__800A4AC8.c 2.7.2-cdk
 src/etc/etc__800A822C.c 2.7.2-cdk
 src/chess/chess.c 2.7.2-cdk
 src/chess/chess__8009ECF8.c 2.7.2-cdk
-src/chess/chess_800BB910.c 2.7.2-cdk
 src/chess/chess_800C4E94.c 2.7.2-cdk
 src/chess/chess_800DCF3C__800DD3D8.c 2.7.2-cdk
 src/chess/chess_800DCF3C__800FE98C.c 2.7.2-cdk
@@ -542,3 +541,5 @@ src/chess/chess__8009A75C__8009AC88.c 2.7.2-cdk
 src/chess/chess__8009A75C__8009AAA4.c 2.7.2-cdk
 src/chess/chess__800A8444__800A8710__800ACF04.c 2.7.2-cdk
 src/chess/chess__800A8444__800A8710__800ACD58.c 2.7.2-cdk
+src/chess/chess_800BB910__800BBACC.c 2.7.2-cdk
+src/chess/chess_800BB910.c 2.7.2-cdk
