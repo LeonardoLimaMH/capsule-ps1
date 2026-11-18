@@ -245,7 +245,44 @@ void func_800CCF2C(s32 a0, s32 a1, s32 a2) {
     *(u32 *)(p + 0x38) = (*(u32 *)(p + 0x38) & ~0x40) | ((a2 & 1) << 6);
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CCFA4);
+void func_800CCFA4(s32 a0, s32 a1, s32 a2) {
+    extern u8 D_80100F38[];
+    extern struct { u8 pad[0x14]; u16 ids[4]; s32 coords[3][3]; u8 rest[0x168]; } D_80091618[];
+    extern u8 *D_800F19C8[][6][3];
+    extern u16 D_80069AB4[];
+    extern s32 func_800B1260(s32);
+    extern void func_800CD1A0(s32, s16, s32, s32);
+    extern void func_800A8E78(s32);
+    s32 k = (u16)func_800B1260(a0);
+    switch (a2) {
+    case 1: {
+        *(s32 *)((u8 *)D_800F19C8[0][k][a1] + 0x38) &= ~1;
+        *(s32 *)((u8 *)D_800F19C8[1][k][a1] + 0x38) &= ~1;
+        break;
+    }
+    case 0: {
+        u8 *q;
+        u16 x, y, n;
+        *(s32 *)((u8 *)D_800F19C8[0][k][a1] + 0x38) |= 1;
+        *(s32 *)((u8 *)D_800F19C8[1][k][a1] + 0x38) |= 1;
+        n = D_80091618[k].ids[a1];
+        q = (u8 *)&D_80091618[k].coords[a1];
+        x = *(u16 *)q;
+        if (*(s16 *)q == -1 || (y = *(u16 *)(q + 4), *(s16 *)(q + 4) == -1)) {
+            u8 *p = D_80100F38;
+            u8 *r = k * 0x79C + p;
+            x = *(u16 *)(r + 0x336);
+            y = *(u16 *)(r + 0x338);
+        }
+        func_800CD1A0(a0, (s16)(D_80069AB4[n] - 1), (s16)x, (s16)y);
+        func_800A8E78((s32)D_800F19C8[0][k][a1]);
+        func_800A8E78((s32)D_800F19C8[1][k][a1]);
+        D_800F19C8[0][k][a1] = 0;
+        D_800F19C8[1][k][a1] = 0;
+        break;
+    }
+    }
+}
 
 extern u8 D_800F19C8[];
 extern u8 D_800EFF58[];
