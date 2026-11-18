@@ -41,9 +41,124 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4", func_800F77D4);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4", func_800F7AB4);
+void func_800F7AB4(u8 *arg0) {
+    extern u8 *D_8008ED68[];
+    extern void SetPolyF4();
+    extern void AddPrim();
+    extern void func_80013920();
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4", func_800F7D1C);
+    u8 **g = D_8008ED68;
+    u16 a0 = *(u16 *)(arg0 + 0x42);
+    s32 s2 = *(s16 *)(arg0 + 0x2A);
+    s32 s3 = *(s16 *)(arg0 + 0x2E);
+    s32 s4;
+    s32 s5;
+    s32 tmp;
+    register u8 *poly asm("s0");
+
+    if (arg0[0x4D] < (a0 >> 1)) {
+        tmp = arg0[0x4D] * 2;
+        s4 = (*(u16 *)(arg0 + 0x40) * tmp) / a0 + 2;
+    } else {
+        tmp = (a0 - arg0[0x4D]) * 2;
+        s4 = (*(u16 *)(arg0 + 0x40) * tmp) / a0 + 2;
+    }
+    s5 = 2;
+
+    {
+        u8 *next = 0;
+        u8 *base;
+        s32 off;
+        poly = *(u8 **)(*g + 0x1090);
+        base = *g;
+        if (poly != 0 && poly + 0x18 <= base + 0x4594) {
+            next = poly + 0x18;
+        }
+        *(u8 **)(base + 0x1090) = next;
+        SetPolyF4(poly);
+        poly[4] = arg0[0x44];
+        poly[5] = arg0[0x45];
+        poly[6] = arg0[0x46];
+        *(s16 *)(poly + 0x8) = s2;
+        *(s16 *)(poly + 0xA) = s3 - s4;
+        *(s16 *)(poly + 0xC) = s5 + s2;
+        *(s16 *)(poly + 0xE) = s3;
+        *(s16 *)(poly + 0x10) = s2 - s5;
+        *(s16 *)(poly + 0x12) = s3;
+        *(s16 *)(poly + 0x14) = s2;
+        *(s16 *)(poly + 0x16) = s4 + s3;
+        off = *(s16 *)(arg0 + 0x32) * 4 + 0x70;
+        AddPrim(*g + off, poly);
+    }
+
+    {
+        u8 *next = 0;
+        u8 *base;
+        s32 off;
+        poly = *(u8 **)(*g + 0x1090);
+        base = *g;
+        if (poly != 0 && poly + 0x18 <= base + 0x4594) {
+            next = poly + 0x18;
+        }
+        *(u8 **)(base + 0x1090) = next;
+        SetPolyF4(poly);
+        poly[4] = arg0[0x44];
+        poly[5] = arg0[0x45];
+        poly[6] = arg0[0x46];
+        *(s16 *)(poly + 0x8) = s2;
+        *(s16 *)(poly + 0xA) = s3 - s5;
+        *(s16 *)(poly + 0xC) = s4 + s2;
+        *(s16 *)(poly + 0xE) = s3;
+        *(s16 *)(poly + 0x10) = s2 - s4;
+        *(s16 *)(poly + 0x12) = s3;
+        *(s16 *)(poly + 0x14) = s2;
+        *(s16 *)(poly + 0x16) = s5 + s3;
+        off = *(s16 *)(arg0 + 0x32) * 4 + 0x70;
+        AddPrim(*g + off, poly);
+    }
+
+    arg0[0x4D] += 1;
+    if (arg0[0x4D] >= *(u16 *)(arg0 + 0x42)) {
+        if (arg0[0x4C] != 0) {
+            func_80013920(arg0);
+        } else {
+            arg0[0x4D] = arg0[0x4D] % *(u16 *)(arg0 + 0x42);
+        }
+    }
+}
+
+void func_800F7D1C(void *arg0) {
+    typedef struct {
+        u16 x50;
+        u16 x52;
+        s16 x54;
+        s16 x56;
+    } SubF7D1C;
+    typedef struct {
+        u8 pad0[0x28];
+        u8 *ptr28;
+        u8 count2C;
+        u8 pad2D[0x50 - 0x2D];
+        SubF7D1C sub[1];
+    } ObjF7D1C;
+    ObjF7D1C *obj = (ObjF7D1C *)arg0;
+    u8 *s1 = obj->ptr28;
+    s32 i;
+
+    for (i = 0; i < obj->count2C; i++) {
+        if (obj->sub[i].x56 == 0) {
+            s16 tmp;
+            *(u16 *)(s1 + 0x46) = obj->sub[i].x50;
+            *(u16 *)(s1 + 0x4A) = obj->sub[i].x52;
+            *(s16 *)(s1 + 0x4E) = obj->sub[i].x54;
+            tmp = 0x78000 / (obj->sub[i].x54 - 0x96);
+            *(s16 *)(s1 + 0x52) = tmp;
+            *(s16 *)(s1 + 0x50) = tmp;
+            *(s16 *)(s1 + 0x54) = func_800202A4(0x1000);
+            func_800161C4(s1);
+        }
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4", func_800F7DE4);
 
