@@ -214,10 +214,3 @@ void func_800C1658(u8 *arg0) {
         break;
     }
 }
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910__800BF9B0__800C0E6C", func_800C1890);
-
-void func_800C1A50(void) {
-    func_800CAE14();
-    func_800125AC(0xA);
-}
