@@ -417,4 +417,18 @@ void func_800A3718(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = func_80019F30(0x60010, (*D_800B3B3C) + 0x19);
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A378C);
+void func_800A378C(void *arg0) {
+    extern u8 D_80085428[];
+    extern u16 D_8008EE44[];
+    extern s16 D_800B3B40[];
+    u8 *p = D_80085428;
+    if ((*D_8008EE44) != 0x12) {
+        M2C_FIELD(arg0, s32 *, 0x38) = (s32) (M2C_FIELD(arg0, s32 *, 0x38) | 1);
+    } else {
+        s32 idx, base;
+        M2C_FIELD(arg0, s32 *, 0x38) = (s32) (M2C_FIELD(arg0, s32 *, 0x38) & ~1);
+        idx = p[0x5D9] * 2;
+        base = *D_800B3B40 + 0xB;
+        M2C_FIELD(arg0, s32 *, 0x18) = func_80019F30(0x6001D, idx + base);
+    }
+}
