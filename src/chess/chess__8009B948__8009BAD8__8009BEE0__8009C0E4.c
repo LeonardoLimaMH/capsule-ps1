@@ -34,7 +34,34 @@ void func_8009C178(char arg1)
   new_var = arg1;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__8009B948__8009BAD8__8009BEE0__8009C0E4", func_8009C1B4);
+void func_8009C1B4(u8 *arg0, s32 arg1, s32 arg2) {
+    extern s32 func_80012A20();
+    extern s32 func_80019F30();
+    extern s32 func_800CA48C();
+    extern s32 func_800CA4AC();
+    struct {
+        u8 pad[0x5E4];
+        u8 unk5E4[1];
+    } *s = (void *)arg0;
+    s32 s1;
+    s32 a1;
+
+    if (arg2 != 0) {
+        MATCHING_CALL4_REPEAT(func_80012A20, func_80019F30(0x50014, 5), 1, 0);
+        return;
+    }
+
+    if (s->unk5E4[arg1] < 3) {
+        s1 = 0x13;
+        a1 = func_800CA48C(arg0, arg1);
+    } else {
+        s1 = 0x14;
+        a1 = func_800CA4AC(arg0, arg1);
+    }
+    if (a1 != -1) {
+        func_80012A20(func_80019F30(s1 | 0x20000, a1), 3, (s16)(arg1 * 0x40 + 0x200), 0x100);
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009B948__8009BAD8__8009BEE0__8009C0E4", func_8009C278);
 
