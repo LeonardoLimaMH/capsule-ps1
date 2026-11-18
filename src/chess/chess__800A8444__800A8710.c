@@ -913,13 +913,277 @@ void func_800AE03C(u8 *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444__800A8710", func_800AE1BC);
+extern s32 rsin(s32);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444__800A8710", func_800AE35C);
+extern s32 rsin(s32);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444__800A8710", func_800AE504);
+extern s32 rsin(s32);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444__800A8710", func_800AE728);
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+void func_800AE1BC(u8 *arg0, s32 arg1) {
+    extern u8 D_8008ED68[];
+    extern s8 D_801187E0[];
+    u8 *base = D_8008ED68;
+    register s16 val asm("v0");
+
+    switch (*(u16 *)(base + 0xE8)) {
+    case 0:
+        *(u16 *)(arg0 + 0x5F8) = 0;
+        func_80012628();
+        break;
+    case 1:
+        *(u16 *)(arg0 + 0x5F8) += 1;
+        if (*(arg0 + arg1 + 0x16) != 0) {
+            D_801187E0[0] = 1;
+        } else {
+            D_801187E0[0] = 2;
+        }
+        func_80012628();
+        break;
+    case 2:
+        val = *(u16 *)(arg0 + 0x5F8);
+        *(u16 *)(arg0 + 0x5F8) = val + 1;
+        if ((s16)(val % 14) == 0) {
+            s8 x = *(s8 *)(arg0 + 0x626);
+            if (x < D_801187E0[0]) {
+                *(s32 *)(base + arg1 * 16 + 0x88) = 0x4000;
+            } else if (D_801187E0[0] < x) {
+                *(s32 *)(base + arg1 * 16 + 0x88) = 0x1000;
+            } else {
+                func_80012628();
+            }
+        }
+        break;
+    case 3:
+        val = *(u16 *)(arg0 + 0x5F8);
+        *(u16 *)(arg0 + 0x5F8) = val + 1;
+        if ((s16)(val % 14) == 0) {
+            *(s32 *)(base + arg1 * 16 + 0x88) = 0x20;
+        }
+        break;
+    }
+}
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+void func_800AE35C(s32 unused, u8 *arg0, s32 arg1) {
+    extern u8 D_8008ED68[];
+    u8 *base = D_8008ED68;
+    register s16 val asm("v0");
+    s32 ret;
+    u8 *p2 = arg0 + ((arg1 * 2 + arg1) * 2 + 0x5EC);
+
+    switch (*(u16 *)(base + 0xE8)) {
+    case 0:
+        *(u16 *)(arg0 + 0x5F8) = 0;
+        func_80012628();
+        break;
+    case 1:
+        val = *(u16 *)(arg0 + 0x5F8);
+        *(u16 *)(arg0 + 0x5F8) = val + 1;
+        if ((s16)(val % 14) == 0) {
+            u8 *p1 = arg0 + arg1 * 2;
+            u8 *p3 = arg0 + (p2[0] * 0x7C + arg1 * 0x2E8);
+            u8 sp10 = p3[0x2D];
+            u8 sp14 = p3[0x2E];
+            u8 a2 = p1[0x601];
+            u8 a3 = p1[0x602];
+            ret = func_800ADD70(arg0, arg1, a2, a3, sp10, sp14);
+            *(s32 *)(base + arg1 * 16 + 0x88) = ret;
+            if (ret == 0) {
+                func_80012628();
+            }
+        }
+        break;
+    case 2:
+        val = *(u16 *)(arg0 + 0x5F8);
+        *(u16 *)(arg0 + 0x5F8) = val + 1;
+        if ((s16)(val % 14) == 0) {
+            *(s32 *)(base + arg1 * 16 + 0x88) = 0x20;
+        }
+        break;
+    }
+}
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+void func_800AE504(u8 *arg0, s32 arg1) {
+    extern u8 D_8008ED68[];
+    extern s8 D_801187E1[];
+    u8 *base = D_8008ED68;
+    register s16 val asm("v0");
+    u8 *p2 = arg0 + ((arg1 * 2 + arg1) * 2 + 0x5EC);
+    u8 *p_idx = arg0 + arg1;
+    u8 *p3 = arg0 + (arg1 * 0x2E8 + 0x18) + p_idx[0x5FB] * 0x7C;
+
+    switch (*(u16 *)(base + 0xE8)) {
+    case 0:
+        *(u16 *)(arg0 + 0x5F8) = 0;
+        func_80012628();
+        break;
+    case 1:
+        *(u16 *)(arg0 + 0x5F8) += 1;
+        if (p2[1] == 3) {
+            D_801187E1[0] = 2;
+        } else if (p2[1] != 0) {
+            if (p3[0x15] != p2[2] || p3[0x16] != p2[3]) {
+                D_801187E1[0] = 0;
+            } else if (p2[1] == 2) {
+                D_801187E1[0] = 1;
+            } else {
+                D_801187E1[0] = 3;
+            }
+        } else {
+            D_801187E1[0] = 3;
+        }
+        func_80012628();
+        break;
+    case 2:
+        val = *(u16 *)(arg0 + 0x5F8);
+        *(u16 *)(arg0 + 0x5F8) = val + 1;
+        if ((s16)(val % 14) == 0) {
+            s8 x = *(s8 *)(arg0 + 0x625);
+            if (x < D_801187E1[0]) {
+                *(s32 *)(base + arg1 * 16 + 0x88) = 0x4000;
+            } else if (D_801187E1[0] < x) {
+                *(s32 *)(base + arg1 * 16 + 0x88) = 0x1000;
+            } else {
+                func_80012628();
+            }
+        }
+        break;
+    case 3:
+        val = *(u16 *)(arg0 + 0x5F8);
+        *(u16 *)(arg0 + 0x5F8) = val + 1;
+        if ((s16)(val % 14) == 0) {
+            *(s32 *)(base + arg1 * 16 + 0x88) = 0x20;
+        }
+        break;
+    }
+}
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+void func_800AE728(u8 *arg0, s32 arg1) {
+    extern u8 D_8008ED68[];
+    u8 *base = D_8008ED68;
+    register s16 val asm("v0");
+    s32 ret;
+    u8 *p2 = arg0 + ((arg1 * 2 + arg1) * 2 + 0x5EC);
+
+    switch (*(u16 *)(base + 0xEC)) {
+    case 0:
+        *(u16 *)(arg0 + 0x5F8) = 0;
+        func_80012668();
+        break;
+    case 1:
+        val = *(u16 *)(arg0 + 0x5F8);
+        *(u16 *)(arg0 + 0x5F8) = val + 1;
+        if ((s16)(val % 14) == 0) {
+            u8 *p1 = arg0 + arg1 * 2;
+            u8 sp10 = p2[2];
+            u8 sp14 = p2[3];
+            u8 a2 = p1[0x601];
+            u8 a3 = p1[0x602];
+            ret = func_800ADD70(arg0, arg1, a2, a3, sp10, sp14);
+            *(s32 *)(base + arg1 * 16 + 0x88) = ret;
+            if (ret == 0) {
+                func_80012668();
+            }
+        }
+        break;
+    case 2:
+        val = *(u16 *)(arg0 + 0x5F8);
+        *(u16 *)(arg0 + 0x5F8) = val + 1;
+        if ((s16)(val % 14) == 0) {
+            *(s32 *)(base + arg1 * 16 + 0x88) = 0x20;
+        }
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444__800A8710", func_800AE8AC);
 
