@@ -107,6 +107,10 @@ s32 func_8009CEE8(void *arg0) {
     }
 }
 
+static inline void set_flags_0x38_0_and_0x34(Unk8009D0ACFlags *p, s32 v34) {
+    p->unk_0x38_0 = 1;
+    p->unk_0x34 = v34;
+}
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009CD9C", func_8009D0AC);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009CD9C", func_8009D2AC);
@@ -239,7 +243,42 @@ u8 func_8009DA94(s32 arg0, s32 arg1, u8 arg2, s32 arg3) {
     return current;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__8009CD9C", func_8009DB7C);
+s32 func_8009DB7C(u8 *arg0, s32 arg1) {
+    extern u32 *D_801010B0[][13];
+    extern u16 D_80100D14[][2];
+    extern s32 rcos(s32);
+    extern s32 rsin(s32);
+    u32 (*grid)[13];
+    s32 index;
+    u16 angle;
+    u8 *entry;
+    u32 x;
+    u32 y;
+    u32 height;
+    s32 c;
+    s32 s;
+    s32 s2;
+    s32 c2;
+
+    grid = (u32 (*)[13])D_801010B0[arg0[9]][0];
+    index = (arg0 + arg0[0x5FA])[0x605];
+    arg0[0x62A] = 1;
+    angle = index << 9;
+    entry = arg0 + ((s8)arg0[0x628] * 0x7C + arg1 * 0x2E8);
+    x = entry[0x2D];
+    y = entry[0x2E];
+    *(s32 *)(arg0 + 0x77C) = (6 - x) * 100;
+    height = grid[x][y];
+    *(s32 *)(arg0 + 0x784) = (6 - y) * 100;
+    *(s32 *)(arg0 + 0x780) = ((height >> 19) & 7) * 50;
+    c = rcos(angle);
+    s = rsin(angle);
+    *(s32 *)(arg0 + 0x77C) += (c * D_80100D14[index][0] + s * D_80100D14[index][1]) / 4096;
+    s2 = rsin(angle);
+    c2 = rcos(angle);
+    *(s32 *)(arg0 + 0x784) += (s2 * D_80100D14[index][0] - c2 * D_80100D14[index][1]) / 4096;
+    return *(s32 *)(arg0 + 0x784);
+}
 
 s32 func_8009DD64(u8 *arg0) {
     s32 stack[3];
