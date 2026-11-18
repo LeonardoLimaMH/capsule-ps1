@@ -193,7 +193,11 @@ void func_800FF740(u8 *arg0) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF820);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF8E0);
+s32 func_800FF8E0(u8 *arg0) {
+    extern u8 D_80118C18[];
+    u8 *p = D_80118C18 + (((((D_80118C18[0x9E9] - D_80118C18[0x9E8]) + 11) % 10) & 0xFF) * 4);
+    return (arg0[0] == p[0x9EA]) ? (arg0[2] == p[0x9EC]) : 0;
+}
 
 u8 func_800FF96C(void) {
     extern u8 D_80118C18[];
@@ -238,7 +242,71 @@ s32 func_800FFA00(u8 *arg0, s32 arg1, u8 *arg2) {
     return n;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FFAB0);
+void func_800FFAB0(u8 *arg0, s32 arg1)
+{
+  extern u8 D_801010B0[];
+  extern u8 D_8008ED68[];
+  extern u8 D_801021B8[][2][6][6];
+  extern s32 func_800202A4(s32);
+  extern u8 func_800A835C(u8 *, s32);
+  typedef struct 
+  {
+    u8 pad0[0x9EC];
+    u32 unk9EC[4];
+  } Work_800FFAB0;
+  u8 *s4 = arg0 + 0x5D0;
+  u8 (*board)[13][4] = *((u8 (**)[13][4]) (D_801010B0 + (s4[9] * 0x34)));
+  s32 idx1 = (arg0 + arg1)[0x5DE] - 1;
+  s32 idx2;
+  u8 *tbl;
+  u8 *p;
+  u8 b;
+  s32 row;
+  s32 col;
+  s32 val;
+  s32 i;
+  if ((s4 + arg1)[0x10] == 0)
+  {
+    idx2 = ((Work_800FFAB0 *) D_8008ED68)->unk9EC[arg1];
+    ((Work_800FFAB0 *) D_8008ED68)->unk9EC[arg1] = ((u32) (idx2 + 1)) % 6;
+  }
+  else
+  {
+    idx2 = func_800202A4(6);
+  }
+  i = 0;
+  tbl = D_801021B8[s4[9]][idx1][idx2];
+  do
+  {
+    if (i == 5)
+    {
+      val = 5;
+    }
+    else
+    {
+      val = func_800202A4(5);
+    }
+    b = tbl[val];
+    row = b >> 4;
+    col = b & 0xF;
+    if (board[row][col][3] == 0)
+    {
+      u8 r;
+      s32 next;
+      p = s4 + ((i * 0x7C) + (arg1 * 0x2E8));
+      p[0x2D] = row;
+      p[0x2E] = col;
+      p[0x2F] = 1;
+      r = func_800A835C(arg0, arg1);
+      next = i + 1;
+      i = r;
+      p[0x3D] = i;
+      i = next;
+      board[row][col][3] = (arg1 << 7) | i;
+    }
+  }
+  while (i < 6);
+}
 
 void func_800FFCAC(u8 *arg0, s32 arg1) {
     extern u8 D_801010B0[];
