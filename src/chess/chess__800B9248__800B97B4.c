@@ -44,7 +44,76 @@ void func_800B98E8(u8 *p) {
     }
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248__800B97B4", func_800B9990);
+void func_800B9990(u8 *arg0) {
+    typedef struct {
+        u8 pad0[0xe];
+        u8 unkE;
+        u8 padF[0x28 - 0xf];
+        u8 unk28;
+        u8 pad29[0x6b - 0x29];
+        u8 unk6B;
+        u8 pad6C[0x7C - 0x6c];
+    } ChessUnit_B9990;
+
+    typedef struct {
+        u8 pad0[0x18];
+        ChessUnit_B9990 units[2][6];
+        u8 pad5E8[0x5FA - (0x18 + 2 * 6 * 0x7C)];
+        u8 unk5FA;
+        u8 unk5FB[2];
+        u8 pad5FD[0x70C - 0x5FD];
+        u8 unk70C;
+        u8 pad70D[0x710 - 0x70D];
+        s16 unk710;
+    } ChessSub5D0_B9990;
+
+    extern s32 func_800D24B4(u8, u8);
+    extern u8 *func_800A8EE8(ChessSub5D0_B9990 *, s32, s32);
+    extern u8 func_800D8B6C(u8, u8);
+    extern u8 func_800D8D48(u8, u8);
+    extern void func_800CAA44(u8 *, ChessUnit_B9990 *);
+    extern void func_800CB9F4(ChessSub5D0_B9990 *, s32, s32);
+    extern void func_800125D8(void);
+
+    ChessSub5D0_B9990 *s0 = (ChessSub5D0_B9990 *)(arg0 + 0x5D0);
+    s32 c = s0->unk5FA;
+    s32 o = s0->unk70C;
+    u8 a = (c << 7) | (s0->unk5FB[c] + 1);
+    s32 n = 1 - c;
+    u8 b = (n << 7) | (o + 1);
+    ChessUnit_B9990 *y = &s0->units[n][o];
+    u32 flags;
+    u32 type;
+
+    arg0[0xD77] = 0;
+    if (o != 5) {
+        s0->unk710 = func_800D24B4(a, b);
+        flags = *(u32 *)(func_800A8EE8(s0, n, o) + 0x10);
+        if ((flags & 3) == 2) {
+            type = (flags >> 2) & 0x1f;
+            if (type == 1) {
+                if (y->unk28 == 0 && func_800D8B6C(b, a) != 0) {
+                    s0->unk710 = (s16)s0->unk710 / 2;
+                    arg0[0xD77] = 1;
+                }
+            } else if (type == 8) {
+                if (y->unk28 == 0 && func_800D8D48(b, a) != 0) {
+                    s0->unk710 = 0;
+                    arg0[0xD77] = 1;
+                }
+            }
+        }
+        if (y->unkE < s0->unk710) {
+            s0->unk710 = y->unkE;
+        }
+        func_800CAA44(arg0, y);
+        y->unk6B = y->unkE - s0->unk710;
+    } else {
+        s0->unk710 = 1;
+    }
+    func_800CB9F4(s0, 1 - c, o);
+    func_800125D8();
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248__800B97B4", func_800B9B88);
 
