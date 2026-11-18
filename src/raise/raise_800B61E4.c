@@ -548,4 +548,64 @@ s32 func_800B7F74(s32 arg0, s32 arg1) {
     return D_800EEB9C.unk3C8[arg0][arg1] == 1;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B7FA8);
+void func_800B7FA8(s32 arg0) {
+    typedef struct {
+        u8 _p00[0x38];
+        u32 b38_0 : 1;
+        u32 _b38_1 : 5;
+        u32 b38_6 : 1;
+        u32 _b38_7 : 25;
+    } Obj;
+    typedef struct {
+        u8 _p00[8];
+        s32 unk8;
+        u8 _p0C[4];
+        s32 unk10;
+        s32 unk14;
+        s32 unk18;
+        Obj *unk1C;
+        u8 _p20[4];
+        s32 unk24;
+        Obj *unk28[7];
+        u8 _p44[0x1C];
+        s32 unk60[7];
+        u8 _p7C[0x1C];
+        Obj *unk98[7];
+        u8 _pB4[0x20];
+        Obj *unkD4[7][9];
+        u8 _p1D0[0x2F4];
+        Obj *unk4C4[7][9];
+    } State;
+    extern State D_800EEB9C[];
+    u32 val;
+    s32 i;
+    s32 j;
+
+    D_800EEB9C->unk18 = arg0;
+    val = arg0 != 1;
+    D_800EEB9C->unk98[D_800EEB9C->unk24]->b38_0 = val;
+    if (D_800EEB9C->unk24 == 5) {
+        if (D_800EEB9C->unk8 == 1) {
+            s32 temp = arg0 == 1;
+            D_800EEB9C->unk10 = temp;
+            D_800EEB9C->unk1C->b38_0 = temp;
+            for (i = 0; i < 7; i++) {
+                D_800EEB9C->unk28[i]->b38_0 = temp;
+            }
+            {
+                s32 temp2 = arg0 != 1;
+                D_800EEB9C->unk14 = temp2;
+                D_800EEB9C->unk1C->b38_6 = temp2 != 1;
+            }
+        }
+        func_800B5BA0(arg0);
+        func_800B70A0((s16)(1 - arg0));
+    } else {
+        for (j = 0; j < D_800EEB9C->unk60[D_800EEB9C->unk24]; j++) {
+            D_800EEB9C->unkD4[D_800EEB9C->unk24][j]->b38_0 = val;
+            if (D_800EEB9C->unk24 < 2) {
+                D_800EEB9C->unk4C4[D_800EEB9C->unk24][j]->b38_0 = val;
+            }
+        }
+    }
+}
