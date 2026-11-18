@@ -76,6 +76,15 @@ typedef struct {
     u32 f1C;
 } AnimObj;
 
+static inline s32 fade_80015540(s32 c, s32 a) {
+    if (a == 0x1000) {
+        return c;
+    }
+    if (a < 0x1000) {
+        return (c * a) / 4096;
+    }
+    return ((0xFF - c) * (a - 0x1000)) / 4096 + c;
+}
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015540);
 
 #include "common.h"
@@ -258,6 +267,12 @@ s32 func_80015D14(AnimObj *p) {
     return 1;
 }
 
+typedef struct {
+    u8 pad0[0x1C];
+    s32 *unk1C;
+    s32 unk20;
+    s16 unk24;
+} Arg_80015E60;
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80015E60);
 
 void func_80015EF8(Struct_80015EF8 *p) {
@@ -519,7 +534,18 @@ INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_800188F0);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018C00);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_80018EF4);
+void func_80018EF4(s16 a, s16 b, s32 c, s32 d, s32 e) {
+    extern u8 D_80078B90[];
+    extern u16 D_80078B88[];
+    extern void func_800188F0();
+    extern void func_8001F1A8();
+    if (d == 0) {
+        func_800188F0(a, b, D_80078B90[c], 4, e);
+    } else {
+        register s32 off asm("v0") = c * 2;
+        func_8001F1A8(a, b, 4, 1, 0, (u8 *)D_80078B88 + off, 1, 1, e);
+    }
+}
 
 s32 func_80018F90(u32 arg0, s32 arg1) {
     extern void func_80020688();
