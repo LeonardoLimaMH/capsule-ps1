@@ -34,31 +34,31 @@ A [revisão de 30/10](docs/reviews/2026-10-30-byte-exact-audit.md) registra a
 auditoria anterior e os 60 testes selecionados das ferramentas.
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching; sobre o que pode virar C, sem o assembly do original):** `█████░░░░░░░░░░░░░░░` **27.22%**  
-**Total incluindo SDK PsyQ:** `█████░░░░░░░░░░░░░░░` **26.48%**  
-**Cobertura (C + funções que já eram assembly no original):** `█████░░░░░░░░░░░░░░░` **26.84%**  
+**Código do jogo decompilado em C (byte-matching; sobre o que pode virar C, sem o assembly do original):** `███████░░░░░░░░░░░░░` **33.98%**  
+**Total incluindo SDK PsyQ:** `███████░░░░░░░░░░░░░` **32.55%**  
+**Cobertura (C + funções que já eram assembly no original):** `███████░░░░░░░░░░░░░` **32.91%**  
 **Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`; sobre o código convertível em C):** `████████████████████` **99.48%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | executável principal | 33.19% (64,108 / 193,164 B) | 468 / 659 | 25.92% (173 / 303 fn) | **30.04%** |
-| `SLPM_860.96` | loader / boot | 15.56% (3,132 / 20,124 B) | 46 / 93 | 23.59% (132 / 215 fn) | **20.86%** |
-| `CHESS.BIN` | overlay de batalha (tabuleiro) | 19.28% (80,240 / 416,244 B) | 385 / 854 | 100.00% (2 / 2 fn) | **19.03%** |
-| `RAISE.BIN` | overlay de criação de monstros | 34.29% (110,552 / 322,408 B) | 671 / 934 | 100.00% (2 / 2 fn) | **33.86%** |
-| `ETC.BIN` | overlay de menus/diversos | 28.44% (25,312 / 88,992 B) | 126 / 189 | 0.00% (0 / 0 fn) | **28.44%** |
-| **Total** | | **27.22%** (283,344 / 1,040,932 B) | 1696 / 2729 | 24.95% (309 / 522 fn) | **26.48%** |
+| `YUUGI.EXE` | executável principal | 34.34% (66,332 / 193,164 B) | 474 / 659 | 25.92% (173 / 303 fn) | **30.90%** |
+| `SLPM_860.96` | loader / boot | 16.16% (3,252 / 20,124 B) | 47 / 93 | 23.59% (132 / 215 fn) | **21.05%** |
+| `CHESS.BIN` | overlay de batalha (tabuleiro) | 28.94% (120,464 / 416,244 B) | 499 / 854 | 100.00% (2 / 2 fn) | **28.56%** |
+| `RAISE.BIN` | overlay de criação de monstros | 38.49% (124,088 / 322,408 B) | 703 / 934 | 100.00% (2 / 2 fn) | **38.01%** |
+| `ETC.BIN` | overlay de menus/diversos | 44.52% (39,620 / 88,992 B) | 149 / 189 | 0.00% (0 / 0 fn) | **44.52%** |
+| **Total** | | **33.98%** (353,756 / 1,040,932 B) | 1872 / 2729 | 24.95% (309 / 522 fn) | **32.55%** |
 
 **Equivalentes e pendências por binário (jogo + SDK):**
 
 | Binário | C equivalente (`equiv/`) | Funcional (bytes convertíveis) | Funções em C | Assembly original | Faltam C |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | 67.72% (323 fn) | `██████████` **98.66%** | 964 / 970 (99.38%) | 65 | **6** |
-| `SLPM_860.96` | 72.22% (122 fn) | `██████████` **95.85%** | 300 / 302 (99.34%) | 32 | **2** |
-| `CHESS.BIN` | 80.97% (482 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | 0 | **0** |
-| `RAISE.BIN` | 66.14% (269 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
-| `ETC.BIN` | 71.56% (63 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | 0 | **0** |
-| **Total** | 72.64% (1,259 fn) | `██████████` **99.48%** | 3,264 / 3,272 (99.76%) | 97 | **8** |
+| `YUUGI.EXE` | 66.85% (317 fn) | `██████████` **98.66%** | 964 / 970 (99.38%) | 65 | **6** |
+| `SLPM_860.96` | 72.03% (121 fn) | `██████████` **95.85%** | 300 / 302 (99.34%) | 32 | **2** |
+| `CHESS.BIN` | 71.44% (368 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | 0 | **0** |
+| `RAISE.BIN` | 61.99% (237 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
+| `ETC.BIN` | 55.48% (40 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | 0 | **0** |
+| **Total** | 66.57% (1,083 fn) | `██████████` **99.48%** | 3,264 / 3,272 (99.76%) | 97 | **8** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código convertível: ficam de fora as rotinas que já eram assembly no
