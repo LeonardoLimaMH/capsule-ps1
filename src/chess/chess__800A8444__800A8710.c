@@ -208,7 +208,42 @@ s32 func_800A8D7C(s32 arg0, s32 arg1, s32 arg2)
   return (*((s32 *) new_var)) & 0x10000000;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444__800A8710", func_800A8DB4);
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+s32 func_800A8DB4(s32 arg0, s32 arg1, s32 arg2)
+{
+    s32 p;
+    s32 v;
+    p = arg2 * 0x7C;
+    p += arg1 * 0x2E8;
+    v = *(s32 *) (arg0 + p + 0x30);
+    if (v & 0x2000000) {
+        return 1;
+    }
+    return (v & 0x20000000) > 0;
+}
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444__800A8710", func_800A8E08);
 
