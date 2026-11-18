@@ -3,7 +3,73 @@
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910__800BF9B0__800C0E6C", func_800C0E6C);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910__800BF9B0__800C0E6C", func_800C11F8);
+void func_800C11F8(u8 *arg0) {
+    extern u8 D_80069AD4[];
+    extern s32 D_80069BB4[];
+    extern u16 D_8008EE50[];
+    u8 *base = arg0 + 0x5D0;
+    s32 c = base[0x5FA];
+    s32 c2 = base[0x712];
+    s32 o = base[0x713];
+    u8 *bc = base + c;
+    u8 *y = base + (c2 * 0x2E8 + 0x18) + o * 0x7C;
+    s32 index = bc[0x5FB];
+    s32 res;
+    u8 *ptr;
+    s32 val;
+    s32 i;
+    u8 *src;
+    u8 *dst;
+    s32 next;
+
+    switch (*D_8008EE50) {
+    case 0:
+        func_800CB9F4(base, c2, o);
+        res = func_800C20E8(arg0, base, c, index, c2, o);
+        i = 0;
+        src = D_80069AD4;
+        base[0x715] = res;
+        ptr = y + res;
+        *(s16 *)(base + 0x710) = ptr[0x6B] - ptr[0xE];
+        base[0x7A4] = 0;
+        dst = base;
+        do {
+            val = *(s32 *)(src + 0x44);
+            src += 4;
+            i++;
+            *(s32 *)(dst + 0x78C) = val;
+            dst += 4;
+        } while (i < 3);
+        func_800B3488(base, y);
+        if (*D_80069BB4 == 0x460) {
+            func_80012628();
+        }
+        func_80012628();
+        return;
+    case 1:
+        if (func_800B2F48(arg0, 0) != 0) {
+            func_80012628();
+        }
+        return;
+    case 2:
+        if (func_800C5FA0(arg0, base, y, 1, 1) != 0) {
+            func_80012628();
+        }
+        return;
+    case 3:
+        func_800B3878(base);
+        func_80012628();
+    case 4:
+        if (func_800B2F48(arg0, 1) != 0) {
+            next = 10;
+            if ((base[0x611] & 1) == 0) {
+                next = 7;
+            }
+            func_80012604(next);
+        }
+        return;
+    }
+}
 
 void func_800C13F0(u8 *p) {
     extern u16 D_8008EE50[];
