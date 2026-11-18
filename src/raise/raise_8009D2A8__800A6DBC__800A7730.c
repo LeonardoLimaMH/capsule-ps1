@@ -4,23 +4,71 @@ extern u8 D_800916E8[];
 extern s16 D_800EC588[][17];
 extern s16 D_800ECB84[][17];
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A7730", func_800A7730);
+s32 func_800A7730(s32 a0) {
+    typedef struct {
+        u16 id;
+        u8 pad2[0xB2];
+        s16 unkB4;
+        u8 padB6[0x8];
+        s16 unkBE;
+        u8 padC0[0x14];
+        s16 unkD4[7];
+        u8 padE2[0x1A8 - 0xE2];
+    } Mon1A8;
+    typedef struct {
+        u8 pad0[0xE];
+        u8 unkE;
+        u8 padF[0x3C - 0xF];
+    } MonInfo3C;
+    extern Mon1A8 D_80091618[];
+    extern MonInfo3C D_80063940[];
+    extern s16 D_800EC7A8[];
+    extern s32 func_800E6A1C(s32, s32);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A7730", func_800A79D8);
+    s32 sum = 0;
+    Mon1A8 *base = D_80091618;
+    s32 off = (u16)a0 * 0x1A8;
+    u8 *p_d4 = (u8 *)base + 0xD4;
+    s16 *pv = (s16 *)(off + p_d4);
+    register u8 s2 asm("s2") = D_80063940[((Mon1A8 *)(off + (u8 *)base))->id].unkE;
+    s16 i, r;
+    s16 x;
+    s32 d;
+    u16 k;
+    Mon1A8 *e;
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A7730", func_800A7C7C);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A7730", func_800A7F20);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A7730", func_800A8184);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A7730", func_800A8340);
-
-void func_800A847C(void) {
-
+    for (i = 3; i < 10; i++, pv++) {
+        if ((u16)(i - 3) < 2) {
+            sum += D_800EC7A8[i] * (0xFF - *pv);
+        } else {
+            sum += ((u16 *)D_800EC7A8)[i] * *(u16 *)pv;
+        }
+    }
+    r = (s16)sum / 100;
+    k = a0;
+    x = s2 + func_800E6A1C(k, (s16)((r * 80) / 255));
+    {
+        Mon1A8 *base2 = D_80091618;
+        e = &base2[k];
+    }
+    d = e->unkBE;
+    e->unkB4 = x;
+    if (d < 0xF5) {
+        e->unkB4 = (x * (d + 0x172)) / 615;
+    } else if (d >= 0x100) {
+        e->unkB4 = (x * (0x366 - d)) / 615;
+    } else {
+        e->unkB4 = (x * 11) / 10;
+    }
+    {
+        Mon1A8 *base3 = D_80091618;
+        Mon1A8 *f = &base3[(u16)a0];
+        if (f->unkB4 >= 0x100) {
+            f->unkB4 = 0xFF;
+        }
+        return f->unkB4;
+    }
 }
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A7730", func_800A8484);
 
 extern s32 D_8008543C[], D_8008ED80[];
 extern s16 D_800ED8EA, D_800ED8EC;
@@ -48,73 +96,3 @@ s32 func_800D1548(void);
 s32 func_800E16AC(s32);
 void func_800D1CC4(s32, s32, s32, s32);
 
-void func_800A865C(u16 a0) {
-    extern s16 D_800EC278[][17];
-    s16 *e = (s16 *)(D_800916E8 + a0 * 0x1A8);
-    s16 i = 1;
-    register s16 (*tbl)[17] asm("v1") = D_800EC278;
-    s16 *t = tbl[*(s16 *)(D_800916E8 + a0 * 0x1A8 - 0xC0)];
-    for (; i < 17; i++, e++) {
-        s16 v = *e;
-        v += t[i];
-        if (i >= 2) {
-            v = (v < 0) ? 0 : ((v > 0xFF) ? 0xFF : v);
-        }
-        if (i >= 13) {
-            v = (v < 0) ? 0 : ((v > 100) ? 100 : v);
-        }
-        *e = v;
-    }
-}
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A7730", func_800A875C);
-
-void func_800A88E4(u16 a0, u16 a1) {
-    s16 *e = (s16 *)(D_800916E8 + a0 * 0x1A8);
-    s16 i;
-    for (i = 1; i < 17; i++, e++) {
-        s16 v = *e;
-        v += D_800EC588[a1][i];
-        if (i >= 2) {
-            v = (v < 0) ? 0 : ((v > 0xFF) ? 0xFF : v);
-        }
-        if (i >= 13) {
-            v = (v < 0) ? 0 : ((v > 100) ? 100 : v);
-        }
-        *e = v;
-    }
-}
-
-void func_800A89E0(u16 a0, s16 a1) {
-    s16 *e = (s16 *)(D_800916E8 + a0 * 0x1A8);
-    s16 i;
-    for (i = 1; i < 17; i++, e++) {
-        s16 v = *e;
-        v += D_800ECB84[a1][i];
-        if (i >= 2) {
-            v = (v < 0) ? 0 : ((v > 0xFF) ? 0xFF : v);
-        }
-        if (i >= 13) {
-            v = (v < 0) ? 0 : ((v > 100) ? 100 : v);
-        }
-        *e = v;
-    }
-}
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A7730", func_800A8AE0);
-
-void func_800A8C10(void) {
-
-}
-
-void func_800A8C18(void) {
-
-}
-
-void func_800A8C20(void) {
-
-}
-
-s32 func_800A8C28(void) {
-    return 0;
-}
