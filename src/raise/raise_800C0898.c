@@ -1,8 +1,40 @@
 #include "common.h"
 
+typedef struct {
+    s16 unk_0;
+    s16 unk_2;
+    u16 idx;
+    u16 cnt;
+    s16 unk_8;
+    s16 a[32];
+    s16 b[32];
+    s16 c[32];
+} D_80100E60_t;
+
+extern D_80100E60_t D_80100E60;
+extern u8 D_80100F38[];
+extern s32 func_800B1260(s32);
+extern s32 func_800E1820(s32);
+extern s32 func_800E17F8(s32);
+extern void func_800C0EE8(s32, s16, s16);
+
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0898", func_800C0898);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0898", func_800C0BC8);
+void func_800C0BC8(s16 a0, s16 a1, s16 a2) {
+    D_80100E60_t *d = &D_80100E60;
+    u16 i = d->idx;
+    s16 c = d->cnt + 1;
+    d->cnt = c;
+    d->cnt = c % 32;
+    d->a[(s16)i] = a0;
+    d->b[(s16)i] = a1;
+    d->c[(s16)i] = a2;
+    if ((s16)i != 31) {
+        d->idx = i + 1;
+    } else {
+        d->idx = 0;
+    }
+}
 
 void func_800C0C40(void) {
     func_800C0C98();
@@ -71,7 +103,19 @@ void func_800C0E14(void) {
 
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0898", func_800C0E1C);
+void func_800C0E1C(s32 a0, s32 a1, s32 a2) {
+    u16 k = func_800B1260(a0);
+    if (k != 0xFFFF) {
+        if (func_800E1820(k) != 0 || func_800E17F8(k) == 0) {
+            func_800C0EE8(a0, (s16)a1, (s16)a2);
+        } else {
+            u8 *p = D_80100F38 + k * 0x79C;
+            *(s16 *)(p + 0x2C0) = a1;
+            *(s16 *)(p + 0x2C2) = a2;
+            *(s16 *)(p + 0x2C8) = 1;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800C0898", func_800C0EE8);
 
