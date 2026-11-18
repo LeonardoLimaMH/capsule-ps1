@@ -295,6 +295,7 @@ segments:
       - [0x4573C, c, chess_800DCF3C]
       - [0x45A30, c, chess_800DCF3C__800DD230]
       - [0x45A74, c, chess_800DCF3C__800DD274]
+      - [0x45AEC, c, chess_800DCF3C__800DD274__800DD2EC]
       - [0x45BD8, c, chess_800DCF3C__800DD3D8]
       - [0x46120, c, chess_800DCF3C__800DD3D8__800DD920]
       - [0x46278, c, chess_800DCF3C__800DD3D8__800DDA78]
