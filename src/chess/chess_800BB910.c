@@ -3,7 +3,76 @@
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BB910);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BBACC);
+s32 func_800BBACC(s32 a0, s32 a1, u8 *a2) {
+    extern u16 D_8008EE54[];
+    extern void func_80012668(void);
+    s32 r = 0;
+
+    switch (D_8008EE54[0]) {
+    case 0:
+        a2[0x17] = 0x8A;
+        a2[0x24] = 0x45;
+        a2[0x23] = 1;
+        func_80012668();
+        break;
+    case 1:
+        if (*(s16 *)(*(u8 **)(a2 + 0x70) + 0x24) < 0) {
+            r = 1;
+        }
+        break;
+    }
+    return r;
+}
+
+typedef struct {
+    u8 pad0[0x20];
+    s32 unk20;
+    u8 pad24[0x18];
+    u32 unk3C;
+    u8 pad40[6];
+    s16 unk46;
+    u8 pad48[2];
+    s16 unk4A;
+    u8 pad4C[4];
+    s16 unk50;
+    s16 unk52;
+    u8 pad54[4];
+    u8 unk58;
+    u8 unk59;
+    u8 unk5A;
+    u8 pad5B[0x1F];
+    u16 unk7A;
+    s32 unk7C;
+    s32 unk80;
+    s32 unk84;
+} UnkBBB54;
+
+extern void func_800CA2C8(s16, s16, s16, s16, s16, s32);
+typedef struct {
+    u8 pad0[0x3C];
+    u32 unk3C;
+    u8 pad40[6];
+    s16 unk46;
+    u8 pad48[2];
+    u16 unk4A;
+    u8 pad4C[6];
+    s16 unk52;
+} UnkBCE0C;
+
+typedef struct {
+    u8 b0, b1, b2, b3;
+} Tile800BE244;
+typedef struct {
+    Tile800BE244 (*board)[13];
+    u8 pad[0x30];
+} Stage800BE244;
+typedef struct {
+    u8 pad[0x88];
+    struct {
+        u32 flags;
+        u8 pad[0xC];
+    } pad88[2];
+} Ed800BE244;
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BBB54);
 

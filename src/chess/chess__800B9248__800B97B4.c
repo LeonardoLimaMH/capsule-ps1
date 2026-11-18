@@ -415,7 +415,33 @@ success:
     }
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248__800B97B4", func_800BA684);
+void func_800BA684(u8 *p) {
+    extern u16 D_8008EE50[];
+    extern s32 func_800C7F74(u8 *);
+    extern s32 func_800C7FDC(u8 *, u8 *, s32, s32);
+    extern void func_80012628(void);
+    extern void func_800125D8(void);
+    u8 *base = p + 0x5d0;
+    s32 s = *D_8008EE50;
+
+    switch (s) {
+    case 0:
+        if (func_800C7F74(base) != 0) {
+            func_80012628();
+        } else {
+            func_800125D8();
+        }
+        break;
+    case 1 ... 10:
+        if (func_800C7FDC(p, base, (s - 1) / 5, (s - 1) % 5) != 0) {
+            func_80012628();
+        }
+        break;
+    case 11:
+        func_800125D8();
+        break;
+    }
+}
 
 s32 func_800BA744(u8 *p) {
     extern u8 D_8008EE6A[];
