@@ -479,7 +479,88 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30", func_8009ECF4);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30", func_8009F384);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30", func_8009F9DC);
+extern void (*D_800B2C2C[])(u8 *);
+
+void func_800A4964();
+
+void func_8009F9DC(u8 *arg0) {
+    typedef struct {
+        u8 pad0[8];
+        s16 unk8;
+        u8 padA[0x22];
+        s16 unk2C;
+    } StructB3B38;
+    extern u8 D_8008ED68[];
+    extern s32 D_8008EDF0[];
+    extern StructB3B38 D_800B3B38[];
+    extern s16 D_800B3B40[];
+    extern s32 D_800B3C08[];
+    extern void func_800220B8(u8 *);
+    extern s32 func_800220D4(u8 *, s32, s32, s32);
+    extern s32 func_8001F8B0(s32, s32);
+    extern void func_80034AB0(s32);
+    extern void func_80012578(void);
+    extern void func_80012508(void);
+    extern void func_80012544(s32);
+    extern void func_800125AC(s32);
+
+    u8 *ed = D_8008ED68;
+    StructB3B38 *b38;
+
+    switch (*(u16 *)(ed + 0xE0)) {
+    case 0:
+        func_800220B8(arg0);
+        *(s32 *)(arg0 + 0x14) = func_8001F8B0(arg0[0x5E5] + 8, 6);
+        func_80012578();
+        break;
+    case 1:
+        if (func_800220D4(arg0, 1, 1, 1) != 0) {
+            func_80012578();
+        }
+        break;
+    case 2:
+        if (*(s32 *)(ed + 0x88) & 0x8000) {
+            func_80034AB0(0x84);
+            *D_800B3B40 = 0;
+        } else if (*(s32 *)(ed + 0x88) & 0x2000) {
+            func_80034AB0(0x84);
+            *D_800B3B40 = 1;
+        }
+        if (*D_8008EDF0 & 0x830) {
+            func_80034AB0(0x48);
+            b38 = D_800B3B38;
+            arg0[0x5DA] = b38->unk8;
+            *D_800B3C08 = 0;
+            if (arg0[0x5DA] == 0) {
+                b38->unk8 = 0;
+                func_80012508();
+                func_800125AC(arg0[0x5E1] == 1 ? 1 : 2);
+                break;
+            }
+            if (b38->unk2C == 1) {
+                func_800220B8(arg0);
+                *(s32 *)(arg0 + 0x14) = func_8001F8B0(arg0[0x5E5] + 8, 3);
+                func_80012578();
+                break;
+            }
+            b38->unk8 = 0;
+            func_80012508();
+            func_800125AC(2);
+        } else if (*D_8008EDF0 & 0x40) {
+            func_80034AB0(0x5D);
+            *D_800B3B40 = arg0[0x5D9];
+            func_80012544(0x10);
+        }
+        break;
+    case 3:
+        if (func_800220D4(arg0, 1, 1, 1) != 0) {
+            *D_800B3B40 = 0;
+            func_80012508();
+            func_800125AC(2);
+        }
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30", func_8009FBDC);
 
