@@ -255,7 +255,133 @@ void func_800264BC(void *arg0)
   while (var_a1 < 3);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80026514);
+void func_80026514(s32 idx) {
+    typedef struct {
+        u16 f0, f2, f4;
+        s16 f6;
+        u8 f8[8];
+        u16 f10, f12;
+        u16 f14[3];
+        u8 pad1A[2];
+        struct { s32 a, b, c; } f1C[3];
+        u16 f40;
+        u8 pad42[2];
+        s32 f44, f48, f4C;
+        u16 f50;
+        u8 pad52[2];
+        s32 f54, f58, f5C;
+        s16 f60;
+        u16 f62[4];
+        u8 pad6A[2];
+        s32 f6C[4];
+        u16 f7C[4];
+        u16 f84, f86, f88, f8A, f8C, f8E, f90, f92, f94;
+        u8 pad96[0x7A];
+        u16 f110;
+        s16 f112;
+        u16 f114[8];
+        u16 f124[8];
+        s16 f134;
+        u16 f136[7];
+        u16 f144[7];
+        u8 pad152[2];
+        s32 f154;
+        u8 pad158[0x1C];
+        s16 f174, f176;
+        s32 f178, f17C, f180, f184;
+        s16 f188, f18A;
+        s32 f18C[3];
+        s16 f198, f19A, f19C, f19E, f1A0, f1A2, f1A4;
+        u8 pad1A6[2];
+    } Ent;
+    extern Ent D_80091618[];
+    extern u8 D_80085428[];
+    s32 i = 7;
+
+    idx &= 0xFFFF;
+    {
+        Ent *base = D_80091618;
+        Ent *p = &base[idx];
+        u8 *q = (u8 *)p + i;
+        p->f0 = 0xFFFF;
+        p->f2 = 0xFFFF;
+        p->f4 = 0xFFFF;
+        p->f6 = -1;
+        do {
+            q[8] = 0;
+            i--;
+            q--;
+        } while (i >= 0);
+    }
+
+    D_80091618[idx].f10 = 0xFFFF;
+    D_80091618[idx].f12 = 0;
+    for (i = 0; i < 3; i++) {
+        D_80091618[idx].f14[i] = 0xFFFF;
+        D_80091618[idx].f1C[i].a = -1;
+        D_80091618[idx].f1C[i].b = -1;
+        D_80091618[idx].f1C[i].c = -1;
+    }
+
+    D_80091618[idx].f40 = 0xFFFF;
+    D_80091618[idx].f44 = -1;
+    D_80091618[idx].f48 = -1;
+    D_80091618[idx].f4C = -1;
+    D_80091618[idx].f50 = 0xFFFF;
+    D_80091618[idx].f54 = -1;
+    D_80091618[idx].f58 = -1;
+    D_80091618[idx].f5C = -1;
+    D_80091618[idx].f60 = 0x7006;
+    for (i = 0; i < 4; i++) {
+        D_80091618[idx].f62[i] = 0;
+        D_80091618[idx].f6C[i] = 0;
+        D_80091618[idx].f7C[i] = 0;
+    }
+
+    D_80091618[idx].f8A = 0xFFFF;
+    D_80091618[idx].f92 = 0xFFFF;
+    D_80091618[idx].f84 = 0;
+    D_80091618[idx].f86 = 0;
+    D_80091618[idx].f88 = 0;
+    D_80091618[idx].f8C = 0;
+    D_80091618[idx].f8E = 0;
+    D_80091618[idx].f90 = 0;
+    D_80091618[idx].f94 = 0;
+    D_80091618[idx].f110 = 0;
+    D_80091618[idx].f112 = -1;
+    for (i = 0; i < 8; i++) {
+        D_80091618[idx].f114[i] = 0;
+        D_80091618[idx].f124[i] = 0;
+    }
+
+    D_80091618[idx].f134 = -1;
+    for (i = 0; i < 7; i++) {
+        D_80091618[idx].f136[i] = 0;
+        D_80091618[idx].f144[i] = 0;
+    }
+
+    D_80091618[idx].f154 = 0;
+    D_80091618[idx].f174 = 0;
+    D_80091618[idx].f176 = 0;
+    D_80091618[idx].f178 = 0;
+    D_80091618[idx].f17C = 0;
+    D_80091618[idx].f180 = 0;
+    D_80091618[idx].f184 = 0;
+    D_80091618[idx].f188 = 0;
+    D_80091618[idx].f18A = 0;
+    for (i = 2; i >= 0; i--) {
+        D_80091618[idx].f18C[i] = 0;
+    }
+
+    D_80091618[idx].f198 = -1;
+    D_80091618[idx].f19A = -1;
+    D_80091618[idx].f19C = 0;
+    D_80091618[idx].f19E = 0;
+    D_80091618[idx].f1A0 = 0;
+    D_80091618[idx].f1A2 = 0;
+    D_80091618[idx].f1A4 = 0;
+    ((struct { u8 pad[0xD7C]; u8 unk[1]; } *)D_80085428)->unk[idx] = 0;
+}
 
 extern u8 D_8008F703;
 extern s32 D_80078C38;
@@ -366,6 +492,16 @@ s32 func_80027B34(u32 a) {
     return r;
 }
 
+typedef struct {
+    u8 pad[8];
+    u32 f8;
+    u32 fC;
+    u8 pad2[0x3C - 0x10];
+} Mon60_27C14;
+static inline s32 get_cls_27C14_b(s32 *tb, Mon60_27C14 *tm, u16 id) {
+    u32 f8 = tm[id].f8 >> 31;
+    return tb[((tm[id].fC & 0xF) << 1) | f8];
+}
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80027C14);
 
 s32 func_80027E04(u16 a0) {
