@@ -342,7 +342,70 @@ void func_800A903C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444__800A8710", func_800A9100);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444__800A8710", func_800A924C);
+extern u8 D_8006B2A4[];
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+void func_800A924C(u8 *arg0, u8 *arg1, s32 arg2, s32 arg3) {
+    extern struct {
+        u8 pad[0x108];
+        s32 x;
+        s32 y;
+    } D_8008ED68[];
+    extern s32 func_800A46B8(u8 *, u32, u32, s16 *);
+    extern s16 func_800CD950(s16 *, u8 *);
+    s16 buf3[4];
+    s16 buf1[4];
+    s16 buf2[4];
+
+    func_800A46B8(arg0, arg0[0xCB4], arg0[0xCB5], buf1);
+    func_800A46B8(arg0, arg0[0xCB6], arg0[0xCB7], buf2);
+
+    switch (arg3) {
+    case 0:
+    case 1:
+        func_800A93DC(buf2, buf1, buf3, 0x1C, arg0[0xCD9], 100);
+        break;
+    case 2:
+        func_800A93DC(buf2, buf1, buf3, 0x3C, arg0[0xCD9], 300);
+        break;
+    case 3:
+        func_800A954C(buf2, buf1, buf3, 8, arg0[0xCD9]);
+        break;
+    case 4:
+        func_800A954C(buf2, buf1, buf3, 8, arg0[0xCD9]);
+        if (arg2 == 1) {
+            buf3[1] -= 0x32;
+        }
+        break;
+    }
+
+    *(s16 *)(arg1 + 0x4E) = func_800CD950(buf3, arg1);
+    *(s16 *)(arg1 + 0x46) -= D_8008ED68[0].x / 2;
+    *(s16 *)(arg1 + 0x4A) -= D_8008ED68[0].y / 2;
+}
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
 
 extern s32 rsin(s32);
 void func_800A93DC(void *arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 arg5) {
