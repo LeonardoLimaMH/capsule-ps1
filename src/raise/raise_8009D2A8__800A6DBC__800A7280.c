@@ -73,7 +73,3 @@ void func_800A74C0(u16 a, u16 b)
     *(u16 *)(base + off + 0xEC) = s[2];
     *(u16 *)(base + off + 0xEE) = s[3];
 }
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A7280", func_800A752C);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A7280", func_800A7600);
