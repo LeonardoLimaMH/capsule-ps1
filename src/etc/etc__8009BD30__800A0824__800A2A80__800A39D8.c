@@ -212,9 +212,182 @@ void func_800A4038(u8 *arg0) {
     *(s32 *)(arg0 + 0x38) |= 1;
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80__800A39D8", func_800A40DC);
+void func_800A40DC(u8 *arg0) {
+    typedef struct {
+        u8 unk0[2];
+        u8 unk2[2];
+        u8 pad4[0x5CC];
+        u8 unk5D0;
+    } S_80085428_A40DC;
+    typedef struct {
+        s16 f0[4];
+        s16 f8[4];
+    } S_800B3B38_A40DC;
+    typedef struct {
+        u8 pad0[0x14];
+        u32 f14;
+        u8 pad18[0x3C - 0x18];
+    } S_80063940_A40DC;
+    extern S_80085428_A40DC D_80085428[];
+    extern u16 D_8008EE44[];
+    extern S_800B3B38_A40DC D_800B3B38[];
+    extern u8 D_800B3B90[][50];
+    extern S_80063940_A40DC D_80063940[];
+    extern u16 D_800B3C08[][2];
+    extern s32 func_80019F30(s32, s32);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80__800A39D8", func_800A4448);
+    u8 *p = (u8 *)D_80085428;
+    u16 r = *(u16 *)(arg0 + 0x84);
+
+    if (D_8008EE44[0] == 0x18) {
+        s32 idx;
+
+        if (((S_80085428_A40DC *)p)->unk5D0 == 2) {
+            if (r != 0) {
+                *(s16 *)(arg0 + 0x4A) = 0x60;
+            } else {
+                *(s16 *)(arg0 + 0x4A) = -0x30;
+            }
+        } else {
+            *(s16 *)(arg0 + 0x4A) = 0x50;
+        }
+
+        idx = D_800B3B38[0].f8[(s16)r] + *(s32 *)(arg0 + 0x80) - 1;
+        if (idx < 0) {
+            idx = ((S_80085428_A40DC *)p)->unk2[(s16)r] - 1;
+        } else {
+            u8 lim = ((S_80085428_A40DC *)p)->unk2[(s16)r];
+            if (idx >= (s32)lim) {
+                idx -= lim;
+            }
+        }
+
+        switch ((s32)D_800B3B38[0].f0[(s16)r]) {
+        case 2:
+            *(s32 *)(arg0 + 0x38) &= ~1;
+            {
+                u8 *e = p + (idx * 14 + (s16)r * 0x2BC);
+                s32 x;
+                *(s32 *)(arg0 + 0x18) = func_80019F30(0x60010, e[0x50] + 0x6F);
+                *(s16 *)(arg0 + 0x2E) = (D_80063940[e[0x50]].f14 >> 1) & 0xE;
+                x = *(s32 *)(arg0 + 0x80);
+                *(s16 *)(arg0 + 0x46) = (x << 6) - 0x80;
+                if (D_800B3B90[(s16)r][idx] != 0) {
+                    *(s32 *)(arg0 + 0x38) |= 0x40;
+                } else {
+                    *(s32 *)(arg0 + 0x38) &= ~0x40;
+                }
+            }
+            return;
+        case 3:
+            *(s32 *)(arg0 + 0x38) &= ~1;
+            {
+                s32 x = *(s32 *)(arg0 + 0x80);
+                *(s16 *)(arg0 + 0x46) = ((x << 6) - D_800B3C08[(s16)r][0]) - 0x80;
+            }
+            return;
+        case 4:
+            {
+                s32 c = *(s32 *)(arg0 + 0x80);
+                *(s32 *)(arg0 + 0x38) &= ~1;
+                if (c == 3) {
+                    u8 *e;
+                    idx -= 3;
+                    if (idx < 0) {
+                        idx += ((S_80085428_A40DC *)p)->unk2[(s16)r];
+                    }
+                    e = p + (idx * 14 + (s16)r * 0x2BC);
+                    *(s32 *)(arg0 + 0x18) = func_80019F30(0x60010, e[0x50] + 0x6F);
+                    *(s16 *)(arg0 + 0x46) = D_800B3C08[(s16)r][0] - 0xC0;
+                    *(s16 *)(arg0 + 0x2E) = (D_80063940[e[0x50]].f14 >> 1) & 0xE;
+                    if (D_800B3B90[(s16)r][idx] != 0) {
+                        *(s32 *)(arg0 + 0x38) |= 0x40;
+                    } else {
+                        *(s32 *)(arg0 + 0x38) &= ~0x40;
+                    }
+                    return;
+                }
+                *(s16 *)(arg0 + 0x46) = (D_800B3C08[(s16)r][0] + (c << 6)) - 0x80;
+            }
+            return;
+        }
+    }
+    *(s32 *)(arg0 + 0x38) |= 1;
+}
+
+void func_800A4448(u8 *arg0) {
+    typedef struct {
+        s16 unk0[6];
+    } Row_800B3B38;
+    typedef struct {
+        u8 pad[0x10];
+        s16 unk10[6];
+    } RowAt10_800B3B38;
+    typedef struct {
+        s16 unk0[8];
+        s16 unk10[2][6];
+    } S_800B3B38;
+    typedef struct {
+        u8 pad[0x14];
+        u32 f14;
+        u8 pad2[0x24];
+    } S_80063940;
+    extern u8 D_80085428[];
+    extern u16 D_8008EE44[];
+    extern s16 D_800B3B38[];
+    extern S_80063940 D_80063940[];
+    extern u16 D_800B25B8[];
+
+    u8 *p = D_80085428;
+    s32 c;
+    s32 r;
+    u16 m;
+    u32 row;
+    s16 *ent;
+
+    *(s32 *)(arg0 + 0x38) |= 1;
+    c = *(s32 *)(arg0 + 0x80);
+    m = D_8008EE44[0];
+    r = *(s32 *)(arg0 + 0x84);
+    if ((u32)(m - 0x18) >= 3) {
+        return;
+    }
+    if (p[0x5D0] == 2 && m == 0x18) {
+        u16 t = ((u16 *)D_800B3B38)[r];
+        if ((u32)(t - 2) < 3 || (s16)t == 6) {
+            return;
+        }
+    }
+    {
+        Row_800B3B38 *tbl = (Row_800B3B38 *)D_800B3B38;
+        row = (u32)((RowAt10_800B3B38 *)&tbl[r])->unk10;
+        ent = (s16 *)(c * 2 + row);
+    }
+    if (*ent < 0) {
+        return;
+    }
+    *(s32 *)(arg0 + 0x38) &= ~1;
+    *(s32 *)(arg0 + 0x18) = func_80019F30(0x60010, *ent + 0x6F);
+    *(u16 *)(arg0 + 0x2E) = (D_80063940[*ent].f14 >> 1) & 0xE;
+    *(u16 *)(arg0 + 0x4A) = D_800B25B8[*ent];
+    if (p[0x5D0] == 2) {
+        u16 base;
+        if (r == 0) {
+            *(s16 *)(arg0 + 0x4A) = -0x20;
+        } else {
+            *(s16 *)(arg0 + 0x4A) = 0x60;
+        }
+        base = *(u16 *)(arg0 + 0x4A);
+        *(u16 *)(arg0 + 0x4A) = base + D_800B25B8[((S_800B3B38 *)D_800B3B38)->unk10[r][c]];
+    }
+    if (((S_800B3B38 *)D_800B3B38)->unk10[r][c] == 0x31) {
+        *(u16 *)(arg0 + 0x52) = 0xE80;
+        *(u16 *)(arg0 + 0x50) = 0xE80;
+    } else {
+        *(u16 *)(arg0 + 0x52) = 0x1000;
+        *(u16 *)(arg0 + 0x50) = 0x1000;
+    }
+}
 
 void func_800A4654(u8 *arg0) {
     extern u8 D_80085428[];
