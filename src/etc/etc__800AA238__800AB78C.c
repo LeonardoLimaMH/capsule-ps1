@@ -19,9 +19,3 @@ void func_800AB78C(void)
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800AA238__800AB78C", func_800AB7D8);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800AA238__800AB78C", func_800AB8E8);
-
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800AA238__800AB78C", func_800ABBF8);
-
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800AA238__800AB78C", func_800ABEA0);
-
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800AA238__800AB78C", func_800AC20C);
