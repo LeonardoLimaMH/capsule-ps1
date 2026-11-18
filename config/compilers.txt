@@ -350,7 +350,6 @@ src/chess/chess_800BB910__800C1CA4__800C202C__800C20E8.c 2.7.2-cdk
 src/chess/chess_800BB910__800C1CA4__800C202C.c 2.7.2-cdk
 src/chess/chess_800C4ECC__800C7F74__800C867C.c 2.8.1-psx
 src/chess/chess_800C4ECC__800C7F74__800C8528.c 2.7.2-cdk
-src/etc/etc__800AA238__800AB78C__800AC780.c 2.8.1-psx
 src/etc/etc__800AA238__800AB78C__800AC650.c 2.7.2-cdk
 src/etc/etc__800AA238__800AB78C__800AC780__800ACEDC.c 2.8.1-psx
 src/etc/etc__800AA238__800AB78C__800AC780__800ACD98.c 2.7.2-cdk
@@ -567,3 +566,5 @@ src/etc/etc__800AA238__800AB78C__800ABBF8.c 2.7.2-cdk
 src/etc/etc__800AA238__800AB78C__800AB8E8.c 2.7.2-cdk
 src/etc/etc__800AA238__800AB78C__800ABEA0__800AC20C.c 2.8.1-psx
 src/etc/etc__800AA238__800AB78C__800ABEA0.c 2.7.2-cdk
+src/etc/etc__800AA238__800AB78C__800AC780__800AC9EC.c 2.8.1-psx
+src/etc/etc__800AA238__800AB78C__800AC780.c 2.7.2-cdk
