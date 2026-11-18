@@ -111,4 +111,69 @@ block_12:
     }
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A5FEC", func_800A7310);
+typedef struct {
+    u8 pad0[0x17];
+    u8 unk17;
+    u8 pad18[0xA];
+    u8 unk22;
+    u8 unk23;
+    u8 pad24;
+    u8 unk25;
+    u8 pad26[2];
+    u8 unk28;
+    u8 pad29[0x7C - 0x29];
+} Unit_800A7310;
+typedef struct {
+    u8 pad0[0x5E8];
+    Unit_800A7310 units[2][6];
+} Board_800A7310;
+typedef struct {
+    u8 pad0[0x14];
+    u8 unk14[4];
+    s32 unk18;
+    s32 unk1C;
+    u8 pad20[0x68];
+    s32 unk88;
+    s32 unk8C;
+} Obj_800A7310;
+s32 func_800A7310(Board_800A7310 *arg0, Obj_800A7310 *arg1, s32 arg2, s32 arg3) {
+    extern s32 func_800A8994(Board_800A7310 *, s32, s32);
+    extern s32 func_800C942C(Board_800A7310 *, u8);
+    extern s32 func_800C9A34(Board_800A7310 *, Unit_800A7310 *, s32);
+    extern void func_800A82A0(Obj_800A7310 *, s32 *, s32 *, Unit_800A7310 *);
+    extern s32 func_800A7B30(Board_800A7310 *, Unit_800A7310 *, s32, s32);
+    extern s32 func_80019F30(s32, s32);
+    extern void func_80015CD0(void *, s32, u8);
+    extern s32 func_800A7BB4(s32, s32, Unit_800A7310 *);
+    extern s32 func_800A81D8(Board_800A7310 *, Obj_800A7310 *, s32, s32);
+
+    s32 sp10;
+    s32 sp14;
+    Unit_800A7310 *unit;
+    s32 s4;
+    s32 s1;
+
+    unit = &arg0->units[arg2][arg3];
+    s4 = func_800A8994(arg0, arg2, arg3);
+    sp14 = func_800C942C(arg0, unit->unk25);
+    sp14 = func_800C9A34(arg0, unit, sp14);
+    if (sp14 != arg1->unk8C) {
+        func_800A82A0(arg1, &sp10, &sp14, unit);
+    } else {
+        sp10 = unit->unk17;
+    }
+    unit->unk22 = sp10;
+    if (unit->unk28 == 0 && (sp10 & 0x80)) {
+        s1 = func_800A7B30(arg0, unit, sp14, sp10);
+        if (arg1->unk88 <= 0 || arg1->unk8C != sp14 || arg1->unk88 - 1 != s1) {
+            func_80015CD0(arg1->unk14, func_80019F30(s4 | 0x70000, s1), unit->unk23);
+            arg1->unk88 = s1 + 1;
+        }
+    } else {
+        arg1->unk88 = 0;
+        arg1->unk18 = func_80019F30(s4 | 0x60000, func_800A7BB4(sp14, sp10, unit));
+        arg1->unk1C = 0;
+    }
+    arg1->unk8C = sp14;
+    return func_800A81D8(arg0, arg1, arg2, arg3);
+}
