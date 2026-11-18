@@ -74,6 +74,8 @@ segments:
       - [0x9F0, rodata]
       - [0xAC0, .rodata, chess__800B9248__800B9684]
       - [0xAD4, rodata]
+      - [0xAD8, .rodata, chess__800B9248__800B97B4]
+      - [0xB00, rodata]
       - [0xBF0, .rodata, chess_800BB910]
       - [0xC08, rodata]
       - [0xEC4, .rodata, chess_800BB910__800BF86C]

@@ -343,7 +343,77 @@ void func_800BA3C4(u8 *p) {
     }
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248__800B97B4", func_800BA4E0);
+void func_800BA4E0(u8 *arg0, s32 arg1) {
+    extern u16 D_8008EE50[];
+    extern void func_80012628(void);
+    extern void func_8001264C(s32);
+    extern s32 func_800A0D40(u8 *, s32);
+    extern s32 func_800A0930(u8 *, s32, s32);
+    extern void func_800220B8(u8 *);
+    extern s32 func_800220D4(u8 *, s32, s32, s32);
+    extern void func_800125D8(void);
+    u8 flags;
+    s32 next;
+
+    switch (*D_8008EE50) {
+    case 0:
+        flags = arg0[0xBE1];
+        next = 9;
+        if (!(flags & 1) && (next = 5, flags >> 7)) {
+            func_80012628();
+        } else {
+            func_8001264C(next);
+        }
+        arg0[0xBE1] &= 0x7F;
+        return;
+    case 1:
+        if (func_800A0D40(arg0, arg1) == 0) {
+            func_8001264C(3);
+            return;
+        }
+        goto success;
+    case 2:
+        if (func_800220D4(arg0, 1, arg1, 0) != 0) {
+            func_8001264C(9);
+        }
+        return;
+    case 3:
+        if (func_800A0D40(arg0, 1 - arg1) == 0) {
+            func_8001264C(5);
+            return;
+        }
+        goto success;
+    case 5:
+        if (func_800A0930(arg0, arg1, 1) == 0) {
+            func_8001264C(7);
+            return;
+        }
+        goto success;
+    case 6:
+        if (func_800220D4(arg0, 1, arg1, 0) != 0) {
+            func_8001264C(9);
+        }
+        return;
+    case 7:
+        if (func_800A0930(arg0, 1 - arg1, 1) != 0) {
+success:
+            func_800220B8(arg0);
+            func_80012628();
+            return;
+        }
+        func_8001264C(9);
+        return;
+    case 4:
+    case 8:
+        if (func_800220D4(arg0, 1, 1 - arg1, 0) != 0) {
+            func_8001264C(9);
+        }
+        return;
+    case 9:
+        func_800125D8();
+        return;
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B9248__800B97B4", func_800BA684);
 
