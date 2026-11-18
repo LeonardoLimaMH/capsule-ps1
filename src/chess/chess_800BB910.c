@@ -74,13 +74,72 @@ typedef struct {
     } pad88[2];
 } Ed800BE244;
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BBB54);
+void func_800BBB54(UnkBBB54 *arg0) {
+    extern s32 D_8008F7A8[];
+    extern s32 rcos(s32);
+    extern s32 rsin(s32);
+    extern void func_80013920(UnkBBB54 *);
+    u32 u7a;
+    u32 u3c;
+    u32 u1;
+    u8 c;
+    s16 s;
+    s32 trig;
+
+    if (arg0->unk20 == 5) {
+        arg0->unk20 = 2;
+    }
+    u7a = arg0->unk7A;
+    u3c = arg0->unk3C;
+    u1 = (u3c * 3) >> 1;
+    c = ((u3c - u7a) * 0xFF) / u3c;
+    arg0->unk58 = c;
+    arg0->unk5A = c;
+    arg0->unk59 = c;
+    s = ((u1 - arg0->unk7A) << 12) / u1;
+    arg0->unk52 = s;
+    arg0->unk50 = s;
+    if (arg0->unk58 < 10) {
+        func_80013920(arg0);
+    }
+    trig = rcos(((arg0->unk84 + arg0->unk7A) << 12) / 200);
+    arg0->unk46 = (((arg0->unk80 * arg0->unk7C * 3) / 4) * trig) / 4096;
+    trig = rsin(((arg0->unk84 + arg0->unk7A) << 12) / 200);
+    arg0->unk4A = (((arg0->unk80 * arg0->unk7C * 2) / 5) * trig) / 4096;
+    arg0->unk7A++;
+    arg0->unk7C++;
+    if (*D_8008F7A8 != 0) {
+        arg0->unk7C += 2;
+    }
+}
+
+extern void func_800CA2C8(s16, s16, s16, s16, s16, s32);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BBD20);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BC49C);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BCE0C);
+extern void func_800CA2C8(s16, s16, s16, s16, s16, s32);
+void func_800BCE0C(UnkBCE0C *arg0) {
+    extern s32 D_80069BB4[];
+    extern u8 D_80086105[];
+    extern u8 D_8008ED68[];
+    u32 temp_v1;
+    u8 *ed;
+    s32 y;
+
+    temp_v1 = arg0->unk3C;
+    if (temp_v1 < 0x32U) {
+        arg0->unk52 = (s16)((temp_v1 << 0xC) / 30);
+    }
+    ed = D_8008ED68;
+    arg0->unk3C += (ed[0x103] >= 2) ? ed[0x103] : 1;
+    y = arg0->unk4A - (0xEBE0 / *D_80069BB4);
+    func_800CA2C8(arg0->unk46, (s16)y, 2, 0x1800, arg0->unk52, 5);
+    if (*D_80086105 != 0) {
+        func_800185F8(arg0);
+    }
+}
 
 void func_800BCEEC(int param_1)
 
@@ -105,7 +164,34 @@ void func_800BCEEC(int param_1)
   return;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BCFB8);
+extern void func_800CA2C8(s16, s16, s16, s16, s16, s32);
+
+void func_800BCFB8(u8 *arg0) {
+    extern u8 D_8008ED68[];
+    u8 *ed = D_8008ED68;
+    s32 d = 60;
+    s32 k = 400;
+    s32 v;
+    s32 n;
+    s32 c;
+    s32 s;
+
+    v = *(s16 *)(arg0 + 0x16) + (ed[0x103] >= 2 ? ed[0x103] : 1);
+    *(s16 *)(arg0 + 0x16) = v;
+    n = (s16)v;
+    if (n > d) {
+        func_80013920(arg0);
+    } else {
+        c = (d - n) * 0xFF / d;
+        s = (k * n) / d;
+        *(u16 *)(arg0 + 0x3E) += 200;
+        arg0[0x32] = c;
+        arg0[0x31] = c;
+        arg0[0x30] = c;
+        *(s16 *)(arg0 + 0x3C) = s;
+        *(s16 *)(arg0 + 0x3A) = s + 0x30;
+    }
+}
 
 void func_800BD080(void *arg0) {
     extern u16 D_8008EE50[];
@@ -249,7 +335,70 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BD8EC);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BDBC0);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800BB910", func_800BE244);
+extern void func_800CA2C8(s16, s16, s16, s16, s16, s32);
+
+void func_800BE244(u8 *base, s32 c, s32 mode) {
+    extern Stage800BE244 D_801010B0[];
+    extern Ed800BE244 D_8008ED68[];
+    extern s32 func_800A8E34(u8 *, s32, s32);
+    register u8 *b asm("s3") = base;
+    Tile800BE244 (*board)[13] = D_801010B0[b[9]].board;
+    s32 side;
+    s32 idx;
+    register s32 dir asm("s4");
+    s32 one;
+    u8 *pair;
+    register u8 *unit asm("a0");
+    u8 *p;
+    u32 flags;
+    u8 v;
+    s32 x, y;
+
+    if (mode == 0) {
+        side = 1 - c;
+        idx = -1;
+        dir = 1;
+    } else {
+        flags = D_8008ED68[0].pad88[c].flags;
+        if (flags & 0x1000) {
+            dir = -1;
+        } else if (flags & 0x8000) {
+            dir = -1;
+        } else if (flags & 0x4000) {
+            dir = 1;
+        } else if (flags & 0x2000) {
+            dir = 1;
+        } else {
+            return;
+        }
+        p = b + c * 2;
+        v = board[p[0x601]][p[0x602]].b3;
+        side = v >> 7;
+        idx = (v & 0x7F) - 1;
+    }
+    one = 1;
+    pair = b + c * 2;
+next:
+    if (dir > 0) {
+        idx++;
+        if (idx == 6) {
+            side = one - side;
+            idx = 0;
+        }
+    } else if (idx == 0) {
+        side = one - side;
+        idx = 5;
+    } else {
+        idx--;
+    }
+    if (func_800A8E34(b, side, idx) != 0) goto next;
+    unit = b + (idx * 0x7C + side * 0x2E8);
+    x = unit[0x2D];
+    y = unit[0x2E];
+    if (*(b + x * 13 + y + 0x630) != 2) goto next;
+    pair[0x601] = x;
+    pair[0x602] = y;
+}
 
 void func_800BE408(s32 arg0) {
     void *temp_s1;
