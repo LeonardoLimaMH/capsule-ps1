@@ -216,6 +216,7 @@ segments:
       - [0x31D90, c, raise_800C8CAC__800C9590]
       - [0x33018, c, raise_800C8CAC__800C9590__800CA818]
       - [0x33144, c, raise_800C8CAC__800C9590__800CA944]
+      - [0x33B70, c, raise_800C8CAC__800C9590__800CA944__800CB370]
       - [0x33C38, c, raise_800CB438]
       - [0x349FC, c, raise_800CC1FC]
       - [0x36964, c, raise_800CE164]

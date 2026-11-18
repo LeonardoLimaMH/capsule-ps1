@@ -39,5 +39,3 @@ u16 func_800CB2B4(s32 a0, s32 a1) {
     }
     return p->val[a1];
 }
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800C8CAC__800C9590__800CA944", func_800CB370);
