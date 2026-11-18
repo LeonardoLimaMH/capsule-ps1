@@ -27,8 +27,29 @@ typedef struct {
     u8 pad14[0x28];
 } S_800DD_Tab8;
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434", func_800EE434);
+void func_800EE434(undefined4 param_1, undefined4 param_2, int param_3, int param_4)
+{
+    extern u8 D_80018600[];
+    extern u8 D_80085A10[];
+    extern int func_800EE2D4();
+    int iVar2;
+    u8 *p;
 
+    p = D_80085A10 + param_3 * 0x2e8 + param_4 * 0x7c;
+    iVar2 = func_80015B3C(func_800EE2D4, D_80018600, 1);
+    *(undefined4 *)(iVar2 + 0x14) = param_2;
+    *(char *)(iVar2 + 0x2c) = (char)param_3;
+    *(char *)(iVar2 + 0x2d) = (char)param_4;
+    p[0x20] = 3;
+    p[0x21] = 4;
+    *(uint *)(p + 0x18) = *(uint *)(p + 0x18) | 0x200000;
+    func_80034AB0(0x800e);
+}
+
+static inline int mul_800EE4F4(int a, int b)
+{
+    return a * b;
+}
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434", func_800EE4F4);
 
 #include "ghidra.h"
