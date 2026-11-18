@@ -168,6 +168,41 @@ s32 func_8009ED54(void)
   return -1;
 }
 
+typedef struct {
+    u8 pad0[0x38];
+    u32 unk38;
+} Obj_9EDA0;
+
+typedef struct {
+    u8 pad0[0x114];
+    s32 unk114;
+    u8 pad118[0x120 - 0x118];
+    Obj_9EDA0 *unk120[14];
+    u8 pad158[0x21C - 0x158];
+    s32 unk21C[14];
+    s32 unk254[14];
+    s32 unk28C;
+} Work_9EDA0;
+
+static inline s32 step_9EDA0(Work_9EDA0 *w, s32 n, s32 s0, s32 *cnt, s32 check0) {
+    w->unk114 = n;
+    if (n == s0) {
+        *cnt = 0;
+        return 1;
+    }
+    (*cnt)++;
+    if (!((w->unk120[n]->unk38 >> 6) & 1)) {
+        if (w->unk21C[n] != -1) {
+            w->unk28C = w->unk254[n];
+        }
+        return 1;
+    }
+    if (check0 && n == 0) {
+        w->unk114 = s0;
+        return 2;
+    }
+    return 0;
+}
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009EDA0);
 
 s32 func_8009F00C(s32 arg0) {
@@ -226,7 +261,67 @@ s32 func_8009F00C(s32 arg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009F1C4);
+void func_8009F1C4(s32 arg0) {
+    struct S100F38 {
+        u8 pad0[0x336];
+        s16 unk336;
+        s16 unk338;
+        u8 pad33A[0x79C - 0x33A];
+    };
+    struct S91618 {
+        u8 pad0[0x10];
+        u16 unk10;
+        u8 pad12[0x1A8 - 0x12];
+    };
+    extern u16 D_8006AF80[];
+    extern s16 D_80078C22[];
+    extern u8 D_80091618[];
+    extern u8 D_80100F38[];
+
+    switch (arg0) {
+    case 0: {
+        u8 *base = D_80100F38;
+        struct S100F38 *p = (struct S100F38 *)((*D_8006AF80) * 0x79C + base);
+        if (*D_80078C22 + 1 < p->unk338) {
+            p->unk338--;
+        }
+        break;
+    }
+    case 1: {
+        u8 *base = D_80100F38;
+        struct S100F38 *p = (struct S100F38 *)((*D_8006AF80) * 0x79C + base);
+        if (p->unk338 < 8) {
+            p->unk338++;
+        }
+        break;
+    }
+    case 2: {
+        u8 *base = D_80100F38;
+        struct S100F38 *p = (struct S100F38 *)((*D_8006AF80) * 0x79C + base);
+        if (*D_80078C22 + 1 < p->unk336) {
+            p->unk336--;
+        }
+        break;
+    }
+    case 3: {
+        u8 *base = D_80100F38;
+        struct S100F38 *p = (struct S100F38 *)((*D_8006AF80) * 0x79C + base);
+        if (p->unk336 < 8) {
+            p->unk336++;
+        }
+        break;
+    }
+    }
+    {
+        u8 *base = D_80100F38;
+        u16 idx = *D_8006AF80;
+        u8 *base2 = D_80091618;
+        struct S100F38 *p = (struct S100F38 *)(idx * 0x79C + base);
+        struct S91618 *q = (struct S91618 *)(idx * 0x1A8 + base2);
+        func_800A99AC(p->unk336 - 1, p->unk338 - 1, q->unk10);
+    }
+    func_80034AB0(0x84);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009F3D4);
 
