@@ -398,7 +398,91 @@ INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B2C64);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B2EA4);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B3008);
+extern s32 func_80019F30(s32, s32);
+extern void func_80015CD0(void *, s32, s32);
+
+s32 func_800B3008(s32 arg0, s32 arg1) {
+    typedef struct {
+        u8 pad0[0x62];
+        u16 f62;
+        u16 f64;
+        u8 pad66[0xA];
+        s32 f70;
+        u8 pad74[0xFE];
+        u16 f172;
+        u8 pad174[0x1A8 - 0x174];
+    } Rec3008;
+    typedef struct {
+        s16 f0[10];
+        s16 f14[10];
+    } BufAF90;
+    extern Rec3008 D_80091618[];
+    extern s32 D_800EEB78[];
+    extern s16 D_800EEB84[];
+    extern s32 D_800F2DB8[];
+    extern s32 D_8006AF84[];
+    extern BufAF90 D_8006AF90[];
+    extern s32 func_800B21F0(u16, u16);
+    extern s32 func_800202A4(s32);
+    extern void func_800B2C64(u16, u16);
+    extern s32 func_800D1CC4(u16, s32, s32, s32);
+
+    Rec3008 *p0;
+    s32 val;
+
+    {
+        Rec3008 *b = D_80091618;
+        p0 = &b[(u16)arg0];
+    }
+    if (p0->f64 != 0) {
+        return 0;
+    }
+
+    if (D_800EEB78[0] == 1) {
+        D_800EEB78[0] = 0;
+        goto ok;
+    } else {
+        u16 s0 = p0->f62;
+        if (s0 != 1 || D_800EEB84[0] != 0) {
+            return 0;
+        }
+        if (D_800F2DB8[0] > 0) {
+            D_800F2DB8[0]--;
+            return 0;
+        }
+        if (func_800B21F0((u16)arg0, (u16)arg1) < 0) {
+            return 0;
+        }
+        if (func_800202A4(8) == 4) {
+ok:
+            {
+                s32 now = D_8006AF84[0];
+                Rec3008 *b = D_80091618;
+                Rec3008 *r0 = &b[(u16)arg0];
+                Rec3008 *r1 = &b[(u16)arg1];
+                r0->f64 = 1;
+                r1->f64 = 1;
+                r0->f70 = now;
+                r1->f70 = now;
+                r0->f172++;
+                r1->f172++;
+                func_800B2C64((u16)arg0, (u16)arg1);
+            }
+
+            if (D_8006AF90->f0[0] < 3) {
+                val = D_8006AF90->f0[D_8006AF90->f0[0]];
+            } else {
+                val = D_8006AF90->f14[D_8006AF90->f14[0]];
+            }
+            func_800D1CC4(val, 0x1B, 4, 0);
+            D_800EEB84[0] = 1;
+            return 1;
+        }
+        D_800EEB84[0] = s0;
+    }
+
+    return 0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B3204);
 
