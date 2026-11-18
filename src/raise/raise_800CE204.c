@@ -168,6 +168,32 @@ void func_800CED78(void) {
 
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CE204", func_800CED80);
+s32 func_800CED80(s32 a0, s32 a1, s32 a2) {
+    extern s16 D_80103D28[], D_80103D30[];
+    extern s32 D_800EE9B8[];
+    extern void func_800D0730(void *, s16, s16, s16);
+    s32 s3 = a0 != 1;
+    u8 *p = D_80100F38 + (func_800B1260(a0) & 0xFFFF) * 0x79C;
+    register s32 row asm("a0");
+    register s32 callrow asm("a1");
+    s32 r0;
+    s32 m;
+    s32 c;
+    s32 v;
+    r0 = a2 / 8;
+    m = a2 - r0 * 8;
+    func_800D0730(D_80103D28, (s16)r0, (s16)m, 0);
+    row = a1 / 8;
+    callrow = row;
+    if (D_800EE9B8[s3] == 1) c = m - 1;
+    else if (D_800EE9B8[s3] == -1) c = m + 1;
+    else c = a1 - row * 8;
+    func_800D0730(D_80103D30, (s16)callrow, (s16)c, 0);
+    *(u16 *)(p + 0x1D4) = (D_80103D28[0] - D_80103D30[0]) / *(s16 *)(p + 0x220);
+    *(u16 *)(p + 0x1D6) = (D_80103D28[1] - D_80103D30[1]) / *(s16 *)(p + 0x220);
+    v = (D_80103D28[2] - D_80103D30[2]) / *(s16 *)(p + 0x220);
+    *(u16 *)(p + 0x1D8) = v;
+    return v;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800CE204", func_800CEF08);
