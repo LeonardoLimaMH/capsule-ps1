@@ -129,6 +129,24 @@ void func_80013668(void) {
     func_8001611C(0);
 }
 
+typedef struct Node_800136C8 {
+    u16 size;
+    u16 prio;
+    struct Node_800136C8 *prev;
+    struct Node_800136C8 *next;
+    void (*funcC)(struct Node_800136C8 *);
+    void (*func10)(struct Node_800136C8 *);
+} Node_800136C8;
+typedef struct Manager_800136C8 {
+    u8 pad_0[0xC000];
+    Node_800136C8 *nodes[0x155];
+    u32 count;
+    Node_800136C8 *heads[8];
+    Node_800136C8 *first;
+    s32 b;
+    s32 c;
+    u32 overflow;
+} Manager_800136C8;
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_800136C8);
 
 typedef struct Node_80013A68 {
@@ -203,7 +221,87 @@ void func_80013C44(void) {
 extern u8 *func_80015B3C();
 extern void func_80015EF8(), func_80015B00(), func_800161C4();
 extern s32 func_80020304(), func_80019F30();
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013C6C);
+typedef struct S_80013C6C {
+    u8 pad00[0x18];
+    s32 unk18;
+    u8 pad1C[0x18];
+    u32 b34_0 : 7;
+    u32 b34_7 : 25;
+    u32 b38_0 : 1;
+    u32 b38_1 : 2;
+    u32 b38_3 : 1;
+    u32 b38_4 : 2;
+    u32 b38_6 : 1;
+    u32 b38_7 : 25;
+    u8 pad3C[0xA];
+    s16 unk46;
+    u8 pad48[2];
+    s16 unk4A;
+    u8 pad4C[2];
+    s16 unk4E;
+    u8 pad50[0x18];
+    s32 unk68;
+} S_80013C6C;
+void *func_80013C6C(s32 a0) {
+    struct Obj {
+        u8 pad00[0x18];
+        s32 unk18;
+        u8 pad1C[0x18];
+        u32 unk34;
+        u32 unk38;
+        u8 pad3C[0xA];
+        s16 unk46;
+        u8 pad48[2];
+        s16 unk4A;
+        u8 pad4C[2];
+        s16 unk4E;
+        u8 pad50[0x18];
+        s32 unk68;
+    } *o, *q;
+    register s32 r asm("v0");
+    register u32 v asm("a1");
+    register u32 flags asm("a0");
+    register u32 mask asm("v1");
+    u32 f, t;
+    u16 h46, h4A;
+
+    o = (struct Obj *)func_80015B3C(func_80015B00, func_800161C4, 4);
+    func_80015EF8(o);
+    o->unk38 &= ~1;
+    r = func_80020304(2);
+    flags = o->unk34;
+    mask = ~0x7F;
+    v = flags & mask;
+    v |= r & 0x7F;
+    o->unk34 = v;
+    if (a0 == 0) {
+        o->unk18 = func_80019F30(0x6000E, (v & 0x7F) + 0x256);
+    } else {
+        o->unk18 = func_80019F30(0x6000E, (v & 0x7F) + 0x237);
+    }
+    o->unk46 = 0xE0;
+    o->unk4A = -0x3C - func_80020304(0x3C);
+    o->unk4E = a0 == 0 ? 0xA : 0x401;
+    f = o->unk38;
+    o->unk68 = -0x3000;
+    o->unk38 = f | 8;
+    if (a0 == 0) {
+        o->unk38 = (f | 0x48) & ~0x30;
+        q = (struct Obj *)func_80015B3C(func_80015B00, func_800161C4, 4);
+        func_80015EF8(q);
+        q->unk38 &= ~1;
+        q->unk18 = func_80019F30(0x6000E, (o->unk34 & 0x7F) + 0x237);
+        h46 = o->unk46;
+        t = q->unk38;
+        q->unk46 = h46;
+        h4A = o->unk4A;
+        q->unk4E = 0x401;
+        q->unk68 = -0x3000;
+        q->unk38 = t | 8;
+        q->unk4A = h4A;
+    }
+    return o;
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount", func_80013DFC);
 
