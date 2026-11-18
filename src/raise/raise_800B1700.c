@@ -177,7 +177,87 @@ s32 func_800B1E7C(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700", func_800B1EBC);
+extern u8 D_800EEB9C[];
+extern s32 D_800EE5D0[], D_800F2DBC[];
+extern u8 *D_800F2DC0[];
+extern s32 func_80019F30(s32, s32);
+extern void func_80015CD0(void *, s32, s32);
+
+s32 func_800B1EBC(void) {
+    typedef struct {
+        u8 pad0[0x66];
+        u16 f66;
+        u16 f68;
+        u8 pad6a[0x18C - 0x6A];
+        s32 f18c;
+        u8 pad190[0x1A8 - 0x190];
+    } Rec1EBC;
+    extern u16 D_8006AF80[];
+    extern u16 D_8008EE4C[];
+    extern Rec1EBC D_80091618[];
+    extern s32 D_800EEB8C[];
+    extern s16 D_800EFA4A[];
+    extern s16 D_800EFA4C[];
+    extern s16 D_80103D38[];
+    extern void func_80024990(s32, s32, s32, s32);
+    extern void func_800125D8(void);
+    extern s32 func_800B1668(void);
+
+    s32 ret = 0;
+    s32 tmp;
+
+    switch (D_8008EE4C[0]) {
+    case 0:
+        if (D_80103D38[0] == 1) {
+            D_800EFA4C[0] = 2;
+        } else {
+            D_800EFA4C[0] = 0;
+        }
+        if (D_800EFA4C[0] != D_800EFA4A[0]) {
+            func_80024990(D_80091618[D_8006AF80[0]].f18c, 1, 0x32, 0);
+        }
+        func_800125D8();
+        break;
+    case 1:
+        if (func_800B1668() == 1) {
+            func_800125D8();
+        }
+        break;
+    case 2:
+        if (func_800B1700() == 1) {
+            func_800125D8();
+        }
+        break;
+    case 3:
+        if (func_800B1940() == 1) {
+            func_800125D8();
+        }
+        break;
+    case 4:
+        if (func_800B1B3C() == 1) {
+            func_800125D8();
+        }
+        break;
+    case 5:
+        if (D_800EEB8C[0] == 0) {
+            tmp = 1;
+            D_80091618[D_8006AF80[0]].f66 = 0;
+            D_800EEB8C[0] = 8;
+            D_80091618[D_8006AF80[0]].f68 = 0;
+        } else {
+            D_800EEB8C[0]--;
+            tmp = 0;
+        }
+        if (tmp == 1) {
+            func_800125D8();
+        }
+        break;
+    case 6:
+        ret = 1;
+        break;
+    }
+    return ret;
+}
 
 void func_800B2094(void) {
 
