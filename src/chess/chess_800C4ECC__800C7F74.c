@@ -39,5 +39,3 @@ int func_800C7F74(s32 arg0)
 }
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C7F74", func_800C7FDC);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C7F74", func_800C8368);
