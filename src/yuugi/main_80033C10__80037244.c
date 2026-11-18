@@ -32,5 +32,3 @@ void func_8003727C(s16 value, s8 arg)
 }
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80037244", func_800372B4);
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80033C10__80037244", func_800373A0);
