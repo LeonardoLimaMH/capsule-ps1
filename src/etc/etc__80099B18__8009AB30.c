@@ -256,7 +256,123 @@ block_11:
     }
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__80099B18__8009AB30", func_8009B1CC);
+void func_8009B1CC(u8 *s1) {
+    extern u8 D_8008ED68[];
+    extern Struct_800AF000 D_800AF000[];
+    extern u16 D_800AF198[];
+    extern s32 D_800B3AF8[];
+    extern s32 D_800B3B20[];
+    extern s32 func_80019F30(s32, s32);
+    extern void func_80015CD0(void *, s32, s32);
+    extern void func_80034AB0(s32);
+    s32 temp;
+    u8 *a2;
+    u16 v1;
+    s32 idx;
+    s32 *s2;
+    Struct_800AF000 *s0;
+
+    v1 = *(u16 *)(s1 + 0x84);
+    temp = *(s32 *)(s1 + 0x38) | 1;
+    a2 = D_8008ED68;
+    *(s32 *)(s1 + 0x38) = temp;
+
+    if (*(u16 *)(a2 + 0xDC) == 4) {
+        *(s32 *)(s1 + 0x38) = temp & ~1;
+        if (*(u16 *)(a2 + 0xE0) == 0) {
+            if (*(s32 *)(s1 + 0x80) == 0) {
+                if (*(s32 *)(s1 + 0x1C) == 0) {
+                    func_80015CD0(s1 + 0x14, func_80019F30(0x70008, D_800AF000[(s16)v1].unk4), 0);
+                    return;
+                }
+            }
+            *(s32 *)(s1 + 0x80) -= 1;
+            return;
+        }
+        *(s32 *)(s1 + 0x80) = D_800AF000[(s16)v1].unk6;
+        return;
+    }
+
+    if (*(u16 *)(a2 + 0xDC) != 5) {
+        return;
+    }
+
+    *(s32 *)(s1 + 0x38) = temp & ~1;
+    if (*(u16 *)(a2 + 0xE0) == 0) {
+        return;
+    }
+
+    if (*(s32 *)(s1 + 0x80) > 0) {
+        *(s32 *)(s1 + 0x80) -= 1;
+        return;
+    }
+
+    idx = (s16)v1;
+    {
+        s32 *tbl = D_800B3AF8;
+        s2 = &tbl[idx];
+    }
+    if (*s2 == 0) {
+        s1[0x58] += 3;
+        s1[0x59] += 3;
+        s1[0x5A] += 3;
+        if (s1[0x58] < 0xFD) {
+            return;
+        }
+        func_80015CD0(s1 + 0x14, func_80019F30(0x70008, 0xB), 1);
+        *(s32 *)(s1 + 0x3C) = 0;
+        *(s32 *)(s1 + 0x88) = 0;
+        *s2 += 1;
+        return;
+    }
+
+    if (*s2 == 1) {
+        s1[0x5A] = 0x80;
+        s1[0x59] = 0x80;
+        s1[0x58] = 0x80;
+        if (*(s16 *)(s1 + 0x24) < 0) {
+            func_80015CD0(s1 + 0x14, func_80019F30(0x70008, D_800AF000[idx].unk8 + 0xC), 0);
+            s0 = &D_800AF000[idx];
+            *(s16 *)(s1 + 0x4E) = 3;
+            *(s32 *)(s1 + 0x30) = (*(s32 *)(s1 + 0x30) & ~0x30) | 0x20;
+            *(u16 *)(s1 + 0x6A) = s0->unkA;
+            *(u16 *)(s1 + 0x68) = s0->unkC;
+            { register u32 field asm("v0") = s0->unkE;
+              *(u16 *)(s1 + 0x6E) = field; }
+            { register u32 last asm("v1") = s0->unk10;
+              register s32 flags asm("v0") = *(s32 *)(s1 + 0x38);
+              *(s32 *)(s1 + 0x38) = flags | 8;
+            { register s32 count asm("v0") = *D_800B3B20;
+              s32 next;
+              *(s16 *)(s1 + 0x52) = 0;
+              *(s16 *)(s1 + 0x50) = 0;
+              *(u16 *)(s1 + 0x6C) = last;
+              count += 1;
+              next = *s2 + 1;
+              *D_800B3B20 = count;
+              *s2 = next;
+            }
+            }
+            func_80034AB0(0x85);
+            return;
+        }
+        *(s32 *)(s1 + 0x3C) += 1;
+        if (*(s32 *)(s1 + 0x3C) == D_800AF198[*(s32 *)(s1 + 0x88)]) {
+            func_80034AB0(0x50);
+            *(s32 *)(s1 + 0x88) += 1;
+        }
+        return;
+    }
+
+    if (*(s16 *)(s1 + 0x50) < 0x1000) {
+        u16 step = *(u16 *)(s1 + 0x50) + 0x40;
+        *(s16 *)(s1 + 0x50) = step;
+        *(s16 *)(s1 + 0x52) = step;
+    } else {
+        *(s16 *)(s1 + 0x52) = 0x1000;
+        *(s16 *)(s1 + 0x50) = 0x1000;
+    }
+}
 
 void func_8009B500(u8 *arg0) {
     extern u16 D_8008EE44[];
