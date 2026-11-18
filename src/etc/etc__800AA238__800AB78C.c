@@ -25,7 +25,3 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc__800AA238__800AB78C", func_800ABBF8);
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800AA238__800AB78C", func_800ABEA0);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__800AA238__800AB78C", func_800AC20C);
-
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800AA238__800AB78C", func_800AC4A4);
-
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800AA238__800AB78C", func_800AC570);
