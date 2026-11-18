@@ -66,7 +66,42 @@ s16 func_800A88C4(s16 a) {
 
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444__800A8710", func_800A88E8);
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+s16 func_800A88E8(u8 c, s16 d) {
+    typedef struct {
+        u8 pad0[0x10];
+        u32 f10_0 : 24;
+        u32 f10_24 : 6;
+        u32 f10_30 : 4 __attribute__((packed));
+        u32 f14_2 : 30;
+        u8 pad18[0x24];
+    } S_800A88E8;
+    extern S_800A88E8 D_80063940[];
+    return (s32)(D_80063940[c].f10_24 * (D_80063940[c].f10_30 * 8 + 0x100)) / d;
+}
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
+
+extern s32 rsin(s32);
 
 s32 func_800A8954(s32 arg0) {
     register s32 a asm("v0");
