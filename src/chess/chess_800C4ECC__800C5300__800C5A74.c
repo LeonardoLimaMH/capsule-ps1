@@ -101,9 +101,3 @@ s32 func_800C5BCC(void *arg0)
   *((s32 *) (((s8 *) arg0) + 0x38)) = var_v0;
   return 0;
 }
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C5300__800C5A74", func_800C5C34);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C5300__800C5A74", func_800C5DE8);
-
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C5300__800C5A74", func_800C5FA0);

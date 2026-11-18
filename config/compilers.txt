@@ -550,3 +550,4 @@ src/chess/chess_800C23A8__800C28A8__800C3108.c 2.7.2-cdk
 src/chess/chess_800C23A8__800C28A8__800C31E8__800C41E8.c 2.7.2-cdk
 src/chess/chess_800C23A8__800C28A8__800C31E8__800C416C.c 2.7.2-cdk
 src/chess/chess_800C4ECC__800C5300__800C5748.c 2.7.2-cdk
+src/chess/chess_800C4ECC__800C5300__800C5A74__800C5C34.c 2.7.2-cdk
