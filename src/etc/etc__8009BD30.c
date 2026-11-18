@@ -45,7 +45,84 @@ void func_8009C970(void)
   D_800B2C2C[*D_8008EE44](*new_var);
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30", func_8009C9C4);
+extern u8 D_80085428[];
+extern u16 D_8008EE44[];
+extern void (*D_800B2C2C[])(u8 *);
+
+void func_8009C9C4(u8 *arg0) {
+    extern u16 D_8008EE44[];
+    extern u16 D_8008EE48[];
+    extern struct {
+        u8 unk0[0xDC];
+        u16 unkDC;
+        u8 unkDE[0x93E];
+        s32 unkA1C;
+        s32 unkA20;
+        s32 unkA24;
+    } D_8008ED68[];
+    extern u8 D_800859F0[];
+    extern s32 D_800B3C10[];
+    extern u16 D_800B3C14[];
+    extern u16 D_800B2C1C[];
+    extern s32 func_80012508(void);
+    extern s32 func_80012578(void);
+    extern s32 func_80019654(void);
+    extern s32 func_800337EC(void);
+    extern s32 func_800338DC(s32);
+    extern s32 func_80012544(s32);
+
+    switch (*D_8008EE48) {
+    case 0:
+        *D_800B3C10 = 0;
+        if (D_8008ED68->unkDC == 0xB) {
+            if (D_8008ED68->unkA1C == 2) {
+                *D_800B3C14 = 0x7020;
+            } else {
+                *D_800B3C14 = D_800B2C1C[arg0[0x5D4]];
+            }
+        } else {
+            *D_800B3C14 = 0x7015;
+        }
+        *(u16 *)(arg0 + 8) = *D_800B3C14;
+        if (D_8008ED68->unkDC == 3 && D_8008ED68->unkA24 == 1) {
+            func_80012508();
+        } else if (*D_800859F0 & 4) {
+            func_80012578();
+        } else if (*D_8008EE44 == 0xB) {
+            func_80012544(0xD);
+        } else if (*D_8008EE44 == 0xC) {
+            func_80012544(7);
+        } else {
+            func_80012508();
+        }
+        break;
+    case 1:
+        if (func_80019654() != 0) {
+            func_80012578();
+        }
+        break;
+    case 2:
+        func_800338DC(*D_800B3C14);
+        func_80012578();
+        break;
+    case 3:
+        if (!(*D_800859F0 & 4) || (func_800337EC() & 0x80)) {
+            func_80012578();
+        }
+        break;
+    case 4:
+        if (*D_8008EE44 == 0xB) {
+            func_80012544(0xD);
+        } else if (*D_8008EE44 == 0xC) {
+            func_80012544(7);
+        } else {
+            func_80012508();
+        }
+        break;
+    }
+}
+
+void func_800A4964();
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30", func_8009CB84);
 
