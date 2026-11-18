@@ -2,7 +2,52 @@
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E2110);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E2558);
+s32 func_800E2558(void) {
+    typedef struct {
+        u16 unk0;
+        u16 unk2;
+        u16 unk4;
+        u8 pad6[0xA];
+        u16 unk10;
+        u8 pad12[0x1A8 - 0x12];
+    } S_800E2558;
+    extern S_800E2558 D_80091618[];
+    extern u8 D_800F2D30[];
+    extern u16 D_800F1ED2[];
+    extern void func_800A7730(u16), func_800A79D8(u16), func_800A7C7C(u16), func_800A7F20(u16), func_800A8484(u16);
+    extern s32 func_800A8CB4(u16), func_800A0E6C(u16);
+    extern void func_8001A464(s32, s32);
+    extern s32 func_80012508();
+    u16 k = D_800F1ED2[0];
+    S_800E2558 *e = &D_80091618[k];
+    s32 g;
+    u16 c;
+    u16 d, i;
+
+    c = e->unk0 = e->unk4;
+    func_800A7730(k);
+    func_800A79D8(k);
+    func_800A7C7C(k);
+    func_800A7F20(k);
+    func_800A8484(k);
+    if (D_800F2D30[c] != 0xFF) {
+        return 1;
+    }
+    g = func_800A8CB4(c);
+    d = e->unk2;
+    for (i = 0; i < 6; i++) {
+        if (i == k) continue;
+        if (D_80091618[i].unk10 == 0xFFFF) continue;
+        if (D_80091618[i].unk0 == d) break;
+    }
+    if (i == 6) {
+        func_8001A464(g, D_800F2D30[d] * 0x15800 + 0x80146A18);
+    } else {
+        func_8001A464(g, func_800A0E6C(c));
+    }
+    func_80019F30(g, (s32)func_80012508);
+    return 0;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E2714);
 
@@ -531,4 +576,36 @@ s32 func_800E6A1C(u16 a0, s16 a1) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E6AF4);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E6BD8);
+s32 func_800E6BD8(u16 a0, u16 a1) {
+    typedef struct {
+        u8 pad0[0xA0];
+        u16 unkA0;
+        u8 padA2[0xC2 - 0xA2];
+        s16 unkC2;
+        u8 padC4[0x1A8 - 0xC4];
+    } S_80091618;
+    typedef struct {
+        u8 pad0[0x26];
+        s16 unk26;
+    } S_801061E0;
+    extern S_80091618 D_80091618[];
+    extern s16 D_800ED228[][3];
+    extern S_801061E0 D_801061E0[];
+    extern u32 D_8008ED80[];
+    s16 v;
+    s32 n;
+    float f;
+
+    D_801061E0[a0].unk26 = v = D_800ED228[a1][D_80091618[a0].unkA0];
+    switch (v) {
+    default: n = 1; break;
+    case 0: n = 0; break;
+    case 1: n = 1; break;
+    case 2: n = 2; break;
+    }
+    f = (float)n * (float)D_80091618[a0].unkC2 / 255.0f * 100.0f;
+    if (f < (float)(D_8008ED80[0] % 100)) {
+        return -1;
+    }
+    return 0;
+}
