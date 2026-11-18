@@ -23,5 +23,3 @@ s32 func_800A6DDC(void)
 }
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A6E14);
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC", func_800A6ED4);
