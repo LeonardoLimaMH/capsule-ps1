@@ -226,6 +226,7 @@ segments:
       - [0x2D6CC, c, chess_800C4ECC]
       - [0x2DA3C, c, chess_800C4ECC__800C523C]
       - [0x2DB00, c, chess_800C4ECC__800C5300]
+      - [0x2DF48, c, chess_800C4ECC__800C5300__800C5748]
       - [0x2E128, c, chess_800C4ECC__800C5300__800C5928]
       - [0x2E274, c, chess_800C4ECC__800C5300__800C5A74]
       - [0x2E9F4, c, chess_800C4ECC__800C5300__800C5A74__800C61F4]
