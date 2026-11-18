@@ -86,7 +86,6 @@ src/raise/raise_800C4964.c 2.8.1-psx
 src/raise/raise_800C6ACC.c 2.8.1-psx
 src/raise/raise_800C8C44.c 2.8.1-psx
 src/raise/raise_800CB438.c 2.8.1-psx
-src/raise/raise_800CE164.c 2.8.1-psx
 src/raise/raise_800CF13C.c 2.8.1-psx
 src/raise/raise_800CF290.c 2.8.1-psx
 src/raise/raise_800DDCFC.c 2.8.1-psx
@@ -574,3 +573,4 @@ src/raise/raise_8009D2A8__800A6DBC__800A7730.c 2.7.2-cdk
 src/raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A8484.c 2.7.2-cdk
 src/raise/raise_800B9C3C__800BA4A0.c 2.7.2-cdk
 src/raise/raise_800C8CAC__800C9590__800CA944__800CB370.c 2.7.2-cdk
+src/raise/raise_800CE164.c 2.7.2-cdk
