@@ -35,7 +35,7 @@ INCLUDE = re.compile(r'INCLUDE_ASM\(\s*"[^"]+"\s*,\s*(\w+)\s*\)')
 START, END = "<!-- PROGRESS:START -->", "<!-- PROGRESS:END -->"
 STAGED = False
 COUNTERS = ('funcs', 'done_funcs', 'bytes', 'done_bytes', 'asm_bytes',
-            'equiv_bytes', 'equiv_funcs', 'asm_funcs', 'pending_funcs')
+            'equiv_bytes', 'equiv_funcs', 'asm_funcs', 'pending_funcs', "hand_bytes", "hand_funcs")
 
 
 class IndexSnapshot(dict):
@@ -174,6 +174,10 @@ def collect(t):
         elif name in hand:
             r[k]["asm_bytes"] += size  # escrita em assembly no original: fica como .s
             r[k]["asm_funcs"] += 1
+        if name in pending and name in hand:
+            # nunca vira C (BIOS, syscall, GTE...): fora do denominador do % de C, tenha ou não C equivalente
+            r[k]["hand_bytes"] += size
+            r[k]["hand_funcs"] += 1
     for group in r.values():
         # assembly original (BIOS, syscall/break, COP0...) não tem equivalente em C: fica fora
         group['pending_funcs'] = (group['funcs'] - group['done_funcs'] - group['equiv_funcs']
@@ -241,22 +245,25 @@ def main():
         g, l = data[t]["game"], data[t]["lib"]
         tb = g["bytes"] + l["bytes"]
         td = g["done_bytes"] + l["done_bytes"]
-        rows.append(f"| `{fname}` | {desc} | {pct(g['done_bytes'], g['bytes']):.2f}% "
-                    f"({g['done_bytes']:,} / {g['bytes']:,} B) | {g['done_funcs']} / {g['funcs']} | "
+        rows.append(f"| `{fname}` | {desc} | {pct(g['done_bytes'], g['bytes'] - g['hand_bytes']):.2f}% "
+                    f"({g['done_bytes']:,} / {g['bytes'] - g['hand_bytes']:,} B) | {g['done_funcs']} / "
+                    f"{g['funcs'] - g['hand_funcs']} | "
                     f"{pct(l['done_bytes'], l['bytes']):.2f}% ({l['done_funcs']} / {l['funcs']} fn) | "
                     f"**{pct(td, tb):.2f}%** |")
     g, l = tot["game"], tot["lib"]
-    rows.append(f"| **Total** | | **{pct(g['done_bytes'], g['bytes']):.2f}%** "
-                f"({g['done_bytes']:,} / {g['bytes']:,} B) | {g['done_funcs']} / {g['funcs']} | "
+    rows.append(f"| **Total** | | **{pct(g['done_bytes'], g['bytes'] - g['hand_bytes']):.2f}%** "
+                f"({g['done_bytes']:,} / {g['bytes'] - g['hand_bytes']:,} B) | {g['done_funcs']} / "
+                f"{g['funcs'] - g['hand_funcs']} | "
                 f"{pct(l['done_bytes'], l['bytes']):.2f}% ({l['done_funcs']} / {l['funcs']} fn) | "
                 f"**{pct(all_d, all_b):.2f}%** |")
-    pg = pct(g["done_bytes"], g["bytes"])
+    pg = pct(g["done_bytes"], g["bytes"] - g["hand_bytes"])
     pa = pct(all_d, all_b)
     cov = pct(all_d + tot["game"]["asm_bytes"] + tot["lib"]["asm_bytes"], all_b)
     fun = pct(all_d + tot["game"]["equiv_bytes"] + tot["lib"]["equiv_bytes"],
               all_b - tot["game"]["asm_bytes"] - tot["lib"]["asm_bytes"])
     summary = [
-        f"**Código do jogo decompilado em C (byte-matching):** `{bar(pg)}` **{pg:.2f}%**  ",
+        f"**Código do jogo decompilado em C (byte-matching; sobre o que pode virar C, sem o assembly do "
+        f"original):** `{bar(pg)}` **{pg:.2f}%**  ",
         f"**Total incluindo SDK PsyQ:** `{bar(pa)}` **{pa:.2f}%**  ",
         f"**Cobertura (C + funções que já eram assembly no original):** `{bar(cov)}` **{cov:.2f}%**  ",
         f"**Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`; "

@@ -34,7 +34,7 @@ A [revisão de 30/10](docs/reviews/2026-10-30-byte-exact-audit.md) registra a
 auditoria anterior e os 60 testes selecionados das ferramentas.
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching):** `█████░░░░░░░░░░░░░░░` **26.61%**  
+**Código do jogo decompilado em C (byte-matching; sobre o que pode virar C, sem o assembly do original):** `█████░░░░░░░░░░░░░░░` **27.22%**  
 **Total incluindo SDK PsyQ:** `█████░░░░░░░░░░░░░░░` **26.48%**  
 **Cobertura (C + funções que já eram assembly no original):** `█████░░░░░░░░░░░░░░░` **26.84%**  
 **Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`; sobre o código convertível em C):** `████████████████████` **99.48%**  
@@ -42,12 +42,12 @@ auditoria anterior e os 60 testes selecionados das ferramentas.
 
 | Binário | Função | Código do jogo (C) | Funções | SDK PsyQ (C) | Total |
 |---|---|---|---|---|---|
-| `YUUGI.EXE` | executável principal | 31.07% (64,108 / 206,364 B) | 468 / 732 | 25.92% (173 / 303 fn) | **30.04%** |
-| `SLPM_860.96` | loader / boot | 15.12% (3,132 / 20,720 B) | 46 / 119 | 23.59% (132 / 215 fn) | **20.86%** |
-| `CHESS.BIN` | overlay de batalha (tabuleiro) | 19.02% (80,240 / 421,956 B) | 385 / 867 | 100.00% (2 / 2 fn) | **19.03%** |
-| `RAISE.BIN` | overlay de criação de monstros | 33.85% (110,552 / 326,576 B) | 671 / 940 | 100.00% (2 / 2 fn) | **33.86%** |
+| `YUUGI.EXE` | executável principal | 33.19% (64,108 / 193,164 B) | 468 / 659 | 25.92% (173 / 303 fn) | **30.04%** |
+| `SLPM_860.96` | loader / boot | 15.56% (3,132 / 20,124 B) | 46 / 93 | 23.59% (132 / 215 fn) | **20.86%** |
+| `CHESS.BIN` | overlay de batalha (tabuleiro) | 19.28% (80,240 / 416,244 B) | 385 / 854 | 100.00% (2 / 2 fn) | **19.03%** |
+| `RAISE.BIN` | overlay de criação de monstros | 34.29% (110,552 / 322,408 B) | 671 / 934 | 100.00% (2 / 2 fn) | **33.86%** |
 | `ETC.BIN` | overlay de menus/diversos | 28.44% (25,312 / 88,992 B) | 126 / 189 | 0.00% (0 / 0 fn) | **28.44%** |
-| **Total** | | **26.61%** (283,344 / 1,064,608 B) | 1696 / 2847 | 24.95% (309 / 522 fn) | **26.48%** |
+| **Total** | | **27.22%** (283,344 / 1,040,932 B) | 1696 / 2729 | 24.95% (309 / 522 fn) | **26.48%** |
 
 **Equivalentes e pendências por binário (jogo + SDK):**
 

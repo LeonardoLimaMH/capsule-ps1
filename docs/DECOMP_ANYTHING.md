@@ -204,3 +204,13 @@ dele usam, numa seção própria não alocável (`.jtbl`): o objdiff não a cont
 idêntico (conferido função por função). O decomp.anything (fork com a checagem de tabelas, `literals.py`)
 lê essas tabelas e passa a recusar, já no app, o C cujo `case` cai no bloco errado, com a mensagem de qual
 entrada mover. Antes isso só aparecia no SHA-1 da integração.
+
+### O que nunca vira C (2026-11-18)
+
+Funções escritas em assembly no original (`config/handwritten.<alvo>.txt`: chamadas à BIOS A0/B0/C0, syscall,
+break, GTE/COP0) e as do SDK PsyQ (`config/symbols.<alvo>.psyq.txt`) não entram no objeto-alvo do
+`tools/objdiff_report.py`: ficam fora do relatório do ByteMatch e do % de código do jogo do README (que passa a
+ser sobre o que pode virar C). A seção `not_c` do `.decomp.wtf.json` diz ao decomp.anything quais são: ele as
+marca com status `asm`/`library` e o motivo, nunca as entrega aos agentes, e a lista de funções do app as filtra
+(Assembly / Library; `list_functions(status="not_c")` para os agentes). Antes disso os agentes pegavam e soltavam
+esses stubs sem parar: 419 desistências e 576 notas iguais em 116 funções.

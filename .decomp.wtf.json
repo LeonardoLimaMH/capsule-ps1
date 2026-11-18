@@ -12,6 +12,12 @@
     ["./run.sh", "python3", "tools/objdiff_report.py", "--objects"]
   ],
   "seeds": ["equiv/{target}/{symbol}.c"],
+  "not_c": [
+    {"list": "config/handwritten.{target}.txt", "status": "asm",
+     "why": "assembly no original (BIOS, syscall/break, GTE/COP0): nenhum C compila nisso"},
+    {"list": "config/symbols.{target}.psyq.txt", "status": "library",
+     "why": "SDK PsyQ (biblioteca da Sony): fora do escopo"}
+  ],
   "matrix": {
     "build": ["./run.sh", "python3", "tools/matrix_build.py", "{job}"],
     "permute": ["./run.sh", "python3", "tools/matrix_permute.py", "{job}"],

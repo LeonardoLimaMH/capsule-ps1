@@ -52,6 +52,14 @@ OBJDIFF = ROOT / ".cache" / "bin" / "objdiff-cli"
 AS_FLAGS = "-EL -march=r3000 -mtune=r3000 -no-pad-sections -Iinclude"
 
 
+def not_c(t):
+    """Funções que nunca viram C: escritas em assembly no original (config/handwritten.<alvo>.txt: BIOS, syscall,
+    break, GTE/COP0) e as do SDK PsyQ (config/symbols.<alvo>.psyq.txt). Ficam fora do objeto-alvo, e portanto
+    do relatório (ByteMatch) e da fila do decomp.anything, que as marca pela seção not_c do .decomp.wtf.json."""
+    import progress
+    return progress.handwritten(t) | progress.psyq_names(t)
+
+
 def tu_functions(text):
     import split_tu
     return [m.group(2) or m.group(3) for m in split_tu.FUNC_START.finditer(text)]
@@ -165,6 +173,7 @@ def generate(objects_only=False):
     units, pending_all = [], {}
     for t in TARGETS:
         lib = progress.psyq_names(t)
+        skip = not_c(t)
         pending_all[t] = set()
         for src in sorted((ROOT / "src" / t).glob("*.c")):
             text = src.read_text(encoding="utf-8")
@@ -176,7 +185,7 @@ def generate(objects_only=False):
             # biblioteca da Sony linkada como está, não entra no relatório nem no progresso
             if src.stem.startswith("sdk_") or sum(f in lib for f in funcs) * 2 > len(funcs):
                 continue
-            tobj = build_target(t, src, funcs)
+            tobj = build_target(t, src, [f for f in funcs if f not in skip])
             if tobj is None:
                 continue
             gcc = comp.get(key, "2.7.2-psx").split("+")[0]
@@ -284,7 +293,8 @@ def build_requested(targets):
         try:
             if kind == "target":
                 INCREMENTAL = False
-                build_target(target, src, tu_functions(src.read_text(encoding="utf-8")))
+                skip = not_c(target)
+                build_target(target, src, [f for f in tu_functions(src.read_text(encoding="utf-8")) if f not in skip])
             else:
                 INCREMENTAL = False  # pedido explícito: sempre recompila
                 build_base(target, src, comp.get(key, "2.7.2-psx").split("+")[0], key in g0, key in sp)
