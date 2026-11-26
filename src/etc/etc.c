@@ -63,7 +63,6 @@ static inline u16 Etc981_clut(u8 *obj, u16 idx, s32 cx, u16 cy) {
     return GetClut(x, y);
 }
 
-
 /* Elemento de 0x7C bytes da matriz [?][6] em +0x5E8 (0x2E8 = 6 * 0x7C). */
 typedef struct {
     u8 unk0;
@@ -139,8 +138,6 @@ s32 func_800979BC(s32 arg0) {
     return a + b;
 }
 
-
-extern u8 D_8008ED68[];
 extern void (*D_800AEF98[])(void);
 
 void func_800979FC(void) {
@@ -180,8 +177,6 @@ void func_800979FC(void) {
     } while (s0 < 2);
 }
 
-
-extern u8 D_8008ED68[];
 extern void (*D_800AEF98[])(void);
 
 s32 func_80097AF0(s32 arg0, s32 arg1, s32 arg2)
@@ -288,7 +283,22 @@ s32 func_80097D8C(s32 arg0, s32 arg1, s32 arg2)
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80097E40);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009807C);
+void func_8009807C(EtcCtx *arg0, s32 arg1, s32 arg2) {
+    extern void func_8001A49C();
+    register s32 ret asm("t2") = 0;
+    Etc7C *p = &arg0->unk5E8[arg1][arg2];
+
+    if (arg2 != 5) {
+        if (Etc_FindPrev(arg0, arg1, arg2) != 0) {
+            ret = 1;
+        }
+    } else if (p->unk2A < 10 || arg1 != p->unk2A - 10) {
+        ret = 1;
+    }
+    if (ret == 0) {
+        func_8001A49C(Etc_GetVramAddr(p->unk2A));
+    }
+}
 
 typedef struct { u32 hidden:1; u32 other:31; } Etc981_Flags;
 static inline s32 Etc981_fade2(u8 *global, s32 c) {
@@ -426,9 +436,6 @@ u8 *func_800992CC(u8 *arg0, u32 arg1) {
     return r;
 }
 
-#include "common.h"
-
-extern u8 D_8008ED68[];
 extern void (*D_800AEF98[])(void);
 
 void func_80099394(void) {
@@ -437,8 +444,6 @@ void func_80099394(void) {
     }
     D_800AEF98[M2C_GFIELD(D_8008ED68, u16, 0xDC)]();
 }
-
-#include "common.h"
 
 void func_800993F8(void) {
     extern M2C_UNK D_80085428[];
@@ -450,8 +455,6 @@ void func_800993F8(void) {
     M2C_GFIELD(D_80085428, s8, 0x5D0) = 1;
     func_80012508(D_80085428);
 }
-
-#include "common.h"
 
 void func_80099444(void) {
     extern int func_80012508();
