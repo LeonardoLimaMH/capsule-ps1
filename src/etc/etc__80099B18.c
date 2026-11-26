@@ -45,8 +45,6 @@ void func_80099B18(u8 *arg0) {
     }
 }
 
-#include "common.h"
-
 extern u16 D_8008EE44[];
 extern void (*D_800AEFDC[])(void);
 
@@ -54,15 +52,11 @@ void func_80099C08(void) {
     D_800AEFDC[(*D_8008EE44)]();
 }
 
-#include "common.h"
-
 void func_80099C48(void) {
     extern int func_80012508();
     func_80019F30(8, func_80012508);
     func_80012508();
 }
-
-#include "common.h"
 
 extern s32 D_800B3AD0[];
 extern s32 func_80019F30(s32, s32);
@@ -134,8 +128,6 @@ void func_80099D34(void) {
     }
 }
 
-#include "common.h"
-
 void func_80099E2C(void) {
     extern M2C_UNK D_8008ED68[];
     extern s32 D_800B3AD0[];
@@ -149,8 +141,6 @@ void func_80099E2C(void) {
         func_80012508();
     }
 }
-
-#include "common.h"
 
 void func_80099EA0(void) {
     extern M2C_UNK D_8008ED68[];
@@ -171,8 +161,6 @@ void func_80099EA0(void) {
     }
 }
 
-#include "common.h"
-
 void func_80099FCC(void) {
     extern M2C_UNK D_8008ED68[];
     extern s32 D_800B3AD0[];
@@ -187,8 +175,6 @@ void func_80099FCC(void) {
         func_80012508();
     }
 }
-
-#include "common.h"
 
 extern char D_800AEFB4[], D_800AEFC8[], D_800AEFD8[];
 extern s32 func_8001F1A8(s32, s32, s32, s32, s32, char *, s32, s32, s32);
@@ -232,8 +218,6 @@ void func_8009A1D4(void) {
 call_tbl:
     D_800AF1B8[*D_8008EE44]();
 }
-
-#include "common.h"
 
 void func_8009A294(void) {
     extern int func_80012508();
@@ -301,8 +285,192 @@ void func_8009A2C4(void)
   }
 }
 
+s32 func_8009A3E8(void)
+{
+  u8 *new_var;
+  typedef struct 
+  {
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6;
+    u8 pad[10];
+  } ItemAF000;
+  typedef struct 
+  {
+    s16 unk0;
+    u8 pad[10];
+  } ItemAF0B4;
+  extern u8 D_8008ED68[];
+  extern u8 D_80085428[];
+  extern ItemAF000 D_800AF000[];
+  extern ItemAF0B4 D_800AF0B4[];
+  extern u16 D_800AF168[];
+  extern u16 D_800AF174[];
+  extern s16 D_800AF1A0[];
+  extern s32 D_800B3AF8[];
+  extern s32 D_800B3AE4[];
+  extern s32 D_800B3AEC[];
+  extern s32 D_800B3B20[];
+  extern s32 D_800B3AE0[];
+  extern s32 func_80019F30(s32, s32);
+  extern void func_80012A20(s32, s32, s32, s32);
+  extern u8 *func_80032E78(s32, s32, s32, s32, s32, void *);
+  extern void func_8009B060();
+  extern void func_8009B1CC();
+  extern void func_8009B624();
+  extern void func_8009B500();
+  extern void func_8009B564();
+  extern void func_8009B6D0();
+  extern void func_8009B738();
+  extern void func_8009B774();
+  extern void func_8009B7EC();
+  extern void func_8009B864();
+  extern void func_8009BBD0();
+  extern void func_8009BD30();
+  extern s32 func_80012544(s32);
+  extern s32 func_80012508(void);
+  extern void func_8001AD48(s32);
+  s32 k;
+  s32 i;
+  s32 alt;
+  u8 *o;
+  s32 ret;
+  for (i = 0; i < 0x11; i++)
+  {
+    func_80012A20(func_80019F30(0x20008, i + 4), 1, 0, 0);
+  }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__80099B18", func_8009A3E8);
+  for (i = 0; i < 6; i++)
+  {
+    func_80012A20(func_80019F30(0x50008, i + 1), 1, 0, 0);
+  }
+
+  o = func_80032DB0(0, -0x18, 4, 8, 2, func_8009B060);
+  *((s16 *) (o + 0x52)) = 0;
+  *((s16 *) (o + 0x50)) = 0;
+  *((s16 *) (o + 0x76)) = 0;
+  *((s16 *) (o + 0x74)) = 0;
+  *((s32 *) (o + 0x3C)) = 0;
+  new_var = D_80085428;
+  for (i = 0; i < 0xA; i++)
+  {
+    s32 v;
+    o = func_80032DB0(D_800AF000[i].unk0, D_800AF000[i].unk2, 4, 8, (D_800AF000[i].unk4 * 2) + 7, func_8009B1CC);
+    v = D_800AF000[i].unk6;
+    *((s32 *) (o + 0x84)) = i;
+    *((s32 *) (o + 0x80)) = (s16) (v % 50);
+    for (k = 0; k < 5; k++)
+    {
+      u16 a;
+      u16 b;
+      o = func_80032DB0(D_800AF000[i].unk0, D_800AF000[i].unk2, 4, 8, k + 0x2E, func_8009B624);
+      a = D_800AF168[k];
+      *((s16 *) (o + 0x6A)) = a;
+      b = D_800AF174[k];
+      *((s32 *) (o + 0x88)) = k;
+      *((u32 *) (o + 0x38)) &= ~8;
+      *((s32 *) (o + 0x84)) = i;
+      *((s16 *) (o + 0x6E)) = b;
+    }
+
+    o = func_80032DB0(D_800AF000[i].unk0, D_800AF000[i].unk2, 4, 8, 8, func_8009B500);
+    *((s32 *) (o + 0x84)) = i;
+    D_800B3AF8[i] = 0;
+  }
+
+  for (i = 0; i < 5; i++)
+  {
+    s32 x = D_800AF1A0[i];
+    s32 y = 0x50;
+    if (i >= 2)
+    {
+      y = 0x40;
+    }
+    o = func_80032E78(x, y, 2, 8, 0x12, func_8009B564);
+    *((s32 *) (o + 0x84)) = i;
+  }
+
+  o = func_80032DB0(0, 0x150, 4, 8, 0x61, func_8009B6D0);
+  *((s16 *) (o + 0x6E)) = -2;
+  *((u32 *) (o + 0x38)) &= ~8;
+  func_80032DB0(-3, 0x50, 3, 8, 1, func_8009B738);
+  o = func_80032DB0(0, 0x44, 3, 8, 3, func_8009B774);
+  *((s32 *) (o + 0x84)) = 0x64;
+  for (i = 0; i < 2; i++)
+  {
+    o = func_80032DB0((-0x40) + (i * 0x80), 0x44, 3, 8, i + 0x63, func_8009B7EC);
+    *((s32 *) (o + 0x84)) = i;
+  }
+
+  alt = 0;
+  for (i = 0; i < 6; i++, alt ^= 1)
+  {
+    for (k = 0; k < 8; k++)
+    {
+      o = func_80032DB0((-0xA0) + (k * 0x28), (i / 3) ? (((i - 3) * 40) + 0x78) : ((i * 40) - 0xF0), 3, 8, (alt) ? (0x4F) : (0x50), func_8009B864);
+      *((s32 *) (o + 0x80)) = k;
+      *((s32 *) (o + 0x84)) = i;
+      *((s16 *) (o + 0x6E)) = (i / 3) ? (-4) : (4);
+      alt ^= 1;
+      *((u32 *) (o + 0x38)) &= ~8;
+    }
+
+  }
+
+  for (i = 0; i < 0xF; i++)
+  {
+    o = func_80032DB0(0, 0xA0, 4, 8, i + 0x51, func_8009BBD0);
+    *((s32 *) (o + 0x80)) = i;
+    *((s32 *) (o + 0x84)) = D_800AF0B4[i].unk0;
+    *((s32 *) (o + 0x88)) = 0;
+    *((s32 *) (o + 0x3C)) = 0;
+    *((u32 *) (o + 0x38)) &= ~8;
+  }
+
+  for (i = 0; i < 4; i++)
+  {
+    for (k = 0; k < 3; k++)
+    {
+      o = func_80032DB0((i * 128) - 0x100, (-0xC0) + (k * 0x80), 5, 8, 0x60, func_8009BD30);
+      o[0x5A] = 0x70;
+      o[0x59] = 0x70;
+      o[0x58] = 0x70;
+      *((u32 *) (o + 0x38)) &= ~8;
+    }
+
+  }
+
+  {
+    typedef struct 
+    {
+      u8 pad[0xA18];
+      s32 unkA18;
+    } StructED68;
+    StructED68 *d = (StructED68 *) D_8008ED68;
+    register u8 *d5428 = new_var;
+    s32 *ae0 = D_800B3AE0;
+    d5428[0xF] = 0;
+    d5428[0xE] = 0;
+    d5428[1] = 0;
+    *D_800B3AE4 = 0;
+    *ae0 = 0;
+    *D_800B3AEC = 0;
+    *D_800B3B20 = 0;
+    if (d->unkA18 == 1)
+    {
+      d->unkA18 = 0;
+      *ae0 = 1;
+      ret = func_80012544(0xB);
+    }
+    else
+    {
+      func_8001AD48(3);
+      ret = func_80012508();
+    }
+  }
+  return ret;
+}
 
 void func_8009A9B0(void) {
     extern M2C_UNK D_8008ED68[];
