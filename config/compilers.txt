@@ -606,3 +606,5 @@ src/raise/raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF51C__800DF67C.c 2.7
 src/raise/raise_800E2110__800E36E4.c 2.7.2-cdk
 src/raise/raise_800E2110__800E3810__800E3A04.c 2.7.2-cdk
 src/raise/raise_800E2110__800E3810.c 2.7.2-cdk
+src/raise/raise_800E2110__800E3810__800E3A04__800E6BD8.c 2.7.2-cdk
+src/raise/raise_800E2110__800E3810__800E3A04__800E6AF4.c 2.7.2-cdk

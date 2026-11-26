@@ -349,39 +349,3 @@ s32 func_800E6A1C(u16 a0, s16 a1) {
     }
     return a1;
 }
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110__800E3810__800E3A04", func_800E6AF4);
-
-s32 func_800E6BD8(u16 a0, u16 a1) {
-    typedef struct {
-        u8 pad0[0xA0];
-        u16 unkA0;
-        u8 padA2[0xC2 - 0xA2];
-        s16 unkC2;
-        u8 padC4[0x1A8 - 0xC4];
-    } S_80091618;
-    typedef struct {
-        u8 pad0[0x26];
-        s16 unk26;
-    } S_801061E0;
-    extern S_80091618 D_80091618[];
-    extern s16 D_800ED228[][3];
-    extern S_801061E0 D_801061E0[];
-    extern u32 D_8008ED80[];
-    s16 v;
-    s32 n;
-    float f;
-
-    D_801061E0[a0].unk26 = v = D_800ED228[a1][D_80091618[a0].unkA0];
-    switch (v) {
-    default: n = 1; break;
-    case 0: n = 0; break;
-    case 1: n = 1; break;
-    case 2: n = 2; break;
-    }
-    f = (float)n * (float)D_80091618[a0].unkC2 / 255.0f * 100.0f;
-    if (f < (float)(D_8008ED80[0] % 100)) {
-        return -1;
-    }
-    return 0;
-}
