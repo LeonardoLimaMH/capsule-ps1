@@ -40,9 +40,44 @@ void func_800A2B64(u8 *arg0, s16 arg1) {
 
 extern s32 func_8001F1A8(s32, s32, s32, s32, s32, void *, s32, s32, s32);
 extern s32 func_8001F1A8();
+static inline void desenha_800A2BB0(s32 x, s32 y, s32 flag, s32 valor, s32 texto, s32 n, s32 lado)
+{
+    s32 cor = 0;
+    if ((s16)flag == lado) {
+        cor = valor;
+    }
+    func_8001F1A8((s16)x, (s16)y, cor, 1, 0, (void *)texto, 1, n, 3);
+}
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A2BB0);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A2CC8);
+typedef struct {
+    s16 unk0[2];
+    s16 unk4[2];
+    s16 unk8[2];
+    s16 unkC[2];
+    s16 unk10[2][6];
+} StructB3B38;
+void func_800A2CC8(s32 first, s32 end) {
+    extern StructB3B38 D_800B3B38;
+    extern s16 D_800B3B70[][6];
+    extern u8 D_800B3B90[][0x32];
+    s32 i;
+    s32 j;
+    u8 *p;
+    for (i = first; i < end; i++) {
+        for (j = 0; j < 6; j++) {
+            D_800B3B38.unk10[i][j] = -1;
+            D_800B3B70[i][j] = 0;
+        }
+        j = 0x31;
+        p = D_800B3B90[i];
+        p += 0x31;
+        do {
+            *p-- = 0;
+        } while (--j >= 0);
+        D_800B3B38.unk4[i] = 6;
+    }
+}
 
 void func_800A2D84(void *arg0)
 {
