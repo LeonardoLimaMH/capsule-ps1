@@ -614,3 +614,5 @@ src/yuugi/main_8002E7A4__8002EC18.c 2.7.2-cdk
 src/yuugi/main_8002E7A4.c 2.7.2-cdk
 src/yuugi/main_800282A0__800282D0__8002C214__8002CA80.c 2.7.2-cdk
 src/yuugi/main_800282A0__800282D0__8002C214__8002C93C.c 2.7.2-cdk
+src/yuugi/main_8002E7A4__8002EC18__80033318.c 2.7.2-cdk
+src/yuugi/main_8002E7A4__8002EC18__80033100.c 2.7.2-cdk
