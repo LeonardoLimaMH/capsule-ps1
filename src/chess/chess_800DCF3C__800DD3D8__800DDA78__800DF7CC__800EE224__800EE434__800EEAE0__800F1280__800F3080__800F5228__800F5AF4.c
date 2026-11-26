@@ -27,7 +27,63 @@ typedef struct {
     u8 pad14[0x28];
 } S_800DD_Tab8;
 
+#define F5B_ALLOC(size, init) do { \
+    register u8 *base asm("a1") = *g; \
+    register u8 *next asm("a2") = 0; \
+    drawn = *(u8 **)(base + 0x1090); \
+    if (drawn != 0 && (u32)(drawn + (size)) <= (u32)(base + 0x4594)) \
+        next = drawn + (size); \
+    *(u8 **)(base + 0x1090) = next; \
+    init(drawn); \
+    drawn[4] = color[0]; \
+    drawn[5] = color[1]; \
+    drawn[6] = color[2]; \
+    SetSemiTrans(drawn, obj[0x43]); \
+} while (0)
+#define F5B_FLAT() do { \
+    F5B_ALLOC(0x14, SetPolyF3); \
+    *(s16 *)(drawn + 8) = x; \
+    *(s16 *)(drawn + 0xA) = y; \
+    *(s16 *)(drawn + 0xC) = px; \
+    *(s16 *)(drawn + 0xE) = py; \
+    *(s16 *)(drawn + 0x10) = work.tx; \
+    *(s16 *)(drawn + 0x12) = work.ty; \
+} while (0)
+#define F5B_TEXTURE() do { \
+    u8 *drawn; \
+    F5B_ALLOC(0x20, SetPolyFT3); \
+    *(s16 *)(drawn + 8) = x; \
+    *(s16 *)(drawn + 0xA) = y; \
+    *(s16 *)(drawn + 0x10) = px; \
+    *(s16 *)(drawn + 0x12) = py; \
+    *(s16 *)(drawn + 0x18) = work.tx; \
+    *(s16 *)(drawn + 0x1A) = work.ty; \
+    *(s16 *)(drawn + 0x16) = *(u16 *)(obj + 0x3E); \
+    { \
+        register u16 clut asm("v1"); \
+        register s32 tex_u asm("t0"); \
+        register s32 tex_v asm("t1"); \
+        clut = *(u16 *)(obj + 0x40); \
+        tex_u = (u8)work.u; \
+        drawn[0xC] = tex_u; \
+        tex_v = (u8)work.v; \
+        drawn[0xD] = tex_v; \
+        tex_u = work.u; \
+        drawn[0x14] = tex_u + 0x40; \
+        tex_v = (u8)work.v; \
+        drawn[0x15] = tex_v; \
+        tex_u = (u8)work.u; \
+        drawn[0x1C] = tex_u; \
+        *(s16 *)(drawn + 0xE) = clut; \
+        tex_v = work.v; \
+        drawn[0x1D] = tex_v + 0x40; \
+    } \
+    output = drawn; \
+} while (0)
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4", func_800F5AF4);
+#undef F5B_ALLOC
+#undef F5B_FLAT
+#undef F5B_TEXTURE
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4", func_800F6320);
 
@@ -162,7 +218,111 @@ void func_800F7D1C(void *arg0) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4", func_800F7DE4);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4", func_800F8374);
+void func_800F8374(u8 *arg0) {
+    extern u8 *D_8008ED68[];
+    extern u8 D_80119710[];
+    extern u8 D_800906A0[];
+    extern s32 rsin();
+    extern s32 GetTPage();
+    extern void func_8002CEC0();
+    extern void ReadRotMatrix();
+    extern void RotMatrix();
+    extern void CompMatrix();
+    extern void SetRotMatrix();
+    extern void SetTransMatrix();
+    extern s32 RotAverage3();
+    extern void SetPolyG3();
+    extern void SetSemiTrans();
+    extern void AddPrim();
+    extern void func_80018610();
+
+    u8 *obj = arg0;
+    s16 rot[4];
+    s16 v0[4], v1[4], v2[4];
+    s32 m0[8], m1[8], m2[8];
+    union { u64 align; struct { s16 xy[3][2]; s32 p, flag; } v; } work;
+    s32 product;
+    s32 width;
+    register s32 projected asm("v0");
+    u16 tpage;
+    s32 i;
+    register s32 *rotation asm("s6");
+    register s32 *composed asm("s5");
+    u8 *q;
+    u8 *poly;
+    u8 **g;
+
+    product = *(s16 *)(obj + 0x36) * rsin(*(s16 *)(obj + 0x38));
+    if (product < 0) product += 0xFFF;
+    tpage = GetTPage(0, 1, 0, 0);
+    width = product >> 12;
+    g = D_8008ED68;
+    if (D_80119710[0x3D] == 0) {
+        func_8002CEC0(D_800906A0);
+        D_80119710[0x3D] = 1;
+    }
+    ReadRotMatrix(m0);
+    v0[0] = 0;
+    v0[1] = 0;
+    v0[2] = 0;
+    v1[0] = *(u16 *)(obj + (s32)0x36);
+    v1[2] = width / 2;
+    v1[1] = 0;
+    v2[0] = *(u16 *)(obj + 0x36);
+    v2[1] = 0;
+    v2[2] = -width / 2;
+    i = 0;
+    if (obj[0x34] != 0) {
+    rotation = m1;
+    composed = m2;
+    do {
+        register u8 *base asm("v1");
+        u8 *next;
+        *(u16 *)(obj + i * 6 + 0x3A) += 0x14;
+        *(u16 *)(obj + i * 6 + 0x3C) += 0x14;
+        *(u16 *)(obj + i * 6 + 0x3E) += 0x14;
+        rot[0] = *(u16 *)(obj + i * 6 + 0x3A);
+        rot[1] = *(u16 *)(obj + i * 6 + 0x3C);
+        rot[2] = *(u16 *)(obj + i * 6 + 0x3E);
+        RotMatrix(rot, rotation);
+        m1[5] = *(s16 *)(obj + 0x28);
+        m1[6] = *(s16 *)(obj + 0x2A);
+        m1[7] = *(s16 *)(obj + 0x2C);
+        CompMatrix(m0, rotation, composed);
+        SetRotMatrix(composed);
+        SetTransMatrix(composed);
+        projected = RotAverage3(v0, v1, v2, work.v.xy[0], work.v.xy[1], work.v.xy[2], &work.v.p, &work.v.flag);
+        base = *g;
+        next = 0;
+        poly = *(u8 **)(base + 0x1090);
+        width = projected;
+        if (poly != 0 && (u32)(poly + 0x1C) <= (u32)(base + 0x4594)) {
+            next = poly + 0x1C;
+        }
+        *(u8 **)(base + 0x1090) = next;
+        SetPolyG3(poly);
+        poly[4] = obj[0x30];
+        poly[5] = obj[0x31];
+        poly[6] = obj[0x32];
+        poly[0xC] = 0;
+        poly[0xD] = 0;
+        poly[0xE] = 0;
+        poly[0x14] = 0;
+        poly[0x15] = 0;
+        poly[0x16] = 0;
+        SetSemiTrans(poly, 1);
+        *(s16 *)(poly + 8) = work.v.xy[0][0];
+        *(s16 *)(poly + 0xA) = work.v.xy[0][1];
+        *(s16 *)(poly + 0x10) = work.v.xy[1][0];
+        *(s16 *)(poly + 0x12) = work.v.xy[1][1];
+        *(s16 *)(poly + 0x18) = work.v.xy[2][0];
+        *(s16 *)(poly + 0x1A) = work.v.xy[2][1];
+        AddPrim(*g + (width * 4 + 0x70), poly);
+        func_80018610(tpage, width);
+        i++;
+    } while (i < obj[0x34]);
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4", func_800F865C);
 
