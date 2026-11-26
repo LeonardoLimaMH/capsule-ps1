@@ -340,7 +340,29 @@ static inline s16 finish_800D82A0(s32 value, u8 arg1) {
     }
     return v - p2[0x5F6];
 }
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74", func_800D82A0);
+s16 func_800D82A0(u8 arg0, u8 arg1) {
+    typedef struct { u8 pad[0x10]; u32 unk10; s16 unk14; u8 pad2[0x42]; } T6B2A4;
+    extern D63940_t D_80063940[];
+    extern T6B2A4 D_8006B2A4[];
+    extern u8 D_80085428[];
+    extern u32 func_800D7B80();
+    T6B2A4 *tbl2 = D_8006B2A4;
+    D63940_t *tbl1 = D_80063940;
+    u8 *base = D_80085428;
+    u8 *p1 = base + (((arg0 & 0x7F) - 1) * 0x7C + ((arg0 & 0xFF) >> 7) * 0x2E8);
+    T6B2A4 *e = &tbl2[(tbl1[p1[0x5E8]].unk8 >> 17) & 0x7F];
+    s32 v;
+    u8 *p2;
+
+    if ((e->unk10 >> 29) == 3) {
+        p2 = base + (((arg1 & 0x7F) - 1) * 0x7C + ((arg1 & 0xFF) >> 7) * 0x2E8);
+        v = p2[0x5F6] + (p2[0x5F1] * e->unk14) / 100;
+    } else {
+        p2 = base + (((arg1 & 0x7F) - 1) * 0x7C + ((arg1 & 0xFF) >> 7) * 0x2E8);
+        v = func_800D7B80(arg0 & 0xFF, p2[0x5F6]) & 0xFF;
+    }
+    return finish_800D82A0(v, arg1);
+}
 
 s32 func_800D8490(u8 arg0, u32 arg1) {
     extern u8 D_80085428[];
