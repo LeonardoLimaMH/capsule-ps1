@@ -37,4 +37,12 @@ for r in data["matched"]:
                 (d / f"{f}.tree.c").write_text('#include "common.h"\n' + r2.replace('#include "common.h"\n', ""),
                                                encoding="utf-8", newline="\n")
                 break
+    # C do banco + os tipos/externs/helpers do arquivo (do agente, senão do main) que ele usa
+    if r["src"].strip():
+        same = tree / "src" / t / asm[(t, f)].name
+        base = same.read_text(errors="replace") if same.exists() else asm[(t, f)].read_text(errors="replace")
+        r3 = extract(base + "\n" + r["src"].replace('#include "common.h"', ""), f)
+        if r3:
+            (d / f"{f}.ctx.c").write_text('#include "common.h"\n' + r3.replace('#include "common.h"\n', ""),
+                                          encoding="utf-8", newline="\n")
     print(t, f)

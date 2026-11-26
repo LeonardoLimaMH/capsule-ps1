@@ -13,6 +13,7 @@ for name, unit, meta, src in db.execute(
         continue
     sym = json.loads(meta or "{}").get("symbol") or name.split("@")[0]
     rows.append({"t": unit.split("/")[0], "f": sym, "src": src or ""})
-claims = db.execute("select count(*) from claims c join functions f on f.id=c.function_id where f.project_id=?",
-                    (pid,)).fetchone()[0]
+# o permuter do próprio app também faz claim, mas não edita arquivos: não conta como agente trabalhando
+claims = db.execute("select count(*) from claims c join functions f on f.id=c.function_id "
+                    "join agents a on a.id=c.agent_id where f.project_id=? and a.name!='permuter'", (pid,)).fetchone()[0]
 print(json.dumps({"claims": claims, "matched": rows}))

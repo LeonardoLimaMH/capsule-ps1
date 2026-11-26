@@ -1,20 +1,23 @@
 #!/bin/bash
 # pipeline.sh: integra no main, sem mão humana, o que os agentes do decomp.anything casaram.
 #   1. exporta da distro do app (decomp-wtf) o src/ dos agentes e as funções casadas no banco;
-#   2. para cada casada que ainda é INCLUDE_ASM no main, tenta o C do banco e o C do arquivo do agente
-#      (com helpers/tipos; nomes que conflitam com o main são renomeados), cada um também com nogp;
-#   3. gêmeas: tools/twins.py tenta o C já casado nas funções de código idêntico (inclusive as que
-#      acabaram de entrar) e o resultado passa pelo mesmo try_one;
-#   4. cada função entra num commit próprio só com os 5 SHA-1 conferidos;
-#   5. se algo entrou: publica (README, GitHub, ByteMatch) e, se não há agente com claim ativo,
-#      sincroniza a cópia dos agentes e atualiza o app.
-# Uso: tools/agents/pipeline.sh [--no-publish] [--no-sync] [--loop MINUTOS]
+#   2. para cada casada que ainda é INCLUDE_ASM no main, tenta o C do banco, o C do arquivo do agente e o C do
+#      banco com os tipos do arquivo (nomes que conflitam com o main são renomeados), cada um como está, com
+#      nogp e com nogp + 2.7.2-cdk; se não entra no arquivo, numa TU própria (try_one.sh);
+#   3. gêmeas: tools/twins.py tenta o C já casado nas funções de código idêntico;
+#   4. com os agentes parados (CPU livre): decomp-permuter nas quase-casadas (permute_near.sh);
+#   5. cada função entra num commit próprio só com os 5 SHA-1 conferidos;
+#   6. se algo entrou: publica (README, GitHub, ByteMatch) e, sem agente com claim ativo, sincroniza a cópia
+#      dos agentes e atualiza o app.
+# Uso: tools/agents/pipeline.sh [--no-publish] [--no-sync] [--no-permute] [--perm N SEGUNDOS] [--loop MINUTOS]
 # Variáveis: AGENTS_DISTRO (decomp-wtf), AGENTS_REPO (~/Decomp/capsule-ps1 na distro do app).
 cd "$(dirname "$0")/../.."
 A=tools/agents; W=.cache/agents
 DISTRO=${AGENTS_DISTRO:-decomp-wtf}; AREPO=${AGENTS_REPO:-'~/Decomp/capsule-ps1'}
-PUBLISH=1; SYNC=1; LOOP=0
-while [ $# -gt 0 ]; do case $1 in --no-publish) PUBLISH=0;; --no-sync) SYNC=0;; --loop) LOOP=$2; shift;; esac; shift; done
+PUBLISH=1; SYNC=1; PERMUTE=1; PN=20; PS=180; LOOP=0
+while [ $# -gt 0 ]; do case $1 in
+  --no-publish) PUBLISH=0;; --no-sync) SYNC=0;; --no-permute) PERMUTE=0;;
+  --perm) PN=$2; PS=$3; shift 2;; --loop) LOOP=$2; shift;; esac; shift; done
 log() { echo "[$(date '+%F %T')] $*"; }
 
 try_all() {  # try_all <alvo> <f> <candidato>...: para no primeiro MATCH
@@ -29,6 +32,8 @@ try_all() {  # try_all <alvo> <f> <candidato>...: para no primeiro MATCH
   log "falha $t/$f"; return 1
 }
 
+claims() { python3 -c "import json;print(json.load(open('$W/matched.json'))['claims'])"; }
+
 round() {
   local head0; head0=$(git rev-parse HEAD)
   [ -z "$(git status --short src config)" ] || { log "src/config com mudanças locais; rodada cancelada"; return 1; }
@@ -36,8 +41,8 @@ round() {
   wsl.exe -d "$DISTRO" --cd / -- bash -c "cd $AREPO && tar -cf - src" | tar -xf - -C $W/tree || { log "export falhou"; return 1; }
   wsl.exe -d "$DISTRO" --cd / -- python3 - < $A/db_matched.py > $W/matched.json || { log "banco do app ilegível"; return 1; }
   python3 $A/candidates.py $W/matched.json $W/tree $W/cands > $W/todo.txt
-  log "agentes: $(wc -l < $W/todo.txt) casadas no app ainda em assembly no main"
-  while read -r t f; do try_all "$t" "$f" $W/cands/$t/$f.db.c $W/cands/$t/$f.tree.c; done < $W/todo.txt
+  log "agentes: $(wc -l < $W/todo.txt) casadas no app ainda em assembly no main; claims ativos: $(claims)"
+  while read -r t f; do try_all "$t" "$f" $W/cands/$t/$f.db.c $W/cands/$t/$f.tree.c $W/cands/$t/$f.ctx.c; done < $W/todo.txt
   # gêmeas
   ./run.sh python3 tools/full_asm.py < /dev/null > /dev/null 2>&1
   touch $W/twins.mark
@@ -46,14 +51,16 @@ round() {
     t=$(basename "$(dirname "$c")"); f=$(basename "$c" .c)
     grep -rqE "INCLUDE_ASM\(.*, $f\)" src/$t/ && try_all "$t" "$f" "$c"
   done
+  # quase-casadas, só com a CPU livre
+  if [ $PERMUTE = 1 ] && [ "$(claims)" = 0 ]; then bash $A/permute_near.sh "$PN" "$PS"; fi
   local n; n=$(git rev-list --count "$head0"..HEAD)
   log "rodada: $n commit(s) novos"
   [ "$n" -gt 0 ] || return 0
   [ $PUBLISH = 1 ] && bash $A/publish.sh "$n função(ões) integradas pelo pipeline dos agentes"
   if [ $SYNC = 1 ]; then
-    c=$(python3 -c "import json;print(json.load(open('$W/matched.json'))['claims'])")
-    if [ "$c" = 0 ]; then wsl.exe -d "$DISTRO" --cd / -- bash -s < $A/sync_down.sh; wsl.exe -d "$DISTRO" --cd / -- bash -s < $A/app_check.sh
-    else log "sync da cópia dos agentes adiado: $c claim(s) ativo(s)"; fi
+    if [ "$(claims)" = 0 ]; then
+      wsl.exe -d "$DISTRO" --cd / -- bash -s < $A/sync_down.sh; wsl.exe -d "$DISTRO" --cd / -- bash -s < $A/app_check.sh
+    else log "sync da cópia dos agentes adiado: $(claims) claim(s) ativo(s)"; fi
   fi
 }
 
