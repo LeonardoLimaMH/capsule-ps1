@@ -8,8 +8,6 @@ void func_8009E048(void) {
     func_8009E23C();
 }
 
-#include "common.h"
-
 /* rand-u16: 0x8006AF80 1 0,1,2,3,5,9 */
 /* rand-mem: 0x800EFF74 4 8 */
 extern u8 D_80091618[], D_800EFF58[], D_800EC084[];
@@ -57,8 +55,6 @@ s32 func_8009E12C(void)
   return 1;
 }
 
-#include "common.h"
-
 s32 func_8009E1C4(void) {
     extern s16 D_800ED88C[];
     extern s32 D_800F0550[];
@@ -78,7 +74,71 @@ void func_8009E21C(void) {
     func_8009DFAC();
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009E23C);
+s32 func_8009E23C(void) {
+    extern u8 D_80103EDC[];
+    extern u8 D_8008ED68[];
+    extern s32 D_8008EDF0[];
+    extern s16 D_800ED87A[];
+    extern void func_800D1598(void *);
+    extern void func_80034AB0(s32);
+    extern void func_8009DC78(s32);
+    extern void func_800BAD64(s32);
+    extern void func_8009E3A8(s32);
+    extern void func_8009E508(s32);
+
+    typedef struct {
+        u8 pad0[0x88];
+        s32 unk88;
+        u8 pad8C[0x1C];
+        s32 unkA8;
+        s32 padAC;
+        s32 unkB0;
+    } Work_8ED68;
+
+    typedef struct {
+        u8 pad0[8];
+        s32 unk8;
+        u8 padC[0x10];
+        u16 unk1C;
+    } Work_EFF58;
+
+    Work_8ED68 *s0 = (Work_8ED68 *)D_8008ED68;
+    Work_EFF58 *s1;
+    s32 flags;
+    u8 (*new_var)[];
+
+    func_800D1598(D_80103EDC);
+    s1 = (Work_EFF58 *)D_800EFF58;
+    if (s1->unk8 == 1 && *D_800ED87A != s1->unk8) {
+        flags = s0->unk88;
+        if (flags & 0x20) {
+            func_80034AB0(0x48);
+            new_var = &D_80091618;
+            *((u16 *) (((*new_var) + ((*D_8006AF80) * 0x1A8)) + 0x10)) = s1->unk1C;
+            func_8009DC78(0);
+            return -1;
+        }
+        if (flags & 0x40) {
+            func_80034AB0(0x5D);
+            func_8009DC78(0);
+            func_800BAD64(2);
+            return -2;
+        }
+        if (flags & 0x8000) {
+            func_8009E3A8(1);
+        } else if (s0->unkB0 != 0) {
+            func_8009E508(1);
+        }
+        if (*D_8008EDF0 & 0x2000) {
+            func_8009E3A8(0);
+            return 0;
+        }
+        if (s0->unkA8 != 0) {
+            func_8009E508(0);
+        }
+    }
+    return 0;
+}
 
 void func_8009E3A8(s32 a0) {
     extern s16 D_800ED878[];
@@ -325,11 +385,8 @@ void func_8009F1C4(s32 arg0) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009F3D4);
 
-#include "common.h"
-
 /* rand-u16: 0x8006AF80 1 0,1,2,3 */
 extern u8 D_800EFF58[], D_80091618[];
-extern u16 D_8006AF80[];
 extern void func_800A0540(s32), func_800A04F4(void), func_800A0780(s32);
 extern s32 func_800A0618(s32);
 
@@ -433,8 +490,6 @@ void func_800A0424(void)
     s32 r = func_80019F30(D_800EE5F0[0] | 0x60000, t - val);
     *(s32 *)(*(s32 *)(w + 0x314) + 0x18) = r;
 }
-
-#include "common.h"
 
 void func_800A04B8(void) {
     func_80025CEC(1, 7, 7, 1);
