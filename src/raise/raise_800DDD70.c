@@ -28,8 +28,6 @@ void func_800DDD70(s32 a0) {
     }
 }
 
-#include "common.h"
-
 /* stub-ret: mixed */
 extern u8 D_80100F38[];
 extern s32 func_800B1260(s32);
@@ -97,7 +95,60 @@ void func_800DE420(s16 arg0, s16 arg1, s16 *arg2, s16 *arg3) {
     *arg3 = ((arg1 - 0x32) / 100) + 5;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DDD70", func_800DE480);
+extern s32 func_800B1260(s32);
+
+extern s16 func_800D68D4(s32);
+
+extern s16 func_800D6848(s32);
+
+static inline void inline_DE304(s16 arg0, s16 arg1, s16 *arg2, s16 *arg3) {
+    *arg2 = -(((arg0 - 4) * 0x64) + 0x32);
+    *arg3 = ((arg1 - 4) * 0x64) + 0x32;
+}
+
+static inline void inline_DE35C(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4, s16 *a5, s16 *a6) {
+    *a6 = a2 + ((a0 * func_800D68D4(a3 + a4)) / 4096);
+    *a5 = a1 + ((a0 * func_800D6848(a3 + a4)) / 4096);
+}
+
+static inline void inline_DE420(s16 arg0, s16 arg1, s16 *arg2, s16 *arg3) {
+    *arg2 = ((-arg0 - 0x32) / 100) + 5;
+    *arg3 = ((arg1 - 0x32) / 100) + 5;
+}
+
+s32 func_800DE480(s32 a0, s16 a1, s16 a2, s16 a3, s16 a4) {
+    extern u8 D_80091618[];
+    extern s32 func_800B12D8();
+    extern s32 func_800DD64C(s32, s32, s32, s32, s32);
+    struct S { u8 _p0[0x10]; u16 unk_10; u8 _p1[0x7E]; u16 unk_90; u8 _p2[0x116]; };
+    s16 p[3][2];
+    s32 k = func_800B1260(a0);
+    s32 x = a0 ^ 1;
+    u16 f = x != 0;
+    struct S *s = (struct S *)D_80091618;
+    u16 id;
+    s16 dist;
+    s16 i;
+    s16 r;
+    if (s[(u16)k].unk_90 != 0) {
+        k = func_800B12D8(a0);
+        f = x == 0;
+    }
+    id = s[(u16)k].unk_10;
+    if (((a2 - 8) & 1) != 0) {
+        dist = (a1 - 1) * 141;
+    } else {
+        dist = (a1 - 1) * 100;
+    }
+    inline_DE304(a3 - 1, a4 - 1, &p[0][0], &p[0][1]);
+    for (i = 0; i < 64; i++) {
+        inline_DE35C(dist, p[0][0], p[0][1], i, 0, &p[1][0], &p[1][1]);
+        inline_DE420(p[1][0], p[1][1], &p[2][0], &p[2][1]);
+        r = func_800DD64C(a0, id, f, p[2][0], p[2][1]);
+        if (r == 0) break;
+    }
+    return r;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800DDD70", func_800DE770);
 
