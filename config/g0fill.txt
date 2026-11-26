@@ -100,3 +100,5 @@ src/yuugi/main_800505D0.c
 src/raise/raise_8009D2A8__800A9738__800AA77C__800AA8D0.c
 src/etc/etc__800AA238__800AB78C__800AC780__800AC9EC.c
 src/slpm/loader_80111E78.c
+src/raise/raise_8009D2A8__800A9738__800A9F84.c
+src/raise/raise_8009D2A8__800A9738__800A9D6C.c
