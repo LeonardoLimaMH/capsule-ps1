@@ -46,4 +46,44 @@ block_17:
     return 0;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8__8009EDA4__800A0850__800A0AD4", func_800A0C54);
+s32 func_800A0C54(u8 *arg0, s32 arg1) {
+    extern s32 D_80065310[];
+    extern s32 func_800202A4(s32);
+    s32 res;
+    s32 n;
+    u8 t;
+    s32 off;
+
+    if (*(arg0 + arg1 + 0x5E4) == 0xFF) {
+        return 0;
+    }
+
+    res = func_800202A4(8);
+    if (res >= 2) {
+        return 0;
+    }
+
+    if (arg1 == arg0[0xBCA]) {
+        if (res != 0) {
+            n = 0x1B;
+        } else {
+            n = 0x1C;
+        }
+    } else {
+        if (res != 0) {
+            n = 0x19;
+        } else {
+            n = 0x1A;
+        }
+    }
+
+    t = *(arg0 + arg1 + 0x5E4);
+    if (t >= 8) {
+        off = 0;
+    } else {
+        off = arg1 * 0x980 - 0x5580;
+    }
+
+    *(s32 *)(arg0 + 0x14) = *(s32 *)(n * 4 + (D_80065310[t] + off)) + off;
+    return 1;
+}
