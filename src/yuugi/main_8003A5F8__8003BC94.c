@@ -72,11 +72,6 @@ extern s32 D_80078D5C;
 extern s32 D_80078C84;
 extern s32 func_8003A5F8();
 extern s32 func_8004FE3C();
-extern s32 D_80078C94;
-extern s32 D_80078D5C;
-extern s32 D_80078C84;
-extern s32 func_8003A5F8();
-extern s32 func_8004FE3C();
 extern u8 D_800949A8[];
 
 s32 func_8003BC94(Unk_800944B8Stream *p) {
@@ -365,4 +360,12 @@ void func_8003C530(s32 n) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003A5F8__8003BC94", func_8003C5BC);
+s32 func_8003C5BC(s32 n) {
+    s32 i;
+    s32 off;
+    for (i = 0; i < D_800944B8[n].unk_0x2A2; i++) {
+        off = n * sizeof(D_800944B8[0]);
+        if (((__typeof__(D_800944B8[0].unk_0x0[0]) *)((u8 *)D_800944B8 + (i * 0x28 + off)))->unk_0x20 != 1) return 1;
+    }
+    return 3;
+}
