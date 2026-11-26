@@ -3,7 +3,51 @@
 
 typedef struct { u32 unk0; u32 unk4; u32 unk8; u8 pad[0x30]; } D63940_t;
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4", func_800CBBB4);
+void func_800CBBB4(u8 *arg0) {
+    extern u8 *D_8008ED68[];
+    extern u8 D_800906A0[];
+    u8 **pp = D_8008ED68;
+    u32 var_a2;
+    u8 *p;
+    u8 *q;
+    u8 *ctx;
+    s32 n;
+    s32 idx;
+    u32 *ot;
+    u32 end;
+    s32 offset;
+    u32 bit = *(u32 *)(arg0 + 0x50) & 1;
+    if (bit != 1) {
+        var_a2 = 0;
+        q = arg0 + 0x18;
+        p = *(u8 **)(*pp + 0x1090);
+        ctx = *pp;
+        if (p != 0) {
+            end = (u32)(p + 0x18);
+            if ((u32)(ctx + 0x4594) >= end) {
+                var_a2 = end;
+            }
+        }
+        *(u32 *)(ctx + 0x1090) = var_a2;
+        SetPolyF4(p);
+        SetSemiTrans(p, (*(u32 *)(arg0 + 0x50) >> 6) & 1);
+        if (arg0[0x58] == 0) {
+            func_8002CEC0(D_800906A0);
+        }
+        n = func_800CD564(q, p);
+        p[4] = q[0x20];
+        p[5] = q[0x21];
+        idx = n - 1;
+        p[6] = q[0x22];
+        if ((u32)(n - 7) < 0x3FA) {
+            offset = idx * 4;
+            *(u32 *)p = (*(u32 *)p & 0xFF000000) | (*(u32 *)(offset + (u32)*pp + 0x70) & 0xFFFFFF);
+            ot = (u32 *)(offset + (u32)*pp);
+            ot[0x70 / 4] = (ot[0x70 / 4] & 0xFF000000) | ((u32)p & 0xFFFFFF);
+            func_80018610(GetTPage(0, (*(u32 *)(arg0 + 0x50) >> 4) & 3, 0, 0) & 0xFFFF, idx);
+        }
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4", func_800CBD28);
 
