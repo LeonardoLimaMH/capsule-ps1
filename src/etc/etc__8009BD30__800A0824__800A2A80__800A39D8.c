@@ -1,6 +1,49 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80__800A39D8", func_800A39D8);
+void func_800A39D8(u8 *arg0) {
+    extern u8 D_80085A01[];
+    extern u16 D_8008EE44[];
+    extern s16 D_800B3B40[];
+    extern u16 D_800B2CB4[];
+    extern u16 D_800B2CE4[];
+    extern u16 D_800B2C9C[];
+    extern u16 D_800B2CCC[];
+    struct Obj {
+        u8 pad0[0x30];
+        u32 unk30_0:6;
+        u32 unk30_6:3;
+        u32 unk30_9:23;
+        s32 unk34;
+        s32 unk38;
+        u8 pad3C[0xA];
+        u16 unk46;
+        s16 unk48;
+        u16 unk4A;
+    };
+    register struct Obj *p asm("a2") = (struct Obj *)arg0;
+    u8 i = D_80085A01[0];
+
+    if (D_8008EE44[0] != 0x12) {
+        p->unk38 |= 1;
+    } else {
+        s32 f;
+        p->unk38 &= ~1;
+        if (D_800B3B40[0] != 0) {
+            register u16 v asm("v0");
+            p->unk46 = D_800B2CB4[i];
+            v = D_800B2CE4[i];
+            p->unk30_6 = 1;
+            p->unk4A = v;
+            return;
+        } else {
+            register u16 v asm("v1");
+            p->unk46 = D_800B2C9C[i];
+            v = D_800B2CCC[i];
+            p->unk30_6 = 0;
+            p->unk4A = v;
+        }
+    }
+}
 
 void func_800A3AB4(u8 *arg0) {
     extern u8 D_80065390[];
