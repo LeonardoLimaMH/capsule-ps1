@@ -13,3 +13,4 @@ func_8003992C
 func_80024024
 func_8003CE14
 func_8003CEF8
+func_8003CC00
