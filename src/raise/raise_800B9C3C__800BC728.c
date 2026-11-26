@@ -52,7 +52,22 @@ void func_800BC7B0(u8 *arg0)
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BC8FC);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B9C3C__800BC728", func_800BCAEC);
+void func_800BCAEC(void)
+{
+    struct T { s16 n; s16 a[1]; };
+    extern u8 D_800EFF58[];
+    s32 i = 0;
+    s32 *base = (s32 *)D_800EFF58;
+    s32 n;
+    base[0x33C / 4] = 1;
+    n = ((struct T *)D_8006AF90)->n;
+    base[0x340 / 4] = 0x20;
+    base[0x344 / 4] = 0;
+    base[0x348 / 4] = n + 4;
+    for (; i < ((struct T *)D_8006AF90)->n; i++) {
+        base[0x3E8 / 4 + i] = ((struct T *)D_8006AF90)->a[i];
+    }
+}
 
 void func_800BCB58(void)
 {
@@ -115,8 +130,6 @@ void func_800BCC98(void) {
     }
 }
 
-#include "common.h"
-
 extern u8 D_800EE5F0[];
 extern u8 D_800EFF58[];
 
@@ -131,11 +144,6 @@ void func_800BCE14(void) {
 
 }
 
-#include "common.h"
-
-extern u8 D_800EE5F0[];
-extern u8 D_800EFF58[];
-
 s32 func_800BCE1C(void) {
     s32 r = func_800BD2E0(0x1A, 0x1C0, 0x48, 5, 0, D_800EE5F0, M2C_GFIELD(D_800EFF58, s32, 0x358), 1, 0, 0, 2, 0, 0);
 
@@ -144,7 +152,6 @@ s32 func_800BCE1C(void) {
 }
 
 extern u8 D_800EE630[];
-extern s16 D_8006AF90[];
 extern s32 func_800BD2E0();
 s32 func_800BD2E0();
 void func_800BCE94(void)
@@ -166,11 +173,6 @@ void func_800BCE94(void)
         (*(struct S *)D_800EFF58).f398[idx],
         0, 0, 0, 2, 0, 0);
 }
-
-#include "common.h"
-
-extern u8 D_800EE5F0[];
-extern u8 D_800EFF58[];
 
 s32 func_800BCF20(void) {
     s32 r = func_800BD2E0(0x1A, 0x38, 0x118, 5, 0, D_800EE5F0, M2C_GFIELD(D_800EFF58, s32, 0x41C), 1, 0, 0, 2, 0, 0);
