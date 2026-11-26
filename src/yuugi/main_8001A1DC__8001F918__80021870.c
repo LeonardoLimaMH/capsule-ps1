@@ -650,7 +650,80 @@ s32 func_800231C4(u8 *o, s32 a1, s32 idx) {
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918__80021870", func_800232F4);
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001F918__80021870", func_8002367C);
+static inline s32 helper_8002367C(u8 *o, s32 a1, s32 idx, u8 *g) {
+    extern u8 D_8006AF90[];
+    extern void func_80012668();
+    extern s32 func_8001F8B0(), func_800212AC();
+    u16 st = *(u16 *)(g + 0xEC);
+    s32 r = 0;
+
+    switch (st) {
+    case 0:
+        if (*(s16 *)(D_8006AF90 + idx * 30) >= 4) {
+            func_80012668();
+            o[0xBE0] = 0;
+        } else {
+            r = 1;
+        }
+        break;
+    case 1:
+        func_800220B8(o);
+        *(s32 *)(o + 0x14) = func_8001F8B0(0x1B, 0);
+        func_80012668();
+        break;
+    case 2:
+        r = func_800212AC(o, a1, 2, 1);
+        if (r == st) {
+            (*(u16 *)(D_8006AF90 + idx * 30))--;
+        }
+        break;
+    }
+    return r;
+}
+
+s32 func_8002367C(u8 *o, s32 a1, s32 a2, s32 a3) {
+    extern u8 D_8008ED68[];
+    extern void func_80012628(), func_8001264C();
+    extern s32 func_800212AC(), func_800232F4();
+    s32 ret = 0;
+    s32 idx = 0;
+    u8 *g;
+    s32 v;
+
+    if (o[0] != 0) {
+        idx = o[0xBCA];
+    }
+    g = D_8008ED68;
+    switch (*(u16 *)(g + 0xE8)) {
+    case 0:
+        v = helper_8002367C(o, o[0], idx, g);
+        if (v == 2) {
+            func_80012628();
+        } else if (v != 0) {
+            func_8001264C(3);
+        }
+        break;
+    case 1:
+        func_800220B8(o);
+        func_80023050(o, a1);
+        func_80012628();
+        break;
+    case 2:
+        if (func_800212AC(o, o[0], 2, 1) != 0) {
+            ret = 1;
+        }
+        break;
+    case 3:
+        v = func_800232F4(o, o[0], (s16)a1, (s16)a2, (s16)a3, idx);
+        if (v > 0) {
+            ret = 1;
+        } else if (v < 0) {
+            func_8001264C(0);
+        }
+        break;
+    }
+    return ret;
+}
 
 void func_800238DC(void) {
     func_80020094();
