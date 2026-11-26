@@ -263,7 +263,71 @@ static inline s32 step_9EDA0(Work_9EDA0 *w, s32 n, s32 s0, s32 *cnt, s32 check0)
     }
     return 0;
 }
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__8009E040", func_8009EDA0);
+s32 func_8009EDA0(s32 a0) {
+    extern s32 func_800A0014(s32, s32, s32);
+    extern void func_80034AB0(s32);
+    extern s32 D_800F006C[];
+
+    s32 cnt = 0;
+    Work_9EDA0 *w;
+    s32 s0;
+    s32 r;
+
+    func_800A0014(2, 0, 0);
+    w = (Work_9EDA0 *)D_800EFF58;
+    s0 = w->unk114;
+    switch (a0) {
+    case 2: {
+        u8 *mon = D_80091618;
+        if (*(u16 *)(mon + *D_8006AF80 * 0x1A8 + 0x10) == 0) {
+            Work_9EDA0 *w2 = w;
+            do {
+                s32 n = w2->unk114 > 0 ? w2->unk114 - 1 : s0;
+                register s32 m asm("v0");
+                w2->unk114 = n;
+                m = n;
+                if (m == s0) {
+                    cnt = 0;
+                    r = 1;
+                } else {
+                    Work_9EDA0 *q;
+                    register u32 flags asm("v1");
+                    m <<= 2;
+                    q = (Work_9EDA0 *)(m + (u32)w2);
+                    cnt++;
+                    flags = q->unk120[0]->unk38;
+                    if (!((flags >> 6) & 1)) {
+                        if (q->unk21C[0] != -1) {
+                            w2->unk28C = q->unk254[0];
+                        }
+                        r = 1;
+                    } else if (n == 0) {
+                        w2->unk114 = s0;
+                        r = 2;
+                    } else {
+                        r = 0;
+                    }
+                }
+            } while (r == 0);
+        } else {
+            do {
+                r = step_9EDA0(w, w->unk114 > 0 ? w->unk114 - 1 : s0, s0, &cnt, 0);
+            } while (r == 0);
+        }
+        break;
+    }
+    case 3:
+        do {
+            r = step_9EDA0(w, w->unk114 < 13 ? w->unk114 + 1 : s0, s0, &cnt, 0);
+        } while (r == 0);
+        break;
+    }
+    func_800A0014(1, 0, cnt);
+    if (s0 != *D_800F006C) {
+        func_80034AB0(0x84);
+    }
+    return 1;
+}
 
 s32 func_8009F00C(s32 arg0) {
     typedef struct {
