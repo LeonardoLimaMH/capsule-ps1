@@ -21,8 +21,6 @@ void func_800A0824(u8 *arg0) {
     }
 }
 
-#include "common.h"
-
 void func_800A0944(void) {
     extern M2C_UNK D_8002E38C[];
     extern s32 D_8008F780[];
@@ -133,7 +131,62 @@ void func_800A13E8(void) {
     }
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A150C);
+void func_800A150C(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    typedef struct {
+        u8 id;
+        u8 name[8];
+        u8 unk9;
+        u8 unkA;
+        u8 unkB;
+        u8 unkC;
+        u8 unkD;
+    } Entry14_A150C;
+    typedef struct {
+        u8 pad0[8];
+        u32 pad8_0 : 12;
+        u32 unk8_12 : 2;
+        u32 pad8_14 : 18;
+        u8 padC[0x3C - 0xC];
+    } Entry63940;
+    extern Entry63940 D_80063940[];
+    extern void func_8001F1A8(s32, s32, s32, s32, s32, void *, s32, s32, s32);
+    extern void func_80018EF4(s32, s32, s32, s32, s32);
+    extern void func_800188F0(s32, s32, s32, s32, s32);
+    extern void func_8001F35C(s32, s32, s32, s32, s32, s32, s32, s32);
+
+    Entry14_A150C *u;
+    s32 x0;
+    s16 y0, y1, x1, x2, y2, y3, x3;
+
+    arg3 += 5;
+    x0 = (s16)arg3;
+    u = &((Entry14_A150C *)arg0)[arg2];
+    arg4 += 7;
+    y0 = arg4;
+    func_8001F1A8(x0, y0, 0, 0, 0, u->name, 0, 8, 3);
+    y1 = arg4 + 0xC;
+    func_80018EF4((s16)(arg3 + 0x20), y1, D_80063940[u->id].unk8_12, 0, 3);
+    x1 = arg3 + 0x36;
+    func_800188F0(x1, y1, 0, 0, 3);
+    x2 = arg3 + 3;
+    y2 = arg4 + 0x19;
+    func_800188F0(x2, y2, 1, 0, 3);
+    func_800188F0(x1, y2, 2, 0, 3);
+    y3 = arg4 + 0x26;
+    func_800188F0(x2, y3, 3, 0, 3);
+    func_8001F35C((s16)(arg3 + 0x62), y0, 2, 0, 0, u->unkD, 1, 3);
+    func_8001F35C((s16)(arg3 + 0x44), y1, 2, 0, 0, u->unkA, 3, 3);
+    x3 = arg3 + 0xF;
+    func_8001F35C(x3, y2, 2, 0, 0, u->unkB, 3, 3);
+    func_8001F35C((s16)(arg3 + 0x4E), y2, 2, 0, 0, u->unkC, 1, 3);
+    func_8001F35C(x3, y3, 2, 0, 0, u->unk9, 3, 3);
+}
+
+#define A1798_B D_800B3B38->unk0
+#define A1798_PAD(i) (D_8008ED68->pad[i].unk0)
+#define A1798_N(i, k) (D_800B3B38->unk10[i][k])
+#define A1798_P(i, k) (D_800B3B70[i][k])
+#define A1798_Q(i) (D_800B3B90[i])
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A1798);
 
