@@ -20,4 +20,48 @@ extern u8 D_800EF364[], D_800EFF58[];
 extern u8 D_80091618[];
 extern u8 D_80092008[];
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF1D8", func_800DF1D8);
+typedef struct {
+    u8 pad[0x8A];
+    u16 f8A;
+    u8 pad1[4];
+    u16 f90;
+    u8 pad2[0x116];
+} Entry1A8;
+extern u16 D_8006AF80[];
+u16 func_800DF1D8(s32 a0, u16 a1, s16 a2) {
+    s32 r = 0;
+    s32 b = a0;
+    Entry1A8 *p = (Entry1A8 *)D_80091618;
+    if (p[*D_8006AF80].f8A == 0xFFFF) {
+        return 2;
+    }
+    switch (p[a1].f90) {
+    case 0:
+        if (b != 0) {
+            if (b == 1) {
+                if (a2 == b) {
+                    r = 0;
+                } else if (a2 == 8) {
+                    r = 2;
+                }
+            }
+        } else {
+            if (a2 == 1) r = 2;
+        }
+        break;
+    case 1:
+        if (b != 0) {
+            if (b == 1) {
+                if (a2 == 1) r = 2;
+            }
+        } else {
+            if (a2 == 1) {
+                r = 0;
+            } else if (a2 == 8) {
+                r = 2;
+            }
+        }
+        break;
+    }
+    return r << 16 >> 16;
+}
