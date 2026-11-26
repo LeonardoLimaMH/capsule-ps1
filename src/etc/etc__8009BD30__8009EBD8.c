@@ -73,7 +73,132 @@ void func_8009EBD8(void *arg0)
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__8009EBD8", func_8009ECF4);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__8009EBD8", func_8009F384);
+extern void (*D_800B2C2C[])(u8 *);
+extern void (*D_800B2C2C[])(u8 *);
+void func_800A4964();
+extern void (*D_800B2C2C[])(u8 *);
+void func_800A4964();
+extern void (*D_800B2C2C[])(u8 *);
+void func_800A4964();
+void func_800A4964();
+
+void func_8009F384(u8 *p)
+{
+    extern u8 D_8008ED68[];
+    extern u16 D_8008EE48[];
+    extern s16 D_800B3B38[];
+    extern s16 D_800B3B40[];
+    extern s32 D_800B3C08[];
+    extern s16 D_800B2B9C[];
+    extern char *D_800B2BE0[];
+    extern s32 D_800B2BB4[];
+    extern u8 D_800B2B94[];
+    extern char D_800B2988[], D_800B2970[], D_800B2978[], D_800B2980[];
+    u8 *s = p + 0x5D0;
+    u8 f = s[6];
+    u8 m = p[0x5D0];
+    u8 g = p[6];
+    u8 *q;
+    u32 pad;
+    s16 v;
+    s32 c;
+
+    if (m == 2) {
+        f |= s[7];
+        g |= p[7];
+    }
+    if (m != 0 || *D_8008EE48 == 0) {
+        func_80020844(-0xA0, 0x30, 0x140, 0x30, 0, 0, 0, 0, 3);
+        func_8001F1A8(-0x98, 0x38, 0, 0, 0, D_800B2988, 1, 8, 2);
+        func_8001F35C(-0x48, 0x38, 0, 0, 0, D_800B3B38[4] + 1, 2, 2);
+        func_8001F1A8(D_800B2B9C[D_800B3B38[4]], 0x3C, 0, 0, 0, D_800B2BE0[D_800B3B38[4]], 1, D_800B2BB4[D_800B3B38[4]], 2);
+    }
+    if (s[0] != 0) {
+        func_8001F1A8(-0x60, 0x60, 0, 1, 0, D_800B2970, 1, 4, 2);
+        func_8001F1A8(-0x10, 0x60, 0, 1, 0, D_800B2978, 1, 3, 2);
+        func_8001F1A8(0x30, 0x60, 0, 1, 0, D_800B2980, 1, 3, 2);
+        q = D_8008ED68;
+        pad = *(u32 *)(q + 0x88);
+        if (s[0] == 2) pad |= *(u32 *)(q + 0x98);
+        if (pad & 0x2000) {
+            func_80034AB0(0x84);
+            v = D_800B3B38[4] + 1;
+            D_800B3B38[4] = v;
+            if (f & 0x80) {
+                if (g & 8) D_800B3B38[4] = v % 11;
+                else D_800B3B38[4] = v % 10;
+            } else if (f & 0x40) D_800B3B38[4] = v % 9;
+            else if (f & 0x20) D_800B3B38[4] = v % 8;
+            else if (f & 0x10) D_800B3B38[4] = v % 7;
+            else D_800B3B38[4] = v % 6;
+            func_800A2588(*D_800B3B40);
+        } else if (pad & 0x8000) {
+            func_80034AB0(0x84);
+            if (--D_800B3B38[4] < 0) {
+                if (f & 0x80) {
+                    if (g & 8) D_800B3B38[4] = 10;
+                    else D_800B3B38[4] = 9;
+                } else if (f & 0x40) D_800B3B38[4] = 8;
+                else if (f & 0x20) D_800B3B38[4] = 7;
+                else if (f & 0x10) D_800B3B38[4] = 6;
+                else D_800B3B38[4] = 5;
+            }
+            func_800A2588(*D_800B3B40);
+        } else if (pad & 0x20) {
+            func_80034AB0(0x48);
+            p[0x5D9] = D_800B3B38[4];
+            D_800B3B38[4] = 0;
+            c = s[0];
+            if (c == 1) {
+                func_80012508();
+                if (D_800B3B38[22] == 0) func_800125AC(2);
+            } else if (c == 2) {
+                D_800B3B38[2] = 0;
+                func_80012544(0x14);
+            }
+        } else if (pad & 0x40) {
+            func_80034AB0(0x5D);
+            *D_800B3B40 = 0;
+            func_800A2588(0);
+            c = s[0];
+            if (c == 1) func_80012544(0xF);
+            else if (c == 2) func_80012544(7);
+        }
+    } else {
+        switch (*D_8008EE48) {
+        case 0:
+            if (++*D_800B3C08 < 0x2D) break;
+            func_80034AB0(0x48);
+            func_80012578();
+            break;
+        case 1:
+            func_800220B8(p);
+            *(s32 *)(p + 0x14) = func_8001F8B0(p[0x5E5] + 8, 7);
+            p[0x5DA] = D_800B2B94[p[0x5E5]];
+            func_80012578();
+            break;
+        case 2:
+            if (func_800220D4(p, 1, 1, 1) == 0) break;
+            p[0x5D9] = D_800B3B38[4];
+            *D_800B3C08 = 0;
+            D_800B3B38[4] = 0;
+            func_80012544(0x12);
+            func_800125AC(0);
+            break;
+        }
+    }
+}
+
+extern void (*D_800B2C2C[])(u8 *);
+
+void func_800A4964();
+
+#define FF08_TEXT(x, y, mode, text, len, rows) \
+    func_8001F1A8(x, y, mode, 1, 0, text, 1, len, rows)
+
+extern void (*D_800B2C2C[])(u8 *);
+
+void func_800A4964();
 
 extern void (*D_800B2C2C[])(u8 *);
 
