@@ -71,7 +71,16 @@ void func_8003CE88(s16 arg0, u16 arg1, u16 arg2) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808__8003CE14", func_8003CEF8);
+void func_8003CEF8(s16 arg0, u16 arg1, u16 arg2) {
+    extern u16 D_80078D54;
+    extern u16 D_80078D56;
+    extern SndChan D_800944B8[];
+    D_80078D54 = arg1;
+    D_80078D56 = arg2;
+    if (D_800944B8[arg0].state != 2) {
+        func_80037E40();
+    }
+}
 
 void func_8003CF68(void) {
     SpuReserveReverbWorkArea(1);
