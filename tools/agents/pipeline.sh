@@ -5,16 +5,18 @@
 #      banco com os tipos do arquivo (nomes que conflitam com o main são renomeados), cada um como está, com
 #      nogp e com nogp + 2.7.2-cdk; se não entra no arquivo, numa TU própria (try_one.sh);
 #   3. gêmeas: tools/twins.py tenta o C já casado nas funções de código idêntico;
-#   4. com os agentes parados (CPU livre): decomp-permuter nas quase-casadas (permute_near.sh);
+#   4. quase-casadas vão para a fila do permuter (permq.py); um trabalhador por máquina (perm_workers.sh:
+#      local + .cache/agents/remotes.txt) pega tarefas quando a máquina está livre;
 #   5. cada função entra num commit próprio só com os 5 SHA-1 conferidos;
 #   6. se algo entrou: publica (README, GitHub, ByteMatch) e, sem agente com claim ativo, sincroniza a cópia
 #      dos agentes e atualiza o app.
 # Uso: tools/agents/pipeline.sh [--no-publish] [--no-sync] [--no-permute] [--perm N SEGUNDOS] [--loop MINUTOS]
+#   --perm: N quase-casadas mais perto do original na fila (40), SEGUNDOS por tarefa (180)
 # Variáveis: AGENTS_DISTRO (decomp-wtf), AGENTS_REPO (~/Decomp/capsule-ps1 na distro do app).
 cd "$(dirname "$0")/../.."
 A=tools/agents; W=.cache/agents
 DISTRO=${AGENTS_DISTRO:-decomp-wtf}; AREPO=${AGENTS_REPO:-'~/Decomp/capsule-ps1'}
-PUBLISH=1; SYNC=1; PERMUTE=1; PN=20; PS=180; LOOP=0
+PUBLISH=1; SYNC=1; PERMUTE=1; PN=40; PS=180; LOOP=0
 while [ $# -gt 0 ]; do case $1 in
   --no-publish) PUBLISH=0;; --no-sync) SYNC=0;; --no-permute) PERMUTE=0;;
   --perm) PN=$2; PS=$3; shift 2;; --loop) LOOP=$2; shift;; esac; shift; done
@@ -36,7 +38,9 @@ claims() { python3 -c "import json;print(json.load(open('$W/matched.json'))['cla
 
 round() {
   local head0; head0=$(git rev-parse HEAD)
-  [ -z "$(git status --short src config)" ] || { log "src/config com mudanças locais; rodada cancelada"; return 1; }
+  exec 7> $W/git.lock; flock 7  # espera um try_one dos trabalhadores do permuter terminar
+  local dirty; dirty=$(git status --short src config); flock -u 7
+  [ -z "$dirty" ] || { log "src/config com mudanças locais; rodada cancelada"; return 1; }
   mkdir -p $W; rm -rf .cache/agents/tree .cache/agents/cands; mkdir -p $W/tree $W/cands
   wsl.exe -d "$DISTRO" --cd / -- bash -c "cd $AREPO && tar -cf - src" | tar -xf - -C $W/tree || { log "export falhou"; return 1; }
   wsl.exe -d "$DISTRO" --cd / -- python3 - < $A/db_matched.py > $W/matched.json || { log "banco do app ilegível"; return 1; }
@@ -51,8 +55,13 @@ round() {
     t=$(basename "$(dirname "$c")"); f=$(basename "$c" .c)
     grep -rqE "INCLUDE_ASM\(.*, $f\)" src/$t/ && try_all "$t" "$f" "$c"
   done
-  # quase-casadas, só com a CPU livre
-  if [ $PERMUTE = 1 ] && [ "$(claims)" = 0 ]; then bash $A/permute_near.sh "$PN" "$PS"; fi
+  # quase-casadas: fila do permuter (cada máquina pega quando está livre)
+  if [ $PERMUTE = 1 ]; then
+    wsl.exe -d "$DISTRO" --cd / -- python3 - < $A/near_dump.py > $W/near.json && mkdir -p $W/perm &&
+      python3 $A/perm_prep.py $W/near.json $W/tree $W/perm "$PN" > $W/perm/all.txt &&
+      log "$(python3 $A/permq.py add $W/perm/all.txt)"
+    bash $A/perm_workers.sh ensure "$PS" | while read -r l; do log "$l"; done
+  fi
   local n; n=$(git rev-list --count "$head0"..HEAD)
   log "rodada: $n commit(s) novos"
   [ "$n" -gt 0 ] || return 0

@@ -20,7 +20,11 @@ rodada integra e publica, e o sync fica para a próxima rodada em que estiverem 
 | Arquivo | O que faz |
 |---|---|
 | `pipeline.sh` | a rodada inteira (export, candidatos, gêmeas, permuter, publicação, sync, conferência no app) |
-| `permute_near.sh` | com os agentes parados: decomp-permuter (~70 variantes/s) nas N quase-casadas do app; o que chega a 0 vai ao try_one |
+| `permq.py` | fila do permuter (SQLite): pending → running com lease (dono + prazo) → done; lease vencido volta a pending |
+| `perm_workers.sh` | `ensure`/`stop`/`status`: um `perm_worker.sh` por máquina (local + `.cache/agents/remotes.txt`) |
+| `perm_worker.sh` | pega tarefa quando a máquina está livre, roda o decomp-permuter (~70 variantes/s), traz o resultado; 0 vai ao try_one |
+| `remote_perm.sh` | roda no computador remoto: permuter no container, limitado a N núcleos, com vigia que para se a máquina ficar ocupada |
+| `agent_claims.py` | roda na distro do app: quantos agentes têm claim ativo (a CPU local é dos agentes primeiro) |
 | `near_dump.py`, `perm_prep.py`, `perm_merge.py` | quase-casadas do banco; candidato que compila sozinho; volta do resultado do permuter |
 | `own_tu.sh` (+ `isolate.py`, `only_fn.py`, `split_rodata.py`) | função numa TU própria (switch em arquivo que já tem .rodata) |
 | `db_matched.py` | roda na distro do app: funções casadas no banco e claims ativos (JSON) |
@@ -39,3 +43,23 @@ no arquivo (ex.: switch num arquivo que já tem .rodata próprio) é tentado num
 O permuter do app testa ~25 variantes/min (recompila o arquivo inteiro); o daqui, ~4000/min.
 As gêmeas (`tools/twins.py`) entram depois das funções dos agentes, para aproveitar as que acabaram de
 casar.
+
+## Fila do permuter e outros computadores
+
+Cada rodada do pipeline põe as 40 quase-casadas mais perto do original na fila (`permq.py`; uma função volta à
+fila quando o melhor C dela no app muda) e garante um trabalhador por máquina. Quem está livre pega a próxima
+tarefa, que fica travada com prazo (lease); se o resultado não volta no prazo (máquina caiu, ssh travou), a
+tarefa volta a ficar pendente para outra máquina.
+
+- Local: livre quando nenhum agente do app tem claim ativo.
+- Remoto: livre quando responde por ssh e a carga de 1 min está abaixo de 1/4 dos núcleos. Usa até
+  `PERM_REMOTE_JOBS` (8) núcleos; durante a tarefa, se os outros processos da máquina passam de 1/4 dos núcleos,
+  o permuter para e a tarefa volta à fila.
+
+Para pôr outra máquina na fila: Ubuntu com Docker, acesso por chave ssh a partir do Windows (`ssh.exe`), a imagem
+do toolchain (`docker save ygo-decomp-tc | gzip | ssh.exe usuario@host "gunzip | docker load"`) e uma linha
+`usuario@host` em `.cache/agents/remotes.txt` (fora do git). Vai para lá só o que o compilador usa (`tools`,
+`include`, `config`) e a pasta de trabalho de cada função; o disco e o assembly do jogo ficam aqui.
+
+    tools/agents/perm_workers.sh status     # máquinas e fila
+    tools/agents/perm_workers.sh stop       # para todos (as tarefas voltam à fila pelo prazo)

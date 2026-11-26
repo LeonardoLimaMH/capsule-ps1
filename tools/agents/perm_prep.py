@@ -3,6 +3,7 @@
 grava <saída>/<alvo>/<f>.c com o melhor C do banco + só os tipos/helpers/externs do arquivo do agente que ele usa
 (compila sozinho, como o decomp-permuter precisa). Imprime "<alvo> <f> <perfil> <candidato>"."""
 import json
+import signal
 import pathlib
 import re
 import sys
@@ -11,6 +12,13 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from with_helpers import extract  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
+
+
+def _slow(*_):
+    raise TimeoutError
+
+
+signal.signal(signal.SIGALRM, _slow)
 near = json.load(open(sys.argv[1]))
 tree, out = pathlib.Path(sys.argv[2]), pathlib.Path(sys.argv[3])
 limit = int(sys.argv[4]) if len(sys.argv) > 4 else 40
@@ -30,7 +38,13 @@ for r in near:
         continue
     agent_file = tree / "src" / t / main_file.name
     base = agent_file.read_text(errors="replace") if agent_file.exists() else main_file.read_text(errors="replace")
-    src = extract(base + "\n" + r["src"].replace('#include "common.h"', ""), f)
+    signal.alarm(10)  # arquivo enorme pode deixar a extração lenta: pula a função
+    try:
+        src = extract(base + "\n" + r["src"].replace('#include "common.h"', ""), f)
+    except TimeoutError:
+        src = None
+    finally:
+        signal.alarm(0)
     if not src:
         continue
     d = out / t

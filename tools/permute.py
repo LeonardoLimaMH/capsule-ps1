@@ -6,7 +6,7 @@ semântica do C (reordenar declarações, trocar tipos equivalentes, introduzir
 temporários...) e mede a distância do código gerado para o original.
 
 Uso:
-  permute.py <alvo> <função> <arquivo.c> [--seconds 600] [--jobs 8]
+  permute.py <alvo> <função> <arquivo.c> [--seconds 600] [--jobs 8] [--prepare]
 O melhor resultado fica em .cache/permuter/<função>/output-*/source.c
 """
 import argparse
@@ -77,6 +77,8 @@ def main():
     ap.add_argument("--gcc", default="2.7.2-psx")
     ap.add_argument("--g0fill", action="store_true", help="perfil das bibliotecas PsyQ")
     ap.add_argument("--spfill", action="store_true", help="com o addu $sp no delay slot do retorno")
+    ap.add_argument("--prepare", action="store_true",
+                    help="só monta .cache/permuter/<função> (para rodar em outro computador)")
     a = ap.parse_args()
     asm = next((ROOT / "asm" / a.target / "nonmatchings").rglob(f"{a.func}.s"))
     d = ROOT / ".cache" / "permuter" / a.func
@@ -97,6 +99,8 @@ def main():
     (d / "compile.sh").write_text(compile_script(a.target, a.gcc, a.g0fill, a.spfill), encoding="utf-8")
     (d / "compile.sh").chmod(0o755)
     (d / "settings.toml").write_text(f'func_name = "{a.func}"\ncompiler_type = "gcc"\n', encoding="utf-8")
+    if a.prepare:
+        return
     cmd = ["timeout", str(a.seconds), "python3", "/opt/decomp-permuter/permuter.py", str(d),
            "-j", str(a.jobs), "--stop-on-zero", "--best-only"]
     print(" ".join(cmd))

@@ -3,6 +3,7 @@
 # faz o commit, envia ao GitHub (push.sh) e o relatório ao ByteMatch (make report).
 set -e
 cd "$(dirname "$0")/../.."
+mkdir -p .cache/agents; exec 8> .cache/agents/git.lock; flock 8
 for e in equiv/*/*.c; do
   [ -f "$e" ] || continue
   t=$(basename "$(dirname "$e")"); f=$(basename "$e" .c)

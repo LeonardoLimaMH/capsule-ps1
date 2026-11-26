@@ -6,6 +6,7 @@
 # Saída: "MATCH <f>" ou "falha <f>".
 cd "$(dirname "$0")/../.."
 A=tools/agents
+mkdir -p .cache/agents; exec 8> .cache/agents/git.lock; flock 8  # um try_one por vez (pipeline e trabalhadores do permuter)
 t=$1; f=$2; c=$3; ng=${4:-}; pr=${5:-}
 mkdir -p .cache/agents/try; w=.cache/agents/try/$f.c; cp "$c" "$w"
 grep -q '#include "common.h"' "$w" || sed -i '1i #include "common.h"' "$w"
