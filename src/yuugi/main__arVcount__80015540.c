@@ -365,7 +365,20 @@ u32 func_800160F8(u32 arg0) {
     return *(u32 *)(base + 0xA74);
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80015540", func_8001611C);
+static inline u32 set_rgb_comp(u32 *p, u32 arg0) {
+    if (arg0 < 0x2001) {
+        *p = arg0;
+    }
+    return *p;
+}
+
+void func_8001611C(u32 arg0) {
+    extern u32 D_8008ED68[];
+    u8 *base = (u8 *)D_8008ED68;
+    set_rgb_comp((u32 *)(base + 0xA6C), arg0);
+    set_rgb_comp((u32 *)(base + 0xA70), arg0);
+    set_rgb_comp((u32 *)(base + 0xA74), arg0);
+}
 
 void func_80016148(void *arg0) {
     extern u8 D_8008F702[];
