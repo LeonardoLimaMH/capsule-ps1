@@ -281,7 +281,75 @@ s32 func_80097D8C(s32 arg0, s32 arg1, s32 arg2)
 
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80097E40);
+void func_80097E40(EtcCtx *arg0, s32 arg1) {
+    extern void func_800979FC();
+    extern void func_8001A464(s32, s32);
+    extern void func_80019F30(s32, void *);
+    extern void func_800190F4(s32, s32, s32, s32);
+    s32 i;
+    s32 slot = 5;
+
+    for (i = 0; i < 2; i++) {
+        s32 prev;
+        s32 var_a1;
+        s32 var_a2;
+        u8 id;
+
+        prev = 0;
+        var_a1 = i;
+        var_a2 = slot;
+        id = arg0->unk5E8[i][slot].unk0;
+        if (var_a1 != 0) {
+            goto loop;
+        }
+        if (var_a2 == 0) {
+            goto end;
+        }
+    loop:
+        if (var_a2 == 0) {
+            goto wrap;
+        }
+    dec:
+        var_a2--;
+        goto check;
+    wrap:
+        var_a1--;
+        var_a2 = 4;
+    check:
+        if (id == arg0->unk5E8[var_a1][var_a2].unk0) {
+            prev = arg0->unk5E8[var_a1][var_a2].unk2A + 1;
+        }
+        if (var_a1 != 0) {
+            goto loop;
+        }
+        if (var_a2 != 0) {
+            goto dec;
+        }
+    end:
+        if (prev != 0) {
+            arg0->unk5E8[i][slot].unk2A = prev - 1;
+            continue;
+        }
+        if (i != 0 && arg0->unk5E8[1][slot].unk0 == arg0->unk5E8[0][slot].unk0) {
+            arg0->unk5E8[i][slot].unk2A = 10;
+            continue;
+        }
+        {
+            u8 c = arg0->unk5E8[i][slot].unk0;
+            s32 id_val = c + 0x10D;
+            arg0->unk5E8[i][slot].unk2A = i + 10;
+            if (c == 0x5C) {
+                func_8001A464(0x174, Etc_GetVramAddr(arg0->unk5E8[i][slot].unk2A));
+                ((u8 *)arg0)[0xD77] = i;
+                ((u8 *)arg0)[0xD78] = slot;
+                func_80019F30(0x174, func_800979FC);
+            }
+            func_8001A464(id_val, Etc_GetVramAddr(arg0->unk5E8[i][slot].unk2A));
+            func_80019F30(id_val, 0);
+        }
+    }
+    func_800190F4(0xFF, arg1, 0, 0);
+}
 
 void func_8009807C(EtcCtx *arg0, s32 arg1, s32 arg2) {
     extern void func_8001A49C();
