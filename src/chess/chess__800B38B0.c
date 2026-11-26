@@ -1024,7 +1024,36 @@ void func_800B8EC0(void *arg0) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B8F38);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B9020);
+s32 func_800B9020(s32 arg0, u8 *arg1, s32 arg2) {
+    extern s8 D_80100FA8[];
+    extern struct { s32 f0; u8 pad[0x30]; } D_801010B0[];
+    s32 i = 0;
+    register s32 two asm("t6") = 2;
+    register s32 offset asm("a2") = arg2 * 2;
+    register u8 *p asm("a2") = arg1 + offset;
+    s8 *d = D_80100FA8;
+    u32 x0 = p[0x601];
+    u32 y0 = p[0x602];
+    s32 board = D_801010B0[arg1[9]].f0;
+    u32 x;
+    s32 y;
+    do {
+        x = x0 + d[0];
+        y = y0 + d[1];
+        if (x < 13 && y >= 0 && y < 13) {
+            if (((*(s32 *)(y * 4 + (x * 0x34 + board)) & 0x3F) >= 2) &&
+                (arg1 + x * 13 + y)[0x630] == two) {
+                p[0x601] = x;
+                p[0x602] = y;
+                goto done;
+            }
+        }
+        i++;
+        d += 2;
+    } while (i < 4);
+done:
+    return i;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B90FC);
 
