@@ -41,7 +41,24 @@ typedef struct {
     u8 rest[0x1C];
 } SpuCommonAttrLocal;
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003C808__8003CE14", func_8003CE14);
+void func_8003CE14(s16 arg0) {
+    extern SndChan D_800944B8[];
+    extern s32 D_80078C84;
+    SndChan *base;
+    SndChan *c;
+    if (arg0 != -1) {
+        base = D_800944B8;
+        c = &base[arg0];
+        if (c->prog != -1) {
+            D_80078C84 = 1;
+            c->prog = -1;
+            c->state = 0;
+            c->vol2 = 0x7F;
+            c->vol1 = 0x7F;
+            D_80078C84 = 0;
+        }
+    }
+}
 
 void func_8003CE88(s16 arg0, u16 arg1, u16 arg2) {
     extern SndVoice D_800944B8[];
