@@ -81,7 +81,31 @@ void func_800C48DC(u8 *s2) {
     *(s16 *)(s2 + 0x4E) = temp4e - 2;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C23A8__800C28A8__800C4600__800C471C__800C48DC", func_800C4B40);
+u8 *func_800C4B40(void *arg0, u8 *arg1, s32 arg2, s32 arg3) {
+    extern void func_8009CA60();
+    extern void func_80034AB0();
+    extern u8 *func_80015B3C();
+    extern void func_80015EF8();
+    extern void func_800161C4();
+    extern s32 func_80019F30();
+    extern void func_80015CD0();
+    s32 i;
+    u8 *o;
+
+    func_8009CA60(1);
+    func_80034AB0(0x800C);
+    for (i = 0; i < 10; i++) {
+        o = func_80015B3C(func_800C48DC, func_800161C4, 5);
+        func_80015EF8(o);
+        *(s32 *)(o + 0x7C) = arg2;
+        *(s32 *)(o + 0x80) = arg3;
+        *(s32 *)(o + 0x84) = i + 1;
+        *(u8 **)(o + 0x40) = arg1;
+        *(u32 *)(o + 0x38) |= 1;
+        func_80015CD0(o + 0x14, func_80019F30(0x70013, 0x59), 2);
+    }
+    return o;
+}
 
 struct Obj_800C4C18 {
     u8 pad0[0x38];
