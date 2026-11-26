@@ -486,7 +486,174 @@ void func_800CD6E0(s32 a0, s32 a1) {
     }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800CC1FC", func_800CD9F4);
+void func_800CD9F4(s32 a0, s32 a1) {
+    typedef struct {
+        u8 pad0[0x10];
+        u8 *unk10;
+        u8 pad14[0x1C - 0x14];
+    } S_80069EC4;
+    extern S_80069EC4 D_80069EC4[][26];
+    extern struct { u8 pad[0x18]; u32 unk18; u32 unk1C; u32 unk20; u8 pad24[0x18]; } D_80063940[];
+    extern u8 D_80091618[];
+    extern u8 D_800EF364[], D_80100F38[];
+    extern u16 D_800F1A68[];
+    extern struct { u8 pad[3]; u8 unk3; u8 pad4; } D_800F07D4[];
+    extern s16 D_80078C20[], D_800F1A64[];
+    s32 side, kind;
+    s32 x;
+    s32 y;
+    u8 *base;
+    register u32 idx asm("a0");
+    u32 map;
+    u32 monster;
+    u32 tableidx;
+    u8 *p;
+    register u8 *delta asm("v1");
+    register u8 *q asm("a0");
+    u8 *e;
+    register u16 *coord asm("v1");
+    S_80069EC4 *entry;
+    u16 state;
+    s32 offset, dist;
+    u32 direcao;
+    register u8 *mapbase asm("v0");
+    register u8 *tile asm("v1");
+    u8 *modelbase;
+    register u8 *dados asm("v1");
+
+    if (a0 == 1) side = *D_80078C20;
+    else side = 1 - *D_80078C20;
+    kind = 4;
+    if (a0 == 1) kind = 1;
+    idx = func_800B1260(a0) & 0xFFFF;
+    e = D_80091618 + idx * 0x1A8;
+    p = D_80100F38 + idx * 0x79C;
+    map = *(u16 *)(e + 0x10);
+    monster = *(u16 *)e;
+    switch (a1) {
+    case 0:
+        x = *(s32 *)(e + 0x44) - 1;
+        y = *(s32 *)(e + 0x48) - 1;
+        break;
+    case 1:
+        x = *(s32 *)(e + 0x54) - 1;
+        y = *(s32 *)(e + 0x58) - 1;
+        break;
+    default: return;
+    }
+    base = D_80091618;
+    if (*(u16 *)(base + idx * 0x1A8 + 0x90) != 0) {
+        idx = func_800B12D8(a0) & 0xFFFF;
+        e = base + idx * 0x1A8;
+        map = *(u16 *)(e + 0x10);
+        if (a0 == 1) side = 1 - *D_80078C20;
+        else side = *D_80078C20;
+        kind = 1;
+        if (a0 == 1) kind = 4;
+    }
+    {
+        register u32 speed asm("v0") = 0x20;
+        *(u16 *)(p + 0x1E0) = speed;
+    }
+    mapbase = D_800EF364;
+    tile = map * 64 + mapbase;
+    q = (u8 *)((x * 8 + (u32)tile) + y);
+    modelbase = (u8 *)D_80069EC4;
+    entry = (S_80069EC4 *)(kind * 0x1C + side * 0x2D8 + modelbase);
+    *(u16 *)(p + 0x1DC) = 0;
+    *(u16 *)(p + 0x1DE) = 0;
+    coord = (u16 *)(entry->unk10 + *q * 8);
+    *(u16 *)(p + 0x1E4) = coord[0];
+    *(u16 *)(p + 0x1E6) = coord[1];
+    *(u16 *)(p + 0x1E8) = coord[2] - 5;
+    state = *(u16 *)(p + 0x2C2);
+    switch (a1) {
+    case 0:
+        if ((u32)state - 4 < 2) {
+            dados = (u8 *)D_80063940;
+            direcao = *(u32 *)(dados + monster * 0x3C + 0x18) >> 17;
+        } else {
+            dados = (u8 *)D_80063940;
+            direcao = *(u32 *)(dados + monster * 0x3C + 0x18) >> 14;
+        }
+        switch (direcao & 7) {
+        case 1: offset = -8; break;
+        case 7: offset = 8; break;
+        default: offset = 0; break;
+        }
+        *(u16 *)(p + 0x1E4) += offset;
+        *(u16 *)(p + 0x1E6) += 16;
+        break;
+    case 1:
+        if ((u32)state - 10 < 3) {
+            u16 *tabela = D_800F1A68;
+            s32 phase;
+            tableidx = D_80063940[monster].unk20 >> 15;
+            tableidx &= 15;
+            phase = ((s16)state - 10) * 3;
+            delta = (u8 *)&tabela[tableidx * 9 + phase];
+            *(u16 *)(p + 0x1E4) += *(u16 *)(delta + 0);
+            *(u16 *)(p + 0x1E6) += *(u16 *)(delta + 2);
+            *(u16 *)(p + 0x1E8) += *(u16 *)(delta + 4);
+        } else if ((s16)state == 14) {
+            tableidx = D_80063940[monster].unk20 >> 15;
+            tableidx &= 15;
+            *(u16 *)(p + 0x1E6) += D_800F07D4[tableidx].unk3;
+        }
+        if ((u32)state - 9 < 2)
+            *(u16 *)(p + 0x1E6) += 2;
+        break;
+    }
+    dist = (*(s16 *)(p + 0x1E4) + *(s16 *)(p + 0x1DC)) *
+           (*(s16 *)(p + 0x1E4) - *(s16 *)(p + 0x1DC));
+    *(u16 *)(p + 0x22A) = 0;
+    *(s32 *)(p + 0x22C) = dist;
+    *(s32 *)(p + 0x22C) = dist / (*(s16 *)(p + 0x1E6) - *(s16 *)(p + 0x1DE));
+    switch (a1) {
+    case 0: goto clear_flag;
+    case 1:
+        switch ((s16)(state - 8)) {
+        case 0: case 1: case 3: case 5: case 6:
+            *(u32 *)(p + 0x798) |= 0x20;
+            break;
+        default:
+        clear_flag:
+            *(u32 *)(p + 0x798) &= ~0x20;
+            break;
+        }
+        break;
+    default: return;
+    }
+    *(s16 *)(p + 0x224) = *(u16 *)(p + 0x1E6) - *(u16 *)(p + 0x1DE);
+    if (*(s16 *)(p + 0x224) < 0) {
+        s32 step = *(s16 *)(p + 0x224);
+        *(s16 *)(p + 0x224) = -step;
+        if (*(s16 *)(p + 0x224) <= 32) *(s16 *)(p + 0x226) = 1;
+        else if (*(s16 *)(p + 0x224) <= 128) *(s16 *)(p + 0x226) = 2;
+        else *(s16 *)(p + 0x226) = 3;
+        *(s16 *)(p + 0x224) /= *(s16 *)(p + 0x226);
+        {
+            s32 d = *(s16 *)(p + 0x226);
+            *(s16 *)(p + 0x226) = -d;
+        }
+    } else {
+        if (*(s16 *)(p + 0x224) <= 32) *(s16 *)(p + 0x226) = 1;
+        else if (*(s16 *)(p + 0x224) <= 128) *(s16 *)(p + 0x226) = 2;
+        else *(s16 *)(p + 0x226) = 3;
+        *(s16 *)(p + 0x224) /= *(s16 *)(p + 0x226);
+    }
+    D_800F1A64[1 - a0] = *(u16 *)(p + 0x224);
+    switch (a1) {
+    case 0:
+        *(s32 *)(p + 0x21C) = *(s32 *)(p + (s16)state * 4 + 0x230);
+        break;
+    case 1: {
+        s32 off = (s16)state * 4;
+        *(s32 *)(p + 0x21C) = *(s32 *)(p + off + 0x258);
+        break;
+    }
+    }
+}
 
 void func_800CDFDC(s32 arg0) {
     extern u8 D_80100F38[];
