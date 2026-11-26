@@ -111,7 +111,37 @@ u8 func_800D7388(u8 *arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74", func_800D741C);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74", func_800D76D8);
+u8 func_800D76D8(u8 arg0, s32 arg1) {
+    typedef struct {
+        u8 pad0[0x10];
+        u32 pad10 : 15;
+        u32 a : 2;
+        u32 b : 4;
+        u32 pad10_hi : 11;
+        u8 pad14[0x58 - 0x14];
+    } D6B2A4_B;
+    extern D63940_t D_80063940[];
+    extern D6B2A4_B D_8006B2A4[];
+    extern u8 D_80085428[];
+    extern u8 D_80119658[];
+    extern u8 D_80119659[];
+    D63940_t *data = D_80063940;
+    u8 *base = D_80085428;
+    u8 *p = base + (((arg0 & 0x7F) - 1) * 0x7C + ((arg0 & 0xFF) >> 7) * 0x2E8);
+    D6B2A4_B *s0 = &D_8006B2A4[(data[p[0x5E8]].unk8 >> 17) & 0x7F];
+    u32 a = s0->a;
+    u32 b = s0->b;
+
+    s0->a = 0;
+    s0->b = 2;
+    func_8001A998(arg1, 0xA9, data);
+    D_80119658[0] = 0;
+    D_80119659[0] = 0;
+    func_800D6DA4(arg0, arg1);
+    s0->a = a;
+    s0->b = b;
+    return D_80119659[0];
+}
 
 u8 func_800D783C(u8 arg0, s32 arg1) {
     typedef struct {
@@ -267,6 +297,17 @@ static inline u8 is_lt_800D80F8(s32 a, s32 b) {
 }
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74", func_800D80F8);
 
+static inline s16 finish_800D82A0(s32 value, u8 arg1) {
+    extern u8 D_80085428[];
+    register s32 v asm("a3") = value;
+    register s32 cmp asm("a2") = (s16)v;
+    u8 *base2 = D_80085428;
+    u8 *p2 = base2 + (((arg1 & 0x7F) - 1) * 0x7C + ((arg1 & 0xFF) >> 7) * 0x2E8);
+    if (p2[0x5F1] < cmp) {
+        v = ((volatile u8 *)p2)[0x5F1];
+    }
+    return v - p2[0x5F6];
+}
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74", func_800D82A0);
 
 s32 func_800D8490(u8 arg0, u32 arg1) {
