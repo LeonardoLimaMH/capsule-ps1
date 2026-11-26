@@ -1,0 +1,5 @@
+func_8009A3E8
+func_800AAE64
+func_800AAE64
+func_800AC20C
+func_800AC20C
