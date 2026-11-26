@@ -40,5 +40,3 @@ void func_800ACEDC(void *arg0)
 
   }
 }
-
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800AA238__800AB78C__800AC780__800ACEDC", func_800ACF80);
