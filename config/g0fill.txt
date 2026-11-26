@@ -104,3 +104,4 @@ src/raise/raise_8009D2A8__800A9738__800A9F84.c
 src/raise/raise_8009D2A8__800A9738__800A9D6C.c
 src/raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A7C7C__800A7F20__800A8184.c
 src/slpm/sdk_libspu_s_n2p.c
+src/yuugi/sdk_libspu_s_n2p.c

@@ -1,1 +1,2 @@
 src/slpm/sdk_libspu_s_n2p.c
+src/yuugi/sdk_libspu_s_n2p.c
