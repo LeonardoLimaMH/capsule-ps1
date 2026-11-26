@@ -16,4 +16,34 @@ void func_800AB78C(void)
   }
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800AA238__800AB78C", func_800AB7D8);
+void func_800AB7D8(void)
+{
+    extern u8 D_80085428[];
+    extern u8 D_800B3D38[];
+    extern u8 D_800B3D25[];
+    extern u8 D_800B3D24[];
+    extern u8 D_800B3D44[];
+    u8 t, j, cnt;
+    s32 one;
+    u8 *flags;
+
+    cnt = 0;
+    for (t = 0; t < 2; t++, cnt = 0) {
+        for (j = 0; j < 5; j++) {
+            u8 *e = D_80085428 + (j * 124 + t * 0x2E8);
+            one = 1;
+            flags = D_800B3D38 + t * 6;
+            if (e[0x5F6] == 0 && e[0x613] != one) {
+                flags[j] = one;
+                cnt++;
+            } else {
+                flags[j] = 0;
+            }
+        }
+        if (*D_800B3D25 == one && *D_800B3D24 != t) {
+            D_800B3D38[t * 6 + 5] = *D_800B3D25;
+            cnt++;
+        }
+        *(t + D_800B3D44) = cnt;
+    }
+}
