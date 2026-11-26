@@ -129,8 +129,6 @@ u16 func_800375C0(s32 a0, s32 a1, s32 a2, s32 a3) {
     return ret;
 }
 
-#include "common.h"
-
 extern u8 D_80093790[];
 extern s32 D_8007142C[];
 extern u16 D_80078D54, D_80078D56;
@@ -277,10 +275,6 @@ extern u8 D_80078CC8[];
 extern u16 D_80078C7C;
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_80037A7C);
 
-#include "common.h"
-
-extern u8 D_80093790[];
-extern s32 D_8007142C[];
 extern u16 D_80078D54;
 extern u16 D_80078D56;
 
@@ -352,8 +346,6 @@ void func_80037E40(s32 ch) {
     }
 }
 
-extern u8 D_80093790[];
-extern s32 D_8007142C[];
 extern s32 D_80078C78;
 extern struct VoiceE D_80093D68[];
 void func_80037F64(void) {
@@ -421,7 +413,67 @@ static inline s32 func_800380C8_helper(u8 *p, u32 a) {
     }
     return r;
 }
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_800380C8);
+
+static inline s32 func_800380C8_helper_b(u8 *p, u32 a) {
+    s32 r;
+    if (a < 0x40U) {
+        register u32 diff asm("v0");
+        if (p[0x1D] == 0) {
+            return 0;
+        }
+        diff = 0x40 - a;
+        r = -((p[0x1D] << 1) * diff);
+    } else {
+        u32 d;
+        if (a == 0x40) {
+            return 0;
+        }
+        d = a - 0x3F;
+        if (p[0x1C] == 0) {
+            return 0;
+        }
+        r = (((volatile u8 *)p)[0x1C] << 1) * d;
+    }
+    return r;
+}
+
+void func_800380C8(u8 *v, s32 force) {
+    extern u8 D_800937D0[];
+    u8 *t = D_800937D0 + v[3] * 0x54;
+    s32 a3, d;
+    register s32 a1 asm("a1");
+    s32 pitch;
+    if (*(u16 *)(v + 0x26) != 0 || t[2] != 0 || *(s16 *)(t + 0x26) != 0 || t[7] != *(u16 *)(v + 0x48) || force != 0) {
+        *(u16 *)(v + 0x48) = t[7];
+        a3 = *(u16 *)(v + 0x2E) + (*(u16 *)(t + 0x1E) + *(u16 *)(t + 0x28));
+        d = func_800380C8_helper_b(v, t[7]);
+        a1 = *(u16 *)(v + 8);
+        M2C_GFIELD(D_80093790, s32, 4) = 0x10;
+        a1 = a3 + ((a1 << 7) + d);
+        pitch = a1 << 16;
+        *(s32 *)D_80093790 = D_8007142C[v[0]];
+        M2C_GFIELD(D_80093790, s16, 0x14) = func_800375C0(pitch >> 23, a1 & 0x7F, v[0x1E], v[0x1F]);
+        SpuSetVoiceAttr(D_80093790);
+    }
+    if (*(u16 *)(v + 0x26) != 0 && SpuGetKeyStatus(D_8007142C[v[0]]) == 0) {
+        *(u16 *)(v + 0x26) = 0;
+        *(u16 *)(v + 0x2E) = 0;
+    }
+}
+
+extern u8 D_800944B8[], D_800937D0[];
+
+extern s32 SpuSetKey(s32, s32), SpuGetKeyStatus(s32);
+
+extern s32 D_8007142C[], D_80078C78;
+
+extern s32 SpuSetKey(s32, s32);
+
+extern s32 SpuGetKeyStatus(s32);
+
+extern u8 D_800947E8[];
+
+extern u8 D_800947E8[], D_800944B8[];
 
 void func_80038294(OscObj *p) {
     if (p->f2 != 0) {
