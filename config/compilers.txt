@@ -70,7 +70,6 @@ src/slpm/sdk_libsnd_vm_seq.c 2.8.1-psx
 src/slpm/sdk_libspu_s_ini.c 2.8.1-psx
 src/slpm/sdk_libspu_spu.c 2.8.1-psx
 src/slpm/sdk_libspu_s_sva.c 2.8.1-psx
-src/slpm/sdk_libspu_s_n2p.c 2.8.1-psx
 src/chess/chess_800BB8BC.c 2.8.1-psx
 src/chess/chess_800C22A0.c 2.8.1-psx
 src/chess/chess_800FFE6C.c 2.8.1-psx
