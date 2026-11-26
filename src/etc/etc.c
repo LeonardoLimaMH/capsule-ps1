@@ -1,5 +1,69 @@
 #include "common.h"
 
+extern u8 D_8008ED68[];
+extern u8 D_800AD55C[];
+extern s32 func_80015D14(u8 *);
+extern void func_80016148(u8 *);
+extern void SetPolyFT4(u8 *);
+extern void SetShadeTex(u8 *, s32), SetSemiTrans(u8 *, s32);
+extern u16 GetTPage(s32, s32, s32, s32);
+extern u16 GetClut(s32, s32);
+extern s32 rcos(s32), rsin(s32);
+
+#define WORK (*(u8 **)D_8008ED68)
+#define FADE (*(s32 *)(D_8008ED68 + 0xA74))
+#define SCRW (*(s32 *)(D_8008ED68 + 0x108))
+#define SCRH (*(s32 *)(D_8008ED68 + 0x10C))
+#define O8(o) (*(u8 *)(obj + (o)))
+#define OS8(o) (*(s8 *)(obj + (o)))
+#define O16(o) (*(u16 *)(obj + (o)))
+#define OS16(o) (*(s16 *)(obj + (o)))
+#define O32(o) (*(u32 *)(obj + (o)))
+#define F16(p, o) (*(u16 *)((p) + (o)))
+#define FS16(p, o) (*(s16 *)((p) + (o)))
+
+static inline s32 Etc981_fade(u8 c) {
+    s32 f = FADE;
+    if (f == 0x1000) return c;
+    if (f < 0x1000) return (c * f) / 4096;
+    return ((0xFF - c) * (f - 0x1000)) / 4096 + c;
+}
+
+static inline u8 *Etc981_alloc_prim(void) {
+    u8 *w = WORK;
+    u8 *p = *(u8 **)(w + 0x1090);
+    u8 *next = 0;
+    if (p && !(w + 0x4594 < p + 0x28)) next = p + 0x28;
+    *(u8 **)(w + 0x1090) = next;
+    return p;
+}
+
+static inline void Etc981_add_prim(u8 *obj, u8 *p) {
+    u32 *ot = (u32 *)(WORK + OS16(0x4E) * 4 + 0x70);
+    *(u32 *)p = (*(u32 *)p & 0xFF000000) | (*ot & 0xFFFFFF);
+    ot = (u32 *)(WORK + OS16(0x4E) * 4 + 0x70);
+    *ot = (*ot & 0xFF000000) | ((u32)p & 0xFFFFFF);
+}
+
+static inline u16 Etc981_clut(u8 *obj, u16 idx, s32 cx, u16 cy) {
+    s32 x, y, v, q;
+    s32 mode = O32(0x34) & 0x7F;
+    if (mode == 0) {
+        v = idx + OS16(0x64);
+        q = v / 16;
+        x = cx + (v - q * 16) * 16;
+        y = (s16)cy + OS16(0x66) + q;
+    } else if (mode == 1) {
+        x = 0x100;
+        y = 0x1FE;
+    } else {
+        x = 0x3F0;
+        y = 0x17F;
+    }
+    return GetClut(x, y);
+}
+
+
 /* Elemento de 0x7C bytes da matriz [?][6] em +0x5E8 (0x2E8 = 6 * 0x7C). */
 typedef struct {
     u8 unk0;
@@ -127,8 +191,41 @@ s32 func_80097AF0(s32 arg0, s32 arg1, s32 arg2)
   return (*((u8 *) (new_var + 0x5E8))) + 0x10D;
 }
 
+typedef struct { s16 x, y, w, h; } Etc97BRect;
+extern void MoveImage(Etc97BRect *, s32, s32);
+static inline void Etc97B_Draw(s32 handle, s32 offset) {
+    extern u8 D_800AD55C[];
+    extern void func_80012A20(s32, s32, s32, s32);
+    register u8 *h asm("s1") = (u8 *)handle;
+    register u8 *t asm("s2") = D_800AD55C + offset;
+    register s32 i asm("s0") = 0;
+    do {
+        s32 a = *(s32 *)(h + 0xC);
+        h += 4;
+        func_80012A20(a, 3, (s16)(*(u16 *)t + (i++ << 5)), *(s16 *)(t + 2));
+    } while (i < 2);
+}
+static inline void Etc97B_Move(s32 offset) {
+    extern u8 D_800AD55C[];
+    extern void MoveImage(Etc97BRect *, s32, s32);
+    Etc97BRect r;
+    register u8 *t asm("s2") = D_800AD55C + offset;
+    register s32 x asm("s1") = 0x3C0;
+    register s32 i asm("s0") = 0;
+    do {
+        r.x = x;
+        x += 0x20;
+        r.y = 0x180;
+        r.w = 0x20;
+        r.h = 0x80;
+        MoveImage(&r, *(s16 *)t + (i++ << 5), *(s16 *)(t + 2));
+    } while (i < 2);
+}
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80097B24);
 
+static inline s32 func_80097C6C_img(u8 *arg0, s32 arg1, s32 arg2) {
+    return arg0[arg2 * 0x7C + arg1 * 0x2E8 + 0x5E8] + 0x10D;
+}
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80097C6C);
 
 s32 func_80097D8C(s32 arg0, s32 arg1, s32 arg2)
@@ -193,9 +290,120 @@ INCLUDE_ASM("asm/etc/nonmatchings/etc", func_80097E40);
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_8009807C);
 
+typedef struct { u32 hidden:1; u32 other:31; } Etc981_Flags;
+static inline s32 Etc981_fade2(u8 *global, s32 c) {
+    s32 f = *(s32 *)(global + 0xA74);
+    if (f == 0x1000) return c;
+    if (f < 0x1000) return (c * f) / 4096;
+    return ((0xFF - c) * (f - 0x1000)) / 4096 + c;
+}
+static inline u8 *Etc981_alloc2(u8 *global) {
+    u8 *w = *(u8 **)global;
+    u8 *p = *(u8 **)(w + 0x1090);
+    u8 *next = 0;
+    if (p && !(w + 0x4594 < p + 0x28)) next = p + 0x28;
+    *(u8 **)(w + 0x1090) = next;
+    return p;
+}
+static inline void Etc981_add2(u8 *global, u8 *obj, u8 *p) {
+    u32 *ot = (u32 *)(*(u8 **)global + OS16(0x4E) * 4 + 0x70);
+    *(u32 *)p = (*(u32 *)p & 0xFF000000) | (*ot & 0xFFFFFF);
+    ot = (u32 *)(*(u8 **)global + OS16(0x4E) * 4 + 0x70);
+    *ot = (*ot & 0xFF000000) | ((u32)p & 0xFFFFFF);
+}
+typedef struct {
+    u8 *work;
+    u8 pad4[0x104];
+    s32 scrW;
+    s32 scrH;
+    u8 pad110[0x964];
+    s32 fade;
+} Ed981_t;
+#define ED981 ((Ed981_t *)D_8008ED68)
+static inline s32 Etc981_fade3(s32 c) {
+    s32 f = ED981->fade;
+    if (f == 0x1000) return c;
+    if (f < 0x1000) return (c * f) / 4096;
+    return ((0xFF - c) * (f - 0x1000)) / 4096 + c;
+}
+static inline u8 *Etc981_alloc3(void) {
+    u8 *w = ED981->work;
+    u8 *p = *(u8 **)(w + 0x1090);
+    u8 *next = 0;
+    if (p && !(w + 0x4594 < p + 0x28)) next = p + 0x28;
+    *(u8 **)(w + 0x1090) = next;
+    return p;
+}
+static inline void Etc981_add3(u8 *obj, u8 *p) {
+    u32 *ot = (u32 *)(ED981->work + OS16(0x4E) * 4 + 0x70);
+    *(u32 *)p = (*(u32 *)p & 0xFF000000) | (*ot & 0xFFFFFF);
+    ot = (u32 *)(ED981->work + OS16(0x4E) * 4 + 0x70);
+    *ot = (*ot & 0xFF000000) | ((u32)p & 0xFFFFFF);
+}
 INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800981F0);
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc", func_800991AC);
+void func_800991AC(u8 *arg0) {
+    extern u8 D_80085A0D[];
+    extern void func_800A4964(u8 *);
+    extern s32 func_800372B4();
+    extern s32 func_80020304(s32);
+    extern s32 func_80019F30(s32, s32);
+    extern void func_80015CD0(void *, s32, s32);
+
+    u8 *s0 = arg0;
+    u32 s1 = *D_80085A0D;
+    register s32 v1 asm("v1");
+    register s32 temp_v0 asm("v0");
+    register s32 a0 asm("a0");
+    s32 a1;
+
+    func_800A4964(arg0);
+
+    v1 = 1;
+    if ((*(u32 *)(s0 + 0x38) & 1) == v1) {
+        *(u32 *)(s0 + 0x3C) = 0;
+        return;
+    }
+
+    if (*(s32 *)(s0 + 0x3C) == 0) {
+        *(s16 *)(s0 + 0x24) = -1;
+    }
+    *(u32 *)(s0 + 0x3C) = v1;
+
+    if ((*(u32 *)(s0 + 0x34) & 0x7F) == 0) {
+        s32 ret = func_800372B4();
+        a1 = 4;
+        if (ret < 0x17D) {
+            a1 = 3;
+            if (ret < 0xBF) {
+                a1 = 1;
+                if (ret > 0) {
+                    a1 = 2;
+                }
+            }
+        }
+        temp_v0 = s1 + 0x15;
+        a0 = 0x60000;
+        a0 |= temp_v0;
+    } else {
+        s32 temp;
+        if (*(s16 *)(s0 + 0x24) >= 0) {
+            return;
+        }
+        if (func_80020304(500) < 5) {
+            temp_v0 = s1 + 0x15;
+            temp = func_80019F30(temp_v0 | 0x70000, 0);
+            func_80015CD0(s0 + 0x14, temp, 1);
+            return;
+        }
+        temp_v0 = s1 + 0x15;
+        a0 = 0x60000;
+        a0 |= temp_v0;
+        a1 = 5;
+    }
+
+    *(s32 *)(s0 + 0x18) = func_80019F30(a0, a1);
+}
 
 u8 *func_800992CC(u8 *arg0, u32 arg1) {
     extern void func_800991AC();
