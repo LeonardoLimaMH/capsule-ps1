@@ -7,7 +7,7 @@ consultados, mas nenhum código deles foi copiado.
 
 | Projeto | Licença | Revisão usada | Texto da licença |
 |---|---|---|---|
-| [sozud/psy-q-decomp](https://github.com/sozud/psy-q-decomp) | MIT | `6edf9b2` | [sozud_psy-q-decomp.LICENSE.txt](sozud_psy-q-decomp.LICENSE.txt) |
+| [sozud/psy-q-decomp](https://github.com/sozud/psy-q-decomp) | MIT | `6edf9b2`, `a3f7da2` (tools/sdk_seed.py) | [sozud_psy-q-decomp.LICENSE.txt](sozud_psy-q-decomp.LICENSE.txt) |
 | [Fancy2209/psyz](https://github.com/Fancy2209/psyz) | MIT | `72fb5e7` | [Fancy2209_psyz.LICENSE.txt](Fancy2209_psyz.LICENSE.txt) |
 | [ser-pounce/rood-reverse](https://github.com/ser-pounce/rood-reverse) | CC0-1.0 | `8bd7908` | [ser-pounce_rood-reverse.LICENSE.txt](ser-pounce_rood-reverse.LICENSE.txt) |
 | [celophi/lom-decomp](https://github.com/celophi/lom-decomp) | MIT | `071ac1b` | [celophi_lom-decomp.LICENSE.txt](celophi_lom-decomp.LICENSE.txt) |

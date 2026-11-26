@@ -24,6 +24,8 @@ cc1_for      = /opt/gcc-$(or $(shell awk '$$1=="$(1)"{print $$2}' config/compile
 MASPSX      := $(PYTHON) tools/psx_as.py
 # perfil das bibliotecas PsyQ (config/g0fill.txt): -G0 + delay slot do ASPSX antigo
 g0fill_for   = $(shell grep -qx '$(1)' config/g0fill.txt 2>/dev/null && echo 1)
+# bibliotecas da PsyQ 4.0 (config/sdk_o3.txt): -O3 -funsigned-char, como o build da Sony
+sdkflags_for = $(shell grep -qx '$(1)' config/sdk_o3.txt 2>/dev/null && echo -O3 -funsigned-char)
 spfill_for   = $(shell grep -qx '$(1)' config/spfill.txt 2>/dev/null && echo --sp)
 MASPSX_NOAS := --aspsx-version=2.79 --expand-div --use-comm-section --dont-force-G0
 MASPSX_FLAGS:= --aspsx-version=2.79 --expand-div --use-comm-section --dont-force-G0 --run-assembler --gnu-as-path $(AS) \
@@ -78,11 +80,11 @@ $(BUILD_DIR)/%.ld: config/%.yaml
 # (src/<alvo>/<arq>.c -> asm/<alvo>/nonmatchings/<arq>/*.s)
 C_ASM_DEPS = $$(wildcard asm/$$(dir $$*)nonmatchings/$$(notdir $$*)/*.s)
 
-$(BUILD_DIR)/src/%.c.o: src/%.c $(C_ASM_DEPS) include/macro.inc $$(wildcard include/*.h) $$(wildcard config/compilers.txt) $$(wildcard config/g0fill.txt) $$(wildcard config/spfill.txt) $(wildcard config/rawdiv.*.txt) $(wildcard config/destload.*.txt) tools/aspsx_fill.py tools/psx_as.py
+$(BUILD_DIR)/src/%.c.o: src/%.c $(C_ASM_DEPS) include/macro.inc $$(wildcard include/*.h) $$(wildcard config/compilers.txt) $$(wildcard config/g0fill.txt) $$(wildcard config/sdk_o3.txt) $$(wildcard config/spfill.txt) $(wildcard config/rawdiv.*.txt) $(wildcard config/destload.*.txt) tools/aspsx_fill.py tools/psx_as.py
 	@mkdir -p $(dir $@)
 	$(if $(call g0fill_for,$<),\
-	  $(CPP) $(CPP_FLAGS) $< | $(call cc1_for,$<) $(subst -G8,-G0,$(CC_FLAGS)) | $(MASPSX) --target $(firstword $(subst /, ,$*)) $(MASPSX_NOAS) | $(PYTHON) tools/aspsx_fill.py $(call spfill_for,$<) | $(AS) $(AS_FLAGS) -o $@,\
-	  $(CPP) $(CPP_FLAGS) $< | $(call cc1_for,$<) $(CC_FLAGS) | $(MASPSX) --target $(firstword $(subst /, ,$*)) $(MASPSX_FLAGS) -o $@)
+	  $(CPP) $(CPP_FLAGS) $< | $(call cc1_for,$<) $(subst -G8,-G0,$(CC_FLAGS)) $(call sdkflags_for,$<) | $(MASPSX) --target $(firstword $(subst /, ,$*)) $(MASPSX_NOAS) | $(PYTHON) tools/aspsx_fill.py $(call spfill_for,$<) | $(AS) $(AS_FLAGS) -o $@,\
+	  $(CPP) $(CPP_FLAGS) $< | $(call cc1_for,$<) $(CC_FLAGS) $(call sdkflags_for,$<) | $(MASPSX) --target $(firstword $(subst /, ,$*)) $(MASPSX_FLAGS) -o $@)
 
 $(BUILD_DIR)/%.s.o: %.s include/macro.inc
 	@mkdir -p $(dir $@)
