@@ -1,0 +1,18 @@
+"""Roda na distro do app (decomp-wtf), lido pelo stdin: python3 - < db_matched.py
+Imprime em JSON as funções casadas no banco do app (alvo, símbolo, C casado) e quantos claims estão ativos."""
+import json
+import os
+import sqlite3
+
+db = sqlite3.connect(f"file:{os.path.expanduser('~')}/Decomp/.decomp/decomp.db?mode=ro", uri=True)
+pid = db.execute("select id from projects where slug='capsule-ps1'").fetchone()[0]
+rows = []
+for name, unit, meta, src in db.execute(
+        "select name, unit, meta, matched_source from functions where project_id=? and status='matched'", (pid,)):
+    if not unit:
+        continue
+    sym = json.loads(meta or "{}").get("symbol") or name.split("@")[0]
+    rows.append({"t": unit.split("/")[0], "f": sym, "src": src or ""})
+claims = db.execute("select count(*) from claims c join functions f on f.id=c.function_id where f.project_id=?",
+                    (pid,)).fetchone()[0]
+print(json.dumps({"claims": claims, "matched": rows}))

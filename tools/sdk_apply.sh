@@ -11,9 +11,9 @@ for txt in .cache/sdk_seed/*/*.txt; do
   [ -z "$file" ] && { echo "já em C: $t/$f"; continue; }
   if grep -qE '^[A-Za-z_][A-Za-z0-9_ *]*\([^;]*\)\s*\{?\s*$' "$file"; then echo "pula $t/$f: $file já tem C"; continue; fi
   cand=.cache/sdk_seed/$t/$f.c
-  python3 tools/with_helpers.py ".cache/sdk_seed/$t/$f.i" "$f" "$cand.tmp" > /dev/null || { echo "falha extração $f"; continue; }
+  python3 tools/agents/with_helpers.py ".cache/sdk_seed/$t/$f.i" "$f" "$cand.tmp" > /dev/null || { echo "falha extração $f"; continue; }
   { echo '#include "common.h"'; echo "/* $f: C de sozud/psy-q-decomp ($src), licença MIT, ver docs/terceiros/README.md */"; cat "$cand.tmp"; } > "$cand"; rm -f "$cand.tmp"
-  python3 .cache/tmp/apply_manual.py "$file" "$f" "$cand" && python3 .cache/tmp/dedupe.py "$file" > /dev/null
+  python3 tools/agents/apply_candidate.py "$file" "$f" "$cand" && python3 tools/agents/dedupe.py "$file" > /dev/null
   awk -v p="$file" '$1!=p' config/compilers.txt > /tmp/cc.txt && cat /tmp/cc.txt > config/compilers.txt
   [ "$gcc" != "2.7.2-psx" ] && echo "$file $gcc" >> config/compilers.txt
   [ "$g0" = True ] && ! grep -qx "$file" config/g0fill.txt && echo "$file" >> config/g0fill.txt
