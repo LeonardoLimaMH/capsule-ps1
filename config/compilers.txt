@@ -607,6 +607,7 @@ src/raise/raise_800E2110__800E3810__800E3A04.c 2.7.2-cdk
 src/raise/raise_800E2110__800E3810.c 2.7.2-cdk
 src/raise/raise_800E2110__800E3810__800E3A04__800E6BD8.c 2.7.2-cdk
 src/raise/raise_800E2110__800E3810__800E3A04__800E6AF4.c 2.7.2-cdk
-src/yuugi/main_8001A1DC__8001DF7C__8001E180__8001EC74.c 2.7.2-cdk
 src/yuugi/main_8001A1DC__8001DF7C__8001E180__8001EA24.c 2.7.2-cdk
 src/yuugi/main_80019F30.c 2.7.2-cdk
+src/yuugi/main_8001A1DC__8001DF7C__8001E180__8001EC74__8001EEC4.c 2.7.2-cdk
+src/yuugi/main_8001A1DC__8001DF7C__8001E180__8001EC74.c 2.7.2-cdk

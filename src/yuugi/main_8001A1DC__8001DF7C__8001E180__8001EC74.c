@@ -1,111 +1,77 @@
 #include "common.h"
 #include "yuugi.h"
 
+
+#include "ghidra.h"
+
 typedef struct {
     u8 data[0x18];
 } Unk_800861B0;
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C__8001E180__8001EC74", func_8001EC74);
+void func_8001EC74(s32 x, s32 y, s32 pal, u32 code, s32 abr, s32 ot) {
+    extern u8 D_8008ED68[], D_800637A0[];
+    extern u32 D_80078BDC;
+    extern void SetSprt(), SetSemiTrans(), func_80018610();
+    extern u16 GetClut(), GetTPage();
+    register u32 _code asm("s5") = code;
+    u8 *d = D_8008ED68;
+    u8 *base, *b_ptr, *p, *nx, *e, *slot;
+    u32 n, q, rem, col, row;
+    s32 k;
+    s16 sx = x;
+    s16 sy = y;
+    s32 rgb;
+    s32 tx;
+    u32 ty;
+    s32 ot4;
+    u32 mask;
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C__8001E180__8001EC74", func_8001EEC4);
-
-void func_8001F160(void) {
-    extern u8 D_8008ED68[];
-    u8 *b = D_8008ED68;
-    func_8001A998(b + 0x96c, 0x18);
-    *(s32 *)(b + 0x988) = 0;
-    *(s32 *)(b + 0x98c) = 0;
-    *(s16 *)(b + 0x986) = 0;
-    *(s16 *)(b + 0x984) = 0;
-    *(s16 *)(b + 0x994) = 0;
-}
-
-void func_8001F1A8(s32 x, s32 y, s32 a2, s32 a3, s32 a4, u8 *str, volatile s32 wide, u32 n, s32 a8) {
-    extern u8 D_8008ED68[];
-    s32 raw = wide;
-    u8 *s = str;
-    s32 i = 0;
-    s32 _x = x;
-    s32 _y = y;
-    register s32 _a2 asm("s5") = a2;
-    if (n != 0) {
-        s32 w = (s16)raw;
-        u8 *b = D_8008ED68;
-        s32 xa = i;
-        s32 xb = i;
-        u16 *p = (u16 *)s;
-        do {
-            s32 c;
-            if (w != 0) {
-                c = *p;
-            } else {
-                c = s[i];
-            }
-            if (c != 0 && c != 0xFFFF) {
-                if (a3 != 0) {
-                    func_8001EA24((s16)(_x + *(s32 *)(b + 0x108) / 2 + xb),
-                                  (s16)(_y + *(s32 *)(b + 0x10C) / 2), (s16)_a2, c, a4, a8);
-                } else {
-                    func_8001EC74((s16)(_x + *(s32 *)(b + 0x108) / 2 + xa),
-                                  (s16)(_y + *(s32 *)(b + 0x10C) / 2), (s16)_a2, c, a4, a8);
-                }
-            }
-            xa += 10;
-            xb += 14;
-            p++;
-        } while (++i < n);
+    if ((u16)(y + 0xA) >= 0xFB) {
+        return;
     }
-}
-
-void func_8001F35C(s32 x, s32 y, s32 z, s32 big, s32 c4, u32 val, u32 count, s32 c7) {
-    extern u8 D_8008ED68[];
-    register u32 n asm("s4") = count;
-    s32 started = 0;
-    register u32 i asm("s0") = started;
-    s32 _x = x;
-    s32 _y = y;
-    if (n != 0) {
-        u8 *b = D_8008ED68;
-        s32 zs = z << 16;
-        s32 xa = i;
-        s32 xb = i;
-        do {
-            u32 d = (val / (u32)func_8001AA44(10, n - i - 1)) % 10;
-            if (d != 0 || started || i >= n - 1) {
-                d += 0xC2;
-                started = 1;
-                if (big) func_8001EA24((s16)(_x + *(s32 *)(b + 0x108) / 2 + xb),
-                    (s16)(_y + *(s32 *)(b + 0x10C) / 2), zs >> 16, d, c4, c7);
-                else func_8001EC74((s16)(_x + *(s32 *)(b + 0x108) / 2 + xa),
-                    (s16)(_y + *(s32 *)(b + 0x10C) / 2), zs >> 16, d, c4, c7);
-            }
-            xa += 10;
-            i++;
-            xb += 14;
-        } while (i < n);
+    if ((u16)(x + 0xA) >= 0x14B) {
+        return;
     }
-}
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8001A1DC__8001DF7C__8001E180__8001EC74", func_8001F524);
-
-void func_8001F7A4(s32 x, s32 y, s32 z, s32 a3, s32 idx, s32 e6) {
-    extern u8 D_8008ED68[], D_8006D60C[];
-    register s32 _e6 asm("s7") = e6;
-    s32 _y = y;
-    s32 _z = z;
-    u8 *b = D_8008ED68;
-    u16 *p = (u16 *)(D_8006D60C + idx * 10);
-    u32 i = 0;
-    s32 off = i;
-    u16 c;
-    do {
-        c = *p;
-        if (c != 0 && c != 0xFFFF) {
-            func_8001EC74((s16)(x + *(s32 *)(b + 0x108) / 2 + off),
-                          (s16)(_y + *(s32 *)(b + 0x10C) / 2), (s16)_z, c, 0, _e6);
+    for (k = 0; k < 2; k++) {
+        if (k == 1) {
+            break;
         }
-        off += 10;
-        i++;
-        p++;
-    } while (i < 5);
+        e = D_800637A0;
+        nx = 0;
+        base = *(u8 **)d;
+        rgb = 0x80;
+        p = *(u8 **)(base + 0x1090);
+        b_ptr = base;
+        if (p != 0 && p + 0x14 <= b_ptr + 0x4594) {
+            nx = p + 0x14;
+        }
+        *(u8 **)(b_ptr + 0x1090) = nx;
+        SetSprt(p);
+        p[4] = rgb;
+        p[5] = rgb;
+        p[6] = rgb;
+        SetSemiTrans(p, abr);
+        n = D_80078BDC;
+        q = _code / (n * n);
+        rem = _code % (n * n);
+        col = _code % n;
+        row = rem / n;
+        *(s16 *)(p + 8) = sx;
+        *(s16 *)(p + 0xA) = sy;
+        e += q * 4;
+        tx = *(u16 *)e;
+        ty = e[2];
+        *(s16 *)(p + 0x10) = 0xA;
+        *(s16 *)(p + 0x12) = 0xA;
+        p[0xC] = (col & 0xFFFF) * 10 + ((tx & 0x3F) << 2);
+        p[0xD] = (row & 0xFFFF) * 10 + ty;
+        *(u16 *)(p + 0xE) = GetClut(0x3E0, (s16)pal + 0x178);
+        ot4 = ot * 4;
+        mask = 0xFFFFFF;
+        *(u32 *)p = (*(u32 *)p & 0xFF000000) | (*(u32 *)((u8 *)ot4 + (u32)*(u8 **)d + 0x70) & mask);
+        slot = (u8 *)ot4 + (u32)*(u8 **)d;
+        *(u32 *)(slot + 0x70) = (*(u32 *)(slot + 0x70) & 0xFF000000) | ((u32)p & mask);
+        func_80018610(GetTPage(0, 0, *(u16 *)e, *(u16 *)(e + 2)) & 0xFFFF, ot);
+    }
 }
+
