@@ -392,7 +392,65 @@ s32 func_800ADBD8(s32 arg0) {
     return (arg0 >> 8) & 0x1F;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444__800A8710__800ACF04", func_800ADBE4);
+void func_800ADBE4(u8 *arg0) {
+    extern u8 D_801010B0[];
+    extern u8 D_80118710[];
+    extern u8 *func_80015B3C();
+    extern void func_80015EF8();
+    extern void func_800161C4();
+    extern void func_800AD7B8();
+    extern s32 func_800ADBC4();
+    extern s32 func_800ADBCC();
+    extern s32 func_800ADBD8();
+    extern s32 func_800CA474();
+    s32 row = 0;
+    u32 *tmp = *(u32 **)(D_801010B0 + arg0[0x5D9] * 0x34);
+    s32 ret = func_800CA474();
+    u32 *line = tmp;
+    s32 col;
+    u32 *cell;
+
+    do {
+        col = 0;
+        cell = line;
+        do {
+            s32 bits = (*cell >> 6) & 0x1FFF;
+            if ((bits & 0x1F) > 3) {
+                s32 new_var;
+                s32 s0;
+                u8 *o;
+                u32 val;
+                register u8 *base asm("a3");
+                register u8 *pos asm("v0");
+                register u32 flags asm("v0");
+                new_var = func_800ADBC4(bits);
+                s0 = new_var;
+                o = func_80015B3C((void *)func_800AD7B8, (void *)func_800161C4, 5);
+                func_80015EF8(o);
+                flags = *(u32 *)(o + 0x38);
+                flags |= 1;
+                *(u32 *)(o + 0x38) = flags;
+                base = D_80118710;
+                pos = row * 13 + base;
+                val = pos[col];
+                s0 -= 4;
+                *(s32 *)(o + 0x80) = s0;
+                *(s32 *)(o + 0x7C) = val;
+                if (s0 < 3) {
+                    *(u32 *)(o + 0x30) = (*(u32 *)(o + 0x30) & ~0x1C0) | 0x40;
+                }
+                *(s16 *)(o + 0x66) = func_800ADBD8(bits);
+                *(s32 *)(o + 0x88) = ret;
+                *(s32 *)(o + 0x8C) = func_800ADBCC(bits);
+                *(u32 *)(o + 0x34) &= ~0x7F;
+            }
+            col++;
+            cell++;
+        } while (col < 13);
+        line += 13;
+        row++;
+    } while (row < 13);
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444__800A8710__800ACF04", func_800ADD70);
 
