@@ -36,6 +36,8 @@ for r in near:
     d = out / t
     d.mkdir(parents=True, exist_ok=True)
     c = d / f"{f}.c"
+    # register T x asm("v0"): o parser do decomp-permuter não aceita; ele procura sem essas fixações
+    src = re.sub(r'\s+(?:__)?asm(?:__)?\s*\(\s*"\$?\w+"\s*\)(?=\s*[=;,)])', "", src)
     c.write_text('#include "common.h"\n' + src.replace('#include "common.h"\n', ""), encoding="utf-8", newline="\n")
     print(t, f, prof.get(f"src/{t}/{main_file.name}", "2.7.2-psx"), c)
     n += 1

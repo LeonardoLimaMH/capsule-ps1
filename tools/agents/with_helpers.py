@@ -12,7 +12,8 @@ from csplit import defined, func_name, items  # noqa: E402
 
 def extract(src, fn):
     its = items(src)
-    funcs = {func_name(it): it for it in its if func_name(it)}
+    last = {func_name(it): k for k, it in enumerate(its) if func_name(it)}  # a definição repetida vale a última
+    funcs = {name: its[k] for name, k in last.items()}
     need, todo = set(), [fn]
     while todo:
         f = todo.pop()
@@ -35,7 +36,8 @@ def extract(src, fn):
                 keep.add(k)
                 code += "\n" + it
                 changed = True
-    out = [it.strip() for k, it in enumerate(its) if (func_name(it) is None and k in keep) or func_name(it) in need]
+    out = [it.strip() for k, it in enumerate(its)
+           if (func_name(it) is None and k in keep) or (func_name(it) in need and last[func_name(it)] == k)]
     return "\n\n".join(out) + "\n"
 
 
