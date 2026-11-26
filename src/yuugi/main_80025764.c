@@ -49,8 +49,6 @@ void func_80025CEC(s32 arg0, u16 arg1, u16 arg2, u16 arg3) {
     }
 }
 
-#include "common.h"
-
 void func_80025DA8(void) {
     extern M2C_UNK D_80069E4C[];
     extern u8 D_80085428[];
@@ -149,8 +147,6 @@ void func_80025FC0(s8 arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
 }
 
-#include "common.h"
-
 void func_80026020(void)
 {
   extern M2C_UNK D_80069E4C[];
@@ -191,8 +187,6 @@ void func_80026020(void)
   } *) D_80069E4C)->v = 1;
   func_800260C8(5, 5);
 }
-
-#include "common.h"
 
 void func_80026078(s32 arg0, s32 arg1, s8 arg2)
 {
@@ -502,7 +496,67 @@ static inline s32 get_cls_27C14_b(s32 *tb, Mon60_27C14 *tm, u16 id) {
     u32 f8 = tm[id].f8 >> 31;
     return tb[((tm[id].fC & 0xF) << 1) | f8];
 }
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_80025764", func_80027C14);
+s32 func_80027C14(u16 a0) {
+    typedef struct {
+        u16 f0;
+        u8 pad[0x1A6];
+    } Ent1A8;
+    extern Ent1A8 D_80091618[];
+    extern u8 D_80085428[];
+    extern Mon60_27C14 D_80063940[];
+    extern s32 D_8006B058[];
+    extern u16 D_8006B1EC[];
+    extern s32 D_80078C4C;
+    extern u8 D_80078C4F[];
+    extern s32 func_800AECC8(s32);
+
+    u16 id = D_80091618[a0].f0;
+    s32 found = 0;
+    u32 i;
+    s32 c;
+    s32 t;
+
+    if (D_80085428[0] != 0) {
+        goto ret0;
+    }
+    if (id == 0xFFFF) {
+        goto ret1;
+    }
+
+    c = get_cls_27C14_b(D_8006B058, D_80063940, id);
+
+    for (i = 0; i < 6; i++) {
+        if (i == a0) {
+            continue;
+        }
+        if (func_800AECC8(i & 0xFFFF) == -1) {
+            continue;
+        }
+        if (get_cls_27C14_b(D_8006B058, D_80063940, D_80091618[i].f0) == c) {
+            goto ret1;
+        }
+    }
+
+    t = D_80078C4C - 1;
+    i = 1;
+    if (t != 0 && !found) {
+        u32 n = t;
+        do {
+            if (D_8006B1EC[i] == c) {
+                found = 1;
+            }
+            i++;
+        } while (i <= n && !found);
+    }
+    if (found == 1) {
+        D_80078C4F[i] = 0;
+    }
+    goto ret1;
+ret0:
+    return 0;
+ret1:
+    return 1;
+}
 
 s32 func_80027E04(u16 a0) {
     extern struct {
