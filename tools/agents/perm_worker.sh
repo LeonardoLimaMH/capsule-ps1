@@ -46,22 +46,40 @@ run_remote() {  # run_remote t f p c -> 0 ok, 3 máquina ficou ocupada, outro: f
     2>> $W/perm/remote.err || { echo "$(date '+%T') $f: envio da tarefa falhou" >> $W/perm/remote.err; return 1; }
   rssh "bash ~/capsule-perm/tools/agents/remote_perm.sh $f $SECS $RJOBS" < /dev/null >> $W/perm/$f.log 2>&1
   rc=$?
-  rssh "tar -cf - -C ~/capsule-perm/.cache/permuter/$f . && rm -rf ~/capsule-perm/.cache/permuter/$f" < /dev/null \
-    | tar -xf - -C .cache/permuter/$f 2> /dev/null
+  # traz o resultado; a pasta remota só é apagada depois que a cópia daqui foi conferida (o remote_perm.sh já
+  # guardou um 0 em ~/capsule-perm/matches, que nunca é apagada)
+  local n
+  for n in 1 2 3; do
+    rssh "tar -cf - -C ~/capsule-perm/.cache/permuter/$f ." < /dev/null | tar -xf - -C .cache/permuter/$f 2> /dev/null && break
+    sleep 10
+  done
+  if [ -f .cache/permuter/$f/target.o ] && [ "$(ls -d .cache/permuter/$f/output-* 2> /dev/null | wc -l)" = \
+       "$(rssh "ls -d ~/capsule-perm/.cache/permuter/$f/output-* 2> /dev/null | wc -l" < /dev/null | tr -d '\r')" ]; then
+    rssh "rm -rf ~/capsule-perm/.cache/permuter/$f" < /dev/null
+  else
+    echo "$(date '+%T') $f: resultado não conferiu aqui; pasta mantida no remoto" >> $W/perm/remote.err
+  fi
   [ $rc = 0 ] || [ $rc = 3 ] || echo "$(date '+%T') $f: permuter remoto saiu com $rc" >> $W/perm/remote.err
   return $rc
 }
 
-evaluate() {  # evaluate t f c -> BEST (melhor pontuação); se 0, try_one
-  local t=$1 f=$2 c=$3 best
+evaluate() {  # evaluate t f c h -> BEST (melhor pontuação); se 0: guarda (banco + arquivo) e só então integra
+  local t=$1 f=$2 c=$3 h=$4 best r
   best=$(ls -d .cache/permuter/$f/output-* 2> /dev/null | sed 's/.*output-//' | sort -t- -k1,1n | head -1)
   BEST=${best%%-*}; BEST=${BEST:-sem melhora}
   [ "$BEST" = 0 ] || return 0
-  python3 $A/perm_merge.py "$c" .cache/permuter/$f/output-$best/source.c $f $W/perm/$f.match.c || return 0
+  if python3 $A/perm_merge.py "$c" .cache/permuter/$f/output-$best/source.c $f $W/perm/$f.match.c; then
+    log "$(python3 $A/permq.py match $t $f $h $W/perm/$f.match.c "$NAME")"
+  else  # sem o candidato original: guarda o C do permuter como veio
+    log "$(python3 $A/permq.py match $t $f $h .cache/permuter/$f/output-$best/source.c "$NAME")"; return 0
+  fi
   for v in "" "nogp" "nogp 2.7.2-cdk"; do
     r=$(bash $A/try_one.sh "$t" "$f" $W/perm/$f.match.c $v < /dev/null 2>&1 | grep -E "^(MATCH|falha|já)" | tail -1)
-    case "$r" in MATCH*|já*) log "$r (permuter${v:+, $v})"; return 0;; esac
+    case "$r" in MATCH*|já*)
+      python3 $A/permq.py integrated $f "$(git rev-parse --short HEAD)"
+      log "$r (permuter${v:+, $v})"; return 0;; esac
   done
+  log "$t/$f: casou no permuter mas não integrou ainda; fica no banco e o pipeline tenta de novo"
 }
 
 was() { python3 -c "import json;print(next((r['score'] for r in json.load(open('$W/near.json')) if r['f']=='$1'),'?'))" 2> /dev/null; }
@@ -81,7 +99,7 @@ while true; do
     python3 $A/permq.py done $f $h "erro: C que o permuter não lê"
     log "$t/$f: C que o permuter não lê; tarefa concluída sem resultado"
   elif [ $rc = 0 ]; then
-    evaluate $t $f "$c"
+    evaluate $t $f "$c" $h
     python3 $A/permq.py done $f $h "$BEST"
     log "$t/$f: melhor $BEST (era $(was $f))"
   else

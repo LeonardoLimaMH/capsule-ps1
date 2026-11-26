@@ -1,7 +1,8 @@
 #!/bin/bash
 # perm_workers.sh ensure|stop|status [SEGUNDOS]: um perm_worker.sh por máquina (local + cada linha de
 # .cache/agents/remotes.txt, "usuario@host"; fica fora do git). ensure sobe os que faltam (máquina nova no
-# remotes.txt entra no próximo ensure); stop derruba todos (as tarefas em andamento voltam à fila pelo lease).
+# remotes.txt entra no próximo ensure); stop espera um try_one em andamento e derruba todos (as tarefas
+# em andamento voltam à fila pelo lease).
 cd "$(dirname "$0")/../.."
 A=tools/agents; D=.cache/agents/workers
 mkdir -p $D
@@ -15,6 +16,8 @@ case "${1:-status}" in
       echo $! > "$D/$h.pid"; echo "trabalhador $h iniciado"
     done;;
   stop)
+    # espera um try_one em andamento terminar (a trava do git) para não deixar src/ pela metade
+    exec 8> .cache/agents/git.lock; flock 8
     for p in $D/*.pid; do [ -f "$p" ] || continue; kill -- -"$(cat "$p")" 2> /dev/null || kill "$(cat "$p")" 2> /dev/null; rm -f "$p"; done
     echo "trabalhadores parados";;
   status)

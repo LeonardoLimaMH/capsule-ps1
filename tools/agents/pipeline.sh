@@ -46,6 +46,11 @@ round() {
   wsl.exe -d "$DISTRO" --cd / -- python3 - < $A/db_matched.py > $W/matched.json || { log "banco do app ilegível"; return 1; }
   python3 $A/candidates.py $W/matched.json $W/tree $W/cands > $W/todo.txt
   log "agentes: $(wc -l < $W/todo.txt) casadas no app ainda em assembly no main; claims ativos: $(claims)"
+  # casamentos do permuter guardados no banco que ainda não entraram (try_one interrompido, falha de integração)
+  python3 $A/permq.py pending_matches | while read -r t f c; do
+    grep -rqE "INCLUDE_ASM\(.*, $f\)" src/$t/ || { python3 $A/permq.py integrated $f "$(git log -1 --format=%h -S "$f" -- src)"; continue; }
+    try_all "$t" "$f" "$c" && python3 $A/permq.py integrated $f "$(git rev-parse --short HEAD)"
+  done
   while read -r t f; do try_all "$t" "$f" $W/cands/$t/$f.db.c $W/cands/$t/$f.tree.c $W/cands/$t/$f.ctx.c; done < $W/todo.txt
   # gêmeas
   ./run.sh python3 tools/full_asm.py < /dev/null > /dev/null 2>&1

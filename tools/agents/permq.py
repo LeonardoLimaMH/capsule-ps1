@@ -10,6 +10,11 @@ dela no app muda (hash do candidato).
   permq.py done <f> <hash> <melhor>   # resultado entregue
   permq.py release <f> <hash>         # devolve à fila (máquina ficou ocupada)
   permq.py status
+
+Casamentos (score 0) ficam guardados antes de qualquer integração, para não se perderem:
+  permq.py match <alvo> <f> <hash> <arquivo.c> <máquina>   # grava o C que casou (tabela matches)
+  permq.py integrated <f> <commit>    # entrou no main
+  permq.py pending_matches            # "<alvo> <f> <arquivo.c>" dos que ainda não entraram
 """
 import hashlib
 import pathlib
@@ -26,7 +31,12 @@ def db():
     c = sqlite3.connect(DB, timeout=30, isolation_level=None)
     c.execute("""CREATE TABLE IF NOT EXISTS jobs(f TEXT PRIMARY KEY, t TEXT, p TEXT, c TEXT, h TEXT, prio INTEGER,
                  state TEXT, worker TEXT, lease_until REAL, tries INTEGER DEFAULT 0, best TEXT, updated REAL)""")
+    c.execute("""CREATE TABLE IF NOT EXISTS matches(f TEXT, t TEXT, h TEXT, source TEXT, path TEXT, machine TEXT,
+                 found_at REAL, integrated_at REAL, commit_id TEXT, PRIMARY KEY(f, h))""")
     return c
+
+
+MATCHES = ROOT / ".cache" / "agents" / "matches"
 
 
 def main():
@@ -73,7 +83,28 @@ def main():
         f, h = args
         c.execute("UPDATE jobs SET state='pending', worker=NULL, updated=? WHERE f=? AND h=? AND state='running'",
                   (now, f, h))
+    elif cmd == "match":
+        t, f, h, path, machine = args
+        src = pathlib.Path(path).read_text(errors="replace")
+        MATCHES.mkdir(parents=True, exist_ok=True)
+        keep = MATCHES / f"{f}.{h}.c"  # cópia em arquivo, além do banco
+        keep.write_text(src, encoding="utf-8", newline="\n")
+        c.execute("INSERT OR IGNORE INTO matches(f,t,h,source,path,machine,found_at) VALUES(?,?,?,?,?,?,?)",
+                  (f, t, h, src, str(keep.relative_to(ROOT)), machine, now))
+        print(f"casamento guardado: {keep.relative_to(ROOT)}")
+    elif cmd == "integrated":
+        f, commit = args
+        c.execute("UPDATE matches SET integrated_at=?, commit_id=? WHERE f=? AND integrated_at IS NULL", (now, commit, f))
+    elif cmd == "pending_matches":
+        for t, f, path, src in c.execute("SELECT t, f, path, source FROM matches WHERE integrated_at IS NULL ORDER BY found_at"):
+            p = ROOT / path
+            if not p.exists():  # o arquivo sumiu: o banco tem o C
+                p.parent.mkdir(parents=True, exist_ok=True)
+                p.write_text(src, encoding="utf-8", newline="\n")
+            print(t, f, path)
     elif cmd == "status":
+        for f, m, ia, cm in c.execute("SELECT f, machine, integrated_at, commit_id FROM matches ORDER BY found_at DESC LIMIT 10"):
+            print(f"  casamento: {f} (de {m}) {'integrado em ' + cm if ia else 'AINDA NÃO INTEGRADO'}")
         for state, n in c.execute("SELECT state, COUNT(*) FROM jobs GROUP BY state"):
             print(f"{state}: {n}")
         for f, w, lu in c.execute("SELECT f, worker, lease_until FROM jobs WHERE state='running'"):
