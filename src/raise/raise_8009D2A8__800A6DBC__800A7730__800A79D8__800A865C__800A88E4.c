@@ -60,21 +60,3 @@ void func_800A89E0(u16 a0, s16 a1) {
         *e = v;
     }
 }
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A865C__800A88E4", func_800A8AE0);
-
-void func_800A8C10(void) {
-
-}
-
-void func_800A8C18(void) {
-
-}
-
-void func_800A8C20(void) {
-
-}
-
-s32 func_800A8C28(void) {
-    return 0;
-}
