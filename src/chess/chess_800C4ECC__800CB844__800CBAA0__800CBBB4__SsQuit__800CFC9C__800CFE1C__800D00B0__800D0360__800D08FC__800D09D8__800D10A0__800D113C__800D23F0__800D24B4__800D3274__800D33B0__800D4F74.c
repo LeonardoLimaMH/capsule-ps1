@@ -295,7 +295,39 @@ static inline u8 is_lt_800D80F8(s32 a, s32 b) {
     }
     return 0;
 }
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74", func_800D80F8);
+u8 func_800D80F8(u32 arg0, u8 arg1) {
+    typedef struct { u8 pad[0x14]; u16 unk14; u8 pad2[0x58 - 0x16]; } D6B2A4_t;
+    extern D63940_t D_80063940[];
+    extern D6B2A4_t D_8006B2A4[];
+    extern u8 D_80085428[];
+    extern s32 func_800202A4(s32);
+    u8 *base = D_80085428;
+    u8 *p1 = base + (((arg0 & 0x7F) - 1) * 0x7C + ((arg0 & 0xFF) >> 7) * 0x2E8);
+    u8 *p2 = base + (((arg1 & 0x7F) - 1) * 0x7C + ((arg1 & 0xFF) >> 7) * 0x2E8);
+    s32 s0 = D_8006B2A4[(D_80063940[p1[0x5E8]].unk8 >> 17) & 0x7F].unk14 + (p1[0x5FA] - p2[0x5FA]) * 5;
+    s32 v = (s16)s0;
+    s32 r;
+    if (v > 0) {
+        if (v >= 0x65) {
+            s0 = 0x64;
+        }
+    } else {
+        s0 = 1;
+    }
+    r = func_800202A4(0x64);
+    {
+        register s32 t asm("s0") = s0 << 16;
+        s0 = t >> 16;
+    }
+    if (is_lt_800D80F8(r, s0)) {
+        u8 *b = D_80085428;
+        u8 *q;
+        b[0xCDE] = 1;
+        q = b + (((arg1 & 0x7F) - 1) * 0x7C + ((arg1 & 0xFF) >> 7) * 0x2E8);
+        return q[0x5F6];
+    }
+    return 1;
+}
 
 static inline s16 finish_800D82A0(s32 value, u8 arg1) {
     extern u8 D_80085428[];
