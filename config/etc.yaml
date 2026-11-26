@@ -81,6 +81,7 @@ segments:
       - [0x12A38, c, etc__800AA238]
       - [0x12A80, c, etc__800AA238__800AA280]
       - [0x12FDC, c, etc__800AA238__800AA7DC]
+      - [0x13E90, c, etc__800AA238__800AA7DC__800AB690]
       - [0x13F8C, c, etc__800AA238__800AB78C]
       - [0x140E8, c, etc__800AA238__800AB78C__800AB8E8]
       - [0x143F8, c, etc__800AA238__800AB78C__800ABBF8]
