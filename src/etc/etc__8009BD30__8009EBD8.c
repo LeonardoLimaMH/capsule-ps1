@@ -283,7 +283,149 @@ void func_8009F9DC(u8 *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__8009EBD8", func_8009FBDC);
+extern u8 D_80085428[];
+extern u16 D_8008EE44[];
+extern void (*D_800B2C2C[])(u8 *);
+extern void (*D_800B2C2C[])(u8 *);
+void func_800A4964();
+extern void (*D_800B2C2C[])(u8 *);
+void func_800A4964();
+extern void (*D_800B2C2C[])(u8 *);
+void func_800A4964();
+void func_800A4964();
+
+extern void (*D_800B2C2C[])(u8 *);
+
+void func_800A4964();
+
+void func_8009FBDC(u8 *arg0) {
+    extern s32 D_8008EDF0[];
+    extern s32 D_8008EE00[];
+    extern u16 D_8008EE48[];
+    extern s16 D_800B3B38[];
+    extern s16 D_800B3B40[];
+    extern s16 D_800B3B64[];
+    extern s32 D_800B3C08[];
+    extern void func_800220B8(u8 *);
+    extern s32 func_800220D4(u8 *, s32, s32, s32);
+    extern s32 func_8001F8B0(s32, s32);
+    extern void func_80034AB0(s32);
+    extern void func_80012544(s32);
+    extern void func_800125AC(s32);
+    extern void func_800A2B64(u8 *, s32);
+    extern void func_800A2CC8(s32, s32);
+    s32 buttons;
+
+    switch (*D_8008EE48) {
+    case 0:
+        func_800220B8(arg0);
+        if (arg0[0x5DA] == 0) {
+            *(s32 *)(arg0 + 0x14) = func_8001F8B0(arg0[0x5E5] + 8, 4);
+            func_800125AC(3);
+        } else {
+            *(s32 *)(arg0 + 0x14) = func_8001F8B0(arg0[0x5E5] + 8, 5);
+            func_800125AC(5);
+        }
+        break;
+    case 1:
+        if (++*D_800B3C08 >= 0x2D) {
+            func_80034AB0(0x13);
+            if (arg0[0x5D9] == 0xA) {
+                arg0[0x5DE] = 1;
+                arg0[0x5DF] = 2;
+            }
+            if (arg0[0x5DF] == 2) {
+                *D_800B3B40 = 1;
+            }
+            if (arg0[0x5D0] == 0 || *D_800B3B64 == 1) {
+                func_800220B8(arg0);
+                *(s32 *)(arg0 + 0x14) = func_8001F8B0(arg0[0x5E5] + 8, 2);
+                func_800125AC(4);
+            } else {
+                *D_800B3C08 = 0x3C;
+                func_800125AC(6);
+            }
+        }
+        break;
+    case 2:
+        if (arg0[0x5DA] == 0) {
+            buttons = *D_8008EE00;
+        } else {
+            buttons = *D_8008EDF0;
+        }
+        if (buttons & 0xF000) {
+            s16 *b38;
+            func_80034AB0(0x84);
+            b38 = D_800B3B38;
+            b38[4] ^= 1;
+        }
+        if (buttons & 0x830) {
+            s16 *b38;
+            func_80034AB0(0x13);
+            b38 = D_800B3B38;
+            func_800A2B64(arg0, b38[4]);
+            func_800A2CC8(0, 2);
+            b38[0] = 0;
+            b38[6] = 0;
+            b38[4] = 0;
+            goto menu;
+        } else if (buttons & 0xC0) {
+            s16 *b38;
+            func_80034AB0(0x5D);
+            b38 = D_800B3B38;
+            b38[4] = 0;
+            if (arg0[0x5D0] == 2) {
+                b38[2] = 0;
+                func_80012544(0x14);
+            } else if (arg0[0x5D0] == 1) {
+                func_80012544(0x11);
+                func_800125AC(2);
+            } else {
+                func_80012544(0x16);
+                func_800125AC(1);
+            }
+        }
+        break;
+    case 3:
+        if (func_800220D4(arg0, 1, 1, 1) != 0) {
+            func_800125AC(1);
+        }
+        break;
+    case 4:
+        if (func_800220D4(arg0, 1, 1, 1) == 0) {
+            break;
+        }
+        goto cleanup;
+    case 5:
+        if (func_800220D4(arg0, 1, 1, 1) != 0) {
+            func_800125AC(2);
+        }
+        break;
+    case 6:
+        if (--*D_800B3C08 >= 0) {
+            break;
+        }
+cleanup:
+        {
+            s16 *b38;
+            func_800A2CC8(0, 2);
+            b38 = D_800B3B38;
+            b38[6] = 0;
+            b38[4] = 0;
+            b38[0] = 0;
+menu:
+            func_80012544(arg0[0x5D0] == 0 ? 0x16 : 0x17);
+        }
+        break;
+    }
+}
+
+#define FF08_TEXT(x, y, mode, text, len, rows) \
+    func_8001F1A8(x, y, mode, 1, 0, text, 1, len, rows)
+
+extern void (*D_800B2C2C[])(u8 *);
+
+void func_800A4964();
 
 INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__8009EBD8", func_8009FF08);
 

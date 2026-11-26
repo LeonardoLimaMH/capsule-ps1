@@ -47,6 +47,8 @@ segments:
       - [0x5C, rodata]
       - [0xB0, .rodata, etc__8009BD30__8009E854]
       - [0xC4, rodata]
+      - [0xC8, .rodata, etc__8009BD30__8009EBD8]
+      - [0xE4, rodata]
       - [0x110, .rodata, etc__8009BD30__800A0824]
       - [0x14C, rodata]
       - [0x1BC, c, etc]
