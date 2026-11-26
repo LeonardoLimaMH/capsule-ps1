@@ -187,5 +187,3 @@ void func_800A150C(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 #define A1798_N(i, k) (D_800B3B38->unk10[i][k])
 #define A1798_P(i, k) (D_800B3B70[i][k])
 #define A1798_Q(i) (D_800B3B90[i])
-
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824", func_800A1798);
