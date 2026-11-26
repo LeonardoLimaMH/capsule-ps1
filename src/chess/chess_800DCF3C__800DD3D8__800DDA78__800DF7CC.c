@@ -27,6 +27,12 @@ typedef struct {
     u8 pad14[0x28];
 } S_800DD_Tab8;
 
+static inline s32 mul_800DF7CC(s32 a, s32 b) {
+    return a * b;
+}
+static inline s32 lerp_800DF7CC(s32 a, s32 b, s32 ta, s32 tb, s32 d) {
+    return (a * ta + b * tb) / d;
+}
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC", func_800DF7CC);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC", func_800DF95C);
@@ -213,7 +219,36 @@ void func_800E6828(u8 *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC", func_800E68A4);
+s32 func_800E68A4(s32 arg0, s32 arg1, u8 *arg2, s32 arg3) {
+    extern u8 D_8008ED68[];
+    extern s32 D_80119710[];
+    extern s32 D_80119714[];
+    extern s32 func_800A83E0();
+    extern s32 func_80034AB0();
+    u8 *ed = D_8008ED68;
+    switch ((s32)*(u16 *)(ed + 0xEC)) {
+    case 0:
+        arg2[0x25] = func_800A83E0(arg0, arg2, arg3);
+        arg2[0x17] = 0x88;
+        arg2[0x23] = 1;
+        *(u16 *)(ed + 0xEC) += 1;
+        D_80119714[0] = 0;
+        break;
+    case 1: {
+        s32 *t = D_80119710;
+        if (t[1] < 0x1E) break;
+        func_80034AB0(0x801C);
+        t[1] = 0;
+        *(u16 *)(ed + 0xEC) += 1;
+        break;
+    }
+    case 2:
+        if (D_80119714[0] < 0x3C) break;
+    case 99:
+        return 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC", func_800E69A8);
 
@@ -298,7 +333,50 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC", func_800EAFE0);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC", func_800EB5BC);
+void func_800EB5BC(u8 *arg0) {
+    extern void func_80013920();
+    s32 k = 0x186A0;
+    u16 sp10[4];
+    s16 v;
+    register s32 done asm("v0");
+    register s32 limit asm("v1") = 0x280000;
+    register u16 t asm("v0");
+    register u8 *p asm("a0");
+    u8 *a;
+    register u8 *b asm("v0");
+
+    p = *(u8 **)(arg0 + 0x14);
+    t = *(u16 *)(arg0 + 0x1C) + 1;
+    *(u16 *)(arg0 + 0x1C) = t;
+    done = (t << 16) > limit;
+    if (done) {
+        a = *(u8 *volatile *)(p + 0x70);
+        b = *(u8 *volatile *)(p + 0x74);
+        *(s16 *)(b + 0x54) = 0;
+        *(s16 *)(a + 0x54) = 0;
+        func_80013920(arg0);
+        return;
+    }
+    if (*(s16 *)(arg0 + 0x1E) > 0) {
+        b = *(u8 **)(p + 0x74);
+        v = *(u16 *)(b + 0x54) + 0x28;
+        p = *(u8 **)(p + 0x70);
+    } else {
+        b = *(u8 **)(p + 0x74);
+        v = *(u16 *)(b + 0x54) - 0x28;
+        p = *(u8 **)(p + 0x70);
+    }
+    *(s16 *)(b + 0x54) = v;
+    *(s16 *)(p + 0x54) = v;
+    *(s32 *)(arg0 + 0x3C) += k;
+    *(s32 *)(arg0 + 0x2C) += *(s32 *)(arg0 + 0x38);
+    *(s32 *)(arg0 + 0x34) += *(s32 *)(arg0 + 0x40);
+    *(s32 *)(arg0 + 0x30) += *(s32 *)(arg0 + 0x3C);
+    sp10[0] = *(u16 *)(arg0 + 0x2E);
+    sp10[1] = *(u16 *)(arg0 + 0x32);
+    sp10[2] = *(u16 *)(arg0 + 0x36);
+    func_800FF190(*(void **)(arg0 + 0x14), sp10, 0xA);
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC", func_800EB6CC);
 
