@@ -1,10 +1,7 @@
 #include "ghidra.h"
 #include "common.h"
-#include "ghidra.h"
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FE98C);
-
-#include "common.h"
 
 void func_800FEBF4(void *arg0) {
     extern M2C_UNK D_80069AD4[];
@@ -43,7 +40,6 @@ void func_800FEE40(s32 arg0, s32 arg1) {
     func_800FEC2C(v);
 }
 
-#include "ghidra.h"
 void func_800FEF04(undefined4 param_1,undefined4 param_2)
 
 {
@@ -173,7 +169,13 @@ static inline void lerp_pos(s16 *arg0, s16 *arg1, s32 arg2, s32 arg3, s16 *arg4)
     arg4[1] = (s16)((arg0[1] * temp_t0 + arg1[1] * arg3) / arg2);
     arg4[2] = (s16)((arg0[2] * temp_t0 + arg1[2] * arg3) / arg2);
 }
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800FE98C", func_800FF460);
+void func_800FF460(u8 *arg0, u8 *arg1, s32 arg2, s32 arg3, s16 *arg4) {
+    s16 v1[3];
+    s16 v2[3];
+    calc_pos(arg0, v1);
+    calc_pos(arg1, v2);
+    lerp_pos(v1, v2, arg2, arg3, arg4);
+}
 
 s32 func_800FF644(void) {
     extern u8 D_80085428[];
@@ -193,8 +195,6 @@ s32 func_800FF644(void) {
     }
     return sum;
 }
-
-#include "common.h"
 
 void func_800FF700(void) {
     extern M2C_UNK D_80119600[];
