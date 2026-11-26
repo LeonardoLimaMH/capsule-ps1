@@ -515,4 +515,71 @@ void func_80038348(OscObj *p) {
     }
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C", func_800383C8);
+void func_800383C8(void) {
+    typedef struct {
+        u8 pad0[0x28A];
+        s16 unk28A;
+        u8 pad28C[0x2AC - 0x28C];
+    } S944B8;
+    s32 i;
+    s32 j;
+    struct VoiceE *e;
+    u8 v;
+
+    i = 0;
+    do {
+        if (((S944B8 *)D_800944B8)[i].unk28A == 1) {
+            for (j = 0; j < 0x10; j++) {
+                OscObj *p = (OscObj *)(((j + i * 0x10) * 0x54) + D_800937D0);
+                if (p->f2 != 0) {
+                    if (p->f14 != 0) {
+                        if (p->f1e + p->f1c < p->f20) {
+                            p->f1e = p->f1e + p->f1c;
+                        } else {
+                            p->f14 = 0;
+                            p->f1e = p->f20;
+                        }
+                    } else {
+                        if (p->f1e - p->f1c > -p->f20) {
+                            p->f1e = p->f1e - p->f1c;
+                        } else {
+                            p->f14 = 1;
+                            p->f1e = -p->f20;
+                        }
+                    }
+                } else {
+                    p->f1e = 0;
+                }
+                if (p->f26 != 0) {
+                    if (p->f2e != 0) {
+                        if (p->f28 + p->f2a < p->f2c) {
+                            p->f28 = p->f28 + p->f2a;
+                        } else {
+                            p->f28 = p->f2c;
+                        }
+                    } else {
+                        if (p->f2a - p->f28 < p->f2c) {
+                            p->f28 = p->f28 - p->f2a;
+                        } else {
+                            p->f28 = -p->f2c;
+                        }
+                    }
+                }
+            }
+        }
+        i++;
+    } while (i <= 0);
+
+    j = 0;
+    if (D_80078C78 > 0) {
+        do {
+            e = &D_80093D68[j];
+            v = e->_p0[3];
+            if (v < 0x10 && ((S944B8 *)D_800944B8)[v >> 4].unk28A == 1) {
+                func_8003793C((u8 *)e);
+                func_80037704((u8 *)e);
+                func_800380C8((u8 *)e, 0);
+            }
+        } while (++j < D_80078C78);
+    }
+}
