@@ -84,7 +84,92 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0", func_800D449C);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0", func_800D46D0);
+extern u32 *D_80118C18[];
+
+s32 func_800D3274(u8 arg0, u8 *arg1, u8 *arg2);
+
+typedef struct {
+    u8 pad0[0x10];
+    u8 unk10[2][6][7];
+    u8 unk64[13][13];
+} ChessState_X46D0;
+
+typedef struct {
+    u8 *buffer;
+    u8 x;
+    u8 y;
+    u8 direction;
+    u8 distance;
+} ChessMove_X46D0;
+
+void func_800D46D0(ChessState_X46D0 *arg0, u32 arg1, ChessMove_X46D0 *arg2);
+
+static inline void chess_search_byte_D46D0(ChessState_X46D0 *arg0, u8 arg1, ChessMove_X46D0 *arg2)
+{
+    ChessMove_X46D0 next;
+    u8 x;
+    u8 y;
+    u8 *p;
+    u8 id;
+    s32 side;
+    u32 w;
+    s32 terrain;
+    u32 piece;
+    s32 delta;
+    u8 *q;
+    u8 i;
+
+    id = arg1 & 0xFF;
+    side = id >> 7;
+    p = (u8 *)arg0 + (side * 0x2A + 0x10) + ((arg1 & 0x7F) * 7 - 7);
+    x = arg2->x;
+    y = arg2->y;
+    if ((u8)func_800D3A2C(id, arg2->direction, &x, &y) != 0) {
+        return;
+    }
+    w = ((u32 (*)[13])D_80118C18[0])[x][y];
+    terrain = (w >> 6) & 0x1FFF;
+    if (terrain == 0 || terrain == 2 || terrain >= 3 || (s32)(w & 0x3F) < 2) {
+        return;
+    }
+    piece = arg0->unk64[x][y];
+    if ((u8)piece != 0) {
+        if ((u8)piece == id || ((u8)piece >> 7) != side || (piece & 0x7F) - 1 == 5) {
+            return;
+        }
+    }
+    delta = ((w >> 19) & 7) - ((((u32 (*)[13])D_80118C18[0])[arg2->x][arg2->y] >> 19) & 7);
+    if ((s8)delta > 0) {
+        arg2->distance += delta;
+        if (arg2->distance >= p[5]) {
+            return;
+        }
+    }
+    arg2->distance++;
+    q = &arg2->buffer[x * 13 + y];
+    if (*q != 0 && arg2->distance >= *q) {
+        return;
+    }
+    *q = arg2->distance;
+    if (piece != 0 || arg2->distance >= p[5]) {
+        return;
+    }
+    i = 0;
+    do {
+        next.buffer = arg2->buffer;
+        next.x = x;
+        next.y = y;
+        next.distance = arg2->distance;
+        next.direction = (arg2->direction + i + 3) % 4;
+        func_800D46D0(arg0, arg1 & 0xFF, &next);
+        i++;
+    } while (i < 3);
+}
+
+void func_800D46D0(ChessState_X46D0 *arg0, u32 arg1, ChessMove_X46D0 *arg2)
+{
+    chess_search_byte_D46D0(arg0, arg1, arg2);
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0", func_800D497C);
 
