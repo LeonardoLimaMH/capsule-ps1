@@ -2,7 +2,80 @@
 #include "common.h"
 #include "ghidra.h"
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B38B0);
+void func_800B38B0(u8 *arg0) {
+    extern u8 *func_800A8FFC(u8 *);
+    extern u8 *func_800A8E84(u8 *);
+    extern s32 func_800CAF74(u8 *);
+    u8 *initial = arg0 + 0x5D0;
+    u8 *base;
+    s32 team = initial[0x5FA];
+    s32 piece = (initial + team)[0x5FB];
+    u8 *unit = initial + (team * 0x2E8 + 0x18) + piece * 0x7C;
+    s32 i;
+    s32 enabled;
+    s32 selected;
+    u8 *p;
+
+    if (unit[0x28] == 0) {
+        i = 0;
+        base = initial;
+        do {
+            enabled = 1;
+            selected = (arg0 + arg0[0xBCA])[0xBCB];
+            p = func_800A8FFC(base);
+            switch (i) {
+            case 0:
+                if (base[0x60C] != 0) enabled = 0;
+                break;
+            case 1:
+                if (selected == 5 || base[0x60D] != 0) {
+                    enabled = 0;
+                } else if (func_800CAF74(arg0 + 0xC00) == 0) {
+                    enabled = 0;
+                }
+                break;
+            case 3:
+                if (p[0] != 0x17 || p[0x29] == 0) {
+                    if ((*(u32 *)(base + 0x60C) & 0xFF0000FF) == 0) {
+                        enabled = 0;
+                    }
+                }
+                break;
+            case 2:
+                if (selected == 5 || base[0x60E] != 0 ||
+                    (*(u32 *)(func_800A8E84(base) + 0x10) & 3) == 2 ||
+                    base[0x60C] != 0) {
+                    enabled = 0;
+                } else if (((s8 *)p)[0x13] == 0) {
+                    enabled = 0;
+                }
+                break;
+            }
+            (arg0 + i)[0xBF0] = enabled;
+            i++;
+        } while (i < 4);
+        i = 0;
+        goto search;
+    } else {
+        u8 *out;
+        i = 3;
+        out = arg0 + 3;
+        do {
+            out[0xBF0] = 0;
+            i--;
+            out--;
+        } while (i >= 0);
+        i = 4;
+found:
+        arg0[0xBF5] = i;
+        return;
+    }
+search:
+    do {
+        if ((arg0 + i)[0xBF0] != 0) goto found;
+        i++;
+    } while (i < 4);
+}
 
 void func_800B3AE4(u8 *arg0) {
     typedef struct {
@@ -95,7 +168,52 @@ s32 func_800B3C4C(u8 *arg0, s32 arg1) {
     return r;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B3D24);
+void func_800B3D24(arg0)
+u8 *arg0;
+{
+    extern void func_800B4304(u8 *);
+    extern void func_800161C4(void *);
+    extern u8 *func_80015B3C();
+    extern s32 func_80019F30();
+    u8 *p;
+    u32 i;
+
+    if (func_800C9414() == 0) {
+        arg0[0xBE0] = 2;
+        func_800B38B0(arg0);
+        p = func_80015B3C(func_800B4304, func_800161C4, 5);
+        func_80015EF8(p);
+        *(s32 *)(p + 0x18) = func_80019F30(0x60012, 0x1B);
+        *(s16 *)(p + 0x46) = -0x90;
+        *(s16 *)(p + 0x4A) = -0x68;
+        *(u16 *)(p + 0x4E) = 4;
+        *(u32 *)(p + 0x34) = (*(u32 *)(p + 0x34) & ~0x7F) | 10;
+        i = 0;
+        if (arg0[0xBCA] != 0) {
+            *(u16 *)(p + 0x46) += 0xE0;
+        }
+        do {
+            p = func_80015B3C(func_800B4304, func_800161C4, 5);
+            func_80015EF8(p);
+            *(s32 *)(p + 0x18) = func_80019F30(0x60012, i + 0x20);
+            *(s16 *)(p + 0x46) = -0x90;
+            *(s16 *)(p + 0x4A) = -0x68;
+            *(u16 *)(p + 0x4E) = 3;
+            *(u32 *)(p + 0x34) = (*(u32 *)(p + 0x34) & ~0x7F) | (i & 0x7F);
+            if (arg0[0xBCA] != 0) {
+                *(u16 *)(p + 0x46) += 0xE0;
+            }
+            if ((arg0 + i)[0xBF0] == 0) {
+                p[0x5A] = 0x40;
+                p[0x59] = 0x40;
+                p[0x58] = 0x40;
+            }
+            i++;
+        } while ((s32)i < 4);
+        arg0[0xBE9] = 1;
+        func_800125D8();
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B3EC4);
 
