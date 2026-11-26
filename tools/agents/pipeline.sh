@@ -67,8 +67,10 @@ round() {
       log "$(python3 $A/permq.py add $W/perm/all.txt)"
     bash $A/perm_workers.sh ensure "$PS" | while read -r l; do log "$l"; done
   fi
-  local n; n=$(git rev-list --count "$head0"..HEAD)
-  log "rodada: $n commit(s) novos"
+  # conta tudo que ainda não está no GitHub (inclui os commits dos trabalhadores do permuter entre rodadas)
+  git fetch -q origin 2> /dev/null || true
+  local n; n=$(git rev-list --count origin/main..HEAD 2> /dev/null || git rev-list --count "$head0"..HEAD)
+  log "rodada: $n commit(s) ainda não publicados"
   [ "$n" -gt 0 ] || return 0
   [ $PUBLISH = 1 ] && bash $A/publish.sh "$n função(ões) integradas pelo pipeline dos agentes"
   if [ $SYNC = 1 ]; then
