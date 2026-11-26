@@ -496,7 +496,6 @@ void func_800A6D68(void) {
     }
 }
 
-
 typedef struct {
     u8 p0[0x8];
     u32 f8;
@@ -802,4 +801,111 @@ typedef struct {
     u8 padD70[0xC];
     u8 unkD7C[1];
 } Save85428;
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A7EB0);
+void func_800A7EB0(void) {
+    typedef struct {
+        u16 id;
+        u8 pad2[6];
+        u8 name[8];
+        u16 unk10;
+        u8 pad12[0x78];
+        u16 unk8A;
+        u16 unk8C;
+        u8 pad8E[0x26];
+        u16 stats[5];
+        u8 padBE[0xDE];
+        u16 unk19C;
+        u16 unk19E;
+        u16 unk1A0;
+        u8 pad1A2[6];
+    } Ent1A8_A7EB0;
+    typedef struct {
+        u8 pad0[0x14];
+        u32 pad14_0 : 5;
+        u32 seen : 1;
+        u32 pad14_6 : 26;
+        u8 pad18[0x24];
+    } Mon63940_A7EB0;
+    typedef struct {
+        u16 unk0;
+        u16 pad2;
+        s32 unk4;
+    } S6AF80_A7EB0;
+    typedef struct {
+        u8 pad0[8];
+        s32 unk8[5];
+        s32 unk1C[5];
+        u16 unk30[11];
+        u16 pad46;
+        s32 unk48[11];
+        u16 unk74[11];
+    } S6AFCC_A7EB0;
+    extern Ent1A8_A7EB0 D_80091618[];
+    extern Save85428 D_80085428;
+    extern Mon63940_A7EB0 D_80063940[];
+    extern S6AF80_A7EB0 D_8006AF80[];
+    extern S6AFCC_A7EB0 D_8006AFCC;
+    extern s32 D_800B3C20[];
+    extern void func_80027C14(u16);
+    extern void func_80027E04(u16);
+    extern void func_80026514(u16);
+
+    Save85428 *s = &D_80085428;
+    u32 n = s->count;
+    s32 j;
+    u16 *src;
+    Ent1A8_A7EB0 *e;
+    s32 v;
+    s32 any;
+
+    s->recs[n].id = D_80091618[D_800B3C20[0]].id;
+    for (j = 0; j < 8; j++) {
+        s->recs[n].name[j] = D_80091618[D_800B3C20[0]].name[j];
+    }
+    src = D_80091618[D_800B3C20[0]].stats;
+    for (j = 0; j < 5; ) {
+        s->recs[n].b[j++] = *src;
+        src++;
+    }
+    s->count++;
+    if (D_80063940[D_80091618[D_800B3C20[0]].id].seen != 1) {
+        D_80063940[D_80091618[D_800B3C20[0]].id].seen = 1;
+        s->unk4++;
+    }
+    func_80027C14(D_800B3C20[0]);
+    func_80027E04(D_800B3C20[0]);
+    e = &D_80091618[D_800B3C20[0]];
+    if (e->unk8A != 0xFFFF) {
+        D_80091618[e->unk8A].unk8A = 0xFFFF;
+        D_80091618[e->unk8A].unk8C = 0;
+    }
+    func_80026514(D_800B3C20[0]);
+    v = D_800B3C20[0];
+    D_80091618[v].unk19C = 0;
+    D_80091618[v].unk19E = 0;
+    D_80091618[v].unk1A0 = 0;
+    s->unkD7C[v] = 0;
+    {
+        register u32 empty asm("a2");
+        any = 0;
+        j = 0;
+        empty = 0xFFFF;
+        for (; j < 6; j++) {
+            if (D_80091618[j].unk10 != empty) {
+                any = 1;
+            }
+        }
+    }
+    if (any == 0) {
+        D_8006AF80->unk0 = 0;
+        D_8006AF80->unk4 = 0x20D0;
+        for (j = 0; j < 5; j++) {
+            D_8006AFCC.unk8[j] = -1;
+            D_8006AFCC.unk1C[j] = 0;
+        }
+        for (j = 0; j < 11; j++) {
+            D_8006AFCC.unk30[j] = 0;
+            D_8006AFCC.unk48[j] = 0;
+            D_8006AFCC.unk74[j] = 0;
+        }
+    }
+}
