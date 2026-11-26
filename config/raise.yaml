@@ -130,6 +130,8 @@ segments:
       - [0x19DCC, c, raise_800B15CC]
       - [0x19E68, c, raise_800B15CC__800B1668]
       - [0x19F00, c, raise_800B1700]
+      - [0x1ACB8, c, raise_800B1700__800B24B8]
+      - [0x1B04C, c, raise_800B1700__800B284C]
       - [0x1CEBC, c, raise_800B46BC]
       - [0x1CF2C, c, raise_800B472C]
       - [0x1D110, c, raise_800B472C__800B4910]
