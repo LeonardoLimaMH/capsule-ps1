@@ -1,8 +1,6 @@
 #include "ghidra.h"
 #include "common.h"
 
-#include "common.h"
-
 typedef struct {
     s16 vx, vy, vz, pad;
     s16 dx, dx_pad;
@@ -52,7 +50,6 @@ static inline int mul_800EE4F4(int a, int b)
 }
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434", func_800EE4F4);
 
-#include "ghidra.h"
 void func_800EE690(undefined4 param_1,undefined4 param_2,int param_3,int param_4)
 
 {
@@ -98,4 +95,53 @@ void func_800EE690(undefined4 param_1,undefined4 param_2,int param_3,int param_4
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434", func_800EE7D4);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434", func_800EE8CC);
+static inline s32 mul_800EE8CC(s32 a, s32 b) {
+    return a * b;
+}
+
+void func_800EE8CC(u8 *arg0) {
+    extern u8 D_8008610C[];
+    s32 ten = 10;
+    s32 seventy = 0x46;
+    s32 one = 1;
+    s32 cnt;
+    s32 st;
+    s32 t;
+
+    cnt = *(s16 *)(arg0 + 0x16);
+    st = arg0[0x15];
+    cnt += 1;
+    switch (st) {
+    case 0:
+        *(s16 *)(arg0 + 0x3A) = mul_800EE8CC(cnt, 0x96) / ten;
+        if (cnt >= 10) {
+            st = one;
+            cnt = 0;
+            func_80034AB0(0x800F);
+        }
+        break;
+    case 1:
+        *(s16 *)(arg0 + 0x3C) = mul_800EE8CC(cnt, 0x640) / ten;
+        if (cnt >= 10) {
+            st = 2;
+            cnt = 0;
+            D_8008610C[0] = one;
+        }
+        break;
+    case 2:
+        t = ((seventy - cnt) * 0x7F) / seventy;
+        arg0[0x32] = t;
+        arg0[0x31] = t;
+        arg0[0x30] = t;
+        if (cnt >= 0x46) {
+            st = 3;
+            cnt = 0;
+        }
+        break;
+    case 3:
+        func_80013920(arg0);
+        return;
+    }
+    arg0[0x15] = st;
+    *(s16 *)(arg0 + 0x16) = cnt;
+}
