@@ -141,6 +141,8 @@ segments:
       - [0x2ADC0, c, main_8003742C__8003A5C0]
       - [0x2ADC8, c, main_8003742C__8003A5C8]
       - [0x2ADF8, c, main_8003A5F8]
+      - [0x2BFB4, c, main_8003A5F8__8003B7B4]
+      - [0x2C494, c, main_8003A5F8__8003BC94]
       - [0x2CE54, c, main_8003A5F8__8003C654]
       - [0x2CF3C, c, main_8003A5F8__8003C73C]
       - [0x2D008, c, main_8003C808]
