@@ -1,4 +1,4 @@
-# Loads simbólicos de .extern pequenos montados sem $gp (lui $r / lw $r,%lo($r)), por função.
+# Loads e stores simbólicos de .extern pequenos montados sem $gp (lui $r / lw $r,%lo($r); stores: lui $at / sw %lo($at)), por função.
 func_80015B3C
 func_80013668
 func_80029784
@@ -9,3 +9,4 @@ func_8002A290
 func_80037A7C
 func_8003CAD8
 func_8003CFBC
+func_8003992C

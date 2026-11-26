@@ -60,6 +60,19 @@ def nogp_load(line, small):
     return f"{ind}lui{sp}{reg},%hi({sym})\n{ind}{op}{sp}{reg},%lo({sym})({reg})"
 
 
+SYMSTORE = re.compile(r"^(\s*)(sw|sh|sb)(\s+)(\$\w+),\s*([A-Za-z_]\w*)\s*$")
+
+
+def nogp_store(line, small):
+    """Store simbólico num .extern pequeno, montado sem $gp: lui $at,%hi(sym) / sw $r,%lo(sym)($at)."""
+    m = SYMSTORE.match(line)
+    if not m or m.group(5) not in small:
+        return line
+    ind, op, sp, reg, sym = m.groups()
+    return (f"{ind}.set\tnoat\n{ind}lui{sp}$at,%hi({sym})\n{ind}{op}{sp}{reg},%lo({sym})($at)\n"
+            f"{ind}.set\tat")
+
+
 def main():
     target = None
     if '--target' in sys.argv:
@@ -85,6 +98,10 @@ def main():
         def _uses_gp(self, line):
             # ASPSX also addresses small .extern symbols through $gp; maspsx only
             # knows .comm/.sdata, and misses the nop before a store of mflo/mfhi
+            if self.no_gp and maspsx.uses_at(line):
+                op, *rest = maspsx.strip_comments(line).split('	')
+                if op in maspsx.store_mnemonics:
+                    return False  # nogp: the store stays a macro, as -G0 builds lui $at / sw %lo($at)
             if super()._uses_gp(line):
                 return True
             if not self.sdata_limit or not self.gp_allow or not maspsx.uses_at(line):
@@ -111,7 +128,7 @@ def main():
             if self.dest_expand and '# EXPAND_AT START' in result:
                 result = through_dest(result)
             if self.no_gp:
-                result = [nogp_load(l, self.extern_small) for l in result]
+                result = [nogp_store(nogp_load(l, self.extern_small), self.extern_small) for l in result]
             return result
 
     maspsx.MaspsxProcessor = ProfiledProcessor

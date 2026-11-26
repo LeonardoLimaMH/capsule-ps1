@@ -134,6 +134,163 @@ s32 func_800398BC(u8 *p, u16 sub, u8 prog) {
     return data + offset;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C__80038890__80038CA8", func_8003992C);
+extern u8 D_800947E8[], D_800944B8[];
+extern s32 D_80078CCC;
+extern s32 SpuGetReverb();
+extern void SpuSetReverb(), SpuSetReverbModeParam();
+#define H10 (*(u16 *)(e + 0x10))
+#define H12 (*(u16 *)(e + 0x12))
+static inline u8 *entry_8003992C(u8 *p, u16 sub, u8 prog) {
+    u8 *bank = D_800947E8;
+    u8 *seq = D_800944B8;
+    s32 k;
+    s32 data, offset;
+    k = *(s16 *)(seq + (prog >> 4) * 0x2AC + 0x288);
+    data = *(s32 *)(bank + k * 0x1C + 4);
+    offset = (p[0] * 16 + sub) * 32 + 0x820;
+    return (u8 *)(data + offset);
+}
+void func_8003992C(u8 *p, u8 prog) {
+    s32 attr[6];
+    u8 *e;
+    s32 i;
+
+    if (p[0x24] == 0x10 && p[0x23] < 0xE) {
+        for (i = 0; i < 0x10; i++) {
+            e = entry_8003992C(p, i, prog);
+            switch (p[0x23]) {
+            case 0:
+                break;
+            case 1:
+                e[1] = p[0x25];
+                break;
+            case 2:
+                e[6] = p[0x25];
+                break;
+            case 3:
+                e[7] = p[0x25];
+                break;
+            case 4:
+                H10 = e[0x10] | ((0x7F - p[0x25]) << 8);
+                break;
+            case 5:
+                H10 = e[0x10] | ((0x7F - p[0x25]) << 8) | 0x8000;
+                break;
+            case 6:
+                H10 = (H10 & 0xFF0F) | ((p[0x25] << 1) & 0xF0);
+                break;
+            case 7:
+                H10 = (p[0x25] >> 3) | (H10 & 0xFFF0);
+                break;
+            case 8:
+                H12 = (H12 & 0x603F) | ((0x7F - p[0x25]) << 6);
+                break;
+            case 9:
+                H12 = (H12 & 0x603F) | ((0x7F - p[0x25]) << 6) | 0x8000;
+                break;
+            case 10:
+                H12 = (H12 & 0xFFC0) | ((0x7F - p[0x25]) >> 3);
+                break;
+            case 11:
+                H12 = (H12 & 0xFFC0) | ((0x7F - p[0x25]) >> 3) | 0x20;
+                break;
+            case 12:
+                if (p[0x25] < 0x41) {
+                    H12 |= 0x4000;
+                } else {
+                    H12 &= 0xBFFF;
+                }
+                break;
+            case 13:
+                H10 = 0x80FF;
+                H12 = 0x1FC0;
+                break;
+            }
+        }
+    } else {
+        e = entry_8003992C(p, p[0x24] & 0xF, prog);
+        switch (p[0x23]) {
+        case 0:
+            break;
+        case 1:
+            e[1] = p[0x25];
+            break;
+        case 2:
+            e[6] = p[0x25];
+            break;
+        case 3:
+            e[7] = p[0x25];
+            break;
+        case 4:
+            H10 = e[0x10] | ((0x7F - p[0x25]) << 8);
+            break;
+        case 5:
+            H10 = e[0x10] | ((0x7F - p[0x25]) << 8) | 0x8000;
+            break;
+        case 6:
+            H10 = (H10 & 0xFF0F) | ((p[0x25] << 1) & 0xF0);
+            break;
+        case 7:
+            H10 = (p[0x25] >> 3) | (H10 & 0xFFF0);
+            break;
+        case 8:
+            H12 = (H12 & 0x603F) | ((0x7F - p[0x25]) << 6);
+            break;
+        case 9:
+            H12 = (H12 & 0x603F) | ((0x7F - p[0x25]) << 6) | 0x8000;
+            break;
+        case 10:
+            H12 = (H12 & 0xFFC0) | ((0x7F - p[0x25]) >> 3);
+            break;
+        case 11:
+            H12 = (H12 & 0xFFC0) | ((0x7F - p[0x25]) >> 3) | 0x20;
+            break;
+        case 12:
+            if (p[0x25] < 0x41) {
+                H12 |= 0x4000;
+            } else {
+                H12 &= 0xBFFF;
+            }
+            break;
+        case 13:
+            H10 = 0x80FF;
+            H12 = 0x1FC0;
+            break;
+        case 15:
+            if (SpuGetReverb() == 1) {
+                SpuSetReverb(0);
+            }
+            if (p[0x25] != 0) {
+                attr[0] = 1;
+                attr[1] = p[0x25];
+                D_80078CCC = p[0x25];
+                SpuSetReverbModeParam(attr);
+                SpuSetReverb(1);
+            }
+            break;
+        case 16:
+            attr[0] = 6;
+            ((s16 *)attr)[4] = p[0x25] << 8;
+            ((s16 *)attr)[5] = p[0x25] << 8;
+            SpuSetReverbModeParam(attr);
+            SpuSetReverb(1);
+            break;
+        case 17:
+            attr[0] = 0x10;
+            attr[4] = p[0x25];
+            SpuSetReverbModeParam(attr);
+            break;
+        case 18:
+        case 19:
+            attr[0] = 8;
+            attr[3] = p[0x25];
+            SpuSetReverbModeParam(attr);
+            break;
+        case 23:
+            p[0x13] = p[0x25];
+            break;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C__80038890__80038CA8", func_80039E60);
