@@ -311,6 +311,8 @@ segments:
       - [0x4A330, c, raise_800DEA54__800E1B30]
       - [0x4A8A8, c, raise_800E20A8]
       - [0x4A910, c, raise_800E2110]
+      - [0x4BEE4, c, raise_800E2110__800E36E4]
+      - [0x4C010, c, raise_800E2110__800E3810]
       - [0x4F5A8, c, raise_800E6DA8]
       - [0x4F5CC, c, raise_800E6DA8__800E6DCC]
       - [0x4F668, c, raise_800E6E68]
