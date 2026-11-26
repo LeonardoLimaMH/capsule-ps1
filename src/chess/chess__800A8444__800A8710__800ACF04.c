@@ -396,7 +396,33 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444__800A8710__800ACF04", func_8
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444__800A8710__800ACF04", func_800ADD70);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444__800A8710__800ACF04", func_800ADF5C);
+void func_800ADF5C(u8 *arg0, s32 arg1) {
+    typedef struct {
+        u8 pad[0x5EC];
+        u8 unk_0x5EC[2][6];
+    } DadosADF5C;
+    extern u8 D_8008ED68[];
+    u8 *base = D_8008ED68;
+    register s16 val asm("v0");
+
+    switch (*(u16 *)(base + 0xE8)) {
+    case 0:
+        *(u16 *)(arg0 + 0x5F8) = 0;
+        func_80012628();
+        break;
+    case 1:
+        val = *(u16 *)(arg0 + 0x5F8) + 1;
+        *(u16 *)(arg0 + 0x5F8) = val;
+        if ((s16)(val % 14) == 0) {
+            if ((arg0 + arg1)[0x6DB] == ((DadosADF5C *)arg0)->unk_0x5EC[arg1][0]) {
+                *(s32 *)(base + arg1 * 16 + 0x88) = 0x20;
+            } else {
+                *(s32 *)(base + arg1 * 16 + 0x88) = 0x2000;
+            }
+        }
+        break;
+    }
+}
 
 extern s32 rsin(s32);
 
