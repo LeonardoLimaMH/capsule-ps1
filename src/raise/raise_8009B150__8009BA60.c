@@ -20,5 +20,3 @@ s32 func_8009BA60(void *v, u8 *o) {
     PopMatrix();
     return r;
 }
-
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009B150__8009BA60", func_8009BB30);
