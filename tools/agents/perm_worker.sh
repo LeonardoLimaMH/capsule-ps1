@@ -68,11 +68,24 @@ evaluate() {  # evaluate t f c h -> BEST (melhor pontuação); se 0: guarda (ban
   best=$(ls -d .cache/permuter/$f/output-* 2> /dev/null | sed 's/.*output-//' | sort -t- -k1,1n | head -1)
   BEST=${best%%-*}; BEST=${BEST:-sem melhora}
   [ "$BEST" = 0 ] || return 0
-  if python3 $A/perm_merge.py "$c" .cache/permuter/$f/output-$best/source.c $f $W/perm/$f.match.c; then
-    log "$(python3 $A/permq.py match $t $f $h $W/perm/$f.match.c "$NAME")"
-  else  # sem o candidato original: guarda o C do permuter como veio
-    log "$(python3 $A/permq.py match $t $f $h .cache/permuter/$f/output-$best/source.c "$NAME")"; return 0
+  mkdir -p $W/matches/nao_confirmados
+  if ! python3 $A/perm_merge.py "$c" .cache/permuter/$f/output-$best/source.c $f $W/perm/$f.match.c; then
+    cp .cache/permuter/$f/output-$best/source.c $W/matches/nao_confirmados/$f.$h.permuter.c
+    log "$t/$f: 0 do permuter guardado em matches/nao_confirmados (não deu para remontar o candidato)"; BEST="0?"; return 0
   fi
+  # o placar do permuter pode dar 0 com registradores trocados: confirma com o compilador exato do projeto
+  local p g0 file
+  file=$(grep -lE "INCLUDE_ASM\(.*, $f\)" src/$t/*.c | head -1); p=$(awk -v p="$file" '$1==p{print $2}' config/compilers.txt)
+  g0=""; grep -qx "$file" config/g0fill.txt && g0=--g0fill
+  local ok=""
+  for g in ${p:-2.7.2-psx} 2.7.2-cdk; do
+    ./run.sh python3 tools/match.py $t $f $W/perm/$f.match.c --gcc ${g%%+*} $g0 -q < /dev/null > /dev/null 2>&1 && { ok=1; break; }
+  done
+  if [ -z "$ok" ]; then
+    cp $W/perm/$f.match.c $W/matches/nao_confirmados/$f.$h.c
+    log "$t/$f: 0 do permuter NÃO confirmado pelo compilador exato (guardado em matches/nao_confirmados)"; BEST="0?"; return 0
+  fi
+  log "$(python3 $A/permq.py match $t $f $h $W/perm/$f.match.c "$NAME")"
   for v in "" "nogp" "nogp 2.7.2-cdk"; do
     r=$(bash $A/try_one.sh "$t" "$f" $W/perm/$f.match.c $v < /dev/null 2>&1 | grep -E "^(MATCH|falha|já)" | tail -1)
     case "$r" in MATCH*|já*)
