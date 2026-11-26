@@ -622,6 +622,18 @@
       "base_path": "build/objdiff/base/yuugi/main_80033C10__80037244.o"
     },
     {
+      "name": "yuugi/main_80033C10__80037244__800373A0",
+      "target_path": "build/objdiff/target/yuugi/main_80033C10__80037244__800373A0.o",
+      "metadata": {
+        "source_path": "src/yuugi/main_80033C10__80037244__800373A0.c",
+        "progress_categories": [
+          "yuugi"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/yuugi/main_80033C10__80037244__800373A0.o"
+    },
+    {
       "name": "yuugi/main_80037404",
       "target_path": "build/objdiff/target/yuugi/main_80037404.o",
       "metadata": {
@@ -1385,7 +1397,7 @@
         "progress_categories": [
           "slpm"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/slpm/loader_80111E78.o"
     },
@@ -1685,9 +1697,21 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess_800BB910.o"
+    },
+    {
+      "name": "chess/chess_800BB910__800BBACC",
+      "target_path": "build/objdiff/target/chess/chess_800BB910__800BBACC.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800BB910__800BBACC.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800BB910__800BBACC.o"
     },
     {
       "name": "chess/chess_800BB910__800BF86C",
@@ -1736,6 +1760,30 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/chess/chess_800BB910__800BF9B0__800C0E6C.o"
+    },
+    {
+      "name": "chess/chess_800BB910__800BF9B0__800C0E6C__800C1890",
+      "target_path": "build/objdiff/target/chess/chess_800BB910__800BF9B0__800C0E6C__800C1890.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800BB910__800BF9B0__800C0E6C__800C1890.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800BB910__800BF9B0__800C0E6C__800C1890.o"
+    },
+    {
+      "name": "chess/chess_800BB910__800BF9B0__800C0E6C__800C1A50",
+      "target_path": "build/objdiff/target/chess/chess_800BB910__800BF9B0__800C0E6C__800C1A50.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800BB910__800BF9B0__800C0E6C__800C1A50.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800BB910__800BF9B0__800C0E6C__800C1A50.o"
     },
     {
       "name": "chess/chess_800BB910__800C1A78",
@@ -1846,6 +1894,54 @@
       "base_path": "build/objdiff/base/chess/chess_800C23A8__800C28A8.o"
     },
     {
+      "name": "chess/chess_800C23A8__800C28A8__800C3108",
+      "target_path": "build/objdiff/target/chess/chess_800C23A8__800C28A8__800C3108.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C23A8__800C28A8__800C3108.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C23A8__800C28A8__800C3108.o"
+    },
+    {
+      "name": "chess/chess_800C23A8__800C28A8__800C31E8",
+      "target_path": "build/objdiff/target/chess/chess_800C23A8__800C28A8__800C31E8.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C23A8__800C28A8__800C31E8.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C23A8__800C28A8__800C31E8.o"
+    },
+    {
+      "name": "chess/chess_800C23A8__800C28A8__800C31E8__800C416C",
+      "target_path": "build/objdiff/target/chess/chess_800C23A8__800C28A8__800C31E8__800C416C.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C23A8__800C28A8__800C31E8__800C416C.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C23A8__800C28A8__800C31E8__800C416C.o"
+    },
+    {
+      "name": "chess/chess_800C23A8__800C28A8__800C31E8__800C41E8",
+      "target_path": "build/objdiff/target/chess/chess_800C23A8__800C28A8__800C31E8__800C41E8.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C23A8__800C28A8__800C31E8__800C41E8.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C23A8__800C28A8__800C31E8__800C41E8.o"
+    },
+    {
       "name": "chess/chess_800C23A8__800C28A8__800C44BC",
       "target_path": "build/objdiff/target/chess/chess_800C23A8__800C28A8__800C44BC.o",
       "metadata": {
@@ -1877,7 +1973,7 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess_800C23A8__800C28A8__800C4600__800C471C.o"
     },
@@ -1966,6 +2062,18 @@
       "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C5300.o"
     },
     {
+      "name": "chess/chess_800C4ECC__800C5300__800C5748",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C5300__800C5748.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800C5300__800C5748.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C5300__800C5748.o"
+    },
+    {
       "name": "chess/chess_800C4ECC__800C5300__800C5928",
       "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C5300__800C5928.o",
       "metadata": {
@@ -1985,9 +2093,33 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C5300__800C5A74.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800C5300__800C5A74__800C5C34",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C5300__800C5A74__800C5C34.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800C5300__800C5A74__800C5C34.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C5300__800C5A74__800C5C34.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800C5300__800C5A74__800C5DE8",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C5300__800C5A74__800C5DE8.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800C5300__800C5A74__800C5DE8.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C5300__800C5A74__800C5DE8.o"
     },
     {
       "name": "chess/chess_800C4ECC__800C5300__800C5A74__800C61F4",
@@ -2098,6 +2230,18 @@
       "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C7F74.o"
     },
     {
+      "name": "chess/chess_800C4ECC__800C7F74__800C8368",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C7F74__800C8368.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800C7F74__800C8368.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C7F74__800C8368.o"
+    },
+    {
       "name": "chess/chess_800C4ECC__800C7F74__800C8528",
       "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C7F74__800C8528.o",
       "metadata": {
@@ -2120,6 +2264,30 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C7F74__800C867C.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800C7F74__800C867C__800C8BF4",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C7F74__800C867C__800C8BF4.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800C7F74__800C867C__800C8BF4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C7F74__800C867C__800C8BF4.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800C7F74__800C867C__800C8DE0",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800C7F74__800C867C__800C8DE0.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800C7F74__800C867C__800C8DE0.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800C7F74__800C867C__800C8DE0.o"
     },
     {
       "name": "chess/chess_800C4ECC__800C7F74__800C9338",
@@ -2321,7 +2489,7 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C.o"
     },
@@ -2345,7 +2513,7 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0.o"
     },
@@ -2633,7 +2801,7 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798__800DC06C__800DC874.o"
     },
@@ -2645,9 +2813,33 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess_800C4ECC__800DCC28.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800DCC28__800DCC84",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800DCC28__800DCC84.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800DCC28__800DCC84.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800DCC28__800DCC84.o"
+    },
+    {
+      "name": "chess/chess_800C4ECC__800DCC28__800DCD20",
+      "target_path": "build/objdiff/target/chess/chess_800C4ECC__800DCC28__800DCD20.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800C4ECC__800DCC28__800DCD20.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800C4ECC__800DCC28__800DCD20.o"
     },
     {
       "name": "chess/chess_800DCE78",
@@ -2657,7 +2849,7 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess_800DCE78.o"
     },
@@ -2672,6 +2864,42 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/chess/chess_800DCF3C.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD230",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD230.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD230.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD230.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD274",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD274.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD274.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD274.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD274__800DD2EC",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD274__800DD2EC.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD274__800DD2EC.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD274__800DD2EC.o"
     },
     {
       "name": "chess/chess_800DCF3C__800DD3D8",
@@ -2753,7 +2981,7 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224.o"
     },
@@ -2804,6 +3032,30 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800EFBA4",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800EFBA4.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800EFBA4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800EFBA4.o"
+    },
+    {
+      "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800EFCF4",
+      "target_path": "build/objdiff/target/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800EFCF4.o",
+      "metadata": {
+        "source_path": "src/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800EFCF4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800EFCF4.o"
     },
     {
       "name": "chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1058",
@@ -2969,7 +3221,7 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428.o"
     },
@@ -2993,7 +3245,7 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC__800EE224__800EE434__800EEAE0__800F1280__800F3080__800F5228__800F5AF4__800FE188__800FE21C__800FE2C4__800FE378__800FE428__800FE74C.o"
     },
@@ -3149,9 +3401,33 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess__8009A75C.o"
+    },
+    {
+      "name": "chess/chess__8009A75C__8009AAA4",
+      "target_path": "build/objdiff/target/chess/chess__8009A75C__8009AAA4.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009A75C__8009AAA4.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009A75C__8009AAA4.o"
+    },
+    {
+      "name": "chess/chess__8009A75C__8009AC88",
+      "target_path": "build/objdiff/target/chess/chess__8009A75C__8009AC88.o",
+      "metadata": {
+        "source_path": "src/chess/chess__8009A75C__8009AC88.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__8009A75C__8009AC88.o"
     },
     {
       "name": "chess/chess__8009A75C__8009B4C8",
@@ -3425,7 +3701,7 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A04C8__800A0540.o"
     },
@@ -3449,7 +3725,7 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850.o"
     },
@@ -3665,7 +3941,7 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A1630__800A1780__800A1D3C__800A3758__800A37E8__800A3AE8__800A3C24.o"
     },
@@ -3713,7 +3989,7 @@
         "progress_categories": [
           "chess"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/chess/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A1630__800A1780__800A1D3C__800A3758__800A37E8__800A3AE8__800A3C24__800A4108__800A431C.o"
     },
@@ -3968,6 +4244,30 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/chess/chess__800A8444__800A8710.o"
+    },
+    {
+      "name": "chess/chess__800A8444__800A8710__800ACD58",
+      "target_path": "build/objdiff/target/chess/chess__800A8444__800A8710__800ACD58.o",
+      "metadata": {
+        "source_path": "src/chess/chess__800A8444__800A8710__800ACD58.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/chess/chess__800A8444__800A8710__800ACD58.o"
+    },
+    {
+      "name": "chess/chess__800A8444__800A8710__800ACF04",
+      "target_path": "build/objdiff/target/chess/chess__800A8444__800A8710__800ACF04.o",
+      "metadata": {
+        "source_path": "src/chess/chess__800A8444__800A8710__800ACF04.c",
+        "progress_categories": [
+          "chess"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/chess/chess__800A8444__800A8710__800ACF04.o"
     },
     {
       "name": "chess/chess__800AECC4",
@@ -4474,6 +4774,18 @@
       "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC.o"
     },
     {
+      "name": "raise/raise_8009D2A8__800A6DBC__800A6ED4",
+      "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A6ED4.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009D2A8__800A6DBC__800A6ED4.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC__800A6ED4.o"
+    },
+    {
       "name": "raise/raise_8009D2A8__800A6DBC__800A70F8",
       "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A70F8.o",
       "metadata": {
@@ -4498,6 +4810,30 @@
       "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC__800A7280.o"
     },
     {
+      "name": "raise/raise_8009D2A8__800A6DBC__800A7280__800A752C",
+      "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A7280__800A752C.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009D2A8__800A6DBC__800A7280__800A752C.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC__800A7280__800A752C.o"
+    },
+    {
+      "name": "raise/raise_8009D2A8__800A6DBC__800A7280__800A7600",
+      "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A7280__800A7600.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009D2A8__800A6DBC__800A7280__800A7600.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC__800A7280__800A7600.o"
+    },
+    {
       "name": "raise/raise_8009D2A8__800A6DBC__800A76C0",
       "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A76C0.o",
       "metadata": {
@@ -4517,9 +4853,69 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC__800A7730.o"
+    },
+    {
+      "name": "raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8",
+      "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8.o"
+    },
+    {
+      "name": "raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A8484",
+      "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A8484.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A8484.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A8484.o"
+    },
+    {
+      "name": "raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A865C",
+      "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A865C.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A865C.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A865C.o"
+    },
+    {
+      "name": "raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A865C__800A875C",
+      "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A865C__800A875C.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A865C__800A875C.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A865C__800A875C.o"
+    },
+    {
+      "name": "raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A865C__800A88E4",
+      "target_path": "build/objdiff/target/raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A865C__800A88E4.o",
+      "metadata": {
+        "source_path": "src/raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A865C__800A88E4.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_8009D2A8__800A6DBC__800A7730__800A79D8__800A865C__800A88E4.o"
     },
     {
       "name": "raise/raise_8009D2A8__800A6DBC__800A8C30",
@@ -5177,7 +5573,7 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800B9C3C__800BA4A0.o"
     },
@@ -5890,6 +6286,18 @@
       "base_path": "build/objdiff/base/raise/raise_800C8CAC__800C9590__800CA944.o"
     },
     {
+      "name": "raise/raise_800C8CAC__800C9590__800CA944__800CB370",
+      "target_path": "build/objdiff/target/raise/raise_800C8CAC__800C9590__800CA944__800CB370.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800C8CAC__800C9590__800CA944__800CB370.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800C8CAC__800C9590__800CA944__800CB370.o"
+    },
+    {
       "name": "raise/raise_800CB438",
       "target_path": "build/objdiff/target/raise/raise_800CB438.o",
       "metadata": {
@@ -5921,7 +6329,7 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800CE164.o"
     },
@@ -5945,7 +6353,7 @@
         "progress_categories": [
           "raise"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/raise/raise_800CF13C.o"
     },
@@ -6454,6 +6862,30 @@
       "base_path": "build/objdiff/base/raise/raise_800DEA54__800DEB28__800DEBA0__800DF058.o"
     },
     {
+      "name": "raise/raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF300",
+      "target_path": "build/objdiff/target/raise/raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF300.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF300.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/raise/raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF300.o"
+    },
+    {
+      "name": "raise/raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF51C",
+      "target_path": "build/objdiff/target/raise/raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF51C.o",
+      "metadata": {
+        "source_path": "src/raise/raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF51C.c",
+        "progress_categories": [
+          "raise"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/raise/raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF51C.o"
+    },
+    {
       "name": "raise/raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF914",
       "target_path": "build/objdiff/target/raise/raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF914.o",
       "metadata": {
@@ -6785,7 +7217,7 @@
         "progress_categories": [
           "etc"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/etc/etc__80099B18__8009AB30.o"
     },
@@ -6836,6 +7268,30 @@
         "complete": false
       },
       "base_path": "build/objdiff/base/etc/etc__8009BD30.o"
+    },
+    {
+      "name": "etc/etc__8009BD30__8009E854",
+      "target_path": "build/objdiff/target/etc/etc__8009BD30__8009E854.o",
+      "metadata": {
+        "source_path": "src/etc/etc__8009BD30__8009E854.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/etc/etc__8009BD30__8009E854.o"
+    },
+    {
+      "name": "etc/etc__8009BD30__8009EBD8",
+      "target_path": "build/objdiff/target/etc/etc__8009BD30__8009EBD8.o",
+      "metadata": {
+        "source_path": "src/etc/etc__8009BD30__8009EBD8.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/etc/etc__8009BD30__8009EBD8.o"
     },
     {
       "name": "etc/etc__8009BD30__800A07AC",
@@ -6941,7 +7397,7 @@
         "progress_categories": [
           "etc"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/etc/etc__800A822C.o"
     },
@@ -6970,6 +7426,78 @@
       "base_path": "build/objdiff/base/etc/etc__800AA238__800AB78C.o"
     },
     {
+      "name": "etc/etc__800AA238__800AB78C__800AB8E8",
+      "target_path": "build/objdiff/target/etc/etc__800AA238__800AB78C__800AB8E8.o",
+      "metadata": {
+        "source_path": "src/etc/etc__800AA238__800AB78C__800AB8E8.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/etc/etc__800AA238__800AB78C__800AB8E8.o"
+    },
+    {
+      "name": "etc/etc__800AA238__800AB78C__800ABBF8",
+      "target_path": "build/objdiff/target/etc/etc__800AA238__800AB78C__800ABBF8.o",
+      "metadata": {
+        "source_path": "src/etc/etc__800AA238__800AB78C__800ABBF8.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/etc/etc__800AA238__800AB78C__800ABBF8.o"
+    },
+    {
+      "name": "etc/etc__800AA238__800AB78C__800ABEA0",
+      "target_path": "build/objdiff/target/etc/etc__800AA238__800AB78C__800ABEA0.o",
+      "metadata": {
+        "source_path": "src/etc/etc__800AA238__800AB78C__800ABEA0.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/etc/etc__800AA238__800AB78C__800ABEA0.o"
+    },
+    {
+      "name": "etc/etc__800AA238__800AB78C__800ABEA0__800AC20C",
+      "target_path": "build/objdiff/target/etc/etc__800AA238__800AB78C__800ABEA0__800AC20C.o",
+      "metadata": {
+        "source_path": "src/etc/etc__800AA238__800AB78C__800ABEA0__800AC20C.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": false
+      },
+      "base_path": "build/objdiff/base/etc/etc__800AA238__800AB78C__800ABEA0__800AC20C.o"
+    },
+    {
+      "name": "etc/etc__800AA238__800AB78C__800AC4A4",
+      "target_path": "build/objdiff/target/etc/etc__800AA238__800AB78C__800AC4A4.o",
+      "metadata": {
+        "source_path": "src/etc/etc__800AA238__800AB78C__800AC4A4.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/etc/etc__800AA238__800AB78C__800AC4A4.o"
+    },
+    {
+      "name": "etc/etc__800AA238__800AB78C__800AC570",
+      "target_path": "build/objdiff/target/etc/etc__800AA238__800AB78C__800AC570.o",
+      "metadata": {
+        "source_path": "src/etc/etc__800AA238__800AB78C__800AC570.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/etc/etc__800AA238__800AB78C__800AC570.o"
+    },
+    {
       "name": "etc/etc__800AA238__800AB78C__800AC650",
       "target_path": "build/objdiff/target/etc/etc__800AA238__800AB78C__800AC650.o",
       "metadata": {
@@ -6989,9 +7517,33 @@
         "progress_categories": [
           "etc"
         ],
-        "complete": false
+        "complete": true
       },
       "base_path": "build/objdiff/base/etc/etc__800AA238__800AB78C__800AC780.o"
+    },
+    {
+      "name": "etc/etc__800AA238__800AB78C__800AC780__800AC9EC",
+      "target_path": "build/objdiff/target/etc/etc__800AA238__800AB78C__800AC780__800AC9EC.o",
+      "metadata": {
+        "source_path": "src/etc/etc__800AA238__800AB78C__800AC780__800AC9EC.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/etc/etc__800AA238__800AB78C__800AC780__800AC9EC.o"
+    },
+    {
+      "name": "etc/etc__800AA238__800AB78C__800AC780__800AC9EC__800ACC04",
+      "target_path": "build/objdiff/target/etc/etc__800AA238__800AB78C__800AC780__800AC9EC__800ACC04.o",
+      "metadata": {
+        "source_path": "src/etc/etc__800AA238__800AB78C__800AC780__800AC9EC__800ACC04.c",
+        "progress_categories": [
+          "etc"
+        ],
+        "complete": true
+      },
+      "base_path": "build/objdiff/base/etc/etc__800AA238__800AB78C__800AC780__800AC9EC__800ACC04.o"
     },
     {
       "name": "etc/etc__800AA238__800AB78C__800AC780__800ACCA8",
