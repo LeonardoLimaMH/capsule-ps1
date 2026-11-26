@@ -246,7 +246,108 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8__8009EDA4__800A0850__800A0E6
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A1630__800A1780__800A1D3C", func_800A2D38);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A1630__800A1780__800A1D3C", func_800A2E20);
+void func_800A2E20(void *arg0) {
+    typedef struct {
+        u8 pad0[0x30];
+        s32 unk30;
+        u8 pad34[0x60 - 0x34];
+        u8 unk60, unk61, unk62;
+        u8 pad63[0xC4 - 0x63];
+        u16 unkC4;
+        u8 padC6[4];
+        u16 unkCA;
+        u8 padCC[4];
+        u16 unkD0;
+        u8 padD2[0xEC - 0xD2];
+        s16 unkEC;
+        u8 unkEE;
+    } Sub_A2E20;
+    typedef struct {
+        u8 pad0[0x14];
+        Sub_A2E20 *unk14;
+        u8 pad18[0x54 - 0x18];
+        u32 unk54;
+        u8 pad58[4];
+        s32 unk5C;
+    } Obj_A2E20;
+    typedef struct { u8 pad0[0x103]; u8 unk103; } State_A2E20;
+    extern State_A2E20 D_8008ED68[];
+    extern s8 D_8008619F[];
+    extern void func_800CB6A0();
+    extern void func_80034AB0();
+    extern void func_800185F8();
+    Obj_A2E20 *obj = arg0;
+    s32 param = obj->unk5C;
+    Sub_A2E20 *sub = obj->unk14;
+    u8 count = 1;
+    s32 i;
+    if (D_8008ED68[0].unk103 >= 2U) {
+        count = ((volatile State_A2E20 *)D_8008ED68)->unk103;
+    }
+    for (i = 0; i < count; i++) {
+        switch (sub->unkEE) {
+        case 0:
+            func_800CB6A0(obj);
+            if (obj->unk54 == 0x18 && param == 0) {
+                func_80034AB0(0x8005);
+            }
+            if (++obj->unk54 >= (u32)sub->unkEC) {
+                sub->unkEE++;
+                obj->unk54 = 0;
+            }
+            break;
+        case 1:
+            if (++obj->unk54 >= (u32)(param * 2)) {
+                sub->unkEE++;
+                obj->unk54 = 0;
+            }
+            break;
+        case 2:
+            sub->unkC4 += 0xA0;
+            sub->unkCA += 0xA0;
+            sub->unkD0 += 0xA0;
+            sub->unk60 += 10;
+            sub->unk61 += 10;
+            sub->unk62 += 10;
+            if (++obj->unk54 >= 4U) {
+                sub->unkEE++;
+                obj->unk54 = 0;
+            }
+            break;
+        case 3:
+            if (++obj->unk54 >= 2U) {
+                sub->unkEE++;
+                obj->unk54 = 0;
+            }
+            break;
+        case 4:
+            sub->unkC4 -= 0xA0;
+            sub->unkCA -= 0xA0;
+            sub->unkD0 -= 0xA0;
+            sub->unk60 -= 10;
+            sub->unk61 -= 10;
+            sub->unk62 -= 10;
+            if (++obj->unk54 >= 4U) {
+                sub->unkEE++;
+                obj->unk54 = 0;
+            }
+            break;
+        case 5:
+            if (++obj->unk54 >= 40U) {
+                sub->unkEE++;
+                obj->unk54 = 0;
+            }
+            break;
+        case 6:
+            sub->unk30 -= 20;
+            if (++obj->unk54 >= 100U) {
+                func_800185F8(obj);
+                *D_8008619F = param;
+            }
+            break;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A1630__800A1780__800A1D3C", func_800A3080);
 
