@@ -582,3 +582,5 @@ src/etc/etc__8009B738__8009B7EC__8009BBD0.c 2.7.2-cdk
 src/etc/etc__8009BD30__800A0824__800A2588.c 2.7.2-cdk
 src/etc/etc__8009BD30__800A0824__800A225C.c 2.7.2-cdk
 src/etc/etc__8009BD30__800A0824__800A1798.c 2.7.2-cdk
+src/raise/raise_8009B150__8009BA60__8009C4D4.c 2.7.2-cdk
+src/raise/raise_8009B150__8009BA60__8009BE98.c 2.7.2-cdk
