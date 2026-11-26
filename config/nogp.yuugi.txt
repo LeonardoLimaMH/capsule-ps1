@@ -10,3 +10,4 @@ func_80037A7C
 func_8003CAD8
 func_8003CFBC
 func_8003992C
+func_80024024
