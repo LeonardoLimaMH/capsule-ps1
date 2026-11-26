@@ -55,7 +55,91 @@ void func_800E2A98(void) {
 
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E2AA0);
+void func_800E2AA0(s32 arg0, s32 arg1, s32 arg2)
+{
+  typedef struct 
+  {
+    u8 pad_0[0x18C];
+    void *unk_18C[3];
+    u8 pad_198[0x10];
+  } SlotArr_80091618;
+  typedef struct 
+  {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    u8 pad[0x20];
+    void *unk30;
+  } Entry_EF524;
+  extern u8 D_80091618[];
+  extern u8 D_800EF524[];
+  extern u8 D_800900C0[];
+  extern s32 D_80069E4C[];
+  extern u16 D_80078C20[];
+  extern s32 func_800B1350(s32);
+  extern u8 *func_80015B3C(void *, void *, s32);
+  extern void func_8002CBDC(u8 *);
+  extern void func_8002858C(s32, s32, void *, s32, s32);
+  extern void D_8002CA80(void);
+  extern void D_8002C93C(void);
+  extern void D_80018600(void);
+  s32 k = func_800B1350(arg1) & 0xFFFF;
+  s32 i = 0;
+  u32 grid = (u32) D_800EF524;
+  s32 one = 1;
+  s32 off_444 = 0x444;
+  do
+  {
+    if ((*((s32 *) (((arg0 * 0x9C) + (i * 0x34)) + grid))) == (-1))
+    {
+      ((SlotArr_80091618 *) D_80091618)[k].unk_18C[i] = 0;
+    }
+    else
+    {
+      void *cb = (arg1 == one) ? ((void *) D_8002CA80) : ((void *) D_8002C93C);
+      s32 s1 = (arg1 == one) ? (i) : (i + 3);
+      u8 *o = func_80015B3C(cb, (void *) D_80018600, i);
+      if (o)
+      {
+        u8 *m;
+        register Entry_EF524 *row;
+        *((u16 *) (o + 0x4C)) = (arg1 != one) ? (one - (*D_80078C20)) : (*D_80078C20);
+        *((u16 *) (o + 0x4E)) = 0;
+        m = D_800900C0 + (s1 * 0xBC);
+        *((u8 **) (o + 0x18)) = m;
+        *((s32 *) m) = (arg2 == one) ? (((Entry_EF524 *) (((arg0 * 0x9C) + (i * 0x34)) + grid))->unk4) : (-1);
+        row = (Entry_EF524 *) (((arg0 * 0x9C) + (i * 0x34)) + grid);
+        func_8002CBDC(o);
+        D_80069E4C[0x15] = ((Entry_EF524 *) (((arg0 * 0x9C) + (i * 0x34)) + grid))->unkC != 0;
+        D_80069E4C[0x16] = (((Entry_EF524 *) (((arg0 * 0x9C) + (i * 0x34)) + grid))->unk8 * 2) + D_80069E4C[0x15];
+        func_8002858C(0xE, ((Entry_EF524 *) (((arg0 * 0x9C) + (i * 0x34)) + grid))->unk0, *((u8 **) (o + 0x18)), 0, s1);
+        if ((arg1 == one) && (arg0 == 7))
+        {
+          ((Entry_EF524 *) (off_444 + grid))->unk30 = o;
+        }
+        *((s32 *) ((*((u8 **) (o + 0x18))) + 0x10)) = 0x1000;
+        *((s32 *) ((*((u8 **) (o + 0x18))) + 0x14)) = 0x1000;
+        *((s32 *) ((*((u8 **) (o + 0x18))) + 0x18)) = 0x1000;
+        if (arg2 == ((unsigned short) one))
+        {
+          *((s32 *) ((*((u8 **) (o + 0x18))) + 0x34)) = (arg1 == one) ? (0) : (-0x320);
+        }
+        else
+        {
+          *((s32 *) ((*((u8 **) (o + 0x18))) + 0x34)) = (arg1 == one) ? (0) : (-0x640);
+        }
+        *((s32 *) ((*((u8 **) (o + 0x18))) + 0x38)) = 0;
+        *((s32 *) ((*((u8 **) (o + 0x18))) + 0x3C)) = 0;
+        *((u16 *) (o + 0x4C)) = (arg1 != one) ? (one - (*D_80078C20)) : (*D_80078C20);
+        ((SlotArr_80091618 *) D_80091618)[k].unk_18C[i] = o;
+      }
+    }
+    off_444 += 0x34;
+    i++;
+  }
+  while (i < 3);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800E2110", func_800E2D7C);
 
@@ -157,8 +241,6 @@ void func_800E3260(s32 a0, s32 a1, s32 a2) {
     }
 }
 
-#include "common.h"
-
 void func_800E32D0(s32 arg0, s16 *arg1, s16 *arg2) {
     extern s16 D_800F1EE0[];
     (*D_800F1EE0) = 1;
@@ -185,8 +267,6 @@ loop:
     func_80025CEC(arg0, *arg1, *arg2, 1);
     func_80025E54(arg0, *arg1, *arg2);
 }
-
-#include "common.h"
 
 void func_800E33E4(s32 arg0, s16 *arg1, s16 *arg2) {
     extern s16 D_800F1EE0[];
