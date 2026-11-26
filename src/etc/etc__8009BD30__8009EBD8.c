@@ -283,8 +283,6 @@ void func_8009F9DC(u8 *arg0) {
     }
 }
 
-extern u8 D_80085428[];
-extern u16 D_8008EE44[];
 extern void (*D_800B2C2C[])(u8 *);
 extern void (*D_800B2C2C[])(u8 *);
 void func_800A4964();
@@ -427,7 +425,159 @@ extern void (*D_800B2C2C[])(u8 *);
 
 void func_800A4964();
 
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__8009EBD8", func_8009FF08);
+void func_8009FF08(u8 *arg0)
+{
+  typedef struct 
+  {
+    s32 buttons;
+    u8 unk4[0xC];
+  } MenuPad;
+  typedef struct 
+  {
+    u8 unk0[0x88];
+    MenuPad pad[2];
+    u8 unkA8[0x38];
+    u16 unkE0;
+    u8 unkE2[0x93E];
+    s32 unkA20;
+  } MenuInput;
+  typedef struct 
+  {
+    u8 unk0[8];
+    s16 ready[2];
+  } MenuReady;
+  extern MenuInput D_8008ED68[];
+  extern s32 D_8008F788[];
+  extern u8 D_800B2970[];
+  extern u8 D_800B2978[];
+  extern u8 D_800B2980[];
+  extern u8 D_800B29FC[];
+  extern u8 D_800B2A20[];
+  extern u8 D_800B2A40[];
+  extern u8 D_800B2A4C[];
+  extern u8 D_800B2A70[];
+  extern u8 D_800B2A90[];
+  extern u8 D_800B2AA8[];
+  extern MenuReady D_800B3B38[];
+  extern u8 D_800B3B88[];
+  extern u8 D_800B3B89[];
+  extern void func_8001F1A8(s32, s32, s32, s32, s32, void *, s32, s32, s32);
+  extern void func_80020844(s32, s32, s32, s32, s32, s32, s32, s32, s32);
+  extern void func_8002E714(void);
+  extern void func_8002E708(void);
+  extern void func_80034AB0(s32);
+  extern void func_8001D850(void);
+  extern void func_80012544(s32);
+  extern void func_80012578(void);
+  extern void func_800125AC(s32);
+  MenuInput *ed;
+  s32 buttons;
+  s32 i;
+  u8 state;
+  state = arg0[0x5CB];
+  if (state != 4)
+  {
+    func_8002E714();
+    return;
+  }
+  ed = D_8008ED68;
+  switch (ed->unkE0)
+  {
+    case 0:
+      func_80020844(-0x80, -0x48, 0x100, 0xA0, 0, 0, 0, 0, 5);
+      func_8001F1A8(-0x7C, -0x3C, 0, 1, 0, D_800B29FC, 1, 0x11, state);
+      func_8001F1A8(-0x6E, -0x2E, 0, 1, 0, D_800B2A20, 1, 0x10, state);
+      func_8001F1A8(-0x6E, -0x20, 0, 1, 0, D_800B2A40, 1, 6, state);
+      func_8001F1A8(-0x7C, -0xC, 0, 1, 0, D_800B2A4C, 1, 0x11, state);
+      func_8001F1A8(-0x6E, 2, 0, 1, 0, D_800B2A70, 1, 0x10, state);
+      func_8001F1A8(-0x6E, 0x10, 0, 1, 0, D_800B2A90, 1, 0xC, state);
+      func_8001F1A8(-0x6E, 0x28, 1, 1, 0, D_800B2AA8, 1, 0xF, state);
+      func_8001F1A8(-0x60, 0x60, 0, 1, 0, D_800B2970, 1, state, 2);
+      func_8001F1A8(-0x10, 0x60, 0, 1, 0, D_800B2978, 1, 3, 2);
+      func_8001F1A8(0x30, 0x60, 0, 1, 0, D_800B2980, 1, 3, 2);
+      for (i = 0; i < 2; i++)
+    {
+      if ((D_800B3B38->ready[i] == 0) && (ed->pad[i].buttons & 0xF000))
+      {
+        func_80034AB0(0x84);
+        D_800B3B88[i] ^= 1;
+      }
+      else
+      {
+        buttons = ed->pad[i].buttons;
+        if (buttons & 0x20)
+        {
+          if (D_800B3B38->ready[i] == 0)
+          {
+            func_80034AB0(0x48);
+            D_800B3B38->ready[i] = 1;
+          }
+        }
+        else
+          if (buttons & 0x40)
+        {
+          func_80034AB0(0x5D);
+          if (D_800B3B38->ready[i] != 0)
+          {
+            D_800B3B38->ready[i] = 0;
+          }
+          else
+          {
+            D_800B3B38->ready[1] = 0;
+            D_800B3B38->ready[0] = 0;
+            D_800B3B88[1] = 0;
+            D_800B3B88[0] = 0;
+            func_8001D850();
+            func_80012544(6);
+          }
+        }
+      }
+    }
+
+      if ((D_800B3B38->ready[0] != 0) && (D_800B3B38->ready[1] != 0))
+    {
+      D_800B3B38->ready[1] = 0;
+      D_800B3B38->ready[0] = 0;
+      if (D_800B3B88[0] == 0)
+      {
+        *D_8008F788 = 3;
+        goto advance;
+      }
+      if (D_800B3B88[1] == 0)
+      {
+        *D_8008F788 = 4;
+        func_8002E708();
+        arg0[0x5CB] = 0;
+        func_800125AC(2);
+        return;
+      }
+      goto reset_menu;
+    }
+      break;
+
+    case 1:
+      if (ed->unkA20 == 0)
+    {
+      if ((*D_800B3B89) == 0)
+      {
+        ed->unkA20 = state;
+        advance:
+        func_8002E708();
+
+        arg0[0x5CB] = 0;
+        func_80012578();
+        return;
+      }
+      goto reset;
+    }
+      goto back;
+
+    case 2:
+ do { if (0 != ed->unkA20) { back: ed->unkA20 = 0; D_800B3B88[1] = 0; D_800B3B88[0] = 0; func_800125AC(0); return; } reset: ed->unkA20 = 0; reset_menu: func_80012544(7); break; } while (0);
+
+  }
+
+}
 
 extern void (*D_800B2C2C[])(u8 *);
 
