@@ -62,7 +62,15 @@ s32 func_800C9B78(u8 *first, u8 *second) {
 
 extern s32 func_8001AA44(s32, s32);
 extern double sqrt(double);
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800C9C38);
+s32 func_800C9C38(u8 *a, u8 *b) {
+    register s32 result asm("v0");
+    if (__builtin_abs(a[0x15] - b[0x15]) < 2) {
+        result = __builtin_abs(a[0x16] - b[0x16]) < 2;
+    } else {
+        result = 0;
+    }
+    return result;
+}
 
 s32 func_800C9C90(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 0x5CC) & 0x40;
