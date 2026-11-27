@@ -63,3 +63,11 @@ do toolchain (`docker save ygo-decomp-tc | gzip | ssh.exe usuario@host "gunzip |
 
     tools/agents/perm_workers.sh status     # máquinas e fila
     tools/agents/perm_workers.sh stop       # para todos (as tarefas voltam à fila pelo prazo)
+
+## Modelo local em outra máquina (janela noturna)
+
+`night_llm.sh <usuario@host> <modelo> <sessões> <HH:MM fim>` liga, até o horário de fim, sessões do agente embutido do
+app (tipo "api") num modelo servido pelo Ollama da outra máquina (`http://<ip>:11434/v1`): trabalho ativo além do
+permuter. No fim remove o endpoint das configurações do app (as sessões param) e descarrega o modelo da GPU; um guarda
+na própria máquina descarrega no mesmo horário se este computador estiver desligado. `app_llm.py start|stop` (roda na
+distro do app) faz a parte do app. Log em `.cache/agents/night.log`.
