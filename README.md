@@ -34,9 +34,9 @@ A [revisão de 30/10](docs/reviews/2026-10-30-byte-exact-audit.md) registra a
 auditoria anterior e os 60 testes selecionados das ferramentas.
 
 <!-- PROGRESS:START -->
-**Código do jogo decompilado em C (byte-matching; sobre o que pode virar C, sem o assembly do original):** `████████░░░░░░░░░░░░` **41.49%**  
-**Total incluindo SDK PsyQ:** `████████░░░░░░░░░░░░` **39.36%**  
-**Cobertura (C + funções que já eram assembly no original):** `████████░░░░░░░░░░░░` **39.72%**  
+**Código do jogo decompilado em C (byte-matching; sobre o que pode virar C, sem o assembly do original):** `████████░░░░░░░░░░░░` **41.51%**  
+**Total incluindo SDK PsyQ:** `████████░░░░░░░░░░░░` **39.38%**  
+**Cobertura (C + funções que já eram assembly no original):** `████████░░░░░░░░░░░░` **39.75%**  
 **Funcional (C byte-idêntico + C equivalente validado por teste diferencial, `equiv/`; sobre o código convertível em C):** `████████████████████` **99.48%**  
 **Rebuild byte-idêntico dos 5 binários:** ✅ (verificado por SHA-1 em `make check`)
 
@@ -46,8 +46,8 @@ auditoria anterior e os 60 testes selecionados das ferramentas.
 | `SLPM_860.96` | loader / boot | 16.16% (3,252 / 20,124 B) | 47 / 93 | 24.27% (133 / 215 fn) | **21.51%** |
 | `CHESS.BIN` | overlay de batalha (tabuleiro) | 32.61% (135,752 / 416,244 B) | 535 / 854 | 100.00% (2 / 2 fn) | **32.18%** |
 | `RAISE.BIN` | overlay de criação de monstros | 44.09% (142,136 / 322,408 B) | 735 / 934 | 100.00% (2 / 2 fn) | **43.53%** |
-| `ETC.BIN` | overlay de menus/diversos | 79.42% (70,680 / 88,992 B) | 176 / 189 | 0.00% (0 / 0 fn) | **79.42%** |
-| **Total** | | **41.49%** (431,844 / 1,040,932 B) | 1991 / 2729 | 25.85% (312 / 522 fn) | **39.36%** |
+| `ETC.BIN` | overlay de menus/diversos | 79.74% (70,960 / 88,992 B) | 177 / 189 | 0.00% (0 / 0 fn) | **79.74%** |
+| **Total** | | **41.51%** (432,124 / 1,040,932 B) | 1992 / 2729 | 25.85% (312 / 522 fn) | **39.38%** |
 
 **Equivalentes e pendências por binário (jogo + SDK):**
 
@@ -57,8 +57,8 @@ auditoria anterior e os 60 testes selecionados das ferramentas.
 | `SLPM_860.96` | 71.57% (120 fn) | `██████████` **95.85%** | 300 / 302 (99.34%) | 32 | **2** |
 | `CHESS.BIN` | 67.82% (332 fn) | `██████████` **100.00%** | 869 / 869 (100.00%) | 0 | **0** |
 | `RAISE.BIN` | 56.47% (205 fn) | `██████████` **100.00%** | 942 / 942 (100.00%) | 0 | **0** |
-| `ETC.BIN` | 20.58% (13 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | 0 | **0** |
-| **Total** | 59.76% (961 fn) | `██████████` **99.48%** | 3,264 / 3,272 (99.76%) | 97 | **8** |
+| `ETC.BIN` | 20.26% (12 fn) | `██████████` **100.00%** | 189 / 189 (100.00%) | 0 | **0** |
+| **Total** | 59.74% (960 fn) | `██████████` **99.48%** | 3,264 / 3,272 (99.76%) | 97 | **8** |
 
 Equivalente conta somente `equiv/`; funcional soma byte-exact e equivalente, sem duplicar funções.
 As barras medem bytes de código convertível: ficam de fora as rotinas que já eram assembly no
