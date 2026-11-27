@@ -2,7 +2,23 @@
 #include "matching.h"
 #include "common.h"
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__8009ECF8__8009EDA4__800A0850__800A0E60__800A13B4__800A1630__800A1780__800A1D3C__800A3758__800A37E8__800A3AE8__800A3C24__800A4108__800A461C__800A475C", func_800A475C);
+extern s32 func_80020304(s32);
+
+extern u8 D_801010B0[];
+
+extern s32 func_80020304(s32);
+
+void func_800A475C(u8 *base, s32 x, s32 y, s16 *out)
+{
+  u32 board = *((u32 *) (D_801010B0 + (base[0x5D9] * 0x34)));
+  u32 cell;
+  int new_var;
+  new_var = 600;
+  out[0] = (x * 100) + (func_80020304(100) - new_var);
+  cell = *((u32 *) ((y * 4) + ((x * 0x34) + board)));
+  out[1] = -(((s32) ((cell >> 19) & 7)) * 50);
+  out[2] = (y * 100) + (func_80020304(100) - new_var);
+}
 
 s32 func_800A4858(s32 unused_arg0, s32 arg1, s32 arg2, void *arg3) {
     s16 temp_a0;
