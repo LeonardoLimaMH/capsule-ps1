@@ -307,6 +307,8 @@ segments:
       - [0x48114, c, raise_800DEA54__800DEB28__800DEBA0__800DF058__800DF914]
       - [0x48310, c, raise_800DEA54__800DFB10]
       - [0x48380, c, raise_800DEA54__800DFB80]
+      - [0x49290, c, raise_800DEA54__800DFB80__800E0A90]
+      - [0x49408, c, raise_800DEA54__800DFB80__800E0C08]
       - [0x49B88, c, raise_800DEA54__800E1388]
       - [0x49BC8, c, raise_800DEA54__800E13C8]
       - [0x49D54, c, raise_800DEA54__800E1554]
