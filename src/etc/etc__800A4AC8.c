@@ -70,7 +70,160 @@ static inline void A4BCC_clamp4(u16 *p, s32 value) {
     else if ((s16)value > 150) value = 150;
     p[0x60] = value;
 }
-INCLUDE_ASM("asm/etc/nonmatchings/etc__800A4AC8", func_800A4BCC);
+void func_800A4BCC(void) {
+    extern u8 D_80033450[], D_80091618[];
+    extern struct { u8 pad0[0xB]; u8 unkB; u8 padC[0x30]; } D_80063940[];
+    extern s32 D_800B3C1C[];
+    extern u8 *func_80032DB0(s32, s32, s32, s32, s32, void *);
+    extern u8 *func_80032E78(s32, s32, s32, s32, s32, void *);
+    extern u8 *func_80032F50(s32, s32, s32, s32, void *);
+    extern void func_800A81F4(), func_800A822C(), func_800A8278(), func_800A8350();
+    extern void func_800A83CC(), func_800A847C(), func_800A8534(), func_800A8638();
+    extern void func_800A86A4(), func_800A8758(), func_800A8810(), func_800A88DC();
+    extern void func_800A8988(), func_800A8B74();
+    struct Flags30 { u8 pad[0x30]; u32 pad30:4; u32 blend:2; u32 mode:3; u32 rest:23; };
+    s32 i, x, n, alt, row;
+    register u8 *obj asm("t0");
+    register u16 *p asm("a2");
+    u8 *table;
+    u8 *base;
+    register u32 v asm("a0");
+    s16 value;
+    register s32 sum asm("v1");
+    register s32 term asm("a0");
+    
+    for (i = 0; i < 19; i++)
+        func_80012A20(func_80019F30(0x2000C, i), 1, 0, 0);
+    for (i = 0; i < 2; i++)
+        func_80012A20(func_80019F30(0x2000C, i + 19), 1, 0, 0);
+    func_80012A20(func_80019F30(0x5000C, 0), 1, 0, 0);
+    {
+    void (*cb)();
+    i = 0;
+    cb = func_800A8278;
+    n = 6;
+    for (; i < 4; i++, n += 2) {
+        s32 ax, ay;
+        ax = (i & 1) ? 0x28 : -0x78;
+        ay = (i / 2) ? -0x10 : -0x68;
+        obj = A4BCC_CREATE(ax, ay, 4, i ? n : 5, cb);
+        *(s32 *)(obj + 0x80) = i;
+        ((struct Flags30 *)obj)->blend = 2;
+    }
+    }
+    A4BCC_CREATE(-0x58, -0x70, 4, 1, func_800A8350);
+    for (i = 0; i < 2; i++) {
+        s32 bx, by;
+        bx = i ? -0x48 : -0x58;
+        by = i ? 0x50 : 0x48;
+        obj = A4BCC_CREATE(bx, by, i ? 3 : 4, i ? 0x6D : 0x70, func_800A822C);
+        *(s32 *)(obj + 0x80) = 5;
+        *(s32 *)(obj + 0x84) = 8;
+        ((struct Flags30 *)obj)->blend = 2;
+    }
+    obj = A4BCC_CREATE(-0x60, -0x20, 3, 0x71, func_800A8534);
+    *(u16 *)(obj + 0x76) = 0x200;
+    *(u16 *)(obj + 0x74) = 0x200;
+    *(u16 *)(obj + 0x52) = 0;
+    *(u16 *)(obj + 0x50) = 0;
+    obj = A4BCC_CREATE(0x20, -0x50, 0x401, 0x19, func_800A822C);
+    *(s32 *)(obj + 0x80) = 6;
+    *(s32 *)(obj + 0x84) = 7;
+    A4BCC_CREATE(0, 0, 0x401, 0x10, func_800A83CC);
+    obj = A4BCC_CREATE(-0x88, -0x50, 0x401, 0x14, func_800A81F4);
+    *(s32 *)(obj + 0x84) = 6;
+    obj = A4BCC_CREATE(-0x68, -0x50, 0x401, 0x1C, func_800A81F4);
+    *(s32 *)(obj + 0x84) = 7;
+    obj = A4BCC_CREATE(-0x88, -0x50, 0x401, 0x1B, func_800A81F4);
+    *(s32 *)(obj + 0x84) = 7;
+    A4BCC_CREATE(-0x68, -0x50, 5, 0x22, func_800A8638);
+    A4BCC_CREATE(-0x68, -0x50, 5, 0x2E, func_800A86A4);
+    for (i = 0; i < 3; i++) {
+        obj = A4BCC_CREATE(-0x80, i * 0x14 - 0x44, 5, i + 0x36, func_800A8758);
+        *(s32 *)(obj + 0x84) = i;
+        ((struct Flags30 *)obj)->blend = 2;
+    }
+    for (i = 0; i < 6; i++) {
+        s32 cx;
+        cx = i / 3 ? 0x80 : 0x47;
+        obj = func_80032E78(cx, (i % 3) * 22 + 10, 5, 0xC, i + 4, func_800A8810);
+        *(s32 *)(obj + 0x84) = i;
+        ((struct Flags30 *)obj)->blend = 2;
+    }
+    obj = func_80032E78(0x50, -0x10, 5, 0xC, 0xB, func_800A8988);
+    ((struct Flags30 *)obj)->mode = 1;
+    ((struct Flags30 *)obj)->blend = 1;
+    for (i = 0; i < 3; i++) {
+        obj = A4BCC_CREATE(i * 14 + 0x58, -0x40, 5, 0x73, func_800A8B74);
+        *(s32 *)(obj + 0x84) = i;
+    }
+    for (i = 0; i < 2; i++) {
+        obj = A4BCC_CREATE(i * 0x70 - 0x68, 0x50, 4, 0x11, func_800A847C);
+        *(s32 *)(obj + 0x84) = i;
+        ((struct Flags30 *)obj)->blend = 2;
+    }
+    for (i = 0; i < 3; i++) {
+        obj = A4BCC_CREATE(i * 0x60 - 0x88, -0x40, 4, 0x6F, func_800A81F4);
+        *(s32 *)(obj + 0x84) = 8;
+        ((struct Flags30 *)obj)->blend = 2;
+        obj = A4BCC_CREATE(i * 0x60 - 0x60, 8, 3, i + 0x59, func_800A88DC);
+        *(s32 *)(obj + 0x84) = i;
+        ((struct Flags30 *)obj)->blend = 2;
+    }
+    obj = A4BCC_CREATE(-0xA0, -0x48, 0x401, 0x68, func_800A81F4);
+    *(s32 *)(obj + 0x84) = 9;
+    ((struct Flags30 *)obj)->blend = 2;
+    alt = 0;
+    for (row = 0; row < 5; row++, alt++) {
+        for (x = -0xA0; x < 0xA1; x += 0x40, alt++) {
+            obj = func_80032F50(x, row * 0x40 - 0xA0, 0x401, (alt & 1) ? 0x1E : 0x1F, D_80033450);
+            *(s16 *)(obj + 0x6A) = -1;
+            *(s16 *)(obj + 0x6E) = 1;
+            obj[0x5A] = 0x70;
+            obj[0x59] = 0x70;
+            obj[0x58] = 0x70;
+            *(u32 *)(obj + 0x38) |= 8;
+        }
+    }
+    table = (u8 *)D_80063940;
+    base = D_80091618;
+    p = (u16 *)base;
+    do {
+        if (p[8] != 0xFFFF) {
+            v = table[p[0] * 0x3C + 0xB] | 0x80;
+            p[0x4F] = v;
+            {
+                s32 qvalue = (s16)p[0x73] * 100 / (s32)v;
+                register u16 *q asm("a0") = p;
+                p[0x60] = qvalue;
+                if ((s16)qvalue >= 0) {
+                    if ((s16)qvalue > 150) qvalue = 150;
+                } else qvalue = 0;
+                q[0x60] = qvalue;
+            }
+            p[0x61] = p[0x6A];
+            if ((s16)p[0x61] < (s16)p[0x6B]) p[0x61] = p[0x6B];
+            p[0x61] = 255 - p[0x61];
+            term = p[0x69];
+            sum = term + p[0x6D];
+            sum += p[0x6E];
+            term = p[0x6F];
+            sum += term;
+            sum += p[0x70];
+            term = p[0x6C];
+            sum += term;
+            value = (s16)sum / 367 + 1;
+            {
+                register s16 val2 asm("a0") = value;
+                if (value > 5) val2 = 5;
+                p[0x5E] = val2;
+            }
+        }
+        p += 0xD4;
+    } while ((s32)p < (s32)(base + 6 * 0x1A8));
+    *D_800B3C1C = 0;
+    func_80012508();
+}
 
 void func_800A5400(void) {
     extern struct { u8 pad0[0x88]; u32 f88; u8 pad8c[0xC]; u32 f98; } D_8008ED68[];
