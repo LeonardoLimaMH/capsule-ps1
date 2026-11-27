@@ -1,8 +1,6 @@
 #include "ghidra.h"
 #include "common.h"
 
-#include "common.h"
-
 typedef struct {
     s16 vx, vy, vz, pad;
     s16 dx, dx_pad;
@@ -37,9 +35,6 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC", func_800DF95C);
 
-#include "common.h"
-
-#include "ghidra.h"
 void func_800DFD98(int param_1)
 
 {
@@ -398,7 +393,30 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC", func_800ED3E0);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC", func_800ED9CC);
+void func_800ED9CC(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    extern u8 D_80085A10[];
+    extern s32 func_800EE7D4();
+    extern s32 func_800FB368();
+    u8 *obj;
+    u8 *p;
+
+    obj = (u8 *)func_80015B3C(func_800EE7D4, func_800FB368, 1);
+    p = D_80085A10 + arg2 * 0x2E8 + arg3 * 0x7C;
+    func_800DDA78(p);
+    func_800FE188(p, obj + 0x28);
+    obj[0x30] = 0x80;
+    obj[0x31] = 0x80;
+    obj[0x32] = 0x80;
+    obj[0x34] = 0x10;
+    *(u16 *)(obj + 0x36) = 0x32;
+    *(u16 *)(obj + 0x3A) = 0;
+    *(u16 *)(obj + 0x38) = 0x14;
+    obj[0x3C] = 1;
+    *(u16 *)(obj + 0x3E) = GetTPage(0, 1, 0x280, 0x100);
+    *(u16 *)(obj + 0x40) = GetClut(0, 0x1F0);
+    obj[0x42] = 0;
+    D_80085A10[0x6FC] = 1;
+}
 
 typedef struct {
     u8 pad0[0x34];
@@ -447,9 +465,6 @@ void func_800EDAC8(u8 *arg0) {
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC", func_800EDC1C);
 
-#include "common.h"
-
-#include "ghidra.h"
 void func_800EDD8C(undefined4 param_1,undefined4 param_2,int param_3,int param_4)
 
 {
@@ -481,7 +496,6 @@ void func_800EDD8C(undefined4 param_1,undefined4 param_2,int param_3,int param_4
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC", func_800EDE7C);
 
-#include "ghidra.h"
 void func_800EE02C(undefined4 param_1,undefined4 param_2,int param_3,int param_4)
 
 {
