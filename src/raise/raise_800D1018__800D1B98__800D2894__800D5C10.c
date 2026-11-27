@@ -47,7 +47,6 @@ typedef struct {
     s32 f_E0;
 } Struct_80069AD4;
 
-
 typedef struct { u8 pad[0x386]; s16 field; u8 tail[0x414]; } Record_800D2894;
 
 u8 *func_800D5C10(s32 idx) {
@@ -341,7 +340,123 @@ end:
     }
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800D1018__800D1B98__800D2894__800D5C10", func_800D87E8);
+typedef struct {
+    u16 x;
+    u16 y;
+    u16 z;
+    u16 pad;
+} Vec3s_800D87E8;
+
+typedef struct {
+    u8 pad0[0xB4];
+    Vec3s_800D87E8 *unkB4;
+    Vec3s_800D87E8 *unkB8;
+} Struct_800D87E8;
+
+void func_800D87E8(Struct_800D87E8 *arg0, s32 arg1, Vec3s_800D87E8 *arg2) {
+    extern s32 D_80069B28[];
+    extern s32 D_80069BB4[];
+    extern s32 D_80069EB0[];
+    extern s32 rand(void);
+    register Vec3s_800D87E8 *s2 asm("s2");
+    register Vec3s_800D87E8 *s1 asm("s1");
+    register Vec3s_800D87E8 *s0 asm("s0");
+    register s32 i asm("s3");
+    register Vec3s_800D87E8 *t1 asm("t1");
+    s32 j;
+
+    s2 = arg2 + 1;
+    s1 = arg0->unkB4;
+    i = 0;
+    s1 = (Vec3s_800D87E8 *)((u8 *)s1 + (arg1 << 5));
+    s0 = s1;
+    for (; i < 4; i++) {
+        s0->x = (rand() % 0x800) - 0x400;
+        s0->y = (rand() % 0x800) - 0x400;
+        s0->z = rand() % 0x400;
+        s0++;
+    }
+
+    t1 = arg0->unkB8;
+    t1 = (Vec3s_800D87E8 *)((u8 *)t1 + (arg1 << 5));
+    if (*D_80069B28 == 1) {
+        goto case_1;
+    }
+    if (*D_80069B28 < 2) {
+        goto end;
+    }
+    if (*D_80069B28 == 2) {
+        goto case_2;
+    }
+    goto end;
+
+case_1:
+    {
+        u16 *ps14;
+        u16 *ps13;
+        u16 *ps12;
+        u16 *p_t1 = (u16 *)t1;
+        u16 *p_s1 = (u16 *)s1;
+        u16 *p_s2 = (u16 *)s2;
+
+        j = 0;
+        ps14 = (u16 *)t1 + 2;
+        ps13 = (u16 *)s1 + 2;
+        ps12 = (u16 *)s2 + 2;
+        do {
+            u16 v1, v2;
+            j++;
+            v1 = *p_s2;
+            p_s2 += 4;
+            v2 = *p_s1;
+            p_s1 += 4;
+            *p_t1 = (v1 - v2) * 2;
+            p_t1 += 4;
+            ps14[-1] = (ps12[-1] - ps13[-1]) * 2;
+            v1 = *ps12;
+            ps12 += 4;
+            v2 = *ps13;
+            ps13 += 4;
+            *ps14 = (v1 - v2) * 2;
+            ps14 += 4;
+        } while (j < 4);
+    }
+    goto end;
+
+case_2:
+    {
+        u16 *ps12;
+        u16 *pu16;
+        u16 *pu15;
+        u16 *p_t1 = (u16 *)t1;
+        u16 *p_s1 = (u16 *)s1;
+        u16 *p_s2 = (u16 *)s2;
+
+        j = 0;
+        ps12 = (u16 *)t1 + 2;
+        pu16 = (u16 *)s1 + 2;
+        pu15 = (u16 *)s2 + 2;
+        do {
+            u16 u3, u4;
+            j++;
+            *p_t1 = *p_s1 - *p_s2;
+            p_t1 += 4;
+            ps12[-1] = pu16[-1] - pu15[-1];
+            u3 = *pu15;
+            pu15 += 4;
+            u4 = *pu16;
+            pu16 += 4;
+            *ps12 = u4 - u3;
+            *(Vec3s_800D87E8 *)p_s1 = *(Vec3s_800D87E8 *)p_s2;
+            p_s2 += 4;
+            p_s1 += 4;
+            ps12 += 4;
+        } while (j < 4);
+    }
+
+end:
+    *D_80069BB4 = *D_80069EB0;
+}
 
 void func_800D8A20(void) {
     extern Struct_80069E4C D_80069E4C[];
