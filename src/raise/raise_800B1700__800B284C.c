@@ -12,7 +12,138 @@ extern void func_80015CD0(void *, s32, s32);
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700__800B284C", func_800B284C);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700__800B284C", func_800B2984);
+s32 func_800B2984(u16 arg0, u16 arg1)
+{
+  int new_var;
+  typedef struct 
+  {
+    u8 pad0[0x62];
+    u16 f62;
+    u8 pad64[0x8];
+    s32 f6c;
+    u8 pad70[0x1E];
+    s16 f8e;
+    u8 pad90[0x48];
+    u16 fd8;
+    u8 padDA[0x8];
+    u16 fe2;
+    u8 padE4[0x1A8 - 0xE4];
+  } Rec2984;
+  typedef struct 
+  {
+    u8 pad0[0x37E];
+    s16 f37e;
+    u8 pad380[0x79C + (-0x380)];
+  } Work2984;
+  extern Rec2984 D_80091618[];
+  extern Work2984 D_80100F38[];
+  extern s32 D_8006AF84[];
+  extern s32 D_800EEB74[];
+  extern s16 D_800EEB84[];
+  extern s32 D_800F2DB8[];
+  extern s32 func_800E0FB8(s32, s32);
+  extern s32 func_800B284C(s32, s32);
+  extern s32 func_800E14C4(s32);
+  extern s32 func_800B20A4(s32, s32);
+  extern s32 func_800B21F0(s32, s32);
+  extern s32 func_800202A4(s32);
+  extern void func_800D0C3C(s32);
+  extern s32 func_800D1CC4(s32, s32, s32, s32);
+  s32 now = D_8006AF84[0];
+  Rec2984 *tbl = D_80091618;
+  s32 id0 = arg0;
+  Rec2984 *p0 = &tbl[id0];
+  s32 id1;
+  if (p0->f62 != 0)
+  {
+    return 0;
+    do
+    {
+    }
+    while (0);
+  }
+  id1 = arg1;
+  if (((unsigned long) (func_800E0FB8(id0, id1) == 1)) || (func_800B284C(id0, id1) == 0))
+  {
+    return 0;
+  }
+  if (D_800EEB74[0] == 1)
+  {
+    D_800EEB74[0] = 0;
+    goto ok;
+  }
+  if ((D_80100F38[id0].f37e != 0) || (D_80100F38[id1].f37e != 0))
+  {
+    return 0;
+  }
+  if ((func_800E14C4(id0) == 1) || (func_800E14C4(id1) == 1))
+  {
+    return 0;
+  }
+  if (func_800B20A4(id0, id1) == 0)
+  {
+    return 0;
+  }
+  if (func_800B21F0(id0, id1) >= 0)
+  {
+    goto calc;
+  }
+  return 0;
+  calc:
+  {
+    register s32 div asm("a1") = 4;
+    register Rec2984 *p1 asm("v0");
+    s32 val;
+    s32 sum_d8;
+    s32 den;
+    register s32 e0 asm("a0");
+    register s32 e1 asm("v1");
+    register s32 d1 asm("v0");
+    register s32 d0 asm("a0");
+    if (p0->f8e == 0)
+    {
+      div = 1;
+    }
+    p1 = (Rec2984 *)(arg1 * sizeof(Rec2984));
+    p1 = (Rec2984 *)((u8 *)p1 + (u32)tbl);
+    e0 = p0->fe2;
+    e1 = p1->fe2;
+    d1 = p1->fd8;
+    val = e0 + e1;
+    d0 = p0->fd8;
+    if (val < 0x100) return 0;
+    sum_d8 = d1 + d0;
+    if (sum_d8 >= 0x154)
+    {
+      return 0;
+    }
+    val *= 0x154 - sum_d8;
+    den = div * 0xA9560;
+    val = (val * 1000) / den;
+    if (func_800202A4(0x3E8) >= val)
+    {
+      return 0;
+    }
+  }
+
+  ok:
+  D_800EEB84[0] = 0;
+
+  D_800F2DB8[new_var = 0] = 0x190;
+  {
+    Rec2984 *b = D_80091618;
+    s32 k0 = arg0;
+    Rec2984 *r0 = &b[k0];
+    Rec2984 *r1 = &b[arg1];
+    r0->f62 = 1;
+    r1->f62 = 1;
+    r0->f6c = now;
+    r1->f6c = now;
+    func_800D0C3C(1);
+    func_800D1CC4(k0, 0x1A, new_var, new_var);
+  }
+  return 1;
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700__800B284C", func_800B2C64);
 
