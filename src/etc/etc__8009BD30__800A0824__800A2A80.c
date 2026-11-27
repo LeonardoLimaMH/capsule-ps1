@@ -48,7 +48,31 @@ static inline void desenha_800A2BB0(s32 x, s32 y, s32 flag, s32 valor, s32 texto
     }
     func_8001F1A8((s16)x, (s16)y, cor, 1, 0, (void *)texto, 1, n, 3);
 }
-INCLUDE_ASM("asm/etc/nonmatchings/etc__8009BD30__800A0824__800A2A80", func_800A2BB0);
+void func_800A2BB0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
+    extern s16 D_800B3B38[];
+    s16 valor = 1;
+    register s32 x asm("s1") = arg0;
+    register s32 y asm("s2") = arg1;
+    register s32 lado asm("s3") = arg3;
+
+    if (D_800B3B38[0] == 1 && D_800B3B38[6] == (s16)arg2) {
+        valor = 3;
+    }
+    func_8001F1A8((s16)x, (s16)y, ((s16)lado == 1) ? valor : 0, 1, 0, (void *)arg4, 1, arg5, 3);
+    {
+        register u32 convertido asm("v0");
+        s32 x2;
+        s32 y2;
+
+        convertido = (u32)x + 0x30;
+        convertido <<= 16;
+        x2 = (s32)convertido >> 16;
+        convertido = (u32)y << 16;
+        y2 = (s32)convertido >> 16;
+        convertido = (u32)lado << 16;
+        func_8001F1A8(x2, y2, convertido == 0 ? valor : 0, 1, 0, (void *)arg6, 1, arg7, 3);
+    }
+}
 
 typedef struct {
     s16 unk0[2];
@@ -203,8 +227,6 @@ void func_800A3014(void *arg0) {
     }
 }
 
-#include "common.h"
-
 void func_800A3060(void *arg0) {
     extern M2C_UNK D_8008ED68[];
     extern u16 D_800B3B60[];
@@ -304,8 +326,6 @@ void func_800A3230(u8 *arg0) {
     }
 }
 
-#include "common.h"
-
 void func_800A32F0(void *arg0) {
     extern M2C_UNK D_8008ED68[];
     extern s16 D_800B3B40[];
@@ -320,8 +340,6 @@ void func_800A32F0(void *arg0) {
         }
     }
 }
-
-#include "common.h"
 
 void func_800A3388(void *arg0)
 {
