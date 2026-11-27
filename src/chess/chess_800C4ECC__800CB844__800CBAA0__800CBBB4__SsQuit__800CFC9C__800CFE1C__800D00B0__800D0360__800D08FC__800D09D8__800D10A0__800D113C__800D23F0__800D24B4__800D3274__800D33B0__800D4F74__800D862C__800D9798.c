@@ -20,7 +20,68 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798", func_800DAE28);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798", func_800DAF10);
+s32 func_800DAF10(id)
+u8 id;
+
+{
+  extern u8 D_80118C18[];
+  extern u8 D_80119660[];
+  extern u8 D_8011970A[];
+  u8 local[13][13];
+  s32 count = 0;
+  s32 value;
+  s32 i;
+  s32 j;
+  s32 left;
+  u8 *p;
+  u8 *q;
+  u8 *selected;
+  value = (s16) func_800D8580(id, id);
+  p = D_80118C18;
+  q = p + ((((id & 0x7F) - 1) * 7) + ((id >> 7) * 42));
+  q[0x3A7] += value;
+  p[10] = 0;
+  left = func_800D497C(id, local);
+  p[10] = 2;
+  q[0x3A7] -= value;
+  i = 0;
+  do
+  {
+    j = 0;
+    do
+    {
+      if (local[i][j] != 0)
+      {
+        left--;
+        if ((value < local[i][j]) && (((u8 (*)[13][4]) (*((u32 *) D_80118C18)))[i][j][3] == 0))
+        {
+          D_80119660[count] = (i * 13) + j;
+          count++;
+        }
+        if (left == 0)
+        {
+          i = 13;
+          break;
+        }
+      }
+      j++;
+    }
+    while (j < 13);
+    i++;
+  }
+  while (i < 13);
+  if (count == 0)
+  {
+    return 0;
+  }
+  i = func_800202A4(count);
+  func_800D90C0(id);
+  selected = &D_80119660[i];
+  func_800CFFF8(id, ((*selected) / 13U) & 0xFF, ((*selected) % 13U) & 0xFF);
+  D_8011970A[0] = (*selected) / 13U;
+  D_8011970A[1] = (*selected) % 13U;
+  return 1;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74__800D862C__800D9798", func_800DB14C);
 
