@@ -292,5 +292,3 @@ void func_8003992C(u8 *p, u8 prog) {
         }
     }
 }
-
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8003742C__80038890__80038CA8", func_80039E60);
