@@ -34,8 +34,6 @@ void func_800A0A5C(void) {
     func_800A0E20();
 }
 
-#include "common.h"
-
 s32 func_800A0A7C(void) {
     extern s16 D_800ED88C[];
     s32 temp_v0;
@@ -174,8 +172,6 @@ s32 func_800A0BB4(void) {
     }
     return 0;
 }
-
-#include "common.h"
 
 typedef struct {
     u8 pad0[0x344];
@@ -330,8 +326,6 @@ s32 func_800A0F4C(void) {
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A11B8);
 
-#include "common.h"
-
 #include "ghidra.h"
 void func_800A16E8(void)
 {
@@ -364,7 +358,76 @@ void func_800A16E8(void)
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A1778);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A18EC);
+void func_800A18EC(void) {
+    typedef struct {
+        u16 unk0;
+        u8 pad2[0x158];
+        u16 unk15A[12];
+        u8 pad172[0x1A8 - 0x172];
+    } Mon_800A18EC;
+    typedef struct {
+        u8 pad0[0x332];
+        s16 unk332;
+        s16 unk334;
+        u8 pad336[0x79C - 0x336];
+    } Work_800A18EC;
+    extern Mon_800A18EC D_80091618[];
+    extern u8 D_800F2D30[];
+    extern u8 D_800F2D98[];
+    extern Work_800A18EC D_80100F38[];
+    extern u16 D_8006AF80[];
+    extern u16 D_800F2CF8[];
+    extern s32 D_800ED890[];
+    extern s32 D_800ED894[];
+    extern void func_8001A49C(s32);
+    extern void func_800E334C(s32, s16 *, s16 *);
+    extern void func_800E3260(s32, s32, s32);
+    extern void func_800A1B18(void);
+    extern void func_800D1CC4(s32, s32, s32, s32);
+
+    u16 c = D_80091618[D_8006AF80[0]].unk0;
+    s32 i;
+
+    if (D_800F2D30[c] == 0xFF) {
+        s32 k;
+        s32 idx;
+        for (k = 0; k < 6; k++) {
+            if (D_800F2D98[k] == (c & 0xFF)) {
+                break;
+            }
+        }
+        if (k == 6) {
+            for (k = 0; k < 6; k++) {
+                if (D_800F2D98[k] == 0xFF) {
+                    break;
+                }
+            }
+            idx = k;
+            if (idx == 6) {
+                idx = 5;
+            }
+            D_800F2D98[idx] = c;
+        } else {
+            idx = k;
+        }
+        func_8001A49C((s32)((u8 *)0x80146A18 + idx * 0x15800));
+    }
+    {
+        u16 cur = D_8006AF80[0];
+        Mon_800A18EC *base = D_80091618;
+        Mon_800A18EC *mon = &base[cur];
+        for (i = 0; i < 12; i++) {
+            mon->unk15A[i] = 0;
+            D_800F2CF8[i] = 0;
+        }
+    }
+    D_800ED890[0] = 0;
+    D_800ED894[0] = 0;
+    func_800E334C(1, &D_80100F38[D_8006AF80[0]].unk332, &D_80100F38[D_8006AF80[0]].unk334);
+    func_800E3260(1, D_80100F38[D_8006AF80[0]].unk332, D_80100F38[D_8006AF80[0]].unk334);
+    func_800A1B18();
+    func_800D1CC4(D_8006AF80[0], 0, 0, 0);
+}
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A0A10", func_800A1B18);
 
@@ -376,8 +439,6 @@ void func_800A1D58(s32 arg0, s32 arg1) {
     D_800EEB9C.a->flags = (D_800EEB9C.a->flags & ~0x40) | ((arg1 & 1) << 6);
     D_800EEB9C.b->flags = (D_800EEB9C.b->flags & ~0x40) | ((arg1 & 1) << 6);
 }
-
-#include "common.h"
 
 void func_800A1DD4(void) {
     extern void * D_800EF300[];
@@ -414,8 +475,6 @@ void func_800A1DD4(void) {
     M2C_FIELD((*D_800FAE10), s16 *, 0x76) = 0x24;
     func_800A1F44(1, 0, 0);
 }
-
-#include "common.h"
 
 typedef struct { u8 pad[0x38]; s32 flags; } Obj_800A1F44;
 
