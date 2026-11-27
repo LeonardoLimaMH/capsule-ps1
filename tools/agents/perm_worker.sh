@@ -13,7 +13,10 @@ DISTRO=${AGENTS_DISTRO:-decomp-wtf}
 SSH=${PERM_SSH:-ssh.exe}; RJOBS=${PERM_REMOTE_JOBS:-8}
 mkdir -p $W/perm
 log() { echo "[$(date '+%F %T')] [$NAME] $*"; }
-rssh() { $SSH -o BatchMode=yes -o ConnectTimeout=10 "$NAME" "$@"; }
+# toda chamada ao remoto tem prazo (RT, padrão 300 s) e checagem de conexão viva: uma conexão que trava não
+# prende o trabalhador (já ficou 5 h parado num remote_idle.sh)
+rssh() { timeout -k 10 "${RT:-300}" $SSH -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=15 \
+  -o ServerAliveCountMax=4 "$NAME" "$@"; }
 
 ship_tools() {  # para o remoto: só o que o compile.sh do permuter usa (o disco e o asm do jogo ficam aqui)
   tar -cf - tools include config | rssh 'mkdir -p ~/capsule-perm && tar -xf - -C ~/capsule-perm' 2>> $W/perm/remote.err
@@ -44,7 +47,7 @@ run_remote() {  # run_remote t f p c -> 0 ok, 3 máquina ficou ocupada, outro: f
     || { echo "$(date '+%T') $f: preparo falhou (C que o permuter não lê)" >> $W/perm/remote.err; return 4; }
   tar -cf - -C .cache/permuter $f | rssh "rm -rf ~/capsule-perm/.cache/permuter/$f; mkdir -p ~/capsule-perm/.cache/permuter && tar -xf - -C ~/capsule-perm/.cache/permuter" \
     2>> $W/perm/remote.err || { echo "$(date '+%T') $f: envio da tarefa falhou" >> $W/perm/remote.err; return 1; }
-  rssh "bash ~/capsule-perm/tools/agents/remote_perm.sh $f $SECS $RJOBS" < /dev/null >> $W/perm/$f.log 2>&1
+  RT=$((SECS + 600)) rssh "bash ~/capsule-perm/tools/agents/remote_perm.sh $f $SECS $RJOBS" < /dev/null >> $W/perm/$f.log 2>&1
   rc=$?
   # traz o resultado; a pasta remota só é apagada depois que a cópia daqui foi conferida (o remote_perm.sh já
   # guardou um 0 em ~/capsule-perm/matches, que nunca é apagada)
