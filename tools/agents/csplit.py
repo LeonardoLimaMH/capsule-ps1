@@ -23,7 +23,7 @@ def items(src):
                 j += 2 if src[j] == "\\" else 1
             i = j + 1
             continue
-        if depth == 0 and c == "#" and src[start:i].strip() == "":
+        if depth == 0 and c == "#" and re.sub(r"/\*.*?\*/", " ", src[start:i], flags=re.S).strip() == "":
             e = src.find("\n", i)
             while e > 0 and src[e - 1] == "\\":
                 e = src.find("\n", e + 1)
@@ -44,12 +44,23 @@ def items(src):
                 out.append(src[start:j])
                 start = i = j
                 continue
-        elif c == ";" and depth == 0:
+        elif c == ";" and depth == 0 and not _kr_head(src[start:i]):
             out.append(src[start:i + 1])
             start = i + 1
         i += 1
     out.append(src[start:])
     return [x for x in out if x.strip()]
+
+
+# cabeçalho de definição K&R ainda sem o corpo: "u16 f(a, b)" seguido das declarações dos parâmetros
+# ("u8 a; u8 *b;"); o ";" delas não fecha um item (senão o cabeçalho fica separado do corpo)
+_KR = re.compile(r"[A-Za-z_]\w*\s*\(\s*[A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)*\s*\)((?:[^;{}()]*;)*[^;{}()]*)$", re.S)
+
+
+def _kr_head(text):
+    t = re.sub(r"/\*.*?\*/", " ", text, flags=re.S).strip()
+    m = _KR.search(t)
+    return bool(m and m.group(1).strip()) and "#" not in t and not re.match(r"(typedef|extern)\b", t)
 
 
 def func_name(it):
