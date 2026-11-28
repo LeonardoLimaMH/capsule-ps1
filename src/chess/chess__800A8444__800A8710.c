@@ -280,7 +280,19 @@ extern s32 rsin(s32);
 
 extern s32 rsin(s32);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800A8444__800A8710", func_800A8E08);
+s32 func_800A8E08(s32 arg0, u32 arg1, s32 arg2)
+{
+    arg1 >>= 30;
+    if (arg1 == 0) {
+        return 0;
+    }
+    if (arg2 == 0) {
+        if (arg1 == 1) {
+            return 0;
+        }
+    }
+    return 1;
+}
 
 s32 func_800A8E34(s32 arg0, s32 arg1, s32 arg2)
 {
