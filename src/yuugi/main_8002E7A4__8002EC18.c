@@ -46,8 +46,6 @@ void func_80030D00(void) {
     }
 }
 
-#include "common.h"
-
 extern u8 D_80085428[];
 extern s32 D_8008F6B8[];
 
@@ -66,8 +64,6 @@ void func_80030D64(void) {
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4__8002EC18", func_80030DD4);
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4__8002EC18", func_8003177C);
-
-#include "common.h"
 
 void func_80031E60(void) {
     extern u16 D_80085430[];
@@ -139,7 +135,31 @@ void func_80032398(void) {
 }
 
 extern s32 func_8001F1A8(s16, s16, s32, s32, s32, s32, s32, s32, s32);
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_8002E7A4__8002EC18", func_80032474);
+void func_80032474(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
+    extern s16 D_800922D2[];
+    s16 valor = 1;
+    register s32 x asm("s1") = arg0;
+    register s32 y asm("s2") = arg1;
+    register s32 lado asm("s3") = arg3;
+
+    if (D_800922D2[0] == (s16)arg2) {
+        valor = 3;
+    }
+    func_8001F1A8((s16)arg0, (s16)arg1, ((s16)arg3 == 1) ? valor : 0, 1, 0, arg4, 1, arg5, 0);
+    {
+        register u32 convertido asm("v0");
+        register s32 x2 asm("a0");
+        register s32 y2 asm("a1");
+
+        convertido = (u32)x + 0x28;
+        convertido <<= 16;
+        x2 = (s32)convertido >> 16;
+        convertido = (u32)y << 16;
+        y2 = (s32)convertido >> 16;
+        convertido = (u32)lado << 16;
+        func_8001F1A8(x2, y2, convertido == 0 ? valor : 0, 1, 0, arg6, 1, arg7, 0);
+    }
+}
 
 void func_80032570(void) {
     extern u8 D_800922FA[];
@@ -216,8 +236,6 @@ void func_80032760(void *arg0) {
     }
 }
 
-#include "common.h"
-
 void func_800327CC(void *arg0) {
     extern M2C_UNK D_80065390[];
     extern M2C_UNK D_8008ED68[];
@@ -235,8 +253,6 @@ void func_800327CC(void *arg0) {
         func_800185F8(arg0);
     }
 }
-
-#include "common.h"
 
 void func_80032888(void *arg0) {
     extern M2C_UNK D_80065390[];
@@ -457,8 +473,6 @@ u8 *func_80032E78(s32 x, s32 y, s32 z, s32 a3, s32 e5, void *cb) {
     return o;
 }
 
-#include "common.h"
-
 extern u8 *func_80015B3C();
 extern s32 func_8001A434();
 extern void func_8003350C();
@@ -486,13 +500,7 @@ u8 *func_80032F50(s16 x, s16 y, s16 z, s32 a3, void *cb) {
     return o;
 }
 
-#include "common.h"
-
-extern u8 *func_80015B3C();
 extern s32 func_8001A44C();
-extern void func_8003350C();
-extern void func_800161C4();
-extern u8 D_80065390[];
 
 u8 *func_80033020(s16 x, s16 y, s16 z, s32 a3, void *cb) {
     u8 *o;
