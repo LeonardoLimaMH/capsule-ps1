@@ -1,8 +1,6 @@
 #include "common.h"
 #include "yuugi.h"
 
-#include "common.h"
-
 void func_80019C58(void)
 {
   s32 var_s0;
@@ -22,8 +20,6 @@ void func_80019C58(void)
   }
   while (var_s0 < 0xC8);
 }
-
-#include "common.h"
 
 #include "ghidra.h"
 void func_80019CB8(int param_1)
@@ -59,7 +55,6 @@ void func_80019D38(s32 arg0, s32 arg1, void *arg2) {
     M2C_FIELD(arg2, s32 *, 4) = (s32) (arg0 & 0xFFFF);
 }
 
-#include "ghidra.h"
 void func_80019D48(int param_1,undefined4 param_2,undefined4 param_3)
 
 {
@@ -67,7 +62,6 @@ void func_80019D48(int param_1,undefined4 param_2,undefined4 param_3)
   return;
 }
 
-#include "ghidra.h"
 void func_80019D7C(int param_1,undefined4 param_2,undefined4 param_3)
 
 {
@@ -89,4 +83,24 @@ void func_80019DB4(s32 arg0, u16 arg1, s32 arg2, s32 arg3) {
     b[0x40C] = 1;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main__arVcount__80019C58", func_80019E1C);
+void func_80019E1C(s32 *f) {
+    register s32 fd asm("s3");
+    s32 size;
+    s32 i;
+
+    fd = PCopen(f[2], 0, 0);
+    if (fd == -1) {
+        return;
+    }
+    size = PClseek(fd, 0, 2);
+    PClseek(fd, 0, 0);
+    for (i = 0; (i + 1) * 800 < size; i++) {
+        PClseek(fd, i * 800, 0);
+        func_800425BC(fd, f[0] + i * 800, 800);
+    }
+    size -= i * 800;
+    if (size > 0) {
+        func_800425BC(fd, f[0] + i * 800, size);
+    }
+    func_800423E8(fd);
+}
