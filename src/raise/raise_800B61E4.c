@@ -524,7 +524,29 @@ s32 func_800B7E70(s32 i)
   return 0;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B61E4", func_800B7ED8);
+void func_800B7ED8(s32 arg0) {
+    typedef struct {
+        u8 _p00[0x38];
+        u32 b38_0 : 1;
+        u32 _b38_1 : 31;
+    } Obj;
+    typedef struct {
+        u8 _p00[0x10];
+        s32 unk10;
+        u8 _p14[8];
+        Obj *unk1C;
+        u8 _p20[8];
+        Obj *unk28[7];
+    } State;
+    extern State D_800EEB9C[];
+    s32 i;
+
+    D_800EEB9C->unk10 = arg0;
+    D_800EEB9C->unk1C->b38_0 = arg0;
+    for (i = 0; i < 7; i++) {
+        D_800EEB9C->unk28[i]->b38_0 = arg0;
+    }
+}
 
 void func_800B7F40(s32 mode) {
     typedef struct Obj {
