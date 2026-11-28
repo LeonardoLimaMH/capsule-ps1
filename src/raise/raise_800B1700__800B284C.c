@@ -147,7 +147,69 @@ s32 func_800B2984(u16 arg0, u16 arg1)
 
 INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700__800B284C", func_800B2C64);
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_800B1700__800B284C", func_800B2EA4);
+s32 func_800B2EA4(void) {
+    extern u8 D_8008ED68[];
+    extern u16 D_8006AF90[];
+    extern u8 D_80085428[];
+    extern s16 D_8006AFA4[];
+    extern u16 D_8008EE4C[];
+    u8 *p1;
+    s16 val0;
+    long val1;
+    s32 i;
+    s16 *p;
+
+    switch (*D_8008EE4C) {
+    case 0: {
+        register u8 *p0 asm("a0") = D_8008ED68;
+        register u8 *p1 asm("a2") = (u8 *)D_8006AF90;
+        val0 = *(u16 *)(p0 + 0xE4);
+        *(s16 *)(p0 + 0xE8) = 0;
+        *(s16 *)(p0 + 0xEC) = 0;
+        val1 = *D_8006AF90 + *(u16 *)(p1 + 0x14);
+        *(u16 *)(p0 + 0xE4) = val0 + 1;
+        *D_8006AF90 = val1;
+        break;
+    }
+    case 1:
+        p1 = (u8 *)D_8006AF90;
+        if (func_8002367C(D_80085428, *(s16 *)(p1 + 0x16), *(s16 *)(p1 + 0x1A), *(s16 *)(p1 + 0x1C))) {
+            register u8 *p0 asm("v1") = D_8008ED68;
+            *(u16 *)(p0 + 0xE4) += 1;
+        }
+        break;
+    case 2:
+        if (*D_8006AFA4 == 1) {
+            register u8 *p0 asm("v1") = D_8008ED68;
+            *(u16 *)(p0 + 0xE4) += 2;
+        } else {
+            register u8 *p0 asm("v0") = D_8008ED68;
+            short v = *(u16 *)(p0 + 0xE4);
+            *(s16 *)(p0 + 0xE8) = 0;
+            *(s16 *)(p0 + 0xEC) = 0;
+            *(u16 *)(p0 + 0xE4) = v + 1;
+        }
+        break;
+    case 3:
+        p1 = (u8 *)D_8006AF90;
+        if (func_8002367C(D_80085428, *(s16 *)(p1 + 0x18), *(s16 *)(p1 + 0x1A), *(s16 *)(p1 + 0x1C))) {
+            register u8 *p0 asm("v1") = D_8008ED68;
+            *(u16 *)(p0 + 0xE4) += 1;
+        }
+        break;
+    case 4:
+        p = (s16 *)D_8006AF90;
+        *D_8008EE4C = 0;
+        p[10] = 0;
+        for (i = 0; i < 2; i++) {
+            p[11 + i] = -1;
+            p[13 + i] = -1;
+        }
+        return 1;
+    }
+
+    return 0;
+}
 
 extern s32 func_80019F30(s32, s32);
 extern void func_80015CD0(void *, s32, s32);
