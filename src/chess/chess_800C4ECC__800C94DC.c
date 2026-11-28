@@ -267,7 +267,41 @@ extern u16 D_8005089C[];
 extern s32 func_80027B34();
 extern s32 func_80033E5C();
 extern s32 func_800A8E34();
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800C94DC", func_800CA574);
+void func_800CA574(u8 *arg0) {
+    s32 n = 1;
+    s32 linha;
+    u16 *lista;
+    s32 deslocLinha;
+
+    D_8005089C[0] = n;
+    linha = 0;
+    lista = D_8005089C;
+    deslocLinha = 0;
+    do {
+        register s32 coluna asm("s1") = 0;
+        s32 desloc = deslocLinha;
+        u32 deslocLista = n * sizeof(*lista);
+        u16 *destino = (u16 *)(deslocLista + (u32)lista);
+
+        do {
+            u16 valor;
+
+            if (func_800A8E34(arg0 + 0x5D0, linha, coluna) == 0) {
+                valor = func_80027B34((arg0 + desloc)[0x5E8]);
+            } else {
+                valor = 0xFFFF;
+            }
+            *destino = valor;
+            destino++;
+            n++;
+            coluna++;
+            desloc += 0x7C;
+        } while (coluna < 5);
+        linha++;
+        deslocLinha += 0x2E8;
+    } while (linha < 2);
+    func_80033E5C(D_8005089C, 11);
+}
 
 s32 func_800CA664(s16 arg0) {
     if (arg0 == 0) return 1;
@@ -367,7 +401,6 @@ void func_800CA87C(u8 *arg0) {
     } while (i < 2);
 }
 
-#include "ghidra.h"
 void func_800CAA44(undefined4 param_1,int param_2)
 
 {
