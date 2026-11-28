@@ -251,7 +251,31 @@ s32 func_800D7CC4(s16 arg0) {
     return func_800202A4(0x64) < arg0;
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0__800D4F74", func_800D7CFC);
+u32 func_800D7CFC(u8 arg0, u8 arg1) {
+    extern u8 D_80063940[];
+    extern u8 D_8006B2A4[];
+    extern u8 D_80085428[];
+    extern u32 func_800D7B80();
+    extern s32 func_800D23F0();
+    extern u32 func_800D2DA8();
+    u8 *table = D_8006B2A4;
+    D63940_t *data = (D63940_t *)D_80063940;
+    u8 *base = D_80085428;
+    u32 side;
+    u8 *p1 = base + (((arg0 & 0x7F) - 1) * 0x7C + (side = (arg0 & 0xFF) >> 7) * 0x2E8);
+    u32 r;
+    u32 res;
+
+    if ((*(u32 *)(table + ((data[p1[0x5E8]].unk8 >> 17) & 0x7F) * 0x58 + 0x10) >> 29) != 6) {
+        u8 *p2 = base + (((arg1 & 0x7F) - 1) * 0x7C + ((arg1 & 0xFF) >> 7) * 0x2E8);
+        r = func_800D23F0(side, p1[0x5F7], p2[0x5F8]);
+        res = (u8)func_800D7B80(arg0 & 0xFF, r & 0xFF);
+    } else {
+        r = func_800D2DA8(arg0 & 0xFF, arg1 & 0xFF);
+        res = (u8)(*(s16 *)(table + ((data[p1[0x5E8]].unk8 >> 17) & 0x7F) * 0x58 + 0x14) * (r & 0xFF));
+    }
+    return res;
+}
 
 u8 func_800D7E94(u32 arg0, u8 arg1) {
     extern u8 D_80085428[];
