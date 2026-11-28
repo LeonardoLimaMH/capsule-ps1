@@ -1,6 +1,5 @@
 #include "ghidra.h"
 #include "common.h"
-#include "ghidra.h"
 
 void func_800B38B0(u8 *arg0) {
     extern u8 *func_800A8FFC(u8 *);
@@ -219,8 +218,6 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B3EC4);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B40F0);
 
-#include "common.h"
-
 void func_800B4284(void) {
     extern u16 D_8008EE4C[];
     switch ((*D_8008EE4C)) {                           /* irregular */
@@ -267,8 +264,6 @@ void func_800B4384(u8 *arg0) {
     *(s32 *)(arg0 + 0x54) += ed[0x103] < 2 ? 1 : ed[0x103];
     func_800A360C(p, p[0xBCA], arg0, 0);
 }
-
-#include "common.h"
 
 void func_800B4400(void *arg0) {
     extern u8 D_8006388C[];
@@ -967,8 +962,6 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B881C);
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B8A0C);
 
-#include "common.h"
-
 void func_800B8DA0(void *arg0) {
     extern u8 D_8008610F[];
     u16 temp_v1;
@@ -1022,7 +1015,40 @@ void func_800B8EC0(void *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B8F38);
+s32 func_800B8F38(void *arg0, u8 *arg1, u8 *arg2, u32 arg3) {
+    extern s8 D_80100FA8[];
+    extern u8 *D_801010B0[];
+    s32 res = 0;
+    s32 i = 0;
+    register s32 five asm("t4") = 5;
+    s8 *d = D_80100FA8;
+    for (; i < 4; i++, d += 2) {
+        u8 x = arg2[0x15];
+        u8 y = arg2[0x16];
+        u8 *base = *(u8 **)((u8 *)D_801010B0 + arg1[9] * 0x34);
+        u32 a = x + d[0];
+        s32 b = y + d[1];
+        u8 *e;
+        register u32 raw asm("v0");
+        register u32 t asm("v1");
+        if (a < 0xD && b >= 0 && b < 0xD) {
+            e = (u8 *)(b * 4 + (a * 0x34 + (u32)base));
+            if ((s32)(*(u32 *)e & 0x3F) >= 2) {
+                raw = e[3];
+                if (raw == 0) continue;
+                t = raw;
+                if ((t >> 7) == arg3) continue;
+                raw = t & 0x7F;
+                raw -= 1;
+                if (raw != five) {
+                    res = 1;
+                    break;
+                }
+            }
+        }
+    }
+    return res;
+}
 
 s32 func_800B9020(s32 arg0, u8 *arg1, s32 arg2) {
     extern s8 D_80100FA8[];
@@ -1057,4 +1083,3 @@ done:
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess__800B38B0", func_800B90FC);
 
-#include "ghidra.h"
