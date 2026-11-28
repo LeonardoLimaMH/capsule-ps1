@@ -387,7 +387,33 @@ INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC", func_800EC878);
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC", func_800ECB98);
+void func_800ECB98(u8 *arg0) {
+    extern s32 rsin(s32);
+    extern s32 rcos(s32);
+    extern void func_80013920(void *);
+    extern void func_800FF0A0(void *, u16 *, s32);
+    u16 buf[3];
+    u32 count;
+    s32 speed;
+    s32 angle;
+
+    count = *(u32 *)(arg0 + 0x3C) + 1;
+    *(u32 *)(arg0 + 0x3C) = count;
+    speed = *(s32 *)(arg0 + 0x80);
+    angle = *(s32 *)(arg0 + 0x84);
+    if (count >= 0xB5U) {
+        func_80013920(arg0);
+        return;
+    }
+    *(s32 *)(arg0 + 0x7C) += 0x2710;
+    *(s32 *)(arg0 + 0x68) += (speed * rsin(angle)) / 4096;
+    *(s32 *)(arg0 + 0x70) += (speed * rcos(angle)) / 4096;
+    *(s32 *)(arg0 + 0x6C) += *(s32 *)(arg0 + 0x7C);
+    buf[0] = *(u16 *)(arg0 + 0x6A);
+    buf[1] = *(u16 *)(arg0 + 0x6E);
+    buf[2] = *(u16 *)(arg0 + 0x72);
+    func_800FF0A0(arg0, buf, 1);
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800DCF3C__800DD3D8__800DDA78__800DF7CC", func_800ECC94);
 
