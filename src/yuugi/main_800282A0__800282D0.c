@@ -38,8 +38,6 @@ s32 func_800282E0(void)
 
 INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_8002835C);
 
-#include "common.h"
-
 typedef struct {
     u32 mode;
     void *crect;
@@ -129,7 +127,67 @@ s32 func_800293E8(void) {
     return 0;
 }
 
-INCLUDE_ASM("asm/yuugi/nonmatchings/main_800282A0__800282D0", func_800294AC);
+s32 func_800294AC(s32 arg0, s32 arg1) {
+    typedef struct {
+        s32 x;
+        s32 y;
+        s32 unk8;
+    } Unk1C;
+    typedef struct {
+        u8 pad0[0x10];
+        u16 unk10;
+        u16 unk12;
+        u16 unk14[4];
+        Unk1C unk1C[4];
+        u8 pad4C[0x1A8 - 0x4C];
+    } Unk91618;
+    typedef struct {
+        u8 pad0[0x336];
+        s16 unk336;
+        s16 unk338;
+        u8 pad33A[0x79C - 0x33A];
+    } Unk100F38;
+    extern Unk91618 D_80091618[];
+    extern Unk100F38 D_80100F38[];
+    extern u8 D_800EF364[][8][8];
+    extern s16 D_80069AB4[];
+    extern s32 func_800A9658(s16);
+
+    u16 id = func_800B1260(arg0);
+    Unk100F38 *p38;
+    u16 fp;
+    u16 i;
+
+    if (id == 0xFFFF) {
+        return 0;
+    }
+    p38 = &D_80100F38[id];
+    fp = D_80091618[id].unk10;
+    if (fp == 0xFFFF) {
+        return 0;
+    }
+    for (i = 0; i < D_80091618[id].unk12; i++) {
+        u16 idx = D_80091618[id].unk14[i];
+        s16 *tbl = D_80069AB4;
+        s16 *ptr = &tbl[idx];
+        s32 x = D_80091618[id].unk1C[i].x;
+        s32 y = D_80091618[id].unk1C[i].y;
+        register s32 n asm("a2") = func_800A9658((s16)((u16)*ptr - 1));
+        u16 j;
+        for (j = 0; j < (u16)n; j++) {
+            s32 w = *ptr;
+            u8 *b = (u8 *)D_800EF364;
+            u8 *grid = (fp << 6) + b;
+            s32 dx = (u16)(j / w) + 1;
+            u8 *row = (u8 *)(((x - dx) * 8) + (u32)grid);
+            s32 dy = (u16)(j % w) + 1;
+            if (arg1 == row[y - dy]) {
+                return 1;
+            }
+        }
+    }
+    return arg1 == D_800EF364[fp][p38->unk336 - 1][p38->unk338 - 1];
+}
 
 s32 func_800296C0(s32 a0, s32 a1) {
     extern u8 D_800EF364[];
@@ -271,7 +329,6 @@ void func_80029A9C(void *arg0) {
     }
 }
 
-#include "common.h"
 #include "gte_inline.h"
 
 void func_80029B28(void *arg0) {
