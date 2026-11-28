@@ -25,7 +25,70 @@ void func_800D3408(s32 arg0) {
     M2C_FIELD(temp_s1, s8 *, 6) = func_800202A4(6);
 }
 
-INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0", func_800D34D4);
+s32 func_800D34D4(u8 *board, u8 *mv, s32 x, s32 y)
+{
+    extern u32 *D_80118C18[];
+    s32 nx, ny;
+    u32 row, col;
+    u32 *table;
+    u8 c;
+    s32 a, b, d;
+
+    register s32 startColumn asm("t4") = y;
+
+    if (mv[10] < 4) {
+        short startColumnOffset = (u8)startColumn * sizeof(u32);
+
+        do {
+            switch (mv[10]) {
+            case 0:
+                nx = x - 1;
+                ny = startColumn;
+                break;
+            case 1:
+                nx = x;
+                ny = startColumn + 1;
+                break;
+            case 2:
+                nx = x + 1;
+                ny = startColumn;
+                break;
+            case 3:
+                nx = x;
+                ny = startColumn - 1;
+                break;
+            default:
+                ny = nx = 0;
+                break;
+            }
+            row = (u8)nx;
+            col = (u8)ny;
+            if (row < 13 && col < 13) {
+                long close;
+                c = *(board + row * 13 + col + 100);
+                table = D_80118C18[0];
+                a = (*(u32 *)(col * sizeof(u32) + (u32)&((u32 (*)[13])table)[row]) >> 19) & 7;
+                b = (*(u32 *)(startColumnOffset + (u32)&((u32 (*)[13])table)[(u8)x]) >> 19) & 7;
+                d = a - b;
+                close = d < 0 ? b - a < 3 : d < 3;
+                if (close && c != 0 && (c >> 7) != board[8]) {
+                    register u8 id asm("a1") = board[9];
+                    u8 count, next;
+                    mv[3] = ny + (u8)nx * 13;
+                    count = mv[4];
+                    next = mv[10];
+                    mv[1] = 2;
+                    mv[2] = y + (u8)x * 13;
+                    mv[0] = id;
+                    mv[4] = count + 1;
+                    mv[10] = next + 1;
+                    return 1;
+                }
+            }
+        } while (++mv[10] < 4);
+    }
+    return 0;
+}
 
 INCLUDE_ASM("asm/chess/nonmatchings/chess_800C4ECC__800CB844__800CBAA0__800CBBB4__SsQuit__800CFC9C__800CFE1C__800D00B0__800D0360__800D08FC__800D09D8__800D10A0__800D113C__800D23F0__800D24B4__800D3274__800D33B0", func_800D3698);
 
