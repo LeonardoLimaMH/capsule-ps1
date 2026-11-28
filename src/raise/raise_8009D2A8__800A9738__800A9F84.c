@@ -90,4 +90,47 @@ s32 func_800AA45C(void) {
     return -1;
 }
 
-INCLUDE_ASM("asm/raise/nonmatchings/raise_8009D2A8__800A9738__800A9F84", func_800AA494);
+s32 func_800AA494(void) {
+    extern s32 D_800ED8DC[];
+    extern u16 D_8006AF80[];
+    extern u8 D_80091618[];
+    extern u8 D_80069E4C[];
+    extern u16 D_800ED88C[];
+    s32 i, j, n;
+    u16 k;
+    u8 *e;
+    u8 *p;
+    u16 v;
+    register u8 *base asm("a0");
+    register u16 *af80 asm("v0");
+
+    if (*D_800ED8DC == 1) {
+        func_800AEA0C();
+        for (i = 1; i >= 0; i--) {
+            k = func_800B1260(i);
+            if (k != 0xFFFF) {
+                e = D_80091618 + k * 0x1A8;
+                v = *(u16 *)(e + 0x10);
+                n = func_800A8E1C(v == 0xFFFF ? 8 : v);
+                if (n > 0) {
+                    j = 0;
+                    p = e;
+                loop:
+                    *(s32 *)(*(u8 **)(p + 0x18C) + 0x50) &= ~1;
+                    j++;
+                    *(s32 *)(*(u8 **)(p + 0x18C) + 0x50) &= ~8;
+                    p += 4;
+                    if (j < n) goto loop;
+                }
+            }
+        }
+    } else {
+        func_800260C8(D_80069E4C[0x11], D_80069E4C[0x10]);
+        *D_800ED88C = 0;
+        func_800B7264(1);
+    }
+    base = D_80091618;
+    af80 = D_8006AF80;
+    func_800ABF7C(*(u16 *)(base + *af80 * 0x1A8 + 0x10) != 0xFFFF);
+    return -1;
+}
